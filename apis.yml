@@ -1,0 +1,146 @@
+name: Basware
+description: Basware is a cloud-based e-invoicing and purchase-to-pay platform that
+  enables global enterprises to automate their invoice and procurement processes. The
+  platform provides REST APIs for submitting and receiving electronic invoices across
+  70+ formats, managing purchase orders, and processing accounts payable workflows.
+  Basware Network connects buyers and suppliers worldwide through a single integration
+  point, handling format conversion and delivery. The APIs support master data management,
+  user administration, document archiving, and real-time transaction data access for
+  finance and procurement operations.
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+url: https://raw.githubusercontent.com/api-evangelist/basware/refs/heads/main/apis.yml
+type: Index
+created: "2026-06-13"
+modified: "2026-06-13"
+specificationVersion: "0.19"
+tags:
+  - E-Invoicing
+  - Purchase-to-Pay
+  - Accounts Payable
+  - Procurement
+  - Electronic Invoicing
+  - Finance Automation
+  - B2B Payments
+apis:
+  - name: Basware P2P API
+    description: The Basware Procure-to-Pay API provides REST-based integration for
+      accounts payable automation, procurement, and master data management. It supports
+      invoice processing, purchase orders, goods receipts, supplier management, user
+      administration, and monitoring of document workflows using JSON payloads over
+      HTTPS with OAuth2 authentication.
+    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    humanURL: https://developer.basware.com/en/api/basware
+    baseURL: https://api.basware.com
+    tags:
+      - Accounts Payable
+      - Procurement
+      - Purchase Orders
+      - Invoice Processing
+    properties:
+      - type: Documentation
+        url: https://developer.basware.com/en/api/basware/manual
+      - type: OpenAPI
+        url: https://developer.basware.com/en/api/basware/api-reference
+      - type: GettingStarted
+        url: https://developer.basware.com/en/api/basware/get-started
+  - name: Basware Network API
+    description: The Basware Network API enables developers to send and receive electronic
+      invoices across the global Basware network. Supporting over 70 document formats,
+      the API handles automatic format conversion so integrators only need to submit
+      invoices in a single standard format. It includes an Invoices API for JSON-based
+      invoice exchange and a Files API for sending and receiving invoice attachments
+      such as PDFs.
+    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    humanURL: https://developer.basware.com/en/api/network
+    baseURL: https://network-api.basware.com
+    tags:
+      - E-Invoicing
+      - Invoice Network
+      - Electronic Documents
+      - Format Conversion
+    properties:
+      - type: Documentation
+        url: https://developer.basware.com/en/api/network/guide
+      - type: OpenAPI
+        url: https://developer.basware.com/en/api/network/api-reference
+      - type: GettingStarted
+        url: https://developer.basware.com/en/api/network/get-started
+  - name: Basware Vault API
+    description: The Basware Vault API provides archiving and retrieval services for
+      e-invoicing documents. It enables integration with Basware's document storage
+      system for long-term retention and compliance-ready archival of invoices and
+      related business documents, with access through REST endpoints and JSON payloads.
+    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    humanURL: https://developer.basware.com/en/api/vault/manual
+    baseURL: https://api.basware.com/vault
+    tags:
+      - Document Archive
+      - Compliance
+      - Document Storage
+    properties:
+      - type: Documentation
+        url: https://developer.basware.com/en/api/vault/manual
+      - type: GettingStarted
+        url: https://developer.basware.com/en/api/vault
+  - name: Basware Data Access API
+    description: The Basware Data Access API allows organizations to query and extract
+      data from Basware systems for reporting, analytics, and integration purposes.
+      It enables programmatic retrieval of transaction data, invoice records, and operational
+      metrics from the Basware platform to feed downstream business intelligence and
+      ERP systems.
+    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    humanURL: https://developer.basware.com/en/api/basware
+    baseURL: https://api.basware.com/data
+    tags:
+      - Data Access
+      - Reporting
+      - Analytics
+      - Business Intelligence
+    properties:
+      - type: Documentation
+        url: https://developer.basware.com/en/api/basware
+      - type: GettingStarted
+        url: https://developer.basware.com/en/api/basware/get-started
+  - name: Basware SmartPDF API
+    description: The Basware SmartPDF API provides PDF document processing and conversion
+      capabilities within the Basware platform. It enables automated extraction and
+      processing of invoice data from PDF documents, supporting touchless invoice processing
+      workflows and integration with accounts payable automation systems.
+    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    humanURL: https://developer.basware.com/en/api/basware
+    baseURL: https://api.basware.com/smartpdf
+    tags:
+      - PDF Processing
+      - Document Conversion
+      - Invoice Capture
+    properties:
+      - type: Documentation
+        url: https://developer.basware.com/en/api/basware
+      - type: GettingStarted
+        url: https://developer.basware.com/en/api/basware/get-started
+common:
+  - type: Website
+    url: https://www.basware.com
+  - type: Documentation
+    url: https://developer.basware.com
+  - type: GitHubOrg
+    url: https://github.com/Basware
+  - type: LinkedIn
+    url: https://www.linkedin.com/company/basware
+  - type: Blog
+    url: https://blog.basware.com/en
+  - type: Pricing
+    url: https://www.basware.com/en-us/pricing/
+  - type: StatusPage
+    url: https://basware.service-now.com/bw?id=services_status
+  - type: X
+    url: https://x.com/basware
+  - type: Plans
+    url: plans/basware-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/basware-rate-limits.yml
+  - type: FinOps
+    url: finops/basware-finops.yml
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

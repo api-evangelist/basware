@@ -1,0 +1,67 @@
+name: Basware API Rate Limits
+description: Basware applies fair use policies to its REST APIs to ensure platform
+  stability and availability for all customers. Specific numeric rate limits are not
+  publicly documented and are subject to the fair use guidelines outlined in the API
+  manual. Customers should consult their Basware delivery consultant or technical
+  partner manager for environment-specific limits.
+specificationVersion: "0.1"
+rateLimits:
+  - name: P2P API Fair Use
+    description: The Basware P2P API (AP Automation, Procurement) applies fair use
+      practices as described in the API manual. Explicit per-minute or per-hour request
+      limits are not published. Customers are expected to implement exponential backoff
+      and respect HTTP 429 responses.
+    scope: P2P API (Basware API)
+    limits:
+      - type: FairUse
+        description: Fair use policy applies; specific limits not publicly disclosed
+        policy: https://developer.basware.com/en/api/basware/manual
+    authentication: OAuth2
+    environments:
+      - name: Test
+        baseUrl: https://test-api.basware.com
+      - name: Production EU
+        baseUrl: https://api.basware.com
+      - name: Production US
+        baseUrl: https://us-api.basware.com
+      - name: Production AU
+        baseUrl: https://au-api.basware.com
+  - name: Network API Fair Use
+    description: The Basware Network API for e-invoicing applies usage controls consistent
+      with contracted document volumes. Rate limits are not publicly specified; sandbox
+      access is available through Basware Support for testing purposes.
+    scope: Network API
+    limits:
+      - type: FairUse
+        description: Usage governed by contracted document volume and fair use policy
+        policy: https://developer.basware.com/en/api/network/guide
+    authentication: OAuth2
+    sandbox:
+      description: Sandbox environment available; contact Basware Support to create
+        a testing account
+      contact: https://developer.basware.com/en/api/network/get-started
+  - name: Vault API Fair Use
+    description: The Basware Vault API for document archiving applies fair use guidelines.
+      Limits are tied to storage capacity and contractual terms. No public numeric
+      thresholds are documented.
+    scope: Vault API
+    limits:
+      - type: FairUse
+        description: Storage and retrieval governed by contract and fair use policy
+        policy: https://developer.basware.com/en/api/vault/manual
+    authentication: OAuth2
+headers:
+  - name: Retry-After
+    description: Returned when a rate limit is exceeded; indicates the number of seconds
+      to wait before retrying
+  - name: x-bwapi-signature-256
+    description: HMAC-SHA256 signature header used in webhook push notifications for
+      request authenticity validation
+notes:
+  - Basware recommends implementing asynchronous patterns and using the RequestStatus
+    endpoint to poll for operation results rather than making high-frequency synchronous
+    calls
+  - Webhook-based push notifications are available as an alternative to polling for
+    invoice and document status updates
+  - Rate limit details are available in the API manual under the fair use practices
+    section at developer.basware.com

@@ -1,0 +1,65 @@
+name: Basware Plans and Pricing
+description: Basware offers enterprise-grade e-invoicing and purchase-to-pay solutions
+  with custom pricing based on organizational size, transaction volume, and required
+  modules. Pricing is not publicly listed and requires direct engagement with Basware
+  sales or a partner. API access is included as part of the broader platform subscription.
+specificationVersion: "0.1"
+plans:
+  - name: Basware Network Connectivity
+    description: Access to the Basware Network for sending and receiving electronic
+      invoices. Enables connection to 200+ countries and territories with format conversion
+      across 70+ document formats. Pricing is volume-based and negotiated with Basware
+      or a certified partner.
+    url: https://www.basware.com/en-us/solutions/e-invoicing/
+    pricing: Custom
+    pricingModel: Volume-based, enterprise contract
+    features:
+      - E-invoice sending and receiving
+      - 70+ format conversions
+      - Global network connectivity
+      - Supplier onboarding support
+      - API access (Network API)
+  - name: AP Automation
+    description: Automated accounts payable processing including invoice capture,
+      coding, approval workflows, and ERP posting. Includes access to P2P APIs for
+      integration with ERP and financial systems. Custom pricing based on invoice
+      volume and number of users.
+    url: https://www.basware.com/en-us/solutions/accounts-payable-automation/
+    pricing: Custom
+    pricingModel: Volume-based, enterprise contract
+    features:
+      - Automated invoice capture (SmartPDF)
+      - Invoice coding and approval workflows
+      - ERP integration via P2P API
+      - Master data synchronization
+      - Real-time monitoring
+      - Webhook push notifications
+  - name: Purchase-to-Pay
+    description: Full procure-to-pay suite covering purchase requisitions, purchase
+      orders, goods receipts, and invoice matching. Includes all API access for procurement
+      and AP automation integration. Priced as an enterprise subscription.
+    url: https://www.basware.com/en-us/solutions/purchase-to-pay/
+    pricing: Custom
+    pricingModel: Enterprise subscription, annual contract
+    features:
+      - Purchase requisitions and orders
+      - Goods receipt management
+      - Contract management
+      - Three-way matching
+      - Supplier management
+      - Full API suite access
+  - name: Basware Vault (Document Archive)
+    description: Long-term document archiving for invoices and related business documents
+      to meet compliance and audit requirements. Provides Vault API access for integration
+      with archiving workflows.
+    url: https://www.basware.com/en-us/solutions/
+    pricing: Custom
+    pricingModel: Add-on module, volume-based
+    features:
+      - Compliant document archiving
+      - Long-term retention
+      - Audit trail support
+      - Vault API access
+contact:
+  url: https://www.basware.com/en-us/contact/
+  description: Contact Basware sales for pricing and licensing information

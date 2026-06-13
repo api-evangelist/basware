@@ -1,0 +1,89 @@
+name: Basware FinOps Framework
+description: FinOps guidance for managing costs associated with Basware e-invoicing
+  and purchase-to-pay API consumption. Basware is priced as an enterprise platform
+  with costs tied to invoice volume, number of connected suppliers, users, and active
+  modules. API usage is included in platform subscriptions rather than metered separately.
+specificationVersion: "1.0"
+framework: FinOps Foundation FOCUS v1.0
+provider: Basware
+currency: USD
+costDrivers:
+  - name: Invoice Volume
+    description: The primary cost driver for Basware is the number of invoices processed
+      through the platform annually. Higher volume tiers unlock lower per-invoice costs
+      in enterprise negotiations.
+    unit: Invoices per year
+    visibility: Contract-defined
+    optimization:
+      - Audit invoice volumes quarterly against contracted tiers
+      - Identify and eliminate duplicate or erroneous invoice submissions
+      - Consolidate suppliers to reduce inbound invoice counts
+  - name: Supplier Connections
+    description: Costs may be associated with the number of suppliers onboarded to
+      the Basware Network. Each connected supplier adds to network reach but may contribute
+      to contracted costs.
+    unit: Connected suppliers
+    visibility: Contract-defined
+    optimization:
+      - Prioritize high-volume suppliers for e-invoicing onboarding
+      - Retire inactive supplier connections
+      - Use Basware's supplier self-service portal to reduce onboarding overhead
+  - name: User Licenses
+    description: Named user licenses for AP Automation, Supplier Management, and
+      procurement modules contribute to subscription cost. License allocation should
+      reflect active users only.
+    unit: Named users
+    visibility: Contract-defined
+    optimization:
+      - Review user license utilization quarterly
+      - Reclaim licenses from inactive or departed users
+      - Consolidate roles where possible to reduce named user count
+  - name: Modules and Add-ons
+    description: Additional modules such as Vault archiving, SmartPDF capture, Data
+      Access reporting, and advanced procurement features are licensed as add-ons.
+      Each active module contributes to total contract value.
+    unit: Modules
+    visibility: Contract-defined
+    optimization:
+      - Audit active modules against actual usage
+      - Defer low-utilization add-ons to contract renewal
+      - Bundle modules where Basware offers package discounts
+  - name: Network Connectivity Fees
+    description: For organizations using the Basware Network for cross-network e-invoicing
+      delivery (PEPPOL, EDI, etc.), fees may apply per transaction or as a flat network
+      access fee depending on contract structure.
+    unit: Transactions or flat fee
+    visibility: Contract-defined
+    optimization:
+      - Prefer direct Basware Network connections over third-party intermediaries
+      - Review cross-network delivery volumes for renegotiation leverage
+reporting:
+  - name: Invoice Processing Cost
+    description: Total platform cost divided by invoices processed, expressed as cost-per-invoice
+      to benchmark efficiency against industry averages (typically $5-$15 per invoice
+      for manual processing vs. under $2 for automated).
+    formula: Total Annual Cost / Annual Invoice Volume
+    unit: USD per invoice
+  - name: Supplier Activation Rate
+    description: Percentage of target suppliers actively exchanging electronic documents
+      via Basware Network. Higher rates improve ROI from network subscription costs.
+    formula: Active E-Invoice Suppliers / Total Target Suppliers
+    unit: Percentage
+  - name: Straight-Through Processing Rate
+    description: Percentage of invoices processed without manual intervention. A key
+      ROI metric for AP Automation investment justification.
+    formula: Auto-Approved Invoices / Total Invoices Processed
+    unit: Percentage
+budgeting:
+  approach: Annual enterprise contract with fixed subscription fee
+  renewalCycle: Annual
+  notes:
+    - Basware pricing is not publicly listed; negotiate volume tiers at contract renewal
+    - Benchmark against Gartner and Ardent Partners AP automation cost data
+    - Request usage reports from Basware Customer Success to validate consumption
+      against contract entitlements
+    - Consider multi-year agreements for deeper discounts on high-volume commitments
+contacts:
+  sales: https://www.basware.com/en-us/contact/
+  support: https://basware.service-now.com/bw
+  customerSuccess: https://www.basware.com/en-us/services/
