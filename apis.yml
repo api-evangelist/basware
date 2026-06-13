@@ -41,6 +41,20 @@ apis:
         url: https://developer.basware.com/en/api/basware/manual
       - type: OpenAPI
         url: https://developer.basware.com/en/api/basware/api-reference
+      - type: OpenAPI
+        url: openapi/basware-p2p-openapi.json
+      - type: OpenAPI
+        url: openapi/basware-user-permission-openapi.json
+      - type: OpenAPI
+        url: openapi/basware-push-notification-openapi.json
+      - type: OpenAPI
+        url: openapi/basware-authentication-openapi.json
+      - type: OpenAPI
+        url: openapi/basware-data-extract-openapi.json
+      - type: OpenAPI
+        url: openapi/basware-smart-pdf-openapi.json
+      - type: OpenAPI
+        url: openapi/basware-directory-openapi.json
       - type: GettingStarted
         url: https://developer.basware.com/en/api/basware/get-started
   - name: Basware Network API
@@ -80,6 +94,8 @@ apis:
     properties:
       - type: Documentation
         url: https://developer.basware.com/en/api/vault/manual
+      - type: OpenAPI
+        url: openapi/basware-vault-openapi.yaml
       - type: GettingStarted
         url: https://developer.basware.com/en/api/vault
   - name: Basware Data Access API

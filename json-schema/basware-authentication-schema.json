@@ -1,0 +1,209 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://developer.basware.com/schemas/authentication",
+  "title": "Basware OAUTH2 authentication APIs",
+  "description": "**Using OAUTH2.0 authentication:**\n\nGet API access token from api.basware.com/tokens\n1. Using client id and client secret, which you can obtain from Basware. \n2. Specify which APIs can be accessed by using the token e.g. Read only access to vendors API only (these are called scopes). Available scopes are listed at <https://developer.basware.com/api/p2p/manual#AccessRights>. \n3. Each token has an expiration time, until which it can be used to call APIs.\n\nWhen using OAUTH2 authentication, you need to pass the OAUTH2 authentication token when calling Basware API endpoints. Available Basware API operations are documented at <https://api.basware.com/swagger>. \n\nSee the Basware API developer site at <https://developer.basware.com/api/p2p/manual#Authentication> for more details on API authentication.",
+  "$defs": {
+    "AccessTokenResponse": {
+      "properties": {
+        "access_token": {
+          "type": "string",
+          "title": "Access Token",
+          "description": "oauth token",
+          "example": "eyJhbGciOiJSUzI1NiIsImtpZCI6Il9BNHRlRFh6THR2Rm1zeXF5YkloRjJQbHVIaHU3QW1yZUw2aURLdF9xS1kiLCJ0eXAiOiJhdCtqd3QifQ.eyJzdWIiOiAiMWRyMm44cjNwMTg2czd1amc0dmpzNXJraXEiLCAic2NvcGUiOiAidXNlcnMucmVhZCB1c2Vycy53cml0ZSBhY2NvdW50cy5yZWFkIHZlbmRvcnMucmVhZCB2ZW5kb3JzLndyaXRlIiwgImF1dGhfdGltZSI6IDE2Mzc5MDUwMTMsICJpc3MiOiAiaHR0cHM6Ly9hcGkuYmFzd2FyZS5jb20iLCAiYXVkIjogIk9wZW5BUEkiLCAiZXhwIjogMTYzNzkwODYxMywgImlhdCI6IDE2Mzc5MDUwMTMsICJqdGkiOiAiZGM4ZDA4YjgtNGU3YS0xMWVjLTlkZTEtYjJkOGY2OGY5N2VkIiwgImJ3Y2lkIjogIjAyMDc3OS1URVNUMSJ9.LNkXSTw6GICKv7UAdn7IcB75ze6Yvp8PelpgzZ9wBbsTGDTPWV6K397Z-vGn_zJevKSXxmQlbxVPuhHnmo9JI7zZtjEJ7t8Tw2VJl9sQOeZTFkt7QDn6FNFTIGhP7aE-AgJOyTswedp0r9EUoFc8DddB49vytyMwpHtHRnUz1TOVIexh0mcS225cwV4zZmI0PUCvY-GKUlJTm9QNruDVEJ-K2wun9PvH3S31PtGkVfS-2GThjtJN7tOK0tsO9sRf3oqvRAvf93TxCoSg_CKyZRGUWCruV9ayu0m8dTrOfuKnOlG4-eTpDtUWDZACdkZZvbzOBT5_Ikm59LHHXBs5QA"
+        },
+        "scope": {
+          "type": "string",
+          "title": "Scope",
+          "description": "Defines scope of token",
+          "example": "users.read users.write accounts.read vendors.read vendors.write"
+        },
+        "expires_in": {
+          "type": "integer",
+          "title": "Expires In",
+          "description": "tells tokens expiration in minutes",
+          "example": 3600
+        },
+        "token_type": {
+          "type": "string",
+          "title": "Token Type",
+          "description": "tells type of token",
+          "default": "Bearer",
+          "example": "Bearer"
+        }
+      },
+      "type": "object",
+      "title": "AccessTokenResponse"
+    },
+    "Body_get_token_v1_tokens_post": {
+      "properties": {
+        "grant_type": {
+          "type": "string",
+          "title": "Grant Type",
+          "description": "Oauth2 grant type. Supported value(s): 'client_credentials' = Client credential authentication flow."
+        },
+        "scope": {
+          "type": "string",
+          "title": "Scope",
+          "description": "Scopes define the operations (e.g. vendors.write) allowed using the returned access token. See <https://developer.basware.com/api/p2p/manual#AccessRights> for list of available operations. Passed as HTTP form parameter."
+        }
+      },
+      "type": "object",
+      "required": [
+        "grant_type",
+        "scope"
+      ],
+      "title": "Body_get_token_v1_tokens_post"
+    },
+    "HTTPValidationError": {
+      "properties": {
+        "detail": {
+          "items": {
+            "$ref": "#/components/schemas/ValidationError"
+          },
+          "type": "array",
+          "title": "Detail"
+        }
+      },
+      "type": "object",
+      "title": "HTTPValidationError"
+    },
+    "OpenIdConfigurationResponse": {
+      "properties": {
+        "issuer": {
+          "type": "string",
+          "title": "Issuer",
+          "description": "Defines token issuer",
+          "example": "https://api.basware.com/"
+        },
+        "jwks_uri": {
+          "type": "string",
+          "title": "Jwks Uri",
+          "description": "Defines well known endpoint",
+          "example": "https://api.basware.com/.well-known/jwks.json"
+        }
+      },
+      "type": "object",
+      "title": "OpenIdConfigurationResponse"
+    },
+    "UnauthorizedErrorResponse": {
+      "properties": {
+        "error": {
+          "type": "string",
+          "title": "Error",
+          "description": "Defines error ",
+          "example": "invalid_client"
+        }
+      },
+      "type": "object",
+      "title": "UnauthorizedErrorResponse"
+    },
+    "ValidationError": {
+      "properties": {
+        "loc": {
+          "items": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "integer"
+              }
+            ]
+          },
+          "type": "array",
+          "title": "Location"
+        },
+        "msg": {
+          "type": "string",
+          "title": "Message"
+        },
+        "type": {
+          "type": "string",
+          "title": "Error Type"
+        }
+      },
+      "type": "object",
+      "required": [
+        "loc",
+        "msg",
+        "type"
+      ],
+      "title": "ValidationError"
+    },
+    "ValidationErrorResponse": {
+      "properties": {
+        "error": {
+          "type": "string",
+          "title": "Error",
+          "description": "Defines error",
+          "example": "invalid_request"
+        },
+        "error_description": {
+          "type": "string",
+          "title": "Error Description",
+          "description": "Defines error details",
+          "example": "grant_type field required"
+        }
+      },
+      "type": "object",
+      "title": "ValidationErrorResponse"
+    },
+    "WellKnownTokenKey": {
+      "properties": {
+        "e": {
+          "type": "string",
+          "title": "E",
+          "description": "Defines the exponent",
+          "example": "AQAB"
+        },
+        "kid": {
+          "type": "string",
+          "title": "Kid",
+          "description": "Defines the unique identifier for the key",
+          "example": "_A4teDXzLtvFmsyqybIhF2PluHhu7AmreL6iDKt_qKY"
+        },
+        "kty": {
+          "type": "string",
+          "title": "Kty",
+          "description": "Defines the key type",
+          "example": "RSA"
+        },
+        "n": {
+          "type": "string",
+          "title": "N",
+          "description": "Defines the modulus",
+          "example": "3BrQ9O9qpvQFtFHuUE5DkYztxtHuyZvOXwX-AYc1fhgnM__WIocrQITVRez-OMJUDhFvM2n8c9CrzDxlywnAtsm-wwDnH-aauKSqA5Nd1UxXTFDreRqGcM--ohSb0zFW2XltsADIIuyO5IE6Vy_TX9xOpsb0NfWGG_iumQya0zIM7-4TKaorUMyi-hwVrRa82jIDYCBgJMw2KJp4HlYCxY75LXz-zie7CN4QNXq7omtSvOBfxBEYicFjGQgAFBwIhZfOT8u1N_7dwW7K-2LHtVkdVeX6pEtVvFwz9FRL67rfCyTiTjzPa-1LIEPWtBfVsckru8_TaKyhF5yrQUcFMQ"
+        },
+        "use": {
+          "type": "string",
+          "title": "Use",
+          "description": "Defines how the key was meant to be used",
+          "example": "sig"
+        },
+        "alg": {
+          "type": "string",
+          "title": "Alg",
+          "description": "Defines the algorithm for the key",
+          "example": "RS256"
+        }
+      },
+      "type": "object",
+      "title": "WellKnownTokenKey"
+    },
+    "WellKnownTokenResponse": {
+      "properties": {
+        "keys": {
+          "items": {
+            "$ref": "#/components/schemas/WellKnownTokenKey"
+          },
+          "type": "array",
+          "title": "Keys",
+          "description": "List of public keys available to validate access tokens."
+        }
+      },
+      "type": "object",
+      "title": "WellKnownTokenResponse"
+    }
+  }
+}

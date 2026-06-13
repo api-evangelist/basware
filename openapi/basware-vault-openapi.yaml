@@ -1,0 +1,431 @@
+swagger: '2.0'
+info:
+  version: 1.1.1
+  title: Open Vault API
+  description: "**Using Basware Vault APIs**
+   
+   1. Prepare a document that will be archived by zipping all the document related files into a single ZIP file. 
+   
+   2. POST the document metadata first. This will return a pre-signed URL as well as a document identifier (bumId).
+   
+   3. PUT the ZIP file to the URL received in step 1. Note: This PUT operation requires no authentication as it is using a pre-signed URL. 
+   
+   4. GET the status of the uploaded document using the bumId identifier received in step 2 (optional).
+   
+   The pre-signed URL is valid for 15 minutes. When the ZIP file is uploaded with 200 OK response, the file is in queue to be archived."
+host: api.basware.com
+
+basePath: /v1
+schemes:
+  - https
+securityDefinitions:
+  baswareBasicAuth:
+    type: basic
+security:
+  - baswareBasicAuth: []
+paths:
+  /vaults/{vaultId}/index:
+    get:
+      tags:
+        - Vault Indexing
+      summary: Retrieve index of archived documents.
+      operationId: getIndex
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: vaultId
+          description: Vault ID to be checked from
+          required: true
+          type: string
+        - in: query
+          name: size
+          description: Number of items to return. Default is 100, maximum is 1000.
+          required: false
+          type: integer
+          default: 100
+        - in: query
+          name: sort
+          description: >-
+                Sort order of the results. 
+                Default is "archiveDate desc". 
+                It is possible to sort by "archiveDate" and "documentDate" fields.
+                Use "asc" or "desc" for ascending or descending order.
+          required: false
+          type: string
+          default: "archiveDate desc"
+        - in: query
+          name: cursor
+          description: >-
+            Cursor for deep pagination. Use the cursor returned in the previous response to get the next page of results.
+            If not provided, the first page is returned.
+          required: false
+          type: string
+          default: "initial"
+      responses:
+        '200':
+          description: Successful operation
+          schema:
+            type: object
+            properties:
+              cursor:
+                type: string
+                description: >-
+                  Cursor for deep pagination. Use this cursor to get the next page of results.
+                  If no more results, API returns last cursor and start will be then same as found.
+                example: VbCSultDQW7KM242Q3FzWlVEUHdWbVpEWKpaV1U0WmkxbU9USm1MVEV4WldZdFltWmlPUzFrTldObE56WmlNbVZsTURZPQZ
+              documents:
+                type: array
+                description: List of archived documents.
+                items:
+                  $ref: '#/definitions/IndexDocumentResponse'
+              found:
+                type: integer
+                description: Total number of archived documents in the vault.
+                example: 111
+              start:
+                type: integer
+                description: Index of the first document in the current page. Start will equal found if there are no more results.
+                example: 0
+
+        '400':
+          description: Invalid request
+        '403':
+          description: Forbidden
+  /vaults/{vaultId}/documents:
+    post:
+      tags:
+        - Vault Archiving
+      summary: Send the document metadata for archiving and receive pre-signed URL to upload document ZIP file.
+      operationId: postArchivedDocument
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: vaultId
+          description: Vault ID to be posted to
+          required: true
+          type: string
+        - in: body
+          name: body
+          description: Metadata of the document.
+          required: true
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/ArchivedDocument'
+      responses:
+        '200':
+          description: Successful operation.
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/ArchivedDocumentResponse'
+        '400':
+          description: Invalid request
+        '403':
+          description: Forbidden
+  /{pre-signed URL}:
+    put:
+      tags:
+        - Vault Archiving
+      summary: Upload the document ZIP file to be archived using a pre-signed URL.
+      operationId: putArchivedDocument
+      consumes:
+        - multipart/form-data
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: pre-signed URL
+          description: >-
+            URL where to PUT the file. Use the pre-signed URL returned from POST request.
+            Uses a different domain from api.basware.com.
+          required: true
+          type: string
+        - in: formData
+          name: file
+          description: ZIP archive containing file(s) to be archived related to the document.
+          required: true
+          type: file
+      responses:
+        '200':
+          description: Successful operation.
+        '400':
+          description: Invalid request
+  /vaults/{vaultId}/documents/status:
+    get:
+      tags:
+        - Vault Archiving
+      summary: Returns the status of archived documents. Response limited to 500 most recent documents.
+      operationId: getArchiveStatuses
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: vaultId
+          description: Vault ID to be checked from
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful operation
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/ArchivedDocumentStatusResponse'
+        '400':
+          description: Invalid request
+        '403':
+          description: Forbidden
+      deprecated: false
+  /vaults/{vaultId}/documents/{bumid}/status:
+    get:
+      tags:
+        - Vault Archiving
+      summary: Return archival status a document.
+      operationId: getArchiveStatusWithID
+      produces:
+        - application/json
+      parameters:
+        - name: bumid
+          in: path
+          description: Unique identifier of the document. Issued by Basware. BUMID must belong to user.
+          required: true
+          type: string
+        - in: path
+          name: vaultId
+          description: Vault ID to be checked from
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful operation.
+          schema:
+            $ref: '#/definitions/ArchivedDocumentStatusResponse'
+        '400':
+          description: Invalid request
+        '404':
+          description: Not found. Typically returned when no document was found using the bumId.
+        '403':
+          description: Forbidden
+      deprecated: false
+definitions:
+  ArchivedDocument:
+    type: object
+    required: [clientUUID, documentId, documentDate, documentType]
+    properties:
+      clientUUID:
+        type: string
+        maxLength: 100
+        description: >-
+          Document identifier created by client. Unique ID in client's namespace.
+          It is returned in the response as a correlation ID.
+          Not to be confused with the documentId (eg invoice number).
+        example: 10d96d73-ff7f-49a7-8e8f-a6c7359f4939
+      documentType:
+        type: string
+        description: Specifies document type. Either Invoice, CreditNote, InvoiceSelfBilled or CreditNoteSelfBilled.
+        pattern: Invoice|CreditNote|InvoiceSelfBilled|CreditNoteSelfBilled
+        example: Invoice
+      senderName:
+        type: string
+        maxLength: 150
+        description: Name of the document sender. For invoice, supplier name.
+        example: Newey & Eyre (UK) Ltd
+      senderIds:
+        type: array
+        items:
+          type: string
+        description: >-
+          Array of IDs identifying the sender. Total size of the array should not exceed: 300 chars
+        example: ["S1001", "S1002", "S1003"]
+      recipientName:
+        type: string
+        maxLength: 150
+        description: Name of the document recipient. For invoice, receiving company's name.
+        example: Acme Inc.
+      recipientIds:
+        type: array
+        items:
+          type: string
+        description: >-
+          Array of IDs identifying the recipient. Total size of the array should not exceed: 300 chars
+        example: ["R1001", "R1002", "R1003"]
+      tradingPartner:
+        type: string
+        maxLength: 150
+        description: >-
+          Name of the document recipient or sender. For invoice, receiving company's name or supplier name.
+        example: Acme Inc.
+      documentDate:
+        type: string
+        description: Date of the document. For invoice, normally invoice date. ISO 8601
+        example: 2010-11-30T08:39:03Z
+      documentId:
+        type: string
+        maxLength: 100
+        description: >-
+          Document identifier. For invoice, normally invoice number.
+          Is not required to be unique but this will be used in search criteria,
+          so it helps if they are easily identifiable using a compound search (documentId + senderId).
+        example: 10003456
+      currencyCode:
+        type: string
+        maxLength: 3
+        description: 3 digit currency code of the document. ISO 4217
+        example: EUR
+      buyerReferenceId:
+        type: string
+        maxLength: 100
+        description: An identifier assigned by the Buyer used for internal routing purposes.
+        example: buyer@acme.com
+      buyerReferenceType:
+        type: string
+        maxLength: 100
+        description: Type of buyerReferenceId. Freetext field. eg. email, name, VAT
+        example: email
+      amount:
+        type: number
+        description: Amount of document. For invoice, use net sum.
+        example: 1600.09
+      flowDirection:
+        type: string
+        description: Document flow direction. Either sending or receiving.
+        pattern: sending|receiving
+        example: sending
+  ArchivedDocumentResponse:
+    type: object
+    properties:
+      bumId:
+        type: string
+        description: Unique identifier of the document. Issued by Basware
+        example: 46aa4caf-b373-11ed-bbfc-cfd535abf178
+      documentId:
+        type: string
+        description: Document identifier. For invoice, normally invoice number.
+        example: 10003456
+      clientUUID:
+        type: string
+        description: Unique identifier as passed on the request for correlation
+        example: 10d96d73-ff7f-49a7-8e8f-a6c7359f4939
+      archiveFileURL:
+        $ref: '#/definitions/ArchiveFileURL'
+  ArchivedDocumentStatusResponse:
+    type: object
+    properties:
+      bumId:
+        type: string
+        description: Identifier of the archived document.
+        example: 46aa4caf-b373-11ed-bbfc-cfd535abf178
+      documentId:
+        type: string
+        description: Document identifier. For invoice, normally invoice number.
+        example: 10003456
+      clientUUID:
+        type: string
+        description: Unique identifier as passed on the request for correlation
+        example: 10d96d73-ff7f-49a7-8e8f-a6c7359f4939
+      lastUpdated:
+        type: string
+        description: Date and time of the last status update.
+        example: 2023-02-23T08:39:03Z
+      status:
+        type: string
+        pattern: >-
+          WaitingForPackageUpload|ArchivingInProgress|ArchivingSuccessful|ArchivingFailed
+        description: Status of document archiving.
+        example: ArchivingInProgress
+      message:
+        type: string
+        description: >-
+          Additional status message in exception cases. For example if file is
+          not found in staging area in 15 minutes.
+        example: ''
+  ArchiveFileURL:
+    type: object
+    properties:
+      url:
+        type: string
+        example: "https://cipreprod-archivewarm-openapistagings3bucket-503ac9e65ad1.s3.eu-west-1.amazonaws.com/70944116/otlwif/2023/03/03/CZ/U6/46aa4caf-b373-11ed-bbfc-cfd535abf178.zip?X-Amz-Security-Token=IQoJb3JpZ2luX2VjEFUaCWV1LXdlc3QtMSJHMEUCIQDCIc4zFGqvfPoixMy5L55YwXQi94j28XXbOIQ4nUjVcQIgAQ6soIBTE5Oq3wtl1%2BrrgssIz2mNzsvt9UxN3iiijZ8q3AMI7f%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARADGgw0OTM3NjA2MDY4MzAiDGI%2BalWWdyGDfGbq9yqwA%2BGAbXcyOWHLDPDiTdA7F9LVMm5OkNd1OTAwr0VbizgBgD8XYrf0qn6F4cyCNJEw20RqkfhgRUq2LXtMsBAd%2Fx2hwp2qqARdcpFA0thltLxlFIUT2wc03wmnsLrmo7oJUAKfZ6qrH5zK9JKG6fZtjdX9F6uC2TAa16o4vIVMLwrWs3VblSPoU4R5OpPetN7SMCmTiUW%2Fwa%2B2P4OhsWoceKS2H2xxtrnOHFr0bLAl7pXPhmNFh%2F5R2X4X9eFuPMsbEwn0sOVoAAMDJwaok%2Ffi8XwjP8g69bb4Q78txhgc21I9mY3Jm4aO7kvtpx28taczXRCIYnrgkuFbuZSc4MSg3YfEgSdZNLz63KekmOlgYhohvqqopgnZ5c3UURcV%2FjrLlTkg405u56SI%2BOtM7fXl6JC90B7n%2Ffb84LlzCSXbWVjcCBPOXFDYIQdMpzbXyIJPUBx75wIATmV7CKzgg%2FO%2FXlcZ8%2FWC3FJEe0oefsqFa4ifkW9d83ZKrzZXSr2MS3zW22Y8Sh9hOx%2FsMhJnpwY5hzP6K3SIRxnHyqc7rTswWLPBgPSvbpwLzVA9mYlyEf0przCKsN2fBjqeAT7tYKT1IaaGkB0t2X9CNMf2hbtJgyHrYQNS8%2FJ1KVwSahHS3YMuY88ZiGPZnqNdqep8xVUeO1t2tPA7QymHiuz5SYVA2y0Ifaf%2Bs0MKBZwjnFAyXy%2BZQkpkvUFzl20EhOTAYSbjvi%2FAocaKyGiLTdxliZVsnBP8mq0sEIz7rGIOZzWObOfk69qD4nYgis9mrldJHL2Z1DeM9fYyuIBo&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20230223T121201Z&X-Amz-SignedHeaders=host&X-Amz-Expires=900&X-Amz-Credential=ASIAXF5TM6JXFF7XYS77%2F20230223%2Feu-west-1%2Fs3%2Faws4_request&X-Amz-Signature=5a824dab54b0d325862d0e036b702fcab8d98e5542ba93e2da67239b72b19a33"
+  IndexDocumentResponse:
+    type: object
+    properties:
+      amount:
+        type: string
+        description: Amount of document. For invoice, use net sum.
+        example: 1600.09
+      archiveDate:
+        type: string
+        description: Archive date of the document. ISO 8601
+        example: 2010-11-30T08:39:03Z
+      archiveId:
+        type: string
+        example: 35d8d778-98fc-4f49-b3e9-9bfd7f92372d
+      bumid:
+        type: string
+        example: 46aa4caf-b373-11ed-bbfc-cfd535abf178
+      buyerReferenceId:
+        type: string
+        maxLength: 100
+        description: An identifier assigned by the Buyer used for internal routing purposes.
+        example: buyer@acme.com
+      buyerReferenceType:
+        type: string
+        maxLength: 100
+        description: Type of buyerReferenceId. Freetext field. eg. email, name, VAT
+        example: email
+      currencyCode:
+        type: string
+        maxLength: 3
+        description: 3 digit currency code of the document. ISO 4217
+        example: EUR
+      documentDate:
+        type: string
+        description: Date of the document. For invoice, normally invoice date. ISO 8601
+        example: 2010-11-30T08:39:03Z
+      documentId:
+        type: string
+        maxLength: 100
+        description: >-
+          Document identifier. For invoice, normally invoice number.
+          Is not required to be unique but this will be used in search criteria,
+          so it helps if they are easily identifiable using a compound search (documentId + senderId).
+        example: 10003456
+      documentType:
+        type: string
+        description: Specifies document type. Either Invoice, CreditNote, InvoiceSelfBilled or CreditNoteSelfBilled.
+        pattern: Invoice|CreditNote|InvoiceSelfBilled|CreditNoteSelfBilled
+        example: Invoice
+      recipientIds:
+        type: array
+        items:
+          type: string
+        description: >-
+          Array of IDs identifying the recipient. Total size of the array should not exceed: 300 chars
+        example: ["R1001", "R1002", "R1003"]
+      recipientName:
+        type: string
+        maxLength: 150
+        description: Name of the document recipient. For invoice, receiving company's name.
+        example: Acme Inc.
+      senderIds:
+        type: array
+        items:
+          type: string
+        description: >-
+          Array of IDs identifying the sender. Total size of the array should not exceed: 300 chars
+        example: [ "S1001", "S1002", "S1003" ]
+      senderName:
+        type: string
+        maxLength: 150
+        description: Name of the document sender. For invoice, supplier name.
+        example: Newey & Eyre (UK) Ltd
+      tradingPartner:
+        type: string
+        maxLength: 150
+        description: >-
+          Name of the document recipient or sender. For invoice, receiving company's name or supplier name.
+        example: Acme Inc.

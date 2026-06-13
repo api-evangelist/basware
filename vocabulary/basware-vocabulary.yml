@@ -1,0 +1,820 @@
+vocab: https://developer.basware.com/vocab#
+prefix: basware
+description: Vocabulary extracted from Basware P2P, Network, Vault, Data Extract, SmartPDF, Directory, Authentication, and Notification APIs
+terms:
+  - term: AccessTokenResponse
+    description: "AccessTokenResponse object from the Basware API"
+    source: authentication
+  - term: AccountCompanyEntity
+    description: "AccountCompanyEntity object from the Basware API"
+    source: p2p
+  - term: AccountEntity
+    description: "AccountEntity object from the Basware API"
+    source: p2p
+  - term: AccountResponse
+    description: "AccountResponse object from the Basware API"
+    source: p2p
+  - term: AccountingDocumentEntity
+    description: "AccountingDocumentEntity object from the Basware API"
+    source: p2p
+  - term: AccountingDocumentInternalEntity
+    description: "AccountingDocumentInternalEntity object from the Basware API"
+    source: p2p
+  - term: AccountingDocumentInternalResponse
+    description: "AccountingDocumentInternalResponse object from the Basware API"
+    source: p2p
+  - term: AccountingDocumentResponse
+    description: "AccountingDocumentResponse object from the Basware API"
+    source: p2p
+  - term: AccountingDocumentStatusUpdate
+    description: "AccountingDocumentStatusUpdate object from the Basware API"
+    source: p2p
+  - term: AccountingDocumentsStatusResponseEntity
+    description: "AccountingDocumentsStatusResponseEntity object from the Basware API"
+    source: p2p
+  - term: AcknowledgeRequest
+    description: "AcknowledgeRequest object from the Basware API"
+    source: p2p
+  - term: Address
+    description: "Address object from the Basware API"
+    source: directory
+  - term: AdvancedPermissionCompanyEntity
+    description: "AdvancedPermissionCompanyEntity object from the Basware API"
+    source: p2p
+  - term: AdvancedPermissionEntity
+    description: "AdvancedPermissionEntity object from the Basware API"
+    source: p2p
+  - term: AdvancedPermissionResponse
+    description: "AdvancedPermissionResponse object from the Basware API"
+    source: p2p
+  - term: AdvancedValidationCompanyEntity
+    description: "AdvancedValidationCompanyEntity object from the Basware API"
+    source: p2p
+  - term: AdvancedValidationEntity
+    description: "AdvancedValidationEntity object from the Basware API"
+    source: p2p
+  - term: AdvancedValidationResponse
+    description: "AdvancedValidationResponse object from the Basware API"
+    source: p2p
+  - term: ApplicationGroupEntity
+    description: "ApplicationGroupEntity object from the Basware API"
+    source: p2p
+  - term: ApplicationGroupsResponse
+    description: "ApplicationGroupsResponse object from the Basware API"
+    source: p2p
+  - term: ApplicationPermission
+    description: "ApplicationPermission object from the Basware API"
+    source: user-permission
+  - term: ApplicationPrivilege
+    description: "ApplicationPrivilege object from the Basware API"
+    source: p2p
+  - term: Applications
+    description: "Applications object from the Basware API"
+    source: p2p
+  - term: ArchiveFileURL
+    description: "ArchiveFileURL object from the Basware API"
+    source: vault
+  - term: ArchivedDocument
+    description: "ArchivedDocument object from the Basware API"
+    source: vault
+  - term: ArchivedDocumentResponse
+    description: "ArchivedDocumentResponse object from the Basware API"
+    source: vault
+  - term: ArchivedDocumentStatusResponse
+    description: "ArchivedDocumentStatusResponse object from the Basware API"
+    source: vault
+  - term: Attachment
+    description: "Attachment object from the Basware API"
+    source: p2p
+  - term: AutoResponder
+    description: "AutoResponder object from the Basware API"
+    source: push-notification
+  - term: AutoResponseModeEnum
+    description: "AutoResponseModeEnum object from the Basware API"
+    source: push-notification
+  - term: AvailableDataExtractInfo
+    description: "AvailableDataExtractInfo object from the Basware API"
+    source: data-extract
+  - term: BaswareSystem
+    description: "BaswareSystem object from the Basware API"
+    source: p2p
+  - term: Body_get_token_v1_tokens_post
+    description: "Body_get_token_v1_tokens_post object from the Basware API"
+    source: authentication
+  - term: BulkOperationStatus
+    description: "Represents the possible statuses of a bulk operation."
+    source: user-permission
+  - term: CompanyAddressEntity
+    description: "CompanyAddressEntity object from the Basware API"
+    source: p2p
+  - term: CompanyContactEntity
+    description: "CompanyContactEntity object from the Basware API"
+    source: p2p
+  - term: CompanyEntity
+    description: "CompanyEntity object from the Basware API"
+    source: p2p
+  - term: CompanyIdentifierEntity
+    description: "CompanyIdentifierEntity object from the Basware API"
+    source: p2p
+  - term: CompanyResponse
+    description: "CompanyResponse object from the Basware API"
+    source: p2p
+  - term: ConsumerLogEventUserView
+    description: "ConsumerLogEventUserView object from the Basware API"
+    source: p2p
+  - term: ContractEntity
+    description: "ContractEntity object from the Basware API"
+    source: p2p
+  - term: ContractExternalLinks
+    description: "Contract external links"
+    source: p2p
+  - term: ContractResponse
+    description: "ContractResponse object from the Basware API"
+    source: p2p
+  - term: ContractSpendAcknowledgeRequest
+    description: "ContractSpendAcknowledgeRequest object from the Basware API"
+    source: p2p
+  - term: ContractSuppliers
+    description: "ContractSuppliers object from the Basware API"
+    source: p2p
+  - term: CostCenterCompanyEntity
+    description: "CostCenterCompanyEntity object from the Basware API"
+    source: p2p
+  - term: CostCenterEntity
+    description: "CostCenterEntity object from the Basware API"
+    source: p2p
+  - term: CostCenterResponse
+    description: "CostCenterResponse object from the Basware API"
+    source: p2p
+  - term: CreateDefaultUserGroupsRequest
+    description: "Represents a request to create default user groups for the specified consumers."
+    source: user-permission
+  - term: Creator
+    description: "Specifies who has created the order / requisition."
+    source: p2p
+  - term: DataExtractFileInfo
+    description: "DataExtractFileInfo object from the Basware API"
+    source: data-extract
+  - term: DefaultUserGroup
+    description: "Represents a default user group within an organization, including its unique identifier, name, description, and associated organization information."
+    source: user-permission
+  - term: DeleteDataRequest
+    description: "DeleteDataRequest object from the Basware API"
+    source: user-permission
+  - term: DeleteOrganisationRequest
+    description: "DeleteOrganisationRequest object from the Basware API"
+    source: p2p
+  - term: DeleteOrganisationResponse
+    description: "DeleteOrganisationResponse object from the Basware API"
+    source: p2p
+  - term: DeleteRequest
+    description: "DeleteRequest object from the Basware API"
+    source: p2p
+  - term: DeleteResponse
+    description: "DeleteResponse object from the Basware API"
+    source: p2p
+  - term: DeleteSubscriptionResponse
+    description: "DeleteSubscriptionResponse object from the Basware API"
+    source: push-notification
+  - term: DeleteUsersRequest
+    description: "DeleteUsersRequest object from the Basware API"
+    source: p2p
+  - term: DeliveryAddress
+    description: "Specifies delivery address for the purchase requisition. If no address specified, uses the default delivery address of organization (configured in P2P). Delivery address on header level applies to en"
+    source: p2p
+  - term: DimensionValue
+    description: "DimensionValue object from the Basware API"
+    source: p2p
+  - term: DirectoryEntry
+    description: "DirectoryEntry object from the Basware API"
+    source: directory
+  - term: DisputeInfo
+    description: "DisputeInfo object from the Basware API"
+    source: p2p
+  - term: ETLTransferResponseEntity
+    description: "ETLTransferResponseEntity object from the Basware API"
+    source: p2p
+  - term: EnrichmentResponseEntity
+    description: "enrichment response entity"
+    source: p2p
+  - term: ErrorEntity
+    description: "ErrorEntity object from the Basware API"
+    source: p2p
+  - term: ErrorFeedbackEntity
+    description: "ErrorFeedbackEntity object from the Basware API"
+    source: p2p
+  - term: ErrorFeedbackResponse
+    description: "ErrorFeedbackResponse object from the Basware API"
+    source: p2p
+  - term: ErrorResponse
+    description: "ErrorResponse object from the Basware API"
+    source: directory
+  - term: ExchangeRateCompanyEntity
+    description: "ExchangeRateCompanyEntity object from the Basware API"
+    source: p2p
+  - term: ExchangeRateEntity
+    description: "ExchangeRateEntity object from the Basware API"
+    source: p2p
+  - term: ExchangeRateResponse
+    description: "ExchangeRateResponse object from the Basware API"
+    source: p2p
+  - term: ExportedContractEntity
+    description: "ExportedContractEntity object from the Basware API"
+    source: p2p
+  - term: ExportedContractExternalLink
+    description: "ExportedContractExternalLink object from the Basware API"
+    source: p2p
+  - term: ExportedContractSpendEntity
+    description: "Contains details on indivisual spend events. Note that a spend event can contain just a part of the whole amount indicated on spend source document, such as when part of the invoice lines correspond t"
+    source: p2p
+  - term: ExportedContractSpendTotal
+    description: "ExportedContractSpendTotal object from the Basware API"
+    source: p2p
+  - term: ExportedContractSpendsResponse
+    description: "ExportedContractSpendsResponse object from the Basware API"
+    source: p2p
+  - term: ExportedContractSupplier
+    description: "ExportedContractSupplier object from the Basware API"
+    source: p2p
+  - term: ExportedContractsRequest
+    description: "ExportedContractsRequest object from the Basware API"
+    source: p2p
+  - term: ExportedContractsResponse
+    description: "ExportedContractsResponse object from the Basware API"
+    source: p2p
+  - term: ExportedPurchaseOrderEntity
+    description: "ExportedPurchaseOrderEntity object from the Basware API"
+    source: p2p
+  - term: ExportedPurchaseOrderGoodsReceiptEntity
+    description: "ExportedPurchaseOrderGoodsReceiptEntity object from the Basware API"
+    source: p2p
+  - term: ExportedPurchaseOrderLineCodingRowEntity
+    description: "ExportedPurchaseOrderLineCodingRowEntity object from the Basware API"
+    source: p2p
+  - term: ExportedPurchaseOrderLineEntity
+    description: "ExportedPurchaseOrderLineEntity object from the Basware API"
+    source: p2p
+  - term: ExportedPurchaseOrdersResponse
+    description: "ExportedPurchaseOrdersResponse object from the Basware API"
+    source: p2p
+  - term: ExportedPurchaseRequisitionCodingRow
+    description: "ExportedPurchaseRequisitionCodingRow object from the Basware API"
+    source: p2p
+  - term: ExportedPurchaseRequisitionEntity
+    description: "ExportedPurchaseRequisitionEntity object from the Basware API"
+    source: p2p
+  - term: ExportedPurchaseRequisitionLineEntity
+    description: "Purchase requisition lines."
+    source: p2p
+  - term: ExportedPurchaseRequisitionUserEntity
+    description: "ExportedPurchaseRequisitionUserEntity object from the Basware API"
+    source: p2p
+  - term: ExportedPurchaseRequisitionsResponse
+    description: "ExportedPurchaseRequisitionsResponse object from the Basware API"
+    source: p2p
+  - term: ExternalCode
+    description: "ExternalCode object from the Basware API"
+    source: user-permission
+  - term: Facility
+    description: "Facility object from the Basware API"
+    source: directory
+  - term: FieldMaintenanceConfiguration
+    description: "FieldMaintenanceConfiguration object from the Basware API"
+    source: p2p
+  - term: FieldUpdateArray
+    description: "FieldUpdateArray object from the Basware API"
+    source: push-notification
+  - term: FinancialAccountIdentifierEntity
+    description: "FinancialAccountIdentifierEntity object from the Basware API"
+    source: p2p
+  - term: FinancialInstitutionEntity
+    description: "FinancialInstitutionEntity object from the Basware API"
+    source: p2p
+  - term: GenericListCompanyEntity
+    description: "GenericListCompanyEntity object from the Basware API"
+    source: p2p
+  - term: GenericListEntity
+    description: "GenericListEntity object from the Basware API"
+    source: p2p
+  - term: GenericListResponse
+    description: "GenericListResponse object from the Basware API"
+    source: p2p
+  - term: GenericListSNSResponse
+    description: "GenericListSNSResponse object from the Basware API"
+    source: p2p
+  - term: GetBatchCompaniesRequest
+    description: "GetBatchCompaniesRequest object from the Basware API"
+    source: p2p
+  - term: GetBatchPermissionRequest
+    description: "GetBatchPermissionRequest object from the Basware API"
+    source: user-permission
+  - term: GetBatchRequest
+    description: "GetBatchRequest object from the Basware API"
+    source: p2p
+  - term: GetBatchUserGroupRequest
+    description: "GetBatchUserGroupRequest object from the Basware API"
+    source: user-permission
+  - term: GetFailedBatchRequest
+    description: "GetFailedBatchRequest object from the Basware API"
+    source: p2p
+  - term: GetOrganisationsResponse
+    description: "GetOrganisationsResponse object from the Basware API"
+    source: p2p
+  - term: GoodsReceiptEntity
+    description: "GoodsReceiptEntity object from the Basware API"
+    source: p2p
+  - term: GoodsReceiptLine
+    description: "GoodsReceiptLine object from the Basware API"
+    source: p2p
+  - term: GoodsReceiver
+    description: "Specifies who has received the goods. At least one of the values needs to be provided."
+    source: p2p
+  - term: GroupingLine
+    description: "GroupingLine object from the Basware API"
+    source: p2p
+  - term: HTTPValidationError
+    description: "HTTPValidationError object from the Basware API"
+    source: authentication
+  - term: History
+    description: "History object from the Basware API"
+    source: directory
+  - term: IModelValidationError
+    description: "IModelValidationError object from the Basware API"
+    source: user-permission
+  - term: IModelValidationResult
+    description: "IModelValidationResult object from the Basware API"
+    source: user-permission
+  - term: Identifiers
+    description: "Identifiers"
+    source: p2p
+  - term: ImportedPurchaseOrderLineCodingRowEntity
+    description: "ImportedPurchaseOrderLineCodingRowEntity object from the Basware API"
+    source: p2p
+  - term: ImportedPurchaseOrderStatusUpdateRequest
+    description: "ImportedPurchaseOrderStatusUpdateRequest object from the Basware API"
+    source: p2p
+  - term: IndexDocumentResponse
+    description: "IndexDocumentResponse object from the Basware API"
+    source: vault
+  - term: InternalAttachment
+    description: "InternalAttachment object from the Basware API"
+    source: p2p
+  - term: InternalDeleteDataRequest
+    description: "Represents a request to delete an entity internally/from consumer apps. This request allows deletion using an external code, with an immediate final status response."
+    source: user-permission
+  - term: InternalDeleteOrganisationRequest
+    description: "InternalDeleteOrganisationRequest object from the Basware API"
+    source: p2p
+  - term: InternalOrganizationByIDResponse
+    description: "Represents the response containing organization details for internal use."
+    source: p2p
+  - term: InternalServerErrorResponse
+    description: "InternalServerErrorResponse object from the Basware API"
+    source: push-notification
+  - term: InternalUserGroup
+    description: "InternalUserGroup object from the Basware API"
+    source: user-permission
+  - term: InternalUserGroupAssociatedUsersSaveRequest
+    description: "Represents a request to save the association of users with one or more user groups. Includes information about the user who performed the change."
+    source: user-permission
+  - term: InternalUserGroupPermissionsSaveRequest
+    description: "Represents a request to save permissions associated with one or more user groups. Includes information about the user who performed the change."
+    source: user-permission
+  - term: InternalUserGroupSaveRequest
+    description: "Represents a request to save one or more user groups within the system. Includes information about the user who performed the change."
+    source: user-permission
+  - term: InvoiceLine
+    description: "InvoiceLine object from the Basware API"
+    source: p2p
+  - term: LanguageTranslationEntity
+    description: "LanguageTranslationEntity object from the Basware API"
+    source: p2p
+  - term: LegalUnit
+    description: "LegalUnit object from the Basware API"
+    source: directory
+  - term: MockResponseInternal
+    description: "MockResponseInternal object from the Basware API"
+    source: p2p
+  - term: NotificationPayload
+    description: "NotificationPayload object from the Basware API"
+    source: push-notification
+  - term: OpenIdConfigurationResponse
+    description: "OpenIdConfigurationResponse object from the Basware API"
+    source: authentication
+  - term: OperatorUserEntity
+    description: "OperatorUserEntity object from the Basware API"
+    source: p2p
+  - term: OperatorUserResponse
+    description: "OperatorUserResponse object from the Basware API"
+    source: p2p
+  - term: OrderEntity
+    description: "OrderEntity object from the Basware API"
+    source: p2p
+  - term: OrderGrouping
+    description: "OrderGrouping object from the Basware API"
+    source: p2p
+  - term: OrderLineCodingEntity
+    description: "OrderLineCodingEntity object from the Basware API"
+    source: p2p
+  - term: OrderLineEntity
+    description: "OrderLineEntity object from the Basware API"
+    source: p2p
+  - term: OrderLineResponse
+    description: "OrderLineResponse object from the Basware API"
+    source: p2p
+  - term: OrderLineUserEntity
+    description: "OrderLineUserEntity object from the Basware API"
+    source: p2p
+  - term: OrderResponse
+    description: "OrderResponse object from the Basware API"
+    source: p2p
+  - term: OrgBizIdentifier
+    description: "Organization Business Identifier"
+    source: p2p
+  - term: OrganizationContextRequest
+    description: "Represents a request for organization context, including external code and mode."
+    source: p2p
+  - term: OrganizationEntity
+    description: "OrganizationEntity object from the Basware API"
+    source: p2p
+  - term: OrganizationTreeLocation
+    description: "Speficies the organization element's position within the organization tree."
+    source: p2p
+  - term: Owner
+    description: "Specifies owner for the order / requisition. Owner is by default same person as creator, unless manually changed."
+    source: p2p
+  - term: ParentEntity
+    description: "ParentEntity object from the Basware API"
+    source: p2p
+  - term: PaymentResponseEntity
+    description: "PaymentResponseEntity object from the Basware API"
+    source: p2p
+  - term: PaymentTermCompanyEntity
+    description: "PaymentTermCompanyEntity object from the Basware API"
+    source: p2p
+  - term: PaymentTermDiscountRule
+    description: "PaymentTermDiscountRule object from the Basware API"
+    source: p2p
+  - term: PaymentTermEntity
+    description: "PaymentTermEntity object from the Basware API"
+    source: p2p
+  - term: PaymentTermResponse
+    description: "PaymentTermResponse object from the Basware API"
+    source: p2p
+  - term: Permission
+    description: "Permission object from the Basware API"
+    source: user-permission
+  - term: PrebookResponseEntity
+    description: "PrebookResponseEntity object from the Basware API"
+    source: p2p
+  - term: ProcessedItem
+    description: "ProcessedItem object from the Basware API"
+    source: p2p
+  - term: ProcessedItemErrorDetail
+    description: "ProcessedItemErrorDetail object from the Basware API"
+    source: p2p
+  - term: ProcessingStatusGetBatchRequest
+    description: "ProcessingStatusGetBatchRequest object from the Basware API"
+    source: p2p
+  - term: ProjectCompanyEntity
+    description: "ProjectCompanyEntity object from the Basware API"
+    source: p2p
+  - term: ProjectEntity
+    description: "ProjectEntity object from the Basware API"
+    source: p2p
+  - term: ProjectEntityV2
+    description: "ProjectEntityV2 object from the Basware API"
+    source: p2p
+  - term: ProjectResponse
+    description: "ProjectResponse object from the Basware API"
+    source: p2p
+  - term: ProjectResponseV2
+    description: "ProjectResponseV2 object from the Basware API"
+    source: p2p
+  - term: PublishOrganisationRequest
+    description: "PublishOrganisationRequest object from the Basware API"
+    source: p2p
+  - term: PurchaseGoodsReceiptEntity
+    description: "PurchaseGoodsReceiptEntity object from the Basware API"
+    source: p2p
+  - term: PurchaseGoodsReceiptResponse
+    description: "PurchaseGoodsReceiptResponse object from the Basware API"
+    source: p2p
+  - term: PurchaseGoodsReceiptStatusUpdateRequest
+    description: "PurchaseGoodsReceiptStatusUpdateRequest object from the Basware API"
+    source: p2p
+  - term: PurchaseManagerModuleAccess
+    description: "Module access in Purchase Manager. Not used in Basware P2P."
+    source: p2p
+  - term: PurchaseManagerUserLocations
+    description: "User default locations in Purchase Manager. Not used in Basware P2P."
+    source: p2p
+  - term: PurchaseOrderEntity
+    description: "PurchaseOrderEntity object from the Basware API"
+    source: p2p
+  - term: PurchaseOrderLineEntity
+    description: "PurchaseOrderLineEntity object from the Basware API"
+    source: p2p
+  - term: PurchaseOrderUserEntity
+    description: "PurchaseOrderUserEntity object from the Basware API"
+    source: p2p
+  - term: PurchaseOrdersResponse
+    description: "PurchaseOrdersResponse object from the Basware API"
+    source: p2p
+  - term: PurchaseRequisitionEntity
+    description: "PurchaseRequisitionEntity object from the Basware API"
+    source: p2p
+  - term: PurchaseRequisitionEntityInternal
+    description: "PurchaseRequisitionEntityInternal object from the Basware API"
+    source: p2p
+  - term: PurchaseRequisitionResponse
+    description: "PurchaseRequisitionResponse object from the Basware API"
+    source: p2p
+  - term: PurchaseRequisitionResponseInternal
+    description: "PurchaseRequisitionResponseInternal object from the Basware API"
+    source: p2p
+  - term: PurchasingGroups
+    description: "PurchasingGroups object from the Basware API"
+    source: p2p
+  - term: Receiver
+    description: "Specifies who has received the goods."
+    source: p2p
+  - term: RecordNotFoundResponse
+    description: "RecordNotFoundResponse object from the Basware API"
+    source: push-notification
+  - term: RedistributeRequest
+    description: "RedistributeRequest object from the Basware API"
+    source: p2p
+  - term: RedistributeResponse
+    description: "RedistributeResponse object from the Basware API"
+    source: p2p
+  - term: RemoveResponseEntity
+    description: "RemoveResponseEntity object from the Basware API"
+    source: p2p
+  - term: RequestStatusFilter
+    description: "RequestStatusFilter object from the Basware API"
+    source: p2p
+  - term: RequestStatusResponse
+    description: "RequestStatusResponse object from the Basware API"
+    source: p2p
+  - term: RequisitionCodingRow
+    description: "RequisitionCodingRow object from the Basware API"
+    source: p2p
+  - term: RequisitionLine
+    description: "RequisitionLine object from the Basware API"
+    source: p2p
+  - term: RequisitionLineInternal
+    description: "RequisitionLineInternal object from the Basware API"
+    source: p2p
+  - term: ResponseEntityList
+    description: "Errors returned here are returned synchronously from Basware API middle layer. Additional errors coming from target system(s) may be returned through errorFeedbacks API."
+    source: p2p
+  - term: Role
+    description: "Role object from the Basware API"
+    source: p2p
+  - term: Root
+    description: "Root object from the Basware API"
+    source: p2p
+  - term: RoutingCode
+    description: "RoutingCode object from the Basware API"
+    source: directory
+  - term: SaveOrganisationRequest
+    description: "SaveOrganisationRequest object from the Basware API"
+    source: p2p
+  - term: SaveSingleUserRequest
+    description: "SaveSingleUserRequest object from the Basware API"
+    source: p2p
+  - term: SaveUserRequest
+    description: "SaveUserRequest object from the Basware API"
+    source: p2p
+  - term: SaveUserResponse
+    description: "SaveUserResponse object from the Basware API"
+    source: p2p
+  - term: SchemaMaintenanceConfiguration
+    description: "SchemaMaintenanceConfiguration object from the Basware API"
+    source: p2p
+  - term: SchemaValidationError
+    description: "SchemaValidationError object from the Basware API"
+    source: push-notification
+  - term: SourceConfiguration
+    description: "SourceConfiguration object from the Basware API"
+    source: p2p
+  - term: SpendingLimits
+    description: "SpendingLimits object from the Basware API"
+    source: p2p
+  - term: StandardCodingEntity
+    description: "StandardCodingEntity object from the Basware API"
+    source: p2p
+  - term: Subscription-Input
+    description: "Subscription-Input object from the Basware API"
+    source: push-notification
+  - term: Subscription-Output
+    description: "Subscription-Output object from the Basware API"
+    source: push-notification
+  - term: SubscriptionType
+    description: "SubscriptionType object from the Basware API"
+    source: push-notification
+  - term: SubscriptionsResponse
+    description: "SubscriptionsResponse object from the Basware API"
+    source: push-notification
+  - term: SuccessResponse
+    description: "SuccessResponse object from the Basware API"
+    source: data-extract
+  - term: TableColumnDefinition
+    description: "TableColumnDefinition object from the Basware API"
+    source: data-extract
+  - term: TableDefinition
+    description: "TableDefinition object from the Basware API"
+    source: data-extract
+  - term: TableDefinitionChangeLog
+    description: "TableDefinitionChangeLog object from the Basware API"
+    source: data-extract
+  - term: TableDefinitionColumnChangeLog
+    description: "TableDefinitionColumnChangeLog object from the Basware API"
+    source: data-extract
+  - term: TargetConfiguration
+    description: "TargetConfiguration object from the Basware API"
+    source: p2p
+  - term: Task
+    description: "Task object from the Basware API"
+    source: push-notification
+  - term: TaskHistory
+    description: "TaskHistory object from the Basware API"
+    source: push-notification
+  - term: TasksResponse
+    description: "TasksResponse object from the Basware API"
+    source: push-notification
+  - term: TaxCodeAdditionalData
+    description: "TaxCodeAdditionalData object from the Basware API"
+    source: p2p
+  - term: TaxCodeCompanyEntity
+    description: "TaxCodeCompanyEntity object from the Basware API"
+    source: p2p
+  - term: TaxCodeEntity
+    description: "TaxCodeEntity object from the Basware API"
+    source: p2p
+  - term: TaxCodeResponse
+    description: "TaxCodeResponse object from the Basware API"
+    source: p2p
+  - term: Tenant
+    description: "Tenant object from the Basware API"
+    source: p2p
+  - term: TenantProvisioningRequest
+    description: "TenantProvisioningRequest object from the Basware API"
+    source: p2p
+  - term: TenantSettingsConfigurationRequest
+    description: "TenantSettingsConfigurationRequest object from the Basware API"
+    source: p2p
+  - term: TransferParameterEntity
+    description: "TransferParameterEntity object from the Basware API"
+    source: p2p
+  - term: TransferResponseEntity
+    description: "TransferResponseEntity object from the Basware API"
+    source: p2p
+  - term: UnauthorizeErrorResponse
+    description: "UnauthorizeErrorResponse object from the Basware API"
+    source: push-notification
+  - term: UnauthorizedErrorResponse
+    description: "UnauthorizedErrorResponse object from the Basware API"
+    source: authentication
+  - term: UnprocessableEntityErrorResponse
+    description: "UnprocessableEntityErrorResponse object from the Basware API"
+    source: push-notification
+  - term: UploadRequest
+    description: "UploadRequest object from the Basware API"
+    source: smart-pdf
+  - term: UploadResponse
+    description: "UploadResponse object from the Basware API"
+    source: smart-pdf
+  - term: UserChangeHistory
+    description: "UserChangeHistory object from the Basware API"
+    source: p2p
+  - term: UserChangeHistoryRequest
+    description: "UserChangeHistoryRequest object from the Basware API"
+    source: p2p
+  - term: UserChangeHistoryResponse
+    description: "UserChangeHistoryResponse object from the Basware API"
+    source: p2p
+  - term: UserEntity
+    description: "UserEntity object from the Basware API"
+    source: p2p
+  - term: UserEntityInternal
+    description: "UserEntityInternal object from the Basware API"
+    source: p2p
+  - term: UserExistenceRequest
+    description: "UserExistenceRequest object from the Basware API"
+    source: p2p
+  - term: UserExistenceResponse
+    description: "UserExistenceResponse object from the Basware API"
+    source: p2p
+  - term: UserGroup
+    description: "UserGroup object from the Basware API"
+    source: p2p
+  - term: UserGroupApplication
+    description: "UserGroupApplication object from the Basware API"
+    source: user-permission
+  - term: UserGroupAssociatedUser
+    description: "UserGroupAssociatedUser object from the Basware API"
+    source: user-permission
+  - term: UserGroupAssociationsDeleteRequest
+    description: "UserGroupAssociationsDeleteRequest object from the Basware API"
+    source: user-permission
+  - term: UserGroupPermission
+    description: "Represents a permission assignment for a specific user group within an application. Each PMS.Domain.Entities.UserGroupPermission.UserGroupPermission defines the mapping between a user group, an appl"
+    source: user-permission
+  - term: UserGroupPermissionResponse
+    description: "UserGroupPermissionResponse object from the Basware API"
+    source: user-permission
+  - term: UserPermission
+    description: "UserPermission object from the Basware API"
+    source: user-permission
+  - term: UserRecipientIdentifiers
+    description: "Recipient identifier data in P2P. Can be used for specifying invoice recipient groups. Note: User recipient identifiers in P2P are overridden with values received through API. When no values are speci"
+    source: p2p
+  - term: UserResponse
+    description: "UserResponse object from the Basware API"
+    source: p2p
+  - term: UserResponseInternal
+    description: "UserResponseInternal object from the Basware API"
+    source: p2p
+  - term: ValidationError
+    description: "ValidationError object from the Basware API"
+    source: authentication
+  - term: ValidationErrorResponse
+    description: "ValidationErrorResponse object from the Basware API"
+    source: push-notification
+  - term: VendorAdditionalFieldEntity
+    description: "VendorAdditionalFieldEntity object from the Basware API"
+    source: p2p
+  - term: VendorAddressEntity
+    description: "VendorAddressEntity object from the Basware API"
+    source: p2p
+  - term: VendorAddressPartEntity
+    description: "VendorAddressPartEntity object from the Basware API"
+    source: p2p
+  - term: VendorBusinessDescriptionEntity
+    description: "VendorBusinessDescriptionEntity object from the Basware API"
+    source: p2p
+  - term: VendorCandidateDataModel
+    description: "VendorCandidateDataModel object from the Basware API"
+    source: p2p
+  - term: VendorCandidateModelEntity
+    description: "VendorCandidateModelEntity object from the Basware API"
+    source: p2p
+  - term: VendorCompanyEntity
+    description: "VendorCompanyEntity object from the Basware API"
+    source: p2p
+  - term: VendorComplianceDataEntity
+    description: "VendorComplianceDataEntity object from the Basware API"
+    source: p2p
+  - term: VendorComplianceTypeEntity
+    description: "VendorComplianceTypeEntity object from the Basware API"
+    source: p2p
+  - term: VendorContactEntity
+    description: "VendorContactEntity object from the Basware API"
+    source: p2p
+  - term: VendorCreditRiskDataEntity
+    description: "VendorCreditRiskDataEntity object from the Basware API"
+    source: p2p
+  - term: VendorDeliveryTermEntity
+    description: "VendorDeliveryTermEntity object from the Basware API"
+    source: p2p
+  - term: VendorEnrichedFieldsEntity
+    description: "VendorEnrichedFieldsEntity object from the Basware API"
+    source: p2p
+  - term: VendorEntity
+    description: "VendorEntity object from the Basware API"
+    source: p2p
+  - term: VendorIdentifierEntity
+    description: "VendorIdentifierEntity object from the Basware API"
+    source: p2p
+  - term: VendorIndustryCodeEntity
+    description: "VendorIndustryCodeEntity object from the Basware API"
+    source: p2p
+  - term: VendorOrderingDetailsEntity
+    description: "VendorOrderingDetailsEntity object from the Basware API"
+    source: p2p
+  - term: VendorPaymentMeanEntity
+    description: "VendorPaymentMeanEntity object from the Basware API"
+    source: p2p
+  - term: VendorPaymentTermEntity
+    description: "VendorPaymentTermEntity object from the Basware API"
+    source: p2p
+  - term: VendorProcessingStatusEntity
+    description: "VendorProcessingStatusEntity object from the Basware API"
+    source: p2p
+  - term: VendorResponse
+    description: "VendorResponse object from the Basware API"
+    source: p2p
+  - term: VendorTagEntity
+    description: "VendorTagEntity object from the Basware API"
+    source: p2p
+  - term: VendorfinancialAccountsEntity
+    description: "VendorfinancialAccountsEntity object from the Basware API"
+    source: p2p
+  - term: WellKnownTokenKey
+    description: "WellKnownTokenKey object from the Basware API"
+    source: authentication
+  - term: WellKnownTokenResponse
+    description: "WellKnownTokenResponse object from the Basware API"
+    source: authentication

@@ -1,0 +1,512 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://developer.basware.com/schemas/push-notification",
+  "title": "Basware push notification APIs",
+  "description": "Steps to use:\n1. Publish a webservice to receive notifications from Basware API.\n2. Subscribe to push notifications using 'subscriptions' API, specifying your webservice URL.\n3. API will POST notifications to specified URL when documents become available.\n4. Retrieve the document(s) from the API(s) indicated by taskType in the received notification. \n\nThe notification data format is documented under 'Callbacks' section of POST subscriptions API. \nSee full documentation on Basware API developer site: <https://developer.basware.com/api/p2p/manual#PushNotifications>",
+  "$defs": {
+    "AutoResponder": {
+      "properties": {
+        "autoResponseMode": {
+          "allOf": [
+            {
+              "$ref": "#/components/schemas/AutoResponseModeEnum"
+            }
+          ],
+          "description": "Determines whether task autoresponder is enabled and whether it returns task responses with status 'Success' or 'Failed'. The entire autoresponder functionality is reserved for later use.",
+          "example": "Disabled"
+        },
+        "autoResponseMessage": {
+          "type": "string",
+          "title": "Autoresponsemessage",
+          "description": "Determines message returned by task autoresponser to P2P.",
+          "example": "Updated coding details."
+        },
+        "fieldUpdateArray": {
+          "anyOf": [
+            {
+              "items": {
+                "$ref": "#/components/schemas/FieldUpdateArray"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Fieldupdatearray",
+          "description": "Reserved for later use. Array of field values to automatically update when autoresponder is enabled."
+        }
+      },
+      "type": "object",
+      "title": "AutoResponder"
+    },
+    "AutoResponseModeEnum": {
+      "type": "string",
+      "enum": [
+        "Disabled",
+        "Success",
+        "Failed"
+      ],
+      "title": "AutoResponseModeEnum"
+    },
+    "DeleteSubscriptionResponse": {
+      "properties": {
+        "status": {
+          "type": "string",
+          "title": "Status",
+          "description": "Success message",
+          "default": "Deleted successfully",
+          "example": "Deleted successfully"
+        },
+        "numberOfRecordsDeleted": {
+          "type": "integer",
+          "title": "Numberofrecordsdeleted",
+          "description": "Number of records deleted",
+          "example": "1"
+        }
+      },
+      "type": "object",
+      "title": "DeleteSubscriptionResponse"
+    },
+    "FieldUpdateArray": {
+      "properties": {
+        "fieldId": {
+          "type": "string",
+          "title": "Fieldid",
+          "description": "Specifies the field to update. Use JSONpath to identify the value on response schema to update.",
+          "example": "codingRows[2]/accountCode"
+        },
+        "updateToValue": {
+          "type": "string",
+          "title": "Updatetovalue",
+          "description": "Specifies value to which field contents are set by the autoresponder.",
+          "example": "02600"
+        }
+      },
+      "type": "object",
+      "title": "FieldUpdateArray"
+    },
+    "InternalServerErrorResponse": {
+      "properties": {
+        "message": {
+          "type": "string",
+          "title": "Message",
+          "description": "Detail of error",
+          "default": "Internal server error",
+          "example": "Internal server error"
+        }
+      },
+      "type": "object",
+      "title": "InternalServerErrorResponse"
+    },
+    "NotificationPayload": {
+      "properties": {
+        "taskId": {
+          "type": "string",
+          "title": "Taskid",
+          "description": "Defines id of task",
+          "example": "eb9ea3fa-69de-4a5a-8a1a-f4347cd18626"
+        },
+        "taskStatus": {
+          "type": "string",
+          "title": "Taskstatus",
+          "description": "Defines status of task",
+          "example": "New"
+        },
+        "taskType": {
+          "type": "string",
+          "title": "Tasktype",
+          "description": "Defines task type",
+          "example": "AccoutingDocuments"
+        },
+        "taskSubType": {
+          "type": "string",
+          "title": "Tasksubtype",
+          "description": "Defines sub task type",
+          "example": "WaitingForTransfer"
+        },
+        "documentId": {
+          "type": "string",
+          "title": "Documentid",
+          "description": "Defines document id",
+          "example": "63255782d0a04d8d8defcc6a0062101d"
+        },
+        "expirationTime": {
+          "type": "string",
+          "title": "Expirationtime",
+          "description": "Defines notification's expiration time",
+          "example": "2021-12-11T08:53:31Z"
+        }
+      },
+      "type": "object",
+      "required": [
+        "taskId",
+        "taskStatus",
+        "taskType",
+        "documentId"
+      ],
+      "title": "NotificationPayload"
+    },
+    "RecordNotFoundResponse": {
+      "properties": {
+        "detail": {
+          "type": "string",
+          "title": "Detail",
+          "description": "Detail of error",
+          "default": "Not Found",
+          "example": "Not Found"
+        }
+      },
+      "type": "object",
+      "title": "RecordNotFoundResponse"
+    },
+    "SchemaValidationError": {
+      "properties": {
+        "type": {
+          "type": "string",
+          "title": "Type",
+          "description": "Type of error",
+          "example": "VALIDATION"
+        },
+        "code": {
+          "type": "string",
+          "title": "Code",
+          "description": "Code of error",
+          "example": "SCHEMA_VALIDATION_ERROR"
+        },
+        "message": {
+          "type": "string",
+          "title": "Message",
+          "description": "Detail of error",
+          "example": "taskType field required"
+        }
+      },
+      "type": "object",
+      "title": "SchemaValidationError"
+    },
+    "Subscription-Input": {
+      "properties": {
+        "taskType": {
+          "type": "string",
+          "minLength": 1,
+          "title": "Tasktype",
+          "description": "Task type for which notifications are sent. Supported values: 'AccountingDocuments', 'ExportedPurchaseRequisitions', 'ExportedPurchaseOrders', 'RequestStatus', 'ExportedContracts' , 'ExportedContractSpends'.",
+          "example": "AccountingDocuments"
+        },
+        "taskSubType": {
+          "type": "string",
+          "title": "Tasksubtype",
+          "description": "Task subtype for which webhook notifications are sent. Supported values: 'WaitingForPrebook', 'WaitingForTransfer', 'WaitingForPrebookCancelation', 'WaitingToBeRemoved', 'WaitingToBeReturned', 'WaitingToBeCompleted', 'WaitingForExport', 'Error', 'Success', 'All'. Available values depend on taskType. If null, defaults to 'Error' for RequestStatus taskType and 'All' for other taskTypes.",
+          "example": "All"
+        },
+        "subscriptionType": {
+          "allOf": [
+            {
+              "$ref": "#/components/schemas/SubscriptionType"
+            }
+          ],
+          "description": "Subscription type. Supported values: 'Webhook'. 'Polling' subscription type is reserved for later use.",
+          "example": "Webhook"
+        },
+        "notificationWebhookURL": {
+          "type": "string",
+          "maxLength": 2083,
+          "minLength": 1,
+          "format": "uri",
+          "title": "Notificationwebhookurl",
+          "description": "URL where API posts push notifications when subscriptionType = 'Webhook' (then field is mandatory). This URL needs to implement the Basware's notification receival API specification.",
+          "example": "https://bwnotificationapi.customer.com/accountingdocumentnotifications"
+        },
+        "webhookAuthenticationToken": {
+          "type": "string",
+          "minLength": 1,
+          "title": "Webhookauthenticationtoken",
+          "description": "Secret key used by API to sign sent push notifications so authenticity can be verified by customer. Mandatory when subscription type is 'Webhook'.",
+          "example": "ad65rujltr9093ijhdkutiyua09d\u00f6ijhsa76d8799w8pqugdfafjdhfkjhadls"
+        },
+        "lastUpdated": {
+          "type": "string",
+          "format": "date-time",
+          "title": "Lastupdated",
+          "description": "Timestamp when this subscription has been last updated (set automatically by Basware API).",
+          "example": "2021-08-04T08:39:13Z"
+        },
+        "autoResponder": {
+          "anyOf": [
+            {
+              "$ref": "#/components/schemas/AutoResponder"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "Reserved for later use."
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "taskType",
+        "subscriptionType",
+        "notificationWebhookURL",
+        "webhookAuthenticationToken"
+      ],
+      "title": "Subscription"
+    },
+    "Subscription-Output": {
+      "properties": {
+        "taskType": {
+          "type": "string",
+          "minLength": 1,
+          "title": "Tasktype",
+          "description": "Task type for which notifications are sent. Supported values: 'AccountingDocuments', 'ExportedPurchaseRequisitions', 'ExportedPurchaseOrders', 'RequestStatus', 'ExportedContracts' , 'ExportedContractSpends'.",
+          "example": "AccountingDocuments"
+        },
+        "taskSubType": {
+          "type": "string",
+          "title": "Tasksubtype",
+          "description": "Task subtype for which webhook notifications are sent. Supported values: 'WaitingForPrebook', 'WaitingForTransfer', 'WaitingForPrebookCancelation', 'WaitingToBeRemoved', 'WaitingToBeReturned', 'WaitingToBeCompleted', 'WaitingForExport', 'Error', 'Success', 'All'. Available values depend on taskType. If null, defaults to 'Error' for RequestStatus taskType and 'All' for other taskTypes.",
+          "example": "All"
+        },
+        "subscriptionType": {
+          "allOf": [
+            {
+              "$ref": "#/components/schemas/SubscriptionType"
+            }
+          ],
+          "description": "Subscription type. Supported values: 'Webhook'. 'Polling' subscription type is reserved for later use.",
+          "example": "Webhook"
+        },
+        "notificationWebhookURL": {
+          "type": "string",
+          "maxLength": 2083,
+          "minLength": 1,
+          "format": "uri",
+          "title": "Notificationwebhookurl",
+          "description": "URL where API posts push notifications when subscriptionType = 'Webhook' (then field is mandatory). This URL needs to implement the Basware's notification receival API specification.",
+          "example": "https://bwnotificationapi.customer.com/accountingdocumentnotifications"
+        },
+        "webhookAuthenticationToken": {
+          "type": "string",
+          "minLength": 1,
+          "title": "Webhookauthenticationtoken",
+          "description": "Secret key used by API to sign sent push notifications so authenticity can be verified by customer. Mandatory when subscription type is 'Webhook'.",
+          "example": "ad65rujltr9093ijhdkutiyua09d\u00f6ijhsa76d8799w8pqugdfafjdhfkjhadls"
+        },
+        "lastUpdated": {
+          "type": "string",
+          "format": "date-time",
+          "title": "Lastupdated",
+          "description": "Timestamp when this subscription has been last updated (set automatically by Basware API).",
+          "example": "2021-08-04T08:39:13Z"
+        },
+        "autoResponder": {
+          "anyOf": [
+            {
+              "$ref": "#/components/schemas/AutoResponder"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "Reserved for later use."
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "taskType",
+        "subscriptionType",
+        "notificationWebhookURL",
+        "webhookAuthenticationToken"
+      ],
+      "title": "Subscription"
+    },
+    "SubscriptionType": {
+      "type": "string",
+      "enum": [
+        "Webhook",
+        "Polling"
+      ],
+      "title": "SubscriptionType"
+    },
+    "SubscriptionsResponse": {
+      "properties": {
+        "subscriptions": {
+          "items": {
+            "$ref": "#/components/schemas/Subscription-Output"
+          },
+          "type": "array",
+          "title": "Subscriptions"
+        }
+      },
+      "type": "object",
+      "required": [
+        "subscriptions"
+      ],
+      "title": "SubscriptionsResponse"
+    },
+    "Task": {
+      "properties": {
+        "taskId": {
+          "type": "string",
+          "title": "Taskid",
+          "description": "Task id identifies the task and is used to correlate task response to the correct operation in P2P.",
+          "example": "sajkhe1i87yhdgdi6sad7iyahljh1ut1"
+        },
+        "taskStatus": {
+          "type": "string",
+          "title": "Taskstatus",
+          "description": "Status of the task (=notification). Available values: 'New', 'Completed', 'Failed'.",
+          "example": "New"
+        },
+        "taskType": {
+          "type": "string",
+          "title": "Tasktype",
+          "description": "Task type specifies type of document. It also determines the API endpoint from which the document needs to be fetched.",
+          "example": "AccountingDocuments"
+        },
+        "taskSubType": {
+          "type": "string",
+          "title": "Tasksubtype",
+          "description": "Specifies status of the document when notification was sent.",
+          "example": "WaitingForTransfer"
+        },
+        "documentId": {
+          "type": "string",
+          "title": "Documentid",
+          "description": "Identifies the document being processed. Same identifier is used in API from which document needs to be fetched.",
+          "example": "198phejkbaku7dilj12kdg867hbdsmag"
+        },
+        "expirationTime": {
+          "type": "string",
+          "title": "Expirationtime",
+          "description": "Timestamp after which the notification expires. Reseved for future use. Responses are no longer accepted for expired tasks.",
+          "example": "2020-12-04T08:39:13Z"
+        },
+        "externalProcessingTime": {
+          "type": "string",
+          "title": "Externalprocessingtime",
+          "description": "Reserved for future use.",
+          "example": "2020-12-04T08:39:13Z"
+        },
+        "isSimulatedTask": {
+          "type": "boolean",
+          "title": "Issimulatedtask",
+          "description": "Reserved for future use. Indicates if task is a simulated task (created using 'simulate' API).",
+          "example": "false"
+        },
+        "lastUpdated": {
+          "type": "string",
+          "title": "Lastupdated",
+          "description": "Timestamp when task has been last updated. Value is set automatically by API.",
+          "example": "2020-12-04T08:39:13Z"
+        },
+        "taskHistory": {
+          "items": {
+            "$ref": "#/components/schemas/TaskHistory"
+          },
+          "type": "array",
+          "title": "Taskhistory",
+          "description": "Shows information aboout task status changes."
+        }
+      },
+      "type": "object",
+      "title": "Task"
+    },
+    "TaskHistory": {
+      "properties": {
+        "action": {
+          "type": "string",
+          "title": "Action",
+          "description": "Action performed on the task.",
+          "example": "New"
+        },
+        "timeStamp": {
+          "type": "string",
+          "title": "Timestamp",
+          "description": "Timestamp when action occurred.",
+          "example": "2021-08-12T08:39:13Z"
+        },
+        "messages": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "title": "Messages",
+          "description": "Additional information regarding task status change, such as error messages.",
+          "example": "Task Created"
+        }
+      },
+      "type": "object",
+      "title": "TaskHistory"
+    },
+    "TasksResponse": {
+      "properties": {
+        "taskStatus": {
+          "items": {
+            "$ref": "#/components/schemas/Task"
+          },
+          "type": "array",
+          "title": "Taskstatus"
+        }
+      },
+      "type": "object",
+      "required": [
+        "taskStatus"
+      ],
+      "title": "TasksResponse"
+    },
+    "UnauthorizeErrorResponse": {
+      "properties": {
+        "message": {
+          "type": "string",
+          "title": "Message",
+          "description": "Detail of error",
+          "default": "Unauthorized",
+          "example": "Unauthorized"
+        }
+      },
+      "type": "object",
+      "title": "UnauthorizeErrorResponse"
+    },
+    "UnprocessableEntityErrorResponse": {
+      "properties": {
+        "message": {
+          "type": "string",
+          "title": "Message",
+          "description": "Detail of error",
+          "default": "UnprocessableEntity",
+          "example": "UnprocessableEntity"
+        }
+      },
+      "type": "object",
+      "title": "UnprocessableEntityErrorResponse"
+    },
+    "ValidationErrorResponse": {
+      "properties": {
+        "requestId": {
+          "type": "string",
+          "title": "Requestid",
+          "description": "RequestId of request",
+          "example": "KLF5BiZ9DoEEMlQ="
+        },
+        "hasError": {
+          "type": "boolean",
+          "title": "Haserror",
+          "description": "Tells that request has error",
+          "example": true
+        },
+        "errorMessages": {
+          "items": {
+            "$ref": "#/components/schemas/SchemaValidationError"
+          },
+          "type": "array",
+          "title": "Errormessages"
+        }
+      },
+      "type": "object",
+      "title": "ValidationErrorResponse"
+    }
+  }
+}

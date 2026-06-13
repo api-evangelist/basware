@@ -1,0 +1,418 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://developer.basware.com/schemas/data-extract",
+  "title": "Basware Data Extract APIs",
+  "description": " Basware Data access APIs are based on REST API, they provide a mechanism to extract raw data from Basware AP Automation. The APIs are used to get a list of the extracts that are available for download. There can be one or multiple extracts available for download. Each extract is a collection of multiple data sets in ZIP files.  This document describes data schemas and available methods. Basware APIs work using REST API calls initiated by customer. Please visit the Basware Data Access API pages on Basware API developer site for full API documentation.\n\n**Data formats**\n\nBasware APIs use JSON data format with UTF-8 character encoding. Descriptions of data fields are under the API methods, on tab 'Schema'. The API has a rich set of fields, many of which are optional.\nDuring the provisioning of the data extract service please make sure you ask for the correct format in which you would like to have the data extracts zip files. Supported formats are JSON or CSV.\nNote: - Formats need to be defined and agreed during the provisioning of the service and cannot be changed thereafter.\nBasware reserves the rights to introduce a new field in the data extracts zip file. Please make sure your integration is configured to read data from records returned in zip files using named JSON or CSV fields and does not assume the fields come in a predefined sequence of elements.\n\n**Authentication**\n\nAPI clients authenticate using OAUTH2 or Basic HTTP authentication. All communication is secured by using the HTTPS protocol (HTTP over TLS, TLS version 1.2 or later). You must make all API requests over HTTPS. API requests made without authentication are not accepted. API clients need to take into account that Basware domain certificates are renewed regularly. For details see, the authentication and access rights section on the Basware API developer site.\n\n**API Versioning**\n\nEvery time there is a backwards-incompatible change to the API, a new major version will be released. This major version is part of the URL path. The current major version is v1.\nUnless informed by our technical support department that we are discontinuing support for a particular API version, you do not need to switch API versions. We will let you know at least 12 months in advance if an old API version is to be deprecated.\nMajor change is a new version of the API that requires changes from the API consumer before the new version can be taken into use. This change would for example be a change to existing fields or adding new mandatory fields.\nMinor change is a new version of the API that is backward compatible and does not require changes from the API consumer. Minor change would consist of for example adding a new non-mandatory field. Please make sure your API client accepts new non-mandatory fields.\n\n**API Client requirements**\n\nAPI clients need to accept new JSON fields as well as absence of null fields from the response JSONs.\nPrograms using Basware API need to handle redirects either at the application layer or the HTTP layer since certain APIs allow larger payloads by redirecting the response.\n\n",
+  "$defs": {
+    "AvailableDataExtractInfo": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "title": "Id",
+          "description": "Extract id",
+          "example": "14ad2cbc3445443fb042fbd1f653ec0e"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "Initial",
+            "Delta",
+            "DateRange"
+          ],
+          "title": "Type",
+          "description": "Extract type, can be Initial, Delta or DateRange",
+          "example": "Initial"
+        },
+        "startDate": {
+          "type": "string",
+          "title": "Startdate",
+          "description": "Extract data start time",
+          "example": "31/01/1970, 21:00:00"
+        },
+        "endDate": {
+          "type": "string",
+          "title": "Enddate",
+          "description": "Extract data end time",
+          "example": "28/03/2024, 10:17:02"
+        },
+        "fileCount": {
+          "type": "integer",
+          "title": "Filecount",
+          "description": "How many files extract contains",
+          "example": 20
+        },
+        "processingStatus": {
+          "type": "string",
+          "enum": [
+            "WaitingForExport",
+            "Exported"
+          ],
+          "title": "Processingstatus",
+          "description": "Processing status of extract, can be WaitingForExport or Exported",
+          "example": "WaitingForExport"
+        },
+        "extractDate": {
+          "type": "string",
+          "title": "Extractdate",
+          "description": "Time when extract is done",
+          "example": "28/03/2024, 10:21:14"
+        },
+        "extractName": {
+          "type": "string",
+          "title": "Extractname",
+          "description": "Extract name",
+          "example": "Standard_data_extract"
+        }
+      },
+      "type": "object",
+      "required": [
+        "id",
+        "type",
+        "startDate",
+        "endDate",
+        "fileCount",
+        "processingStatus",
+        "extractDate",
+        "extractName"
+      ],
+      "title": "AvailableDataExtractInfo"
+    },
+    "DataExtractFileInfo": {
+      "properties": {
+        "extractId": {
+          "type": "string",
+          "title": "Extractid",
+          "description": "Extract id for which file belongs",
+          "example": "14ad2cbc3445443fb042fbd1f653ec0e"
+        },
+        "tableName": {
+          "type": "string",
+          "title": "Tablename",
+          "description": "Table name of data the file contains",
+          "example": "IA_INVOICE"
+        },
+        "fileName": {
+          "type": "string",
+          "title": "Filename",
+          "description": "File name",
+          "example": "IA_INVOICE_0001.json.gz"
+        },
+        "startDate": {
+          "type": "string",
+          "title": "Startdate",
+          "description": "Extract file data start time",
+          "example": "31/01/1970, 21:00:00"
+        },
+        "endDate": {
+          "type": "string",
+          "title": "Enddate",
+          "description": "Extract file data end time",
+          "example": "28/03/2024, 10:17:02"
+        },
+        "downloadUrl": {
+          "type": "string",
+          "title": "Downloadurl",
+          "description": "Url to download file",
+          "example": "https://api.basware.com/v1/dataExtracts/14ad2cbc3445443fb042fbd1f653ec0e/getFile?file=IA_INVOICE_0001.json.gz"
+        }
+      },
+      "type": "object",
+      "required": [
+        "extractId",
+        "tableName",
+        "fileName",
+        "startDate",
+        "endDate",
+        "downloadUrl"
+      ],
+      "title": "DataExtractFileInfo"
+    },
+    "HTTPValidationError": {
+      "properties": {
+        "detail": {
+          "items": {
+            "$ref": "#/components/schemas/ValidationError"
+          },
+          "type": "array",
+          "title": "Detail"
+        }
+      },
+      "type": "object",
+      "title": "HTTPValidationError"
+    },
+    "InternalServerErrorResponse": {
+      "properties": {
+        "message": {
+          "type": "string",
+          "title": "Message",
+          "description": "Detail of error",
+          "default": "Internal server error",
+          "example": "Internal server error"
+        }
+      },
+      "type": "object",
+      "title": "InternalServerErrorResponse"
+    },
+    "RecordNotFoundResponse": {
+      "properties": {
+        "detail": {
+          "type": "string",
+          "title": "Detail",
+          "description": "Detail of error",
+          "default": "Not Found",
+          "example": "Not Found"
+        }
+      },
+      "type": "object",
+      "title": "RecordNotFoundResponse"
+    },
+    "SchemaValidationError": {
+      "properties": {
+        "type": {
+          "type": "string",
+          "title": "Type",
+          "description": "Type of error",
+          "example": "VALIDATION"
+        },
+        "code": {
+          "type": "string",
+          "title": "Code",
+          "description": "Code of error",
+          "example": "SCHEMA_VALIDATION_ERROR"
+        },
+        "message": {
+          "type": "string",
+          "title": "Message",
+          "description": "Detail of error",
+          "example": "taskType field required"
+        }
+      },
+      "type": "object",
+      "title": "SchemaValidationError"
+    },
+    "SuccessResponse": {
+      "properties": {
+        "succeeded": {
+          "type": "boolean",
+          "title": "Succeeded",
+          "description": "Success status",
+          "example": true
+        },
+        "message": {
+          "type": "string",
+          "title": "Message",
+          "description": "Success message",
+          "default": "Action done successfully",
+          "example": "Action done successfully"
+        }
+      },
+      "type": "object",
+      "title": "SuccessResponse"
+    },
+    "TableColumnDefinition": {
+      "properties": {
+        "Column name": {
+          "type": "string",
+          "title": "Column Name",
+          "example": "NAME"
+        },
+        "Data Type": {
+          "type": "string",
+          "title": "Data Type",
+          "example": "NVARCHAR2"
+        },
+        "Field definition": {
+          "type": "string",
+          "title": "Field Definition",
+          "example": "Name of the person"
+        },
+        "Example value": {
+          "type": "string",
+          "title": "Example Value",
+          "example": "John Doe"
+        }
+      },
+      "type": "object",
+      "required": [
+        "Column name",
+        "Data Type",
+        "Field definition",
+        "Example value"
+      ],
+      "title": "TableColumnDefinition"
+    },
+    "TableDefinition": {
+      "properties": {
+        "Table name": {
+          "type": "string",
+          "title": "Table Name",
+          "example": "TABLE_1"
+        },
+        "Columns": {
+          "items": {
+            "$ref": "#/components/schemas/TableColumnDefinition"
+          },
+          "type": "array",
+          "title": "Columns"
+        }
+      },
+      "type": "object",
+      "required": [
+        "Table name",
+        "Columns"
+      ],
+      "title": "TableDefinition"
+    },
+    "TableDefinitionChangeLog": {
+      "properties": {
+        "Version": {
+          "type": "string",
+          "title": "Version"
+        },
+        "Added tables": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "title": "Added Tables"
+        },
+        "Removed tables": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "title": "Removed Tables"
+        },
+        "Column changes": {
+          "additionalProperties": {
+            "$ref": "#/components/schemas/TableDefinitionColumnChangeLog"
+          },
+          "type": "object",
+          "title": "Column Changes"
+        }
+      },
+      "type": "object",
+      "required": [
+        "Version",
+        "Added tables",
+        "Removed tables",
+        "Column changes"
+      ],
+      "title": "TableDefinitionChangeLog"
+    },
+    "TableDefinitionColumnChangeLog": {
+      "properties": {
+        "Added columns": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "title": "Added Columns"
+        },
+        "Removed columns": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "title": "Removed Columns"
+        }
+      },
+      "type": "object",
+      "required": [
+        "Added columns",
+        "Removed columns"
+      ],
+      "title": "TableDefinitionColumnChangeLog"
+    },
+    "UnauthorizeErrorResponse": {
+      "properties": {
+        "message": {
+          "type": "string",
+          "title": "Message",
+          "description": "Detail of error",
+          "default": "Unauthorized",
+          "example": "Unauthorized"
+        }
+      },
+      "type": "object",
+      "title": "UnauthorizeErrorResponse"
+    },
+    "UnprocessableEntityErrorResponse": {
+      "properties": {
+        "message": {
+          "type": "string",
+          "title": "Message",
+          "description": "Detail of error",
+          "default": "UnprocessableEntity",
+          "example": "UnprocessableEntity"
+        }
+      },
+      "type": "object",
+      "title": "UnprocessableEntityErrorResponse"
+    },
+    "ValidationError": {
+      "properties": {
+        "loc": {
+          "items": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "integer"
+              }
+            ]
+          },
+          "type": "array",
+          "title": "Location"
+        },
+        "msg": {
+          "type": "string",
+          "title": "Message"
+        },
+        "type": {
+          "type": "string",
+          "title": "Error Type"
+        }
+      },
+      "type": "object",
+      "required": [
+        "loc",
+        "msg",
+        "type"
+      ],
+      "title": "ValidationError"
+    },
+    "ValidationErrorResponse": {
+      "properties": {
+        "requestId": {
+          "type": "string",
+          "title": "Requestid",
+          "description": "RequestId of request",
+          "example": "KLF5BiZ9DoEEMlQ="
+        },
+        "transactionId": {
+          "type": "string",
+          "title": "Transactionid",
+          "description": "TransactionId of request",
+          "example": "JKL5BiZ9DoEEMkV="
+        },
+        "hasError": {
+          "type": "boolean",
+          "title": "Haserror",
+          "description": "Tells that request has error",
+          "example": true
+        },
+        "errorMessages": {
+          "items": {
+            "$ref": "#/components/schemas/SchemaValidationError"
+          },
+          "type": "array",
+          "title": "Errormessages"
+        }
+      },
+      "type": "object",
+      "title": "ValidationErrorResponse"
+    }
+  }
+}

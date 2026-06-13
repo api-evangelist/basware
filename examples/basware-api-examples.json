@@ -1,0 +1,60 @@
+{
+  "basware_purchase_order_example": {
+    "description": "Example Purchase Order request body for Basware P2P API",
+    "api": "p2p",
+    "schema": "PurchaseOrderEntity",
+    "value": {
+      "externalCode": "PO-2026-001234",
+      "extOrderNumber": "EXT-ORD-56789",
+      "extRequisitionNumber": "REQ-2026-00456",
+      "processingStatus": "OPEN",
+      "organizationUnitCode": "ORG-UNIT-001",
+      "organizationIdentifier": "FIN-001",
+      "purchasingGroupCode": "PG-IT",
+      "purchasingGroupName": "IT Procurement",
+      "purpose": "Software license renewal",
+      "noteToSupplier": "Please deliver by end of month"
+    }
+  },
+  "basware_user_example": {
+    "description": "Example User entity for Basware P2P Master Data API",
+    "api": "p2p",
+    "schema": "UserEntity",
+    "value": {
+      "firstName": "Jane",
+      "surName": "Smith",
+      "uiLanguage": "en",
+      "countryCode": "US",
+      "telephone": "+1-555-0100",
+      "loginAccount": "jsmith@example.com",
+      "email": "jsmith@example.com",
+      "costCenterCode": "CC-FINANCE-001",
+      "validFrom": "2026-01-01"
+    }
+  },
+  "basware_authentication_token_example": {
+    "description": "Example OAuth2 token response from Basware Authentication API",
+    "api": "authentication",
+    "schema": "AccessTokenResponse",
+    "value": {
+      "access_token": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9...",
+      "token_type": "Bearer",
+      "expires_in": 3600,
+      "scope": "p2p:read p2p:write"
+    }
+  },
+  "basware_push_notification_example": {
+    "description": "Example push notification subscription for Basware Notification API",
+    "api": "push-notification",
+    "schema": "Subscription",
+    "value": {
+      "callbackUrl": "https://myapp.example.com/webhooks/basware",
+      "eventTypes": [
+        "INVOICE_RECEIVED",
+        "INVOICE_APPROVED",
+        "PO_CREATED"
+      ],
+      "active": true
+    }
+  }
+}

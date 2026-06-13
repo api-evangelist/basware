@@ -1,0 +1,558 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://developer.basware.com/schemas/directory",
+  "title": "Directory API. Stage: prod",
+  "description": "The Directory API is a search service for receiver-specific e-invoicing endpoints. Based on given search criteria (for example, a French SIREN), it returns possible matches and their endpoints to help customers determine how to send e-invoices to their buyers.",
+  "$defs": {
+    "Address": {
+      "properties": {
+        "addressLine1": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Addressline1"
+        },
+        "addressLine2": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Addressline2"
+        },
+        "addressLine3": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Addressline3"
+        },
+        "postalCode": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Postalcode"
+        },
+        "countrySubdivision": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Countrysubdivision"
+        },
+        "locality": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Locality"
+        },
+        "countryCode": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Countrycode"
+        },
+        "countryName": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Countryname"
+        }
+      },
+      "type": "object",
+      "title": "Address"
+    },
+    "DirectoryEntry": {
+      "properties": {
+        "routingIdentifier": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Routingidentifier"
+        },
+        "addressingIdentifier": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Addressingidentifier"
+        },
+        "siren": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Siren"
+        },
+        "siret": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Siret"
+        },
+        "addressingSuffix": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Addressingsuffix"
+        },
+        "dateTo": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Dateto"
+        },
+        "effectiveEndDate": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Effectiveenddate"
+        },
+        "history": {
+          "anyOf": [
+            {
+              "$ref": "#/components/schemas/History"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "routingCode": {
+          "anyOf": [
+            {
+              "$ref": "#/components/schemas/RoutingCode"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "legalUnit": {
+          "anyOf": [
+            {
+              "$ref": "#/components/schemas/LegalUnit"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "facility": {
+          "anyOf": [
+            {
+              "$ref": "#/components/schemas/Facility"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "type": "object",
+      "title": "DirectoryEntry"
+    },
+    "ErrorResponse": {
+      "properties": {
+        "error": {
+          "type": "string",
+          "title": "Error"
+        }
+      },
+      "type": "object",
+      "required": [
+        "error"
+      ],
+      "title": "ErrorResponse",
+      "example": {
+        "error": "timeout"
+      }
+    },
+    "Facility": {
+      "properties": {
+        "siret": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Siret"
+        },
+        "siren": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Siren"
+        },
+        "name": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Name"
+        },
+        "facilityType": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Facilitytype"
+        },
+        "diffusible": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Diffusible"
+        },
+        "administrativeStatus": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Administrativestatus"
+        },
+        "address": {
+          "anyOf": [
+            {
+              "$ref": "#/components/schemas/Address"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "type": "object",
+      "title": "Facility"
+    },
+    "HTTPValidationError": {
+      "properties": {
+        "detail": {
+          "items": {
+            "$ref": "#/components/schemas/ValidationError"
+          },
+          "type": "array",
+          "title": "Detail"
+        }
+      },
+      "type": "object",
+      "title": "HTTPValidationError"
+    },
+    "History": {
+      "properties": {
+        "definitionDate": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Definitiondate"
+        },
+        "dateFrom": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Datefrom"
+        },
+        "createdBy": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Createdby"
+        },
+        "idInstance": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Idinstance"
+        }
+      },
+      "type": "object",
+      "title": "History"
+    },
+    "LegalUnit": {
+      "properties": {
+        "siren": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Siren"
+        },
+        "businessName": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Businessname"
+        },
+        "entityType": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Entitytype"
+        },
+        "administrativeStatus": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Administrativestatus"
+        },
+        "diffusible": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Diffusible"
+        }
+      },
+      "type": "object",
+      "title": "LegalUnit"
+    },
+    "RoutingCode": {
+      "properties": {
+        "routingIdentifier": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Routingidentifier"
+        },
+        "routingIdentifierType": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Routingidentifiertype"
+        },
+        "routingCodeName": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Routingcodename"
+        },
+        "managesLegalCommitment": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Manageslegalcommitment"
+        },
+        "administrativeStatus": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Administrativestatus"
+        },
+        "address": {
+          "anyOf": [
+            {
+              "$ref": "#/components/schemas/Address"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "type": "object",
+      "title": "RoutingCode"
+    },
+    "ValidationError": {
+      "properties": {
+        "loc": {
+          "items": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "integer"
+              }
+            ]
+          },
+          "type": "array",
+          "title": "Location"
+        },
+        "msg": {
+          "type": "string",
+          "title": "Message"
+        },
+        "type": {
+          "type": "string",
+          "title": "Error Type"
+        },
+        "input": {
+          "title": "Input"
+        },
+        "ctx": {
+          "type": "object",
+          "title": "Context"
+        }
+      },
+      "type": "object",
+      "required": [
+        "loc",
+        "msg",
+        "type"
+      ],
+      "title": "ValidationError"
+    }
+  }
+}

@@ -1,0 +1,1277 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "User Permission Management APIs",
+    "description": "This set of APIs allows managing user groups and associating users to the user groups. These user groups grant granular user permissions across Basware applications. The permissions granted by the user groups are managed in Basware Admin application.<br><br>Each of the managed applications needs to support permission management through cross application user groups and be configured to have cross application user groups enabled. Supported applications include <b>AP Automation</b>, <b>SmartPDF</b> and <b>Vault</b>.",
+    "version": "v1"
+  },
+  "servers": [
+    {
+      "url": ""
+    }
+  ],
+  "paths": {
+    "/v1/userGroupAssociatedUsers": {
+      "post": {
+        "tags": [
+          "UserGroupAssociatedUsers"
+        ],
+        "summary": "Associates users with userGroup",
+        "parameters": [
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "description": "Specifies the media type of the resource. Value application/json is supported.",
+            "schema": {
+              "type": "string"
+            },
+            "example": "application/json"
+          }
+        ],
+        "requestBody": {
+          "description": "External code of the user associated to the user group.",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/UserGroupAssociatedUser"
+                }
+              }
+            },
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/UserGroupAssociatedUser"
+                }
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/UserGroupAssociatedUser"
+                }
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/UserGroupAssociatedUser"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/UserGroupAssociatedUser"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/UserGroupAssociatedUser"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/UserGroupAssociatedUser"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/IModelValidationResult"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IModelValidationResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IModelValidationResult"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "UserGroupAssociatedUsers"
+        ],
+        "summary": "Returns user associations with user Groups",
+        "parameters": [
+          {
+            "name": "UserGroupExternalCode",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "UserExternalCode",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "x-amz-meta-continuationToken",
+            "in": "header",
+            "description": "Used to get next page of results when item count indicated by 'pageSize' is exceeded. A token is returned in header (not body) parameter 'X-amz-meta-continuationToken' of the response whenever there are more records to fetch. Post the received value here in a new HEADER parameter on the next GET request to receive the next page of results. When getting the next page of results, you must include the same query parameters that were used when getting the first page.",
+            "schema": {
+              "type": "string"
+            },
+            "example": "00fbeb94-7644-4877-8086-d5a22fd299b1"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/UserGroupAssociatedUser"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/UserGroupAssociatedUser"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/UserGroupAssociatedUser"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "UserGroupAssociatedUsers"
+        ],
+        "summary": "Deletes user association with user group.",
+        "description": "For manual one-time operations only, such as a manual clean-up to remove test data generated during API integration development. Only removes records from API layer. \r\nDeletion in target systems needs to be done separately using the data deletion mechanisms available in each of the target system in addition to deleting the data in Basware API.",
+        "requestBody": {
+          "description": "Contains the body of the request.\r\n            If both (userGroupExternalCode and UserExternalCode) values are provided then the record will be deleted directly, else delete lambda will be triggered.",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserGroupAssociationsDeleteRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserGroupAssociationsDeleteRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserGroupAssociationsDeleteRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserGroupAssociationsDeleteRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "BadRequest"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "202": {
+            "description": "RequestAccepted"
+          },
+          "500": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    },
+    "/v1/userGroups/{externalCode}": {
+      "get": {
+        "tags": [
+          "UserGroups"
+        ],
+        "summary": "Returns user group by externalCode",
+        "parameters": [
+          {
+            "name": "externalCode",
+            "in": "path",
+            "description": "The ExternalCode of the entity to be fetched",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "x-amz-meta-continuationToken",
+            "in": "header",
+            "description": "Used to get next page of results when item count indicated by 'pageSize' is exceeded. A token is returned in header (not body) parameter 'X-amz-meta-continuationToken' of the response whenever there are more records to fetch. Post the received value here in a new HEADER parameter on the next GET request to receive the next page of results. When getting the next page of results, you must include the same query parameters that were used when getting the first page.",
+            "schema": {
+              "type": "string"
+            },
+            "example": "7a71f046-4450-47b1-9ee9-8af480f5be1b"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/UserGroup"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/UserGroup"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/UserGroup"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/v1/userGroups": {
+      "get": {
+        "tags": [
+          "UserGroups"
+        ],
+        "summary": "Returns a list of available user groups.",
+        "parameters": [
+          {
+            "name": "OrganizationExternalCode",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "x-amz-meta-continuationToken",
+            "in": "header",
+            "description": "Used to get next page of results when item count indicated by 'pageSize' is exceeded. A token is returned in header (not body) parameter 'X-amz-meta-continuationToken' of the response whenever there are more records to fetch. Post the received value here in a new HEADER parameter on the next GET request to receive the next page of results. When getting the next page of results, you must include the same query parameters that were used when getting the first page.",
+            "schema": {
+              "type": "string"
+            },
+            "example": "4ef57cfb-145c-4e44-9337-ff363180c1c1"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/UserGroup"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/UserGroup"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/UserGroup"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "UserGroups"
+        ],
+        "summary": "Create or update user group",
+        "parameters": [
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "description": "Specifies the media type of the resource. Value application/json is supported.",
+            "schema": {
+              "type": "string"
+            },
+            "example": "application/json"
+          }
+        ],
+        "requestBody": {
+          "description": "The user groups to create or update.",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/UserGroup"
+                }
+              }
+            },
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/UserGroup"
+                }
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/UserGroup"
+                }
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/UserGroup"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/UserGroup"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/UserGroup"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/UserGroup"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/IModelValidationResult"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IModelValidationResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IModelValidationResult"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "UserGroups"
+        ],
+        "summary": "Delete user groups",
+        "description": "For manual one-time operations only, such as a manual clean-up to remove test data generated during API integration development. Only removes records from API layer. \r\nDeletion in target systems needs to be done separately using the data deletion mechanisms available in each of the target system in addition to deleting the data in Basware API.",
+        "requestBody": {
+          "description": "Contains the body of the request.\r\n            Either externalCode or lastUpdated -field is required. If both values are provided, externalCode will have the priority.",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeleteDataRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeleteDataRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeleteDataRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeleteDataRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "BadRequest",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/IModelValidationResult"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IModelValidationResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IModelValidationResult"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "202": {
+            "description": "RequestAccepted"
+          },
+          "500": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ApplicationPermission": {
+        "type": "object",
+        "properties": {
+          "permissionId": {
+            "maxLength": 100,
+            "minLength": 1,
+            "type": "string",
+            "description": "ExternalCode of Permission that is granted. Needs to be a Permission that is available in the application selected in 'applicationExternalCode'.",
+            "nullable": true,
+            "example": "Organization_edit"
+          },
+          "dimensionValues": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DimensionValue"
+            },
+            "description": "Used to set application specific Permission dimensions. The fields available in this block, corresponding to application specific Permissions, depend on the selected application.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "BulkOperationStatus": {
+        "enum": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "type": "integer",
+        "description": "Represents the possible statuses of a bulk operation.",
+        "format": "int32"
+      },
+      "CreateDefaultUserGroupsRequest": {
+        "required": [
+          "consumers"
+        ],
+        "type": "object",
+        "properties": {
+          "consumers": {
+            "minItems": 1,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "List of consumer identifiers for whom default user groups should be created.\r\nPermissible values: P2P, BwAdmin, SmartPdf."
+          },
+          "changedBy": {
+            "type": "string",
+            "description": "Username of user who made the change",
+            "nullable": true,
+            "example": "JohnDoe"
+          }
+        },
+        "additionalProperties": false,
+        "description": "Represents a request to create default user groups for the specified consumers."
+      },
+      "DefaultUserGroup": {
+        "required": [
+          "externalCode",
+          "name",
+          "organizationExternalCode"
+        ],
+        "type": "object",
+        "properties": {
+          "externalCode": {
+            "maxLength": 100,
+            "minLength": 1,
+            "type": "string",
+            "description": "Unique identifier for the user group. Used to identify the user group when it is updated.",
+            "example": "IND_Admins"
+          },
+          "name": {
+            "maxLength": 100,
+            "minLength": 1,
+            "type": "string",
+            "description": "Name of the user group",
+            "example": "India Admins"
+          },
+          "description": {
+            "maxLength": 250,
+            "minLength": 0,
+            "type": "string",
+            "description": "Description of the user group",
+            "nullable": true,
+            "example": "Group for India admin users"
+          },
+          "organizationExternalCode": {
+            "maxLength": 100,
+            "minLength": 1,
+            "type": "string",
+            "description": "ExternalCode identifier for the organization on which the user group resides.",
+            "example": "BW10"
+          },
+          "applications": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Gets or sets the list of application names associated with the user group.",
+            "nullable": true
+          },
+          "permissions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Gets or sets the list of permission ID's associated with the user group.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Represents a default user group within an organization, including its unique identifier,\r\nname, description, and associated organization information."
+      },
+      "DeleteDataRequest": {
+        "type": "object",
+        "properties": {
+          "externalCode": {
+            "maxLength": 36,
+            "minLength": 0,
+            "type": "string",
+            "description": "Single item can be deleted using externalCode and final status is returned immediately.",
+            "nullable": true
+          },
+          "lastUpdated": {
+            "type": "string",
+            "description": "To delete records updated after specific time, use lastUpdated -field. This will delete all items that have been updated after the specified date. In response, user will get the taskStatus api link where the task status can be checked. Note: '0001-01-01' can be used to delete all records.",
+            "format": "date-time",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "DeleteResponse": {
+        "type": "object",
+        "properties": {
+          "statusApiLink": {
+            "type": "string",
+            "description": "Gets or sets the API link to check the status of the delete operation.",
+            "nullable": true
+          },
+          "taskName": {
+            "type": "string",
+            "description": "Gets or sets the name of the delete task.",
+            "nullable": true
+          },
+          "taskStatus": {
+            "type": "string",
+            "description": "Gets or sets the current status of the delete task.",
+            "nullable": true,
+            "readOnly": true
+          },
+          "statusEnum": {
+            "$ref": "#/components/schemas/BulkOperationStatus"
+          }
+        },
+        "additionalProperties": false,
+        "description": "Represents the response returned after a delete operation."
+      },
+      "DimensionValue": {
+        "type": "object",
+        "properties": {
+          "organizationExternalCode": {
+            "maxLength": 100,
+            "minLength": 0,
+            "type": "string",
+            "description": "External code of the organization on which the Permission is granted.",
+            "nullable": true,
+            "example": "Mobor_FI"
+          },
+          "limit": {
+            "type": "number",
+            "description": "Limit for the permission - for example invoice approval limit.",
+            "format": "double",
+            "nullable": true,
+            "example": 10000
+          }
+        },
+        "additionalProperties": false
+      },
+      "ExternalCode": {
+        "type": "object",
+        "properties": {
+          "userGroupExternalCode": {
+            "type": "string",
+            "nullable": true,
+            "example": "Mobor_FI"
+          },
+          "permissionId": {
+            "type": "string",
+            "nullable": true,
+            "example": "app.alusta.invoice.personal.admin_approve_invoice"
+          }
+        },
+        "additionalProperties": false
+      },
+      "GetBatchPermissionRequest": {
+        "type": "object",
+        "properties": {
+          "requestId": {
+            "type": "string",
+            "nullable": true
+          },
+          "requestDateTimeTicks": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "requestDateTime": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "externalCodes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ExternalCode"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "GetBatchUserGroupRequest": {
+        "type": "object",
+        "properties": {
+          "requestId": {
+            "type": "string",
+            "nullable": true
+          },
+          "requestDateTimeTicks": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "requestDateTime": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "externalCodes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Gets or sets the list of external codes for batch retrieval.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "IModelValidationError": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "nullable": true
+          },
+          "externalCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "info": {
+            "type": "string",
+            "nullable": true
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          },
+          "type": {
+            "type": "string",
+            "nullable": true
+          },
+          "cdmErrorMappingOrganizationCode": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "IModelValidationResult": {
+        "type": "object",
+        "properties": {
+          "requestId": {
+            "type": "string",
+            "nullable": true
+          },
+          "errors": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/IModelValidationError"
+            },
+            "nullable": true,
+            "readOnly": true
+          },
+          "hasErrors": {
+            "type": "boolean",
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "InternalDeleteDataRequest": {
+        "required": [
+          "changedBy"
+        ],
+        "type": "object",
+        "properties": {
+          "externalCode": {
+            "maxLength": 36,
+            "minLength": 0,
+            "type": "string",
+            "description": "Single item can be deleted using externalCode and final status is returned immediately.",
+            "nullable": true
+          },
+          "changedBy": {
+            "minLength": 1,
+            "type": "string",
+            "description": "The username of the user who deleted the record."
+          }
+        },
+        "additionalProperties": false,
+        "description": "Represents a request to delete an entity internally/from consumer apps.\r\nThis request allows deletion using an external code, with an immediate final status response."
+      },
+      "InternalUserGroup": {
+        "required": [
+          "externalCode",
+          "name",
+          "organizationExternalCode"
+        ],
+        "type": "object",
+        "properties": {
+          "externalCode": {
+            "maxLength": 100,
+            "minLength": 1,
+            "type": "string",
+            "description": "Unique identifier for the user group. Used to identify the user group when it is updated.",
+            "example": "IND_Admins"
+          },
+          "name": {
+            "maxLength": 100,
+            "minLength": 1,
+            "type": "string",
+            "description": "Name of the user group",
+            "example": "India Admins"
+          },
+          "description": {
+            "maxLength": 250,
+            "minLength": 0,
+            "type": "string",
+            "description": "Description of the user group",
+            "nullable": true,
+            "example": "Group for India admin users"
+          },
+          "organizationExternalCode": {
+            "maxLength": 100,
+            "minLength": 1,
+            "type": "string",
+            "description": "ExternalCode identifier for the organization on which the user group resides.",
+            "example": "BW10"
+          },
+          "organizationHierarchy": {
+            "type": "string",
+            "description": "Organization hierarchy path for the user group's organization.",
+            "nullable": true,
+            "example": "ROOT/ORG1/ORG2"
+          }
+        },
+        "additionalProperties": false
+      },
+      "InternalUserGroupAssociatedUsersSaveRequest": {
+        "type": "object",
+        "properties": {
+          "changedBy": {
+            "type": "string",
+            "description": "Username of user who made the change",
+            "nullable": true,
+            "example": "JohnDoe"
+          },
+          "userGroupAssociatedUsers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UserGroupAssociatedUser"
+            },
+            "description": "Collection of user-group associations to be created or updated.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Represents a request to save the association of users with one or more user groups.\r\nIncludes information about the user who performed the change."
+      },
+      "InternalUserGroupPermissionsSaveRequest": {
+        "type": "object",
+        "properties": {
+          "changedBy": {
+            "type": "string",
+            "description": "Username of user who made the change",
+            "nullable": true,
+            "example": "JohnDoe"
+          },
+          "userGroupPermissions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UserGroupPermission"
+            },
+            "description": "Collection of user group permissions to be created or updated.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Represents a request to save permissions associated with one or more user groups.\r\nIncludes information about the user who performed the change."
+      },
+      "InternalUserGroupSaveRequest": {
+        "type": "object",
+        "properties": {
+          "changedBy": {
+            "type": "string",
+            "description": "Username of user who made the change",
+            "nullable": true,
+            "example": "JohnDoe"
+          },
+          "userGroups": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UserGroup"
+            },
+            "description": "Collection of user groups to be created or updated.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Represents a request to save one or more user groups within the system.\r\nIncludes information about the user who performed the change."
+      },
+      "Permission": {
+        "type": "object",
+        "properties": {
+          "permissionId": {
+            "type": "string",
+            "nullable": true
+          },
+          "organizationExternalCodes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "UserGroup": {
+        "required": [
+          "externalCode",
+          "name",
+          "organizationExternalCode"
+        ],
+        "type": "object",
+        "properties": {
+          "externalCode": {
+            "maxLength": 100,
+            "minLength": 1,
+            "type": "string",
+            "description": "Unique identifier for the user group. Used to identify the user group when it is updated.",
+            "example": "IND_Admins"
+          },
+          "name": {
+            "maxLength": 100,
+            "minLength": 1,
+            "type": "string",
+            "description": "Name of the user group",
+            "example": "India Admins"
+          },
+          "description": {
+            "maxLength": 250,
+            "minLength": 0,
+            "type": "string",
+            "description": "Description of the user group",
+            "nullable": true,
+            "example": "Group for India admin users"
+          },
+          "organizationExternalCode": {
+            "maxLength": 100,
+            "minLength": 1,
+            "type": "string",
+            "description": "ExternalCode identifier for the organization on which the user group resides.",
+            "example": "BW10"
+          }
+        },
+        "additionalProperties": false,
+        "description": "Represents a user group within an organization, including its unique identifier,\r\nname, description, and associated organization information."
+      },
+      "UserGroupApplication": {
+        "type": "object",
+        "properties": {
+          "applicationCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "permissions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Permission"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "UserGroupAssociatedUser": {
+        "required": [
+          "userExternalCode",
+          "userGroupExternalCode"
+        ],
+        "type": "object",
+        "properties": {
+          "userGroupExternalCode": {
+            "maxLength": 100,
+            "minLength": 1,
+            "type": "string",
+            "description": "External code of the user group to which the user is associated.",
+            "example": "IND_Admins"
+          },
+          "userExternalCode": {
+            "maxLength": 100,
+            "minLength": 1,
+            "type": "string",
+            "description": "External code of the user associated to the user group.",
+            "example": "joe@basware.com"
+          }
+        },
+        "additionalProperties": false
+      },
+      "UserGroupAssociationsDeleteRequest": {
+        "type": "object",
+        "properties": {
+          "userGroupExternalCode": {
+            "maxLength": 36,
+            "minLength": 0,
+            "type": "string",
+            "nullable": true
+          },
+          "userExternalCode": {
+            "maxLength": 36,
+            "minLength": 0,
+            "type": "string",
+            "nullable": true
+          },
+          "lastUpdated": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "UserGroupPermission": {
+        "required": [
+          "applicationCode",
+          "permissionId",
+          "userGroupExternalCode"
+        ],
+        "type": "object",
+        "properties": {
+          "userGroupExternalCode": {
+            "maxLength": 100,
+            "minLength": 1,
+            "type": "string",
+            "description": "ExternalCode of the user group whose Permissions are being defined.",
+            "example": "Auditors"
+          },
+          "applicationCode": {
+            "maxLength": 100,
+            "minLength": 1,
+            "type": "string",
+            "description": "Code of the application whose Permission is granted.",
+            "example": "BWAdmin"
+          },
+          "permissionId": {
+            "maxLength": 100,
+            "minLength": 1,
+            "type": "string",
+            "description": "Id of Permission that is granted. Needs to be a Permission that is available in the application selected in 'applicationCode'.",
+            "example": "app.alusta.invoice.personal.admin_approve_invoice"
+          },
+          "isDeleted": {
+            "type": "boolean",
+            "example": false
+          },
+          "dimensionValues": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DimensionValue"
+            },
+            "description": "Used to set application specific Permission dimensions. The fields available in this block, corresponding to application specific Permissions, depend on the selected application.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Represents a permission assignment for a specific user group within an application.\r\nEach PMS.Domain.Entities.UserGroupPermission.UserGroupPermission defines the mapping between a user group,\r\nan application, and a granted permission. It may also include application-specific\r\ndimension values for fine-grained access control."
+      },
+      "UserGroupPermissionResponse": {
+        "type": "object",
+        "properties": {
+          "userGroupExternalCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "applications": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UserGroupApplication"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "UserPermission": {
+        "type": "object",
+        "properties": {
+          "applicationCode": {
+            "maxLength": 100,
+            "minLength": 1,
+            "type": "string",
+            "description": "ExternalCode of the application whose Permission is granted through the Permission selected in 'PermissionExternalCode'. Needs to be an application that is listed in 'registeredApplications' API.",
+            "nullable": true,
+            "example": "BWAdmin"
+          },
+          "applicationPermissions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ApplicationPermission"
+            },
+            "description": "Used to set application specific Permission dimensions. The fields available in this block, corresponding to application specific Permissions, depend on the selected application.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "securitySchemes": {
+      "Bearer": {
+        "type": "http",
+        "description": "Please insert basic authentication credentials into fields",
+        "scheme": "basic"
+      },
+      "oauth2authentication": {
+        "type": "oauth2",
+        "description": "OAuth2 client credentials flow.",
+        "flows": {
+          "clientCredentials": {
+            "tokenUrl": "https://api.basware.com/v1/tokens",
+            "scopes": {
+              "userGroups.read": "GET user groups",
+              "userGroups.write": "POST user groups",
+              "userGroups.delete": "DELETE user groups",
+              "userGroupAssociatedUsers.read": "GET user associations with user group",
+              "userGroupAssociatedUsers.write": "POST user associations to user group",
+              "userGroupAssociatedUsers.delete": "DELETE user associations from user group"
+            }
+          }
+        }
+      }
+    }
+  },
+  "security": [
+    {
+      "Bearer": [ ]
+    },
+    {
+      "oauth2authentication": [ ]
+    }
+  ]
+}
