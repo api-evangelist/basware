@@ -7,7 +7,7 @@ description: Basware is a cloud-based e-invoicing and purchase-to-pay platform t
   point, handling format conversion and delivery. The APIs support master data management,
   user administration, document archiving, and real-time transaction data access for
   finance and procurement operations.
-image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 url: https://raw.githubusercontent.com/api-evangelist/basware/refs/heads/main/apis.yml
 type: Index
 created: "2026-06-13"
@@ -28,7 +28,7 @@ apis:
       invoice processing, purchase orders, goods receipts, supplier management, user
       administration, and monitoring of document workflows using JSON payloads over
       HTTPS with OAuth2 authentication.
-    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     humanURL: https://developer.basware.com/en/api/basware
     baseURL: https://api.basware.com
     tags:
@@ -64,7 +64,7 @@ apis:
       invoices in a single standard format. It includes an Invoices API for JSON-based
       invoice exchange and a Files API for sending and receiving invoice attachments
       such as PDFs.
-    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     humanURL: https://developer.basware.com/en/api/network
     baseURL: https://network-api.basware.com
     tags:
@@ -84,7 +84,7 @@ apis:
       e-invoicing documents. It enables integration with Basware's document storage
       system for long-term retention and compliance-ready archival of invoices and
       related business documents, with access through REST endpoints and JSON payloads.
-    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     humanURL: https://developer.basware.com/en/api/vault/manual
     baseURL: https://api.basware.com/vault
     tags:
@@ -104,7 +104,7 @@ apis:
       It enables programmatic retrieval of transaction data, invoice records, and operational
       metrics from the Basware platform to feed downstream business intelligence and
       ERP systems.
-    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     humanURL: https://developer.basware.com/en/api/basware
     baseURL: https://api.basware.com/data
     tags:
@@ -122,7 +122,7 @@ apis:
       capabilities within the Basware platform. It enables automated extraction and
       processing of invoice data from PDF documents, supporting touchless invoice processing
       workflows and integration with accounts payable automation systems.
-    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     humanURL: https://developer.basware.com/en/api/basware
     baseURL: https://api.basware.com/smartpdf
     tags:
