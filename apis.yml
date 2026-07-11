@@ -135,6 +135,10 @@ apis:
       - type: GettingStarted
         url: https://developer.basware.com/en/api/basware/get-started
 common:
+  - type: DomainSecurity
+    url: security/basware-domain-security.yml
+  - type: Authentication
+    url: authentication/basware-authentication.yml
   - type: OAuthScopes
     url: scopes/basware-scopes.yml
   - type: Website

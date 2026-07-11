@@ -1,0 +1,36 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/basware-authentication-openapi.json, openapi/basware-directory-openapi.json,
+  openapi/basware-p2p-openapi.json, openapi/basware-user-permission-openapi.json, openapi/basware-vault-openapi.yaml
+summary:
+  types:
+  - http
+  - oauth2
+  oauth2_flows:
+  - clientCredentials
+schemes:
+- name: HTTPBasic
+  type: http
+  scheme: basic
+  sources:
+  - openapi/basware-authentication-openapi.json
+  - openapi/basware-directory-openapi.json
+  - openapi/basware-p2p-openapi.json
+  - openapi/basware-user-permission-openapi.json
+  - openapi/basware-vault-openapi.yaml
+- name: BearerAuth
+  type: http
+  scheme: bearer
+  bearerFormat: JWT
+  sources:
+  - openapi/basware-directory-openapi.json
+- name: oauth2authentication
+  type: oauth2
+  flows:
+  - flow: clientCredentials
+    tokenUrl: https://api.basware.com/v1/tokens
+    scopes: 80
+  description: Oauth2 client credentials flow.
+  sources:
+  - openapi/basware-p2p-openapi.json
+  - openapi/basware-user-permission-openapi.json
