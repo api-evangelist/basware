@@ -135,6 +135,8 @@ apis:
       - type: GettingStarted
         url: https://developer.basware.com/en/api/basware/get-started
 common:
+  - type: OAuthScopes
+    url: scopes/basware-scopes.yml
   - type: Website
     url: https://www.basware.com
   - type: Documentation

@@ -1,0 +1,533 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/basware-p2p-openapi.json, openapi/basware-user-permission-openapi.json
+schemes:
+- name: oauth2authentication
+  source: openapi/basware-p2p-openapi.json
+  flows:
+  - flow: clientCredentials
+    tokenUrl: https://api.basware.com/v1/tokens
+  description: Oauth2 client credentials flow.
+- name: oauth2authentication
+  source: openapi/basware-user-permission-openapi.json
+  flows:
+  - flow: clientCredentials
+    tokenUrl: https://api.basware.com/v1/tokens
+  description: OAuth2 client credentials flow.
+scopes:
+- scope: accountingDocuments.delete
+  description: DELETE accountingDocuments
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/basware-p2p-openapi.json
+- scope: accountingDocuments.read
+  description: GET accountingDocuments
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/basware-p2p-openapi.json
+- scope: accountingDocuments.write
+  description: POST/PATCH accountingDocuments
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/basware-p2p-openapi.json
+- scope: accounts.delete
+  description: DELETE accounts
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/basware-p2p-openapi.json
+- scope: accounts.read
+  description: GET accounts
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/basware-p2p-openapi.json
+- scope: accounts.write
+  description: POST/PATCH accounts
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/basware-p2p-openapi.json
+- scope: advancedPermissions.delete
+  description: DELETE advancedPermissions
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/basware-p2p-openapi.json
+- scope: advancedPermissions.read
+  description: GET advancedPermissions
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/basware-p2p-openapi.json
+- scope: advancedPermissions.write
+  description: POST/PATCH advancedPermissions
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/basware-p2p-openapi.json
+- scope: advancedValidations.delete
+  description: DELETE advancedValidations
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/basware-p2p-openapi.json
+- scope: advancedValidations.read
+  description: GET advancedValidations
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/basware-p2p-openapi.json
+- scope: advancedValidations.write
+  description: POST/PATCH advancedValidations
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/basware-p2p-openapi.json
+- scope: applicationGroups.read
+  description: GET applicationGroups
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/basware-p2p-openapi.json
+- scope: applicationGroups.write
+  description: POST/PATCH applicationGroups
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/basware-p2p-openapi.json
+- scope: companies.read
+  description: GET companies
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/basware-p2p-openapi.json
+- scope: companies.write
+  description: POST/PATCH companies
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/basware-p2p-openapi.json
+- scope: contracts.delete
+  description: DELETE contracts
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/basware-p2p-openapi.json
+- scope: contracts.read
+  description: GET contracts
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/basware-p2p-openapi.json
+- scope: contracts.write
+  description: POST/PATCH contracts
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/basware-p2p-openapi.json
+- scope: costCenters.delete
+  description: DELETE costCenters
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/basware-p2p-openapi.json
+- scope: costCenters.read
+  description: GET costCenters
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/basware-p2p-openapi.json
+- scope: costCenters.write
+  description: POST/PATCH costCenters
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/basware-p2p-openapi.json
+- scope: errorFeedbacks.delete
+  description: DELETE errorFeedbacks
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/basware-p2p-openapi.json
+- scope: errorFeedbacks.read
+  description: GET errorFeedbacks
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/basware-p2p-openapi.json
+- scope: errorFeedbacks.write
+  description: POST/PATCH errorFeedbacks
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/basware-p2p-openapi.json
+- scope: exchangeRates.delete
+  description: DELETE exchangeRates
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/basware-p2p-openapi.json
+- scope: exchangeRates.read
+  description: GET exchangeRates
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/basware-p2p-openapi.json
+- scope: exchangeRates.write
+  description: POST/PATCH exchangeRates
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/basware-p2p-openapi.json
+- scope: exportedContractSpends.delete
+  description: DELETE exportedContractSpends
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/basware-p2p-openapi.json
+- scope: exportedContractSpends.read
+  description: GET exportedContractSpends
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/basware-p2p-openapi.json
+- scope: exportedContractSpends.write
+  description: POST/PATCH exportedContractSpends
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/basware-p2p-openapi.json
+- scope: exportedContracts.delete
+  description: DELETE exportedContracts
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/basware-p2p-openapi.json
+- scope: exportedContracts.read
+  description: GET exportedContracts
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/basware-p2p-openapi.json
+- scope: exportedContracts.write
+  description: POST/PATCH exportedContracts
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/basware-p2p-openapi.json
+- scope: exportedPurchaseOrders.delete
+  description: DELETE exportedPurchaseOrders
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/basware-p2p-openapi.json
+- scope: exportedPurchaseOrders.read
+  description: GET exportedPurchaseOrders
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/basware-p2p-openapi.json
+- scope: exportedPurchaseOrders.write
+  description: POST/PATCH exportedPurchaseOrders
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/basware-p2p-openapi.json
+- scope: exportedPurchaseRequisitions.delete
+  description: DELETE exportedPurchaseRequisitions
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/basware-p2p-openapi.json
+- scope: exportedPurchaseRequisitions.read
+  description: GET exportedPurchaseRequisitions
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/basware-p2p-openapi.json
+- scope: exportedPurchaseRequisitions.write
+  description: POST/PATCH exportedPurchaseRequisitions
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/basware-p2p-openapi.json
+- scope: lists.delete
+  description: DELETE lists
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/basware-p2p-openapi.json
+- scope: lists.read
+  description: GET lists
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/basware-p2p-openapi.json
+- scope: lists.write
+  description: POST/PATCH lists
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/basware-p2p-openapi.json
+- scope: matchingOrderLines.delete
+  description: DELETE matchingOrderLines
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/basware-p2p-openapi.json
+- scope: matchingOrderLines.read
+  description: GET matchingOrderLines
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/basware-p2p-openapi.json
+- scope: matchingOrderLines.write
+  description: POST/PATCH matchingOrderLines
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/basware-p2p-openapi.json
+- scope: matchingOrders.delete
+  description: DELETE matchingOrders
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/basware-p2p-openapi.json
+- scope: matchingOrders.read
+  description: GET matchingOrders
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/basware-p2p-openapi.json
+- scope: matchingOrders.write
+  description: POST/PATCH matchingOrders
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/basware-p2p-openapi.json
+- scope: paymentTerms.delete
+  description: DELETE paymentTerms
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/basware-p2p-openapi.json
+- scope: paymentTerms.read
+  description: GET paymentTerms
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/basware-p2p-openapi.json
+- scope: paymentTerms.write
+  description: POST/PATCH paymentTerms
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/basware-p2p-openapi.json
+- scope: projects.delete
+  description: DELETE projects
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/basware-p2p-openapi.json
+- scope: projects.read
+  description: GET projects
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/basware-p2p-openapi.json
+- scope: projects.write
+  description: POST/PATCH projects
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/basware-p2p-openapi.json
+- scope: purchaseGoodsReceipts.delete
+  description: DELETE purchaseGoodsReceipts
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/basware-p2p-openapi.json
+- scope: purchaseGoodsReceipts.read
+  description: GET purchaseGoodsReceipts
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/basware-p2p-openapi.json
+- scope: purchaseGoodsReceipts.write
+  description: POST/PATCH purchaseGoodsReceipts
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/basware-p2p-openapi.json
+- scope: purchaseOrders.delete
+  description: DELETE purchaseOrders
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/basware-p2p-openapi.json
+- scope: purchaseOrders.read
+  description: GET purchaseOrders
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/basware-p2p-openapi.json
+- scope: purchaseOrders.write
+  description: POST/PATCH purchaseOrders
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/basware-p2p-openapi.json
+- scope: purchaseRequisitions.delete
+  description: DELETE purchaseRequisitions
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/basware-p2p-openapi.json
+- scope: purchaseRequisitions.read
+  description: GET purchaseRequisitions
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/basware-p2p-openapi.json
+- scope: purchaseRequisitions.write
+  description: POST/PATCH purchaseRequisitions
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/basware-p2p-openapi.json
+- scope: requestStatus.read
+  description: GET requestStatus
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/basware-p2p-openapi.json
+- scope: requestStatus.write
+  description: POST/PATCH requestStatus
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/basware-p2p-openapi.json
+- scope: subscriptions.delete
+  description: DELETE subscriptions
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/basware-p2p-openapi.json
+- scope: subscriptions.read
+  description: GET subscriptions
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/basware-p2p-openapi.json
+- scope: subscriptions.write
+  description: POST/PATCH subscriptions
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/basware-p2p-openapi.json
+- scope: taskStatus.read
+  description: GET taskStatus
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/basware-p2p-openapi.json
+- scope: tasks.read
+  description: GET tasks
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/basware-p2p-openapi.json
+- scope: taxCodes.delete
+  description: DELETE taxCodes
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/basware-p2p-openapi.json
+- scope: taxCodes.read
+  description: GET taxCodes
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/basware-p2p-openapi.json
+- scope: taxCodes.write
+  description: POST/PATCH taxCodes
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/basware-p2p-openapi.json
+- scope: userGroupAssociatedUsers.delete
+  description: DELETE user associations from user group
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/basware-user-permission-openapi.json
+- scope: userGroupAssociatedUsers.read
+  description: GET user associations with user group
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/basware-user-permission-openapi.json
+- scope: userGroupAssociatedUsers.write
+  description: POST user associations to user group
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/basware-user-permission-openapi.json
+- scope: userGroups.delete
+  description: DELETE user groups
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/basware-user-permission-openapi.json
+- scope: userGroups.read
+  description: GET user groups
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/basware-user-permission-openapi.json
+- scope: userGroups.write
+  description: POST user groups
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/basware-user-permission-openapi.json
+- scope: users.delete
+  description: DELETE users
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/basware-p2p-openapi.json
+- scope: users.read
+  description: GET users
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/basware-p2p-openapi.json
+- scope: users.write
+  description: POST/PATCH users
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/basware-p2p-openapi.json
+- scope: vendors.delete
+  description: DELETE vendors
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/basware-p2p-openapi.json
+- scope: vendors.read
+  description: GET vendors
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/basware-p2p-openapi.json
+- scope: vendors.write
+  description: POST/PATCH vendors
+  flows:
+  - clientCredentials
+  sources:
+  - openapi/basware-p2p-openapi.json
