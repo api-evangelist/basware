@@ -135,6 +135,8 @@ apis:
       - type: GettingStarted
         url: https://developer.basware.com/en/api/basware/get-started
 common:
+  - type: AgenticAccess
+    url: agentic-access/basware-agentic-access.yml
   - type: DomainSecurity
     url: security/basware-domain-security.yml
   - type: Authentication
