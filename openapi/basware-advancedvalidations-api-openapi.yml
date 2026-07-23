@@ -1,0 +1,631 @@
+openapi: 3.0.2
+info:
+  title: Basware OAUTH2 authentication APIs AccountingDocuments AdvancedValidations API
+  description: "**Using OAUTH2.0 authentication:**\n\nGet API access token from api.basware.com/tokens\n1. Using client id and client secret, which you can obtain from Basware. \n2. Specify which APIs can be accessed by using the token e.g. Read only access to vendors API only (these are called scopes). Available scopes are listed at <https://developer.basware.com/api/p2p/manual#AccessRights>. \n3. Each token has an expiration time, until which it can be used to call APIs.\n\nWhen using OAUTH2 authentication, you need to pass the OAUTH2 authentication token when calling Basware API endpoints. Available Basware API operations are documented at <https://api.basware.com/swagger>. \n\nSee the Basware API developer site at <https://developer.basware.com/api/p2p/manual#Authentication> for more details on API authentication."
+  version: 1.0.0
+  x-logo:
+    url: https://fastapi.tiangolo.com/img/logo-margin/logo-teal.png
+tags:
+- name: AdvancedValidations
+paths:
+  /v1/advancedValidations:
+    get:
+      tags:
+      - AdvancedValidations
+      summary: Returns coding row validation rules posted to Basware API.
+      description: ''
+      parameters:
+      - name: pageSize
+        in: query
+        description: A limit for the number of items to be returned for one request. Limit can range between 1 and 500 items.
+        schema:
+          type: integer
+          format: int32
+          default: 500
+      - name: companyCode
+        in: query
+        description: Company filter. Returns items for specific company.
+        schema:
+          type: string
+          default: ''
+      - name: lastUpdated
+        in: query
+        description: Date Filter. Returns items that have been updated after specified date.
+        schema:
+          type: string
+          format: date-time
+      - name: x-amz-meta-continuationtoken
+        in: header
+        description: Used to get next page of results when item count indicated by 'pageSize' is exceeded. A token is returned in header (not body) parameter 'X-amz-meta-continuationToken' of the response whenever there are more records to fetch. Post the received value here in a new HEADER parameter on the next GET request to receive the next page of results. When getting the next page of results, you must include the same query parameters that were used when getting the first page.
+        schema:
+          type: string
+        example: 359557b5-7f8b-4ec1-a65c-ec8a362640ea
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/AdvancedValidationResponse'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AdvancedValidationResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/AdvancedValidationResponse'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found. Request was successful and no records were found.
+        '500':
+          description: Unexpected error
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+    post:
+      tags:
+      - AdvancedValidations
+      summary: Creates new coding row validation rule(s), fully overwrites previous record if exists.
+      parameters:
+      - name: Content-Type
+        in: header
+        description: Specifies the media type of the resource. Value application/json is supported.
+        schema:
+          type: string
+        example: application/json
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/AdvancedValidationEntity'
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/AdvancedValidationEntity'
+          text/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/AdvancedValidationEntity'
+          application/*+json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/AdvancedValidationEntity'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AdvancedValidationEntity'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AdvancedValidationEntity'
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AdvancedValidationEntity'
+        '400':
+          description: Bad request
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+        '401':
+          description: Unauthorized
+        '409':
+          description: Conflict
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+        '500':
+          description: Unexpected error
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+    delete:
+      tags:
+      - AdvancedValidations
+      summary: Deletes data from Basware API. For manual one-time operations.
+      description: "For manual one-time operations only, such as a manual clean-up to remove test data generated during API integration development. Only removes records from API layer. \r\nDeletion in target systems needs to be done separately using the data deletion mechanisms available in each of the target system in addition to deleting the data in Basware API."
+      requestBody:
+        description: "Contains the body of the request.\r\n            Either externalCode or lastUpdated -field is required. If both values are provided, externalCode will have the priority."
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/DeleteRequest'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteRequest'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/DeleteRequest'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/DeleteRequest'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/DeleteResponse'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/DeleteResponse'
+        '202':
+          description: RequestAccepted
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/DeleteResponse'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/DeleteResponse'
+        '400':
+          description: BadRequest
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+        '401':
+          description: Unauthorized
+        '500':
+          description: Unexpected error
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+  /v1/advancedValidations/{externalCode}:
+    get:
+      tags:
+      - AdvancedValidations
+      summary: Returns single coding row validation rules by externalCode -identifier.
+      description: ''
+      parameters:
+      - name: externalCode
+        in: path
+        description: The ExternalCode of the entity to be fetched
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/AdvancedValidationEntity'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AdvancedValidationEntity'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/AdvancedValidationEntity'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found. Request was successful and no records were found.
+        '500':
+          description: Unexpected error
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+    patch:
+      tags:
+      - AdvancedValidations
+      summary: Updates fields on spefified coding row validation rule. Preserves existing values in fields, which were not updated.
+      parameters:
+      - name: externalCode
+        in: path
+        description: The ExternalCode of the advancedValidation to be updated
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: Entity to be updated
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/AdvancedValidationEntity'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AdvancedValidationEntity'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/AdvancedValidationEntity'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/AdvancedValidationEntity'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/AdvancedValidationEntity'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AdvancedValidationEntity'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/AdvancedValidationEntity'
+        '400':
+          description: Bad request
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found. Record to update not found.
+        '500':
+          description: Unexpected error
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+components:
+  schemas:
+    AdvancedValidationCompanyEntity:
+      required:
+      - active
+      - companyCode
+      type: object
+      properties:
+        companyCode:
+          maxLength: 32
+          minLength: 1
+          type: string
+          description: Company code identifier. Corresponds to company code used in P2P. Used as key in this array.
+          example: BW01
+        active:
+          type: boolean
+          description: Active / Not active setting
+          example: true
+      additionalProperties: false
+    DeleteRequest:
+      type: object
+      properties:
+        lastUpdated:
+          type: string
+          description: 'To delete records updated after specific time, use lastUpdated -field. This will delete all items that have been updated after the specified date. In response, user will get the taskStatus api link where the task status can be checked. Note: ''0001-01-01'' can be used to delete all records.'
+          format: date-time
+          nullable: true
+        externalCode:
+          maxLength: 36
+          minLength: 0
+          type: string
+          description: Single item can be deleted using externalCode and final status is returned immediately.
+          nullable: true
+      additionalProperties: false
+    DeleteResponse:
+      type: object
+      properties:
+        statusApiLink:
+          type: string
+          nullable: true
+        taskName:
+          type: string
+          nullable: true
+        taskStatus:
+          type: string
+          nullable: true
+      additionalProperties: false
+    ErrorEntity:
+      type: object
+      properties:
+        externalCode:
+          type: string
+          description: External code of record on which error occurred (when available).
+          nullable: true
+          example: 4847-31231212-212121-1212
+        type:
+          enum:
+          - BUSINESS
+          - VALIDATION
+          - TECHNICAL
+          - SECURITY
+          type: string
+          description: Error type.
+          example: ''
+        code:
+          enum:
+          - EXTERNAL_CODE_MISMATCH
+          - SCHEMA_VALIDATION_ERROR
+          - CONFLICT_IN_POST
+          - DATA_ORIGIN_VALIDATION_ERROR
+          - ACCESS_TOKEN_VALIDATION_ERROR
+          - CREDENTIAL_VALIDATION_ERROR
+          - PARAMETER_VALIDATION_ERROR
+          - UNEXPECTED_ERROR
+          - METHOD_NOT_ALLOWED
+          - ENTITY_NOT_FOUND
+          - DATA_VALIDATION_FAILED
+          - SNS_PUBLISH_ERROR
+          - SQS_PUBLISH_ERROR
+          type: string
+          description: Error code.
+          example: ''
+        message:
+          type: string
+          description: Specific error message.
+          nullable: true
+          example: ''
+        info:
+          type: string
+          description: Information about type of the error.
+          nullable: true
+          example: ''
+      additionalProperties: false
+    AdvancedValidationResponse:
+      required:
+      - advancedValidations
+      type: object
+      properties:
+        advancedValidations:
+          type: array
+          items:
+            $ref: '#/components/schemas/AdvancedValidationEntity'
+      additionalProperties: false
+    ResponseEntityList:
+      type: object
+      properties:
+        requestId:
+          type: string
+          description: ID of the request on which error occurred (generated by Basware API).
+          nullable: true
+          example: fbc082a2-65a4-469c-b230-d84a252f18fc
+        hasErrors:
+          type: boolean
+          description: Specifies whether the request has errors.
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorEntity'
+          nullable: true
+      additionalProperties: false
+      description: Errors returned here are returned synchronously from Basware API middle layer. Additional errors coming from target system(s) may be returned through errorFeedbacks API.
+    AdvancedValidationEntity:
+      required:
+      - dimension1
+      - externalCode
+      - interface
+      - keyValue
+      type: object
+      properties:
+        interface:
+          maxLength: 40
+          minLength: 1
+          type: string
+          description: "Specifies validation rule type to use. Needs to match with validation rule types configured in P2P. Rule type configuration determines: \r\n-Key value type (e.g. account code, cost center code, etc) against which the validations are applied\r\n-What coding row fields are used for dimension1-7."
+          example: AdvancedValidation
+        keyValue:
+          maxLength: 40
+          minLength: 1
+          type: string
+          description: Specifies key value for validation rule, e.g. value of account code, value of cost center code, etc. When this key value is used on coding row, below validations are applied.
+          example: '10012'
+        dimension1:
+          maxLength: 40
+          minLength: 0
+          type: string
+          description: "Dimension1-7: Specifies if coding field value needs to be within range. \r\n1 = Must be within range, field is mandatory (empty coding field not allowed)\r\n2 = Field not allowed (must be empty)\r\n3 = Must be within range, field is optional (empty coding field allowed)\r\nNote: Ranges can be used only if the accounting dimension has a numeric value. If a value is not numeric, a warning is shown. Leading zeros are allowed for numeric values."
+          example: '1'
+        dimension1From:
+          maxLength: 40
+          minLength: 0
+          type: string
+          description: 'Dimension1-7From: Specifies starting value for the range.'
+          nullable: true
+          example: '10000'
+        dimension1To:
+          maxLength: 40
+          minLength: 0
+          type: string
+          description: 'Dimension1-7To: Specifies ending value for the range.'
+          nullable: true
+          example: '20000'
+        dimension2:
+          maxLength: 40
+          minLength: 0
+          type: string
+          nullable: true
+          example: '2'
+        dimension2From:
+          maxLength: 40
+          minLength: 0
+          type: string
+          nullable: true
+          example: '18200'
+        dimension2To:
+          maxLength: 40
+          minLength: 0
+          type: string
+          nullable: true
+          example: '18300'
+        dimension3:
+          maxLength: 40
+          minLength: 0
+          type: string
+          nullable: true
+          example: '3'
+        dimension3From:
+          maxLength: 40
+          minLength: 0
+          type: string
+          nullable: true
+          example: ''
+        dimension3To:
+          maxLength: 40
+          minLength: 0
+          type: string
+          nullable: true
+          example: ''
+        dimension4:
+          maxLength: 40
+          minLength: 0
+          type: string
+          nullable: true
+          example: ''
+        dimension4From:
+          maxLength: 40
+          minLength: 0
+          type: string
+          nullable: true
+          example: ''
+        dimension4To:
+          maxLength: 40
+          minLength: 0
+          type: string
+          nullable: true
+          example: ''
+        dimension5:
+          maxLength: 40
+          minLength: 0
+          type: string
+          nullable: true
+          example: ''
+        dimension5From:
+          maxLength: 40
+          minLength: 0
+          type: string
+          nullable: true
+          example: ''
+        dimension5To:
+          maxLength: 40
+          minLength: 0
+          type: string
+          nullable: true
+          example: ''
+        dimension6:
+          maxLength: 40
+          minLength: 0
+          type: string
+          nullable: true
+          example: ''
+        dimension6From:
+          maxLength: 40
+          minLength: 0
+          type: string
+          nullable: true
+          example: ''
+        dimension6To:
+          maxLength: 40
+          minLength: 0
+          type: string
+          nullable: true
+          example: ''
+        dimension7:
+          maxLength: 40
+          minLength: 0
+          type: string
+          nullable: true
+          example: ''
+        dimension7From:
+          maxLength: 40
+          minLength: 0
+          type: string
+          nullable: true
+          example: ''
+        dimension7To:
+          maxLength: 40
+          minLength: 0
+          type: string
+          nullable: true
+          example: ''
+        companies:
+          type: array
+          items:
+            $ref: '#/components/schemas/AdvancedValidationCompanyEntity'
+          description: List of company units to associate account to P2P organization hierarchy
+          nullable: true
+        externalCode:
+          maxLength: 36
+          minLength: 1
+          type: string
+          description: External identifier that is used as a key in API.
+          example: 4847-31231212-212121-1212
+        lastUpdated:
+          type: string
+          description: Timestamp when the record was last sent to API. Set automatically.
+          format: date-time
+      additionalProperties: false
+  securitySchemes:
+    HTTPBasic:
+      type: http
+      scheme: basic

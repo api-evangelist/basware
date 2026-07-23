@@ -1,0 +1,541 @@
+openapi: 3.0.2
+info:
+  title: Basware OAUTH2 authentication APIs AccountingDocuments PurchaseGoodsReceipts API
+  description: "**Using OAUTH2.0 authentication:**\n\nGet API access token from api.basware.com/tokens\n1. Using client id and client secret, which you can obtain from Basware. \n2. Specify which APIs can be accessed by using the token e.g. Read only access to vendors API only (these are called scopes). Available scopes are listed at <https://developer.basware.com/api/p2p/manual#AccessRights>. \n3. Each token has an expiration time, until which it can be used to call APIs.\n\nWhen using OAUTH2 authentication, you need to pass the OAUTH2 authentication token when calling Basware API endpoints. Available Basware API operations are documented at <https://api.basware.com/swagger>. \n\nSee the Basware API developer site at <https://developer.basware.com/api/p2p/manual#Authentication> for more details on API authentication."
+  version: 1.0.0
+  x-logo:
+    url: https://fastapi.tiangolo.com/img/logo-margin/logo-teal.png
+tags:
+- name: PurchaseGoodsReceipts
+paths:
+  /v1/purchaseGoodsReceipts:
+    get:
+      tags:
+      - PurchaseGoodsReceipts
+      summary: Returns purchase goods receipts.
+      description: ''
+      parameters:
+      - name: processingStatus
+        in: query
+        description: Document status filter. Returns items by purchase goods receipt status.
+        schema:
+          enum:
+          - ImportInProgress
+          - Imported
+          - ImportFailed
+          type: string
+      - name: pageSize
+        in: query
+        description: A limit for the number of items to be returned for one request. Limit can range between 1 and 100 items.
+        schema:
+          type: integer
+          format: int32
+          default: 100
+      - name: lastUpdated
+        in: query
+        description: Date filter. Returns items that have been updated after specified date.
+        schema:
+          type: string
+          format: date-time
+      - name: x-amz-meta-continuationtoken
+        in: header
+        description: Used to get next page of results when item count indicated by 'pageSize' is exceeded. A token is returned in header (not body) parameter 'X-amz-meta-continuationToken' of the response whenever there are more records to fetch. Post the received value here in a new HEADER parameter on the next GET request to receive the next page of results. When getting the next page of results, you must include the same query parameters that were used when getting the first page.
+        schema:
+          type: string
+        example: 78b71d6b-b219-494d-860e-8f1aa8945d8c
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/PurchaseGoodsReceiptResponse'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PurchaseGoodsReceiptResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/PurchaseGoodsReceiptResponse'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not Found
+        '500':
+          description: Unexpected error
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+    post:
+      tags:
+      - PurchaseGoodsReceipts
+      summary: Creates new purchase goods receipts, fully overwrites previous record if exists.
+      description: "Specifies a single goods receipt or reverse goods receipt document concerning one purchase order. Goods receipt document can contain single receiving for some or all PO lines. So you can receive all order lines, some order lines or some order lines partly. Reversing has reference to GR document and line to reverse with negative quanties. For receiving or reversing to succeed all lines need to exist in order having sufficient quantity to receive. They cannot be closed, cancelled or matched. Several goods receipt documents can be sent for the same purchase order in one JSON. Suggested practice is to group lines received at one time in one location for the PO into a single goods receipt document.\r\nNotes:\r\n1. All the lines received on single goods receipt document must be ordered to the same delivery location as stated in order. Each delivery location requires a separate goods receipt document.\r\n2. A single goods receipt document is processed fully when imported to P2P. There is no partial processing: All lines are either accepted or the complete goods receipt document is rejected.\r\n3. P2P supports reversing GR documents. When sending a GR reversal, all lines on the GR document must be reversal lines. Normal goods receipt lines and reversal lines cannot be mixed on the same goods reeipt document. \r\n\r\nPlease see section \"[Usage scenario 4: Import and export procurement data](https://developer.basware.com/api/p2p/manual#usage4)\" for details on implementing this API. Check out also the [example JSONs using a minimal feasible set of fields](https://developer.basware.com/api/p2p/templates) from the developer site."
+      parameters:
+      - name: Content-Type
+        in: header
+        description: Specifies the media type of the resource. Value application/json is supported.
+        schema:
+          type: string
+        example: application/json
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/PurchaseGoodsReceiptEntity'
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/PurchaseGoodsReceiptEntity'
+          text/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/PurchaseGoodsReceiptEntity'
+          application/*+json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/PurchaseGoodsReceiptEntity'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/PurchaseGoodsReceiptEntity'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PurchaseGoodsReceiptEntity'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/PurchaseGoodsReceiptEntity'
+        '400':
+          description: Bad request
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+        '401':
+          description: Unauthorized
+        '409':
+          description: Conflict
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+        '500':
+          description: Unexpected error
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+    delete:
+      tags:
+      - PurchaseGoodsReceipts
+      summary: Deletes data from Basware API. For manual one-time operations.
+      description: "For manual one-time operations only, such as a manual clean-up to remove test data generated during API integration development. Only removes records from API layer. \r\nDeletion in target systems needs to be done separately using the data deletion mechanisms available in each of the target system in addition to deleting the data in Basware API."
+      requestBody:
+        description: "Contains the body of the request.\r\n            Either externalCode or lastUpdated -field is required. If both values are provided, externalCode will have the priority."
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/DeleteRequest'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteRequest'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/DeleteRequest'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/DeleteRequest'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/DeleteResponse'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/DeleteResponse'
+        '202':
+          description: RequestAccepted
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/DeleteResponse'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/DeleteResponse'
+        '400':
+          description: BadRequest
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+        '401':
+          description: Unauthorized
+        '500':
+          description: Unexpected error
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+  /v1/purchaseGoodsReceipts/{externalCode}:
+    get:
+      tags:
+      - PurchaseGoodsReceipts
+      summary: Returns single purchase goods receipts by orderId - identifier.
+      parameters:
+      - name: externalCode
+        in: path
+        description: The external code of the entity to be fetched
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/PurchaseGoodsReceiptResponse'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PurchaseGoodsReceiptResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/PurchaseGoodsReceiptResponse'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found. Request was successful and no records were found.
+        '500':
+          description: Unexpected error
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+components:
+  schemas:
+    PurchaseGoodsReceiptResponse:
+      required:
+      - goodsReceipts
+      type: object
+      properties:
+        goodsReceipts:
+          type: array
+          items:
+            $ref: '#/components/schemas/PurchaseGoodsReceiptEntity'
+      additionalProperties: false
+    GoodsReceiptLine:
+      required:
+      - externalCode
+      - orderLineExternalCode
+      type: object
+      properties:
+        externalCode:
+          maxLength: 100
+          minLength: 1
+          type: string
+          description: Unique identifier of the goods receipt line.
+          example: 06dagdea-5123-71ea-a38b-2e128ce88122
+        orderLineExternalCode:
+          maxLength: 100
+          minLength: 1
+          type: string
+          description: External code of the order line for which goods/services are being received.
+          example: 060cb8ea-5464-11ea-a38b-2e728ce88123
+        deliveryNoteNumber:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: Do not use - Use header level DeliveryNoteNumber instead from P2P 23.3 or later.
+          nullable: true
+          example: D128735871
+          deprecated: true
+        productSerialNumber:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: Product serial number. Generally used with goods receipt cancellations.
+          nullable: true
+          example: ''
+        receivedQuantity:
+          type: number
+          description: 'Quantity received. Value is allowed in only one of the following fields: ''receivedQuantity'', ''receivedNetSum'', ''receivedGrossSum'' (one of these fields must have a value). The field which has a value specifies whether the receival has been done by quantity, net sum or gross sum. Same receival method needs to be used for all goods receipts done to the same order line. If the first goods receipt has been done through P2P Purchase UI, that will determine the receival method expected on any future goods receipts (also those imported through API). If all the previous goods receipts done to the order row have been reversed, then the receival method can be chosen again. Use a negative value if you are reversing a previous GR line.'
+          format: double
+          nullable: true
+          example: 1
+        receivedNetSum:
+          type: number
+          description: 'Net sum received. Value is allowed in only one of the following fields: ''receivedQuantity'', ''receivedNetSum'', ''receivedGrossSum'' (one of these fields must have a value). The field which has a value specifies whether the receival has been done by quantity, net sum or gross sum. Same receival method needs to be used for all goods receipts done to the same order line. If the first goods receipt has been done through P2P Purchase UI, that will determine the receival method expected on any future goods receipts (also those imported through API). If all the previous goods receipts done to the order row have been reversed, then the receival method can be chosen again. Use a negative value if you are reversing a previous GR line.'
+          format: double
+          nullable: true
+          example: 100
+        receivedGrossSum:
+          type: number
+          format: double
+          nullable: true
+        referenceGRLineExternalCode:
+          maxLength: 100
+          minLength: 0
+          type: string
+          description: Used when this receipt item is a negative return/cancellation item for an earlier receipt. Needs to match with externalCode of the original goods receipt line.
+          nullable: true
+          example: ''
+        comment:
+          maxLength: 255
+          minLength: 0
+          type: string
+          description: Available for additional information regarding the GR line, such as reason for cancellation in case of reversing the GR.
+          nullable: true
+          example: ''
+        notifyFault:
+          type: boolean
+          description: Used to notify supplier of damaged goods. True if goods are faulty while receiving.
+          example: false
+      additionalProperties: false
+    PurchaseGoodsReceiptEntity:
+      required:
+      - externalCode
+      - externalGRNumber
+      - lineReceivings
+      - orderExternalCode
+      - receiveDate
+      - receiver
+      type: object
+      properties:
+        externalCode:
+          maxLength: 100
+          minLength: 1
+          type: string
+          description: GR document external code. External identifier that is used as a key in API. Identifies goods receipt for updates through API.
+          example: 4847-31231212-212121-1212
+        externalGRNumber:
+          maxLength: 100
+          minLength: 1
+          type: string
+          description: Goods receipt document number in the system from which it is being imported.
+          example: GR123652138
+        orderExternalCode:
+          maxLength: 100
+          minLength: 1
+          type: string
+          description: External code of the order for which goods/services are being received. Needs to match with 'externalCode' in exportedPurchaseOrders API.
+          example: ERP1_PO1234233267
+        processingStatus:
+          enum:
+          - ImportInProgress
+          - Imported
+          - ImportFailed
+          type: string
+          description: Processing status of the goods receipt (set automatically by Basware API).
+          example: ImportInProgress
+        receiveDate:
+          type: string
+          description: Date on which goods have been received.
+          format: date-time
+          example: '2020-10-24T00:00:00'
+        referenceGRDocumentExternalCode:
+          maxLength: 100
+          minLength: 0
+          type: string
+          description: Indicates a return/cancellation for an earlier receipt. In such case, 1) this field needs to contain value of 'externalCode' field of the original goods receipt document and 2) lineReceivings need to contain referenceGRLineExternalCodes, 3) receivedQuantity is expected to be negative.
+          nullable: true
+          example: ''
+        deliveryNoteNumber:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: Reference to the delivery note this delivery relates to.
+          nullable: true
+          example: D128735871
+        lastUpdated:
+          type: string
+          description: Timestamp when the record was last updated in API. Set automatically.
+          format: date-time
+        receiver:
+          $ref: '#/components/schemas/GoodsReceiver'
+        lineReceivings:
+          type: array
+          items:
+            $ref: '#/components/schemas/GoodsReceiptLine'
+          description: List of individual goods receipt lines.
+      additionalProperties: false
+    DeleteRequest:
+      type: object
+      properties:
+        lastUpdated:
+          type: string
+          description: 'To delete records updated after specific time, use lastUpdated -field. This will delete all items that have been updated after the specified date. In response, user will get the taskStatus api link where the task status can be checked. Note: ''0001-01-01'' can be used to delete all records.'
+          format: date-time
+          nullable: true
+        externalCode:
+          maxLength: 36
+          minLength: 0
+          type: string
+          description: Single item can be deleted using externalCode and final status is returned immediately.
+          nullable: true
+      additionalProperties: false
+    DeleteResponse:
+      type: object
+      properties:
+        statusApiLink:
+          type: string
+          nullable: true
+        taskName:
+          type: string
+          nullable: true
+        taskStatus:
+          type: string
+          nullable: true
+      additionalProperties: false
+    GoodsReceiver:
+      type: object
+      properties:
+        loginAccount:
+          maxLength: 100
+          minLength: 0
+          type: string
+          description: Login account.
+          nullable: true
+          example: company\\jyrik
+        emailAddress:
+          maxLength: 320
+          minLength: 0
+          pattern: ^(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*)@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])$
+          type: string
+          description: Email address.
+          nullable: true
+          example: emailaddress@company.com
+        externalCode:
+          maxLength: 50
+          minLength: 0
+          type: string
+          description: External code.
+          nullable: true
+          example: sadkj2983g87i12diuodsahyukjd
+      additionalProperties: false
+      description: Specifies who has received the goods. At least one of the values needs to be provided.
+    ErrorEntity:
+      type: object
+      properties:
+        externalCode:
+          type: string
+          description: External code of record on which error occurred (when available).
+          nullable: true
+          example: 4847-31231212-212121-1212
+        type:
+          enum:
+          - BUSINESS
+          - VALIDATION
+          - TECHNICAL
+          - SECURITY
+          type: string
+          description: Error type.
+          example: ''
+        code:
+          enum:
+          - EXTERNAL_CODE_MISMATCH
+          - SCHEMA_VALIDATION_ERROR
+          - CONFLICT_IN_POST
+          - DATA_ORIGIN_VALIDATION_ERROR
+          - ACCESS_TOKEN_VALIDATION_ERROR
+          - CREDENTIAL_VALIDATION_ERROR
+          - PARAMETER_VALIDATION_ERROR
+          - UNEXPECTED_ERROR
+          - METHOD_NOT_ALLOWED
+          - ENTITY_NOT_FOUND
+          - DATA_VALIDATION_FAILED
+          - SNS_PUBLISH_ERROR
+          - SQS_PUBLISH_ERROR
+          type: string
+          description: Error code.
+          example: ''
+        message:
+          type: string
+          description: Specific error message.
+          nullable: true
+          example: ''
+        info:
+          type: string
+          description: Information about type of the error.
+          nullable: true
+          example: ''
+      additionalProperties: false
+    ResponseEntityList:
+      type: object
+      properties:
+        requestId:
+          type: string
+          description: ID of the request on which error occurred (generated by Basware API).
+          nullable: true
+          example: fbc082a2-65a4-469c-b230-d84a252f18fc
+        hasErrors:
+          type: boolean
+          description: Specifies whether the request has errors.
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorEntity'
+          nullable: true
+      additionalProperties: false
+      description: Errors returned here are returned synchronously from Basware API middle layer. Additional errors coming from target system(s) may be returned through errorFeedbacks API.
+  securitySchemes:
+    HTTPBasic:
+      type: http
+      scheme: basic

@@ -1,0 +1,660 @@
+openapi: 3.0.2
+info:
+  title: Basware OAUTH2 authentication APIs AccountingDocuments PaymentTerms API
+  description: "**Using OAUTH2.0 authentication:**\n\nGet API access token from api.basware.com/tokens\n1. Using client id and client secret, which you can obtain from Basware. \n2. Specify which APIs can be accessed by using the token e.g. Read only access to vendors API only (these are called scopes). Available scopes are listed at <https://developer.basware.com/api/p2p/manual#AccessRights>. \n3. Each token has an expiration time, until which it can be used to call APIs.\n\nWhen using OAUTH2 authentication, you need to pass the OAUTH2 authentication token when calling Basware API endpoints. Available Basware API operations are documented at <https://api.basware.com/swagger>. \n\nSee the Basware API developer site at <https://developer.basware.com/api/p2p/manual#Authentication> for more details on API authentication."
+  version: 1.0.0
+  x-logo:
+    url: https://fastapi.tiangolo.com/img/logo-margin/logo-teal.png
+tags:
+- name: PaymentTerms
+paths:
+  /v1/paymentTerms:
+    get:
+      tags:
+      - PaymentTerms
+      summary: Returns payment terms posted to Basware API.
+      description: ''
+      parameters:
+      - name: pageSize
+        in: query
+        description: A limit for the number of items to be returned for one request. Limit can range between 1 and 500 items.
+        schema:
+          type: integer
+          format: int32
+          default: 500
+      - name: companyCode
+        in: query
+        description: Company filter. Returns items for specific company.
+        schema:
+          type: string
+          default: ''
+      - name: lastUpdated
+        in: query
+        description: Date Filter. Returns items that have been updated after specified date.
+        schema:
+          type: string
+          format: date-time
+      - name: x-amz-meta-continuationtoken
+        in: header
+        description: Used to get next page of results when item count indicated by 'pageSize' is exceeded. A token is returned in header (not body) parameter 'X-amz-meta-continuationToken' of the response whenever there are more records to fetch. Post the received value here in a new HEADER parameter on the next GET request to receive the next page of results. When getting the next page of results, you must include the same query parameters that were used when getting the first page.
+        schema:
+          type: string
+        example: 9797a921-ca15-4b40-84e0-11fe94125b47
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/PaymentTermResponse'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentTermResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/PaymentTermResponse'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found. Request was successful and no records were found.
+        '500':
+          description: Unexpected error
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+    post:
+      tags:
+      - PaymentTerms
+      summary: Creates new paymentTerm entity, fully overwrites previous record if exists.
+      description: 'Note: Please post payment term(s) before posting vendor(s) using the payment term(s). Payment term(s) should be in P2P before posting the vendor(s).'
+      parameters:
+      - name: Content-Type
+        in: header
+        description: Specifies the media type of the resource. Value application/json is supported.
+        schema:
+          type: string
+        example: application/json
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/PaymentTermEntity'
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/PaymentTermEntity'
+          text/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/PaymentTermEntity'
+          application/*+json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/PaymentTermEntity'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PaymentTermEntity'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PaymentTermEntity'
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PaymentTermEntity'
+        '400':
+          description: Bad request
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+        '401':
+          description: Unauthorized
+        '409':
+          description: Conflict
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+        '500':
+          description: Unexpected error
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+    delete:
+      tags:
+      - PaymentTerms
+      summary: Deletes data from Basware API. For manual one-time operations.
+      description: "For manual one-time operations only, such as a manual clean-up to remove test data generated during API integration development. Only removes records from API layer. \r\nDeletion in target systems needs to be done separately using the data deletion mechanisms available in each of the target system in addition to deleting the data in Basware API."
+      requestBody:
+        description: "Contains the body of the request.\r\n            Either externalCode or lastUpdated -field is required. If both values are provided, externalCode will have the priority."
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/DeleteRequest'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteRequest'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/DeleteRequest'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/DeleteRequest'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/DeleteResponse'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/DeleteResponse'
+        '202':
+          description: RequestAccepted
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/DeleteResponse'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/DeleteResponse'
+        '400':
+          description: BadRequest
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+        '401':
+          description: Unauthorized
+        '500':
+          description: Unexpected error
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+  /v1/paymentTerms/{externalCode}:
+    get:
+      tags:
+      - PaymentTerms
+      summary: Returns single payment term by externalCode -identifier.
+      description: ''
+      parameters:
+      - name: externalCode
+        in: path
+        description: The ExternalCode of the entity to be fetched
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/PaymentTermEntity'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentTermEntity'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/PaymentTermEntity'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found. Request was successful and no records were found.
+        '500':
+          description: Unexpected error
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+    patch:
+      tags:
+      - PaymentTerms
+      summary: Updates on specified payment term. Preserves existing values in fields, which were not updated.
+      parameters:
+      - name: externalCode
+        in: path
+        description: The ExternalCode of the payment term to be updated. To do a partial update consumer needs to provide changed properties.
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: Entity to be updated
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/PaymentTermEntity'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PaymentTermEntity'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/PaymentTermEntity'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/PaymentTermEntity'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/PaymentTermEntity'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentTermEntity'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/PaymentTermEntity'
+        '400':
+          description: Bad request
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found. Record to update not found.
+        '500':
+          description: Unexpected error
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+components:
+  schemas:
+    LanguageTranslationEntity:
+      required:
+      - language
+      - translation
+      type: object
+      properties:
+        translation:
+          maxLength: 2000
+          minLength: 2
+          type: string
+          description: Translated text
+          example: Office supplies
+        language:
+          maxLength: 10
+          minLength: 2
+          type: string
+          description: Language code
+          example: en-US
+      additionalProperties: false
+    DeleteRequest:
+      type: object
+      properties:
+        lastUpdated:
+          type: string
+          description: 'To delete records updated after specific time, use lastUpdated -field. This will delete all items that have been updated after the specified date. In response, user will get the taskStatus api link where the task status can be checked. Note: ''0001-01-01'' can be used to delete all records.'
+          format: date-time
+          nullable: true
+        externalCode:
+          maxLength: 36
+          minLength: 0
+          type: string
+          description: Single item can be deleted using externalCode and final status is returned immediately.
+          nullable: true
+      additionalProperties: false
+    DeleteResponse:
+      type: object
+      properties:
+        statusApiLink:
+          type: string
+          nullable: true
+        taskName:
+          type: string
+          nullable: true
+        taskStatus:
+          type: string
+          nullable: true
+      additionalProperties: false
+    PaymentTermCompanyEntity:
+      required:
+      - active
+      - companyCode
+      - inherit
+      type: object
+      properties:
+        companyCode:
+          maxLength: 32
+          minLength: 1
+          type: string
+          description: The payment term for different suppliers is attached to this company code.
+          example: BW01
+        inherit:
+          type: boolean
+          description: The value defines whether the payment is inherited to lower organization units in the organization structure.
+        active:
+          type: boolean
+          description: This flag will enable the data to be visible on UI, provided if the value is true, not visible in case of value is false. It will be also used for soft delete.
+          example: true
+      additionalProperties: false
+    PaymentTermResponse:
+      required:
+      - paymentTerms
+      type: object
+      properties:
+        paymentTerms:
+          type: array
+          items:
+            $ref: '#/components/schemas/PaymentTermEntity'
+      additionalProperties: false
+    ErrorEntity:
+      type: object
+      properties:
+        externalCode:
+          type: string
+          description: External code of record on which error occurred (when available).
+          nullable: true
+          example: 4847-31231212-212121-1212
+        type:
+          enum:
+          - BUSINESS
+          - VALIDATION
+          - TECHNICAL
+          - SECURITY
+          type: string
+          description: Error type.
+          example: ''
+        code:
+          enum:
+          - EXTERNAL_CODE_MISMATCH
+          - SCHEMA_VALIDATION_ERROR
+          - CONFLICT_IN_POST
+          - DATA_ORIGIN_VALIDATION_ERROR
+          - ACCESS_TOKEN_VALIDATION_ERROR
+          - CREDENTIAL_VALIDATION_ERROR
+          - PARAMETER_VALIDATION_ERROR
+          - UNEXPECTED_ERROR
+          - METHOD_NOT_ALLOWED
+          - ENTITY_NOT_FOUND
+          - DATA_VALIDATION_FAILED
+          - SNS_PUBLISH_ERROR
+          - SQS_PUBLISH_ERROR
+          type: string
+          description: Error code.
+          example: ''
+        message:
+          type: string
+          description: Specific error message.
+          nullable: true
+          example: ''
+        info:
+          type: string
+          description: Information about type of the error.
+          nullable: true
+          example: ''
+      additionalProperties: false
+    PaymentTermDiscountRule:
+      required:
+      - active
+      - externalCode
+      type: object
+      properties:
+        externalCode:
+          maxLength: 36
+          minLength: 1
+          type: string
+          description: External code is a unique code for the payment term's discount rules.
+          example: c9921a52-6d8b-1017-cb8c-923d
+        discountDays:
+          maximum: 2147483647
+          minimum: 0
+          type: integer
+          description: Defines number of days used in dynamic cash discount. The number of days must be unique for each discount percentage.
+          format: int32
+          nullable: true
+          example: 21
+        discountPercent:
+          maximum: 1000000000
+          minimum: 0
+          type: number
+          description: Defines the discount percentage that the supplier offers for the buyer for early cash payments
+          format: double
+          nullable: true
+          example: 1
+        active:
+          type: boolean
+          description: This flag will enable the data to be visible on UI, provided if the value is true, not visible in case of value is false. It will be also used for soft delete.
+          example: false
+      additionalProperties: false
+    PaymentTermEntity:
+      required:
+      - companies
+      - externalCode
+      - paymentTermCode
+      - paymentTermNames
+      - validFrom
+      - validTo
+      type: object
+      properties:
+        paymentTermCode:
+          maxLength: 25
+          minLength: 1
+          type: string
+          description: Specifies code for the payment term.
+          example: NT60
+        paymentTermNames:
+          type: array
+          items:
+            $ref: '#/components/schemas/LanguageTranslationEntity'
+          description: Defines name(s) for the payment term. Please always include 'en-US' language tag for Basware global support, as well as any local-language tag being used. If both translations are not available, please use the same string with both language tags.
+        sortOrder:
+          maximum: 2147483647
+          minimum: 0
+          type: integer
+          description: Specifies position of a payment term in selection list.
+          format: int32
+          nullable: true
+          example: 8
+        moveDueDatesTo:
+          pattern: 0|1|2
+          type: string
+          description: "Specifies whether to move due date and cash date to next/previous working day (in case due date occurs during weekend). \r\n0 = Do not move due date.\r\n1 = Move to next working day.\r\n2 = Move to previous working day."
+          nullable: true
+          example: '0'
+        dueDateCalc:
+          pattern: 0|1
+          type: integer
+          description: "Specifies due date calculation method. \r\n1 = Due date is calculated automatically according to rules specified in this payment term. \r\n0 = Due date is entered manually (no automatic calculation)."
+          format: int32
+          nullable: true
+          example: 1
+        dueDateDays:
+          maximum: 2147483647
+          minimum: 0
+          type: integer
+          description: Used in due date calculation. Specifies number of days to be added to the base date.
+          format: int32
+          nullable: true
+          example: 60
+        dueDateDays2:
+          maximum: 2147483647
+          minimum: 0
+          type: integer
+          description: Used in due date calculation. Specifies the amount of days to be added after month-end -moves.
+          format: int32
+          nullable: true
+          example: 0
+        dueDateEom:
+          maximum: 2147483647
+          minimum: 0
+          type: integer
+          description: "Accepts integer values from 0 to 12 only.\r\nUsed in due date calculation. Specifies number of month-ends to be added to due date. Month-ends are added after adding dueDateDays to base calculation date.\r\n0 = Date not moved to end of month.\r\n1 = Date is moved to end of month\r\n2 = Date is moved to end of next month \r\n3 = Date is moved in following way: Add 2 full months, then move date to end of resulting month. \r\nn = Date is moved in following way: Add (n-1) full months, then move date to end of resulting month."
+          format: int32
+          nullable: true
+          example: 0
+        cashDueDateCalc:
+          pattern: 0|1|2
+          type: integer
+          description: "Specifies cash date calculation method.\r\n0 = Cash date is entered manually (no calculation)\r\n1 = Calculate cash date (accorging to rules specified on this payment term)\r\n2 = Calculate dynamic cash date and cash discount (specified in paymentTermDiscountRules -block)"
+          format: int32
+          nullable: true
+          example: 2
+        cashDueDateDays:
+          maximum: 2147483647
+          minimum: 0
+          type: integer
+          description: Used in cash date calculation. Specifies number of days to be added to the base date.
+          format: int32
+          nullable: true
+          example: 21
+        cashDueDateDays2:
+          maximum: 2147483647
+          minimum: 0
+          type: integer
+          description: Used in cash date calculation. Specifies the amount of days to be added after month-end -moves.
+          format: int32
+          nullable: true
+          example: 0
+        cashDueDateEom:
+          maximum: 2147483647
+          minimum: 0
+          type: integer
+          description: "Accepts integer values from 0 to 12 only.\r\nUsed in cash date calculation. Specifies number of month-ends to be added to cash date. Month-ends are added after adding dueDateDays to base calculation date.\r\n0 = Date not moved to end of month.\r\n1 = Date is moved to end of month\r\n2 = Date is moved to end of next month \r\n3 = Date is moved in following way: Add 2 full months, then move date to end of resulting month. \r\nn = Date is moved in following way: Add (n-1) full months, then move date to end of resulting month."
+          format: int32
+          nullable: true
+          example: 0
+        cashDiscount:
+          maximum: 1000000000
+          minimum: 0
+          type: number
+          description: Defines the discount percentage. This amount of discount is received if invoice is paid by cash date.
+          format: double
+          nullable: true
+          example: 1
+        validFrom:
+          type: string
+          description: Defines the date when the payment term's validity period starts.
+          format: date-time
+          example: '2015-01-01'
+        validTo:
+          type: string
+          description: Defines the date when the payment term's validity period ends.
+          format: date-time
+          example: '2016-01-02'
+        companies:
+          type: array
+          items:
+            $ref: '#/components/schemas/PaymentTermCompanyEntity'
+          description: List of company units to associate paymentterm to P2P organization hierarchy
+        paymentTermDiscountRules:
+          type: array
+          items:
+            $ref: '#/components/schemas/PaymentTermDiscountRule'
+          description: "PaymentTermDiscountRules can be used to specify multiple cash discount dates. Data is imported to \"Calculate cynamic cash date and cash discount\" -section in P2P. \r\nTo enable cash discount calculation using these rules, 'cashDueDateCalc' must be set to 2. When enabled, overrides the standard cash date calculation -fields cashDiscount, cashDueDateDays and cashDueDateDays2.\r\nPaymentTermDiscountRules -block is used and mandatory only when 'cashDueDateCalc' is set to 2."
+          nullable: true
+        externalCode:
+          maxLength: 36
+          minLength: 1
+          type: string
+          description: External identifier that is used as a key in API.
+          example: 4847-31231212-212121-1212
+        lastUpdated:
+          type: string
+          description: Timestamp when the record was last sent to API. Set automatically.
+          format: date-time
+      additionalProperties: false
+    ResponseEntityList:
+      type: object
+      properties:
+        requestId:
+          type: string
+          description: ID of the request on which error occurred (generated by Basware API).
+          nullable: true
+          example: fbc082a2-65a4-469c-b230-d84a252f18fc
+        hasErrors:
+          type: boolean
+          description: Specifies whether the request has errors.
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorEntity'
+          nullable: true
+      additionalProperties: false
+      description: Errors returned here are returned synchronously from Basware API middle layer. Additional errors coming from target system(s) may be returned through errorFeedbacks API.
+  securitySchemes:
+    HTTPBasic:
+      type: http
+      scheme: basic

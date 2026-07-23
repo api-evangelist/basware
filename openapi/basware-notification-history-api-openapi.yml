@@ -1,0 +1,269 @@
+openapi: 3.0.2
+info:
+  title: Basware OAUTH2 authentication APIs AccountingDocuments Notification history API
+  description: "**Using OAUTH2.0 authentication:**\n\nGet API access token from api.basware.com/tokens\n1. Using client id and client secret, which you can obtain from Basware. \n2. Specify which APIs can be accessed by using the token e.g. Read only access to vendors API only (these are called scopes). Available scopes are listed at <https://developer.basware.com/api/p2p/manual#AccessRights>. \n3. Each token has an expiration time, until which it can be used to call APIs.\n\nWhen using OAUTH2 authentication, you need to pass the OAUTH2 authentication token when calling Basware API endpoints. Available Basware API operations are documented at <https://api.basware.com/swagger>. \n\nSee the Basware API developer site at <https://developer.basware.com/api/p2p/manual#Authentication> for more details on API authentication."
+  version: 1.0.0
+  x-logo:
+    url: https://fastapi.tiangolo.com/img/logo-margin/logo-teal.png
+tags:
+- name: Notification history
+paths:
+  /v1/tasks/{taskId}:
+    get:
+      tags:
+      - Notification history
+      summary: Used to check status of an individual task by taskId. Does not contain task payload.
+      operationId: read_item_v1_tasks__taskId__get
+      parameters:
+      - name: taskId
+        in: path
+        required: true
+        schema:
+          type: string
+          description: TaskId of the task to be returned.
+          title: Taskid
+        description: TaskId of the task to be returned.
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TasksResponse'
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorResponse'
+          description: Internal Server Error
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizeErrorResponse'
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RecordNotFoundResponse'
+          description: Not Found
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntityErrorResponse'
+          description: Unprocessable Entity
+  /v1/tasks:
+    get:
+      tags:
+      - Notification history
+      summary: Returns task status by search criteria. Does not contain task payload.
+      operationId: read_item_v1_tasks_get
+      parameters:
+      - name: taskType
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Task type (InvoiceGenericTask, InvoiceCalcTax, etc)
+          title: Tasktype
+        description: Task type (InvoiceGenericTask, InvoiceCalcTax, etc)
+      - name: taskStatus
+        in: query
+        required: false
+        schema:
+          type: string
+          description: 'Status of the task. Available values: ''New'', ''Completed'', ''Failed''.'
+          title: Taskstatus
+        description: 'Status of the task. Available values: ''New'', ''Completed'', ''Failed''.'
+      - name: documentId
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Returns all tasks for a specific document (for example all tasks related to one AccountingDocument).
+          title: Documentid
+        description: Returns all tasks for a specific document (for example all tasks related to one AccountingDocument).
+      - name: lastUpdated
+        in: query
+        required: false
+        schema:
+          type: string
+          description: Date Filter. Returns tasks which have been updated after specified datetime.
+          title: Lastupdated
+        description: Date Filter. Returns tasks which have been updated after specified datetime.
+      - name: x-amz-meta-continuationtoken
+        in: header
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: Used to get next page of results when item count indicated by 'pageSize' is exceeded. A token is returned in header (not body) parameter 'X-amz-meta-continuationToken' of the response whenever there are more records to fetch. Post the received value here in a new GET request to receive the next page of results.
+          title: X-Amz-Meta-Continuationtoken
+        description: Used to get next page of results when item count indicated by 'pageSize' is exceeded. A token is returned in header (not body) parameter 'X-amz-meta-continuationToken' of the response whenever there are more records to fetch. Post the received value here in a new GET request to receive the next page of results.
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TasksResponse'
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorResponse'
+          description: Internal Server Error
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizeErrorResponse'
+          description: Unauthorized
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RecordNotFoundResponse'
+          description: Not Found
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntityErrorResponse'
+          description: Unprocessable Entity
+components:
+  schemas:
+    TasksResponse:
+      properties:
+        taskStatus:
+          items:
+            $ref: '#/components/schemas/Task'
+          type: array
+          title: Taskstatus
+      type: object
+      required:
+      - taskStatus
+      title: TasksResponse
+    RecordNotFoundResponse:
+      properties:
+        detail:
+          type: string
+          title: Detail
+          description: Detail of error
+          default: Not Found
+          example: Not Found
+      type: object
+      title: RecordNotFoundResponse
+    Task:
+      properties:
+        taskId:
+          type: string
+          title: Taskid
+          description: Task id identifies the task and is used to correlate task response to the correct operation in P2P.
+          example: sajkhe1i87yhdgdi6sad7iyahljh1ut1
+        taskStatus:
+          type: string
+          title: Taskstatus
+          description: 'Status of the task (=notification). Available values: ''New'', ''Completed'', ''Failed''.'
+          example: New
+        taskType:
+          type: string
+          title: Tasktype
+          description: Task type specifies type of document. It also determines the API endpoint from which the document needs to be fetched.
+          example: AccountingDocuments
+        taskSubType:
+          type: string
+          title: Tasksubtype
+          description: Specifies status of the document when notification was sent.
+          example: WaitingForTransfer
+        documentId:
+          type: string
+          title: Documentid
+          description: Identifies the document being processed. Same identifier is used in API from which document needs to be fetched.
+          example: 198phejkbaku7dilj12kdg867hbdsmag
+        expirationTime:
+          type: string
+          title: Expirationtime
+          description: Timestamp after which the notification expires. Reseved for future use. Responses are no longer accepted for expired tasks.
+          example: '2020-12-04T08:39:13Z'
+        externalProcessingTime:
+          type: string
+          title: Externalprocessingtime
+          description: Reserved for future use.
+          example: '2020-12-04T08:39:13Z'
+        isSimulatedTask:
+          type: boolean
+          title: Issimulatedtask
+          description: Reserved for future use. Indicates if task is a simulated task (created using 'simulate' API).
+          example: 'false'
+        lastUpdated:
+          type: string
+          title: Lastupdated
+          description: Timestamp when task has been last updated. Value is set automatically by API.
+          example: '2020-12-04T08:39:13Z'
+        taskHistory:
+          items:
+            $ref: '#/components/schemas/TaskHistory'
+          type: array
+          title: Taskhistory
+          description: Shows information aboout task status changes.
+      type: object
+      title: Task
+    InternalServerErrorResponse:
+      properties:
+        message:
+          type: string
+          title: Message
+          description: Detail of error
+          default: Internal server error
+          example: Internal server error
+      type: object
+      title: InternalServerErrorResponse
+    UnauthorizeErrorResponse:
+      properties:
+        message:
+          type: string
+          title: Message
+          description: Detail of error
+          default: Unauthorized
+          example: Unauthorized
+      type: object
+      title: UnauthorizeErrorResponse
+    UnprocessableEntityErrorResponse:
+      properties:
+        message:
+          type: string
+          title: Message
+          description: Detail of error
+          default: UnprocessableEntity
+          example: UnprocessableEntity
+      type: object
+      title: UnprocessableEntityErrorResponse
+    TaskHistory:
+      properties:
+        action:
+          type: string
+          title: Action
+          description: Action performed on the task.
+          example: New
+        timeStamp:
+          type: string
+          title: Timestamp
+          description: Timestamp when action occurred.
+          example: '2021-08-12T08:39:13Z'
+        messages:
+          items:
+            type: string
+          type: array
+          title: Messages
+          description: Additional information regarding task status change, such as error messages.
+          example: Task Created
+      type: object
+      title: TaskHistory
+  securitySchemes:
+    HTTPBasic:
+      type: http
+      scheme: basic

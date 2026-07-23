@@ -1,0 +1,504 @@
+openapi: 3.0.2
+info:
+  title: Basware OAUTH2 authentication APIs AccountingDocuments RequestStatus API
+  description: "**Using OAUTH2.0 authentication:**\n\nGet API access token from api.basware.com/tokens\n1. Using client id and client secret, which you can obtain from Basware. \n2. Specify which APIs can be accessed by using the token e.g. Read only access to vendors API only (these are called scopes). Available scopes are listed at <https://developer.basware.com/api/p2p/manual#AccessRights>. \n3. Each token has an expiration time, until which it can be used to call APIs.\n\nWhen using OAUTH2 authentication, you need to pass the OAUTH2 authentication token when calling Basware API endpoints. Available Basware API operations are documented at <https://api.basware.com/swagger>. \n\nSee the Basware API developer site at <https://developer.basware.com/api/p2p/manual#Authentication> for more details on API authentication."
+  version: 1.0.0
+  x-logo:
+    url: https://fastapi.tiangolo.com/img/logo-margin/logo-teal.png
+tags:
+- name: RequestStatus
+paths:
+  /v1/requestStatus/{requestId}:
+    get:
+      tags:
+      - RequestStatus
+      summary: Returns request status responses from receiving end-system(s), based on request id.
+      description: "Note: RequestStatus functionality is not yet available for 'users' API for 'Basware network' target system, which uses application codes 'SupplierPortal' and 'SupplierManagement'). \r\n\r\nPlease see section \"[Usage scenario 5: Error handling and monitoring](https://developer.basware.com/api/p2p/manual#usage5)\" in Basware Purchase-to-Pay API manual for details on implementing error handling with Basware API."
+      parameters:
+      - name: requestId
+        in: path
+        description: The request id used to post in the data. This is returned in request header parameter 'x-amzn-RequestId', in response of the original request.
+        required: true
+        schema:
+          type: string
+      - name: system
+        in: query
+        description: Allows limiting the responses to requests routed to a particular target system.
+        schema:
+          type: string
+      - name: ignoreSuccessfulItems
+        in: query
+        description: Allows filtering out succesful records within the response. Can be used to show only records with errors and records in progress.
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/RequestStatusResponse'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RequestStatusResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RequestStatusResponse'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+        '500':
+          description: Unexpected error
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+  /v1/requestStatus:
+    get:
+      tags:
+      - RequestStatus
+      summary: Returns request status responses from receiving end-system(s), based on status and time stamp.
+      description: "Notes:\r\n1) This API supports sending webhook based [push notifications](https://developer.basware.com/api/p2p/manual#PushNotifications) when new data is available to be exported. \r\n2) RequestStatus functionality is not yet available for 'users' API for 'Basware network' target system, which uses application codes 'SupplierPortal' and 'SupplierManagement'). \r\n\r\nPlease see section \"[Usage scenario 5: Error handling and monitoring](https://developer.basware.com/api/p2p/manual#usage5)\" in Basware Purchase-to-Pay API manual for details on implementing error handling with Basware API."
+      parameters:
+      - name: status
+        in: query
+        description: Allows filtering requests by status. Defaults to status ‘Error’ if search is not narrowed-down by entityType or system.
+        schema:
+          enum:
+          - InProgress
+          - Success
+          - Error
+          - AcknowledgedSuccess
+          - AcknowledgedError
+          type: string
+      - name: entityType
+        in: query
+        description: Allows filtering requests by EntityType.
+        schema:
+          enum:
+          - Account
+          - Contract
+          - CostCenter
+          - TaxCode
+          - ExchangeRate
+          - PaymentTerm
+          - User
+          - Project
+          - MatchingOrder
+          - MatchingOrderLine
+          - GenericList
+          - AdvancedPermission
+          - TransferResponse
+          - PaymentResponse
+          - PrebookResponse
+          - Vendor
+          - AdvancedValidation
+          - PurchaseRequisition
+          - PurchaseOrder
+          - PurchaseGoodsReceipt
+          - Organization
+          - EnrichmentTransferResponse
+          - UserGroup
+          - UserGroupAssociatedUser
+          - UserGroupPermission
+          type: string
+      - name: ignoreSuccessfullItems
+        in: query
+        description: Allows filtering out succesful records within the response. Can be used to show only records with errors and records in progress.
+        schema:
+          type: boolean
+      - name: system
+        in: query
+        description: Allows limiting the responses to requests routed to a particular target system.
+        schema:
+          type: string
+      - name: pageSize
+        in: query
+        description: A limit for the number of items to be returned for one request. Limit can range between 1 and 500 items.
+        schema:
+          type: integer
+          format: int32
+          default: 500
+      - name: lastUpdated
+        in: query
+        description: Date Filter. Returns items that have been updated after specified date.
+        schema:
+          type: string
+          format: date-time
+      - name: x-amz-meta-continuationtoken
+        in: header
+        description: Used to get next page of results when item count indicated by 'pageSize' is exceeded. A token is returned in header (not body) parameter 'X-amz-meta-continuationToken' of the response whenever there are more records to fetch. Post the received value here in a new HEADER parameter on the next GET request to receive the next page of results. When getting the next page of results, you must include the same query parameters that were used when getting the first page.
+        schema:
+          type: string
+        example: 273705a0-c35a-4fda-8f98-450705ac5e96
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/RequestStatusResponse'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RequestStatusResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RequestStatusResponse'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+        '500':
+          description: Unexpected error
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+  /v1/requestStatus/acknowledge:
+    post:
+      tags:
+      - RequestStatus
+      summary: Acknowledged request status responses are no longer offered for next GET operation.
+      description: 'Acknowledging will status from ''Success'' or ''Error'' to indicate the request has already been acknowledged. Please see section "[Usage scenario 5: Error handling and monitoring](https://developer.basware.com/api/p2p/manual#usage5)" in Basware Purchase-to-Pay API manual for details on implementing error handling with Basware API.'
+      parameters:
+      - name: Content-Type
+        in: header
+        description: Specifies the media type of the resource. Value application/json is supported.
+        schema:
+          type: string
+        example: application/json
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/ProcessingStatusGetBatchRequest'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProcessingStatusGetBatchRequest'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/ProcessingStatusGetBatchRequest'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/ProcessingStatusGetBatchRequest'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                type: string
+            text/json:
+              schema:
+                type: string
+        '400':
+          description: Bad request
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found. Record to acknowledge not found.
+        '405':
+          description: Method Not allowed. This generally happens when trying to acknowledge an request status response that is already acknowledged.
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+        '500':
+          description: Unexpected error
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+components:
+  schemas:
+    BaswareSystem:
+      type: object
+      properties:
+        system:
+          type: string
+          description: Target system from which the response originates (P2P, network, etc).
+          nullable: true
+          example: P2P
+        module:
+          type: string
+          nullable: true
+          example: IA
+        systemStatus:
+          enum:
+          - InProgress
+          - Success
+          - Error
+          - AcknowledgedSuccess
+          - AcknowledgedError
+          type: string
+          description: "Status of processing the request in the target system (aggregated from statuses of individual records). \r\n* InProgress: Request is still being processed.  \r\n* Success: Request succesfully processed (no errors/warnings). \r\n* Error: There was one or more errors processing the request. \r\n* AcknowledgedSuccess: Request with 'Success' status after 'acknowledge' API operation. \r\n* AcknowledgedError: Request with 'Error' status after 'acknowledge' API operation."
+          example: Error
+        lastUpdated:
+          type: string
+          format: date-time
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProcessedItem'
+          description: Contains status for each invividual record posted in the original request.
+          nullable: true
+      additionalProperties: false
+    ProcessedItem:
+      type: object
+      properties:
+        externalCode:
+          type: string
+          description: ExternalCode of the processed record.
+          nullable: true
+          example: aedf21df912ebc89123687cgh181ea4
+        parentExternalCode:
+          type: string
+          description: ExternalCode of the parent record, if applicable. For example, for accounting document responses we will provide InvoiceID in this field.
+          nullable: true
+        status:
+          enum:
+          - InProgress
+          - NotProcessed
+          - Warning
+          - Success
+          - Error
+          - RecordExpired
+          - Unpublished
+          type: string
+          description: "Status of the processed record. \r\n* InProgress: Record is still being processed.  \r\n* NotProcessed: Record skipped due to no changes from previous version of the record. \r\n* Warning: Record saved with warning(s). Some data on the record may not be saved. Example: One or more user group(s) indicated on user record not found in P2P. User was saved, missing user groups were omitted. \r\n* Success: Record succesfully saved (no errors/warnings). \r\n* Error: Error processing the record. \r\n* RecordExpired: More recent version of the record has been posted to API. Skipped this version since only the more recent version will be saved. This usually requires the same record to have been updated two or more times within less than a second.\r\n* Unpublished: Record is in draft status ('published' = 'false') and is not distributed to any target system. This status is used only with organizations API (coming soon)."
+          example: Error
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProcessedItemErrorDetail'
+          nullable: true
+      additionalProperties: false
+    ProcessedItemErrorDetail:
+      type: object
+      properties:
+        type:
+          enum:
+          - Error
+          - Warning
+          - RecordExpired
+          type: string
+          description: "Mesage type.\r\n* Error: Error processing the record. \r\n* Warning: Record saved with warning(s). Some data on the record may not be saved. Example: One or more user group(s) indicated on user record not found in P2P. User was saved, missing user groups were omitted.\r\n* RecordExpired: More recent version of the record has been posted to API. Skipped this version since only the more recent version will be saved. This usually requires the same record to have been updated two or more times within less than a second."
+          example: Error
+        message:
+          type: string
+          description: Error message.
+          nullable: true
+          example: Record skipped due to wrong or missing CompanyCode
+        category:
+          enum:
+          - Unknown
+          - Technical
+          - DataValidation
+          type: string
+          description: "Error category.\r\n* DataValidation: Data validation error. Typically correctable by customr through correcting an error in the data payload sent by customer.\r\n* Technical: Technical error. These typically require an intervention from Basware. \r\n* Unknown: Error category not identified."
+          example: Data validation
+      additionalProperties: false
+    ErrorEntity:
+      type: object
+      properties:
+        externalCode:
+          type: string
+          description: External code of record on which error occurred (when available).
+          nullable: true
+          example: 4847-31231212-212121-1212
+        type:
+          enum:
+          - BUSINESS
+          - VALIDATION
+          - TECHNICAL
+          - SECURITY
+          type: string
+          description: Error type.
+          example: ''
+        code:
+          enum:
+          - EXTERNAL_CODE_MISMATCH
+          - SCHEMA_VALIDATION_ERROR
+          - CONFLICT_IN_POST
+          - DATA_ORIGIN_VALIDATION_ERROR
+          - ACCESS_TOKEN_VALIDATION_ERROR
+          - CREDENTIAL_VALIDATION_ERROR
+          - PARAMETER_VALIDATION_ERROR
+          - UNEXPECTED_ERROR
+          - METHOD_NOT_ALLOWED
+          - ENTITY_NOT_FOUND
+          - DATA_VALIDATION_FAILED
+          - SNS_PUBLISH_ERROR
+          - SQS_PUBLISH_ERROR
+          type: string
+          description: Error code.
+          example: ''
+        message:
+          type: string
+          description: Specific error message.
+          nullable: true
+          example: ''
+        info:
+          type: string
+          description: Information about type of the error.
+          nullable: true
+          example: ''
+      additionalProperties: false
+    RequestStatusResponse:
+      required:
+      - requestStatus
+      type: object
+      properties:
+        requestStatus:
+          type: array
+          items:
+            $ref: '#/components/schemas/ConsumerLogEventUserView'
+      additionalProperties: false
+    ConsumerLogEventUserView:
+      type: object
+      properties:
+        requestId:
+          type: string
+          description: The request id used to post in the data. This is returned in request header parameter 'x-amzn-RequestId', in response of the original request.
+          nullable: true
+          example: 06ca6901-f728-489b-a827-704f5048858c
+        entityType:
+          enum:
+          - Account
+          - Contract
+          - CostCenter
+          - TaxCode
+          - ExchangeRate
+          - PaymentTerm
+          - User
+          - Project
+          - MatchingOrder
+          - MatchingOrderLine
+          - GenericList
+          - AdvancedPermission
+          - TransferResponse
+          - PaymentResponse
+          - PrebookResponse
+          - Vendor
+          - AdvancedValidation
+          - PurchaseRequisition
+          - PurchaseOrder
+          - PurchaseGoodsReceipt
+          - Organization
+          - EnrichmentTransferResponse
+          - UserGroup
+          - UserGroupAssociatedUser
+          - UserGroupPermission
+          type: string
+          description: Entity type (API interface) of processed data.
+          example: Account
+        entityVersion:
+          type: string
+          description: Version of entity type (API interface).
+          nullable: true
+          example: AccountV1
+        requestStatus:
+          enum:
+          - InProgress
+          - Success
+          - Error
+          - AcknowledgedSuccess
+          - AcknowledgedError
+          type: string
+          description: "Status of processing the request (aggregated from statuses of each target system).\r\n* InProgress: Request is still being processed.  \r\n* Success: Request succesfully processed (no errors/warnings). \r\n* Error: There was one or more errors processing the request. \r\n* AcknowledgedSuccess: Request with 'Success' status after 'acknowledge' API operation. \r\n* AcknowledgedError: Request with 'Error' status after 'acknowledge' API operation."
+          example: Error
+        changedBy:
+          type: string
+          description: Username / name of the user who made change request
+          nullable: true
+          example: John Doe
+        operationType:
+          type: string
+          description: Type of API operation.
+          nullable: true
+          example: POST
+        genericListKey:
+          type: string
+          description: Generic List key against which changes have been made.
+          nullable: true
+          example: ACC_LIST_1
+        lastUpdated:
+          type: string
+          format: date-time
+        systems:
+          type: array
+          items:
+            $ref: '#/components/schemas/BaswareSystem'
+          description: Target system from which the response originates (P2P, network, etc).
+          nullable: true
+      additionalProperties: false
+    ResponseEntityList:
+      type: object
+      properties:
+        requestId:
+          type: string
+          description: ID of the request on which error occurred (generated by Basware API).
+          nullable: true
+          example: fbc082a2-65a4-469c-b230-d84a252f18fc
+        hasErrors:
+          type: boolean
+          description: Specifies whether the request has errors.
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorEntity'
+          nullable: true
+      additionalProperties: false
+      description: Errors returned here are returned synchronously from Basware API middle layer. Additional errors coming from target system(s) may be returned through errorFeedbacks API.
+    ProcessingStatusGetBatchRequest:
+      type: object
+      properties:
+        requestIds:
+          type: array
+          items:
+            type: string
+          description: List of requestIds to acknowledge. Several requests can be acknowledged in one operation.
+          nullable: true
+      additionalProperties: false
+  securitySchemes:
+    HTTPBasic:
+      type: http
+      scheme: basic

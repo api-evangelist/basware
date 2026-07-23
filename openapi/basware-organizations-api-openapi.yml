@@ -1,0 +1,553 @@
+openapi: 3.0.2
+info:
+  title: Basware OAUTH2 authentication APIs AccountingDocuments Organizations API
+  description: "**Using OAUTH2.0 authentication:**\n\nGet API access token from api.basware.com/tokens\n1. Using client id and client secret, which you can obtain from Basware. \n2. Specify which APIs can be accessed by using the token e.g. Read only access to vendors API only (these are called scopes). Available scopes are listed at <https://developer.basware.com/api/p2p/manual#AccessRights>. \n3. Each token has an expiration time, until which it can be used to call APIs.\n\nWhen using OAUTH2 authentication, you need to pass the OAUTH2 authentication token when calling Basware API endpoints. Available Basware API operations are documented at <https://api.basware.com/swagger>. \n\nSee the Basware API developer site at <https://developer.basware.com/api/p2p/manual#Authentication> for more details on API authentication."
+  version: 1.0.0
+  x-logo:
+    url: https://fastapi.tiangolo.com/img/logo-margin/logo-teal.png
+tags:
+- name: Organizations
+paths:
+  /v1/organizations:
+    post:
+      tags:
+      - Organizations
+      summary: Creates new organization element(s), fully overwrites previous record if exists. Available for pilot customers.
+      description: "Notes: \r\n 1. Organization element type 'Company' requires fields 'homeCurrency' and 'countryCode' to have values. \r\n 2. Organization element type 'Group' does not support adding organization identifiers."
+      parameters:
+      - name: Content-Type
+        in: header
+        description: Specifies the media type of the resource. Value application/json is supported.
+        schema:
+          type: string
+        example: application/json
+      requestBody:
+        description: ''
+        content:
+          application/json-patch+json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/OrganizationEntity'
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/OrganizationEntity'
+          text/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/OrganizationEntity'
+          application/*+json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/OrganizationEntity'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/OrganizationEntity'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/OrganizationEntity'
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/OrganizationEntity'
+        '400':
+          description: Bad request
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+        '403':
+          description: Forbidden
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+        '500':
+          description: Unexpected error
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+    get:
+      tags:
+      - Organizations
+      summary: Returns existing organization elements.
+      parameters:
+      - name: level
+        in: query
+        description: Sets how many levels of the organization to include. If no parentExternalCode is given, it starts from the top and goes down to the specified level.
+        schema:
+          type: string
+      - name: parentExternalCode
+        in: query
+        description: Returns child organizations linked to the specified parentExternalCode. When level is also provided, it includes all child organizations up to the given level.
+        schema:
+          type: string
+      - name: pageSize
+        in: query
+        description: A limit for the number of items to be returned for one request. Limit can range between 1 and 300 items.
+        schema:
+          type: integer
+          format: int32
+          default: 300
+      - name: lastUpdated
+        in: query
+        description: Date Filter. Returns items that have been updated after specified date. The lastUpdated filter is ignored when used together with level or parentExternalCode. Use it alone for the filter to apply.
+        schema:
+          type: string
+          format: date-time
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/OrganizationEntity'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/OrganizationEntity'
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/OrganizationEntity'
+        '400':
+          description: Bad request
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+        '403':
+          description: Forbidden
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+        '500':
+          description: Unexpected error
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+    delete:
+      tags:
+      - Organizations
+      summary: Can be used for removing existing organization elements in draft state (published = false).
+      description: "Notes: \r\n 1. Only unpublished, draft state organization elements can be removed (those having 'published' = 'false').\r\n 2. Removing an organization element will also remove it's child organization elements."
+      requestBody:
+        description: ''
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/DeleteOrganisationRequest'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteOrganisationRequest'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/DeleteOrganisationRequest'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/DeleteOrganisationRequest'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/DeleteOrganisationResponse'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteOrganisationResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/DeleteOrganisationResponse'
+        '202':
+          description: RequestAccepted
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/DeleteOrganisationResponse'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteOrganisationResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/DeleteOrganisationResponse'
+        '400':
+          description: BadRequest
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+        '401':
+          description: Unauthorized
+        '500':
+          description: Unexpected error
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+  /v1/organizations/{externalCode}:
+    get:
+      tags:
+      - Organizations
+      summary: Returns a single organization element by externalCode -identifier.
+      parameters:
+      - name: externalCode
+        in: path
+        description: ''
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OrganizationEntity'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationEntity'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationEntity'
+components:
+  schemas:
+    Identifiers:
+      required:
+      - description
+      - externalCode
+      - id
+      - schemeId
+      type: object
+      properties:
+        externalCode:
+          maxLength: 100
+          minLength: 1
+          type: string
+          description: External identifier for the Business identifier. Needs to be unique within business identifiers.
+          example: 4847-31231212-212121-1212
+        id:
+          maxLength: 100
+          minLength: 0
+          type: string
+          description: Specifies identifier value for the selected identifier type. The identifier type is determined by field 'schemeId'.
+          example: FI190101452
+        schemeId:
+          minLength: 1
+          type: string
+          description: "Specifies identifier type. The identifier value is determined by field 'id'. Available values:\r\n\"DUNS\", \"EMAIL-RFC2822\", \"GLN\", \"IBAN\", \"ISO6523-ACTORID-UPIS\", \"UNKNOWN\", \"FI:Y-TUNNUS\", \"FI:VAT\", \"FI:OVT\", \"SE:ORGNR\", \"SE:VAT\", \"GLN\", \"NO:ORGNR\", \"NO:VAT\", \"DK:CVR\", \"DK:P\", \"DK:DIGST\", \"GLN\", \"FR:SIRENE\", \"FR:SIRET\", \"FR:VAT\", \"GLN\", \"DE:ORGNR\", \"DE:HRN\", \"DE:VAT\", \"DE:LWID\", \"GLN\", \"BE:EN\", \"BE:VAT\", \"GLN\", \"NL:KVK\", \"NL:VAT\", \"IBAN\", \"IT:FISCALE\", \"IT:IPA\", \"IT:IVA\", \"PT:NIF\", \"ES:CIF\", \"ES:NIF\", \"PL:KRS\", \"PL:REGON\", \"PL:VAT\", \"EE:ORGNR\", \"EE:VAT\", \"IE:ORGNR\", \"IE:VAT\", \"GLN\", \"GB:ORGNR\", \"GB:VAT\", \"XI:VAT\", \"GB:UTR\", \"GLN\", \"AT:ORGNR\", \"AT:VAT\", \"AT:GOV\", \"AT:CID\", \"CH:ORGNR\", \"CH:VAT\", \"HU:VAT\", \"RO:VAT\", \"GR:VAT\", \"GR:GEMI\", \"LI:VAT\", \"LU:VAT\", \"LT:LEC\", \"LT:VAT\", \"LV:VAT\", \"CZ:ORGNR\", \"CZ:VAT\", \"IS:KTNR\", \"IS:VAT\", \"BG:VAT\", \"HR:VAT\", \"SK:ORGNR\", \"SK:VAT\", \"CY:VAT\", \"US:TIN\", \"CA:BN\", \"CA:GST\", \"MX:VAT\", \"IN:GSTIN\", \"CN:BRN\", \"MY:GST\", \"AU:ABN\", \"AU:ACN\", \"AU:TFN\", \"NZ:BN\""
+          example: FI:VAT
+        description:
+          maxLength: 500
+          minLength: 0
+          type: string
+          description: Describes the business identifier. Auto-filled by API based on identifier scheme id, but can be set manually for 'UNKNOWN' type identifiers to provide information what kind of identifier is used.
+          example: Finnish Value Added Tax identifier.
+        category:
+          enum:
+          - Legal
+          - NonLegal
+          type: string
+          description: Specifies identifier category. Legal identifiers can no longer be changed after the company is published.
+          nullable: true
+        inherited:
+          type: boolean
+          description: Specifies whether the identifier has been inherited from a parent company. Legal identifiers for Units are automatically inherited from parent Company.
+          example: false
+      additionalProperties: false
+      description: Identifiers
+    DeleteOrganisationResponse:
+      type: object
+      properties:
+        taskStatus:
+          enum:
+          - Success
+          - Failed
+          type: string
+        deletedRecordCount:
+          type: integer
+          format: int32
+          nullable: true
+        deletedRecordExternalCodes:
+          type: array
+          items:
+            type: string
+          nullable: true
+        message:
+          type: string
+          nullable: true
+      additionalProperties: false
+    OrganizationEntity:
+      required:
+      - countryCode
+      - externalCode
+      - homeCurrency
+      - organizationCode
+      - organizationName
+      - orgTreeLocation
+      - type
+      type: object
+      properties:
+        externalCode:
+          maxLength: 100
+          minLength: 1
+          pattern: ^[^;:=]*$
+          type: string
+          description: 'External identifier for the organization element. Used to identify right organization element when the organization element is updated. Needs to be unique within the API. Cannot contain characters : ; =.'
+          example: 4847-31231212-212121-1212
+        organizationCode:
+          maxLength: 25
+          minLength: 1
+          type: string
+          description: Organization code. Must be unique within the tenant. Value cannot be modified after publishing.
+          example: '200'
+        organizationName:
+          maxLength: 100
+          minLength: 1
+          type: string
+          description: Organization name.
+          example: Acme corporation
+        type:
+          enum:
+          - Company
+          - Group
+          - Unit
+          type: string
+          description: 'Specifies organization element type: ''Group'' is a collection point of other organization elements. ''Company'' is normally used to represent a legal company. ''OrganizationUnit'' is a general element which is usually representing business unit or cost center in system.'
+          example: Company
+        homeCurrency:
+          maxLength: 3
+          minLength: 3
+          type: string
+          description: Specifies home currency for the organization element. Mandatory when 'type' = 'Company'.
+          example: EUR
+        countryCode:
+          maxLength: 2
+          minLength: 0
+          type: string
+          description: Specifies home country for the organization element. Mandatory when 'type' = 'Company'. Value cannot be modified after publishing. Country code is specified in ISO 3166-1 alpha-2 format.
+          example: FI
+        published:
+          type: boolean
+          description: 'Determines whether the organization element is a draft (for previewing in Basware Admin) or whether it is published to be available in Basware systems. Organization elements can no longer be removed after publishing. True = published to all systems, False = Draft. Default value: false.'
+          example: true
+        activeFrom:
+          type: string
+          description: Specifies validity start date for the organization element.
+          format: date-time
+          nullable: true
+          example: '2022-01-01'
+        activeTo:
+          type: string
+          description: Specifies validity end date for the organization element.
+          format: date-time
+          nullable: true
+          example: '2026-12-12'
+        description:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: Available for additional information or a description regarding the company.
+          nullable: true
+          example: ''
+        sourceSystem:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: Specifies the source system from where the organization element is imported.
+          nullable: true
+          example: SAP_1
+        lastUpdated:
+          type: string
+          description: Timestamp when the record was last updated. This value is set automatically by API when a new/changed record is received.
+          format: date-time
+        orgTreeLocation:
+          $ref: '#/components/schemas/OrganizationTreeLocation'
+        businessIdentifiers:
+          type: array
+          items:
+            $ref: '#/components/schemas/Identifiers'
+          description: 'Company business identifiers. See "Usage scenario 6: Import companies on Basware API developer site for explanation of available identifier type values. Note: Identifiers are not allowed on ''group'' type organization elements.'
+          nullable: true
+      additionalProperties: false
+    OrganizationTreeLocation:
+      required:
+      - parentExternalCode
+      type: object
+      properties:
+        pathToRoot:
+          type: array
+          items:
+            type: string
+          description: Lists all parent externalCodes on the way to root organization element (set automatically by API).
+          nullable: true
+        parentExternalCode:
+          minLength: 1
+          type: string
+          description: 'External code of the parent company. Note: Parent company cannot be changed after the company is published (published = true).'
+          example: ROOT
+        parentCompanyCode:
+          type: string
+          description: Company code of the parent company. This value is set automatically by API.
+          nullable: true
+          example: ROOT
+        level:
+          type: integer
+          description: Specifies how many levels from root node the organization element resides from. This value is set automatically by API based on number of parents on the way to the root node.
+          format: int32
+          example: 1
+        childCount:
+          type: integer
+          description: Count of child organization elements (immediate children) of this organization element. This value is set automatically by API.
+          format: int32
+          example: 0
+        sortPosition:
+          type: integer
+          description: Specifies the sorting position for organization elements under the same parent element. Used for placement of the company within the organization tree in UI.
+          format: int32
+          example: 3
+      additionalProperties: false
+      description: Speficies the organization element's position within the organization tree.
+    DeleteOrganisationRequest:
+      type: object
+      properties:
+        externalCode:
+          type: string
+          nullable: true
+      additionalProperties: false
+    ErrorEntity:
+      type: object
+      properties:
+        externalCode:
+          type: string
+          description: External code of record on which error occurred (when available).
+          nullable: true
+          example: 4847-31231212-212121-1212
+        type:
+          enum:
+          - BUSINESS
+          - VALIDATION
+          - TECHNICAL
+          - SECURITY
+          type: string
+          description: Error type.
+          example: ''
+        code:
+          enum:
+          - EXTERNAL_CODE_MISMATCH
+          - SCHEMA_VALIDATION_ERROR
+          - CONFLICT_IN_POST
+          - DATA_ORIGIN_VALIDATION_ERROR
+          - ACCESS_TOKEN_VALIDATION_ERROR
+          - CREDENTIAL_VALIDATION_ERROR
+          - PARAMETER_VALIDATION_ERROR
+          - UNEXPECTED_ERROR
+          - METHOD_NOT_ALLOWED
+          - ENTITY_NOT_FOUND
+          - DATA_VALIDATION_FAILED
+          - SNS_PUBLISH_ERROR
+          - SQS_PUBLISH_ERROR
+          type: string
+          description: Error code.
+          example: ''
+        message:
+          type: string
+          description: Specific error message.
+          nullable: true
+          example: ''
+        info:
+          type: string
+          description: Information about type of the error.
+          nullable: true
+          example: ''
+      additionalProperties: false
+    ResponseEntityList:
+      type: object
+      properties:
+        requestId:
+          type: string
+          description: ID of the request on which error occurred (generated by Basware API).
+          nullable: true
+          example: fbc082a2-65a4-469c-b230-d84a252f18fc
+        hasErrors:
+          type: boolean
+          description: Specifies whether the request has errors.
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorEntity'
+          nullable: true
+      additionalProperties: false
+      description: Errors returned here are returned synchronously from Basware API middle layer. Additional errors coming from target system(s) may be returned through errorFeedbacks API.
+  securitySchemes:
+    HTTPBasic:
+      type: http
+      scheme: basic

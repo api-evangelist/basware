@@ -1,0 +1,1161 @@
+openapi: 3.0.2
+info:
+  title: Basware OAUTH2 authentication APIs AccountingDocuments Vendors API
+  description: "**Using OAUTH2.0 authentication:**\n\nGet API access token from api.basware.com/tokens\n1. Using client id and client secret, which you can obtain from Basware. \n2. Specify which APIs can be accessed by using the token e.g. Read only access to vendors API only (these are called scopes). Available scopes are listed at <https://developer.basware.com/api/p2p/manual#AccessRights>. \n3. Each token has an expiration time, until which it can be used to call APIs.\n\nWhen using OAUTH2 authentication, you need to pass the OAUTH2 authentication token when calling Basware API endpoints. Available Basware API operations are documented at <https://api.basware.com/swagger>. \n\nSee the Basware API developer site at <https://developer.basware.com/api/p2p/manual#Authentication> for more details on API authentication."
+  version: 1.0.0
+  x-logo:
+    url: https://fastapi.tiangolo.com/img/logo-margin/logo-teal.png
+tags:
+- name: Vendors
+paths:
+  /v1/vendors:
+    get:
+      tags:
+      - Vendors
+      summary: Returns vendors posted to Basware API.
+      description: ''
+      parameters:
+      - name: pageSize
+        in: query
+        description: A limit for the number of items to be returned for one request. Limit can range between 1 and 500 items.
+        schema:
+          type: integer
+          format: int32
+          default: 100
+      - name: companyCode
+        in: query
+        description: Company filter. Returns items for specific company.
+        schema:
+          type: string
+          default: ''
+      - name: lastUpdated
+        in: query
+        description: Date Filter. Returns items that have been updated after specified date.
+        schema:
+          type: string
+          format: date-time
+      - name: x-amz-meta-continuationtoken
+        in: header
+        description: Used to get next page of results when item count indicated by 'pageSize' is exceeded. A token is returned in header (not body) parameter 'X-amz-meta-continuationToken' of the response whenever there are more records to fetch. Post the received value here in a new HEADER parameter on the next GET request to receive the next page of results. When getting the next page of results, you must include the same query parameters that were used when getting the first page.
+        schema:
+          type: string
+        example: 3fb86dcb-654a-4bc3-866b-b82f9435f4cf
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/VendorResponse'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VendorResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/VendorResponse'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found. Request was successful and no records were found.
+        '500':
+          description: Unexpected error
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+    post:
+      tags:
+      - Vendors
+      summary: Creates new vendor(s), overwrites previous record if exists.
+      description: "Notes: \r\n1) Payment terms used by the vendor(s) need to exist in P2P. Payment terms can be imported through paymentTerms API or maintained manually in P2P.  \r\n2) Currencies used by the vendor(s) need to be active in P2P. Active currencies are maintained manually in P2P.  \r\n3) Vendors used with P2P Purchase need to have 'orderingFormat' value different from 'none'. 'OrderingFormat' field can be specified through vendors API (in orderingDetails -block), or it can be manually maintained in P2P. \r\n4) Posting vendors to Bsaware Portal requires company structure to be imported to portal. The company structure can also be backfilled to portal from P2P. \r\n5) Up to 200 vendor records can be sent in one POST vendors request.\r\n\r\nCheck out the [example JSONs using a minimal feasible set of fields](https://developer.basware.com/api/p2p/templates) from the developer site."
+      parameters:
+      - name: Content-Type
+        in: header
+        description: Specifies the media type of the resource. Value application/json is supported.
+        schema:
+          type: string
+        example: application/json
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/VendorEntity'
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/VendorEntity'
+          text/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/VendorEntity'
+          application/*+json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/VendorEntity'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/VendorEntity'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/VendorEntity'
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/VendorEntity'
+        '400':
+          description: Bad request
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+        '401':
+          description: Unauthorized
+        '409':
+          description: Conflict
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+        '500':
+          description: Unexpected error
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+    delete:
+      tags:
+      - Vendors
+      summary: Deletes data from Basware API. For manual one-time operations.
+      description: "For manual one-time operations only, such as a manual clean-up to remove test data generated during API integration development. Only removes records from API layer. \r\nDeletion in target systems needs to be done separately using the data deletion mechanisms available in each of the target system in addition to deleting the data in Basware API."
+      requestBody:
+        description: "Contains the body of the request.\r\n            Either externalCode or lastUpdated -field is required. If both values are provided, externalCode will have the priority."
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/DeleteRequest'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteRequest'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/DeleteRequest'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/DeleteRequest'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/DeleteResponse'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/DeleteResponse'
+        '202':
+          description: RequestAccepted
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/DeleteResponse'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/DeleteResponse'
+        '400':
+          description: BadRequest
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+        '401':
+          description: Unauthorized
+        '500':
+          description: Unexpected error
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+  /v1/vendors/{externalCode}:
+    get:
+      tags:
+      - Vendors
+      summary: Returns single vendor by externalCode -identifier.
+      description: ''
+      parameters:
+      - name: externalCode
+        in: path
+        description: The ExternalCode of the entity to be fetched
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/VendorEntity'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VendorEntity'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/VendorEntity'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found. Request was successful and no records were found.
+        '500':
+          description: Unexpected error
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+    patch:
+      tags:
+      - Vendors
+      summary: Updates fields on specified vendor. Preserves existing values in fields, which were not updated.
+      description: "Notes: \r\n1) Basware API considers 'null' value in field(s) equivalent to the field(s) not being sent. For this reason patch method does not support setting field values to 'null'.\r\n2) This PATCH operation is not suitable for updating existing contents of vendor sub-entities, such as for updating existing contact or address details. Please use the POST operation for this instead."
+      parameters:
+      - name: externalCode
+        in: path
+        description: The ExternalCode of the vendor to be updated
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: Entity to be updated
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/VendorEntity'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VendorEntity'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/VendorEntity'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/VendorEntity'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/VendorEntity'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VendorEntity'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/VendorEntity'
+        '400':
+          description: Bad request
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found. Record to update not found.
+        '500':
+          description: Unexpected error
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+components:
+  schemas:
+    DeleteRequest:
+      type: object
+      properties:
+        lastUpdated:
+          type: string
+          description: 'To delete records updated after specific time, use lastUpdated -field. This will delete all items that have been updated after the specified date. In response, user will get the taskStatus api link where the task status can be checked. Note: ''0001-01-01'' can be used to delete all records.'
+          format: date-time
+          nullable: true
+        externalCode:
+          maxLength: 36
+          minLength: 0
+          type: string
+          description: Single item can be deleted using externalCode and final status is returned immediately.
+          nullable: true
+      additionalProperties: false
+    DeleteResponse:
+      type: object
+      properties:
+        statusApiLink:
+          type: string
+          nullable: true
+        taskName:
+          type: string
+          nullable: true
+        taskStatus:
+          type: string
+          nullable: true
+      additionalProperties: false
+    FinancialInstitutionEntity:
+      required:
+      - id
+      - name
+      - schemeId
+      type: object
+      properties:
+        name:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: Specifies the vendor's bank name.
+          example: Nordea UK
+        id:
+          maxLength: 20
+          minLength: 1
+          type: string
+          description: Specifies the value for idenfitier type specified in 'schemeId'. Typically used for importing bank account BIC/SWIFT number.
+          example: NDEAGB2L
+        schemeId:
+          maxLength: 36
+          minLength: 1
+          type: string
+          description: Specifies the identifier type for field 'id'. Use 'BIC' for importing bank account BIC/SWIFT number in field 'id'.
+          example: BIC
+        branchId:
+          maxLength: 50
+          minLength: 0
+          type: string
+          description: 'BranchId. Note: Field is not used in P2P.'
+          nullable: true
+        branchIdSchemeId:
+          maxLength: 36
+          minLength: 0
+          type: string
+          description: 'BranchIdSchemeId. Note: Field is not used in P2P.'
+          nullable: true
+        countryId:
+          maxLength: 2
+          minLength: 2
+          type: string
+          description: 'Defines the country ID for the vendor. Please use 2-char ISO country codes (according to ISO-3166-1 -standard). Note: Field is not used in P2P.'
+          nullable: true
+          example: US
+      additionalProperties: false
+    VendorfinancialAccountsEntity:
+      type: object
+      properties:
+        financialInstitution:
+          $ref: '#/components/schemas/FinancialInstitutionEntity'
+        financialAccountIdentifiers:
+          type: array
+          items:
+            $ref: '#/components/schemas/FinancialAccountIdentifierEntity'
+          nullable: true
+      additionalProperties: false
+    VendorTagEntity:
+      required:
+      - name
+      - value
+      type: object
+      properties:
+        name:
+          maxLength: 50
+          minLength: 1
+          type: string
+          description: Name of the tag. Used as key in this array.
+        value:
+          maxLength: 250
+          minLength: 1
+          type: string
+        tagGroup:
+          maxLength: 50
+          minLength: 0
+          type: string
+          nullable: true
+      additionalProperties: false
+    VendorDeliveryTermEntity:
+      required:
+      - deliveryTermCode
+      type: object
+      properties:
+        deliveryTermCode:
+          maxLength: 25
+          minLength: 1
+          type: string
+          description: Specifies the vendor's delivery term code.
+          example: D02
+        deliveryLocation:
+          maxLength: 100
+          minLength: 0
+          type: string
+          description: Specifies delivery location to be used with delivery term selected on order sent to vendor from P2P Purchase.
+          nullable: true
+          example: Office
+        description:
+          maxLength: 200
+          minLength: 0
+          type: string
+          description: Default delivery term description.
+          nullable: true
+      additionalProperties: false
+    VendorAddressEntity:
+      required:
+      - externalCode
+      - name
+      type: object
+      properties:
+        externalCode:
+          maxLength: 36
+          minLength: 1
+          type: string
+          description: External code for vendor address.
+          example: d6437eef-0d71-4cb0-8a6e-7f114831479d
+        name:
+          maxLength: 200
+          minLength: 1
+          type: string
+          description: Specifies the address' name for the vendor.
+          example: Delivery address
+        description:
+          maxLength: 200
+          minLength: 0
+          type: string
+          description: Freetext description of the address.
+          nullable: true
+          example: Default delivery addrss
+        addressType:
+          enum:
+          - AdditionalAddress
+          - VisitingAddress
+          - RemittanceAddress
+          - DeliveryAddress
+          - PostalAddress
+          - RegistrationAddress
+          type: string
+          description: 'Specifies type of the address. Typically PostalAddress and DeliveryAddress are used with P2P. Types supported by P2P: PostalAddress, DeliveryAddress, AdditionalAddress, RemittanceAddress.'
+          nullable: true
+          example: DeliveryAddress
+        addressLine1:
+          maxLength: 200
+          minLength: 0
+          type: string
+          description: 'Vendor address as free text, line 1. Use by target systems - P2P: no, Vendor manager: yes.'
+          nullable: true
+          example: 1800 Main Street
+        addressLine2:
+          maxLength: 200
+          minLength: 0
+          type: string
+          description: 'Vendor address as free text, line 2. Use by target systems - P2P: no, Vendor manager: yes.'
+          nullable: true
+        addressLine3:
+          maxLength: 200
+          minLength: 0
+          type: string
+          description: 'Vendor address as free text, line 3. Use by target systems - P2P: no, Vendor manager: yes.'
+          nullable: true
+        cityName:
+          maxLength: 50
+          minLength: 0
+          type: string
+          nullable: true
+          example: Dallas
+        postalZone:
+          maxLength: 50
+          minLength: 0
+          type: string
+          nullable: true
+          example: '75201'
+        poBox:
+          maxLength: 50
+          minLength: 0
+          type: string
+          nullable: true
+          example: '724'
+        streetName:
+          maxLength: 50
+          minLength: 0
+          type: string
+          nullable: true
+          example: Burlington Avenue
+        locality:
+          maxLength: 50
+          minLength: 0
+          type: string
+          description: Attribute to postalAddress. This field is required in UK if a similar road name exists within a post town area.
+          nullable: true
+          example: Burlington
+        countrySubEntity:
+          maxLength: 50
+          minLength: 0
+          type: string
+          nullable: true
+          example: TX
+        countrySubEntityDescription:
+          maxLength: 50
+          minLength: 0
+          type: string
+          nullable: true
+          example: Texas
+        countryId:
+          maxLength: 2
+          minLength: 2
+          type: string
+          description: 'Defines the country ID for the account. Please use 2-char ISO country codes (according to ISO-3166-1 -standard). Note: This field is not used in P2P.'
+          nullable: true
+          example: US
+        default:
+          type: boolean
+          description: Is this the default address (true / false).
+          nullable: true
+        additionalAddressFields:
+          type: array
+          items:
+            $ref: '#/components/schemas/VendorAddressPartEntity'
+          description: 'Additional address fields. Use by target systems - P2P: yes, Vendor manager: no.'
+          nullable: true
+      additionalProperties: false
+    VendorAdditionalFieldEntity:
+      required:
+      - name
+      - value
+      type: object
+      properties:
+        name:
+          maxLength: 25
+          minLength: 1
+          type: string
+          description: Name of Supplier additional data key field.
+          example: TaxRegistrationValidUntil
+        value:
+          maxLength: 250
+          minLength: 1
+          type: string
+          description: Value for key field specified above.
+          example: 2021-06-30"
+        groupName:
+          maxLength: 500
+          minLength: 0
+          type: string
+          description: Group name. Not used in P2P.
+          nullable: true
+      additionalProperties: false
+    VendorContactEntity:
+      required:
+      - name
+      type: object
+      properties:
+        name:
+          maxLength: 200
+          minLength: 1
+          type: string
+          description: 'Name of the contact. Used as a key in list of contacts. Note: Max length 50 chars if vendors are imported to ScanMarket.'
+          example: DeliveryContact1
+        description:
+          maxLength: 200
+          minLength: 0
+          type: string
+          nullable: true
+          example: Use this as a primary contact
+        telephone:
+          maxLength: 50
+          minLength: 0
+          type: string
+          description: Specifies the vendor's telephone number.
+          nullable: true
+          example: 555-3342-454
+        telefax:
+          maxLength: 50
+          minLength: 0
+          type: string
+          description: Specifies the vendor's fax number.
+          nullable: true
+          example: 555-3342-45412
+        email:
+          maxLength: 200
+          minLength: 0
+          type: string
+          description: Specifies the vendor's email address. Field is imported to P2P.
+          nullable: true
+          example: contact@vendor.com
+        website:
+          maxLength: 200
+          minLength: 0
+          type: string
+          description: Specifies the vendor's web site address.
+          nullable: true
+          example: www.mrSmith.com
+        role:
+          enum:
+          - AdditionalContact
+          - PrimaryContact
+          - SecondaryContact
+          type: string
+      additionalProperties: false
+    VendorResponse:
+      required:
+      - vendorEntities
+      type: object
+      properties:
+        vendorEntities:
+          type: array
+          items:
+            $ref: '#/components/schemas/VendorEntity'
+      additionalProperties: false
+    VendorPaymentMeanEntity:
+      required:
+      - paymentMeansCode
+      type: object
+      properties:
+        paymentMeansCode:
+          maxLength: 25
+          minLength: 1
+          type: string
+          description: Specifies the payment means code.
+          example: A001
+        description:
+          maxLength: 200
+          minLength: 0
+          type: string
+          description: Specifies payment means description.
+          nullable: true
+          example: Payment by a pre-printed form (check).
+        currencyCode:
+          maxLength: 3
+          minLength: 3
+          type: string
+          description: 'Specifies vendor default currency. This is used as vendor''s default currency in P2P. Notes: 1) currencyCode of the payment means -block where default = ''true'' is selected as the vendor''s default currency in P2P. 2) This currency needs to be marked as ''active'' in P2P.'
+          nullable: true
+          example: USD
+        financialAccounts:
+          type: array
+          items:
+            $ref: '#/components/schemas/VendorfinancialAccountsEntity'
+          nullable: true
+        default:
+          type: boolean
+          description: Is this the default payment means (true / false).
+          nullable: true
+      additionalProperties: false
+    VendorProcessingStatusEntity:
+      type: object
+      properties:
+        active:
+          type: boolean
+          description: 'Is the vendor active : true / false.'
+          nullable: true
+        paymentDenied:
+          type: boolean
+          description: 'Is payment block is enabled for the vendor: true / false.'
+          nullable: true
+          example: false
+      additionalProperties: false
+    FinancialAccountIdentifierEntity:
+      required:
+      - schemeId
+      type: object
+      properties:
+        schemeId:
+          maxLength: 36
+          minLength: 1
+          type: string
+          description: 'Account type: BBAN / IBAN.'
+          example: IBAN
+        description:
+          maxLength: 200
+          minLength: 0
+          type: string
+          description: 'Description. Note: Field is not used in P2P.'
+          nullable: true
+          example: UK only
+        id:
+          maxLength: 50
+          minLength: 0
+          type: string
+          description: 'The account number. Note: Max 32 chars when used with P2P.'
+          nullable: true
+          example: GB29 NWBK 6016 1331 9268 19
+        accountHolderName:
+          maxLength: 200
+          minLength: 0
+          type: string
+          description: 'Account holder name. Note: Field is not used in P2P.'
+          nullable: true
+          example: United Parcels UK
+        currencyCode:
+          maxLength: 3
+          minLength: 3
+          type: string
+          description: 'Currency code of the account. Note: Field is not used in P2P. To import the supplier specific currency code to P2P, use the ''currencyCode'' field in ''paymentMeans'' -block.'
+          nullable: true
+          example: GBP
+        accountAdditionalData1:
+          maxLength: 200
+          minLength: 0
+          type: string
+          description: Account additional data field 1.
+          nullable: true
+          example: FRS123
+        accountAdditionalData2:
+          maxLength: 200
+          minLength: 0
+          type: string
+          description: Account additional data field 2.
+          nullable: true
+          example: 971298-1212
+        default:
+          type: boolean
+          description: Is this the default account (true / false).
+          nullable: true
+        linkedBbanOrIban:
+          maxLength: 50
+          minLength: 0
+          type: string
+          description: "Allows linking BBAN and IBAN together when both represent the same bank account.\r\nAccounts are linked when the value of linkedBbanOrlban' on account A is the same as the value of 'id' on account B (and also the other way around).\r\nAlso, the schemeld values need to be 'IBAN' and 'BBAN' and values of fields 'currencyCode', 'accountAdditionalDatal', 'accountAdditionalData2', 'default' need to be same on both accounts.\r\nAccount linking is supported only by P2P."
+          nullable: true
+          example: ''
+      additionalProperties: false
+    VendorCompanyEntity:
+      required:
+      - companyCode
+      type: object
+      properties:
+        companyCode:
+          maxLength: 32
+          minLength: 1
+          type: string
+          description: Specifies the organization that the vendor is mapped to.
+          example: BW00
+        inheritToChildUnits:
+          type: boolean
+          description: Specifies whether the vendor is inherited to lower organizations.
+          nullable: true
+      additionalProperties: false
+    VendorPaymentTermEntity:
+      required:
+      - paymentTermCode
+      type: object
+      properties:
+        paymentTermCode:
+          maxLength: 25
+          minLength: 1
+          type: string
+          description: Specifies the vendor's payment term code
+          example: Net90
+        description:
+          maxLength: 200
+          minLength: 0
+          type: string
+          nullable: true
+          example: Payment 90 days after invoice date
+      additionalProperties: false
+    VendorAddressPartEntity:
+      type: object
+      properties:
+        key:
+          enum:
+          - AdditionalField1
+          - AdditionalField2
+          - AdditionalStreetName
+          - BlockName
+          - BuildingName
+          - BuildingNumber
+          - CitySubDivisionName
+          - Country
+          - Department
+          - District
+          - Email
+          - Floor
+          - GlobalLocationNumber
+          - InhouseEmail
+          - MarkAttention
+          - MarkCare
+          - Region
+          - Room
+          - CoordinateSystemCode
+          - PlotIdentification
+          - LatitudeDegreesMeasure
+          - LatitudeDirectionCode
+          - LatitudeMinutesMeasure
+          - LongitudeDegreesMeasure
+          - LongitudeDirectionCode
+          - LongitudeMinutesMeasure
+          type: string
+        value:
+          maxLength: 200
+          minLength: 0
+          type: string
+          nullable: true
+      additionalProperties: false
+    VendorIdentifierEntity:
+      required:
+      - id
+      - schemeId
+      type: object
+      properties:
+        id:
+          maxLength: 36
+          minLength: 1
+          type: string
+          description: Value of the identifier type specified by 'schemeId'.
+          example: 0592542-4
+        schemeId:
+          maxLength: 32
+          minLength: 1
+          type: string
+          description: Specifies identifier type. Typically used for eInvoicing address, VAT ID, local registry id, DUNS, GLN, etc. Configure available values in P2P. Available values are the supplier identifier keys configured in P2P "identifier configuration". For example 'PartyId' is commonly used for supplier's eInvoicing address.
+          example: PartyId
+        defaultPartyId:
+          type: boolean
+          description: 'Is this the default identifier: true / false.'
+          nullable: true
+      additionalProperties: false
+    ResponseEntityList:
+      type: object
+      properties:
+        requestId:
+          type: string
+          description: ID of the request on which error occurred (generated by Basware API).
+          nullable: true
+          example: fbc082a2-65a4-469c-b230-d84a252f18fc
+        hasErrors:
+          type: boolean
+          description: Specifies whether the request has errors.
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorEntity'
+          nullable: true
+      additionalProperties: false
+      description: Errors returned here are returned synchronously from Basware API middle layer. Additional errors coming from target system(s) may be returned through errorFeedbacks API.
+    VendorEntity:
+      required:
+      - companies
+      - externalCode
+      - name
+      - vendorCode
+      type: object
+      properties:
+        externalCode:
+          maxLength: 36
+          minLength: 1
+          type: string
+          description: Specifies a unique code to identify vendor for updates through Basware API.
+          example: c6437eef-0d71-4cb0-8a6e-7f114831478d
+        vendorCode:
+          maxLength: 25
+          minLength: 1
+          type: string
+          description: Vendor code. Normally the vendor code used by Customer ERP system.
+          example: '81264'
+        vendorParent:
+          type: string
+          description: VendorCode of parent. Not used in Basware P2P.
+          nullable: true
+          example: AS12154
+        buvid:
+          maxLength: 36
+          minLength: 0
+          type: string
+          description: Vendor identifier generated by Basware. Not to be included when posting data.
+          nullable: true
+          example: f0b29a62-a5e0-4285-8ceb-11a92eccf212
+        name:
+          maxLength: 250
+          minLength: 1
+          type: string
+          description: Vendor name.
+          example: Things and Gadgets Inc.
+        sourceSystem:
+          maxLength: 36
+          minLength: 0
+          type: string
+          description: Name of the source system, e.g. ERP instance
+          nullable: true
+          example: SAPEUR1
+        description:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: Freetext description of vendor
+          nullable: true
+          example: ''
+        lastUpdated:
+          type: string
+          description: Timestamp when the record was last sent to API. Set automatically.
+          format: date-time
+        supplierAssignedAccountId:
+          maxLength: 128
+          minLength: 0
+          type: string
+          description: Customer ID in vendor's system.
+          nullable: true
+          example: '12890'
+        eligibleForSourcing:
+          type: boolean
+          description: 'Specifies whether the vendor is eligible for sourcing activities. This flag can be used to mark vendors that need to be copied to an external sourcing system. Note: If your sourcing system does not support a multiple company -structure, please make sure only one company-specific instance of the each vendor has eligibleForSourcing = ''true''.'
+          nullable: true
+          example: false
+        vendorClass:
+          maxLength: 100
+          minLength: 0
+          type: string
+          description: 'Specifies vendor class. Can be used to determine preferred vendors in P2P Purchase. Values are determined by customer. Typical example values: A, B, C, Preferred. Note: Allowed values for vendor class need to be configured in P2P before posting data.'
+          nullable: true
+          example: Preferred
+        identifiers:
+          type: array
+          items:
+            $ref: '#/components/schemas/VendorIdentifierEntity'
+          description: Vendor identifiers
+          nullable: true
+        addresses:
+          type: array
+          items:
+            $ref: '#/components/schemas/VendorAddressEntity'
+          description: Vendor addresses
+          nullable: true
+        contacts:
+          type: array
+          items:
+            $ref: '#/components/schemas/VendorContactEntity'
+          description: Vendor contacts. Used in Vendor Manager. Not used in Basware P2P, except for email address -field.
+          nullable: true
+        deliveryTerm:
+          $ref: '#/components/schemas/VendorDeliveryTermEntity'
+        paymentMeans:
+          type: array
+          items:
+            $ref: '#/components/schemas/VendorPaymentMeanEntity'
+          description: Vendor payment means
+          nullable: true
+        paymentTerms:
+          $ref: '#/components/schemas/VendorPaymentTermEntity'
+        orderingDetails:
+          $ref: '#/components/schemas/VendorOrderingDetailsEntity'
+        processingStatus:
+          $ref: '#/components/schemas/VendorProcessingStatusEntity'
+        tags:
+          type: array
+          items:
+            $ref: '#/components/schemas/VendorTagEntity'
+          description: Tags are used to group the vendors. Not used in P2P.
+          nullable: true
+        customFields:
+          type: array
+          items:
+            $ref: '#/components/schemas/VendorAdditionalFieldEntity'
+          description: Custom fields are used to provide additional data. Posted as ‘Supplier additional data’ -fields to P2P.
+          nullable: true
+        companies:
+          type: array
+          items:
+            $ref: '#/components/schemas/VendorCompanyEntity'
+          description: List of company units to associate vendor to P2P organization hierarchy
+      additionalProperties: false
+    ErrorEntity:
+      type: object
+      properties:
+        externalCode:
+          type: string
+          description: External code of record on which error occurred (when available).
+          nullable: true
+          example: 4847-31231212-212121-1212
+        type:
+          enum:
+          - BUSINESS
+          - VALIDATION
+          - TECHNICAL
+          - SECURITY
+          type: string
+          description: Error type.
+          example: ''
+        code:
+          enum:
+          - EXTERNAL_CODE_MISMATCH
+          - SCHEMA_VALIDATION_ERROR
+          - CONFLICT_IN_POST
+          - DATA_ORIGIN_VALIDATION_ERROR
+          - ACCESS_TOKEN_VALIDATION_ERROR
+          - CREDENTIAL_VALIDATION_ERROR
+          - PARAMETER_VALIDATION_ERROR
+          - UNEXPECTED_ERROR
+          - METHOD_NOT_ALLOWED
+          - ENTITY_NOT_FOUND
+          - DATA_VALIDATION_FAILED
+          - SNS_PUBLISH_ERROR
+          - SQS_PUBLISH_ERROR
+          type: string
+          description: Error code.
+          example: ''
+        message:
+          type: string
+          description: Specific error message.
+          nullable: true
+          example: ''
+        info:
+          type: string
+          description: Information about type of the error.
+          nullable: true
+          example: ''
+      additionalProperties: false
+    VendorOrderingDetailsEntity:
+      type: object
+      properties:
+        orderingFormat:
+          enum:
+          - UBL
+          - EHFXML21
+          - email
+          - other
+          - none
+          - BaswareNetwork
+          type: string
+          description: "Specifies format in which orders are sent to vendor (from P2P Purchase).\r\n'UBL' = Deprecated value, will be converted to 'BaswareNetwork'.\r\n'EHFXML21' = Deprecated value, will be converted to 'BaswareNetwork'.\r\n'email' = Deliver purchase orders by email as PDF attachments or SmartOrders.\r\n'other' = Deprecated value, will be converted to 'none'.\r\n'none' = Vendor not available for purchasing process.\r\n'BaswareNetwork' = Deliver purchase orders in XML UBL2.0 format to Basware Network. \r\n\r\nNote: Since all ERP systems do not have a field for this information, P2P can be configured so that this field is maintained in P2P instead of being imported through API."
+          nullable: true
+          example: none
+        orderingMessageLanguage:
+          maxLength: 10
+          minLength: 0
+          type: string
+          description: Specifies language of order -message sent to vendor from P2P Purchase.
+          nullable: true
+          example: en-US
+        orderingLanguage:
+          maxLength: 25
+          minLength: 0
+          type: string
+          description: Specifies region-specific texts, including number- and date formats used in the order -message sent to supplier from P2P Purchase.
+          nullable: true
+          example: en-US
+        orderEmail:
+          maxLength: 320
+          minLength: 3
+          pattern: ^(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*)@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])$
+          type: string
+          description: 'Specifies the supplier''s email address where the purchase order is sent to. Note: Since all ERP systems do not have a field for this information, P2P can be configured so that this field is maintained in P2P instead of being imported through API.'
+          nullable: true
+          example: orders@vendor.com
+        orderProcessType:
+          maxLength: 50
+          minLength: 0
+          type: string
+          description: Name of order process. Not used in Basware P2P.
+          nullable: true
+        minimumOrderAllowed:
+          type: number
+          description: Value of the minimum order allowed. Not used in Basware P2P.
+          format: double
+          nullable: true
+        isTaxable:
+          type: boolean
+          description: Are purchases from this vendor taxable. Not used in Basware P2P.
+          nullable: true
+        automaticallyReceiveOnInvoice:
+          type: boolean
+          description: Not used in Basware P2P.
+          nullable: true
+        automaticallyReceiveOnOrder:
+          type: boolean
+          description: Not used in Basware P2P.
+          nullable: true
+        hasActiveCatalog:
+          type: boolean
+          description: Not used in Basware P2P.
+          nullable: true
+        createOrderAutomatically:
+          type: boolean
+          description: Not used in Basware P2P.
+          nullable: true
+        deliverOrderAutomatically:
+          type: boolean
+          description: Not used in Basware P2P.
+          nullable: true
+        noFreeformItems:
+          type: boolean
+          description: Not used in Basware P2P.
+          nullable: true
+        sendToNetwork:
+          type: boolean
+          description: Not used in Basware P2P.
+          nullable: true
+      additionalProperties: false
+  securitySchemes:
+    HTTPBasic:
+      type: http
+      scheme: basic

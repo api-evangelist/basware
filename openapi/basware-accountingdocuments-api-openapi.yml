@@ -1,0 +1,3568 @@
+openapi: 3.0.2
+info:
+  title: Basware OAUTH2 authentication APIs AccountingDocuments API
+  description: "**Using OAUTH2.0 authentication:**\n\nGet API access token from api.basware.com/tokens\n1. Using client id and client secret, which you can obtain from Basware. \n2. Specify which APIs can be accessed by using the token e.g. Read only access to vendors API only (these are called scopes). Available scopes are listed at <https://developer.basware.com/api/p2p/manual#AccessRights>. \n3. Each token has an expiration time, until which it can be used to call APIs.\n\nWhen using OAUTH2 authentication, you need to pass the OAUTH2 authentication token when calling Basware API endpoints. Available Basware API operations are documented at <https://api.basware.com/swagger>. \n\nSee the Basware API developer site at <https://developer.basware.com/api/p2p/manual#Authentication> for more details on API authentication."
+  version: 1.0.0
+  x-logo:
+    url: https://fastapi.tiangolo.com/img/logo-margin/logo-teal.png
+tags:
+- name: AccountingDocuments
+paths:
+  /v1/accountingDocuments:
+    get:
+      tags:
+      - AccountingDocuments
+      summary: Returns invoices approved for transfer to accounting.
+      description: "Notes: \r\n1) This API supports sending webhook based  [push notifications](https://developer.basware.com/api/p2p/manual#PushNotifications) when new data is available to be exported. \r\n2) This GET operation returns a HTTP redirect, which the API client needs to follow. \r\nPlease see section \"[Usage scenario 3: Prebook and transfer invoice to Accounting](https://developer.basware.com/api/p2p/manual#usage3)\" of Basware Purchase-to-Pay API manual for details on implementing invoice transfer process with Basware API."
+      parameters:
+      - name: ProcessingStatus
+        in: query
+        description: "Document status filter. Returns items by accounting document status.\r\n            \n To get new invoices waiting for transfer, use filter 'WaitingForTransfer'. See [diagram on developer site](https://developer.basware.com/api/p2p/manual#ProcessingStatusDiagram) for details on available status transitions.\r\n            \n⚠️ Important: Enrichment-related statuses (e.g. 'WaitingForEnrichmentTransfer', 'EnrichmentTransferInProgress', 'EnrichmentTransferred', 'EnrichmentTransferFailed') are only applicable when 'p2pProcessingMode=InvoiceEnrichment' is used.\r\n            \nIf these statuses are used without setting 'p2pProcessingMode=InvoiceEnrichment', no results will be returned.\n"
+        schema:
+          enum:
+          - WaitingForPrebook
+          - PrebookInProgress
+          - Prebooked
+          - PrebookFailed
+          - WaitingForTransfer
+          - TransferInProgress
+          - Transferred
+          - TransferFailed
+          - WaitingForPrebookCancelation
+          - PrebookCancelationInProgress
+          - PrebookCanceled
+          - PrebookCancelFailed
+          - WaitingToBeRemoved
+          - Removed
+          - RemoveFailed
+          - WaitingToBeReturned
+          - Returned
+          - ReturnFailed
+          - WaitingToBeCompleted
+          - CompletionInProgress
+          - Completed
+          - CompletionFailed
+          - Paid
+          - New
+          - WaitingForEnrichmentTransfer
+          - EnrichmentTransferInProgress
+          - EnrichmentTransferred
+          - EnrichmentTransferFailed
+          - InDocumentFilter
+          - DocumentFilterReleased
+          type: string
+      - name: pageSize
+        in: query
+        description: A limit for the number of items to be returned for one request. Limit can range between 1 and 100 items. For invoices with large numbers of coding rows, number of invoices returned will be less in order to limit response message size.
+        schema:
+          type: integer
+          format: int32
+          default: 100
+      - name: companyCode
+        in: query
+        description: Company filter. Returns items for specific company.
+        schema:
+          type: string
+          default: ''
+      - name: lastUpdated
+        in: query
+        description: Date filter. Returns items that have been updated after specified date.
+        schema:
+          type: string
+          format: date-time
+      - name: p2pProcessingMode
+        in: query
+        description: "Defines the P2P flow type for which invoices are being returned. 'Standard' refers to the standard P2P flow where transferred invoices are already approved for payment. 'InvoiceEnrichment' refers to using P2P to only validate and enrich invoice contents - in this case the approval for payment is expected to be done in another system. Default: Standard. Both types of documents are not returned in the same request.\r\n            \n⚠️ Note: To retrieve documents in enrichment-related ProcessingStatus values, this parameter must be set to 'InvoiceEnrichment'.\n"
+        schema:
+          enum:
+          - Standard
+          - InvoiceEnrichment
+          type: string
+          default: Standard
+      - name: x-amz-meta-continuationtoken
+        in: header
+        description: Used to get next page of results when item count indicated by 'pageSize' is exceeded. A token is returned in header (not body) parameter 'X-amz-meta-continuationToken' of the response whenever there are more records to fetch. Post the received value here in a new HEADER parameter on the next GET request to receive the next page of results. When getting the next page of results, you must include the same query parameters that were used when getting the first page.
+        schema:
+          type: string
+        example: e799fdb7-222c-4e0f-af2f-881f4beae654
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/AccountingDocumentResponse'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountingDocumentResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/AccountingDocumentResponse'
+        '302':
+          description: Redirect
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found. Request was successful and no records were found.
+        '500':
+          description: Unexpected error
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+    delete:
+      tags:
+      - AccountingDocuments
+      summary: Deletes data from Basware API. For manual one-time operations.
+      description: "For manual one-time operations only, such as a manual clean-up to remove test data generated during API integration development. Only removes records from API layer. \r\nDeletion in target systems needs to be done separately using the data deletion mechanisms available in each of the target system in addition to deleting the data in Basware API."
+      requestBody:
+        description: "Contains the body of the request.\r\n            Either externalCode or lastUpdated -field is required. If both values are provided, externalCode will have the priority."
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/DeleteRequest'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteRequest'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/DeleteRequest'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/DeleteRequest'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/DeleteResponse'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/DeleteResponse'
+        '202':
+          description: RequestAccepted
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/DeleteResponse'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/DeleteResponse'
+        '400':
+          description: BadRequest
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+        '401':
+          description: Unauthorized
+        '500':
+          description: Unexpected error
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+  /v1/accountingDocuments/{invoiceId}:
+    get:
+      tags:
+      - AccountingDocuments
+      summary: Returns single approved invoice by invoiceId -identifier.
+      description: "Note: This GET operation returns a HTTP redirect, which the API client needs to follow. \r\n* 'Authorization' header must not be included in the redirected request (the second request after receiving a redirect). \r\n* 'Host' header needs to be included.\r\n\r\nPlease see section \"[Usage scenario 3: Prebook and transfer invoice to Accounting](https://developer.basware.com/api/p2p/manual#usage3)\" of Basware Purchase-to-Pay API manual for details on implementing invoice transfer process with Basware API."
+      parameters:
+      - name: invoiceId
+        in: path
+        description: The Invoice Id of the entity to be fetched
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/AccountingDocumentResponse'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountingDocumentResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/AccountingDocumentResponse'
+        '302':
+          description: Redirect
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found. Request was successful and no records were found.
+        '500':
+          description: Unexpected error
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+  /v1/accountingDocuments/{invoiceId}/acknowledge:
+    post:
+      tags:
+      - AccountingDocuments
+      summary: Acknowledged invoices are no longer offered for next GET operation. Done right after GET, before transferResponse.
+      description: "Notes: \r\n1) Updates 'processingStatus' -field on the invoice to allow filtering out the invoice on the next GET operation. \r\n2) For an invoice which is already acknowledged (processingStatus: 'TransferInProgress' or 'PrebookInProgress'), API will return 405 'Method not allowed' if acknowledge is attempted again on the invoice.\r\n      \r\nPlease see section \"[Usage scenario 3: Prebook and transfer invoice to Accounting](https://developer.basware.com/api/p2p/manual#usage3)\" of Basware Purchase-to-Pay API manual for details on implementing invoice transfer process with Basware API."
+      parameters:
+      - name: invoiceId
+        in: path
+        description: Invoice Id of the accountingDocument to be acknowledged.
+        required: true
+        schema:
+          type: string
+      - name: Content-Type
+        in: header
+        description: Specifies the media type of the resource. Value application/json is supported.
+        schema:
+          type: string
+        example: application/json
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                type: string
+            text/json:
+              schema:
+                type: string
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found. Record to acknowledge not found.
+        '405':
+          description: Method Not allowed. This generally happens when trying to acknowledge an accountingDocument that is already acknowledged.
+        '500':
+          description: Unexpected error
+  /v1/accountingDocuments/{invoiceId}/enrichmentResponses:
+    post:
+      tags:
+      - AccountingDocuments
+      summary: Marks invoice transfer P2P as accepted / rejected by receiving system. Used with invoices having 'p2pProcessingMode' = 'InvoiceEnrichment' which are not approved for payment.
+      description: "Notes: \r\n1) Enrichment responses for already enrichment transferred invoices are not allowed.\r\n2) Please do not send acknowledge and enrichmentResponse for at the same time for the same invoice. If acknowledge is used, please wait for acknowledge to complete before sending the enrichmentResponse.\r\n3) Only latest 100 responses will be saved per invoice.\r\n\r\nPlease see section \"[Usage scenario 3: Prebook and transfer invoice to Accounting](https://developer.basware.com/api/p2p/manual#usage3)\" of Basware Purchase-to-Pay API manual for details on implementing invoice transfer process with Basware API."
+      parameters:
+      - name: invoiceId
+        in: path
+        description: Invoice Id of the accountingDocument to be updated
+        required: true
+        schema:
+          type: string
+      - name: Content-Type
+        in: header
+        description: Specifies the media type of the resource. Value application/json is supported.
+        schema:
+          type: string
+        example: application/json
+      requestBody:
+        description: Transfer response to be added to accountingDocument
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/EnrichmentResponseEntity'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EnrichmentResponseEntity'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/EnrichmentResponseEntity'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/EnrichmentResponseEntity'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/EnrichmentResponseEntity'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EnrichmentResponseEntity'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/EnrichmentResponseEntity'
+        '400':
+          description: Bad request
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found. Record to update not found.
+        '500':
+          description: Unexpected error
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+  /v1/accountingDocuments/{invoiceId}/prebookResponses:
+    post:
+      tags:
+      - AccountingDocuments
+      summary: Marks invoice prebooking as accepted / rejected by receiving system.
+      description: "Notes: \r\n1. Prebook responses for already prebooked invoices (where processingStatus = 'Prebooked') are not allowed.\r\n2. Saving voucher numbers and payment block -information to the invoice in P2P requires a succesful prebook response from ERP ('success' = 'true'). The responseMessage gets saved also when success = false.\r\n3. Please do not send acknowledge and prebookResponse at the same time for the same invoice. If acknowledge is used, please wait for acknowledge to complete before sending the transferResponse.\r\n4. Prebook failed -invoices (success = false) are processed manually in P2P.\r\n5. Only latest 100 responses will be saved per invoice.\r\n\r\nPlease see section \"[Usage scenario 3: Prebook and transfer invoice to Accounting](https://developer.basware.com/api/p2p/manual#usage3)\" of Basware Purchase-to-Pay API manual for details on implementing invoice transfer process with Basware API."
+      parameters:
+      - name: invoiceId
+        in: path
+        description: Invoice Id of the accountingDocument to be updated
+        required: true
+        schema:
+          type: string
+      - name: Content-Type
+        in: header
+        description: Specifies the media type of the resource. Value application/json is supported.
+        schema:
+          type: string
+        example: application/json
+      requestBody:
+        description: Prebook responses to be added to accountingDocument
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/PrebookResponseEntity'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PrebookResponseEntity'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/PrebookResponseEntity'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/PrebookResponseEntity'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/PrebookResponseEntity'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PrebookResponseEntity'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/PrebookResponseEntity'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not Found. Record to update not found.
+        '409':
+          description: Conflict
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+        '500':
+          description: Unexpected error
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+        '400':
+          description: Bad request
+  /v1/accountingDocuments/{invoiceId}/transferResponses:
+    post:
+      tags:
+      - AccountingDocuments
+      summary: Marks invoice transfer as accepted / rejected by receiving system. Used with invoices having 'p2pProcessingMode' = 'Standard' which are approved for payment.
+      description: "Notes: \r\n1) Transfer responses for already transferred invoices (where processingStatus = 'Transferred') are not allowed. \r\n2) Saving voucher numbers and payment block -information to the invoice in P2P requires a succesful transfer to ERP ('success' = 'true'). The responseMessage gets saved also when success = false. \r\n3) Please do not send acknowledge and transferResponse for at the same time for the same invoice. If acknowledge is used, please wait for acknowledge to complete before sending the transferResponse. \r\n4) Only latest 100 responses will be saved per invoice.\r\n\r\nPlease see section \"[Usage scenario 3: Prebook and transfer invoice to Accounting](https://developer.basware.com/api/p2p/manual#usage3)\" of Basware Purchase-to-Pay API manual for details on implementing invoice transfer process with Basware API."
+      parameters:
+      - name: invoiceId
+        in: path
+        description: Invoice Id of the accountingDocument to be updated
+        required: true
+        schema:
+          type: string
+      - name: Content-Type
+        in: header
+        description: Specifies the media type of the resource. Value application/json is supported.
+        schema:
+          type: string
+        example: application/json
+      requestBody:
+        description: Transfer response to be added to accountingDocument
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/TransferResponseEntity'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TransferResponseEntity'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/TransferResponseEntity'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/TransferResponseEntity'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/TransferResponseEntity'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransferResponseEntity'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/TransferResponseEntity'
+        '400':
+          description: Bad request
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found. Record to update not found.
+        '500':
+          description: Unexpected error
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+  /v1/accountingDocuments/{invoiceId}/paymentResponses:
+    post:
+      tags:
+      - AccountingDocuments
+      summary: Updates invoice payment information, including payment date.
+      description: "Notes: \r\n1) Payment response can be sent multiple times for the same invoice (for example when updating partial payments). When sending multiple payment responses to the same invoice, externalCode needs to be different on each of the paymentResponse updates. \r\n2) Please post a payment response only when data related to it on the invoice has changed (do not post same contents repeatedly).\r\n3) Fields not included on the payment response will be cleared (e.g. paymentMethod). \r\n4) Current date is defaulted as payment date if payment date is empty. \r\n5) Only latest 100 responses will be saved per invoice.\r\n\r\nPlease see section \"[Usage scenario 3: Prebook and transfer invoice to Accounting](https://developer.basware.com/api/p2p/manual#usage3)\" of Basware Purchase-to-Pay API manual for details on implementing invoice transfer process with Basware API."
+      parameters:
+      - name: invoiceId
+        in: path
+        description: Invoice Id of the accountingDocument to be updated
+        required: true
+        schema:
+          type: string
+      - name: Content-Type
+        in: header
+        description: Specifies the media type of the resource. Value application/json is supported.
+        schema:
+          type: string
+        example: application/json
+      requestBody:
+        description: Payment response to be added to accountingDocument
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/PaymentResponseEntity'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PaymentResponseEntity'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/PaymentResponseEntity'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/PaymentResponseEntity'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/PaymentResponseEntity'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentResponseEntity'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/PaymentResponseEntity'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found. Record to update not found.
+        '409':
+          description: Conflict
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+        '500':
+          description: Unexpected error
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+        '400':
+          description: Bad request
+  /v1/accountingDocuments/status:
+    get:
+      tags:
+      - AccountingDocuments
+      summary: Returns high level invoice status by search criteria such as company code, invoice number and invoice date.
+      description: "This API receives search criteria such as company code, invoice number, invoice date and gross sum and returns the status, i.e. ‘In Approval Process’, ‘Ready For Payment’, ‘Paid’ or ‘Rejected’. This API can return data also for invoices transferred to ERP outside of Basware API using a webservice or file based integration (Anyerp transferred invoices). \r\n\r\nFollowing high-level statuses are returned. \r\n* InApprovalProcess - Invoice has been received in Basware P2P and is being processed. This includes all invoice statuses before succesful transfer to ERP.\r\n* ReadyForPayment - Invoice is approved for payment and has been transferred to ERP system.\r\n* Paid - Invoice has been paid.\r\n* Rejected - Invoice has been rejected.\r\n\r\nNotes:\r\n1) The API returns only status information and the invoiceId(s). If more information regarding the returned invoice(s) is required, doing a GET accountingDocuments/{invoiceId} query will return the full invoice details.\r\n2) To enable this feature for your organization, please contact your Basware consultant or Basware Support. Before the API is enabled, it will return no results. \r\n\r\nPlease see section \"[Usage scenario 7: Retrieve invoice status](https://developer.basware.com/api/p2p/manual#usage8)\" of Basware Purchase-to-Pay API manual for details on retrieving invoice status through Basware API."
+      parameters:
+      - name: companyCode
+        in: query
+        description: Company filter. Returns invoices for specified company.
+        required: true
+        schema:
+          type: string
+      - name: invoiceNumber
+        in: query
+        description: Invoice number filter. Returns invoices having specified invoice number.
+        required: true
+        schema:
+          type: string
+      - name: invoiceDate
+        in: query
+        description: Invoice date filter. Returns invoices having specified invoice date.
+        required: true
+        schema:
+          type: string
+          format: date-time
+      - name: grossSum
+        in: query
+        description: Gross sum filter. Returns invoices having specified gross sum.
+        schema:
+          type: number
+          format: double
+      - name: pageSize
+        in: query
+        description: Page size filter. A limit for the number of items to be returned for one request. Limit can range between 1 and 500 items.
+        schema:
+          type: integer
+          format: int32
+          default: 500
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AccountingDocumentsStatusResponseEntity'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AccountingDocumentsStatusResponseEntity'
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AccountingDocumentsStatusResponseEntity'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found. Request was successful and no records were found.
+        '500':
+          description: Unexpected error
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+  /v1/accountingDocuments/{invoiceId}/attachments/{attachmentExternalCode}:
+    get:
+      tags:
+      - AccountingDocuments
+      summary: Returns invoice attachment(s) by attachmentExternalCode identifier.
+      description: "This API returns invoice attachments(s) by invoiceId and attachmentExternalCode identifiers. The attachmentExternalCode identifiers are available on the attachments block in main accountingDocuments API. \r\n\r\nNotes: \r\n 1) The API response redirects to a pre-signed URL. Make sure your API client will follow the '302' redirect to the returned new URL. The pre-signed URL will be valid for 15min.\r\n 2) This API is enabled manually through CMN_TENANT_SETTINGS parameter 'OpenApi.SendInvoiceAttachments' in P2P."
+      parameters:
+      - name: invoiceId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: attachmentExternalCode
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+        '302':
+          description: Found
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found. No attachment found by given attachmentExternalCode.
+        '500':
+          description: Internal Server Error
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+components:
+  schemas:
+    TransferResponseEntity:
+      required:
+      - externalCode
+      - paymentBlock
+      - responseMessage
+      - success
+      type: object
+      properties:
+        externalCode:
+          maxLength: 36
+          minLength: 1
+          type: string
+          description: External identifier that is used as a key in API. External code of the transferResponse needs to be unique within an accountingDocument -record. You should always create a new externalCode when sending response, there is no overwriting/editing of previous response. This will enable the visibility that all responses are tracked in API. ExternalCode in response messages plays no role in P2P (other than it is used in communication between P2P and the API layer).
+          example: 9c857869cb5c4028ac79b03b57af12795
+        success:
+          type: boolean
+          description: Specifies if the invoice was succesfully transfered to ERP system (true = invoice successfully transferred, false = transfer failed).
+          example: true
+        responseMessage:
+          maxLength: 250
+          minLength: 1
+          type: string
+          description: Informative message for P2P user regarding the transfer. If transfer failed, please indicate reason for transfer failure in this message. This message is shown in invoice action log.
+          example: Invoice transferred to ERP.
+        sourceSystem:
+          maxLength: 32
+          minLength: 0
+          type: string
+          description: Indicates the system that is returning transfer response.
+          nullable: true
+          example: ERP1
+        voucherNumber1:
+          maxLength: 25
+          minLength: 0
+          type: string
+          description: Available for returning voucher number from ERP system. Voucher number is saved onto the invoice in P2P.
+          nullable: true
+          example: '114785224'
+        voucherNumber2:
+          maxLength: 25
+          minLength: 0
+          type: string
+          description: Available for returning second voucher number from ERP system. Voucher number 2 is saved onto the invoice in P2P.
+          nullable: true
+          example: '774785220'
+        transferDate:
+          type: string
+          description: 'Transfer date. Saved onto the invoice in P2P. Note: Field needs to be made visible in P2P UI to see sent value.'
+          format: date-time
+          nullable: true
+        paymentBlock:
+          type: boolean
+          description: Available for indicating if invoice has been set to payment blocked -state by the receiving ERP system. Saved onto the invoice in P2P.
+          example: false
+      additionalProperties: false
+    TransferParameterEntity:
+      required:
+      - key
+      - value
+      type: object
+      properties:
+        key:
+          maxLength: 250
+          minLength: 1
+          type: string
+          example: InvoiceBatchId
+        value:
+          maxLength: 250
+          minLength: 1
+          type: string
+          example: ca7f0c603388437ea9584446e26cf01c
+      additionalProperties: false
+    AccountingDocumentResponse:
+      required:
+      - accountingDocuments
+      type: object
+      properties:
+        accountingDocuments:
+          type: array
+          items:
+            $ref: '#/components/schemas/AccountingDocumentEntity'
+      additionalProperties: false
+    DeleteRequest:
+      type: object
+      properties:
+        lastUpdated:
+          type: string
+          description: 'To delete records updated after specific time, use lastUpdated -field. This will delete all items that have been updated after the specified date. In response, user will get the taskStatus api link where the task status can be checked. Note: ''0001-01-01'' can be used to delete all records.'
+          format: date-time
+          nullable: true
+        externalCode:
+          maxLength: 36
+          minLength: 0
+          type: string
+          description: Single item can be deleted using externalCode and final status is returned immediately.
+          nullable: true
+      additionalProperties: false
+    DeleteResponse:
+      type: object
+      properties:
+        statusApiLink:
+          type: string
+          nullable: true
+        taskName:
+          type: string
+          nullable: true
+        taskStatus:
+          type: string
+          nullable: true
+      additionalProperties: false
+    AccountingDocumentEntity:
+      required:
+      - companyCode
+      - currencyCode
+      - invoiceId
+      - paymentBlock
+      - processingStatus
+      - supplierCode
+      type: object
+      properties:
+        invoiceId:
+          maxLength: 36
+          minLength: 1
+          type: string
+          description: Unique identifier for an invoice generated by Basware P2P. Must be returned in when sending acknowledgement, transferResponse or paymentResponse to the invoice.
+          example: 138e7d94997847aebe7432e521b3dac9
+        bumid:
+          maxLength: 36
+          minLength: 0
+          type: string
+          description: Unique identifier for a business document generated by BT, used between Basware P2P and other Basware systems.
+          nullable: true
+          example: c6d7067f-eb67-4289-89ec-819446078a3a
+        p2pProcessingMode:
+          enum:
+          - Standard
+          - InvoiceEnrichment
+          type: string
+          description: Specifies the P2P processing mode for the invoice. Standard = Ivoice has been processed in Basware P2P and is approved for payment. InvoiceEnrichment = Invoice data contents have been enriched for processing, invoice approval is to be handled separately in receiving system.
+          example: Standard
+        invoiceNumber:
+          maxLength: 100
+          minLength: 0
+          type: string
+          description: Invoice number (from supplier).
+          nullable: true
+          example: '80000330200233'
+        voucherNumber1:
+          maxLength: 25
+          minLength: 0
+          type: string
+          description: Voucher Number 1 (for accounting). Voucher numbers can be generated by Basware or returned from customer ERP.
+          nullable: true
+          example: '114785224'
+        voucherNumber2:
+          maxLength: 25
+          minLength: 0
+          type: string
+          description: Voucher Number 2 (for accounting). Voucher numbers can be generated by Basware or returned from customer ERP.
+          nullable: true
+          example: '774785220'
+        voucherDate:
+          type: string
+          description: Voucher date can be used to determine the target accounting period for invoice in receiving (ERP) system.
+          format: date-time
+          nullable: true
+        processingStatus:
+          enum:
+          - WaitingForPrebook
+          - PrebookInProgress
+          - Prebooked
+          - PrebookFailed
+          - WaitingForTransfer
+          - TransferInProgress
+          - Transferred
+          - TransferFailed
+          - WaitingForPrebookCancelation
+          - PrebookCancelationInProgress
+          - PrebookCanceled
+          - PrebookCancelFailed
+          - WaitingToBeRemoved
+          - Removed
+          - RemoveFailed
+          - WaitingToBeReturned
+          - Returned
+          - ReturnFailed
+          - WaitingToBeCompleted
+          - CompletionInProgress
+          - Completed
+          - CompletionFailed
+          - Paid
+          - New
+          - WaitingForEnrichmentTransfer
+          - EnrichmentTransferInProgress
+          - EnrichmentTransferred
+          - EnrichmentTransferFailed
+          - InDocumentFilter
+          - DocumentFilterReleased
+          type: string
+          description: Processing status of the invoice in Basware API.
+        originService:
+          type: integer
+          description: Describes how the invoice got created (as e-invoice, scanned from paper, extracted from pdf, etc)
+          format: int32
+        companyCode:
+          maxLength: 32
+          minLength: 1
+          type: string
+          description: Company code.
+          example: BW00
+        companyName:
+          maxLength: 250
+          minLength: 2
+          type: string
+          description: Company name.
+          nullable: true
+          example: Basware Helsinki
+        organizationCode:
+          maxLength: 25
+          minLength: 0
+          type: string
+          description: Organization element in the higher level of the organization than companyCode. This organization element collects the spend from the lower organization units.
+          nullable: true
+          example: BWFIN
+        organizationName:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: Organization element name.
+          nullable: true
+          example: Basware Finland
+        supplierCode:
+          maxLength: 25
+          minLength: 0
+          type: string
+          description: A party that supplied goods or services referred in the invoice.
+          example: '430022'
+        supplierName:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: Supplier name.
+          nullable: true
+          example: Easy Office Supplies Inc.
+        currencyCode:
+          maxLength: 3
+          minLength: 2
+          type: string
+          description: Invoice currency.
+          example: EUR
+        netSum:
+          type: number
+          description: Invoice net sum (invoice total without tax), in invoice currecy.
+          format: double
+          nullable: true
+          example: 1000
+        grossSum:
+          type: number
+          description: Invoice gross sum (invoice total with tax), in invoice currecy.
+          format: double
+          nullable: true
+          example: 1160
+        taxCode:
+          maxLength: 25
+          minLength: 0
+          type: string
+          description: Tax code.
+          nullable: true
+          example: T16
+        taxPercent1:
+          maximum: 1000000000
+          minimum: -1000000000
+          type: number
+          description: Tax percentage.
+          format: double
+          nullable: true
+          example: 16
+        taxPercent2:
+          type: number
+          description: Second tax percentage (for example for partially deductible VAT).
+          format: double
+          nullable: true
+          example: 0
+        taxSum1:
+          type: number
+          description: Invoice tax sum to be paid, in invoice currency.
+          format: double
+          nullable: true
+          example: 160
+        taxSum2:
+          type: number
+          description: Invoice tax sum that is excluded from the tax sum to be paid, in invoice currency.
+          format: double
+          nullable: true
+          example: 0
+        invoiceDate:
+          type: string
+          description: Invoice date (from supplier).
+          format: date-time
+          nullable: true
+        baseLineDate:
+          type: string
+          format: date-time
+          nullable: true
+        dueDate:
+          type: string
+          description: Due date. The last payment date before penalties.
+          format: date-time
+          nullable: true
+        cashDate:
+          type: string
+          description: Cash cate. The last payment date with discount.
+          format: date-time
+          nullable: true
+        cashPercent:
+          maximum: 100
+          minimum: 0
+          type: number
+          description: Percentage out of invoice total that can be excluded if the invoice is paid before the cashDate.
+          format: double
+          nullable: true
+          example: 2
+        cashSum:
+          type: number
+          description: Cash discount amount in invoice currency.
+          format: double
+          nullable: true
+          example: 23.2
+        referencePerson:
+          maxLength: 255
+          minLength: 0
+          type: string
+          description: Person that has been referenced in the invoice.
+          nullable: true
+          example: Jane Buyer
+        contractNumber:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: Contract number.
+          nullable: true
+          example: AX94055432
+        description:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: A short description of an invoice.
+          nullable: true
+          example: More information about the invoice.
+        invoiceTypeCode:
+          maxLength: 25
+          minLength: 0
+          type: string
+          description: Invoice type code.
+          nullable: true
+          example: RE
+        invoiceTypeName:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: Invoice type name.
+          nullable: true
+          example: Purchase order based invoice
+        paymentMethod:
+          maxLength: 25
+          minLength: 0
+          type: string
+          description: Payment method.
+          nullable: true
+          example: BankTransfer
+        paymentBlock:
+          type: boolean
+          description: Identifies if the payment of this invoice should be denied by the ERP system and additonal steps like approval must take place before the invoice can be paid. Normally this parameter has value False when Basware P2P sends invoice for transfer.
+          example: false
+        paymentTermCode:
+          maxLength: 25
+          minLength: 0
+          type: string
+          description: Payment term code.
+          nullable: true
+          example: 7D2-NT30
+        paymentTermName:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: Payment term name.
+          nullable: true
+          example: 7 days -2%, 30 days Net
+        paymentTermExternalCode:
+          maxLength: 100
+          minLength: 0
+          type: string
+          description: Payment term external code.
+          nullable: true
+          example: 7D2-NT30
+        paymentPlanReference:
+          maxLength: 255
+          minLength: 0
+          type: string
+          description: Payment plan reference.
+          nullable: true
+          example: 737-12321
+        paymentRevelsalDocument:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: Payment reversal document.
+          nullable: true
+          example: '245576456'
+        codingDate:
+          type: string
+          description: Coding date.
+          format: date-time
+          nullable: true
+        prebooked:
+          type: boolean
+          description: Identifies if the cost is already prebooked in ERP system. Some systems require prebooking the cost before invoice can be sent for payment.
+          nullable: true
+          example: false
+        referenceNumber:
+          maxLength: 50
+          minLength: 0
+          type: string
+          description: Payment reference number.
+          nullable: true
+          example: 16422-3210654-1872000-1110
+        supplierBankIBAN:
+          maxLength: 50
+          minLength: 0
+          type: string
+          description: Supplier bank account (IBAN).
+          nullable: true
+          example: IT60X0542811101000000123456
+        supplierBankBBAN:
+          maxLength: 50
+          minLength: 0
+          type: string
+          description: Supplier bank account.
+          nullable: true
+          example: '539007547034'
+        supplierBankBIC:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: Supplier bank SWIFT/BIC code.
+          nullable: true
+          example: CTBAAU2W
+        supplierBankName:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: Supplier bank name.
+          nullable: true
+          example: Bankers United
+        accountingPeriod:
+          maxLength: 50
+          minLength: 0
+          type: string
+          description: Code for target accounting period (if specified by Basware P2P).
+          nullable: true
+          example: 2021-01
+        accountingGroup:
+          maxLength: 50
+          minLength: 0
+          type: string
+          description: Name for target accounting period (if specified by Basware P2P).
+          nullable: true
+          example: January 2021
+        removalReason:
+          enum:
+          - NotDefined
+          - Duplicate
+          - MissingData
+          - MissingPO
+          - Statement
+          - NonInvoice
+          - ProcessingTimeExpired
+          - InvoiceMatched
+          - ZeroValue
+          - Confidential
+          - Reprocessed
+          - IncorrectVAT
+          - ErrorInBankDetails
+          - CreditorUnknown
+          - IncorrectRecipient
+          - IncorrectValidator
+          - InvoiceNotCompliantWithOrder
+          - SupportingDocumentationMissing
+          - NotCompliantWithDelivery
+          - ContractEnded
+          - IncorrectInvoiceAmount
+          - SupplierUnknown
+          - InvoiceProcessedElsewhere
+          - PaymentNotReceivedOrCanceled
+          - ReasonOtherThanIncorrectValidator
+          - OtherContactYourBuyer
+          - Other
+          type: string
+          description: "Specifies reason code why the invoice was removed. \r\nNote: Whether the invoice has been removed can only be checked from the invoice status field. ProcessingStatus: \"Removed\" means the invoice has been removed."
+        removalReasonComment:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: Free text comment related to removing invoice.
+          nullable: true
+        disputeInfo:
+          $ref: '#/components/schemas/DisputeInfo'
+        clearingReferenceId:
+          maxLength: 100
+          minLength: 0
+          type: string
+          description: Government issued invoice identifier which provides evidence of successful tax clearance for the invoice. Used on invoices in countries requiring tax clearance.
+          nullable: true
+          example: 2222222222-20231018-077835639C85-1E
+        clearingCountry:
+          maxLength: 25
+          minLength: 0
+          type: string
+          description: Country of clearance. Specifies the issuing authority whose tax clearing platform is used.
+          nullable: true
+          example: PL
+        clearingDate:
+          type: string
+          description: Date of clearance in government tax clearing platform.
+          format: date-time
+          nullable: true
+        paymentMessage:
+          maxLength: 100
+          minLength: 0
+          type: string
+          description: Payment message.
+          nullable: true
+          example: ''
+        text1:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: text1-60 can be used for additional, customer-specific, invoice header text fields.
+          nullable: true
+          example: ''
+        text2:
+          maxLength: 250
+          minLength: 0
+          type: string
+          nullable: true
+          example: ''
+        text3:
+          maxLength: 250
+          minLength: 0
+          type: string
+          nullable: true
+          example: ''
+        text4:
+          maxLength: 250
+          minLength: 0
+          type: string
+          nullable: true
+          example: ''
+        text5:
+          maxLength: 250
+          minLength: 0
+          type: string
+          nullable: true
+          example: ''
+        text6:
+          maxLength: 250
+          minLength: 0
+          type: string
+          nullable: true
+          example: ''
+        text7:
+          maxLength: 250
+          minLength: 0
+          type: string
+          nullable: true
+          example: ''
+        text8:
+          maxLength: 250
+          minLength: 0
+          type: string
+          nullable: true
+          example: ''
+        text9:
+          maxLength: 250
+          minLength: 0
+          type: string
+          nullable: true
+          example: ''
+        text10:
+          maxLength: 250
+          minLength: 0
+          type: string
+          nullable: true
+          example: ''
+        text11:
+          maxLength: 100
+          minLength: 0
+          type: string
+          nullable: true
+          example: ''
+        text12:
+          maxLength: 100
+          minLength: 0
+          type: string
+          nullable: true
+          example: ''
+        text13:
+          maxLength: 100
+          minLength: 0
+          type: string
+          nullable: true
+          example: ''
+        text14:
+          maxLength: 100
+          minLength: 0
+          type: string
+          nullable: true
+          example: ''
+        text15:
+          maxLength: 100
+          minLength: 0
+          type: string
+          nullable: true
+          example: ''
+        text16:
+          maxLength: 100
+          minLength: 0
+          type: string
+          nullable: true
+          example: ''
+        text17:
+          maxLength: 100
+          minLength: 0
+          type: string
+          nullable: true
+          example: ''
+        text18:
+          maxLength: 100
+          minLength: 0
+          type: string
+          nullable: true
+          example: ''
+        text19:
+          maxLength: 100
+          minLength: 0
+          type: string
+          nullable: true
+          example: ''
+        text20:
+          maxLength: 100
+          minLength: 0
+          type: string
+          nullable: true
+          example: ''
+        text21:
+          maxLength: 100
+          minLength: 0
+          type: string
+          nullable: true
+          example: ''
+        text22:
+          maxLength: 100
+          minLength: 0
+          type: string
+          nullable: true
+          example: ''
+        text23:
+          maxLength: 100
+          minLength: 0
+          type: string
+          nullable: true
+          example: ''
+        text24:
+          maxLength: 100
+          minLength: 0
+          type: string
+          nullable: true
+          example: ''
+        text25:
+          maxLength: 100
+          minLength: 0
+          type: string
+          nullable: true
+          example: ''
+        text26:
+          maxLength: 100
+          minLength: 0
+          type: string
+          nullable: true
+          example: ''
+        text27:
+          maxLength: 100
+          minLength: 0
+          type: string
+          nullable: true
+          example: ''
+        text28:
+          maxLength: 100
+          minLength: 0
+          type: string
+          nullable: true
+          example: ''
+        text29:
+          maxLength: 100
+          minLength: 0
+          type: string
+          nullable: true
+          example: ''
+        text30:
+          maxLength: 100
+          minLength: 0
+          type: string
+          nullable: true
+          example: ''
+        text31:
+          maxLength: 250
+          minLength: 0
+          type: string
+          nullable: true
+          example: ''
+        text32:
+          maxLength: 250
+          minLength: 0
+          type: string
+          nullable: true
+          example: ''
+        text33:
+          maxLength: 250
+          minLength: 0
+          type: string
+          nullable: true
+          example: ''
+        text34:
+          maxLength: 250
+          minLength: 0
+          type: string
+          nullable: true
+          example: ''
+        text35:
+          maxLength: 250
+          minLength: 0
+          type: string
+          nullable: true
+          example: ''
+        text36:
+          maxLength: 250
+          minLength: 0
+          type: string
+          nullable: true
+          example: ''
+        text37:
+          maxLength: 250
+          minLength: 0
+          type: string
+          nullable: true
+          example: ''
+        text38:
+          maxLength: 250
+          minLength: 0
+          type: string
+          nullable: true
+          example: ''
+        text39:
+          maxLength: 250
+          minLength: 0
+          type: string
+          nullable: true
+          example: ''
+        text40:
+          maxLength: 250
+          minLength: 0
+          type: string
+          nullable: true
+          example: ''
+        text41:
+          maxLength: 250
+          minLength: 0
+          type: string
+          nullable: true
+          example: ''
+        text42:
+          maxLength: 250
+          minLength: 0
+          type: string
+          nullable: true
+          example: ''
+        text43:
+          maxLength: 250
+          minLength: 0
+          type: string
+          nullable: true
+          example: ''
+        text44:
+          maxLength: 250
+          minLength: 0
+          type: string
+          nullable: true
+          example: ''
+        text45:
+          maxLength: 250
+          minLength: 0
+          type: string
+          nullable: true
+          example: ''
+        text46:
+          maxLength: 250
+          minLength: 0
+          type: string
+          nullable: true
+          example: ''
+        text47:
+          maxLength: 250
+          minLength: 0
+          type: string
+          nullable: true
+          example: ''
+        text48:
+          maxLength: 250
+          minLength: 0
+          type: string
+          nullable: true
+          example: ''
+        text49:
+          maxLength: 250
+          minLength: 0
+          type: string
+          nullable: true
+          example: ''
+        text50:
+          maxLength: 250
+          minLength: 0
+          type: string
+          nullable: true
+          example: ''
+        text51:
+          maxLength: 250
+          minLength: 0
+          type: string
+          nullable: true
+          example: ''
+        text52:
+          maxLength: 250
+          minLength: 0
+          type: string
+          nullable: true
+          example: ''
+        text53:
+          maxLength: 250
+          minLength: 0
+          type: string
+          nullable: true
+          example: ''
+        text54:
+          maxLength: 250
+          minLength: 0
+          type: string
+          nullable: true
+          example: ''
+        text55:
+          maxLength: 250
+          minLength: 0
+          type: string
+          nullable: true
+          example: ''
+        text56:
+          maxLength: 250
+          minLength: 0
+          type: string
+          nullable: true
+          example: ''
+        text57:
+          maxLength: 250
+          minLength: 0
+          type: string
+          nullable: true
+          example: ''
+        text58:
+          maxLength: 250
+          minLength: 0
+          type: string
+          nullable: true
+          example: ''
+        text59:
+          maxLength: 250
+          minLength: 0
+          type: string
+          nullable: true
+          example: ''
+        text60:
+          maxLength: 250
+          minLength: 0
+          type: string
+          nullable: true
+          example: ''
+        numeric1:
+          type: number
+          description: numeric1-30 can be used for additional, customer-specific, invoice header numeric fields.
+          format: double
+          nullable: true
+        numeric2:
+          type: number
+          format: double
+          nullable: true
+        numeric3:
+          type: number
+          format: double
+          nullable: true
+        numeric4:
+          type: number
+          format: double
+          nullable: true
+        numeric5:
+          type: number
+          format: double
+          nullable: true
+        numeric6:
+          type: number
+          format: double
+          nullable: true
+        numeric7:
+          type: number
+          format: double
+          nullable: true
+        numeric8:
+          type: number
+          format: double
+          nullable: true
+        numeric9:
+          type: number
+          format: double
+          nullable: true
+        numeric10:
+          type: number
+          format: double
+          nullable: true
+        numeric11:
+          type: number
+          format: double
+          nullable: true
+        numeric12:
+          type: number
+          format: double
+          nullable: true
+        numeric13:
+          type: number
+          format: double
+          nullable: true
+        numeric14:
+          type: number
+          format: double
+          nullable: true
+        numeric15:
+          type: number
+          format: double
+          nullable: true
+        numeric16:
+          type: number
+          format: double
+          nullable: true
+        numeric17:
+          type: number
+          format: double
+          nullable: true
+        numeric18:
+          type: number
+          format: double
+          nullable: true
+        numeric19:
+          type: number
+          format: double
+          nullable: true
+        numeric20:
+          type: number
+          format: double
+          nullable: true
+        numeric21:
+          type: number
+          format: double
+          nullable: true
+        numeric22:
+          type: number
+          format: double
+          nullable: true
+        numeric23:
+          type: number
+          format: double
+          nullable: true
+        numeric24:
+          type: number
+          format: double
+          nullable: true
+        numeric25:
+          type: number
+          format: double
+          nullable: true
+        numeric26:
+          type: number
+          format: double
+          nullable: true
+        numeric27:
+          type: number
+          format: double
+          nullable: true
+        numeric28:
+          type: number
+          format: double
+          nullable: true
+        numeric29:
+          type: number
+          format: double
+          nullable: true
+        numeric30:
+          type: number
+          format: double
+          nullable: true
+        date1:
+          type: string
+          description: date1-10 can be used for additional, customer-specific, invoice header date fields.
+          format: date-time
+          nullable: true
+        date2:
+          type: string
+          format: date-time
+          nullable: true
+        date3:
+          type: string
+          format: date-time
+          nullable: true
+        date4:
+          type: string
+          format: date-time
+          nullable: true
+        date5:
+          type: string
+          format: date-time
+          nullable: true
+        date6:
+          type: string
+          format: date-time
+          nullable: true
+        date7:
+          type: string
+          format: date-time
+          nullable: true
+        date8:
+          type: string
+          format: date-time
+          nullable: true
+        date9:
+          type: string
+          format: date-time
+          nullable: true
+        date10:
+          type: string
+          format: date-time
+          nullable: true
+        invoiceImageURL:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: URL Link to invoice image.
+          nullable: true
+        invoiceImageToken:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: Invoice image token (invoice-specific part of image link).
+          nullable: true
+        orderNumbers:
+          type: array
+          items:
+            type: string
+          description: A list of order numbers associated with invoice
+          nullable: true
+        lastUpdated:
+          type: string
+          description: Timestamp when the invoice record was last updated (from Basware P2P or from customer end).
+          format: date-time
+        codingRows:
+          type: array
+          items:
+            $ref: '#/components/schemas/StandardCodingEntity'
+          description: "Coding rows specify information about posting the invoice to accounting - accounts, cost centers, tax codes, etc. \r\nTypically a small portion of available fields is used within each customer implementation."
+          nullable: true
+        invoiceLines:
+          type: array
+          items:
+            $ref: '#/components/schemas/InvoiceLine'
+          description: Invoice Lines. By default invoice lines are not sent from P2P. To Enable / disable sending the invoice lines, use the OpenAPI.TransferInvoiceLinesEnabled CMN_TENANT_SETTINGS parameter in P2P.
+          nullable: true
+        attachments:
+          type: array
+          items:
+            $ref: '#/components/schemas/Attachment'
+          description: Attachments related to the invoice. Attachments become available on invoices after transfer to accounting.
+          nullable: true
+          readOnly: true
+        transferParameters:
+          type: array
+          items:
+            $ref: '#/components/schemas/TransferParameterEntity'
+          description: "Contains transfer parameters entered by user to pop-up window uring transfer, such as voucher date for a batch of invoices. \r\nThese can be specified in IA_TRANSFER_PARAMETER -table in P2P. Also contains InvoiceBatchId (transfer batch id)."
+          nullable: true
+        enrichmentResponses:
+          type: array
+          items:
+            $ref: '#/components/schemas/EnrichmentResponseEntity'
+          description: Lists enrichment responses posted to Basware API for the invoice. Enrichment responses are used with invoices having p2pProcessingMode = 'InvoiceEnrichment'. For there invoices, P2P is used to validate and enrich invoice contents while the approval for payment is done in another system.
+          nullable: true
+        prebookResponses:
+          type: array
+          items:
+            $ref: '#/components/schemas/PrebookResponseEntity'
+          description: Lists prebook responses posted to Basware API for the invoice.
+          nullable: true
+        transferResponses:
+          type: array
+          items:
+            $ref: '#/components/schemas/TransferResponseEntity'
+          description: Lists tranfer responses posted to Basware API for the invoice.
+          nullable: true
+        paymentResponses:
+          type: array
+          items:
+            $ref: '#/components/schemas/PaymentResponseEntity'
+          description: Lists payment responses posted to Basware API for the invoice.
+          nullable: true
+        removeResponses:
+          type: array
+          items:
+            $ref: '#/components/schemas/RemoveResponseEntity'
+          description: Not in use. Reserved for listing remove responses to prebooked invoices.
+          nullable: true
+        cashSumCompany:
+          type: number
+          description: Cash discount amount in company home currency.
+          format: double
+          nullable: true
+          example: 23.2
+        cashSumOrganization:
+          type: number
+          description: Cash discount amount in organization home currency.
+          format: double
+          nullable: true
+          example: 23.2
+        exchangeRateBaseDate:
+          type: string
+          description: Exchange rate(s) valid on this date are used on the invoice.
+          format: date-time
+          nullable: true
+        exchangeRateCompany:
+          type: number
+          description: Exchange rate between invoice currency and company home currency.
+          format: double
+          nullable: true
+          example: 1
+        exchangeRateOrganization:
+          type: number
+          description: Exchange rate between invoice currency and organization home currency
+          format: double
+          nullable: true
+          example: 1
+        taxSum1Company:
+          type: number
+          description: Invoice tax sum 1, in company home currency.
+          format: double
+          nullable: true
+          example: 160
+        taxSum1Organization:
+          type: number
+          description: Invoice tax sum 1, in organization home currency.
+          format: double
+          nullable: true
+          example: 160
+        taxSum2Company:
+          type: number
+          description: Invoice tax sum 2, in company home currency.
+          format: double
+          nullable: true
+          example: 0
+        taxSum2Organization:
+          type: number
+          description: Invoice tax sum 2, in organization home currency.
+          format: double
+          nullable: true
+          example: 0
+        currencyCodeCompany:
+          maxLength: 3
+          minLength: 0
+          type: string
+          description: Currency code of company home currency.
+          nullable: true
+          example: EUR
+        currencyCodeOrganization:
+          maxLength: 3
+          minLength: 2
+          type: string
+          description: Currency code of organization home currency.
+          nullable: true
+          example: EUR
+        organizationElementCode:
+          maxLength: 25
+          minLength: 1
+          type: string
+          description: Organization element code.
+          nullable: true
+          example: BWOO
+        organizationElementName:
+          maxLength: 250
+          minLength: 1
+          type: string
+          description: Organization element name.
+          nullable: true
+          example: Basware Helsinki
+        grossSumCompany:
+          type: number
+          description: Invoice gross sum (invoice total with tax), in company home currency.
+          format: double
+          nullable: true
+          example: 1160
+        grossSumOrganization:
+          type: number
+          description: Invoice gross sum (invoice total with tax), in organization home currency.
+          format: double
+          nullable: true
+          example: 1160
+        netSumCompany:
+          type: number
+          description: Invoice net sum (invoice total without tax), in company home currency.
+          format: double
+          nullable: true
+          example: 1000
+        netSumOrganization:
+          type: number
+          description: Invoice net sum (invoice total without tax), in organization home currency.
+          format: double
+          nullable: true
+          example: 1000
+        parentInvoiceBumId:
+          maxLength: 36
+          minLength: 0
+          type: string
+          description: Basware Unique Message Identifier (bumid) for the original invoice to where this document links to. Used in special cases, such as chargeback. Normally field is empty.
+          nullable: true
+          example: fad3v47f-eb174bsa9-162c-eafg79a6783w
+        supplierSourceSystemId:
+          maxLength: 36
+          minLength: 0
+          type: string
+          description: It is used to identify the source ERP in cases where supplier data is imported from multiple data sources. In these cases, you can identify a supplier using the SupplierSourceSystemId and the supplierCode.
+          nullable: true
+          example: ERP1
+        removedBeforeTransfer:
+          type: boolean
+          nullable: true
+      additionalProperties: false
+    PrebookResponseEntity:
+      required:
+      - externalCode
+      - paymentBlock
+      - responseMessage
+      - success
+      type: object
+      properties:
+        externalCode:
+          maxLength: 36
+          minLength: 1
+          type: string
+          description: External identifier
+          example: ff842a95dbb445b8bb3dcb4d53e51f44
+        success:
+          maxLength: 250
+          minLength: 1
+          type: boolean
+          description: Specifies if the invoice was succesfully prebooked to ERP system (true = invoice successfully prebooked, false = prebook failed). Note that if success = false, only the responseMessage and prebook status are saved to the invoice. Other fields, such as the voucher numbers or paymentBlock, are not updated.
+          example: true
+        responseMessage:
+          maxLength: 250
+          minLength: 1
+          type: string
+          description: Informative message for P2P user regarding the prebook. If prebook failed, please indicate reason for failure in this message. This message is shown in invoice action log.
+          example: Prebooked to ERP
+        sourceSystem:
+          maxLength: 32
+          minLength: 0
+          type: string
+          description: Indicates the system that is returning prebook response.
+          nullable: true
+          example: ERP1
+        voucherNumber1:
+          maxLength: 25
+          minLength: 0
+          type: string
+          description: Available for returning voucher number from ERP system. Voucher number is saved onto the invoice in P2P.
+          nullable: true
+          example: '114785224'
+        voucherNumber2:
+          maxLength: 25
+          minLength: 0
+          type: string
+          description: Available for returning second voucher number from ERP system. Voucher number 2 is saved onto the invoice in P2P.
+          nullable: true
+          example: '774785220'
+        prebookDate:
+          type: string
+          description: 'Prebook date. Note: Field is not saved to P2P (P2P saves the moment when prebook response message arrives).'
+          format: date-time
+          nullable: true
+        paymentBlock:
+          type: boolean
+          description: Available for indicating if invoice has been set to payment blocked -state by the receiving ERP system. Saved onto the invoice in P2P.
+          example: false
+      additionalProperties: false
+    DisputeInfo:
+      type: object
+      properties:
+        isDisputed:
+          type: boolean
+          description: Specifies whether the invoice is disputed. True = disputed, False = not disputed.
+          example: true
+        disputeReason:
+          type: string
+          description: Specifies reason for the dispute. Available reasons are selected from a list. The list is defined by customer in P2P.
+          nullable: true
+          example: DamagedGoods
+        disputeDate:
+          type: string
+          description: Specifies when the invoice was disputed.
+          format: date-time
+          nullable: true
+      additionalProperties: false
+      description: ''
+    EnrichmentResponseEntity:
+      required:
+      - externalCode
+      - responseMessage
+      - success
+      type: object
+      properties:
+        externalCode:
+          maxLength: 36
+          minLength: 1
+          type: string
+          description: External identifier that is used as a key in API. External code of the enrichmentResponse needs to be unique within an accountingDocument -record. Always create a new externalCode when sending response, there is no overwriting/editing of previous response. This will enable the visibility that all responses are tracked in API. ExternalCode in response messages plays no role in P2P (other than it is used in communication between P2P and the API layer).
+          example: f24fff19120445de9c23651434129991
+        success:
+          type: boolean
+          description: Specifies if the invoice was succesfully transfered to ERP system (true = invoice successfully transferred, false = transfer failed).
+          example: true
+        responseMessage:
+          maxLength: 250
+          minLength: 1
+          type: string
+          description: Informative message for P2P user regarding the transfer. If transfer failed, please indicate reason for transfer failure in this message. This message is shown in invoice action log.
+          example: Enriched invoice contents transferred for payment approval in ERP .
+        sourceSystem:
+          maxLength: 32
+          minLength: 0
+          type: string
+          description: Indicates the system that is returning prebook response.
+          nullable: true
+          example: ERP1
+        transferDate:
+          type: string
+          description: 'Transfer date. Saved onto the invoice in P2P. Note: Field needs to be made visible in P2P UI to see sent value.'
+          format: date-time
+          nullable: true
+      additionalProperties: false
+      description: enrichment response entity
+    InvoiceLine:
+      type: object
+      properties:
+        externalCode:
+          type: string
+          description: Basware P2P identifier for the invoice row
+          nullable: true
+          example: a86f243081c24d6a939f6e885ed0e539
+        rowIndex:
+          type: integer
+          description: Invoice row number
+          format: int32
+          nullable: true
+          example: 1
+        productCode:
+          type: string
+          description: Product code
+          nullable: true
+          example: '1.000000'
+        productName:
+          type: string
+          description: Product name
+          nullable: true
+        quantity:
+          type: number
+          description: Quantity
+          format: double
+          nullable: true
+        orderNumber:
+          type: string
+          description: Order number
+          nullable: true
+          example: '6000235428'
+        netPrice:
+          type: number
+          description: Net unit price
+          format: double
+          nullable: true
+          example: 1000
+        taxPercent:
+          type: number
+          description: Tax percent
+          format: double
+          nullable: true
+          example: 25
+        taxSum:
+          type: number
+          description: Tax sum
+          format: double
+          nullable: true
+          example: 250
+        quantityUnit:
+          type: string
+          description: Unit in which quantity is specified, e.g. pcs, kg
+          nullable: true
+        infoItem:
+          type: integer
+          description: Information about the item
+          format: int32
+          nullable: true
+          example: 0
+        grossPrice:
+          type: number
+          description: Gross unit price
+          format: double
+          nullable: true
+          example: 1250
+        additionalCost:
+          type: boolean
+          nullable: true
+        additionalCostRecognition:
+          maxLength: 200
+          minLength: 0
+          type: string
+          description: Additional cost recognition keywork. The keywords are configured in P2P.
+          nullable: true
+        deliveryNoteNumber:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: Delivery note number
+          nullable: true
+        discountAmount:
+          type: number
+          description: Discount amount
+          format: double
+          nullable: true
+          example: 0
+        discountPercent:
+          type: number
+          description: Discount percentage
+          format: double
+          nullable: true
+          example: 0
+        grossSum:
+          type: number
+          description: Gross sum
+          format: double
+          nullable: true
+          example: 1250
+        itemTotalSum:
+          type: number
+          description: Total amount of the item
+          format: double
+          nullable: true
+          example: 0
+        lineType:
+          type: integer
+          format: int32
+          nullable: true
+        netSum:
+          type: number
+          description: Net sum
+          format: double
+          nullable: true
+          example: 1000
+        orderRowNumber:
+          maxLength: 50
+          minLength: 0
+          type: string
+          description: Order row number
+          nullable: true
+        taxCode:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: Tax code
+          nullable: true
+        taxPercent2:
+          type: number
+          description: Secondary tax percent
+          format: double
+          nullable: true
+          example: 0
+        taxSum2:
+          type: number
+          description: Secondary tax sum
+          format: double
+          nullable: true
+          example: 0
+        date1:
+          type: string
+          description: date1-5 Customer specific date field
+          format: date-time
+          nullable: true
+          example: '"2023-05-23T11:17:25.830Z"'
+        date2:
+          type: string
+          format: date-time
+          nullable: true
+        date3:
+          type: string
+          format: date-time
+          nullable: true
+        date4:
+          type: string
+          format: date-time
+          nullable: true
+        date5:
+          type: string
+          format: date-time
+          nullable: true
+        numeric1:
+          type: number
+          description: numeric1-20 Customer specific numeric field
+          format: double
+          nullable: true
+          example: 0
+        numeric2:
+          type: number
+          format: double
+          nullable: true
+        numeric3:
+          type: number
+          format: double
+          nullable: true
+        numeric4:
+          type: number
+          format: double
+          nullable: true
+        numeric5:
+          type: number
+          format: double
+          nullable: true
+        numeric6:
+          type: number
+          format: double
+          nullable: true
+        numeric7:
+          type: number
+          format: double
+          nullable: true
+        numeric8:
+          type: number
+          format: double
+          nullable: true
+        numeric9:
+          type: number
+          format: double
+          nullable: true
+        numeric10:
+          type: number
+          format: double
+          nullable: true
+        text1:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: text1-85 Customer specific text field
+          nullable: true
+        text2:
+          maxLength: 250
+          minLength: 0
+          type: string
+          nullable: true
+        text3:
+          maxLength: 250
+          minLength: 0
+          type: string
+          nullable: true
+        text4:
+          maxLength: 250
+          minLength: 0
+          type: string
+          nullable: true
+        text5:
+          maxLength: 250
+          minLength: 0
+          type: string
+          nullable: true
+        text6:
+          maxLength: 250
+          minLength: 0
+          type: string
+          nullable: true
+        text7:
+          maxLength: 250
+          minLength: 0
+          type: string
+          nullable: true
+        text8:
+          maxLength: 250
+          minLength: 0
+          type: string
+          nullable: true
+        text9:
+          maxLength: 250
+          minLength: 0
+          type: string
+          nullable: true
+        text10:
+          maxLength: 250
+          minLength: 0
+          type: string
+          nullable: true
+      additionalProperties: false
+    Attachment:
+      type: object
+      properties:
+        externalCode:
+          type: string
+          description: Attachment external code. Used to retrieve the actual attachment file through the accountingDocuments/{invoiceId}/{attachmentExternalCode} endpoint.
+          nullable: true
+          example: fafv67fe21747s791f2eeafgc9ab78ae
+        category:
+          type: string
+          description: 'Attachment category. Available values: ORIGINALIMAGE, ATTACHMENT, EXPORTEDEMAIL.'
+          nullable: true
+          example: ATTACHMENT
+        filename:
+          type: string
+          description: Attachment file name.
+          nullable: true
+          example: Image.jpg
+        isConfidential:
+          type: boolean
+          description: Indicates whether the attachment is confidential. true = confidential, false = not confidential.
+          example: false
+        creationTime:
+          type: string
+          description: Creation time of the attachment in P2P.
+          format: date-time
+          example: '2024-03-19T09:28:19.093Z'
+      additionalProperties: false
+    StandardCodingEntity:
+      required:
+      - externalCode
+      type: object
+      properties:
+        externalCode:
+          maxLength: 36
+          minLength: 1
+          type: string
+          description: Coding row external code.
+          example: d5dc444e5c4a4222bc70ee1f8eabcb7d
+        rowIndex:
+          maximum: 100000
+          minimum: 0
+          type: integer
+          description: "Unique number assigned to a row at the time of it's creation. \r\nNote: Does not necessarily contain sequential numbers. May contain gaps (as in 1,2,5,6) in cases where coding lines are deleted."
+          format: int32
+          nullable: true
+          example: 1
+        accountCode:
+          maxLength: 50
+          minLength: 0
+          type: string
+          description: Account code.
+          nullable: true
+          example: '18620'
+        accountName:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: Account name.
+          nullable: true
+          example: Office expenses
+        costCenterCode:
+          maxLength: 200
+          minLength: 0
+          type: string
+          description: Cost center code.
+          nullable: true
+          example: '61300'
+        costCenterName:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: Cose center name.
+          nullable: true
+          example: Helsinki Office
+        deliveryNoteNumber:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: Delivery note number.
+          nullable: true
+          example: ''
+        lastComment:
+          maxLength: 1000
+          minLength: 0
+          type: string
+          description: Last user comment related to a coding row.
+          nullable: true
+          example: ''
+        matchingType:
+          type: integer
+          description: "Order matching type. Possible values: \r\n0 = Regular, \r\n1 = Framework, \r\n2 = Return, \r\n3 = Service, \r\n4 = Many, \r\n5 = Subsequent."
+          format: int32
+          nullable: true
+          example: 0
+        grossTotal:
+          type: number
+          description: Coding row gross sum, in invoice currency.
+          format: double
+          nullable: true
+          example: 1160
+        grossTotalCompany:
+          type: number
+          description: Coding row gross sum, in company home currency.
+          format: double
+          nullable: true
+          example: 1160
+        grossTotalOrganization:
+          type: number
+          description: Coding row gross sum, in organization currency.
+          format: double
+          nullable: true
+          example: 1160
+        netTotal:
+          type: number
+          description: Coding row net sum, in invoice currency.
+          format: double
+          nullable: true
+          example: 1000
+        netTotalCompany:
+          type: number
+          description: Coding row net sum, in company home currency.
+          format: double
+          nullable: true
+          example: 1000
+        netTotalOrganization:
+          type: number
+          description: Coding row net sum, in organization currency.
+          format: double
+          nullable: true
+          example: 1000
+        orderLineNetTotal:
+          type: number
+          description: Net total on (matched) order line.
+          format: double
+          nullable: true
+          example: 1000
+        orderLineGrossTotal:
+          type: number
+          description: Gross total on (matched) order line.
+          format: double
+          nullable: true
+          example: 1160
+        receivedQuantity:
+          type: number
+          description: Received quantity on (matched) goods receipt.
+          format: double
+          nullable: true
+          example: 100
+        receivedNetPrice:
+          type: number
+          description: Received net unit price on (matched) goods receipt.
+          format: double
+          nullable: true
+          example: 10
+        receivedGrossPrice:
+          type: number
+          description: Received gross unit price on (matched) goods receipt.
+          format: double
+          nullable: true
+          example: 11.6
+        receivedNetTotal:
+          type: number
+          description: Received net total on (matched) goods receipt.
+          format: double
+          nullable: true
+          example: 1000
+        receivedGrossTotal:
+          type: number
+          description: Received gross total on (matched) goods receipt.
+          format: double
+          nullable: true
+          example: 1160
+        organizationElementName:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: Organization element name.
+          nullable: true
+          example: Basware Helsinki
+        organizationElementCode:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: Organization element code.
+          nullable: true
+          example: BW00
+        freightSlip:
+          type: string
+          description: Freight slip.
+          nullable: true
+          example: ''
+        conversionNumerator:
+          type: number
+          description: Conversion numerator. Used in giving fractional unit amounts. Used with SAP.
+          format: double
+          nullable: true
+          example: 1
+        conversionDeNumerator:
+          type: number
+          description: Deprecated field - not in use.
+          format: double
+          nullable: true
+          example: 1
+        conversionDenominator:
+          type: number
+          description: Conversion denominator. Used in giving fractional unit amounts. Used with SAP.
+          format: double
+          nullable: true
+          example: 1
+        orderedQuantity:
+          type: number
+          description: Ordered quantity on (matched) order line.
+          format: double
+          nullable: true
+          example: 10
+        orderNetTotal:
+          type: number
+          description: Ordered net total on (matched) order line.
+          format: double
+          nullable: true
+          example: 1000
+        orderGrossTotal:
+          type: number
+          description: Ordered gross total on (matched) order line.
+          format: double
+          nullable: true
+          example: 1160
+        orderedNetPrice:
+          type: number
+          description: Ordered net unit price (matched) order line.
+          format: double
+          nullable: true
+          example: 10
+        orderedGrossPrice:
+          type: number
+          description: Ordered gross unit price on (matched) order line.
+          format: double
+          nullable: true
+          example: 11.6
+        internalOrderCode:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: Internal order code.
+          nullable: true
+          example: ''
+        internalOrderName:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: Internal order name.
+          nullable: true
+          example: ''
+        orderItemNumber:
+          type: string
+          description: Order item number (from matched order line).
+          nullable: true
+          example: '1'
+        orderNumber:
+          maxLength: 1000
+          minLength: 0
+          type: string
+          description: Order number (from matched order).
+          nullable: true
+          example: PO612298
+        orderLineNumber:
+          maxLength: 2000
+          minLength: 0
+          type: string
+          description: Order line number (from matched order line).
+          nullable: true
+          example: '1'
+        contractNumber:
+          maxLength: 255
+          minLength: 0
+          type: string
+          description: Contract number.
+          nullable: true
+          example: '123456'
+        allocatedQuantity:
+          type: number
+          description: Allocated quantity.
+          format: double
+          nullable: true
+          example: 10
+        matchedQuantity:
+          type: number
+          description: Matched quantity.
+          format: double
+          nullable: true
+          example: 10
+        matchedNetSum:
+          type: number
+          description: Matched net sum.
+          format: double
+          nullable: true
+          example: 1000
+        matchedGrossSum:
+          type: number
+          description: Matched gross sum.
+          format: double
+          nullable: true
+          example: 1160
+        closeOrder:
+          maxLength: 100
+          minLength: 0
+          type: string
+          description: Close order -indicator.
+          nullable: true
+          example: ''
+        plant:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: Plant.
+          nullable: true
+          example: ''
+        profitCenterCode:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: Profit center code.
+          nullable: true
+          example: ''
+        profitCenterName:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: Profit center name.
+          nullable: true
+          example: ''
+        businessUnitCode:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: Business unit code.
+          nullable: true
+          example: ''
+        businessUnitName:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: Business unit name.
+          nullable: true
+          example: ''
+        projectCode:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: Project code.
+          nullable: true
+          example: ''
+        projectName:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: Project name.
+          nullable: true
+          example: ''
+        projectSubCode:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: Project sub code.
+          nullable: true
+          example: ''
+        projectSubName:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: Project sub name.
+          nullable: true
+          example: ''
+        employeeCode:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: Employee code.
+          nullable: true
+          example: ''
+        employeeName:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: Employee name.
+          nullable: true
+          example: ''
+        vehicleNumber:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: Vehicle number.
+          nullable: true
+          example: ''
+        vehicleName:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: Vehicle name.
+          nullable: true
+          example: ''
+        salesOrderCode:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: Sales order code.
+          nullable: true
+          example: ''
+        salesOrderName:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: Sales order name.
+          nullable: true
+          example: ''
+        salesOrderSubCode:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: Sales order sub code.
+          nullable: true
+          example: ''
+        salesOrderSubName:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: Sales order sub name.
+          nullable: true
+          example: ''
+        customerCode:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: Customer code.
+          nullable: true
+          example: ''
+        customerName:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: Customer name.
+          nullable: true
+          example: ''
+        conditionType:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: Condition type.
+          nullable: true
+          example: ''
+        accAssignmentCategoryCode:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: Account assignment cotegory code.
+          nullable: true
+          example: ''
+        accAssignmentCategoryName:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: Account assignment category name.
+          nullable: true
+          example: ''
+        budgetCode:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: Budget code.
+          nullable: true
+          example: ''
+        budgetName:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: Budget name.
+          nullable: true
+          example: ''
+        serviceCode:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: Service code.
+          nullable: true
+          example: ''
+        serviceName:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: Service name.
+          nullable: true
+          example: ''
+        businessAreaCode:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: Business area code.
+          nullable: true
+          example: ''
+        businessAreaName:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: Business area name.
+          nullable: true
+          example: ''
+        productCode:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: Product code.
+          nullable: true
+          example: ''
+        productName:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: Product name.
+          nullable: true
+          example: ''
+        buyerName:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: Buyer name.
+          nullable: true
+          example: ''
+        orderLineDescription:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: Order line description (from matched order line).
+          nullable: true
+          example: Box of ball-point pencils
+        orderLinePriceUnit:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: Order line price unit (from matched order line).
+          nullable: true
+          example: BOX
+        orderLinePriceUnitDescription:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: Order line price unit description (from matched order line).
+          nullable: true
+          example: Box
+        partnerProfitCenter:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: Partner profit center.
+          nullable: true
+          example: ''
+        fixedAssetCode:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: Fixed asset code.
+          nullable: true
+          example: ''
+        fixedAssetName:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: Fixed asset name.
+          nullable: true
+          example: ''
+        goodsReceiptItemNumber:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: Goods receipt item number (from matched goods receipt).
+          nullable: true
+          example: '1'
+        goodsReceiptNumber:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: Goods receipt number (from matched goods receipt).
+          nullable: true
+          example: '215871624'
+        materialGroup:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: Material group.
+          nullable: true
+          example: ''
+        fiscalYear:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: Fiscal Year.
+          nullable: true
+          example: '2021'
+        fixedAssetSubCode:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: Fixed asset sub code.
+          nullable: true
+          example: ''
+        fixedAssetSubName:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: Fixed asset sub name.
+          nullable: true
+          example: ''
+        orderLineUOM:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: Order line unit of measure (from matched order line).
+          nullable: true
+          example: BOX
+        subUOM:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: Order line sub unit of measure (from matched order line).
+          nullable: true
+          example: ''
+        workOrderCode:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: Work order code.
+          nullable: true
+          example: ''
+        workOrderName:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: Work order name.
+          nullable: true
+          example: ''
+        workOrderSubCode:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: Work order sub code.
+          nullable: true
+          example: ''
+        workOrderSubName:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: Work order sub name.
+          nullable: true
+          example: ''
+        commitmentItem:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: Commitment item.
+          nullable: true
+          example: ''
+        controllingArea:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: Controlling area.
+          nullable: true
+          example: ''
+        functionalArea:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: Functional area.
+          nullable: true
+          example: ''
+        network:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: Network.
+          nullable: true
+          example: ''
+        networkActivity:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: Network activity.
+          nullable: true
+          example: ''
+        orderCodingRowNumber:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: Order coding row number - from coding row(s) of matched order line.
+          nullable: true
+          example: '1'
+        ownerName:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: Owner name.
+          nullable: true
+          example: ''
+        taxCode:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: Tax code.
+          nullable: true
+          example: T16
+        taxJurisdictionCode:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: Tax juristiction code.
+          nullable: true
+          example: ''
+        taxPercent:
+          maximum: 1000000000
+          minimum: -1000000000
+          type: number
+          description: Tax percent.
+          format: double
+          nullable: true
+          example: 16
+        taxPercent2:
+          maximum: 1000000000
+          minimum: -1000000000
+          type: number
+          description: Tax percent 2. Can be used for example for handling reverse charges on EU VAT.
+          format: double
+          nullable: true
+          example: 0
+        taxSum:
+          type: number
+          description: Coding row tax sum, in invoice currency.
+          format: double
+          nullable: true
+          example: 160
+        taxSumCompany:
+          type: number
+          description: Coding row tax sum, in company home currency.
+          format: double
+          nullable: true
+          example: 160
+        taxSumOrganization:
+          type: number
+          description: Coding row tax sum, in organization currency.
+          format: double
+          nullable: true
+          example: 160
+        taxSum2:
+          type: number
+          description: Coding row tax sum 2, in invoice currency.
+          format: double
+          nullable: true
+          example: 0
+        taxSum2Company:
+          type: number
+          description: Coding row tax sum 2, in company home currency.
+          format: double
+          nullable: true
+          example: 0
+        taxSum2Organization:
+          type: number
+          description: Coding row tax sum 2, in organization currency.
+          format: double
+          nullable: true
+          example: 0
+        rowOrigin:
+          maxLength: 50
+          minLength: 0
+          type: string
+          description: Not in use. Reserved for indicating how coding row was created.
+          nullable: true
+          example: ''
+        plannedAdditionalCostType:
+          type: integer
+          description: Planned additional cost type.
+          format: int32
+          example: 0
+        dimCode1:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: dimCode1-10 are often used for additional, customer-specific, coding dimensions. Specifies the dimension code.
+          nullable: true
+          example: ''
+        dimCode2:
+          maxLength: 250
+          minLength: 0
+          type: string
+          nullable: true
+          example: ''
+        dimCode3:
+          maxLength: 250
+          minLength: 0
+          type: string
+          nullable: true
+          example: ''
+        dimCode4:
+          maxLength: 250
+          minLength: 0
+          type: string
+          nullable: true
+          example: ''
+        dimCode5:
+          maxLength: 250
+          minLength: 0
+          type: string
+          nullable: true
+          example: ''
+        dimCode6:
+          maxLength: 250
+          minLength: 0
+          type: string
+          nullable: true
+          example: ''
+        dimCode7:
+          maxLength: 250
+          minLength: 0
+          type: string
+          nullable: true
+          example: ''
+        dimCode8:
+          maxLength: 250
+          minLength: 0
+          type: string
+          nullable: true
+          example: ''
+        dimCode9:
+          maxLength: 250
+          minLength: 0
+          type: string
+          nullable: true
+          example: ''
+        dimCode10:
+          maxLength: 250
+          minLength: 0
+          type: string
+          nullable: true
+          example: ''
+        dimName1:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: dimName1-10 are often used for additional, customer-specific, coding dimensions. Specifies the dimension name.
+          nullable: true
+          example: ''
+        dimName2:
+          maxLength: 250
+          minLength: 0
+          type: string
+          nullable: true
+          example: ''
+        dimName3:
+          maxLength: 250
+          minLength: 0
+          type: string
+          nullable: true
+          example: ''
+        dimName4:
+          maxLength: 250
+          minLength: 0
+          type: string
+          nullable: true
+          example: ''
+        dimName5:
+          maxLength: 250
+          minLength: 0
+          type: string
+          nullable: true
+          example: ''
+        dimName6:
+          maxLength: 250
+          minLength: 0
+          type: string
+          nullable: true
+          example: ''
+        dimName7:
+          maxLength: 250
+          minLength: 0
+          type: string
+          nullable: true
+          example: ''
+        dimName8:
+          maxLength: 250
+          minLength: 0
+          type: string
+          nullable: true
+          example: ''
+        dimName9:
+          maxLength: 250
+          minLength: 0
+          type: string
+          nullable: true
+          example: ''
+        dimName10:
+          maxLength: 250
+          minLength: 0
+          type: string
+          nullable: true
+          example: ''
+        num1:
+          type: number
+          description: Num1-5 can be used for additional, customer-specific, numeric coding fields.
+          format: double
+          nullable: true
+        num2:
+          type: number
+          format: double
+          nullable: true
+        num3:
+          type: number
+          format: double
+          nullable: true
+        num4:
+          type: number
+          format: double
+          nullable: true
+        num5:
+          type: number
+          format: double
+          nullable: true
+        text1:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: Text1-5, Text84-85 can be used for additional, customer-specific, text coding fields.
+          nullable: true
+          example: ''
+        text2:
+          maxLength: 250
+          minLength: 0
+          type: string
+          nullable: true
+          example: ''
+        text3:
+          maxLength: 250
+          minLength: 0
+          type: string
+          nullable: true
+          example: ''
+        text4:
+          maxLength: 250
+          minLength: 0
+          type: string
+          nullable: true
+          example: ''
+        text5:
+          maxLength: 250
+          minLength: 0
+          type: string
+          nullable: true
+          example: ''
+        text84:
+          maxLength: 250
+          minLength: 0
+          type: string
+          nullable: true
+          example: ''
+        text85:
+          maxLength: 250
+          minLength: 0
+          type: string
+          nullable: true
+          example: ''
+        date1:
+          type: string
+          description: Date1-5 can be used for additional, customer-specific, date coding fields.
+          format: date-time
+          nullable: true
+        date2:
+          type: string
+          format: date-time
+          nullable: true
+        date3:
+          type: string
+          format: date-time
+          nullable: true
+        date4:
+          type: string
+          format: date-time
+          nullable: true
+        date5:
+          type: string
+          format: date-time
+          nullable: true
+      additionalProperties: false
+    ErrorEntity:
+      type: object
+      properties:
+        externalCode:
+          type: string
+          description: External code of record on which error occurred (when available).
+          nullable: true
+          example: 4847-31231212-212121-1212
+        type:
+          enum:
+          - BUSINESS
+          - VALIDATION
+          - TECHNICAL
+          - SECURITY
+          type: string
+          description: Error type.
+          example: ''
+        code:
+          enum:
+          - EXTERNAL_CODE_MISMATCH
+          - SCHEMA_VALIDATION_ERROR
+          - CONFLICT_IN_POST
+          - DATA_ORIGIN_VALIDATION_ERROR
+          - ACCESS_TOKEN_VALIDATION_ERROR
+          - CREDENTIAL_VALIDATION_ERROR
+          - PARAMETER_VALIDATION_ERROR
+          - UNEXPECTED_ERROR
+          - METHOD_NOT_ALLOWED
+          - ENTITY_NOT_FOUND
+          - DATA_VALIDATION_FAILED
+          - SNS_PUBLISH_ERROR
+          - SQS_PUBLISH_ERROR
+          type: string
+          description: Error code.
+          example: ''
+        message:
+          type: string
+          description: Specific error message.
+          nullable: true
+          example: ''
+        info:
+          type: string
+          description: Information about type of the error.
+          nullable: true
+          example: ''
+      additionalProperties: false
+    PaymentResponseEntity:
+      required:
+      - externalCode
+      - paymentBlock
+      - success
+      type: object
+      properties:
+        externalCode:
+          maxLength: 36
+          minLength: 1
+          type: string
+          description: External identifier that is used as a key in API. External code of the paymentResponse needs to be unique within an accountingDocument -record. You should always create a new externalCode when sending response, there is no overwriting/editing of previous response. This will enable the visibility that all responses are tracked in API. ExternalCode in response messages plays no role in P2P (other than it is used in communication between P2P and the API layer).
+          example: f24fff19120445de9c23651434129991
+        success:
+          type: boolean
+          description: Indicates a succesful response from ERP. Needs to be 'true' for P2P to update invoice data field contents.
+          example: true
+        responseMessage:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: This message is stored to P2P invoice action log.
+          nullable: true
+          example: Invoice Paid.
+        sourceSystem:
+          maxLength: 32
+          minLength: 0
+          type: string
+          description: Indicates the system that is returning payment response.
+          nullable: true
+          example: ERP1
+        paymentDate:
+          type: string
+          description: Date when the invoice was paid can be updated here.
+          format: date-time
+          nullable: true
+        paymentTermCode:
+          maxLength: 25
+          minLength: 0
+          type: string
+          description: Invoice payment term code can be updated here.
+          nullable: true
+          example: 7D2-NT30
+        paymentBlock:
+          type: boolean
+          description: Payment block.
+          example: false
+        paymentMethod:
+          maxLength: 25
+          minLength: 0
+          type: string
+          description: Payment method can be updated here.
+          nullable: true
+          example: BankTransfer
+        paidTotal:
+          type: number
+          description: Total amount paid for the invoice so far. For partial payments, this value will increase each time more of the invoice is paid.
+          format: double
+          nullable: true
+          example: 1136.8
+        cashDiscount:
+          type: number
+          description: discount amount can be updated here.
+          format: double
+          nullable: true
+          example: 23.2
+        checkNumber:
+          maxLength: 25
+          minLength: 0
+          type: string
+          description: Unique identifier from the check used in payment transaction.
+          nullable: true
+          example: '123456012'
+        paymentMessage:
+          maxLength: 100
+          minLength: 0
+          type: string
+          description: Payment message can be updated here.
+          nullable: true
+          example: ''
+        paymentNumber:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: Payment number can be updated here.
+          nullable: true
+          example: 122447-55257552
+        paymentDocument:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: Payment document number can be updated here.
+          nullable: true
+          example: '873326806'
+        paymentReversalDocument:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: Payment reversal document can be updated here.
+          nullable: true
+          example: '873326806'
+      additionalProperties: false
+    ResponseEntityList:
+      type: object
+      properties:
+        requestId:
+          type: string
+          description: ID of the request on which error occurred (generated by Basware API).
+          nullable: true
+          example: fbc082a2-65a4-469c-b230-d84a252f18fc
+        hasErrors:
+          type: boolean
+          description: Specifies whether the request has errors.
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorEntity'
+          nullable: true
+      additionalProperties: false
+      description: Errors returned here are returned synchronously from Basware API middle layer. Additional errors coming from target system(s) may be returned through errorFeedbacks API.
+    AccountingDocumentsStatusResponseEntity:
+      type: object
+      properties:
+        invoiceId:
+          type: string
+          description: Basware internal identifier for the invoice. Can be used to query invoice details from accountingDocuments API.
+          nullable: true
+          example: fbc082a265a4469cb230d84a252f18fc
+        status:
+          enum:
+          - InApprovalProcess
+          - ReadyForPayment
+          - Paid
+          - Rejected
+          type: string
+          description: "High level status of the invoice.\r\n* InApprovalProcess - Invoice has been received in Basware P2P and is being processed. This includes all invoice statuses before succesful transfer to ERP.\r\n* ReadyForPayment - Invoice is approved for payment and has been transferred to ERP system.\r\n* Paid - Invoice has been paid.\r\n* Rejected - Invoice has been rejected."
+          example: InApprovalProcess
+        processingStatus:
+          enum:
+          - WaitingForPrebook
+          - PrebookInProgress
+          - Prebooked
+          - PrebookFailed
+          - WaitingForTransfer
+          - TransferInProgress
+          - Transferred
+          - TransferFailed
+          - WaitingForPrebookCancelation
+          - PrebookCancelationInProgress
+          - PrebookCanceled
+          - PrebookCancelFailed
+          - WaitingToBeRemoved
+          - Removed
+          - RemoveFailed
+          - WaitingToBeReturned
+          - Returned
+          - ReturnFailed
+          - WaitingToBeCompleted
+          - CompletionInProgress
+          - Completed
+          - CompletionFailed
+          - Paid
+          - New
+          - WaitingForEnrichmentTransfer
+          - EnrichmentTransferInProgress
+          - EnrichmentTransferred
+          - EnrichmentTransferFailed
+          - InDocumentFilter
+          - DocumentFilterReleased
+          type: string
+          description: API processing status of the invoice (from accountingDocuments API).
+          example: New
+        disputeInfo:
+          $ref: '#/components/schemas/DisputeInfo'
+        lastUpdated:
+          type: string
+          description: Timestamp when the invoice record was last updated (from Basware P2P or from customer end).
+          format: date-time
+      additionalProperties: false
+      description: ''
+    RemoveResponseEntity:
+      required:
+      - externalCode
+      - responseMessage
+      type: object
+      properties:
+        externalCode:
+          maxLength: 36
+          minLength: 2
+          type: string
+          description: External identifier
+          example: dd79ba5612a744bf9a92333fe14a6aef
+        success:
+          type: boolean
+          description: Identifies if the invoice was succesfully removed
+          nullable: true
+          example: false
+        responseMessage:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: Message that gives more details of the deviance that was identified in the invoice details. The message is stored to a comment field in the invoice action log item that is created based on the result.
+          example: ''
+        sourceSystem:
+          maxLength: 32
+          minLength: 0
+          type: string
+          description: Indicates the system that is returning transfer response.
+          nullable: true
+          example: ERP1
+      additionalProperties: false
+  securitySchemes:
+    HTTPBasic:
+      type: http
+      scheme: basic

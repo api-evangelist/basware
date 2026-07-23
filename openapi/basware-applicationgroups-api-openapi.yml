@@ -1,0 +1,335 @@
+openapi: 3.0.2
+info:
+  title: Basware OAUTH2 authentication APIs AccountingDocuments ApplicationGroups API
+  description: "**Using OAUTH2.0 authentication:**\n\nGet API access token from api.basware.com/tokens\n1. Using client id and client secret, which you can obtain from Basware. \n2. Specify which APIs can be accessed by using the token e.g. Read only access to vendors API only (these are called scopes). Available scopes are listed at <https://developer.basware.com/api/p2p/manual#AccessRights>. \n3. Each token has an expiration time, until which it can be used to call APIs.\n\nWhen using OAUTH2 authentication, you need to pass the OAUTH2 authentication token when calling Basware API endpoints. Available Basware API operations are documented at <https://api.basware.com/swagger>. \n\nSee the Basware API developer site at <https://developer.basware.com/api/p2p/manual#Authentication> for more details on API authentication."
+  version: 1.0.0
+  x-logo:
+    url: https://fastapi.tiangolo.com/img/logo-margin/logo-teal.png
+tags:
+- name: ApplicationGroups
+paths:
+  /v1/applicationGroups:
+    post:
+      tags:
+      - ApplicationGroups
+      summary: Creates new Application groups, fully overwrites previous record if exists.
+      description: "Application groups give access to a specific set of applications for users imported through 'users' API. Each user needs to be assigned to one or more application group(s) by specifying 'applicationGroupCode' values in users API. \r\nNotes: \r\n1. User 'loginType' (set on users API) needs to be '4' (user authentication through Basware Access) when the user is imported to any system besides (or in addition to) P2P.\r\n2. POSTing to applicationGroups API returns a link to 'redistribute users' task status. This is because changes to applicationGroups will trigger changes to users assigned to those groups. When there are many users, the changes to users may take a while to complete. Accessing the link requires providing API credentials.\r\n\r\nPlease see section \"[Usage scenario 4: Import users](https://developer.basware.com/api/p2p/manual#usage3)\" of Basware Purchase-to-Pay API manual for details on managing users with Basware API. Check out also the [example JSONs using a minimal feasible set of fields](https://developer.basware.com/api/p2p/templates) from the developer site."
+      parameters:
+      - name: Content-Type
+        in: header
+        description: Specifies the media type of the resource. Value application/json is supported.
+        schema:
+          type: string
+        example: application/json
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/ApplicationGroupEntity'
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/ApplicationGroupEntity'
+          text/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/ApplicationGroupEntity'
+          application/*+json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/ApplicationGroupEntity'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ApplicationGroupEntity'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationGroupEntity'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationGroupEntity'
+        '400':
+          description: Bad request
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+        '401':
+          description: Unauthorized
+        '409':
+          description: Conflict
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+        '500':
+          description: Unexpected error
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+    get:
+      tags:
+      - ApplicationGroups
+      summary: Returns application groups.
+      description: Application groups give access to a specific set of applications for users imported through 'users' API. Each user needs to be assigned to one or more application group(s) by specifying 'applicationGroupCode' values in users API.
+      parameters:
+      - name: pageSize
+        in: query
+        description: A limit for the number of items to be returned for one request. Limit can range between 1 and 100 items.
+        schema:
+          type: integer
+          format: int32
+          default: 100
+      - name: lastUpdated
+        in: query
+        description: Date filter. Returns items that have been updated after specified date.
+        schema:
+          type: string
+          format: date-time
+      - name: x-amz-meta-continuationtoken
+        in: header
+        description: Used to get next page of results when item count indicated by 'pageSize' is exceeded. A token is returned in header (not body) parameter 'X-amz-meta-continuationToken' of the response whenever there are more records to fetch. Post the received value here in a new HEADER parameter on the next GET request to receive the next page of results. When getting the next page of results, you must include the same query parameters that were used when getting the first page.
+        schema:
+          type: string
+        example: 2913fb86-1258-4372-8e2c-d149ad982c6a
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ApplicationGroupsResponse'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationGroupsResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationGroupsResponse'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not Found
+        '500':
+          description: Unexpected error
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+  /v1/applicationGroups/{applicationGroupCode}:
+    get:
+      tags:
+      - ApplicationGroups
+      summary: Returns single Application Group by application group code - identifier.
+      description: Application groups give access to a specific set of applications for users imported through 'users' API. Each user needs to be assigned to one or more application group(s) by specifying 'applicationGroupCode' values in users API.
+      parameters:
+      - name: applicationGroupCode
+        in: path
+        description: The external code of the entity to be fetched
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ApplicationGroupsResponse'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationGroupsResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ApplicationGroupsResponse'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found. Request was successful and no records were found.
+        '500':
+          description: Unexpected error
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+components:
+  schemas:
+    ApplicationGroupsResponse:
+      required:
+      - applicationGroups
+      type: object
+      properties:
+        applicationGroups:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApplicationGroupEntity'
+      additionalProperties: false
+    ApplicationGroupEntity:
+      required:
+      - applicationGroupCode
+      - applications
+      - description
+      type: object
+      properties:
+        applicationGroupCode:
+          maxLength: 100
+          minLength: 1
+          type: string
+          description: 'Identifier for the application group. Best practice: Use descriptive names, such as ''Auditors'', ''Reviewers'', etc.'
+          example: Reviewers
+        description:
+          maxLength: 250
+          minLength: 1
+          type: string
+          description: Freetext description for the applicationGroup.
+          example: Basic users - access to P2P.
+        active:
+          type: boolean
+          description: Determines whether the applicationGroup is active or not. Groups where active = 'false' do not give access to any applications.
+          example: true
+        default:
+          type: boolean
+          description: Used for specifying default application groups. Application groups where default = 'true' will be assigned automatically to all users who have no application group assigned through users API.
+          example: true
+        lastUpdated:
+          type: string
+          description: Timestamp when the record was last sent to API (set automatically by Basware API).
+          format: date-time
+          example: '2020-10-24T00:00:00'
+        applications:
+          type: array
+          items:
+            $ref: '#/components/schemas/Applications'
+      additionalProperties: false
+    ErrorEntity:
+      type: object
+      properties:
+        externalCode:
+          type: string
+          description: External code of record on which error occurred (when available).
+          nullable: true
+          example: 4847-31231212-212121-1212
+        type:
+          enum:
+          - BUSINESS
+          - VALIDATION
+          - TECHNICAL
+          - SECURITY
+          type: string
+          description: Error type.
+          example: ''
+        code:
+          enum:
+          - EXTERNAL_CODE_MISMATCH
+          - SCHEMA_VALIDATION_ERROR
+          - CONFLICT_IN_POST
+          - DATA_ORIGIN_VALIDATION_ERROR
+          - ACCESS_TOKEN_VALIDATION_ERROR
+          - CREDENTIAL_VALIDATION_ERROR
+          - PARAMETER_VALIDATION_ERROR
+          - UNEXPECTED_ERROR
+          - METHOD_NOT_ALLOWED
+          - ENTITY_NOT_FOUND
+          - DATA_VALIDATION_FAILED
+          - SNS_PUBLISH_ERROR
+          - SQS_PUBLISH_ERROR
+          type: string
+          description: Error code.
+          example: ''
+        message:
+          type: string
+          description: Specific error message.
+          nullable: true
+          example: ''
+        info:
+          type: string
+          description: Information about type of the error.
+          nullable: true
+          example: ''
+      additionalProperties: false
+    ResponseEntityList:
+      type: object
+      properties:
+        requestId:
+          type: string
+          description: ID of the request on which error occurred (generated by Basware API).
+          nullable: true
+          example: fbc082a2-65a4-469c-b230-d84a252f18fc
+        hasErrors:
+          type: boolean
+          description: Specifies whether the request has errors.
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorEntity'
+          nullable: true
+      additionalProperties: false
+      description: Errors returned here are returned synchronously from Basware API middle layer. Additional errors coming from target system(s) may be returned through errorFeedbacks API.
+    Applications:
+      required:
+      - code
+      type: object
+      properties:
+        code:
+          enum:
+          - PurchaseToPay
+          - Reporting
+          - SupplierPortal
+          - SupplierManagement
+          - CloudscanWithSelfValidation
+          - CloudscanWithBaswareValidation
+          - BaswareAdmin
+          - StrategicSourcing
+          - SmartPDFSelfValidation
+          - SmartPDFAdmin
+          - BaswareAdminOrgMgmt
+          - APAssuranceAdmin
+          - APAssuranceUser
+          - StatementMatchingUser
+          - StatementMatchingAdmin
+          type: string
+          description: " Specifies code for the application. \r\n 1. PurchaseToPay = Basware Purchase-to-Pay (P2P)\r\n 2. Reporting = Basware Reporting\r\n 3. SupplierPortal = Access to Basware network, user can see only own company's suppliers. \r\n 4. SupplierManagement = Access to Basware network, user can see suppliers from any company within tenant. \r\n 5. CloudscanWithSelfValidation = CloudScan with Self-Validation\r\n 6. CloudscanWithBaswareValidation = CloudScan with Basware Validation\r\n 7. BaswareAdmin = Basware Admin (excl. organization management)\r\n 8. StrategicSourcing = Strategic Sourcing\r\n 9. SmartPDFSelfValidation  = SmartPfd with self validation\r\n10. SmartPDFAdmin = SmartPdf Administration\r\n11. BaswareAdminOrgMgmt = Basware Admin - organization management (in piloting)\r\n12. APAssuranceUser = AP Assurance, user access\r\n13. APAssuranceAdmin = AP Assurance, administrator access\r\n14. StatementMatchingUser = Statement Matching, user access\r\n15. StatementMatchingAdmin = Statement Matching, administrator access\r\n \r\n Note: For accessing applications 2, 5, 6, 7, 9, 10 above, either loginType '4' (Basware Access login) or accessEnabledLogin = “True” is required on the user posted through users API."
+          example: PurchaseToPay
+      additionalProperties: false
+  securitySchemes:
+    HTTPBasic:
+      type: http
+      scheme: basic

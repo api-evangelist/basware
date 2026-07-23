@@ -1,0 +1,154 @@
+openapi: 3.0.2
+info:
+  title: Basware OAUTH2 authentication APIs AccountingDocuments Vault Indexing API
+  description: "**Using OAUTH2.0 authentication:**\n\nGet API access token from api.basware.com/tokens\n1. Using client id and client secret, which you can obtain from Basware. \n2. Specify which APIs can be accessed by using the token e.g. Read only access to vendors API only (these are called scopes). Available scopes are listed at <https://developer.basware.com/api/p2p/manual#AccessRights>. \n3. Each token has an expiration time, until which it can be used to call APIs.\n\nWhen using OAUTH2 authentication, you need to pass the OAUTH2 authentication token when calling Basware API endpoints. Available Basware API operations are documented at <https://api.basware.com/swagger>. \n\nSee the Basware API developer site at <https://developer.basware.com/api/p2p/manual#Authentication> for more details on API authentication."
+  version: 1.0.0
+  x-logo:
+    url: https://fastapi.tiangolo.com/img/logo-margin/logo-teal.png
+tags:
+- name: Vault Indexing
+paths:
+  /vaults/{vaultId}/index:
+    get:
+      tags:
+      - Vault Indexing
+      summary: Retrieve index of archived documents.
+      operationId: getIndex
+      produces:
+      - application/json
+      parameters:
+      - in: path
+        name: vaultId
+        description: Vault ID to be checked from
+        required: true
+        type: string
+      - in: query
+        name: size
+        description: Number of items to return. Default is 100, maximum is 1000.
+        required: false
+        type: integer
+        default: 100
+      - in: query
+        name: sort
+        description: Sort order of the results.  Default is "archiveDate desc".  It is possible to sort by "archiveDate" and "documentDate" fields. Use "asc" or "desc" for ascending or descending order.
+        required: false
+        type: string
+        default: archiveDate desc
+      - in: query
+        name: cursor
+        description: Cursor for deep pagination. Use the cursor returned in the previous response to get the next page of results. If not provided, the first page is returned.
+        required: false
+        type: string
+        default: initial
+      responses:
+        '200':
+          description: Successful operation
+          schema:
+            type: object
+            properties:
+              cursor:
+                type: string
+                description: Cursor for deep pagination. Use this cursor to get the next page of results. If no more results, API returns last cursor and start will be then same as found.
+                example: VbCSultDQW7KM242Q3FzWlVEUHdWbVpEWKpaV1U0WmkxbU9USm1MVEV4WldZdFltWmlPUzFrTldObE56WmlNbVZsTURZPQZ
+              documents:
+                type: array
+                description: List of archived documents.
+                items:
+                  $ref: '#/definitions/IndexDocumentResponse'
+              found:
+                type: integer
+                description: Total number of archived documents in the vault.
+                example: 111
+              start:
+                type: integer
+                description: Index of the first document in the current page. Start will equal found if there are no more results.
+                example: 0
+        '400':
+          description: Invalid request
+        '403':
+          description: Forbidden
+components:
+  securitySchemes:
+    HTTPBasic:
+      type: http
+      scheme: basic
+definitions:
+  IndexDocumentResponse:
+    type: object
+    properties:
+      amount:
+        type: string
+        description: Amount of document. For invoice, use net sum.
+        example: 1600.09
+      archiveDate:
+        type: string
+        description: Archive date of the document. ISO 8601
+        example: 2010-11-30 08:39:03+00:00
+      archiveId:
+        type: string
+        example: 35d8d778-98fc-4f49-b3e9-9bfd7f92372d
+      bumid:
+        type: string
+        example: 46aa4caf-b373-11ed-bbfc-cfd535abf178
+      buyerReferenceId:
+        type: string
+        maxLength: 100
+        description: An identifier assigned by the Buyer used for internal routing purposes.
+        example: buyer@acme.com
+      buyerReferenceType:
+        type: string
+        maxLength: 100
+        description: Type of buyerReferenceId. Freetext field. eg. email, name, VAT
+        example: email
+      currencyCode:
+        type: string
+        maxLength: 3
+        description: 3 digit currency code of the document. ISO 4217
+        example: EUR
+      documentDate:
+        type: string
+        description: Date of the document. For invoice, normally invoice date. ISO 8601
+        example: 2010-11-30 08:39:03+00:00
+      documentId:
+        type: string
+        maxLength: 100
+        description: Document identifier. For invoice, normally invoice number. Is not required to be unique but this will be used in search criteria, so it helps if they are easily identifiable using a compound search (documentId + senderId).
+        example: 10003456
+      documentType:
+        type: string
+        description: Specifies document type. Either Invoice, CreditNote, InvoiceSelfBilled or CreditNoteSelfBilled.
+        pattern: Invoice|CreditNote|InvoiceSelfBilled|CreditNoteSelfBilled
+        example: Invoice
+      recipientIds:
+        type: array
+        items:
+          type: string
+        description: 'Array of IDs identifying the recipient. Total size of the array should not exceed: 300 chars'
+        example:
+        - R1001
+        - R1002
+        - R1003
+      recipientName:
+        type: string
+        maxLength: 150
+        description: Name of the document recipient. For invoice, receiving company's name.
+        example: Acme Inc.
+      senderIds:
+        type: array
+        items:
+          type: string
+        description: 'Array of IDs identifying the sender. Total size of the array should not exceed: 300 chars'
+        example:
+        - S1001
+        - S1002
+        - S1003
+      senderName:
+        type: string
+        maxLength: 150
+        description: Name of the document sender. For invoice, supplier name.
+        example: Newey & Eyre (UK) Ltd
+      tradingPartner:
+        type: string
+        maxLength: 150
+        description: Name of the document recipient or sender. For invoice, receiving company's name or supplier name.
+        example: Acme Inc.

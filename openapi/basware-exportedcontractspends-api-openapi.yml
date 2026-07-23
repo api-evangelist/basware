@@ -1,0 +1,586 @@
+openapi: 3.0.2
+info:
+  title: Basware OAUTH2 authentication APIs AccountingDocuments ExportedContractSpends API
+  description: "**Using OAUTH2.0 authentication:**\n\nGet API access token from api.basware.com/tokens\n1. Using client id and client secret, which you can obtain from Basware. \n2. Specify which APIs can be accessed by using the token e.g. Read only access to vendors API only (these are called scopes). Available scopes are listed at <https://developer.basware.com/api/p2p/manual#AccessRights>. \n3. Each token has an expiration time, until which it can be used to call APIs.\n\nWhen using OAUTH2 authentication, you need to pass the OAUTH2 authentication token when calling Basware API endpoints. Available Basware API operations are documented at <https://api.basware.com/swagger>. \n\nSee the Basware API developer site at <https://developer.basware.com/api/p2p/manual#Authentication> for more details on API authentication."
+  version: 1.0.0
+  x-logo:
+    url: https://fastapi.tiangolo.com/img/logo-margin/logo-teal.png
+tags:
+- name: ExportedContractSpends
+paths:
+  /v1/exportedContractSpends:
+    get:
+      tags:
+      - ExportedContractSpends
+      summary: Returns contract spends exported from Basware P2P.
+      description: "Notes: \r\n1) Whether contract spends are collected is controlled by the fields 'invoiceSpend', 'orderSpend' and 'spendPlanSpend'. Spend is not collected when these fields are set to 'false'.\r\n2) This API supports sending webhook based  [push notifications](https://developer.basware.com/api/p2p/manual#PushNotifications) when new data is available to be exported. \r\n3) This API exports spends for contracts imported through Basware API. Spend is not exported for contracts imported through anyerp.\r\n\r\nPlease see section \"[Usage scenario 4: Import and export procurement data](https://developer.basware.com/api/p2p/manual#usage4)\" for details on implementing this API. Check out also the [example JSONs using a minimal feasible set of fields](https://developer.basware.com/api/p2p/templates) from the developer site."
+      parameters:
+      - name: processingStatus
+        in: query
+        description: Document status filter. Returns records by document status. Use 'WaitingForExport' to retrieve unacknowledged records.
+        schema:
+          enum:
+          - WaitingForExport
+          - Exported
+          type: string
+      - name: documentType
+        in: query
+        description: Document type filter. Returns items for specific document type.
+        schema:
+          enum:
+          - AccountingDocument
+          - PurchaseOrder
+          - SpendPlan
+          type: string
+      - name: pageSize
+        in: query
+        description: A limit for the number of items to be returned for one request. Limit can range between 1 and 500 items.
+        schema:
+          type: integer
+          format: int32
+          default: 500
+      - name: contractExternalCode
+        in: query
+        description: Contract code filter. Returns items for specific contract.
+        schema:
+          type: string
+          default: ''
+      - name: lastUpdated
+        in: query
+        description: Date Filter. Returns items that have been updated after specified date.
+        schema:
+          type: string
+          format: date-time
+      - name: x-amz-meta-continuationtoken
+        in: header
+        description: Used to get next page of results when item count indicated by 'pageSize' is exceeded. A token is returned in header (not body) parameter 'X-amz-meta-continuationToken' of the response whenever there are more records to fetch. Post the received value here in a new HEADER parameter on the next GET request to receive the next page of results. When getting the next page of results, you must include the same query parameters that were used when getting the first page.
+        schema:
+          type: string
+        example: 4e1c0aa1-5478-4396-a6c1-4fd816030924
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ExportedContractSpendsResponse'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExportedContractSpendsResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ExportedContractSpendsResponse'
+        '401':
+          description: Unauthorized
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+        '404':
+          description: Not Found
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+        '500':
+          description: Unexpected error
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+    delete:
+      tags:
+      - ExportedContractSpends
+      summary: Deletes data from Basware API. For manual one-time operations.
+      description: "For manual one-time operations only, such as a manual clean-up to remove test data generated during API integration development. Only removes records from API layer. \r\nDeletion in target systems needs to be done separately using the data deletion mechanisms available in each of the target system in addition to deleting the data in Basware API."
+      requestBody:
+        description: "Contains the body of the request.\r\n            Either externalCode or lastUpdated -field is required. If both values are provided, externalCode will have the priority."
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/DeleteRequest'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteRequest'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/DeleteRequest'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/DeleteRequest'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/DeleteResponse'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/DeleteResponse'
+        '202':
+          description: RequestAccepted
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/DeleteResponse'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/DeleteResponse'
+        '400':
+          description: BadRequest
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+        '401':
+          description: Unauthorized
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+        '500':
+          description: Unexpected error
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+  /v1/exportedContractSpends/{externalCode}:
+    get:
+      tags:
+      - ExportedContractSpends
+      summary: Returns contract spend details exported from Basware P2P by externalCode.
+      description: "Notes: \r\n1) Whether contract spends are collected is controlled by the fields 'invoiceSpend', 'orderSpend' and 'spendPlanSpend'. Spend is not collected when these fields are set to 'false'.\r\n2) This API exports spends for contracts imported through Basware API. Spend is not exported for contracts imported through anyerp. \r\n\r\nPlease see section \"[Usage scenario 4: Import and export procurement data](https://developer.basware.com/api/p2p/manual#usage4)\" for details on implementing this API. Check out also the [example JSONs using a minimal feasible set of fields](https://developer.basware.com/api/p2p/templates) from the developer site."
+      parameters:
+      - name: externalCode
+        in: path
+        description: The ExternalCode of the ContractSpend to be fetched.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ExportedContractSpendsResponse'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExportedContractSpendsResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ExportedContractSpendsResponse'
+        '401':
+          description: Unauthorized
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+        '404':
+          description: Not found
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+        '500':
+          description: Unexpected error
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+  /v1/exportedContractSpends/acknowledge:
+    post:
+      tags:
+      - ExportedContractSpends
+      summary: Acknowledged contract spends are no longer returned on the next GET operation.
+      description: "Notes: \r\n1) Updates 'processingStatus' -field on the document to allow filtering out already acknowledged documents on the next GET operation. \r\n2) For a document which is already acknowledged (processingStatus: 'Exported'), API will return 405 'Method not allowed' if acknowledge is attempted again on the document.\r\n\r\nPlease see section \"[Usage scenario 4: Import and export procurement data](https://developer.basware.com/api/p2p/manual#usage4)\" for details on implementing this API. Check out also the [example JSONs using a minimal feasible set of fields](https://developer.basware.com/api/p2p/templates) from the developer site."
+      parameters:
+      - name: Content-Type
+        in: header
+        description: Specifies the media type of the resource. Value application/json is supported.
+        schema:
+          type: string
+        example: application/json
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/ContractSpendAcknowledgeRequest'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ContractSpendAcknowledgeRequest'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/ContractSpendAcknowledgeRequest'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/ContractSpendAcknowledgeRequest'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                type: string
+            text/json:
+              schema:
+                type: string
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+        '405':
+          description: Method not allowed. This generally happens when trying to acknowledge an exportedContractSpend that is already acknowledged.
+        '500':
+          description: Unexpected error
+components:
+  schemas:
+    DeleteRequest:
+      type: object
+      properties:
+        lastUpdated:
+          type: string
+          description: 'To delete records updated after specific time, use lastUpdated -field. This will delete all items that have been updated after the specified date. In response, user will get the taskStatus api link where the task status can be checked. Note: ''0001-01-01'' can be used to delete all records.'
+          format: date-time
+          nullable: true
+        externalCode:
+          maxLength: 36
+          minLength: 0
+          type: string
+          description: Single item can be deleted using externalCode and final status is returned immediately.
+          nullable: true
+      additionalProperties: false
+    DeleteResponse:
+      type: object
+      properties:
+        statusApiLink:
+          type: string
+          nullable: true
+        taskName:
+          type: string
+          nullable: true
+        taskStatus:
+          type: string
+          nullable: true
+      additionalProperties: false
+    ErrorEntity:
+      type: object
+      properties:
+        externalCode:
+          type: string
+          description: External code of record on which error occurred (when available).
+          nullable: true
+          example: 4847-31231212-212121-1212
+        type:
+          enum:
+          - BUSINESS
+          - VALIDATION
+          - TECHNICAL
+          - SECURITY
+          type: string
+          description: Error type.
+          example: ''
+        code:
+          enum:
+          - EXTERNAL_CODE_MISMATCH
+          - SCHEMA_VALIDATION_ERROR
+          - CONFLICT_IN_POST
+          - DATA_ORIGIN_VALIDATION_ERROR
+          - ACCESS_TOKEN_VALIDATION_ERROR
+          - CREDENTIAL_VALIDATION_ERROR
+          - PARAMETER_VALIDATION_ERROR
+          - UNEXPECTED_ERROR
+          - METHOD_NOT_ALLOWED
+          - ENTITY_NOT_FOUND
+          - DATA_VALIDATION_FAILED
+          - SNS_PUBLISH_ERROR
+          - SQS_PUBLISH_ERROR
+          type: string
+          description: Error code.
+          example: ''
+        message:
+          type: string
+          description: Specific error message.
+          nullable: true
+          example: ''
+        info:
+          type: string
+          description: Information about type of the error.
+          nullable: true
+          example: ''
+      additionalProperties: false
+    ExportedContractSpendEntity:
+      required:
+      - contractNumber
+      - externalCode
+      - processingStatus
+      type: object
+      properties:
+        externalCode:
+          maxLength: 100
+          minLength: 1
+          type: string
+          description: External identifier that is used as a key in API to identify the contract spend.
+          example: 4847-31231212-212121-1212
+        processingStatus:
+          enum:
+          - WaitingForExport
+          - Exported
+          type: string
+          description: Processing status of the contract spend in Basware API. Use 'WaitingForExport' to get unacknowledged records.
+          example: WaitingForExport
+        contractNumber:
+          maxLength: 255
+          minLength: 1
+          type: string
+          description: Contract number in P2P.
+          example: '2125400'
+        contractExternalCode:
+          maxLength: 100
+          minLength: 0
+          type: string
+          description: External identifier that is used as a key in API for the contract to which this spend belongs. The contract can be found using this code from exportedContracts API.
+          nullable: true
+          example: 4847-31231212-565656-3344
+        companyCode:
+          maxLength: 25
+          minLength: 0
+          type: string
+          description: Buyer Company Code
+          nullable: true
+          example: '200'
+        companyName:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: Buyer Company Name
+          nullable: true
+          example: Basware Oyj
+        supplierCode:
+          maxLength: 25
+          minLength: 0
+          type: string
+          description: Code of the supplier in the contract spend event.
+          nullable: true
+          example: '25365'
+        supplierName:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: Name of the supplier in the contract spend event.
+          nullable: true
+          example: Acme Motor Leasing inc.
+        documentType:
+          enum:
+          - AccountingDocument
+          - PurchaseOrder
+          - SpendPlan
+          type: string
+          description: "Type of the spend source document. \r\n1) AccountingDocument = An approved invoice transferred to accounting (available trough accountingDocuments API). Spend is exported when the invoice is transferred to accounting. \r\n2) PurchaseOrder = An order created in or imported to P2P Purchase, which is sent to supplier (available from exportedPurchaseOrders API when export is enabled). \r\nNote: Spend is updated whenever the order is updated. \r\n3) SpendPlan = Spend plan created in P2P. Spend is exported when Spend plan is activated in P2P and removed if the spend plan is deactivated. SpendPlans are not available through Basware API. Note: When using spendPlans or PurchaseOrders, the spend is exported twice - first on the spendplan/PO and second on the invoice. Spend of PurchaseOrders and SpendPlans are considered as spend reservations and invoice spend as the actual spend."
+          example: WaitingForExport
+        documentExternalCode:
+          maxLength: 100
+          minLength: 1
+          type: string
+          description: External identifier of the spend source document. This can be used to fetch the document from accountingDocuments API (by invoiceId) or exportedPurchaseOrders API (by externalCode).
+          nullable: true
+          example: 138e7d94997847aebe7432e521b3dac9
+        documentNumber:
+          maxLength: 100
+          minLength: 0
+          type: string
+          description: DocumentNumber of the spend source document, ie. Invoice number, order number, spend plan reference. Corresponds to 'invoiceNumber' in accountingDocuments API or to 'orderNumber' in exportedPurchaseOrders API.
+          nullable: true
+          example: '80000330200233'
+        netSumDocument:
+          type: number
+          description: Net currency amount spent on this contract on the spend source document, indicated in currency of the spend source document.
+          format: double
+          example: 150
+        grossSumDocument:
+          type: number
+          description: Gross currency amount spent on this contract on the spend source document, indicated in currency of the spend source document.
+          format: double
+          example: 250
+        currencyCodeDocument:
+          maxLength: 3
+          minLength: 2
+          type: string
+          description: Currency of the spend source document.
+          nullable: true
+          example: EUR
+        netSumContract:
+          type: number
+          description: Net currency amount spent on the spend document, indicated in currency of the contract.
+          format: double
+          example: 150
+        grossSumContract:
+          type: number
+          description: Gross currency amount spent on the spend document, indicated in currency of the contract.
+          format: double
+          example: 250
+        currencyCodeContract:
+          maxLength: 3
+          minLength: 2
+          type: string
+          description: Currency of the contract.
+          nullable: true
+          example: EUR
+        netSumCompany:
+          type: number
+          description: Net currency amount spent on the spend document, indicated in currency of the byuer company.
+          format: double
+          example: 1534.5
+        grossSumCompany:
+          type: number
+          description: Gross currency amount spent on the spend document, indicated in currency of the buyer company.
+          format: double
+          example: 1902.16
+        currencyCodeCompany:
+          maxLength: 3
+          minLength: 2
+          type: string
+          description: Currency of the buyer company.
+          nullable: true
+          example: Liz Black
+        netSumOrganization:
+          type: number
+          description: Net currency amount spent on the spend document, indicated in currency of the byuer organization.
+          format: double
+          example: 126
+        grossSumOrganization:
+          type: number
+          description: Gross currency amount spent on the spend document, indicated in currency of the buyer organization.
+          format: double
+          example: 156.2
+        currencyCodeOrganization:
+          maxLength: 3
+          minLength: 2
+          type: string
+          description: Currency of the buyer organization.
+          nullable: true
+          example: GBP
+        isCancelled:
+          type: boolean
+          description: Indicates whether the spend is cancelled. An existing spend may be cancelled for example when wrong contract was linked to a document.
+          example: false
+        lastUpdated:
+          type: string
+          description: Timestamp when the record was last sent to API. Set automatically.
+          format: date-time
+      additionalProperties: false
+      description: Contains details on indivisual spend events. Note that a spend event can contain just a part of the whole amount indicated on spend source document, such as when part of the invoice lines correspond to a contract.
+    ExportedContractSpendsResponse:
+      required:
+      - contractSpends
+      type: object
+      properties:
+        contractSpends:
+          type: array
+          items:
+            $ref: '#/components/schemas/ExportedContractSpendEntity'
+      additionalProperties: false
+    ContractSpendAcknowledgeRequest:
+      type: object
+      properties:
+        lastUpdated:
+          type: string
+          description: Records with lastUpdated -timestamp after the specified value are acknowledged. '0001-01-01' can be used as input value to acknowledge all records.
+          format: date-time
+          nullable: true
+          example: '2022-01-01'
+        externalCodes:
+          type: array
+          items:
+            type: string
+          description: List of requestIds to acknowledge. Several requests can be acknowledged in one operation.
+          nullable: true
+      additionalProperties: false
+    ResponseEntityList:
+      type: object
+      properties:
+        requestId:
+          type: string
+          description: ID of the request on which error occurred (generated by Basware API).
+          nullable: true
+          example: fbc082a2-65a4-469c-b230-d84a252f18fc
+        hasErrors:
+          type: boolean
+          description: Specifies whether the request has errors.
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorEntity'
+          nullable: true
+      additionalProperties: false
+      description: Errors returned here are returned synchronously from Basware API middle layer. Additional errors coming from target system(s) may be returned through errorFeedbacks API.
+  securitySchemes:
+    HTTPBasic:
+      type: http
+      scheme: basic

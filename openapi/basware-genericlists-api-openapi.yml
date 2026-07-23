@@ -1,0 +1,1173 @@
+openapi: 3.0.2
+info:
+  title: Basware OAUTH2 authentication APIs AccountingDocuments GenericLists API
+  description: "**Using OAUTH2.0 authentication:**\n\nGet API access token from api.basware.com/tokens\n1. Using client id and client secret, which you can obtain from Basware. \n2. Specify which APIs can be accessed by using the token e.g. Read only access to vendors API only (these are called scopes). Available scopes are listed at <https://developer.basware.com/api/p2p/manual#AccessRights>. \n3. Each token has an expiration time, until which it can be used to call APIs.\n\nWhen using OAUTH2 authentication, you need to pass the OAUTH2 authentication token when calling Basware API endpoints. Available Basware API operations are documented at <https://api.basware.com/swagger>. \n\nSee the Basware API developer site at <https://developer.basware.com/api/p2p/manual#Authentication> for more details on API authentication."
+  version: 1.0.0
+  x-logo:
+    url: https://fastapi.tiangolo.com/img/logo-margin/logo-teal.png
+tags:
+- name: GenericLists
+paths:
+  /v1/lists/{listKey}:
+    get:
+      tags:
+      - GenericLists
+      summary: Returns list items posted to Basware API for specified list.
+      parameters:
+      - name: listKey
+        in: path
+        description: ListKey defines the target table in Alusta. e.g. List with listKey 'ACC_LIST_5' will be mapped to EXT_ACC_LIST_5.
+        required: true
+        schema:
+          enum:
+          - ACC_LIST_1
+          - ACC_LIST_2
+          - ACC_LIST_3
+          - ACC_LIST_4
+          - ACC_LIST_5
+          - ACC_LIST_6
+          - ACC_LIST_7
+          - ACC_LIST_8
+          - ACC_LIST_9
+          - ACC_LIST_10
+          - ACC_LIST_11
+          - ACC_LIST_12
+          - ACC_LIST_13
+          - ACC_LIST_14
+          - ACC_LIST_15
+          - ACC_LIST_16
+          - ACC_LIST_17
+          - ACC_LIST_18
+          - ACC_LIST_19
+          - ACC_LIST_20
+          - ACC_LIST_21
+          - ACC_LIST_22
+          - ACC_LIST_23
+          - ACC_LIST_24
+          - ACC_LIST_25
+          - ACC_LIST_26
+          - ACC_LIST_27
+          - ACC_LIST_28
+          - ACC_LIST_29
+          - ACC_LIST_30
+          - ACC_LIST_31
+          - ACC_LIST_32
+          - ACC_LIST_33
+          - ACC_LIST_34
+          - ACC_LIST_35
+          - CUST_RESOLVER_1
+          - CUST_RESOLVER_2
+          - CUST_RESOLVER_3
+          - CUST_RESOLVER_4
+          - CUST_RESOLVER_5
+          - INV_LIST_1
+          - INV_LIST_2
+          - INV_LIST_3
+          - INV_LIST_4
+          - INV_LIST_5
+          - INV_LIST_6
+          - INV_LIST_7
+          - INV_LIST_8
+          - INV_LIST_9
+          - INV_LIST_10
+          - INV_LIST_11
+          - INV_LIST_12
+          - INV_LIST_13
+          - INV_LIST_14
+          - INV_LIST_15
+          - INV_LIST_16
+          - INV_LIST_17
+          - INV_LIST_18
+          - INV_LIST_19
+          - INV_LIST_20
+          type: string
+      - name: pageSize
+        in: query
+        description: A limit for the number of items to be returned for one request. Limit can range between 1 and 500 items.
+        schema:
+          type: integer
+          format: int32
+          default: 500
+      - name: companyCode
+        in: query
+        description: Company filter. Returns items for specific company.
+        schema:
+          type: string
+          default: ''
+      - name: lastUpdated
+        in: query
+        description: Date Filter. Returns items that have been updated after specified date.
+        schema:
+          type: string
+          format: date-time
+      - name: x-amz-meta-continuationtoken
+        in: header
+        description: Used to get next page of results when item count indicated by 'pageSize' is exceeded. A token is returned in header (not body) parameter 'X-amz-meta-continuationToken' of the response whenever there are more records to fetch. Post the received value here in a new HEADER parameter on the next GET request to receive the next page of results. When getting the next page of results, you must include the same query parameters that were used when getting the first page.
+        schema:
+          type: string
+        example: 0d0f6d24-758e-4889-95ec-321f4036e146
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/GenericListResponse'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericListResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/GenericListResponse'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found. Request was successful and no records were found.
+        '500':
+          description: Unexpected error
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+    post:
+      tags:
+      - GenericLists
+      summary: Creates new list item(s), fully overwrites previous record if exists.
+      description: "In Basware P2P, the following lists are available. Please note the list-specific differences in available columns and column lengths. \r\n1) ACC_LIST_1  - ACC_LIST_10: Text1 - Text5  (250 chars), Num1 - Num3\r\n2) ACC_LIST_11 - ACC_LIST_20: Text1 - Text5  (50 chars), Num1 - Num3\r\n3) ACC_LIST_21 - ACC_LIST_30: Text1 - Text10 (250 chars), Num1 - Num5,  Date1 - Date5\r\n4) ACC_LIST_31 - ACC_LIST_35: Text1 - Text25 (250 chars), Num1 - Num10, Date1 - Date10\r\n5) INV_LIST_1  - INV_LIST_10: Text1 - Text5  (250 chars)\r\n6) INV_LIST_11 - INV_LIST_20: Text1 - Text10 (250 chars), Num1 - Num5,  Date1 - Date5\r\n7) CUST_RESOLVER_1 - CUST_RESOLVER_5: Text1 - Text15 (250 chars), Num1 - Num15, Date1 - Date15"
+      parameters:
+      - name: listKey
+        in: path
+        description: ListKey defines the target table in Alusta. e.g. List with listKey 'ACC_LIST_5' will be mapped to EXT_ACC_LIST_5.
+        required: true
+        schema:
+          enum:
+          - ACC_LIST_1
+          - ACC_LIST_2
+          - ACC_LIST_3
+          - ACC_LIST_4
+          - ACC_LIST_5
+          - ACC_LIST_6
+          - ACC_LIST_7
+          - ACC_LIST_8
+          - ACC_LIST_9
+          - ACC_LIST_10
+          - ACC_LIST_11
+          - ACC_LIST_12
+          - ACC_LIST_13
+          - ACC_LIST_14
+          - ACC_LIST_15
+          - ACC_LIST_16
+          - ACC_LIST_17
+          - ACC_LIST_18
+          - ACC_LIST_19
+          - ACC_LIST_20
+          - ACC_LIST_21
+          - ACC_LIST_22
+          - ACC_LIST_23
+          - ACC_LIST_24
+          - ACC_LIST_25
+          - ACC_LIST_26
+          - ACC_LIST_27
+          - ACC_LIST_28
+          - ACC_LIST_29
+          - ACC_LIST_30
+          - ACC_LIST_31
+          - ACC_LIST_32
+          - ACC_LIST_33
+          - ACC_LIST_34
+          - ACC_LIST_35
+          - CUST_RESOLVER_1
+          - CUST_RESOLVER_2
+          - CUST_RESOLVER_3
+          - CUST_RESOLVER_4
+          - CUST_RESOLVER_5
+          - INV_LIST_1
+          - INV_LIST_2
+          - INV_LIST_3
+          - INV_LIST_4
+          - INV_LIST_5
+          - INV_LIST_6
+          - INV_LIST_7
+          - INV_LIST_8
+          - INV_LIST_9
+          - INV_LIST_10
+          - INV_LIST_11
+          - INV_LIST_12
+          - INV_LIST_13
+          - INV_LIST_14
+          - INV_LIST_15
+          - INV_LIST_16
+          - INV_LIST_17
+          - INV_LIST_18
+          - INV_LIST_19
+          - INV_LIST_20
+          type: string
+      - name: Content-Type
+        in: header
+        description: Specifies the media type of the resource. Value application/json is supported.
+        schema:
+          type: string
+        example: application/json
+      requestBody:
+        description: Entity to be updated
+        content:
+          application/json-patch+json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/GenericListEntity'
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/GenericListEntity'
+          text/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/GenericListEntity'
+          application/*+json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/GenericListEntity'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GenericListEntity'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GenericListEntity'
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GenericListEntity'
+        '400':
+          description: Bad request
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+        '401':
+          description: Unauthorized
+        '409':
+          description: Conflict
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+        '500':
+          description: Unexpected error
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+    delete:
+      tags:
+      - GenericLists
+      summary: Deletes data from Basware API. For manual one-time operations.
+      description: "For manual one-time operations only, such as a manual clean-up to remove test data generated during API integration development. Only removes records from API layer. \r\nDeletion in target systems needs to be done separately using the data deletion mechanisms available in each of the target system in addition to deleting the data in Basware API."
+      parameters:
+      - name: listKey
+        in: path
+        description: Contains list item name to be deleted.
+        required: true
+        schema:
+          enum:
+          - ACC_LIST_1
+          - ACC_LIST_2
+          - ACC_LIST_3
+          - ACC_LIST_4
+          - ACC_LIST_5
+          - ACC_LIST_6
+          - ACC_LIST_7
+          - ACC_LIST_8
+          - ACC_LIST_9
+          - ACC_LIST_10
+          - ACC_LIST_11
+          - ACC_LIST_12
+          - ACC_LIST_13
+          - ACC_LIST_14
+          - ACC_LIST_15
+          - ACC_LIST_16
+          - ACC_LIST_17
+          - ACC_LIST_18
+          - ACC_LIST_19
+          - ACC_LIST_20
+          - ACC_LIST_21
+          - ACC_LIST_22
+          - ACC_LIST_23
+          - ACC_LIST_24
+          - ACC_LIST_25
+          - ACC_LIST_26
+          - ACC_LIST_27
+          - ACC_LIST_28
+          - ACC_LIST_29
+          - ACC_LIST_30
+          - ACC_LIST_31
+          - ACC_LIST_32
+          - ACC_LIST_33
+          - ACC_LIST_34
+          - ACC_LIST_35
+          - CUST_RESOLVER_1
+          - CUST_RESOLVER_2
+          - CUST_RESOLVER_3
+          - CUST_RESOLVER_4
+          - CUST_RESOLVER_5
+          - INV_LIST_1
+          - INV_LIST_2
+          - INV_LIST_3
+          - INV_LIST_4
+          - INV_LIST_5
+          - INV_LIST_6
+          - INV_LIST_7
+          - INV_LIST_8
+          - INV_LIST_9
+          - INV_LIST_10
+          - INV_LIST_11
+          - INV_LIST_12
+          - INV_LIST_13
+          - INV_LIST_14
+          - INV_LIST_15
+          - INV_LIST_16
+          - INV_LIST_17
+          - INV_LIST_18
+          - INV_LIST_19
+          - INV_LIST_20
+          type: string
+      requestBody:
+        description: "Contains the body of the request.\r\n            Either externalCode or lastUpdated -field is required. If both values are provided, externalCode will have the priority."
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/DeleteRequest'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteRequest'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/DeleteRequest'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/DeleteRequest'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/DeleteResponse'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/DeleteResponse'
+        '202':
+          description: RequestAccepted
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/DeleteResponse'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/DeleteResponse'
+        '400':
+          description: BadRequest
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+        '401':
+          description: Unauthorized
+        '500':
+          description: Unexpected error
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+  /v1/lists/{listKey}/{externalCode}:
+    get:
+      tags:
+      - GenericLists
+      summary: Returns single list item, based on specified list and externalCode -identifier of the record.
+      description: ''
+      parameters:
+      - name: listKey
+        in: path
+        description: ListKey defines the target table in Alusta. e.g. List with listKey 'ACC_LIST_5' will be mapped to EXT_ACC_LIST_5.
+        required: true
+        schema:
+          enum:
+          - ACC_LIST_1
+          - ACC_LIST_2
+          - ACC_LIST_3
+          - ACC_LIST_4
+          - ACC_LIST_5
+          - ACC_LIST_6
+          - ACC_LIST_7
+          - ACC_LIST_8
+          - ACC_LIST_9
+          - ACC_LIST_10
+          - ACC_LIST_11
+          - ACC_LIST_12
+          - ACC_LIST_13
+          - ACC_LIST_14
+          - ACC_LIST_15
+          - ACC_LIST_16
+          - ACC_LIST_17
+          - ACC_LIST_18
+          - ACC_LIST_19
+          - ACC_LIST_20
+          - ACC_LIST_21
+          - ACC_LIST_22
+          - ACC_LIST_23
+          - ACC_LIST_24
+          - ACC_LIST_25
+          - ACC_LIST_26
+          - ACC_LIST_27
+          - ACC_LIST_28
+          - ACC_LIST_29
+          - ACC_LIST_30
+          - ACC_LIST_31
+          - ACC_LIST_32
+          - ACC_LIST_33
+          - ACC_LIST_34
+          - ACC_LIST_35
+          - CUST_RESOLVER_1
+          - CUST_RESOLVER_2
+          - CUST_RESOLVER_3
+          - CUST_RESOLVER_4
+          - CUST_RESOLVER_5
+          - INV_LIST_1
+          - INV_LIST_2
+          - INV_LIST_3
+          - INV_LIST_4
+          - INV_LIST_5
+          - INV_LIST_6
+          - INV_LIST_7
+          - INV_LIST_8
+          - INV_LIST_9
+          - INV_LIST_10
+          - INV_LIST_11
+          - INV_LIST_12
+          - INV_LIST_13
+          - INV_LIST_14
+          - INV_LIST_15
+          - INV_LIST_16
+          - INV_LIST_17
+          - INV_LIST_18
+          - INV_LIST_19
+          - INV_LIST_20
+          type: string
+      - name: externalCode
+        in: path
+        description: The ExternalCode of the list item
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/GenericListEntity'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericListEntity'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/GenericListEntity'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found. Request was successful and no records were found.
+        '500':
+          description: Unexpected error
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+    patch:
+      tags:
+      - GenericLists
+      summary: Updates fields on specified list item. Preserves existing values in omitted fields.
+      description: "In Basware P2P, the following lists are available. Please note the list-specific differences in available columns and column lengths. \r\n1) ACC_LIST_1  - ACC_LIST_10: Text1 - Text5  (250 chars), Num1 - Num3\r\n2) ACC_LIST_11 - ACC_LIST_20: Text1 - Text5  (50 chars), Num1 - Num3\r\n3) ACC_LIST_21 - ACC_LIST_30: Text1 - Text10 (250 chars), Num1 - Num5,  Date1 - Date5\r\n4) ACC_LIST_31 - ACC_LIST_35: Text1 - Text25 (250 chars), Num1 - Num10, Date1 - Date10\r\n5) INV_LIST_1  - INV_LIST_10: Text1 - Text5  (250 chars)\r\n6) INV_LIST_11 - INV_LIST_20: Text1 - Text10 (250 chars), Num1 - Num5,  Date1 - Date5\r\n7) CUST_RESOLVER_1 - CUST_RESOLVER_5: Text1 - Text15 (250 chars), Num1 - Num15, Date1 - Date15\r\n\r\nNote: Basware API considers 'null' value in field(s) equivalent to the field(s) not being sent. For this reason patch method does not support setting field values to 'null'."
+      parameters:
+      - name: listKey
+        in: path
+        description: ListKey defines the target table in Alusta. e.g. List with listKey 'ACC_LIST_5' will be mapped to EXT_ACC_LIST_5.
+        required: true
+        schema:
+          enum:
+          - ACC_LIST_1
+          - ACC_LIST_2
+          - ACC_LIST_3
+          - ACC_LIST_4
+          - ACC_LIST_5
+          - ACC_LIST_6
+          - ACC_LIST_7
+          - ACC_LIST_8
+          - ACC_LIST_9
+          - ACC_LIST_10
+          - ACC_LIST_11
+          - ACC_LIST_12
+          - ACC_LIST_13
+          - ACC_LIST_14
+          - ACC_LIST_15
+          - ACC_LIST_16
+          - ACC_LIST_17
+          - ACC_LIST_18
+          - ACC_LIST_19
+          - ACC_LIST_20
+          - ACC_LIST_21
+          - ACC_LIST_22
+          - ACC_LIST_23
+          - ACC_LIST_24
+          - ACC_LIST_25
+          - ACC_LIST_26
+          - ACC_LIST_27
+          - ACC_LIST_28
+          - ACC_LIST_29
+          - ACC_LIST_30
+          - ACC_LIST_31
+          - ACC_LIST_32
+          - ACC_LIST_33
+          - ACC_LIST_34
+          - ACC_LIST_35
+          - CUST_RESOLVER_1
+          - CUST_RESOLVER_2
+          - CUST_RESOLVER_3
+          - CUST_RESOLVER_4
+          - CUST_RESOLVER_5
+          - INV_LIST_1
+          - INV_LIST_2
+          - INV_LIST_3
+          - INV_LIST_4
+          - INV_LIST_5
+          - INV_LIST_6
+          - INV_LIST_7
+          - INV_LIST_8
+          - INV_LIST_9
+          - INV_LIST_10
+          - INV_LIST_11
+          - INV_LIST_12
+          - INV_LIST_13
+          - INV_LIST_14
+          - INV_LIST_15
+          - INV_LIST_16
+          - INV_LIST_17
+          - INV_LIST_18
+          - INV_LIST_19
+          - INV_LIST_20
+          type: string
+      - name: externalCode
+        in: path
+        description: The ExternalCode of the genericList to be updated
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: Entity to be updated
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/GenericListEntity'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenericListEntity'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/GenericListEntity'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/GenericListEntity'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/GenericListEntity'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericListEntity'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/GenericListEntity'
+        '400':
+          description: Bad request
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found. Record to update not found.
+        '500':
+          description: Unexpected error
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+components:
+  schemas:
+    GenericListEntity:
+      required:
+      - externalCode
+      type: object
+      properties:
+        externalCode:
+          maxLength: 36
+          minLength: 1
+          type: string
+          description: Id of the list entry.
+          example: 6532e1d70e194ff8a193e42beab4a0d9
+        text_1:
+          type: string
+          description: Text column for lists.
+          nullable: true
+          example: '032141'
+        text_2:
+          type: string
+          description: Text column for lists.
+          nullable: true
+          example: John Smith
+        text_3:
+          type: string
+          description: Text column for lists.
+          nullable: true
+          example: 'true'
+        text_4:
+          type: string
+          description: Text column for lists.
+          nullable: true
+          example: 'false'
+        text_5:
+          type: string
+          description: Text column for lists.
+          nullable: true
+          example: 620018A
+        text_6:
+          type: string
+          description: Text column for lists.
+          nullable: true
+          example: ''
+        text_7:
+          type: string
+          description: Text column for lists.
+          nullable: true
+          example: ''
+        text_8:
+          type: string
+          description: Text column for lists.
+          nullable: true
+          example: ''
+        text_9:
+          type: string
+          description: Text column for lists.
+          nullable: true
+          example: ''
+        text_10:
+          type: string
+          description: Text column for lists.
+          nullable: true
+          example: ''
+        text_11:
+          type: string
+          description: Text column for lists.
+          nullable: true
+          example: ''
+        text_12:
+          type: string
+          description: Text column for lists.
+          nullable: true
+          example: ''
+        text_13:
+          type: string
+          description: Text column for lists.
+          nullable: true
+          example: ''
+        text_14:
+          type: string
+          description: Text column for lists.
+          nullable: true
+          example: ''
+        text_15:
+          type: string
+          description: Text column for lists.
+          nullable: true
+          example: ''
+        text_16:
+          type: string
+          description: Text column for lists.
+          nullable: true
+          example: ''
+        text_17:
+          type: string
+          description: Text column for lists.
+          nullable: true
+          example: ''
+        text_18:
+          type: string
+          description: Text column for lists.
+          nullable: true
+          example: ''
+        text_19:
+          type: string
+          description: Text column for lists.
+          nullable: true
+          example: ''
+        text_20:
+          type: string
+          description: Text column for lists.
+          nullable: true
+          example: ''
+        text_21:
+          type: string
+          description: Text column for lists.
+          nullable: true
+          example: ''
+        text_22:
+          type: string
+          description: Text column for lists.
+          nullable: true
+          example: ''
+        text_23:
+          type: string
+          description: Text column for lists.
+          nullable: true
+          example: ''
+        text_24:
+          type: string
+          description: Text column for lists.
+          nullable: true
+          example: ''
+        text_25:
+          type: string
+          description: Text column for lists.
+          nullable: true
+          example: ''
+        number_1:
+          type: number
+          description: Numeric column for lists.
+          format: double
+          nullable: true
+          example: 10000
+        number_2:
+          type: number
+          description: Numeric column for lists.
+          format: double
+          nullable: true
+          example: 0
+        number_3:
+          type: number
+          description: Numeric column for lists.
+          format: double
+          nullable: true
+          example: 0
+        number_4:
+          type: number
+          description: Numeric column for lists.
+          format: double
+          nullable: true
+          example: 0
+        number_5:
+          type: number
+          description: Numeric column for lists.
+          format: double
+          nullable: true
+          example: 0
+        number_6:
+          type: number
+          description: Numeric column for lists.
+          format: double
+          nullable: true
+          example: 0
+        number_7:
+          type: number
+          description: Numeric column for lists.
+          format: double
+          nullable: true
+          example: 0
+        number_8:
+          type: number
+          description: Numeric column for lists.
+          format: double
+          nullable: true
+          example: 0
+        number_9:
+          type: number
+          description: Numeric column for lists.
+          format: double
+          nullable: true
+          example: 0
+        number_10:
+          type: number
+          description: Numeric column for lists.
+          format: double
+          nullable: true
+          example: 0
+        number_11:
+          type: number
+          description: Numeric column for lists.
+          format: double
+          nullable: true
+          example: 0
+        number_12:
+          type: number
+          description: Numeric column for lists.
+          format: double
+          nullable: true
+          example: 0
+        number_13:
+          type: number
+          description: Numeric column for lists.
+          format: double
+          nullable: true
+          example: 0
+        number_14:
+          type: number
+          description: Numeric column for lists.
+          format: double
+          nullable: true
+          example: 0
+        number_15:
+          type: number
+          description: Numeric column for lists.
+          format: double
+          nullable: true
+          example: 0
+        dateValue_1:
+          type: string
+          description: DateTime column for lists.
+          format: date-time
+          nullable: true
+          example: '2019-11-11'
+        dateValue_2:
+          type: string
+          description: DateTime column for lists.
+          format: date-time
+          nullable: true
+          example: '2019-11-11'
+        dateValue_3:
+          type: string
+          description: DateTime column for lists.
+          format: date-time
+          nullable: true
+          example: '2019-11-11'
+        dateValue_4:
+          type: string
+          description: DateTime column for lists.
+          format: date-time
+          nullable: true
+          example: '2019-11-11'
+        dateValue_5:
+          type: string
+          description: DateTime column for lists.
+          format: date-time
+          nullable: true
+          example: '2019-11-11'
+        dateValue_6:
+          type: string
+          description: DateTime column for lists.
+          format: date-time
+          nullable: true
+          example: '2019-11-11'
+        dateValue_7:
+          type: string
+          description: DateTime column for lists.
+          format: date-time
+          nullable: true
+          example: '2019-11-11'
+        dateValue_8:
+          type: string
+          description: DateTime column for lists.
+          format: date-time
+          nullable: true
+          example: '2019-11-11'
+        dateValue_9:
+          type: string
+          description: DateTime column for lists.
+          format: date-time
+          nullable: true
+          example: '2019-11-11'
+        dateValue_10:
+          type: string
+          description: DateTime column for lists.
+          format: date-time
+          nullable: true
+          example: '2019-11-11'
+        dateValue_11:
+          type: string
+          description: DateTime column for lists.
+          format: date-time
+          nullable: true
+          example: '2019-11-11'
+        dateValue_12:
+          type: string
+          description: DateTime column for lists.
+          format: date-time
+          nullable: true
+          example: '2019-11-11'
+        dateValue_13:
+          type: string
+          description: DateTime column for lists.
+          format: date-time
+          nullable: true
+          example: '2019-11-11'
+        dateValue_14:
+          type: string
+          description: DateTime column for lists.
+          format: date-time
+          nullable: true
+          example: '2019-11-11'
+        dateValue_15:
+          type: string
+          description: DateTime column for lists.
+          format: date-time
+          nullable: true
+          example: '2019-11-11'
+        lastUpdated:
+          type: string
+          description: Timestamp when the record was last sent to API. Set automatically.
+          format: date-time
+        companies:
+          type: array
+          items:
+            $ref: '#/components/schemas/GenericListCompanyEntity'
+          description: List of company units to associate genericlist to P2P organization hierarchy
+          nullable: true
+        listContent:
+          enum:
+          - Plant
+          - ProfitCenter
+          - BusinessUnit
+          - Project
+          - ProjectSub
+          - Employee
+          - Vehicle
+          - Customer
+          - AccAssignmentCategory
+          - Budget
+          - Service
+          - BusinessArea
+          - PartnerProfitCenter
+          - FixedAsset
+          - FixedAssetSubCode
+          - WorkOrderCode
+          - WorkOrderSubCode
+          - CommitmentItem
+          - ControllingArea
+          - FunctionalArea
+          - Network
+          - NetworkActivity
+          - Tax
+          - TaxJurisdiction
+          - Dimension1
+          - Dimension2
+          - Dimension3
+          - Dimension4
+          - Dimension5
+          - Dimension6
+          - Dimension7
+          - Dimension8
+          - Dimension9
+          - Dimension10
+          - InternalOrder
+          - SalesOrder
+          - SalesOrderSub
+          type: string
+          description: Purchase manager list identifier. Needed if Purchase Manager is integrated through Basware API. Not used by P2P.
+          nullable: true
+          example: ''
+      additionalProperties: false
+    GenericListCompanyEntity:
+      required:
+      - active
+      - companyCode
+      type: object
+      properties:
+        companyCode:
+          maxLength: 32
+          minLength: 1
+          type: string
+          description: Company code identifier. Corresponds to company code used in P2P. Used as key in this array.
+          example: BW01
+        active:
+          type: boolean
+          description: Gets or Sets Active
+      additionalProperties: false
+    DeleteResponse:
+      type: object
+      properties:
+        statusApiLink:
+          type: string
+          nullable: true
+        taskName:
+          type: string
+          nullable: true
+        taskStatus:
+          type: string
+          nullable: true
+      additionalProperties: false
+    DeleteRequest:
+      type: object
+      properties:
+        lastUpdated:
+          type: string
+          description: 'To delete records updated after specific time, use lastUpdated -field. This will delete all items that have been updated after the specified date. In response, user will get the taskStatus api link where the task status can be checked. Note: ''0001-01-01'' can be used to delete all records.'
+          format: date-time
+          nullable: true
+        externalCode:
+          maxLength: 36
+          minLength: 0
+          type: string
+          description: Single item can be deleted using externalCode and final status is returned immediately.
+          nullable: true
+      additionalProperties: false
+    ErrorEntity:
+      type: object
+      properties:
+        externalCode:
+          type: string
+          description: External code of record on which error occurred (when available).
+          nullable: true
+          example: 4847-31231212-212121-1212
+        type:
+          enum:
+          - BUSINESS
+          - VALIDATION
+          - TECHNICAL
+          - SECURITY
+          type: string
+          description: Error type.
+          example: ''
+        code:
+          enum:
+          - EXTERNAL_CODE_MISMATCH
+          - SCHEMA_VALIDATION_ERROR
+          - CONFLICT_IN_POST
+          - DATA_ORIGIN_VALIDATION_ERROR
+          - ACCESS_TOKEN_VALIDATION_ERROR
+          - CREDENTIAL_VALIDATION_ERROR
+          - PARAMETER_VALIDATION_ERROR
+          - UNEXPECTED_ERROR
+          - METHOD_NOT_ALLOWED
+          - ENTITY_NOT_FOUND
+          - DATA_VALIDATION_FAILED
+          - SNS_PUBLISH_ERROR
+          - SQS_PUBLISH_ERROR
+          type: string
+          description: Error code.
+          example: ''
+        message:
+          type: string
+          description: Specific error message.
+          nullable: true
+          example: ''
+        info:
+          type: string
+          description: Information about type of the error.
+          nullable: true
+          example: ''
+      additionalProperties: false
+    ResponseEntityList:
+      type: object
+      properties:
+        requestId:
+          type: string
+          description: ID of the request on which error occurred (generated by Basware API).
+          nullable: true
+          example: fbc082a2-65a4-469c-b230-d84a252f18fc
+        hasErrors:
+          type: boolean
+          description: Specifies whether the request has errors.
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorEntity'
+          nullable: true
+      additionalProperties: false
+      description: Errors returned here are returned synchronously from Basware API middle layer. Additional errors coming from target system(s) may be returned through errorFeedbacks API.
+    GenericListResponse:
+      required:
+      - listItems
+      type: object
+      properties:
+        listItems:
+          type: array
+          items:
+            $ref: '#/components/schemas/GenericListEntity'
+      additionalProperties: false
+  securitySchemes:
+    HTTPBasic:
+      type: http
+      scheme: basic

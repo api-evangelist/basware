@@ -1,0 +1,2399 @@
+openapi: 3.0.2
+info:
+  title: Basware OAUTH2 authentication APIs AccountingDocuments ExportedPurchaseRequisitions API
+  description: "**Using OAUTH2.0 authentication:**\n\nGet API access token from api.basware.com/tokens\n1. Using client id and client secret, which you can obtain from Basware. \n2. Specify which APIs can be accessed by using the token e.g. Read only access to vendors API only (these are called scopes). Available scopes are listed at <https://developer.basware.com/api/p2p/manual#AccessRights>. \n3. Each token has an expiration time, until which it can be used to call APIs.\n\nWhen using OAUTH2 authentication, you need to pass the OAUTH2 authentication token when calling Basware API endpoints. Available Basware API operations are documented at <https://api.basware.com/swagger>. \n\nSee the Basware API developer site at <https://developer.basware.com/api/p2p/manual#Authentication> for more details on API authentication."
+  version: 1.0.0
+  x-logo:
+    url: https://fastapi.tiangolo.com/img/logo-margin/logo-teal.png
+tags:
+- name: ExportedPurchaseRequisitions
+paths:
+  /v1/exportedPurchaseRequisitions:
+    get:
+      tags:
+      - ExportedPurchaseRequisitions
+      summary: Returns purchase requisitions exported fom Basware P2P.
+      description: "Notes:\r\n1) A purchase requisition is exported from P2P when the requisition is approved, rejected or canceled. Requisitions are not exported while they are in approval process. \r\n2) This API supports sending webhook based  [push notifications](https://developer.basware.com/api/p2p/manual#PushNotifications) when new data is available to be exported. \r\n3) This GET operation returns a HTTP redirect, which the API client needs to follow. \r\n * 'Authorization' header must not be included in the redirected request (the second request after receiving a redirect). \r\n * 'Host' header needs to be included.\r\n\r\nPlease see section \"[Usage scenario 4: Import and export procurement data](https://developer.basware.com/api/p2p/manual#usage4)\" for details on implementing this API."
+      parameters:
+      - name: status
+        in: query
+        description: Document status filter. Returns items by order document status.
+        schema:
+          enum:
+          - WaitingForExport
+          - Exported
+          type: string
+      - name: pageSize
+        in: query
+        description: A limit for the number of items to be returned for one request. Limit can range between 1 and 100 items.
+        schema:
+          type: integer
+          format: int32
+          default: 100
+      - name: companyCode
+        in: query
+        description: Company filter. Returns items for specific company.
+        schema:
+          type: string
+          default: ''
+      - name: lastUpdated
+        in: query
+        description: Date filter. Returns items that have been updated after specified date.
+        schema:
+          type: string
+          format: date-time
+      - name: x-amz-meta-continuationtoken
+        in: header
+        description: Used to get next page of results when item count indicated by 'pageSize' is exceeded. A token is returned in header (not body) parameter 'X-amz-meta-continuationToken' of the response whenever there are more records to fetch. Post the received value here in a new HEADER parameter on the next GET request to receive the next page of results. When getting the next page of results, you must include the same query parameters that were used when getting the first page.
+        schema:
+          type: string
+        example: 1093edb3-7620-4986-b46b-985c3f9addd4
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ExportedPurchaseRequisitionsResponse'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExportedPurchaseRequisitionsResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ExportedPurchaseRequisitionsResponse'
+        '401':
+          description: Unauthorized
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+        '404':
+          description: Not Found
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+        '500':
+          description: Unexpected error
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+    delete:
+      tags:
+      - ExportedPurchaseRequisitions
+      summary: Deletes data from Basware API. For manual one-time operations.
+      description: "For manual one-time operations only, such as a manual clean-up to remove test data generated during API integration development. Only removes records from API layer. \r\nDeletion in target systems needs to be done separately using the data deletion mechanisms available in each of the target system in addition to deleting the data in Basware API."
+      requestBody:
+        description: "Contains the body of the request.\r\n            Either externalCode or lastUpdated -field is required. If both values are provided, externalCode will have the priority."
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/DeleteRequest'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteRequest'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/DeleteRequest'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/DeleteRequest'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/DeleteResponse'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/DeleteResponse'
+        '202':
+          description: RequestAccepted
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/DeleteResponse'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/DeleteResponse'
+        '400':
+          description: BadRequest
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+        '401':
+          description: Unauthorized
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+        '500':
+          description: Unexpected error
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+  /v1/exportedPurchaseRequisitions/{externalCode}:
+    get:
+      tags:
+      - ExportedPurchaseRequisitions
+      summary: Returns a single purchase requisition by external code - identifier.
+      description: "Note: This GET operation returns a HTTP redirect, which the API client needs to follow. \r\n* 'Authorization' header must not be included in the redirected request (the second request after receiving a redirect). \r\n* 'Host' header needs to be included.\r\n\r\nPlease see section \"[Usage scenario 4: Import and export procurement data](https://developer.basware.com/api/p2p/manual#usage4)\" for details on implementing this API."
+      parameters:
+      - name: externalCode
+        in: path
+        description: ExternalCode of the requisition to be retrieved.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ExportedPurchaseRequisitionsResponse'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExportedPurchaseRequisitionsResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ExportedPurchaseRequisitionsResponse'
+        '401':
+          description: Unauthorized
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+        '404':
+          description: Not found
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+        '500':
+          description: Unexpected error
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+  /v1/exportedPurchaseRequisitions/{externalCode}/acknowledge:
+    post:
+      tags:
+      - ExportedPurchaseRequisitions
+      summary: Acknowledged requisitions are no longer returned for next GET operation.
+      description: "Notes:\r\n1. Updates 'processingStatus' -field on the document to allow filtering out the document on the next GET operation\r\n2. For a document which is already acknowledged (processingStatus: 'Exported'), API will return 405 'Method not allowed' if acknowledge is attempted again on the document.\r\n\r\nPlease see section \"[Usage scenario 4: Import and export procurement data](https://developer.basware.com/api/p2p/manual#usage4)\" for details on implementing this API."
+      parameters:
+      - name: externalCode
+        in: path
+        description: 'External Code of the purchase requisition to be acknowledged. Note: For a purchase requisition which is already acknowledged, API will return 405 ''Method not allowed''.'
+        required: true
+        schema:
+          type: string
+      - name: Content-Type
+        in: header
+        description: Specifies the media type of the resource. Value application/json is supported.
+        schema:
+          type: string
+        example: application/json
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                type: string
+            text/json:
+              schema:
+                type: string
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found
+        '405':
+          description: Method not allowed. This generally happens when trying to acknowledge an exportedPurchaseRequisition that is already acknowledged.
+        '500':
+          description: Unexpected error
+components:
+  schemas:
+    GroupingLine:
+      required:
+      - externalCode
+      - requisitionLineNumber
+      type: object
+      properties:
+        externalCode:
+          maxLength: 100
+          minLength: 1
+          type: string
+          example: 987236sd-sd31-3562-1239-9asffa986asd
+        requisitionLineNumber:
+          maxLength: 100
+          minLength: 1
+          type: string
+          example: '1'
+      additionalProperties: false
+    OrderGrouping:
+      required:
+      - hidePricesFromSupplier
+      - releaseOrdersRequired
+      type: object
+      properties:
+        supplierCode:
+          maxLength: 32
+          minLength: 0
+          type: string
+          description: Supplier code.
+          nullable: true
+          example: SU100
+        supplierName:
+          maxLength: 255
+          minLength: 0
+          type: string
+          description: Supplier name.
+          nullable: true
+          example: ProjectSupplierLtd
+        paymentTermCode:
+          maxLength: 255
+          minLength: 0
+          type: string
+          description: Payment term code.
+          nullable: true
+          example: 30N
+        paymentTermName:
+          maxLength: 2000
+          minLength: 0
+          type: string
+          description: Payment term name.
+          nullable: true
+          example: 30DaysNet
+        contractNumber:
+          maxLength: 255
+          minLength: 0
+          type: string
+          description: Contract number.
+          nullable: true
+          example: Contract-100
+        orderType:
+          enum:
+          - Standard
+          - Blanket
+          type: string
+        validityPeriodStartDate:
+          type: string
+          description: 'Used only if the order type is blanket to specify the start date for blanket purchase order validity period (date format: yyyy-MM-dd).'
+          format: date-time
+          nullable: true
+          example: ''
+        validityPeriodEndDate:
+          type: string
+          description: 'Used only if the order type is blanket to specify the end date for blanket purchase order validity period (date format: yyyy-MM-dd).'
+          format: date-time
+          nullable: true
+          example: ''
+        deliveryTerm:
+          maxLength: 100
+          minLength: 0
+          type: string
+          description: Delivery term.
+          nullable: true
+          example: Supplier to Buyer via Post
+        deliveryLocation:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: Delivery location.
+          nullable: true
+          example: ''
+        deliveryInstruction:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: Delivery instruction.
+          nullable: true
+          example: Check the packing so it will not break
+        sendingMethod:
+          enum:
+          - BaswareNetwork
+          - Email
+          type: string
+          description: Determines how Basware P2P will sends the order to supplier when the order is placed.
+          nullable: true
+          example: BaswareNetwork
+        orderRecipientType:
+          enum:
+          - Supplier
+          - Owner
+          - SupplierAndOwner
+          type: string
+          description: "Determines who order is sent to.\r\n-Supplier(0) : Order is sent only to supplier.\r\n-If orderingMethod is email, order is sent to the email indicated by 'supplierOrderingEmail'. -If orderingMethod is network, the order is sent through Basware network.\r\n-Owner (1): Order is sent only to email address(es) indicated by field 'otherOrderingEmail'. Used for example when goods were picked up from a store and no order needs to be sent to supplier.\r\n-SupplierAndOwner (2): Order is sent to both supplier and email addresses indicated by field 'otherOrderingEmail'. Order delivery method to supplier is determined by orderingMethod, same as above."
+          example: Supplier
+        supplierOrderingEmail:
+          maxLength: 1800
+          minLength: 0
+          type: string
+          description: Specifies the email address(es) where the order is sent to when sending order to supplier. Can contain multiple email addresses. Used when orderRecipientType is set as 'Owner' or 'SupplierAndOwner'.
+          nullable: true
+          example: john.smith@company.com
+        ownerOrderingEmail:
+          maxLength: 1800
+          minLength: 0
+          type: string
+          description: 'Contact email to which supplier can send questions about the order. Note: When order is sent to supplier, it is not sent to this email. Note: Fields visible on the order sent to supplier are configured in P2P Purchase.'
+          nullable: true
+          example: john.smith@company.com
+        otherOrderingEmail:
+          type: string
+          description: The email address(es) where the order is sent by P2P purchase. Can contain multiple email addresses. The order is sent to these addresses when orderRecipientType is 'Owner' or 'Both'.
+          nullable: true
+          example: john.smith@company.com
+        releaseOrdersRequired:
+          type: boolean
+          description: Used only if the order type is blanket to specify, if the blanket purchase order requires release orders.
+          example: false
+        hidePricesFromSupplier:
+          type: boolean
+          description: Specifies, if all price information is hidden from the supplier in the outgoing purchase order.
+          example: false
+        attachPdfToNetworkOrder:
+          type: boolean
+          description: Specifies if order is attached as pdf file when order is sent to supplier through Basware network.
+          nullable: true
+          example: true
+        grossSum:
+          type: number
+          description: Gross sum of the grouped order line(s).
+          format: double
+          example: 125
+        netSum:
+          type: number
+          description: Net sum of the grouped order line(s).
+          format: double
+          example: 100
+        receivers:
+          type: array
+          items:
+            $ref: '#/components/schemas/ExportedPurchaseRequisitionUserEntity'
+          description: List of people who should receive the order.
+          nullable: true
+        receiverToContact:
+          $ref: '#/components/schemas/ExportedPurchaseRequisitionUserEntity'
+        requisitionLines:
+          type: array
+          items:
+            $ref: '#/components/schemas/GroupingLine'
+          description: Specifies the requisition lines which are on-course for being grouped to this order.
+          nullable: true
+      additionalProperties: false
+    ExportedPurchaseRequisitionCodingRow:
+      required:
+      - externalCode
+      type: object
+      properties:
+        externalCode:
+          maxLength: 36
+          minLength: 1
+          type: string
+          description: External identifier that is used as a key in API for the coding line.
+          example: 1547e4371231ad32dff2132985aae212
+        rowIndex:
+          type: integer
+          description: Purchase internal document coding line number.
+          format: int32
+          example: 1
+        splitPercent:
+          type: number
+          description: Percentage of requisition line’s cost which this coding row covers (cost can be split between coding lines). Current always 100 (as long as there is one coding line per requisition line).
+          format: double
+          example: 100
+        accountCode:
+          maxLength: 25
+          minLength: 0
+          type: string
+          description: Account code.
+          nullable: true
+          example: '10017'
+        accountName:
+          maxLength: 2000
+          minLength: 0
+          type: string
+          description: Account name.
+          nullable: true
+          example: IT equipment costs
+        costCenterCode:
+          maxLength: 25
+          minLength: 0
+          type: string
+          description: Cost center code.
+          nullable: true
+          example: '23800'
+        costCenterName:
+          maxLength: 2000
+          minLength: 0
+          type: string
+          description: Cost center name.
+          nullable: true
+          example: Lift engine research
+        projectCode:
+          maxLength: 25
+          minLength: 0
+          type: string
+          description: Project code.
+          nullable: true
+          example: ''
+        projectName:
+          maxLength: 255
+          minLength: 0
+          type: string
+          description: Project name.
+          nullable: true
+          example: ''
+        fixedAssetCode:
+          maxLength: 25
+          minLength: 0
+          type: string
+          description: Fixed asset code.
+          nullable: true
+          example: ''
+        fixedAssetName:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: Fixed asset name.
+          nullable: true
+          example: ''
+        fixedAssetSubCode:
+          maxLength: 25
+          minLength: 0
+          type: string
+          description: Fixed asset sub code.
+          nullable: true
+          example: ''
+        fixedAssetSubName:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: Fixed asset sub name.
+          nullable: true
+          example: ''
+        internalOrderCode:
+          maxLength: 25
+          minLength: 0
+          type: string
+          description: Internal order code.
+          nullable: true
+          example: ''
+        internalOrderName:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: Internal order name.
+          nullable: true
+          example: ''
+        profitCenterCode:
+          maxLength: 25
+          minLength: 0
+          type: string
+          description: Profit center code.
+          nullable: true
+          example: ''
+        profitCenterName:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: Profit center name.
+          nullable: true
+          example: ''
+        businessUnitCode:
+          maxLength: 25
+          minLength: 0
+          type: string
+          description: Business unit code.
+          nullable: true
+          example: ''
+        businessUnitName:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: Business unit name.
+          nullable: true
+          example: ''
+        projectSubCode:
+          maxLength: 25
+          minLength: 0
+          type: string
+          description: Project sub code.
+          nullable: true
+          example: ''
+        projectSubName:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: Project sub name.
+          nullable: true
+          example: ''
+        employeeCode:
+          maxLength: 25
+          minLength: 0
+          type: string
+          description: Employee code.
+          nullable: true
+          example: '815722'
+        employeeName:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: Employee name.
+          nullable: true
+          example: Jim Green
+        vehicleName:
+          maxLength: 255
+          minLength: 0
+          type: string
+          description: Vehicle name.
+          nullable: true
+          example: ''
+        vehicleNumber:
+          maxLength: 25
+          minLength: 0
+          type: string
+          description: Vehicle number.
+          nullable: true
+          example: ''
+        salesOrderCode:
+          maxLength: 25
+          minLength: 0
+          type: string
+          description: Sales order code.
+          nullable: true
+          example: ''
+        salesOrderName:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: Sales order name.
+          nullable: true
+          example: ''
+        salesOrderSubCode:
+          maxLength: 25
+          minLength: 0
+          type: string
+          description: Sales order sub code.
+          nullable: true
+          example: ''
+        salesOrderSubName:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: Sales order sub name.
+          nullable: true
+          example: ''
+        customerCode:
+          maxLength: 25
+          minLength: 0
+          type: string
+          description: Customer code.
+          nullable: true
+          example: ''
+        customerName:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: Customer name.
+          nullable: true
+          example: ''
+        accAssignmentCategoryCode:
+          maxLength: 25
+          minLength: 0
+          type: string
+          description: Account assignment category code.
+          nullable: true
+          example: ''
+        accAssignmentCategoryName:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: Account assignment category name.
+          nullable: true
+          example: ''
+        budgetCode:
+          maxLength: 25
+          minLength: 0
+          type: string
+          description: Budget code.
+          nullable: true
+          example: B36782
+        budgetName:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: Budget name.
+          nullable: true
+          example: IT equipment 2020
+        serviceCode:
+          maxLength: 25
+          minLength: 0
+          type: string
+          description: Service code.
+          nullable: true
+          example: ''
+        serviceName:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: Service name.
+          nullable: true
+          example: ''
+        businessAreaCode:
+          maxLength: 25
+          minLength: 0
+          type: string
+          description: Business area code.
+          nullable: true
+          example: ''
+        businessAreaName:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: Business area name.
+          nullable: true
+          example: ''
+        workOrderCode:
+          maxLength: 25
+          minLength: 0
+          type: string
+          description: Work order code.
+          nullable: true
+          example: ''
+        workOrderName:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: Work order name.
+          nullable: true
+          example: ''
+        workOrderSubCode:
+          maxLength: 25
+          minLength: 0
+          type: string
+          description: Work order sub code.
+          nullable: true
+          example: ''
+        workOrderSubName:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: Work order sub name.
+          nullable: true
+          example: ''
+        distributionCode:
+          maxLength: 25
+          minLength: 0
+          type: string
+          description: Distribution code.
+          nullable: true
+          example: ''
+        distributionMode:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: Distribution mode.
+          nullable: true
+          example: ''
+        dimCode1:
+          maxLength: 25
+          minLength: 0
+          type: string
+          description: DimCode1-10 are often used for additional, customer-specific, coding dimensions. Specifies the dimension code.
+          nullable: true
+          example: '2800'
+        dimCode2:
+          maxLength: 25
+          minLength: 0
+          type: string
+          nullable: true
+          example: ''
+        dimCode3:
+          maxLength: 25
+          minLength: 0
+          type: string
+          nullable: true
+          example: ''
+        dimCode4:
+          maxLength: 25
+          minLength: 0
+          type: string
+          nullable: true
+          example: ''
+        dimCode5:
+          maxLength: 25
+          minLength: 0
+          type: string
+          nullable: true
+          example: ''
+        dimCode6:
+          maxLength: 25
+          minLength: 0
+          type: string
+          nullable: true
+          example: ''
+        dimCode7:
+          maxLength: 25
+          minLength: 0
+          type: string
+          nullable: true
+          example: ''
+        dimCode8:
+          maxLength: 25
+          minLength: 0
+          type: string
+          nullable: true
+          example: ''
+        dimCode9:
+          maxLength: 25
+          minLength: 0
+          type: string
+          nullable: true
+          example: ''
+        dimCode10:
+          maxLength: 25
+          minLength: 0
+          type: string
+          nullable: true
+          example: ''
+        dimName1:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: DimName1-10 are often used for additional, customer-specific, coding dimensions. Specifies the dimension name.
+          nullable: true
+          example: EU Purchases
+        dimName2:
+          maxLength: 250
+          minLength: 0
+          type: string
+          nullable: true
+          example: ''
+        dimName3:
+          maxLength: 250
+          minLength: 0
+          type: string
+          nullable: true
+          example: ''
+        dimName4:
+          maxLength: 250
+          minLength: 0
+          type: string
+          nullable: true
+          example: ''
+        dimName5:
+          maxLength: 250
+          minLength: 0
+          type: string
+          nullable: true
+          example: ''
+        dimName6:
+          maxLength: 250
+          minLength: 0
+          type: string
+          nullable: true
+          example: ''
+        dimName7:
+          maxLength: 250
+          minLength: 0
+          type: string
+          nullable: true
+          example: ''
+        dimName8:
+          maxLength: 250
+          minLength: 0
+          type: string
+          nullable: true
+          example: ''
+        dimName9:
+          maxLength: 250
+          minLength: 0
+          type: string
+          nullable: true
+          example: ''
+        dimName10:
+          maxLength: 250
+          minLength: 0
+          type: string
+          nullable: true
+          example: ''
+        num1:
+          type: number
+          description: Num1-5 can be used for additional, customer-specific, numeric fields.
+          format: double
+          nullable: true
+        num2:
+          type: number
+          format: double
+          nullable: true
+        num3:
+          type: number
+          format: double
+          nullable: true
+        num4:
+          type: number
+          format: double
+          nullable: true
+        num5:
+          type: number
+          format: double
+          nullable: true
+        text1:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: Text1-5 can be used for additional, customer-specific, text fields
+          nullable: true
+          example: ''
+        text2:
+          maxLength: 250
+          minLength: 0
+          type: string
+          nullable: true
+          example: ''
+        text3:
+          maxLength: 250
+          minLength: 0
+          type: string
+          nullable: true
+          example: ''
+        text4:
+          maxLength: 250
+          minLength: 0
+          type: string
+          nullable: true
+          example: ''
+        text5:
+          maxLength: 250
+          minLength: 0
+          type: string
+          nullable: true
+          example: ''
+        date1:
+          type: string
+          description: Date1-5 can be used for additional, customer-specific, date fields
+          format: date-time
+          nullable: true
+        date2:
+          type: string
+          format: date-time
+          nullable: true
+        date3:
+          type: string
+          format: date-time
+          nullable: true
+        date4:
+          type: string
+          format: date-time
+          nullable: true
+        date5:
+          type: string
+          format: date-time
+          nullable: true
+      additionalProperties: false
+    Creator:
+      type: object
+      properties:
+        personCode:
+          maxLength: 25
+          minLength: 0
+          type: string
+          description: Person code.
+          nullable: true
+          example: '32232'
+        userName:
+          maxLength: 227
+          minLength: 0
+          type: string
+          description: User name.
+          nullable: true
+          example: Timothy Smith
+        loginAccount:
+          maxLength: 100
+          minLength: 0
+          type: string
+          description: Login account.
+          nullable: true
+          example: company\\timsmith
+        emailAddress:
+          maxLength: 320
+          minLength: 0
+          pattern: ^(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*)@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])$
+          type: string
+          description: Email address.
+          nullable: true
+          example: timothy.smith@company.com
+        externalCode:
+          maxLength: 50
+          minLength: 0
+          type: string
+          description: External code.
+          nullable: true
+          example: douikj327sa8d07213879
+      additionalProperties: false
+      description: Specifies who has created the order / requisition.
+    DeleteRequest:
+      type: object
+      properties:
+        lastUpdated:
+          type: string
+          description: 'To delete records updated after specific time, use lastUpdated -field. This will delete all items that have been updated after the specified date. In response, user will get the taskStatus api link where the task status can be checked. Note: ''0001-01-01'' can be used to delete all records.'
+          format: date-time
+          nullable: true
+        externalCode:
+          maxLength: 36
+          minLength: 0
+          type: string
+          description: Single item can be deleted using externalCode and final status is returned immediately.
+          nullable: true
+      additionalProperties: false
+    DeleteResponse:
+      type: object
+      properties:
+        statusApiLink:
+          type: string
+          nullable: true
+        taskName:
+          type: string
+          nullable: true
+        taskStatus:
+          type: string
+          nullable: true
+      additionalProperties: false
+    ExportedPurchaseRequisitionUserEntity:
+      type: object
+      properties:
+        personCode:
+          type: string
+          description: Person code.
+          nullable: true
+          example: '031573'
+        userName:
+          type: string
+          description: User name.
+          nullable: true
+          example: Jim Huskinson
+        loginAccount:
+          type: string
+          description: Login account.
+          nullable: true
+          example: company\\jimhuski
+        emailAddress:
+          type: string
+          description: Email address.
+          nullable: true
+          example: jim.huskinson@company.com
+        externalCode:
+          type: string
+          description: External code.
+          nullable: true
+          example: 8e5a304e74d34dc19911425914aae427
+      additionalProperties: false
+    ExportedPurchaseRequisitionLineEntity:
+      required:
+      - companyCurrency
+      - externalCode
+      - groupCurrency
+      - hidePricesFromSupplier
+      - refundLine
+      - releaseOrdersRequired
+      - requisitionLineNumber
+      type: object
+      properties:
+        externalCode:
+          maxLength: 100
+          minLength: 1
+          type: string
+          description: External identifier that is used as a key in API for the requisition line.
+          example: 987236sd-sd31-3562-1239-9asffa986asd
+        requisitionLineNumber:
+          maxLength: 100
+          minLength: 1
+          type: string
+          description: The requisition line number in Basware P2P.
+          example: '1'
+        extRequisitionLineNumber:
+          maxLength: 100
+          minLength: 0
+          type: string
+          description: The requisition line number in the external system. The value must be unique for each line on the requisition.
+          nullable: true
+          example: '1'
+        isRejected:
+          type: boolean
+          description: Specifies if the requisition line is rejected.
+          example: false
+        lineStatus:
+          enum:
+          - Approved
+          - Canceled
+          - Rejected
+          type: string
+          description: Status of the requisition line in Basware P2P.
+          example: Approved
+        categoryCode:
+          maxLength: 100
+          minLength: 0
+          type: string
+          description: Code for the item's purchasing category. The code must match a valid, active purchasing category for the organization. If invalid, the field will be emptied during import.
+          nullable: true
+          example: '6200'
+        categoryName:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: Code for the item's purchasing category.
+          nullable: true
+          example: Office equipment
+        supplierCode:
+          maxLength: 32
+          minLength: 0
+          type: string
+          description: Supplier code. The code must match a valid supplier for the organization, or it will be emptied during import. If the purchase order is a self-service order and the supplier is invalid, the import will fail.
+          nullable: true
+          example: '10280'
+        supplierName:
+          maxLength: 255
+          minLength: 0
+          type: string
+          description: Supplier name.
+          nullable: true
+          example: ACME services and supplies
+        contractNumber:
+          maxLength: 255
+          minLength: 0
+          type: string
+          description: Contract number.
+          nullable: true
+          example: '66236'
+        orderType:
+          enum:
+          - Standard
+          - Blanket
+          type: string
+        releaseOrdersRequired:
+          type: boolean
+          description: Used only if the order type is blanket to specify, if the blanket purchase order requires release orders.
+          example: false
+        sendingMethod:
+          enum:
+          - BaswareNetwork
+          - Email
+          type: string
+          description: Determines how Basware P2P sends order to supplier when the order is placed.
+          nullable: true
+          example: BaswareNetwork
+        buyerProductCode:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: A code that identifies purchased items for internal reporting and communication.
+          nullable: true
+          example: '1239873'
+        supplierProductName:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: Supplier product name.
+          nullable: true
+          example: External USB3 hard drive, 1Tb
+        supplierProductCode:
+          maxLength: 50
+          minLength: 0
+          type: string
+          description: Supplier product code.
+          nullable: true
+          example: '126587213'
+        manufacturerProductCode:
+          maxLength: 255
+          minLength: 0
+          type: string
+          description: Manufacturer product code is an identification number supplied by a manufacturer to uniquely identify products that aren't easily distinquishable from one another. It allows consumers to search for the exact product they need without any technical knowledge. Commonly used for example with automotive or electronics replacement parts. Required P2P 23.10 or later.
+          nullable: true
+          example: ManufacturerProductCode
+        description:
+          maxLength: 2000
+          minLength: 0
+          type: string
+          description: Description.
+          nullable: true
+          example: 1Tb external hard disk
+        validityPeriodStartDate:
+          type: string
+          description: 'Used only if the order type is blanket to specify the start date for blanket purchase order validity period (date format: yyyy-MM-dd).'
+          format: date-time
+          nullable: true
+          example: ''
+        validityPeriodEndDate:
+          type: string
+          description: 'Used only if the order type is blanket to specify the end date for blanket purchase order validity period (date format: yyyy-MM-dd).'
+          format: date-time
+          nullable: true
+          example: ''
+        leadTime:
+          maxLength: 255
+          minLength: 0
+          type: string
+          description: Specifies how soon after receiving order the supplier usually is able to deliver the goods. Informative field.
+          nullable: true
+          example: ''
+        desiredDeliveryDate:
+          type: string
+          description: Desired date the goods are to be delivered.
+          format: date-time
+          nullable: true
+          example: '2020-01-08T00:00:00'
+        desiredDeliveryEndDate:
+          type: string
+          description: Desired end date the goods are to be delivered.
+          format: date-time
+          nullable: true
+          example: '2020-01-08T00:00:00'
+        paymentTermCode:
+          maxLength: 255
+          minLength: 0
+          type: string
+          description: Payment term code. Identifies terms of payment when supplier charges the customer.
+          nullable: true
+          example: 30N
+        paymentTermName:
+          maxLength: 2000
+          minLength: 0
+          type: string
+          description: Payment term name.
+          nullable: true
+          example: 30 days net
+        deliveryTerm:
+          maxLength: 100
+          minLength: 0
+          type: string
+          description: Identifier for the agreed delivery term for the item. If empty, supplier's default delivery term is used.
+          nullable: true
+          example: ''
+        deliveryLocation:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: Delivery location. Used to further specify the delivery term.
+          nullable: true
+          example: ''
+        allowPartialDeliveries:
+          type: boolean
+          description: Indicates if the partial delivery of goods is allowed.
+          nullable: true
+          example: false
+        hidePricesFromSupplier:
+          type: boolean
+          description: Specifies, if all price information is hidden from the supplier in the outgoing purchase order.
+          example: false
+        deliveryInstruction:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: Delivery instruction for supplier.
+          nullable: true
+          example: ''
+        supplierOrderingEmail:
+          maxLength: 1800
+          minLength: 0
+          type: string
+          description: Specifies the email address(es) where the order is sent to when sending order to supplier. Can contain multiple email addresses. Used when orderRecipientType is set as 'Owner' or 'SupplierAndOwner'.
+          nullable: true
+          example: john.smith@company.com
+        ownerOrderingEmail:
+          maxLength: 1800
+          minLength: 0
+          type: string
+          description: Specifies the email address(es) where the order is sent to when sending order to owner. Can contain multiple email addresses. Used when orderRecipientType is set as 'Owner' or 'SupplierAndOwner'.
+          nullable: true
+          example: john.smith@company.com
+        otherOrderingEmail:
+          type: string
+          description: The email address(es) where the order is sent by P2P purchase. Can contain multiple email addresses. The order is sent to these addresses when orderRecipientType is 'Owner' or 'Both'.
+          nullable: true
+          example: john.smith@company.com
+        attachPdfToNetworkOrder:
+          type: boolean
+          description: Specifies if order is attached as pdf file when order is sent to supplier through Basware network.
+          nullable: true
+          example: true
+        noteToSupplier:
+          maxLength: 2000
+          minLength: 0
+          type: string
+          description: Note sent to supplier concerning this order. Send to supplier when order is placed.
+          nullable: true
+          example: ''
+        additionalInfo:
+          maxLength: 2000
+          minLength: 0
+          type: string
+          description: Additional information. Contains data from custom fields in free-text ordering forms.
+          nullable: true
+          example: ''
+        receiveAutomatically:
+          type: boolean
+          description: Indicates if the goods can be automatically received by Basware P2P on behalf of the user.
+          nullable: true
+          example: false
+        plant:
+          maxLength: 10
+          minLength: 0
+          type: string
+          description: Plant.
+          nullable: true
+          example: ''
+        storageLocation:
+          maxLength: 100
+          minLength: 0
+          type: string
+          description: Storage location.
+          nullable: true
+          example: ''
+        unspsc:
+          maxLength: 64
+          minLength: 0
+          type: string
+          description: "The United Nations Standard Products and Services Code, a unique 8-digit number used to identify trade items, products, and services. \r\nThe value can also be used to match order lines to invoice lines. If empty, resolved by Basware P2P using the item's categoryCode."
+          nullable: true
+          example: '43211578'
+        grNote:
+          maxLength: 100
+          minLength: 0
+          type: string
+          description: Note for receiving goods.
+          nullable: true
+          example: ''
+        lineType:
+          enum:
+          - Catalog
+          - FreeText
+          - Punchout
+          - Marketplace
+          type: string
+          description: Specifies how the requisition line got created.
+          example: BaswareNetwork
+        lineDataDate1:
+          type: string
+          description: LineDataDate1-5 can be used for customer-specific date fields. These fields are from 'Line data' -tab of the requisition line in P2P.
+          format: date-time
+          nullable: true
+        lineDataDate2:
+          type: string
+          format: date-time
+          nullable: true
+        lineDataDate3:
+          type: string
+          format: date-time
+          nullable: true
+        lineDataDate4:
+          type: string
+          format: date-time
+          nullable: true
+        lineDataDate5:
+          type: string
+          format: date-time
+          nullable: true
+        lineDataNum1:
+          type: number
+          description: LineDataNum1-5 can be used for customer-specific numeric fields. These fields are from 'Line data' -tab of the requisition line in P2P.
+          format: double
+          nullable: true
+        lineDataNum2:
+          type: number
+          format: double
+          nullable: true
+        lineDataNum3:
+          type: number
+          format: double
+          nullable: true
+        lineDataNum4:
+          type: number
+          format: double
+          nullable: true
+        lineDataNum5:
+          type: number
+          format: double
+          nullable: true
+        lineDataText1:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: LineDataText1-5 can be used for customer-specific text fields. These fields are from 'Line data' -tab of the requisition line in P2P.
+          nullable: true
+          example: ''
+        lineDataText2:
+          maxLength: 250
+          minLength: 0
+          type: string
+          nullable: true
+          example: ''
+        lineDataText3:
+          maxLength: 250
+          minLength: 0
+          type: string
+          nullable: true
+          example: ''
+        lineDataText4:
+          maxLength: 250
+          minLength: 0
+          type: string
+          nullable: true
+          example: ''
+        lineDataText5:
+          maxLength: 250
+          minLength: 0
+          type: string
+          nullable: true
+          example: ''
+        quantity:
+          type: number
+          description: Defines how many items a customer wants to purchase. The quantity must contain a positive value.
+          format: double
+          nullable: true
+          example: 1
+        quantityUnit:
+          maxLength: 10
+          minLength: 0
+          type: string
+          description: Quantity unit code.
+          nullable: true
+          example: PCS
+        quantityUnitName:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: Quantity unit name.
+          nullable: true
+          example: Pieces
+        priceType:
+          enum:
+          - Net
+          - Gross
+          type: string
+          description: Defines if the unit price stated is net or gross.
+          example: Net
+        subUOM:
+          maxLength: 100
+          minLength: 0
+          type: string
+          description: Sub-unit of measure.
+          nullable: true
+          example: ''
+        refundLine:
+          type: boolean
+          description: Specifies whether the line is a refund line. True = refund line, false = not a refund line.
+          example: false
+        discountPercent:
+          maximum: 1000000000
+          minimum: 0
+          type: number
+          description: Discount percent.
+          format: double
+          nullable: true
+          example: 0
+        discountPercentReason:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: Reason for discount.
+          nullable: true
+          example: ''
+        purchaseCurrency:
+          maxLength: 25
+          minLength: 0
+          type: string
+          description: Currency code for currency in which the requisition is placed.
+          nullable: true
+          example: ''
+        companyCurrency:
+          maxLength: 25
+          minLength: 1
+          type: string
+          description: Identifies the company's home currency. All lines within a requisition have the same company home currency.
+          example: EUR
+        groupCurrency:
+          maxLength: 25
+          minLength: 1
+          type: string
+          description: Identifies the organization's home currency. All lines within a requisition have the same organization currency.
+          example: EUR
+        grossSum:
+          type: number
+          description: Gross sum in purchasing currency (=purchaseCurrency).
+          format: double
+          example: 125
+        grossSumComp:
+          type: number
+          description: Gross sum in company home currency.
+          format: double
+          example: 125
+        grossSumOrg:
+          type: number
+          description: Gross sum in organization home currency.
+          format: double
+          example: 125
+        netSum:
+          type: number
+          description: Net sum in purchasing currency (=purchaseCurrency).
+          format: double
+          example: 100
+        netSumComp:
+          type: number
+          description: Net sum in company home currency.
+          format: double
+          example: 100
+        netSumOrg:
+          type: number
+          description: Net sum of order in organization home currency.
+          format: double
+          example: 100
+        tax1Sum:
+          type: number
+          description: Tax sum 1 in purchasing currency (=purchaseCurrency).
+          format: double
+          nullable: true
+          example: 25
+        tax1SumComp:
+          type: number
+          description: Tax sum 1 in company home currency.
+          format: double
+          nullable: true
+          example: 25
+        tax1SumOrg:
+          type: number
+          description: Tax sum 1 in organization home currency.
+          format: double
+          example: 25
+        tax2Sum:
+          type: number
+          description: Tax sum 2 in purchasing currency (=purchaseCurrency).
+          format: double
+          nullable: true
+          example: 0
+        tax2SumComp:
+          type: number
+          description: Tax sum 2 in company home currency.
+          format: double
+          nullable: true
+          example: 0
+        tax2SumOrg:
+          type: number
+          description: Tax sum 2 in organization home currency.
+          format: double
+          nullable: true
+          example: 0
+        taxTotal:
+          type: number
+          description: Total tax sum in purchasing currency (=purchaseCurrency).
+          format: double
+          example: 25
+        taxTotalComp:
+          type: number
+          description: Total tax sum in company home currency.
+          format: double
+          example: 25
+        taxTotalOrg:
+          type: number
+          description: Total tax sum in organization home currency.
+          format: double
+          example: 25
+        taxCategory:
+          maxLength: 25
+          minLength: 0
+          type: string
+          description: Tax category
+          nullable: true
+          example: ''
+        taxCode:
+          maxLength: 32
+          minLength: 0
+          type: string
+          description: Tax code.
+          nullable: true
+          example: T25
+        taxJuristictionCode:
+          maxLength: 25
+          minLength: 0
+          type: string
+          description: Tax juristiction code.
+          nullable: true
+          example: ''
+        taxPercent:
+          maximum: 1000000000
+          minimum: -1000000000
+          type: number
+          description: Tax percent 1.
+          format: double
+          nullable: true
+          example: 25
+        taxPercent2:
+          type: number
+          description: Tax percent 2. Can be used for example for handling reverse charges on EU VAT.
+          format: double
+          nullable: true
+          example: 0
+        grossPrice:
+          type: number
+          description: Gross unit price in purchasing currency (with discount).
+          format: double
+          example: 125
+        grossPriceComp:
+          type: number
+          description: Gross unit price in company currency (with discount).
+          format: double
+          example: 125
+        grossPriceOrg:
+          type: number
+          description: Gross unit price in organization currency (with discount).
+          format: double
+          example: 125
+        grossUnitPrice:
+          type: number
+          description: Gross unit price in purchasing currency (without discount).
+          format: double
+          nullable: true
+          example: 125
+        grossUnitPriceComp:
+          type: number
+          description: Gross unit price in company currency (without discount).
+          format: double
+          nullable: true
+          example: 125
+        grossUnitPriceOrg:
+          type: number
+          description: Gross unit price in organization currency (without discount).
+          format: double
+          nullable: true
+          example: 125
+        netPrice:
+          type: number
+          description: Net unit price in purchasing currency (with discount).
+          format: double
+          example: 100
+        netPriceComp:
+          type: number
+          description: Net unit price in company currency (with discount).
+          format: double
+          example: 100
+        netPriceOrg:
+          type: number
+          description: Net unit price in organization currency (with discount).
+          format: double
+          example: 100
+        netUnitPrice:
+          type: number
+          description: Net unit price in purchasing currency (without discount).
+          format: double
+          nullable: true
+        netUnitPriceComp:
+          type: number
+          description: Net unit price in organization currency (without discount).
+          format: double
+          nullable: true
+          example: 100
+        netUnitPriceOrg:
+          type: number
+          description: Net unit price in company currency (without discount).
+          format: double
+          nullable: true
+          example: 100
+        conversionNumerator:
+          type: number
+          description: Conversion numerator. Factor for conversions.
+          format: double
+          nullable: true
+          example: 1
+        conversionDenominator:
+          type: number
+          description: Conversion denominator. Factor for conversions.
+          format: double
+          nullable: true
+          example: 1
+        materialGroup:
+          maxLength: 100
+          minLength: 0
+          type: string
+          description: Material group.
+          nullable: true
+          example: ''
+        linePricingDate1:
+          type: string
+          description: LinePricingDate1-5 can be used for customer-specific date fields. These fields are from 'Pricing' -tab of the requisition line in P2P.
+          format: date-time
+          nullable: true
+        linePricingDate2:
+          type: string
+          format: date-time
+          nullable: true
+        linePricingDate3:
+          type: string
+          format: date-time
+          nullable: true
+        linePricingDate4:
+          type: string
+          format: date-time
+          nullable: true
+        linePricingDate5:
+          type: string
+          format: date-time
+          nullable: true
+        linePricingNum1:
+          type: number
+          description: LinePricingNum1-5 can be used for customer-specific numeric fields. These fields are from 'Pricing' -tab of the requisition line in P2P.
+          format: double
+          nullable: true
+        linePricingNum2:
+          type: number
+          format: double
+          nullable: true
+        linePricingNum3:
+          type: number
+          format: double
+          nullable: true
+        linePricingNum4:
+          type: number
+          format: double
+          nullable: true
+        linePricingNum5:
+          type: number
+          format: double
+          nullable: true
+        linePricingText1:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: LinePricingText1-5 can be used for customer-specific text fields. These fields are from 'Pricing' -tab of the requisition line in P2P.
+          nullable: true
+          example: ''
+        linePricingText2:
+          maxLength: 250
+          minLength: 0
+          type: string
+          nullable: true
+          example: ''
+        linePricingText3:
+          maxLength: 250
+          minLength: 0
+          type: string
+          nullable: true
+          example: ''
+        linePricingText4:
+          maxLength: 250
+          minLength: 0
+          type: string
+          nullable: true
+          example: ''
+        linePricingText5:
+          maxLength: 250
+          minLength: 0
+          type: string
+          nullable: true
+          example: ''
+        receivers:
+          type: array
+          items:
+            $ref: '#/components/schemas/ExportedPurchaseRequisitionUserEntity'
+          description: Lists person(s) who should receive the goods.
+          nullable: true
+        receiverToContact:
+          $ref: '#/components/schemas/ExportedPurchaseRequisitionUserEntity'
+        deliveryAddress:
+          $ref: '#/components/schemas/DeliveryAddress'
+        codingRows:
+          type: array
+          items:
+            $ref: '#/components/schemas/ExportedPurchaseRequisitionCodingRow'
+          description: 'Coding line(s). Note: Each requisition line currently has one coding row.'
+          nullable: true
+      additionalProperties: false
+      description: Purchase requisition lines.
+    DeliveryAddress:
+      required:
+      - name
+      type: object
+      properties:
+        name:
+          maxLength: 250
+          minLength: 1
+          type: string
+          description: Specifies the address’ name for the goods delivery.
+          example: Maple street office
+        pObox:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: PO box
+          nullable: true
+          example: ''
+        streetName:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: Street name.
+          nullable: true
+          example: Maple street
+        additionalStreetName:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: Additional street name.
+          nullable: true
+          example: ''
+        blockName:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: Block name.
+          nullable: true
+          example: ''
+        buildingName:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: Building name.
+          nullable: true
+          example: ''
+        buildingNumber:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: Building number.
+          nullable: true
+          example: '68'
+        department:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: Department.
+          nullable: true
+          example: ''
+        floor:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: Floor.
+          nullable: true
+          example: ''
+        room:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: Room.
+          nullable: true
+          example: ''
+        postalZone:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: Postal zone.
+          nullable: true
+          example: '02600'
+        city:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: City.
+          nullable: true
+          example: Toronto
+        region:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: Region.
+          nullable: true
+          example: ''
+        district:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: District.
+          nullable: true
+          example: ''
+        countryCode:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: Country code.
+          nullable: true
+          example: CA
+        countryName:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: Country name.
+          nullable: true
+          example: Canada
+        description:
+          maxLength: 1000
+          minLength: 0
+          type: string
+          description: Description.
+          nullable: true
+          example: ''
+        globalLocationNumber:
+          maxLength: 13
+          minLength: 0
+          type: string
+          description: Global location number.
+          nullable: true
+          example: ''
+        countrySubEntity:
+          maxLength: 50
+          minLength: 0
+          type: string
+          nullable: true
+          example: TX
+        countrySubEntityDescription:
+          maxLength: 50
+          minLength: 0
+          type: string
+          nullable: true
+          example: Texas
+        addressId:
+          maxLength: 2000
+          minLength: 0
+          type: string
+          description: Identifier for the address.
+          nullable: true
+          example: '1000467'
+        addressSchemeId:
+          maxLength: 2000
+          minLength: 0
+          type: string
+          description: Can be used to specify a code that represents the agency or organization responsible for the addressID numbering.
+          nullable: true
+          example: BuyerAccountId
+      additionalProperties: false
+      description: "Specifies delivery address for the purchase requisition. If no address specified, uses the default delivery address of organization (configured in P2P).\r\nDelivery address on header level applies to entire purchase reuisition. If addresses are also provided on requisition lines, these will apply only to the corresponding lines."
+    ErrorEntity:
+      type: object
+      properties:
+        externalCode:
+          type: string
+          description: External code of record on which error occurred (when available).
+          nullable: true
+          example: 4847-31231212-212121-1212
+        type:
+          enum:
+          - BUSINESS
+          - VALIDATION
+          - TECHNICAL
+          - SECURITY
+          type: string
+          description: Error type.
+          example: ''
+        code:
+          enum:
+          - EXTERNAL_CODE_MISMATCH
+          - SCHEMA_VALIDATION_ERROR
+          - CONFLICT_IN_POST
+          - DATA_ORIGIN_VALIDATION_ERROR
+          - ACCESS_TOKEN_VALIDATION_ERROR
+          - CREDENTIAL_VALIDATION_ERROR
+          - PARAMETER_VALIDATION_ERROR
+          - UNEXPECTED_ERROR
+          - METHOD_NOT_ALLOWED
+          - ENTITY_NOT_FOUND
+          - DATA_VALIDATION_FAILED
+          - SNS_PUBLISH_ERROR
+          - SQS_PUBLISH_ERROR
+          type: string
+          description: Error code.
+          example: ''
+        message:
+          type: string
+          description: Specific error message.
+          nullable: true
+          example: ''
+        info:
+          type: string
+          description: Information about type of the error.
+          nullable: true
+          example: ''
+      additionalProperties: false
+    ExportedPurchaseRequisitionsResponse:
+      required:
+      - exportedPurchaseRequisitions
+      type: object
+      properties:
+        exportedPurchaseRequisitions:
+          type: array
+          items:
+            $ref: '#/components/schemas/ExportedPurchaseRequisitionEntity'
+      additionalProperties: false
+    ExportedPurchaseRequisitionEntity:
+      required:
+      - companyCode
+      - companyCurrency
+      - companyName
+      - creator
+      - deliveryAddress
+      - exchangeRateComp
+      - exchangeRateOrg
+      - externalCode
+      - grossSum
+      - grossSumComp
+      - grossSumOrg
+      - groupCurrency
+      - netSum
+      - netSumComp
+      - netSumOrg
+      - organizationUnitCode
+      - organizationUnitName
+      - owner
+      - processingStatus
+      - purchaseCurrency
+      - requisitionCreationTime
+      - requisitionExportTimestamp
+      - requisitionNumber
+      - taxSum
+      - taxSumComp
+      - taxSumOrg
+      type: object
+      properties:
+        externalCode:
+          maxLength: 100
+          minLength: 1
+          type: string
+          description: External identifier that is used as a key in API for the requisition.
+          example: be84e5ba6ad748bebbe8a5a10146e685da
+        requisitionNumber:
+          maxLength: 32
+          minLength: 1
+          type: string
+          description: Requisition number in Basware P2P.
+          example: Alusta-PR-100
+        extRequisitionNumber:
+          maxLength: 100
+          minLength: 0
+          type: string
+          description: Requisition number in external system (for imported requisitions).
+          nullable: true
+          example: SAP-PR-100
+        extOrderNumber:
+          maxLength: 100
+          minLength: 0
+          type: string
+          description: Order number in external system (for imported orders).
+          nullable: true
+          example: SAP-PO-100
+        requisitionStatus:
+          enum:
+          - Approved
+          - Canceled
+          - Rejected
+          type: string
+          description: Status of the requisition in Basware P2P.
+          example: Approved
+        processingStatus:
+          enum:
+          - WaitingForExport
+          - Exported
+          type: string
+          description: Processing status of exported purchase requisition in Basware API. WaitingForExport = New requisition data (not acknowledged), which is waiting to be fetched. Exported = This requisition has been acknowledged by customer system.
+          example: WaitingForExport
+        companyCode:
+          maxLength: 25
+          minLength: 1
+          type: string
+          description: P2P company code name for buyer company.
+          example: BE100
+        companyName:
+          maxLength: 250
+          minLength: 1
+          type: string
+          description: P2P company name for buyer company.
+          example: BuyerLtd
+        organizationUnitCode:
+          maxLength: 25
+          minLength: 1
+          type: string
+          description: P2P company  code for buyer organisation unit.
+          example: BE100
+        organizationUnitName:
+          maxLength: 250
+          minLength: 1
+          type: string
+          description: P2P company name for buyer organisation unit.
+          example: Buyer Ltd
+        purchasingGroupCode:
+          maxLength: 25
+          minLength: 0
+          type: string
+          description: Purchasing group code.
+          nullable: true
+          example: PG201
+        purchasingGroupName:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: Purchasing group name.
+          nullable: true
+          example: Office equipment
+        purpose:
+          maxLength: 2000
+          minLength: 0
+          type: string
+          description: Reason why order is placed (text description).
+          nullable: true
+          example: Goods for Project A
+        desiredDeliveryDate:
+          type: string
+          description: Delivery date requested by buyer.
+          format: date-time
+          nullable: true
+          example: '2020-10-24T00:00:00'
+        desiredDeliveryEndDate:
+          type: string
+          description: Buyer requested latest delivery date.
+          format: date-time
+          nullable: true
+          example: '2020-10-24T00:00:00'
+        deliveryInstructions:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: Delivery instructions for supplier.
+          nullable: true
+          example: Delivery required between 10AM-4PM.
+        classification:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: Requisition classification code (values specified by customer). Often used to group requisitions and assign different groups to be handled to different persons.
+          nullable: true
+          example: Group F
+        requisitionCreationTime:
+          type: string
+          description: Creation time of the requisition in P2P.
+          format: date-time
+          example: '2020-10-24T00:00:00'
+        requisitionExportTimestamp:
+          type: string
+          description: Timestamp when the requisition was exported from P2P to Basware API.
+          format: date-time
+          example: '2020-10-24T00:00:00'
+        documentSource:
+          enum:
+          - P2P
+          - ImportedAsRequisition
+          - ImportedAsOrder
+          type: string
+          description: States whether the requisition was created in P2P or imported from external system.
+          example: P2P
+        documentLink:
+          type: string
+          description: URL link to view the requisition in Basware P2P.
+          format: uri
+          nullable: true
+          example: http://customertenant.p2p.basware.com/Portal/Default.aspx?forms=1&sl=1&tid=customertenant&dl=(RequisitionDetailsPage-requisitionid((e105de8f-3e13-4487-a7e5-8c1ba12d7ea9))
+        purchaseCurrency:
+          maxLength: 25
+          minLength: 1
+          type: string
+          description: Currency code for currency in which the requisition is placed.
+          example: EUR
+        companyCurrency:
+          maxLength: 25
+          minLength: 1
+          type: string
+          description: Currency code of the company in P2P for which the requisition is placed.
+          example: EUR
+        groupCurrency:
+          maxLength: 25
+          minLength: 1
+          type: string
+          description: "Currency code of the group / organization in P2P for which the requisition is placed. \r\nThe group is a parent-level entity to the company in P2P."
+          example: EUR
+        exchangeRateComp:
+          type: number
+          description: Exchange rate between requisition currency (=purchaseCurrency) and company currency.
+          format: double
+          example: 1
+        exchangeRateOrg:
+          type: number
+          description: Exchange rate between requisition currency (=purchaseCurrency) and group  currency.
+          format: double
+          example: 1
+        grossSum:
+          type: number
+          description: Gross sum of requisition in requisition currency (purchaseCurrency).
+          format: double
+          example: 125
+        grossSumComp:
+          type: number
+          description: Gross sum of requisition in company currency.
+          format: double
+          example: 125
+        grossSumOrg:
+          type: number
+          description: Gross sum of requisition in company currency.
+          format: double
+          example: 125
+        netSum:
+          type: number
+          description: Net sum of requisition in requisition currency (purchaseCurrency).
+          format: double
+          example: 100
+        netSumComp:
+          type: number
+          description: Net sum of requisition in company currency.
+          format: double
+          example: 100
+        netSumOrg:
+          type: number
+          description: Net sum of requisition in company currency.
+          format: double
+          example: 100
+        taxSum:
+          type: number
+          description: Tax sum of requisition in requisition currency (purchaseCurrency).
+          format: double
+          example: 25
+        taxSumComp:
+          type: number
+          description: Tax sum of requisition in company currency.
+          format: double
+          example: 25
+        taxSumOrg:
+          type: number
+          description: Tax sum of requisition in company currency.
+          format: double
+          example: 25
+        headerDataDate1:
+          type: string
+          description: 'HeaderDataDate1-5: Can be used for for customer-specific date fields.'
+          format: date-time
+          nullable: true
+        headerDataDate2:
+          type: string
+          format: date-time
+          nullable: true
+        headerDataDate3:
+          type: string
+          format: date-time
+          nullable: true
+        headerDataDate4:
+          type: string
+          format: date-time
+          nullable: true
+        headerDataDate5:
+          type: string
+          format: date-time
+          nullable: true
+        headerDataNum1:
+          type: number
+          description: 'HeaderDataNum1-5: Can be used for for customer-specific numeric fields.'
+          format: double
+          nullable: true
+          example: 2264
+        headerDataNum2:
+          type: number
+          format: double
+          nullable: true
+          example: 0
+        headerDataNum3:
+          type: number
+          format: double
+          nullable: true
+          example: 0
+        headerDataNum4:
+          type: number
+          format: double
+          nullable: true
+          example: 0
+        headerDataNum5:
+          type: number
+          format: double
+          nullable: true
+          example: 0
+        headerDataText1:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: 'HeaderDataText1-5: Can be used for for customer-specific text fields.'
+          nullable: true
+          example: ''
+        headerDataText2:
+          maxLength: 250
+          minLength: 0
+          type: string
+          nullable: true
+          example: ''
+        headerDataText3:
+          maxLength: 250
+          minLength: 0
+          type: string
+          nullable: true
+          example: ''
+        headerDataText4:
+          maxLength: 250
+          minLength: 0
+          type: string
+          nullable: true
+          example: ''
+        headerDataText5:
+          maxLength: 250
+          minLength: 0
+          type: string
+          nullable: true
+          example: ''
+        lastUpdated:
+          type: string
+          description: Timestamp when the purchase order was last updated (from Basware P2P or from customer end).
+          format: date-time
+        creator:
+          $ref: '#/components/schemas/Creator'
+        owner:
+          $ref: '#/components/schemas/Owner'
+        deliveryAddress:
+          $ref: '#/components/schemas/DeliveryAddress'
+        lines:
+          type: array
+          items:
+            $ref: '#/components/schemas/ExportedPurchaseRequisitionLineEntity'
+          nullable: true
+        orderGrouping:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderGrouping'
+          description: Specifies how the requisition lines will be grouped by P2P into orders (according to grouping criteria).
+          nullable: true
+      additionalProperties: false
+    Owner:
+      type: object
+      properties:
+        personCode:
+          maxLength: 25
+          minLength: 0
+          type: string
+          description: Person code.
+          nullable: true
+          example: '22110'
+        userName:
+          maxLength: 227
+          minLength: 0
+          type: string
+          description: User name.
+          nullable: true
+          example: Liz Green
+        loginAccount:
+          maxLength: 100
+          minLength: 0
+          type: string
+          description: Login account.
+          nullable: true
+          example: company\\lizgreen
+        emailAddress:
+          maxLength: 320
+          minLength: 0
+          pattern: ^(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*)@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])$
+          type: string
+          description: Email address.
+          nullable: true
+          example: liz.green@company.com
+        externalCode:
+          maxLength: 50
+          minLength: 0
+          type: string
+          description: External code.
+          nullable: true
+          example: 908123lkhjhdsai213io7
+      additionalProperties: false
+      description: Specifies owner for the order / requisition. Owner is by default same person as creator, unless manually changed.
+    ResponseEntityList:
+      type: object
+      properties:
+        requestId:
+          type: string
+          description: ID of the request on which error occurred (generated by Basware API).
+          nullable: true
+          example: fbc082a2-65a4-469c-b230-d84a252f18fc
+        hasErrors:
+          type: boolean
+          description: Specifies whether the request has errors.
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorEntity'
+          nullable: true
+      additionalProperties: false
+      description: Errors returned here are returned synchronously from Basware API middle layer. Additional errors coming from target system(s) may be returned through errorFeedbacks API.
+  securitySchemes:
+    HTTPBasic:
+      type: http
+      scheme: basic

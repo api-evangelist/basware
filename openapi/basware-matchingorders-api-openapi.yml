@@ -1,0 +1,774 @@
+openapi: 3.0.2
+info:
+  title: Basware OAUTH2 authentication APIs AccountingDocuments MatchingOrders API
+  description: "**Using OAUTH2.0 authentication:**\n\nGet API access token from api.basware.com/tokens\n1. Using client id and client secret, which you can obtain from Basware. \n2. Specify which APIs can be accessed by using the token e.g. Read only access to vendors API only (these are called scopes). Available scopes are listed at <https://developer.basware.com/api/p2p/manual#AccessRights>. \n3. Each token has an expiration time, until which it can be used to call APIs.\n\nWhen using OAUTH2 authentication, you need to pass the OAUTH2 authentication token when calling Basware API endpoints. Available Basware API operations are documented at <https://api.basware.com/swagger>. \n\nSee the Basware API developer site at <https://developer.basware.com/api/p2p/manual#Authentication> for more details on API authentication."
+  version: 1.0.0
+  x-logo:
+    url: https://fastapi.tiangolo.com/img/logo-margin/logo-teal.png
+tags:
+- name: MatchingOrders
+paths:
+  /v1/matchingOrders:
+    get:
+      tags:
+      - MatchingOrders
+      summary: Returns matching order headers posted to Basware API.
+      description: ''
+      parameters:
+      - name: pageSize
+        in: query
+        description: A limit for the number of items to be returned for one request. Limit can range between 1 and 500 items.
+        schema:
+          type: integer
+          format: int32
+          default: 500
+      - name: companyCode
+        in: query
+        description: Company filter. Returns items for specific company.
+        schema:
+          type: string
+          default: ''
+      - name: orderStatus
+        in: query
+        description: Order status filter. Returns items for specific status.
+        schema:
+          type: string
+          default: ''
+      - name: lastUpdated
+        in: query
+        description: Date Filter. Returns items that have been updated after specified date.
+        schema:
+          type: string
+          format: date-time
+      - name: x-amz-meta-continuationtoken
+        in: header
+        description: Used to get next page of results when item count indicated by 'pageSize' is exceeded. A token is returned in header (not body) parameter 'X-amz-meta-continuationToken' of the response whenever there are more records to fetch. Post the received value here in a new HEADER parameter on the next GET request to receive the next page of results. When getting the next page of results, you must include the same query parameters that were used when getting the first page.
+        schema:
+          type: string
+        example: a4cb3d5f-441a-469d-9234-36f631bc5249
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OrderResponse'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OrderResponse'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found. Request was successful and no records were found.
+        '500':
+          description: Unexpected error
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+    post:
+      tags:
+      - MatchingOrders
+      summary: Creates new order header(s), overwrites previous record if exists.
+      description: "Notes: \r\n1) Please make sure you have POSTed the order header to matchingOrders API before posting lines to the same order through matchingOrderLines API. It is enough to POST the order header only once (unless updates are needed to the order header). The order becomes available in P2P after order lines lines have been added.\r\n2) Vendor(s) used by the order need to be in P2P before importing the order. \r\n3) The following fields uniquely identify an order in P2P: Order number, source system, company code and organization element code.\r\n\r\nPlease see section \"[Usage scenario 2: Import external purchase orders for Order Matching](https://developer.basware.com/api/p2p/manual#usage2)\" for details on implementing this API. Check out also the [example JSONs using a minimal feasible set of fields](https://developer.basware.com/api/p2p/templates) from the developer site."
+      parameters:
+      - name: Content-Type
+        in: header
+        description: Specifies the media type of the resource. Value application/json is supported.
+        schema:
+          type: string
+        example: application/json
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/OrderEntity'
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/OrderEntity'
+          text/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/OrderEntity'
+          application/*+json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/OrderEntity'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/OrderEntity'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/OrderEntity'
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/OrderEntity'
+        '400':
+          description: Bad request
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+        '401':
+          description: Unauthorized
+        '409':
+          description: Conflict
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+        '500':
+          description: Unexpected error
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+    delete:
+      tags:
+      - MatchingOrders
+      summary: Deletes data from Basware API. For manual one-time operations.
+      description: "For manual one-time operations only, such as a manual clean-up to remove test data generated during API integration development. Only removes records from API layer. \r\nDeletion in target systems needs to be done separately using the data deletion mechanisms available in each of the target system in addition to deleting the data in Basware API."
+      requestBody:
+        description: "Contains the body of the request.\r\n            Either externalCode or lastUpdated -field is required. If both values are provided, externalCode will have the priority."
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/DeleteRequest'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteRequest'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/DeleteRequest'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/DeleteRequest'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/DeleteResponse'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/DeleteResponse'
+        '202':
+          description: RequestAccepted
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/DeleteResponse'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/DeleteResponse'
+        '400':
+          description: BadRequest
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+        '401':
+          description: Unauthorized
+        '500':
+          description: Unexpected error
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+  /v1/matchingOrders/{externalCode}:
+    get:
+      tags:
+      - MatchingOrders
+      summary: Returns single matching order header by externalCode -identifier.
+      description: ''
+      parameters:
+      - name: externalCode
+        in: path
+        description: The ExternalCode of the entity to be fetched
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OrderEntity'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderEntity'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OrderEntity'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found. Request was successful and no records were found.
+        '500':
+          description: Unexpected error
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+    patch:
+      tags:
+      - MatchingOrders
+      summary: Updates fields on specified order header. Preserves existing values in fields, which were not updated.
+      description: "Note: Basware API considers 'null' value in field(s) equivalent to the field(s) not being sent. For this reason patch method does not support setting field values to 'null'.\r\nPlease see section \"[Usage scenario 2: Import external purchase orders for Order Matching](https://developer.basware.com/api/p2p/manual#usage2)\" for details on implementing this API. Check out also the [example JSONs using a minimal feasible set of fields](https://developer.basware.com/api/p2p/templates) from the developer site."
+      parameters:
+      - name: externalCode
+        in: path
+        description: The ExternalCode of the order to be updated
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: Entity to be updated
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/OrderEntity'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrderEntity'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OrderEntity'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/OrderEntity'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OrderEntity'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderEntity'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OrderEntity'
+        '400':
+          description: Bad request
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found. Record to update not found.
+        '500':
+          description: Unexpected error
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+components:
+  schemas:
+    DeleteRequest:
+      type: object
+      properties:
+        lastUpdated:
+          type: string
+          description: 'To delete records updated after specific time, use lastUpdated -field. This will delete all items that have been updated after the specified date. In response, user will get the taskStatus api link where the task status can be checked. Note: ''0001-01-01'' can be used to delete all records.'
+          format: date-time
+          nullable: true
+        externalCode:
+          maxLength: 36
+          minLength: 0
+          type: string
+          description: Single item can be deleted using externalCode and final status is returned immediately.
+          nullable: true
+      additionalProperties: false
+    DeleteResponse:
+      type: object
+      properties:
+        statusApiLink:
+          type: string
+          nullable: true
+        taskName:
+          type: string
+          nullable: true
+        taskStatus:
+          type: string
+          nullable: true
+      additionalProperties: false
+    ErrorEntity:
+      type: object
+      properties:
+        externalCode:
+          type: string
+          description: External code of record on which error occurred (when available).
+          nullable: true
+          example: 4847-31231212-212121-1212
+        type:
+          enum:
+          - BUSINESS
+          - VALIDATION
+          - TECHNICAL
+          - SECURITY
+          type: string
+          description: Error type.
+          example: ''
+        code:
+          enum:
+          - EXTERNAL_CODE_MISMATCH
+          - SCHEMA_VALIDATION_ERROR
+          - CONFLICT_IN_POST
+          - DATA_ORIGIN_VALIDATION_ERROR
+          - ACCESS_TOKEN_VALIDATION_ERROR
+          - CREDENTIAL_VALIDATION_ERROR
+          - PARAMETER_VALIDATION_ERROR
+          - UNEXPECTED_ERROR
+          - METHOD_NOT_ALLOWED
+          - ENTITY_NOT_FOUND
+          - DATA_VALIDATION_FAILED
+          - SNS_PUBLISH_ERROR
+          - SQS_PUBLISH_ERROR
+          type: string
+          description: Error code.
+          example: ''
+        message:
+          type: string
+          description: Specific error message.
+          nullable: true
+          example: ''
+        info:
+          type: string
+          description: Information about type of the error.
+          nullable: true
+          example: ''
+      additionalProperties: false
+    OrderEntity:
+      required:
+      - companyCode
+      - currencyCode
+      - externalCode
+      - orderNumber
+      - organizationElementCode
+      - sourceSystem
+      - supplierCode
+      type: object
+      properties:
+        externalCode:
+          maxLength: 36
+          minLength: 1
+          type: string
+          description: Identifies the order for future updates through Basware API. Typically Generated by the system calling Basware API.
+          example: 6741ecc7-848a-443c-83ad-ea95e4df06fa
+        orderNumber:
+          maxLength: 100
+          minLength: 1
+          type: string
+          description: Order number. Identifier typically generated by the system in which the order is created.
+          example: '450004534'
+        sourceSystem:
+          maxLength: 36
+          minLength: 1
+          type: string
+          description: Identifies the source system from where the purchase order is originated
+          example: SAPEUR1
+        companyCode:
+          maxLength: 25
+          minLength: 1
+          type: string
+          description: Company code. Identifier for an organization element that represents the legal structure of an organization. A purchase order company is compared with the values set in the company filter when the system identifies the correct matching configuration to be used. It is also used when searching purchase orders to be matched by the system or a user.
+          example: '1010'
+        companyName:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: Company name.
+          nullable: true
+          example: Amazing Store Central City, Phoenix, Arizona
+        organizationElementCode:
+          maxLength: 25
+          minLength: 2
+          type: string
+          description: Identifier for an administrative organization element on top of the the company set for the purchase order. The organization element is used to identify if the user has rights to see the purchase order in Basware P2P Matching view.
+          example: '1000'
+        organizationElementName:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: Name of the organization element.
+          nullable: true
+          example: Amazing Store Inc.
+        orderTypeCode:
+          maxLength: 25
+          minLength: 0
+          type: string
+          description: A grouping element for purchase orders. orderTypeCode is commonly used in OM Category filters.
+          nullable: true
+          example: NB
+        currencyCode:
+          maxLength: 3
+          minLength: 2
+          type: string
+          description: Currency presentation of the purchase order document. Valid values are in ISO 4217 Alpha format.
+          example: USD
+        created:
+          type: string
+          description: 'The date when the purchase order was issued. Valid values are in format: CCYY-MM-DD. If the time zone is known, it must be represented with +hh:mm or -hh:mm or Z (which means UTC). If the time zone is not known, it must be left empty.'
+          format: date-time
+          nullable: true
+          example: '2017-07-02T07:36:13.053Z'
+        isClosed:
+          type: boolean
+          description: Indicates whether the purchase order is closed. Not inherited to order lines, which have their own indicator. Informative field.
+          nullable: true
+          example: false
+        description:
+          maxLength: 1000
+          minLength: 0
+          type: string
+          description: Description of purchase order.
+          nullable: true
+          example: Economy letters - 500
+        purchaseOrganizationCode:
+          maxLength: 25
+          minLength: 0
+          type: string
+          description: Party that is the accountable buyer of the goods/services in the referred business document. The purchaseOrganizationCode does not have an impact to the matching process.
+          nullable: true
+          example: '1017'
+        purchaseOrganizationName:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: Name of the purchase organization unit
+          nullable: true
+          example: Marketing
+        supplierCode:
+          maxLength: 25
+          minLength: 1
+          type: string
+          description: Supplier code to which the order is placed. The supplier of the goods/services in the referred business document.
+          example: '114612065012'
+        supplierName:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: Name of the supplier.
+          nullable: true
+          example: Acme Supplier Inc.
+        invoicingSupplierCode:
+          maxLength: 25
+          minLength: 0
+          type: string
+          description: Supplier code of supplier sending the invoice. In some cases may be different from the main supplierCode.
+          nullable: true
+          example: '540077'
+        invoicingSupplierName:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: Name of supplier sending the invoice.
+          nullable: true
+          example: Office Warehouse Inc.
+        requestedDeliveryDate:
+          type: string
+          description: 'Date when goods/services are expected to be delivered. Valid values are in format: CCYY-MM-DD. If the time zone is known, it must be represented with +hh:mm or -hh:mm or Z (which means UTC). If the time zone is not known, it must be left empty.'
+          format: date-time
+          nullable: true
+          example: '2018-07-02T07:36:13.053Z'
+        actualDeliveryDate:
+          type: string
+          description: 'Date when goods/services were delivered. Valid values are in format: CCYY-MM-DD. If the time zone is known, it must be represented with +hh:mm or -hh:mm or Z (which means UTC). If the time zone is not known, it must be left empty.'
+          format: date-time
+          nullable: true
+          example: '2018-07-02T07:36:13.053Z'
+        validFrom:
+          type: string
+          description: 'Date when the validity of the purchase order starts. Valid values are in format: CCYY-MM-DD. If the time zone is known, it must be represented with +hh:mm or -hh:mm or Z (which means UTC). If the time zone is not known, it must be left empty. By default, the field does not impact the matching logic in P2P.'
+          format: date-time
+          nullable: true
+          example: '2018-01-01T07:36:13.053Z'
+        validTo:
+          type: string
+          description: 'Date when the validity of the purchase order ends. Valid values are in format: CCYY-MM-DD. If the time zone is known, it must be represented with +hh:mm or -hh:mm or Z (which means UTC). If the time zone is not known, it must be left empty. By default, the field does not impact the matching logic in P2P.'
+          format: date-time
+          nullable: true
+          example: '2018-12-31T07:36:13.053Z'
+        paymentTermCode:
+          maxLength: 25
+          minLength: 0
+          type: string
+          description: Identifier for the agreed payment term that is to be used when supplier charges the customer. Required if using matching validation rule to check payment term on order is same as on invoice. By default, this field does not impact the matching logic in P2P.
+          nullable: true
+          example: NT30
+        paymentTermName:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: Name of the payment term
+          nullable: true
+          example: 30 days net
+        text1:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: Custom field in the business document
+          nullable: true
+          example: ''
+        text2:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: Custom field in the business document
+          nullable: true
+          example: ''
+        text3:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: Custom field in the business document
+          nullable: true
+          example: ''
+        text4:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: Custom field in the business document
+          nullable: true
+          example: ''
+        text5:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: Custom field in the business document
+          nullable: true
+          example: ''
+        text6:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: Custom field in the business document
+          nullable: true
+          example: ''
+        text7:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: Custom field in the business document
+          nullable: true
+          example: ''
+        text8:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: Custom field in the business document
+          nullable: true
+          example: ''
+        text9:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: Custom field in the business document
+          nullable: true
+          example: ''
+        text10:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: Custom field in the business document
+          nullable: true
+          example: ''
+        numeric1:
+          type: number
+          description: Custom field in the business document
+          format: double
+          nullable: true
+          example: 0
+        numeric2:
+          type: number
+          description: Custom field in the business document
+          format: double
+          nullable: true
+          example: 0
+        numeric3:
+          type: number
+          description: Custom field in the business document
+          format: double
+          nullable: true
+          example: 0
+        numeric4:
+          type: number
+          description: Custom field in the business document
+          format: double
+          nullable: true
+          example: 0
+        numeric5:
+          type: number
+          description: Custom field in the business document
+          format: double
+          nullable: true
+          example: 0
+        date1:
+          type: string
+          description: 'Custom field in the business document. Valid values are in format: CCYY-MM-DD. If the time zone is known, it must be represented with +hh:mm or -hh:mm or Z (which means UTC). If the time zone is not known, it must be left empty.'
+          format: date-time
+          nullable: true
+          example: '2018-07-02T07:36:13.053Z'
+        date2:
+          type: string
+          description: 'Custom field in the business document. Valid values are in format: CCYY-MM-DD. If the time zone is known, it must be represented with +hh:mm or -hh:mm or Z (which means UTC). If the time zone is not known, it must be left empty.'
+          format: date-time
+          nullable: true
+          example: '2018-07-02T07:36:13.053Z'
+        date3:
+          type: string
+          description: 'Custom field in the business document. Valid values are in format: CCYY-MM-DD. If the time zone is known, it must be represented with +hh:mm or -hh:mm or Z (which means UTC). If the time zone is not known, it must be left empty.'
+          format: date-time
+          nullable: true
+          example: '2018-07-02T07:36:13.053Z'
+        date4:
+          type: string
+          description: 'Custom field in the business document. Valid values are in format: CCYY-MM-DD. If the time zone is known, it must be represented with +hh:mm or -hh:mm or Z (which means UTC). If the time zone is not known, it must be left empty.'
+          format: date-time
+          nullable: true
+          example: '2018-07-02T07:36:13.053Z'
+        date5:
+          type: string
+          description: 'Custom field in the business document. Valid values are in format: CCYY-MM-DD. If the time zone is known, it must be represented with +hh:mm or -hh:mm or Z (which means UTC). If the time zone is not known, it must be left empty.'
+          format: date-time
+          nullable: true
+          example: '2018-07-02T07:36:13.053Z'
+        isInvoiced:
+          type: boolean
+          description: Indicates whether the purchase order is invoiced. By default, the field does not impact the matching logic in P2P.
+          nullable: true
+          example: false
+        isDelivered:
+          type: boolean
+          description: Indicates whether the purchase order is delivered. By default, the field does not impact the matching logic in P2P.
+          nullable: true
+          example: false
+        lastUpdated:
+          type: string
+          description: Timestamp when the record was last sent to API. Set automatically.
+          format: date-time
+        orderReference:
+          maxLength: 100
+          minLength: 0
+          type: string
+          description: Reference to parent order. Allows an invoice to be matched to child order(s) under the parent order. Intended for scenarios where one order number is given to supplier while customer keeps generating new orders, which are still matched using the parent order number given to supplier. This method of matching is by default not enabled and needs to be manually activated in P2P.
+          nullable: true
+          example: PO4300157
+      additionalProperties: false
+    ResponseEntityList:
+      type: object
+      properties:
+        requestId:
+          type: string
+          description: ID of the request on which error occurred (generated by Basware API).
+          nullable: true
+          example: fbc082a2-65a4-469c-b230-d84a252f18fc
+        hasErrors:
+          type: boolean
+          description: Specifies whether the request has errors.
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorEntity'
+          nullable: true
+      additionalProperties: false
+      description: Errors returned here are returned synchronously from Basware API middle layer. Additional errors coming from target system(s) may be returned through errorFeedbacks API.
+    OrderResponse:
+      required:
+      - matchingOrders
+      type: object
+      properties:
+        matchingOrders:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderEntity'
+      additionalProperties: false
+  securitySchemes:
+    HTTPBasic:
+      type: http
+      scheme: basic

@@ -1,0 +1,609 @@
+openapi: 3.0.2
+info:
+  title: Basware OAUTH2 authentication APIs AccountingDocuments TaxCodes API
+  description: "**Using OAUTH2.0 authentication:**\n\nGet API access token from api.basware.com/tokens\n1. Using client id and client secret, which you can obtain from Basware. \n2. Specify which APIs can be accessed by using the token e.g. Read only access to vendors API only (these are called scopes). Available scopes are listed at <https://developer.basware.com/api/p2p/manual#AccessRights>. \n3. Each token has an expiration time, until which it can be used to call APIs.\n\nWhen using OAUTH2 authentication, you need to pass the OAUTH2 authentication token when calling Basware API endpoints. Available Basware API operations are documented at <https://api.basware.com/swagger>. \n\nSee the Basware API developer site at <https://developer.basware.com/api/p2p/manual#Authentication> for more details on API authentication."
+  version: 1.0.0
+  x-logo:
+    url: https://fastapi.tiangolo.com/img/logo-margin/logo-teal.png
+tags:
+- name: TaxCodes
+paths:
+  /v1/taxCodes:
+    get:
+      tags:
+      - TaxCodes
+      summary: Returns tax codes posted to Basware API.
+      description: ''
+      parameters:
+      - name: pageSize
+        in: query
+        description: A limit for the number of items to be returned for one request. Limit can range between 1 and 500 items.
+        schema:
+          type: integer
+          format: int32
+          default: 500
+      - name: companyCode
+        in: query
+        description: Company filter. Returns items for specific company.
+        schema:
+          type: string
+          default: ''
+      - name: lastUpdated
+        in: query
+        description: Date Filter. Returns items that have been updated after specified date.
+        schema:
+          type: string
+          format: date-time
+      - name: x-amz-meta-continuationtoken
+        in: header
+        description: Used to get next page of results when item count indicated by 'pageSize' is exceeded. A token is returned in header (not body) parameter 'X-amz-meta-continuationToken' of the response whenever there are more records to fetch. Post the received value here in a new HEADER parameter on the next GET request to receive the next page of results. When getting the next page of results, you must include the same query parameters that were used when getting the first page.
+        schema:
+          type: string
+        example: 349f0630-6f63-448c-82dd-3961ae642201
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/TaxCodeResponse'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaxCodeResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/TaxCodeResponse'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found. Request was successful and no records were found.
+        '500':
+          description: Unexpected error
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+    post:
+      tags:
+      - TaxCodes
+      summary: Creates new tax code(s), fully overwrites previous record if exists.
+      parameters:
+      - name: Content-Type
+        in: header
+        description: Specifies the media type of the resource. Value application/json is supported.
+        schema:
+          type: string
+        example: application/json
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/TaxCodeEntity'
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/TaxCodeEntity'
+          text/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/TaxCodeEntity'
+          application/*+json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/TaxCodeEntity'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TaxCodeEntity'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TaxCodeEntity'
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TaxCodeEntity'
+        '400':
+          description: Bad request
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+        '401':
+          description: Unauthorized
+        '409':
+          description: Conflict
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+        '500':
+          description: Unexpected error
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+    delete:
+      tags:
+      - TaxCodes
+      summary: Deletes data from Basware API. For manual one-time operations.
+      description: "For manual one-time operations only, such as a manual clean-up to remove test data generated during API integration development. Only removes records from API layer. \r\nDeletion in target systems needs to be done separately using the data deletion mechanisms available in each of the target system in addition to deleting the data in Basware API."
+      requestBody:
+        description: "Contains the body of the request.\r\n            Either externalCode or lastUpdated -field is required. If both values are provided, externalCode will have the priority."
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/DeleteRequest'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteRequest'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/DeleteRequest'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/DeleteRequest'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/DeleteResponse'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/DeleteResponse'
+        '202':
+          description: RequestAccepted
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/DeleteResponse'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/DeleteResponse'
+        '400':
+          description: BadRequest
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+        '401':
+          description: Unauthorized
+        '500':
+          description: Unexpected error
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+  /v1/taxCodes/{externalCode}:
+    get:
+      tags:
+      - TaxCodes
+      summary: Returns single tax code by externalCode identifier.
+      description: ''
+      parameters:
+      - name: externalCode
+        in: path
+        description: The ExternalCode of the entity to be fetched
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/TaxCodeEntity'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaxCodeEntity'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/TaxCodeEntity'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found. Request was successful and no records were found.
+        '500':
+          description: Unexpected error
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+    patch:
+      tags:
+      - TaxCodes
+      summary: Updates on specified taxCode. Preserves existing values in fields, which were not updated.
+      parameters:
+      - name: externalCode
+        in: path
+        description: The ExternalCode of the taxCodes to be updated
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: Entity to be updated
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/TaxCodeEntity'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TaxCodeEntity'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/TaxCodeEntity'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/TaxCodeEntity'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/TaxCodeEntity'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaxCodeEntity'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/TaxCodeEntity'
+        '400':
+          description: Bad request
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found. Record to update not found.
+        '500':
+          description: Unexpected error
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+components:
+  schemas:
+    TaxCodeCompanyEntity:
+      required:
+      - active
+      - companyCode
+      - inherit
+      type: object
+      properties:
+        companyCode:
+          maxLength: 32
+          minLength: 1
+          type: string
+          description: Defines a company code that the tax code is mapped to
+          example: BW01
+        inherit:
+          type: boolean
+          description: The value specifies whether the property is inherited to lower organizations.
+          example: false
+        active:
+          type: boolean
+          description: This flag will enable the data to be visible on UI, provided if the value is true, not visible in case of value is false. It will be also used for soft delete.
+          example: true
+      additionalProperties: false
+    LanguageTranslationEntity:
+      required:
+      - language
+      - translation
+      type: object
+      properties:
+        translation:
+          maxLength: 2000
+          minLength: 2
+          type: string
+          description: Translated text
+          example: Office supplies
+        language:
+          maxLength: 10
+          minLength: 2
+          type: string
+          description: Language code
+          example: en-US
+      additionalProperties: false
+    TaxCodeAdditionalData:
+      type: object
+      properties:
+        externalCode:
+          maxLength: 32
+          minLength: 0
+          type: string
+          description: Exernal code for tax calculation rule.
+          nullable: true
+          example: c9921a52-6d8b-1017-cb8c-923d
+        account:
+          maxLength: 25
+          minLength: 0
+          type: string
+          description: Tax account. Used in creating tax account posting for SAP.
+          nullable: true
+          example: '46860'
+        statistical:
+          maxLength: 25
+          minLength: 0
+          type: string
+          description: 'Statistical indicator. Used in SAP business logic for balance calculations. values: ''X'' or null. When X, SAP skips balance check.'
+          nullable: true
+          example: X
+        transactionType:
+          maxLength: 25
+          minLength: 0
+          type: string
+          description: 'SAP tax transaction type. Example values: MWST, VST.'
+          nullable: true
+          example: MWST
+        taxPercent:
+          type: number
+          description: Tax percentage used for this tax calculation rule.
+          format: double
+          nullable: true
+          example: 25
+        country:
+          maxLength: 25
+          minLength: 0
+          type: string
+          description: 'Country code. Example values: DE, EN.'
+          nullable: true
+          example: EN
+        condition:
+          maxLength: 25
+          minLength: 0
+          type: string
+          description: 'Condition type. Technical field required back by SAP when posting invoices. Example values: MWVS, MWAS.'
+          nullable: true
+          example: MWVS
+        active:
+          type: boolean
+          description: Is calculation rule active (true / false).
+          nullable: true
+      additionalProperties: false
+    DeleteRequest:
+      type: object
+      properties:
+        lastUpdated:
+          type: string
+          description: 'To delete records updated after specific time, use lastUpdated -field. This will delete all items that have been updated after the specified date. In response, user will get the taskStatus api link where the task status can be checked. Note: ''0001-01-01'' can be used to delete all records.'
+          format: date-time
+          nullable: true
+        externalCode:
+          maxLength: 36
+          minLength: 0
+          type: string
+          description: Single item can be deleted using externalCode and final status is returned immediately.
+          nullable: true
+      additionalProperties: false
+    DeleteResponse:
+      type: object
+      properties:
+        statusApiLink:
+          type: string
+          nullable: true
+        taskName:
+          type: string
+          nullable: true
+        taskStatus:
+          type: string
+          nullable: true
+      additionalProperties: false
+    TaxCodeEntity:
+      required:
+      - companies
+      - externalCode
+      - taxCode
+      - taxCodeNames
+      - taxPercentage
+      type: object
+      properties:
+        taxCode:
+          maxLength: 25
+          minLength: 1
+          type: string
+          description: Tax code.
+          example: B9
+        taxCodeNames:
+          type: array
+          items:
+            $ref: '#/components/schemas/LanguageTranslationEntity'
+          description: Defines name(s) for the tax code. Please always include 'en-US' language tag for Basware global support, as well as any local-language tag being used. If both translations are not available, please use the same string with both language tags.
+        taxGroup:
+          maxLength: 25
+          minLength: 0
+          type: string
+          description: Tax Group
+          nullable: true
+          example: ''
+        taxPercentage:
+          maximum: 1000000000
+          minimum: -1000000000
+          type: number
+          description: Specifies the tax percentage.
+          format: double
+          example: 10
+        taxPercentage2:
+          maximum: 1000000000
+          minimum: -1000000000
+          type: number
+          description: Tax percentage 2 (may be used for example for partially deductible VAT)
+          format: double
+          nullable: true
+          example: 0
+        additionalData:
+          type: array
+          items:
+            $ref: '#/components/schemas/TaxCodeAdditionalData'
+          description: SAP tax calculation rules. Used with SAP interfaces.
+          nullable: true
+        companies:
+          type: array
+          items:
+            $ref: '#/components/schemas/TaxCodeCompanyEntity'
+          description: List of company units to associate taxcodes to P2P organization hierarchy
+        externalCode:
+          maxLength: 36
+          minLength: 1
+          type: string
+          description: External identifier that is used as a key in API.
+          example: 4847-31231212-212121-1212
+        lastUpdated:
+          type: string
+          description: Timestamp when the record was last sent to API. Set automatically.
+          format: date-time
+      additionalProperties: false
+    ErrorEntity:
+      type: object
+      properties:
+        externalCode:
+          type: string
+          description: External code of record on which error occurred (when available).
+          nullable: true
+          example: 4847-31231212-212121-1212
+        type:
+          enum:
+          - BUSINESS
+          - VALIDATION
+          - TECHNICAL
+          - SECURITY
+          type: string
+          description: Error type.
+          example: ''
+        code:
+          enum:
+          - EXTERNAL_CODE_MISMATCH
+          - SCHEMA_VALIDATION_ERROR
+          - CONFLICT_IN_POST
+          - DATA_ORIGIN_VALIDATION_ERROR
+          - ACCESS_TOKEN_VALIDATION_ERROR
+          - CREDENTIAL_VALIDATION_ERROR
+          - PARAMETER_VALIDATION_ERROR
+          - UNEXPECTED_ERROR
+          - METHOD_NOT_ALLOWED
+          - ENTITY_NOT_FOUND
+          - DATA_VALIDATION_FAILED
+          - SNS_PUBLISH_ERROR
+          - SQS_PUBLISH_ERROR
+          type: string
+          description: Error code.
+          example: ''
+        message:
+          type: string
+          description: Specific error message.
+          nullable: true
+          example: ''
+        info:
+          type: string
+          description: Information about type of the error.
+          nullable: true
+          example: ''
+      additionalProperties: false
+    ResponseEntityList:
+      type: object
+      properties:
+        requestId:
+          type: string
+          description: ID of the request on which error occurred (generated by Basware API).
+          nullable: true
+          example: fbc082a2-65a4-469c-b230-d84a252f18fc
+        hasErrors:
+          type: boolean
+          description: Specifies whether the request has errors.
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorEntity'
+          nullable: true
+      additionalProperties: false
+      description: Errors returned here are returned synchronously from Basware API middle layer. Additional errors coming from target system(s) may be returned through errorFeedbacks API.
+    TaxCodeResponse:
+      type: object
+      properties:
+        taxCodes:
+          type: array
+          items:
+            $ref: '#/components/schemas/TaxCodeEntity'
+          nullable: true
+      additionalProperties: false
+  securitySchemes:
+    HTTPBasic:
+      type: http
+      scheme: basic

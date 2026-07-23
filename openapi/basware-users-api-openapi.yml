@@ -1,0 +1,706 @@
+openapi: 3.0.2
+info:
+  title: Basware OAUTH2 authentication APIs AccountingDocuments Users API
+  description: "**Using OAUTH2.0 authentication:**\n\nGet API access token from api.basware.com/tokens\n1. Using client id and client secret, which you can obtain from Basware. \n2. Specify which APIs can be accessed by using the token e.g. Read only access to vendors API only (these are called scopes). Available scopes are listed at <https://developer.basware.com/api/p2p/manual#AccessRights>. \n3. Each token has an expiration time, until which it can be used to call APIs.\n\nWhen using OAUTH2 authentication, you need to pass the OAUTH2 authentication token when calling Basware API endpoints. Available Basware API operations are documented at <https://api.basware.com/swagger>. \n\nSee the Basware API developer site at <https://developer.basware.com/api/p2p/manual#Authentication> for more details on API authentication."
+  version: 1.0.0
+  x-logo:
+    url: https://fastapi.tiangolo.com/img/logo-margin/logo-teal.png
+tags:
+- name: Users
+paths:
+  /v1/users:
+    get:
+      tags:
+      - Users
+      summary: Returns users posted to Basware API.
+      description: ''
+      parameters:
+      - name: pageSize
+        in: query
+        description: A limit for the number of items to be returned for one request. Limit can range between 1 and 500 items.
+        schema:
+          type: integer
+          format: int32
+          default: 500
+      - name: companyCode
+        in: query
+        description: Company filter. Returns items for specific company.
+        schema:
+          type: string
+          default: ''
+      - name: lastUpdated
+        in: query
+        description: Date Filter. Returns items that have been updated after specified date.
+        schema:
+          type: string
+          format: date-time
+      - name: x-amz-meta-continuationtoken
+        in: header
+        description: Used to get next page of results when item count indicated by 'pageSize' is exceeded. A token is returned in header (not body) parameter 'X-amz-meta-continuationToken' of the response whenever there are more records to fetch. Post the received value here in a new HEADER parameter on the next GET request to receive the next page of results. When getting the next page of results, you must include the same query parameters that were used when getting the first page.
+        schema:
+          type: string
+        example: 436d78dd-3579-4346-9115-0d3ad9933703
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/UserResponse'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/UserResponse'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found. Request was successful and no records were found.
+        '500':
+          description: Unexpected error
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+    post:
+      tags:
+      - Users
+      summary: Creates new user(s), fully overwrites previous record if exists.
+      description: "Basware applications accessible to a user are controlled through 'users' and 'applicationGroups' APIs. Applications in a group are defined through 'applicationGroups' API. Application groups are assigned to users through the 'applicationGroups' -block in users API.\r\n\r\nNotes: \r\n1. You need to have at least one applicationGroup for posting users to Basware API. The applicationGroups are available in applicationGroups API.  \r\n2. Application groups are assigned to users through the 'applicationGroups' -block in users API. \r\n3. It is possible to assign users to default application group(s). Users with no applicationGroups are automatically assigned to application groups where 'default' = true. When using this approach, you will need to have an applicationGroup with default = true. \r\n4. The company to which a user is imported needs to be set up as an administrative site in P2P. \r\n5. When the user is imported to any system besides (or in addition to) P2P, user 'loginType' needs to be 4 (user authentication through Basware Access) or accessEnabledLogin needs to be 'true'.\r\n6. When loginType = 4 (Basware Access) or accessEnabledLogin = true, the email is used as user’s login account and must be unique within a tenant.\r\n7. User groups are overwritten in P2P only when P2P admin parameter to overwrite existing user groups them is enabled. (Note: user groups are different from application groups)\r\n8. User recipient identifiers in P2P are overridden with values received through API. When no values are specified in API, the corresponding fields are emptied in P2P. \r\n9. User's externalCode is used as unique identifier in P2P and in Basware Access. Change to external code means a new user. The externalCode is ignored by Network Portal, which uses loginAccount as unique identifier.\r\n10. Fields containing data on existing user records cannot be cleared in P2P through users API. It is only possible to send new values and not possible to set fields already having values to null. This API works differently than rest of the APIs in that regard.  \r\n\r\nPlease see section \"[Usage scenario 7 Import users](https://developer.basware.com/api/p2p/manual#usage7)\" of Basware Purchase-to-Pay API manual for details on managing users with Basware API. Check out also the [example JSONs using a minimal feasible set of fields](https://developer.basware.com/api/p2p/templates) from the developer site."
+      parameters:
+      - name: Content-Type
+        in: header
+        description: Specifies the media type of the resource. Value application/json is supported.
+        schema:
+          type: string
+        example: application/json
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/UserEntity'
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/UserEntity'
+          text/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/UserEntity'
+          application/*+json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/UserEntity'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UserEntity'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UserEntity'
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UserEntity'
+        '400':
+          description: Bad request
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+        '401':
+          description: Unauthorized
+        '409':
+          description: Conflict
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+        '500':
+          description: Unexpected error
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+    delete:
+      tags:
+      - Users
+      summary: Deletes data from Basware API. For manual one-time operations.
+      description: "For manual one-time operations only, such as a manual clean-up to remove test data generated during API integration development. Only removes records from API layer. \r\nDeletion in target systems needs to be done separately using the data deletion mechanisms available in each of the target system in addition to deleting the data in Basware API."
+      requestBody:
+        description: "Contains the body of the request.\r\n            Either externalCode or lastUpdated -field is required. If both values are provided, externalCode will have the priority."
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/DeleteRequest'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteRequest'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/DeleteRequest'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/DeleteRequest'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/DeleteResponse'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/DeleteResponse'
+        '202':
+          description: RequestAccepted
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/DeleteResponse'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/DeleteResponse'
+        '400':
+          description: BadRequest
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+        '401':
+          description: Unauthorized
+        '500':
+          description: Unexpected error
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+  /v1/users/{externalCode}:
+    get:
+      tags:
+      - Users
+      summary: Returns single user by externalCode -identifier.
+      description: ''
+      parameters:
+      - name: externalCode
+        in: path
+        description: The ExternalCode of the entity to be fetched
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/UserEntity'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserEntity'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/UserEntity'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found. Request was successful and no records were found.
+        '500':
+          description: Unexpected error
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+    patch:
+      tags:
+      - Users
+      summary: Updates fields on specified user. Preserves existing values in fields, which were not updated.
+      description: "Basware applications accessible to a user are controlled through 'users' and 'applicationGroups' APIs. Applications in a group are defined through 'applicationGroups' API. Application groups are assigned to users through the 'applicationGroups' -block in users API.\r\n\r\nNotes: \r\n1. You need to have at least one applicationGroup for posting users to Basware API. The applicationGroups are available in applicationGroups API.  \r\n2. Application groups are assigned to users through the 'applicationGroups' -block in users API. \r\n3. It is possible to assign users to default application group(s). Users with no applicationGroups are automatically assigned to application groups where 'default' = true. When using this approach, you will need to have an applicationGroup with default = true. \r\n4. The company to which a user is imported needs to be set up as an administrative site in P2P. \r\n5. When the user is imported to any system besides (or in addition to) P2P, user 'loginType' needs to be 4 (user authentication through Basware Access) or accessEnabledLogin needs to be 'true'.\r\n6. When loginType = 4 (Basware Access) or accessEnabledLogin = true, the email is used as user’s login account and must be unique within a tenant.\r\n7. User groups are overwritten in P2P only when P2P admin parameter to overwrite existing user groups them is enabled. (Note: user groups are different from application groups)\r\n8. User recipient identifiers in P2P are overridden with values received through API. When no values are specified in API, the corresponding fields are emptied in P2P. \r\n9. User's externalCode is used as unique identifier in P2P and in Basware Access. Change to external code means a new user. The externalCode is ignored by Network Portal, which uses loginAccount as unique identifier.\r\n10. Basware API considers 'null' value in field(s) equivalent to the field(s) not being sent. For this reason patch method does not support setting field values to 'null'.\r\n\r\nPlease see section \"[Usage scenario 4: Import users](https://developer.basware.com/api/p2p/manual#usage3)\" of Basware Purchase-to-Pay API manual for details on managing users with Basware API. Check out also the [example JSONs using a minimal feasible set of fields](https://developer.basware.com/api/p2p/templates) from the developer site."
+      parameters:
+      - name: externalCode
+        in: path
+        description: The ExternalCode of the User to be updated
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: Entity to be updated
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/UserEntity'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserEntity'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/UserEntity'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/UserEntity'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/UserEntity'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserEntity'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/UserEntity'
+        '400':
+          description: Bad request
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not found. Record to update not found.
+        '500':
+          description: Unexpected error
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEntityList'
+components:
+  schemas:
+    DeleteRequest:
+      type: object
+      properties:
+        lastUpdated:
+          type: string
+          description: 'To delete records updated after specific time, use lastUpdated -field. This will delete all items that have been updated after the specified date. In response, user will get the taskStatus api link where the task status can be checked. Note: ''0001-01-01'' can be used to delete all records.'
+          format: date-time
+          nullable: true
+        externalCode:
+          maxLength: 36
+          minLength: 0
+          type: string
+          description: Single item can be deleted using externalCode and final status is returned immediately.
+          nullable: true
+      additionalProperties: false
+    DeleteResponse:
+      type: object
+      properties:
+        statusApiLink:
+          type: string
+          nullable: true
+        taskName:
+          type: string
+          nullable: true
+        taskStatus:
+          type: string
+          nullable: true
+      additionalProperties: false
+    UserEntity:
+      required:
+      - companyCode
+      - email
+      - externalCode
+      - firstName
+      - loginAccount
+      - surName
+      type: object
+      properties:
+        firstName:
+          maxLength: 100
+          minLength: 1
+          type: string
+          description: Specifies the user's first name.
+          example: John
+        surName:
+          maxLength: 100
+          minLength: 1
+          type: string
+          description: Specifies the user's last name.
+          example: Smith
+        uiLanguage:
+          maxLength: 25
+          minLength: 0
+          type: string
+          description: Language code. Specifies the language in which the user uses the system. The languages, for example English or Finnish, are available in the language picker.
+          nullable: true
+          example: en-US
+        countryCode:
+          maxLength: 3
+          minLength: 2
+          type: string
+          description: Specifies user's country code. Not used in Basware P2P.
+          nullable: true
+          example: FIN
+        telephone:
+          maxLength: 25
+          minLength: 0
+          type: string
+          description: Specifies the user's telephone number.
+          nullable: true
+          example: '501234567'
+        loginAccount:
+          maxLength: 100
+          minLength: 1
+          type: string
+          description: User identifier for authentication. With SSO loginAccount needs to match to the data that identity provider sends to Basware and with P2P basic authentication the loginAccount needs to match to what user keys in during authentication. For example BASWARE\john.smith or john.smith@basware.com. Basware Access basic authentication uses email instead of loginAccount. P2P and Access allow changes to loginAccount without creating a new user, but in Network Portal loginAccount is unique identifier i.e. changed loginAccount means new user into Network Portal.
+          example: BASWARE\\JOHNSMITH
+        middleInitial:
+          maxLength: 25
+          minLength: 0
+          type: string
+          description: Specifies the user's middle name's initial letter.
+          nullable: true
+          example: S
+        email:
+          maxLength: 320
+          minLength: 3
+          pattern: ^(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*)@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])$
+          type: string
+          description: 'Specifies the user’s email address. User needs access to the email account in order to set password. Note: When loginType = 4 (Basware Access), the email is used as user’s login account and must be unique within a tenant. Else only the first user having the same email is accepted, next users are not created.'
+          example: john.smith@company.com
+        costCenterCode:
+          maxLength: 25
+          minLength: 0
+          type: string
+          description: User's default cost center code.
+          nullable: true
+          example: '1000'
+        validFrom:
+          type: string
+          description: 'The user is active and can use the system starting from this date. Note: This field is used by P2P and Access, not used by Network.'
+          format: date-time
+          nullable: true
+          example: '2017-01-01'
+        validUntil:
+          type: string
+          description: 'On this date, the user is deactivated and can no longer use the system. Note: This field is used by P2P and Access, not used by Network.'
+          format: date-time
+          nullable: true
+          example: '2018-01-02'
+        supervisorLoginAccount:
+          maxLength: 100
+          minLength: 0
+          type: string
+          description: Unique user id of the user’s supervisor.
+          nullable: true
+          example: BASWARE\\JOEGREEN
+        personCode:
+          maxLength: 25
+          minLength: 0
+          type: string
+          description: Defines the user’s person code that is mapped with the user’s employee ID.
+          nullable: true
+          example: '1002'
+        title:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: Specifies the user's title.
+          nullable: true
+          example: Solid line manager
+        loginType:
+          pattern: 0|2|4|99|
+          type: string
+          description: "User 'loginType' needs to be 4 (user authentication through Basware Access) when the user is imported to any system besides (or in addition to) P2P. Following types of login are available.\r\nSingle service username and password login (0): Entry level option for cases when only one Basware service is in use. User is created to the Basware service user repository and authentication is with username and password. If more than one Basware service is in use this may cause situation where same user has different passwords for different Basware services and needs to authenticate separately to each service. Passwords are delivered via separate emails.\r\nSingle service SSO login (2): Single Sign On integrated solution for cases when only one Basware service is in use. Also used for Purchase Manager and Invoice Automation point to point authentication integration if other Basware services are not in use. Not applicable with some Basware Services (username and separate password is used in those services instead).\r\nBasware Access login (4): Authentication through Basware Access. Authentication for cases when all Basware services are in use or when Single Sign On integration is required and not otherwise supported. Supports both username and password authentication and SSO integrations. Requires provisioning Basware Access service into use. 'Password' -field above needs to be null when using Basware Access login type.\r\nDefined in P2P (99): Allows login type to be changed to one of the above in P2P Administration's user management module. Defaults to 'Default login type' set for the user's home organization in P2P."
+          nullable: true
+          example: '2'
+        accessEnabledLogin:
+          type: boolean
+          description: "Allows user to login through Basware Access even if loginType != 4 (login through Basware Access).\r\nNeeds to be set to 'true' in cases where P2P uses a different loginType than 4 and CloudScan 3.0 or Reporting is required on the same user account."
+          nullable: true
+          example: true
+        approvalPasswordUseAllowed:
+          type: string
+          description: This value defines whether the system generates an approval password for the user to be used when approving purchase requisitions, purchase orders, and invoices.
+          nullable: true
+          example: '0'
+        collaborationSendType:
+          pattern: 0|1|2|
+          type: string
+          description: 'Defines how notifications are sent for discussions and announcements. The options are: 0 = No notifications, 1 = For each new message, 2 = Daily summary.'
+          nullable: true
+          example: '1'
+        messageSendType:
+          pattern: 0|1|2|
+          type: string
+          description: 'Defines how notifications are sent for tasks. The options are: 0 = No notifications, 1= For each new task, 2 = Daily summary.'
+          nullable: true
+          example: '1'
+        groups:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserGroup'
+          description: User groups in P2P. These determine user rights within P2P application. User groups are created and configured in P2P user group administration UI. When user group creation has been done, the groups can be assigned to users through this section of users API.
+          nullable: true
+        userRecipientIdentifiers:
+          $ref: '#/components/schemas/UserRecipientIdentifiers'
+        accessLoginMethod:
+          maxLength: 100
+          minLength: 0
+          type: string
+          description: "Used only when loginType = 4 (=Basware Access). Normally empty. Used when multiple login methods are used with Basware Access. Values supported by Access: 'EmailAndPwd', 'SSO1', (empty).\r\nWhen field needs to be used, applicable login method code(s) are provided by Basware SaaS production -personnel. When field empty, uses default value (which is configured by SaaS production)."
+          nullable: true
+          example: SSO1
+        accessTimeout:
+          maximum: 28800
+          minimum: 900
+          type: integer
+          description: Used only when loginType = 4 (=Basware Access). User specific session idle timeout in seconds to use instead of the login method default. Determines how long user can stay logged in without using the system.
+          format: int32
+          nullable: true
+          example: 1800
+        mfa:
+          pattern: notAllowed|optional|mandatory
+          type: string
+          description: 'Used only when loginType = 4 (=Basware Access). Determines Multi Factor Authentication settings (additional authentication using SMS or Google authenticator app for smartphones): required, allowed or disabled.'
+          nullable: true
+          example: optional
+        sendAccountCreationEmail:
+          pattern: welcome|resetPwd|notSend
+          type: string
+          description: Used only when loginType = 4 (=Basware Access). Use 'welcome' if Basware Access should send welcome email containing a link for account activation. The password within the welcome email expires within an hour and can be recovered using 'forgot password' -function. Use 'notSend' if customer wants to send welcome email themselves or if welcome email is not required. ResetPwd is reserved for internal API usage.
+          nullable: true
+          example: notSend
+        accountCreationURI:
+          type: string
+          description: Used only when loginType = 4 (=Basware Access). Defines service address for welcome email sent by Basware Access. Put here the login URL of the service where you want the user to land (P2P, network, etc). In P2P case this is the URL that consultant would give for customer when using SSO login.
+          nullable: true
+          example: https://tenantcode.p2p.basware.com/Portal/WifLogin
+        companyCode:
+          maxLength: 32
+          minLength: 1
+          type: string
+          description: 'The company code specifies the user''s home organization element. Note: The company to which a user is imported needs to be set up as an administrative site in P2P.'
+          example: BW01
+        loginAllowed:
+          type: boolean
+          description: Determines whether the user can access the system after the user details are saved. If field is omitted, it is treated as 'false'.
+          nullable: true
+          example: true
+        applicationGroups:
+          type: array
+          items:
+            type: string
+          description: Used for assigning the user to application groups, which give the user login-access to specific applications (P2P, Reporting, Supplier Portal, etc). The applications belonging to each applicationGroup are maintained through applicationGroups API. Value(s) posted need to match to applicationGroupCodes created in applicationGroups API. Application group needs to be created before posting user to API. If no applicationGroups are specified, user will receive those applicationGroups where 'default' = 'true'.
+          nullable: true
+        externalCode:
+          maxLength: 36
+          minLength: 1
+          type: string
+          description: Unique identifier in P2P and in Basware Access. Change to external code means a new user. The externalCode is ignored by Network Portal, which uses loginAccount as unique identifier.
+          example: BASWARE\\JOHNSMITH
+        lastUpdated:
+          type: string
+          description: Timestamp when the record was last sent to API. Set automatically.
+          format: date-time
+      additionalProperties: false
+    ErrorEntity:
+      type: object
+      properties:
+        externalCode:
+          type: string
+          description: External code of record on which error occurred (when available).
+          nullable: true
+          example: 4847-31231212-212121-1212
+        type:
+          enum:
+          - BUSINESS
+          - VALIDATION
+          - TECHNICAL
+          - SECURITY
+          type: string
+          description: Error type.
+          example: ''
+        code:
+          enum:
+          - EXTERNAL_CODE_MISMATCH
+          - SCHEMA_VALIDATION_ERROR
+          - CONFLICT_IN_POST
+          - DATA_ORIGIN_VALIDATION_ERROR
+          - ACCESS_TOKEN_VALIDATION_ERROR
+          - CREDENTIAL_VALIDATION_ERROR
+          - PARAMETER_VALIDATION_ERROR
+          - UNEXPECTED_ERROR
+          - METHOD_NOT_ALLOWED
+          - ENTITY_NOT_FOUND
+          - DATA_VALIDATION_FAILED
+          - SNS_PUBLISH_ERROR
+          - SQS_PUBLISH_ERROR
+          type: string
+          description: Error code.
+          example: ''
+        message:
+          type: string
+          description: Specific error message.
+          nullable: true
+          example: ''
+        info:
+          type: string
+          description: Information about type of the error.
+          nullable: true
+          example: ''
+      additionalProperties: false
+    UserResponse:
+      type: object
+      properties:
+        users:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserEntity'
+          nullable: true
+      additionalProperties: false
+    ResponseEntityList:
+      type: object
+      properties:
+        requestId:
+          type: string
+          description: ID of the request on which error occurred (generated by Basware API).
+          nullable: true
+          example: fbc082a2-65a4-469c-b230-d84a252f18fc
+        hasErrors:
+          type: boolean
+          description: Specifies whether the request has errors.
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorEntity'
+          nullable: true
+      additionalProperties: false
+      description: Errors returned here are returned synchronously from Basware API middle layer. Additional errors coming from target system(s) may be returned through errorFeedbacks API.
+    UserRecipientIdentifiers:
+      type: object
+      properties:
+        identifier1:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: 'Identifier1-5: Specifies invoice recipient group(s), to which the user belongs.'
+          nullable: true
+          example: Europe
+        identifier2:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: ''
+          nullable: true
+          example: ''
+        identifier3:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: ''
+          nullable: true
+          example: ''
+        identifier4:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: ''
+          nullable: true
+          example: ''
+        identifier5:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: ''
+          nullable: true
+          example: ''
+      additionalProperties: false
+      description: 'Recipient identifier data in P2P. Can be used for specifying invoice recipient groups. Note: User recipient identifiers in P2P are overridden with values received through API. When no values are specified in API, the fields are emptied in P2P.'
+    UserGroup:
+      required:
+      - externalGroupCode
+      type: object
+      properties:
+        externalGroupCode:
+          maxLength: 260
+          minLength: 1
+          type: string
+          description: Specifies the user group to which the user gets assigned. Needs to match with 'External code' of User group in P2P user groups administration UI.
+          example: Approvers_200
+        active:
+          type: boolean
+          description: 'Specifies is the user group active. Note: P2P allows a delete/insert -import of user groups by enabling setting: "P2P Administration" -> "Settings" -> "Delete existing user groups when importing users".'
+          nullable: true
+          example: true
+      additionalProperties: false
+  securitySchemes:
+    HTTPBasic:
+      type: http
+      scheme: basic

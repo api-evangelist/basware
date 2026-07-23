@@ -1,0 +1,158 @@
+openapi: 3.0.2
+info:
+  title: Basware OAUTH2 authentication APIs AccountingDocuments Tokens API
+  description: "**Using OAUTH2.0 authentication:**\n\nGet API access token from api.basware.com/tokens\n1. Using client id and client secret, which you can obtain from Basware. \n2. Specify which APIs can be accessed by using the token e.g. Read only access to vendors API only (these are called scopes). Available scopes are listed at <https://developer.basware.com/api/p2p/manual#AccessRights>. \n3. Each token has an expiration time, until which it can be used to call APIs.\n\nWhen using OAUTH2 authentication, you need to pass the OAUTH2 authentication token when calling Basware API endpoints. Available Basware API operations are documented at <https://api.basware.com/swagger>. \n\nSee the Basware API developer site at <https://developer.basware.com/api/p2p/manual#Authentication> for more details on API authentication."
+  version: 1.0.0
+  x-logo:
+    url: https://fastapi.tiangolo.com/img/logo-margin/logo-teal.png
+tags:
+- name: Tokens
+paths:
+  /v1/tokens:
+    post:
+      tags:
+      - Tokens
+      summary: Returns OAUTH2 access tokens.
+      description: "Tokens returned by this API are used to provide access to Basware API operations when OAUTH2 authorization is used for the API requests. The available operations are defined at <https://api.basware.com/swagger>.\n             \nNote: the request body parameters are sent as HTTP form parameters ('application/x-www-form-urlencoded') for this authentication API, while they are sent as raw application/json in the API operations defined at https://api.basware.com/swagger."
+      operationId: get_token_v1_tokens_post
+      security:
+      - HTTPBasic: []
+      parameters:
+      - name: authorization
+        in: header
+        required: true
+        schema:
+          type: string
+          description: To authorize your access token request, please pass the client id and client secret of your oAUTH2 client as username and password. These are sent by using Basic HTTP authorization, in the 'authorization' header. Passed as HTTP form parameter.
+          title: Authorization
+        description: To authorize your access token request, please pass the client id and client secret of your oAUTH2 client as username and password. These are sent by using Basic HTTP authorization, in the 'authorization' header. Passed as HTTP form parameter.
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Body_get_token_v1_tokens_post'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessTokenResponse'
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationErrorResponse'
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedErrorResponse'
+          description: Unauthorized
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    AccessTokenResponse:
+      properties:
+        access_token:
+          type: string
+          title: Access Token
+          description: oauth token
+          example: eyJhbGciOiJSUzI1NiIsImtpZCI6Il9BNHRlRFh6THR2Rm1zeXF5YkloRjJQbHVIaHU3QW1yZUw2aURLdF9xS1kiLCJ0eXAiOiJhdCtqd3QifQ.eyJzdWIiOiAiMWRyMm44cjNwMTg2czd1amc0dmpzNXJraXEiLCAic2NvcGUiOiAidXNlcnMucmVhZCB1c2Vycy53cml0ZSBhY2NvdW50cy5yZWFkIHZlbmRvcnMucmVhZCB2ZW5kb3JzLndyaXRlIiwgImF1dGhfdGltZSI6IDE2Mzc5MDUwMTMsICJpc3MiOiAiaHR0cHM6Ly9hcGkuYmFzd2FyZS5jb20iLCAiYXVkIjogIk9wZW5BUEkiLCAiZXhwIjogMTYzNzkwODYxMywgImlhdCI6IDE2Mzc5MDUwMTMsICJqdGkiOiAiZGM4ZDA4YjgtNGU3YS0xMWVjLTlkZTEtYjJkOGY2OGY5N2VkIiwgImJ3Y2lkIjogIjAyMDc3OS1URVNUMSJ9.LNkXSTw6GICKv7UAdn7IcB75ze6Yvp8PelpgzZ9wBbsTGDTPWV6K397Z-vGn_zJevKSXxmQlbxVPuhHnmo9JI7zZtjEJ7t8Tw2VJl9sQOeZTFkt7QDn6FNFTIGhP7aE-AgJOyTswedp0r9EUoFc8DddB49vytyMwpHtHRnUz1TOVIexh0mcS225cwV4zZmI0PUCvY-GKUlJTm9QNruDVEJ-K2wun9PvH3S31PtGkVfS-2GThjtJN7tOK0tsO9sRf3oqvRAvf93TxCoSg_CKyZRGUWCruV9ayu0m8dTrOfuKnOlG4-eTpDtUWDZACdkZZvbzOBT5_Ikm59LHHXBs5QA
+        scope:
+          type: string
+          title: Scope
+          description: Defines scope of token
+          example: users.read users.write accounts.read vendors.read vendors.write
+        expires_in:
+          type: integer
+          title: Expires In
+          description: tells tokens expiration in minutes
+          example: 3600
+        token_type:
+          type: string
+          title: Token Type
+          description: tells type of token
+          default: Bearer
+          example: Bearer
+      type: object
+      title: AccessTokenResponse
+    ValidationErrorResponse:
+      properties:
+        error:
+          type: string
+          title: Error
+          description: Defines error
+          example: invalid_request
+        error_description:
+          type: string
+          title: Error Description
+          description: Defines error details
+          example: grant_type field required
+      type: object
+      title: ValidationErrorResponse
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    UnauthorizedErrorResponse:
+      properties:
+        error:
+          type: string
+          title: Error
+          description: 'Defines error '
+          example: invalid_client
+      type: object
+      title: UnauthorizedErrorResponse
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    Body_get_token_v1_tokens_post:
+      properties:
+        grant_type:
+          type: string
+          title: Grant Type
+          description: 'Oauth2 grant type. Supported value(s): ''client_credentials'' = Client credential authentication flow.'
+        scope:
+          type: string
+          title: Scope
+          description: Scopes define the operations (e.g. vendors.write) allowed using the returned access token. See <https://developer.basware.com/api/p2p/manual#AccessRights> for list of available operations. Passed as HTTP form parameter.
+      type: object
+      required:
+      - grant_type
+      - scope
+      title: Body_get_token_v1_tokens_post
+  securitySchemes:
+    HTTPBasic:
+      type: http
+      scheme: basic
