@@ -7,7 +7,20 @@ description: Basware is a cloud-based e-invoicing and purchase-to-pay platform t
   point, handling format conversion and delivery. The APIs support master data management,
   user administration, document archiving, and real-time transaction data access for
   finance and procurement operations.
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: enterprise
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Enterprise · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/basware.png
 url: https://raw.githubusercontent.com/api-evangelist/basware/refs/heads/main/apis.yml
 type: Index
 created: "2026-06-13"
@@ -22,118 +35,905 @@ tags:
   - Finance Automation
   - B2B Payments
 apis:
-  - name: Basware P2P API
-    description: The Basware Procure-to-Pay API provides REST-based integration for
-      accounts payable automation, procurement, and master data management. It supports
-      invoice processing, purchase orders, goods receipts, supplier management, user
-      administration, and monitoring of document workflows using JSON payloads over
-      HTTPS with OAuth2 authentication.
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    humanURL: https://developer.basware.com/en/api/basware
-    baseURL: https://api.basware.com
-    tags:
-      - Accounts Payable
-      - Procurement
-      - Purchase Orders
-      - Invoice Processing
-    properties:
-      - type: Documentation
-        url: https://developer.basware.com/en/api/basware/manual
-      - type: OpenAPI
-        url: https://developer.basware.com/en/api/basware/api-reference
-      - type: OpenAPI
-        url: openapi/basware-p2p-openapi.json
-      - type: OpenAPI
-        url: openapi/basware-user-permission-openapi.json
-      - type: OpenAPI
-        url: openapi/basware-push-notification-openapi.json
-      - type: OpenAPI
-        url: openapi/basware-authentication-openapi.json
-      - type: OpenAPI
-        url: openapi/basware-data-extract-openapi.json
-      - type: OpenAPI
-        url: openapi/basware-smart-pdf-openapi.json
-      - type: OpenAPI
-        url: openapi/basware-directory-openapi.json
-      - type: GettingStarted
-        url: https://developer.basware.com/en/api/basware/get-started
-  - name: Basware Network API
-    description: The Basware Network API enables developers to send and receive electronic
-      invoices across the global Basware network. Supporting over 70 document formats,
-      the API handles automatic format conversion so integrators only need to submit
-      invoices in a single standard format. It includes an Invoices API for JSON-based
-      invoice exchange and a Files API for sending and receiving invoice attachments
-      such as PDFs.
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    humanURL: https://developer.basware.com/en/api/network
-    baseURL: https://network-api.basware.com
-    tags:
-      - E-Invoicing
-      - Invoice Network
-      - Electronic Documents
-      - Format Conversion
-    properties:
-      - type: Documentation
-        url: https://developer.basware.com/en/api/network/guide
-      - type: OpenAPI
-        url: https://developer.basware.com/en/api/network/api-reference
-      - type: GettingStarted
-        url: https://developer.basware.com/en/api/network/get-started
-  - name: Basware Vault API
-    description: The Basware Vault API provides archiving and retrieval services for
-      e-invoicing documents. It enables integration with Basware's document storage
-      system for long-term retention and compliance-ready archival of invoices and
-      related business documents, with access through REST endpoints and JSON payloads.
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    humanURL: https://developer.basware.com/en/api/vault/manual
-    baseURL: https://api.basware.com/vault
-    tags:
-      - Document Archive
-      - Compliance
-      - Document Storage
-    properties:
-      - type: Documentation
-        url: https://developer.basware.com/en/api/vault/manual
-      - type: OpenAPI
-        url: openapi/basware-vault-openapi.yaml
-      - type: GettingStarted
-        url: https://developer.basware.com/en/api/vault
-  - name: Basware Data Access API
-    description: The Basware Data Access API allows organizations to query and extract
-      data from Basware systems for reporting, analytics, and integration purposes.
-      It enables programmatic retrieval of transaction data, invoice records, and operational
-      metrics from the Basware platform to feed downstream business intelligence and
-      ERP systems.
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    humanURL: https://developer.basware.com/en/api/basware
-    baseURL: https://api.basware.com/data
-    tags:
-      - Data Access
-      - Reporting
-      - Analytics
-      - Business Intelligence
-    properties:
-      - type: Documentation
-        url: https://developer.basware.com/en/api/basware
-      - type: GettingStarted
-        url: https://developer.basware.com/en/api/basware/get-started
-  - name: Basware SmartPDF API
-    description: The Basware SmartPDF API provides PDF document processing and conversion
-      capabilities within the Basware platform. It enables automated extraction and
-      processing of invoice data from PDF documents, supporting touchless invoice processing
-      workflows and integration with accounts payable automation systems.
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    humanURL: https://developer.basware.com/en/api/basware
-    baseURL: https://api.basware.com/smartpdf
-    tags:
-      - PDF Processing
-      - Document Conversion
-      - Invoice Capture
-    properties:
-      - type: Documentation
-        url: https://developer.basware.com/en/api/basware
-      - type: GettingStarted
-        url: https://developer.basware.com/en/api/basware/get-started
+- name: Basware Data Access API
+  description: >-
+    The Basware Data Access API allows organizations to query and extract data from Basware systems for
+    reporting, analytics, and integration purposes. It enables programmatic retrieval of transaction data,
+    invoice records, and operational metrics from the Basware platform to feed downstream business intelligence
+    and ERP systems.
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://developer.basware.com/en/api/basware
+  baseURL: https://api.basware.com/data
+  tags:
+  - Data Access
+  - Reporting
+  - Analytics
+  - Business Intelligence
+  properties:
+  - type: Documentation
+    url: https://developer.basware.com/en/api/basware
+  - type: GettingStarted
+    url: https://developer.basware.com/en/api/basware/get-started
+- name: Basware SmartPDF API
+  description: >-
+    The Basware SmartPDF API provides PDF document processing and conversion capabilities within the Basware
+    platform. It enables automated extraction and processing of invoice data from PDF documents, supporting
+    touchless invoice processing workflows and integration with accounts payable automation systems.
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://developer.basware.com/en/api/basware
+  baseURL: https://api.basware.com/smartpdf
+  tags:
+  - PDF Processing
+  - Document Conversion
+  - Invoice Capture
+  properties:
+  - type: Documentation
+    url: https://developer.basware.com/en/api/basware
+  - type: GettingStarted
+    url: https://developer.basware.com/en/api/basware/get-started
+- aid: basware:basware-accountingdocuments-api
+  name: Basware AccountingDocuments API
+  description: The AccountingDocuments API from Basware — 9 operation(s) for accountingdocuments.
+  humanURL: https://developer.basware.com/en/api/basware
+  baseURL: https://api.basware.com
+  tags:
+  - AccountingDocuments
+  properties:
+  - type: OpenAPI
+    url: openapi/basware-accountingdocuments-api-openapi.yml
+  - type: Documentation
+    url: https://developer.basware.com/en/api/basware/manual
+  - type: GettingStarted
+    url: https://developer.basware.com/en/api/basware/get-started
+  - type: Documentation
+    url: https://developer.basware.com/en/api/network/guide
+  - type: GettingStarted
+    url: https://developer.basware.com/en/api/network/get-started
+  - type: Documentation
+    url: https://developer.basware.com/en/api/vault/manual
+  - type: GettingStarted
+    url: https://developer.basware.com/en/api/vault
+- aid: basware:basware-accounts-api
+  name: Basware Accounts API
+  description: The Accounts API from Basware — 2 operation(s) for accounts.
+  humanURL: https://developer.basware.com/en/api/basware
+  baseURL: https://api.basware.com
+  tags:
+  - Accounts
+  properties:
+  - type: OpenAPI
+    url: openapi/basware-accounts-api-openapi.yml
+  - type: Documentation
+    url: https://developer.basware.com/en/api/basware/manual
+  - type: GettingStarted
+    url: https://developer.basware.com/en/api/basware/get-started
+  - type: Documentation
+    url: https://developer.basware.com/en/api/network/guide
+  - type: GettingStarted
+    url: https://developer.basware.com/en/api/network/get-started
+  - type: Documentation
+    url: https://developer.basware.com/en/api/vault/manual
+  - type: GettingStarted
+    url: https://developer.basware.com/en/api/vault
+- aid: basware:basware-advancedpermissions-api
+  name: Basware AdvancedPermissions API
+  description: The AdvancedPermissions API from Basware — 2 operation(s) for advancedpermissions.
+  humanURL: https://developer.basware.com/en/api/basware
+  baseURL: https://api.basware.com
+  tags:
+  - AdvancedPermissions
+  properties:
+  - type: OpenAPI
+    url: openapi/basware-advancedpermissions-api-openapi.yml
+  - type: Documentation
+    url: https://developer.basware.com/en/api/basware/manual
+  - type: GettingStarted
+    url: https://developer.basware.com/en/api/basware/get-started
+  - type: Documentation
+    url: https://developer.basware.com/en/api/network/guide
+  - type: GettingStarted
+    url: https://developer.basware.com/en/api/network/get-started
+  - type: Documentation
+    url: https://developer.basware.com/en/api/vault/manual
+  - type: GettingStarted
+    url: https://developer.basware.com/en/api/vault
+- aid: basware:basware-advancedvalidations-api
+  name: Basware AdvancedValidations API
+  description: The AdvancedValidations API from Basware — 2 operation(s) for advancedvalidations.
+  humanURL: https://developer.basware.com/en/api/basware
+  baseURL: https://api.basware.com
+  tags:
+  - AdvancedValidations
+  properties:
+  - type: OpenAPI
+    url: openapi/basware-advancedvalidations-api-openapi.yml
+  - type: Documentation
+    url: https://developer.basware.com/en/api/basware/manual
+  - type: GettingStarted
+    url: https://developer.basware.com/en/api/basware/get-started
+  - type: Documentation
+    url: https://developer.basware.com/en/api/network/guide
+  - type: GettingStarted
+    url: https://developer.basware.com/en/api/network/get-started
+  - type: Documentation
+    url: https://developer.basware.com/en/api/vault/manual
+  - type: GettingStarted
+    url: https://developer.basware.com/en/api/vault
+- aid: basware:basware-applicationgroups-api
+  name: Basware ApplicationGroups API
+  description: The ApplicationGroups API from Basware — 2 operation(s) for applicationgroups.
+  humanURL: https://developer.basware.com/en/api/basware
+  baseURL: https://api.basware.com
+  tags:
+  - ApplicationGroups
+  properties:
+  - type: OpenAPI
+    url: openapi/basware-applicationgroups-api-openapi.yml
+  - type: Documentation
+    url: https://developer.basware.com/en/api/basware/manual
+  - type: GettingStarted
+    url: https://developer.basware.com/en/api/basware/get-started
+  - type: Documentation
+    url: https://developer.basware.com/en/api/network/guide
+  - type: GettingStarted
+    url: https://developer.basware.com/en/api/network/get-started
+  - type: Documentation
+    url: https://developer.basware.com/en/api/vault/manual
+  - type: GettingStarted
+    url: https://developer.basware.com/en/api/vault
+- aid: basware:basware-companies-deprecated-api
+  name: Basware Companies (deprecated) API
+  description: The Companies (deprecated) API from Basware — 2 operation(s) for companies (deprecated).
+  humanURL: https://developer.basware.com/en/api/basware
+  baseURL: https://api.basware.com
+  tags:
+  - Companies (deprecated)
+  properties:
+  - type: OpenAPI
+    url: openapi/basware-companies-deprecated-api-openapi.yml
+  - type: Documentation
+    url: https://developer.basware.com/en/api/basware/manual
+  - type: GettingStarted
+    url: https://developer.basware.com/en/api/basware/get-started
+  - type: Documentation
+    url: https://developer.basware.com/en/api/network/guide
+  - type: GettingStarted
+    url: https://developer.basware.com/en/api/network/get-started
+  - type: Documentation
+    url: https://developer.basware.com/en/api/vault/manual
+  - type: GettingStarted
+    url: https://developer.basware.com/en/api/vault
+- aid: basware:basware-contracts-api
+  name: Basware Contracts API
+  description: The Contracts API from Basware — 2 operation(s) for contracts.
+  humanURL: https://developer.basware.com/en/api/basware
+  baseURL: https://api.basware.com
+  tags:
+  - Contracts
+  properties:
+  - type: OpenAPI
+    url: openapi/basware-contracts-api-openapi.yml
+  - type: Documentation
+    url: https://developer.basware.com/en/api/basware/manual
+  - type: GettingStarted
+    url: https://developer.basware.com/en/api/basware/get-started
+  - type: Documentation
+    url: https://developer.basware.com/en/api/network/guide
+  - type: GettingStarted
+    url: https://developer.basware.com/en/api/network/get-started
+  - type: Documentation
+    url: https://developer.basware.com/en/api/vault/manual
+  - type: GettingStarted
+    url: https://developer.basware.com/en/api/vault
+- aid: basware:basware-costcenters-api
+  name: Basware CostCenters API
+  description: The CostCenters API from Basware — 2 operation(s) for costcenters.
+  humanURL: https://developer.basware.com/en/api/basware
+  baseURL: https://api.basware.com
+  tags:
+  - CostCenters
+  properties:
+  - type: OpenAPI
+    url: openapi/basware-costcenters-api-openapi.yml
+  - type: Documentation
+    url: https://developer.basware.com/en/api/basware/manual
+  - type: GettingStarted
+    url: https://developer.basware.com/en/api/basware/get-started
+  - type: Documentation
+    url: https://developer.basware.com/en/api/network/guide
+  - type: GettingStarted
+    url: https://developer.basware.com/en/api/network/get-started
+  - type: Documentation
+    url: https://developer.basware.com/en/api/vault/manual
+  - type: GettingStarted
+    url: https://developer.basware.com/en/api/vault
+- aid: basware:basware-data-extract-api
+  name: Basware Data extract API
+  description: The Data extract API from Basware — 5 operation(s) for data extract.
+  humanURL: https://developer.basware.com/en/api/basware
+  baseURL: https://api.basware.com
+  tags:
+  - Data extract
+  properties:
+  - type: OpenAPI
+    url: openapi/basware-data-extract-api-openapi.yml
+  - type: Documentation
+    url: https://developer.basware.com/en/api/basware/manual
+  - type: GettingStarted
+    url: https://developer.basware.com/en/api/basware/get-started
+  - type: Documentation
+    url: https://developer.basware.com/en/api/network/guide
+  - type: GettingStarted
+    url: https://developer.basware.com/en/api/network/get-started
+  - type: Documentation
+    url: https://developer.basware.com/en/api/vault/manual
+  - type: GettingStarted
+    url: https://developer.basware.com/en/api/vault
+- aid: basware:basware-directory-france-lookup-api
+  name: Basware Directory France lookup API
+  description: >-
+    The Directory France lookup API from Basware — 1 operation(s) for directory france lookup.
+  humanURL: https://developer.basware.com/en/api/basware
+  baseURL: https://api.basware.com
+  tags:
+  - Directory France lookup
+  properties:
+  - type: OpenAPI
+    url: openapi/basware-directory-france-lookup-api-openapi.yml
+  - type: Documentation
+    url: https://developer.basware.com/en/api/basware/manual
+  - type: GettingStarted
+    url: https://developer.basware.com/en/api/basware/get-started
+  - type: Documentation
+    url: https://developer.basware.com/en/api/network/guide
+  - type: GettingStarted
+    url: https://developer.basware.com/en/api/network/get-started
+  - type: Documentation
+    url: https://developer.basware.com/en/api/vault/manual
+  - type: GettingStarted
+    url: https://developer.basware.com/en/api/vault
+- aid: basware:basware-document-import-api-api
+  name: Basware Document Import API API
+  description: The Document Import API API from Basware — 1 operation(s) for document import api.
+  humanURL: https://developer.basware.com/en/api/basware
+  baseURL: https://api.basware.com
+  tags:
+  - Document Import API
+  properties:
+  - type: OpenAPI
+    url: openapi/basware-document-import-api-api-openapi.yml
+  - type: Documentation
+    url: https://developer.basware.com/en/api/basware/manual
+  - type: GettingStarted
+    url: https://developer.basware.com/en/api/basware/get-started
+  - type: Documentation
+    url: https://developer.basware.com/en/api/network/guide
+  - type: GettingStarted
+    url: https://developer.basware.com/en/api/network/get-started
+  - type: Documentation
+    url: https://developer.basware.com/en/api/vault/manual
+  - type: GettingStarted
+    url: https://developer.basware.com/en/api/vault
+- aid: basware:basware-errorfeedbacks-api
+  name: Basware ErrorFeedbacks API
+  description: The ErrorFeedbacks API from Basware — 3 operation(s) for errorfeedbacks.
+  humanURL: https://developer.basware.com/en/api/basware
+  baseURL: https://api.basware.com
+  tags:
+  - ErrorFeedbacks
+  properties:
+  - type: OpenAPI
+    url: openapi/basware-errorfeedbacks-api-openapi.yml
+  - type: Documentation
+    url: https://developer.basware.com/en/api/basware/manual
+  - type: GettingStarted
+    url: https://developer.basware.com/en/api/basware/get-started
+  - type: Documentation
+    url: https://developer.basware.com/en/api/network/guide
+  - type: GettingStarted
+    url: https://developer.basware.com/en/api/network/get-started
+  - type: Documentation
+    url: https://developer.basware.com/en/api/vault/manual
+  - type: GettingStarted
+    url: https://developer.basware.com/en/api/vault
+- aid: basware:basware-exchangerates-api
+  name: Basware ExchangeRates API
+  description: The ExchangeRates API from Basware — 2 operation(s) for exchangerates.
+  humanURL: https://developer.basware.com/en/api/basware
+  baseURL: https://api.basware.com
+  tags:
+  - ExchangeRates
+  properties:
+  - type: OpenAPI
+    url: openapi/basware-exchangerates-api-openapi.yml
+  - type: Documentation
+    url: https://developer.basware.com/en/api/basware/manual
+  - type: GettingStarted
+    url: https://developer.basware.com/en/api/basware/get-started
+  - type: Documentation
+    url: https://developer.basware.com/en/api/network/guide
+  - type: GettingStarted
+    url: https://developer.basware.com/en/api/network/get-started
+  - type: Documentation
+    url: https://developer.basware.com/en/api/vault/manual
+  - type: GettingStarted
+    url: https://developer.basware.com/en/api/vault
+- aid: basware:basware-exportedcontracts-api
+  name: Basware ExportedContracts API
+  description: The ExportedContracts API from Basware — 3 operation(s) for exportedcontracts.
+  humanURL: https://developer.basware.com/en/api/basware
+  baseURL: https://api.basware.com
+  tags:
+  - ExportedContracts
+  properties:
+  - type: OpenAPI
+    url: openapi/basware-exportedcontracts-api-openapi.yml
+  - type: Documentation
+    url: https://developer.basware.com/en/api/basware/manual
+  - type: GettingStarted
+    url: https://developer.basware.com/en/api/basware/get-started
+  - type: Documentation
+    url: https://developer.basware.com/en/api/network/guide
+  - type: GettingStarted
+    url: https://developer.basware.com/en/api/network/get-started
+  - type: Documentation
+    url: https://developer.basware.com/en/api/vault/manual
+  - type: GettingStarted
+    url: https://developer.basware.com/en/api/vault
+- aid: basware:basware-exportedcontractspends-api
+  name: Basware ExportedContractSpends API
+  description: The ExportedContractSpends API from Basware — 3 operation(s) for exportedcontractspends.
+  humanURL: https://developer.basware.com/en/api/basware
+  baseURL: https://api.basware.com
+  tags:
+  - ExportedContractSpends
+  properties:
+  - type: OpenAPI
+    url: openapi/basware-exportedcontractspends-api-openapi.yml
+  - type: Documentation
+    url: https://developer.basware.com/en/api/basware/manual
+  - type: GettingStarted
+    url: https://developer.basware.com/en/api/basware/get-started
+  - type: Documentation
+    url: https://developer.basware.com/en/api/network/guide
+  - type: GettingStarted
+    url: https://developer.basware.com/en/api/network/get-started
+  - type: Documentation
+    url: https://developer.basware.com/en/api/vault/manual
+  - type: GettingStarted
+    url: https://developer.basware.com/en/api/vault
+- aid: basware:basware-exportedpurchaseorders-api
+  name: Basware ExportedPurchaseOrders API
+  description: The ExportedPurchaseOrders API from Basware — 3 operation(s) for exportedpurchaseorders.
+  humanURL: https://developer.basware.com/en/api/basware
+  baseURL: https://api.basware.com
+  tags:
+  - ExportedPurchaseOrders
+  properties:
+  - type: OpenAPI
+    url: openapi/basware-exportedpurchaseorders-api-openapi.yml
+  - type: Documentation
+    url: https://developer.basware.com/en/api/basware/manual
+  - type: GettingStarted
+    url: https://developer.basware.com/en/api/basware/get-started
+  - type: Documentation
+    url: https://developer.basware.com/en/api/network/guide
+  - type: GettingStarted
+    url: https://developer.basware.com/en/api/network/get-started
+  - type: Documentation
+    url: https://developer.basware.com/en/api/vault/manual
+  - type: GettingStarted
+    url: https://developer.basware.com/en/api/vault
+- aid: basware:basware-exportedpurchaserequisitions-api
+  name: Basware ExportedPurchaseRequisitions API
+  description: >-
+    The ExportedPurchaseRequisitions API from Basware — 3 operation(s) for exportedpurchaserequisitions.
+  humanURL: https://developer.basware.com/en/api/basware
+  baseURL: https://api.basware.com
+  tags:
+  - ExportedPurchaseRequisitions
+  properties:
+  - type: OpenAPI
+    url: openapi/basware-exportedpurchaserequisitions-api-openapi.yml
+  - type: Documentation
+    url: https://developer.basware.com/en/api/basware/manual
+  - type: GettingStarted
+    url: https://developer.basware.com/en/api/basware/get-started
+  - type: Documentation
+    url: https://developer.basware.com/en/api/network/guide
+  - type: GettingStarted
+    url: https://developer.basware.com/en/api/network/get-started
+  - type: Documentation
+    url: https://developer.basware.com/en/api/vault/manual
+  - type: GettingStarted
+    url: https://developer.basware.com/en/api/vault
+- aid: basware:basware-genericlists-api
+  name: Basware GenericLists API
+  description: The GenericLists API from Basware — 2 operation(s) for genericlists.
+  humanURL: https://developer.basware.com/en/api/basware
+  baseURL: https://api.basware.com
+  tags:
+  - GenericLists
+  properties:
+  - type: OpenAPI
+    url: openapi/basware-genericlists-api-openapi.yml
+  - type: Documentation
+    url: https://developer.basware.com/en/api/basware/manual
+  - type: GettingStarted
+    url: https://developer.basware.com/en/api/basware/get-started
+  - type: Documentation
+    url: https://developer.basware.com/en/api/network/guide
+  - type: GettingStarted
+    url: https://developer.basware.com/en/api/network/get-started
+  - type: Documentation
+    url: https://developer.basware.com/en/api/vault/manual
+  - type: GettingStarted
+    url: https://developer.basware.com/en/api/vault
+- aid: basware:basware-matchingorderlines-api
+  name: Basware MatchingOrderLines API
+  description: The MatchingOrderLines API from Basware — 2 operation(s) for matchingorderlines.
+  humanURL: https://developer.basware.com/en/api/basware
+  baseURL: https://api.basware.com
+  tags:
+  - MatchingOrderLines
+  properties:
+  - type: OpenAPI
+    url: openapi/basware-matchingorderlines-api-openapi.yml
+  - type: Documentation
+    url: https://developer.basware.com/en/api/basware/manual
+  - type: GettingStarted
+    url: https://developer.basware.com/en/api/basware/get-started
+  - type: Documentation
+    url: https://developer.basware.com/en/api/network/guide
+  - type: GettingStarted
+    url: https://developer.basware.com/en/api/network/get-started
+  - type: Documentation
+    url: https://developer.basware.com/en/api/vault/manual
+  - type: GettingStarted
+    url: https://developer.basware.com/en/api/vault
+- aid: basware:basware-matchingorders-api
+  name: Basware MatchingOrders API
+  description: The MatchingOrders API from Basware — 2 operation(s) for matchingorders.
+  humanURL: https://developer.basware.com/en/api/basware
+  baseURL: https://api.basware.com
+  tags:
+  - MatchingOrders
+  properties:
+  - type: OpenAPI
+    url: openapi/basware-matchingorders-api-openapi.yml
+  - type: Documentation
+    url: https://developer.basware.com/en/api/basware/manual
+  - type: GettingStarted
+    url: https://developer.basware.com/en/api/basware/get-started
+  - type: Documentation
+    url: https://developer.basware.com/en/api/network/guide
+  - type: GettingStarted
+    url: https://developer.basware.com/en/api/network/get-started
+  - type: Documentation
+    url: https://developer.basware.com/en/api/vault/manual
+  - type: GettingStarted
+    url: https://developer.basware.com/en/api/vault
+- aid: basware:basware-notification-history-api
+  name: Basware Notification history API
+  description: The Notification history API from Basware — 2 operation(s) for notification history.
+  humanURL: https://developer.basware.com/en/api/basware
+  baseURL: https://api.basware.com
+  tags:
+  - Notification history
+  properties:
+  - type: OpenAPI
+    url: openapi/basware-notification-history-api-openapi.yml
+  - type: Documentation
+    url: https://developer.basware.com/en/api/basware/manual
+  - type: GettingStarted
+    url: https://developer.basware.com/en/api/basware/get-started
+  - type: Documentation
+    url: https://developer.basware.com/en/api/network/guide
+  - type: GettingStarted
+    url: https://developer.basware.com/en/api/network/get-started
+  - type: Documentation
+    url: https://developer.basware.com/en/api/vault/manual
+  - type: GettingStarted
+    url: https://developer.basware.com/en/api/vault
+- aid: basware:basware-organizations-api
+  name: Basware Organizations API
+  description: The Organizations API from Basware — 2 operation(s) for organizations.
+  humanURL: https://developer.basware.com/en/api/basware
+  baseURL: https://api.basware.com
+  tags:
+  - Organizations
+  properties:
+  - type: OpenAPI
+    url: openapi/basware-organizations-api-openapi.yml
+  - type: Documentation
+    url: https://developer.basware.com/en/api/basware/manual
+  - type: GettingStarted
+    url: https://developer.basware.com/en/api/basware/get-started
+  - type: Documentation
+    url: https://developer.basware.com/en/api/network/guide
+  - type: GettingStarted
+    url: https://developer.basware.com/en/api/network/get-started
+  - type: Documentation
+    url: https://developer.basware.com/en/api/vault/manual
+  - type: GettingStarted
+    url: https://developer.basware.com/en/api/vault
+- aid: basware:basware-paymentterms-api
+  name: Basware PaymentTerms API
+  description: The PaymentTerms API from Basware — 2 operation(s) for paymentterms.
+  humanURL: https://developer.basware.com/en/api/basware
+  baseURL: https://api.basware.com
+  tags:
+  - PaymentTerms
+  properties:
+  - type: OpenAPI
+    url: openapi/basware-paymentterms-api-openapi.yml
+  - type: Documentation
+    url: https://developer.basware.com/en/api/basware/manual
+  - type: GettingStarted
+    url: https://developer.basware.com/en/api/basware/get-started
+  - type: Documentation
+    url: https://developer.basware.com/en/api/network/guide
+  - type: GettingStarted
+    url: https://developer.basware.com/en/api/network/get-started
+  - type: Documentation
+    url: https://developer.basware.com/en/api/vault/manual
+  - type: GettingStarted
+    url: https://developer.basware.com/en/api/vault
+- aid: basware:basware-projects-v1-deprecated-api
+  name: Basware Projects v1 (deprecated) API
+  description: >-
+    The Projects v1 (deprecated) API from Basware — 2 operation(s) for projects v1 (deprecated).
+  humanURL: https://developer.basware.com/en/api/basware
+  baseURL: https://api.basware.com
+  tags:
+  - Projects v1 (deprecated)
+  properties:
+  - type: OpenAPI
+    url: openapi/basware-projects-v1-deprecated-api-openapi.yml
+  - type: Documentation
+    url: https://developer.basware.com/en/api/basware/manual
+  - type: GettingStarted
+    url: https://developer.basware.com/en/api/basware/get-started
+  - type: Documentation
+    url: https://developer.basware.com/en/api/network/guide
+  - type: GettingStarted
+    url: https://developer.basware.com/en/api/network/get-started
+  - type: Documentation
+    url: https://developer.basware.com/en/api/vault/manual
+  - type: GettingStarted
+    url: https://developer.basware.com/en/api/vault
+- aid: basware:basware-projects-v2-api
+  name: Basware Projects v2 API
+  description: The Projects v2 API from Basware — 2 operation(s) for projects v2.
+  humanURL: https://developer.basware.com/en/api/basware
+  baseURL: https://api.basware.com
+  tags:
+  - Projects v2
+  properties:
+  - type: OpenAPI
+    url: openapi/basware-projects-v2-api-openapi.yml
+  - type: Documentation
+    url: https://developer.basware.com/en/api/basware/manual
+  - type: GettingStarted
+    url: https://developer.basware.com/en/api/basware/get-started
+  - type: Documentation
+    url: https://developer.basware.com/en/api/network/guide
+  - type: GettingStarted
+    url: https://developer.basware.com/en/api/network/get-started
+  - type: Documentation
+    url: https://developer.basware.com/en/api/vault/manual
+  - type: GettingStarted
+    url: https://developer.basware.com/en/api/vault
+- aid: basware:basware-purchasegoodsreceipts-api
+  name: Basware PurchaseGoodsReceipts API
+  description: The PurchaseGoodsReceipts API from Basware — 2 operation(s) for purchasegoodsreceipts.
+  humanURL: https://developer.basware.com/en/api/basware
+  baseURL: https://api.basware.com
+  tags:
+  - PurchaseGoodsReceipts
+  properties:
+  - type: OpenAPI
+    url: openapi/basware-purchasegoodsreceipts-api-openapi.yml
+  - type: Documentation
+    url: https://developer.basware.com/en/api/basware/manual
+  - type: GettingStarted
+    url: https://developer.basware.com/en/api/basware/get-started
+  - type: Documentation
+    url: https://developer.basware.com/en/api/network/guide
+  - type: GettingStarted
+    url: https://developer.basware.com/en/api/network/get-started
+  - type: Documentation
+    url: https://developer.basware.com/en/api/vault/manual
+  - type: GettingStarted
+    url: https://developer.basware.com/en/api/vault
+- aid: basware:basware-purchaseorders-api
+  name: Basware PurchaseOrders API
+  description: The PurchaseOrders API from Basware — 2 operation(s) for purchaseorders.
+  humanURL: https://developer.basware.com/en/api/basware
+  baseURL: https://api.basware.com
+  tags:
+  - PurchaseOrders
+  properties:
+  - type: OpenAPI
+    url: openapi/basware-purchaseorders-api-openapi.yml
+  - type: Documentation
+    url: https://developer.basware.com/en/api/basware/manual
+  - type: GettingStarted
+    url: https://developer.basware.com/en/api/basware/get-started
+  - type: Documentation
+    url: https://developer.basware.com/en/api/network/guide
+  - type: GettingStarted
+    url: https://developer.basware.com/en/api/network/get-started
+  - type: Documentation
+    url: https://developer.basware.com/en/api/vault/manual
+  - type: GettingStarted
+    url: https://developer.basware.com/en/api/vault
+- aid: basware:basware-purchaserequisitions-api
+  name: Basware PurchaseRequisitions API
+  description: The PurchaseRequisitions API from Basware — 2 operation(s) for purchaserequisitions.
+  humanURL: https://developer.basware.com/en/api/basware
+  baseURL: https://api.basware.com
+  tags:
+  - PurchaseRequisitions
+  properties:
+  - type: OpenAPI
+    url: openapi/basware-purchaserequisitions-api-openapi.yml
+  - type: Documentation
+    url: https://developer.basware.com/en/api/basware/manual
+  - type: GettingStarted
+    url: https://developer.basware.com/en/api/basware/get-started
+  - type: Documentation
+    url: https://developer.basware.com/en/api/network/guide
+  - type: GettingStarted
+    url: https://developer.basware.com/en/api/network/get-started
+  - type: Documentation
+    url: https://developer.basware.com/en/api/vault/manual
+  - type: GettingStarted
+    url: https://developer.basware.com/en/api/vault
+- aid: basware:basware-requeststatus-api
+  name: Basware RequestStatus API
+  description: The RequestStatus API from Basware — 3 operation(s) for requeststatus.
+  humanURL: https://developer.basware.com/en/api/basware
+  baseURL: https://api.basware.com
+  tags:
+  - RequestStatus
+  properties:
+  - type: OpenAPI
+    url: openapi/basware-requeststatus-api-openapi.yml
+  - type: Documentation
+    url: https://developer.basware.com/en/api/basware/manual
+  - type: GettingStarted
+    url: https://developer.basware.com/en/api/basware/get-started
+  - type: Documentation
+    url: https://developer.basware.com/en/api/network/guide
+  - type: GettingStarted
+    url: https://developer.basware.com/en/api/network/get-started
+  - type: Documentation
+    url: https://developer.basware.com/en/api/vault/manual
+  - type: GettingStarted
+    url: https://developer.basware.com/en/api/vault
+- aid: basware:basware-subscribe-to-notifications-api
+  name: Basware Subscribe to notifications API
+  description: >-
+    The Subscribe to notifications API from Basware — 1 operation(s) for subscribe to notifications.
+  humanURL: https://developer.basware.com/en/api/basware
+  baseURL: https://api.basware.com
+  tags:
+  - Subscribe to notifications
+  properties:
+  - type: OpenAPI
+    url: openapi/basware-subscribe-to-notifications-api-openapi.yml
+  - type: Documentation
+    url: https://developer.basware.com/en/api/basware/manual
+  - type: GettingStarted
+    url: https://developer.basware.com/en/api/basware/get-started
+  - type: Documentation
+    url: https://developer.basware.com/en/api/network/guide
+  - type: GettingStarted
+    url: https://developer.basware.com/en/api/network/get-started
+  - type: Documentation
+    url: https://developer.basware.com/en/api/vault/manual
+  - type: GettingStarted
+    url: https://developer.basware.com/en/api/vault
+- aid: basware:basware-taxcodes-api
+  name: Basware TaxCodes API
+  description: The TaxCodes API from Basware — 2 operation(s) for taxcodes.
+  humanURL: https://developer.basware.com/en/api/basware
+  baseURL: https://api.basware.com
+  tags:
+  - TaxCodes
+  properties:
+  - type: OpenAPI
+    url: openapi/basware-taxcodes-api-openapi.yml
+  - type: Documentation
+    url: https://developer.basware.com/en/api/basware/manual
+  - type: GettingStarted
+    url: https://developer.basware.com/en/api/basware/get-started
+  - type: Documentation
+    url: https://developer.basware.com/en/api/network/guide
+  - type: GettingStarted
+    url: https://developer.basware.com/en/api/network/get-started
+  - type: Documentation
+    url: https://developer.basware.com/en/api/vault/manual
+  - type: GettingStarted
+    url: https://developer.basware.com/en/api/vault
+- aid: basware:basware-tokens-api
+  name: Basware Tokens API
+  description: The Tokens API from Basware — 1 operation(s) for tokens.
+  humanURL: https://developer.basware.com/en/api/basware
+  baseURL: https://api.basware.com
+  tags:
+  - Tokens
+  properties:
+  - type: OpenAPI
+    url: openapi/basware-tokens-api-openapi.yml
+  - type: Documentation
+    url: https://developer.basware.com/en/api/basware/manual
+  - type: GettingStarted
+    url: https://developer.basware.com/en/api/basware/get-started
+  - type: Documentation
+    url: https://developer.basware.com/en/api/network/guide
+  - type: GettingStarted
+    url: https://developer.basware.com/en/api/network/get-started
+  - type: Documentation
+    url: https://developer.basware.com/en/api/vault/manual
+  - type: GettingStarted
+    url: https://developer.basware.com/en/api/vault
+- aid: basware:basware-usergroupassociatedusers-api
+  name: Basware UserGroupAssociatedUsers API
+  description: >-
+    The UserGroupAssociatedUsers API from Basware — 1 operation(s) for usergroupassociatedusers.
+  humanURL: https://developer.basware.com/en/api/basware
+  baseURL: https://api.basware.com
+  tags:
+  - UserGroupAssociatedUsers
+  properties:
+  - type: OpenAPI
+    url: openapi/basware-usergroupassociatedusers-api-openapi.yml
+  - type: Documentation
+    url: https://developer.basware.com/en/api/basware/manual
+  - type: GettingStarted
+    url: https://developer.basware.com/en/api/basware/get-started
+  - type: Documentation
+    url: https://developer.basware.com/en/api/network/guide
+  - type: GettingStarted
+    url: https://developer.basware.com/en/api/network/get-started
+  - type: Documentation
+    url: https://developer.basware.com/en/api/vault/manual
+  - type: GettingStarted
+    url: https://developer.basware.com/en/api/vault
+- aid: basware:basware-usergroups-api
+  name: Basware UserGroups API
+  description: The UserGroups API from Basware — 2 operation(s) for usergroups.
+  humanURL: https://developer.basware.com/en/api/basware
+  baseURL: https://api.basware.com
+  tags:
+  - UserGroups
+  properties:
+  - type: OpenAPI
+    url: openapi/basware-usergroups-api-openapi.yml
+  - type: Documentation
+    url: https://developer.basware.com/en/api/basware/manual
+  - type: GettingStarted
+    url: https://developer.basware.com/en/api/basware/get-started
+  - type: Documentation
+    url: https://developer.basware.com/en/api/network/guide
+  - type: GettingStarted
+    url: https://developer.basware.com/en/api/network/get-started
+  - type: Documentation
+    url: https://developer.basware.com/en/api/vault/manual
+  - type: GettingStarted
+    url: https://developer.basware.com/en/api/vault
+- aid: basware:basware-users-api
+  name: Basware Users API
+  description: The Users API from Basware — 2 operation(s) for users.
+  humanURL: https://developer.basware.com/en/api/basware
+  baseURL: https://api.basware.com
+  tags:
+  - Users
+  properties:
+  - type: OpenAPI
+    url: openapi/basware-users-api-openapi.yml
+  - type: Documentation
+    url: https://developer.basware.com/en/api/basware/manual
+  - type: GettingStarted
+    url: https://developer.basware.com/en/api/basware/get-started
+  - type: Documentation
+    url: https://developer.basware.com/en/api/network/guide
+  - type: GettingStarted
+    url: https://developer.basware.com/en/api/network/get-started
+  - type: Documentation
+    url: https://developer.basware.com/en/api/vault/manual
+  - type: GettingStarted
+    url: https://developer.basware.com/en/api/vault
+- aid: basware:basware-vault-archiving-api
+  name: Basware Vault Archiving API
+  description: The Vault Archiving API from Basware — 4 operation(s) for vault archiving.
+  humanURL: https://developer.basware.com/en/api/basware
+  baseURL: https://api.basware.com
+  tags:
+  - Vault Archiving
+  properties:
+  - type: OpenAPI
+    url: openapi/basware-vault-archiving-api-openapi.yml
+  - type: Documentation
+    url: https://developer.basware.com/en/api/basware/manual
+  - type: GettingStarted
+    url: https://developer.basware.com/en/api/basware/get-started
+  - type: Documentation
+    url: https://developer.basware.com/en/api/network/guide
+  - type: GettingStarted
+    url: https://developer.basware.com/en/api/network/get-started
+  - type: Documentation
+    url: https://developer.basware.com/en/api/vault/manual
+  - type: GettingStarted
+    url: https://developer.basware.com/en/api/vault
+- aid: basware:basware-vault-indexing-api
+  name: Basware Vault Indexing API
+  description: The Vault Indexing API from Basware — 1 operation(s) for vault indexing.
+  humanURL: https://developer.basware.com/en/api/basware
+  baseURL: https://api.basware.com
+  tags:
+  - Vault Indexing
+  properties:
+  - type: OpenAPI
+    url: openapi/basware-vault-indexing-api-openapi.yml
+  - type: Documentation
+    url: https://developer.basware.com/en/api/basware/manual
+  - type: GettingStarted
+    url: https://developer.basware.com/en/api/basware/get-started
+  - type: Documentation
+    url: https://developer.basware.com/en/api/network/guide
+  - type: GettingStarted
+    url: https://developer.basware.com/en/api/network/get-started
+  - type: Documentation
+    url: https://developer.basware.com/en/api/vault/manual
+  - type: GettingStarted
+    url: https://developer.basware.com/en/api/vault
+- aid: basware:basware-vendors-api
+  name: Basware Vendors API
+  description: The Vendors API from Basware — 2 operation(s) for vendors.
+  humanURL: https://developer.basware.com/en/api/basware
+  baseURL: https://api.basware.com
+  tags:
+  - Vendors
+  properties:
+  - type: OpenAPI
+    url: openapi/basware-vendors-api-openapi.yml
+  - type: Documentation
+    url: https://developer.basware.com/en/api/basware/manual
+  - type: GettingStarted
+    url: https://developer.basware.com/en/api/basware/get-started
+  - type: Documentation
+    url: https://developer.basware.com/en/api/network/guide
+  - type: GettingStarted
+    url: https://developer.basware.com/en/api/network/get-started
+  - type: Documentation
+    url: https://developer.basware.com/en/api/vault/manual
+  - type: GettingStarted
+    url: https://developer.basware.com/en/api/vault
+- aid: basware:basware-well-known-api
+  name: Basware .well-known API
+  description: The .well-known API from Basware — 2 operation(s) for .well-known.
+  humanURL: https://developer.basware.com/en/api/basware
+  baseURL: https://api.basware.com
+  tags:
+  - .well-known
+  properties:
+  - type: OpenAPI
+    url: openapi/basware-well-known-api-openapi.yml
+  - type: Documentation
+    url: https://developer.basware.com/en/api/basware/manual
+  - type: GettingStarted
+    url: https://developer.basware.com/en/api/basware/get-started
+  - type: Documentation
+    url: https://developer.basware.com/en/api/network/guide
+  - type: GettingStarted
+    url: https://developer.basware.com/en/api/network/get-started
+  - type: Documentation
+    url: https://developer.basware.com/en/api/vault/manual
+  - type: GettingStarted
+    url: https://developer.basware.com/en/api/vault
 common:
   - type: AgenticAccess
     url: agentic-access/basware-agentic-access.yml
