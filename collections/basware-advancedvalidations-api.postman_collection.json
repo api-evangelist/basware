@@ -1,0 +1,1381 @@
+{
+  "item": [
+    {
+      "id": "bd060579-c548-4744-9bcc-2d97647ca066",
+      "name": "AdvancedValidations",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "422b032a-5976-48d2-98f5-5c14b4951f87",
+          "name": "Returns coding row validation rules posted to Basware API.",
+          "request": {
+            "name": "Returns coding row validation rules posted to Basware API.",
+            "description": {
+              "content": "",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "advancedValidations"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "pageSize",
+                  "value": "500",
+                  "description": "A limit for the number of items to be returned for one request. Limit can range between 1 and 500 items."
+                },
+                {
+                  "disabled": false,
+                  "key": "companyCode",
+                  "value": "",
+                  "description": "Company filter. Returns items for specific company."
+                },
+                {
+                  "disabled": false,
+                  "key": "lastUpdated",
+                  "value": "<dateTime>",
+                  "description": "Date Filter. Returns items that have been updated after specified date."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Used to get next page of results when item count indicated by 'pageSize' is exceeded. A token is returned in header (not body) parameter 'X-amz-meta-continuationToken' of the response whenever there are more records to fetch. Post the received value here in a new HEADER parameter on the next GET request to receive the next page of results. When getting the next page of results, you must include the same query parameters that were used when getting the first page.",
+                "key": "x-amz-meta-continuationtoken",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b94c48b9-ae62-4b43-8bd4-8a0a5f2df55c",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "advancedValidations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "500"
+                    },
+                    {
+                      "key": "companyCode",
+                      "value": ""
+                    },
+                    {
+                      "key": "lastUpdated",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Used to get next page of results when item count indicated by 'pageSize' is exceeded. A token is returned in header (not body) parameter 'X-amz-meta-continuationToken' of the response whenever there are more records to fetch. Post the received value here in a new HEADER parameter on the next GET request to receive the next page of results. When getting the next page of results, you must include the same query parameters that were used when getting the first page.",
+                    "key": "x-amz-meta-continuationtoken",
+                    "value": "359557b5-7f8b-4ec1-a65c-ec8a362640ea"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"advancedValidations\": [\n    {\n      \"dimension1\": \"1\",\n      \"externalCode\": \"4847-31231212-212121-1212\",\n      \"interface\": \"AdvancedValidation\",\n      \"keyValue\": \"10012\",\n      \"dimension1From\": \"10000\",\n      \"dimension1To\": \"20000\",\n      \"dimension2\": \"2\",\n      \"dimension2From\": \"18200\",\n      \"dimension2To\": \"18300\",\n      \"dimension3\": \"3\",\n      \"dimension3From\": \"\",\n      \"dimension3To\": \"\",\n      \"dimension4\": \"\",\n      \"dimension4From\": \"\",\n      \"dimension4To\": \"\",\n      \"dimension5\": \"\",\n      \"dimension5From\": \"\",\n      \"dimension5To\": \"\",\n      \"dimension6\": \"\",\n      \"dimension6From\": \"\",\n      \"dimension6To\": \"\",\n      \"dimension7\": \"\",\n      \"dimension7From\": \"\",\n      \"dimension7To\": \"\",\n      \"companies\": [\n        {\n          \"active\": true,\n          \"companyCode\": \"BW01\"\n        },\n        {\n          \"active\": true,\n          \"companyCode\": \"BW01\"\n        }\n      ],\n      \"lastUpdated\": \"1996-03-08T17:12:29.021Z\"\n    },\n    {\n      \"dimension1\": \"1\",\n      \"externalCode\": \"4847-31231212-212121-1212\",\n      \"interface\": \"AdvancedValidation\",\n      \"keyValue\": \"10012\",\n      \"dimension1From\": \"10000\",\n      \"dimension1To\": \"20000\",\n      \"dimension2\": \"2\",\n      \"dimension2From\": \"18200\",\n      \"dimension2To\": \"18300\",\n      \"dimension3\": \"3\",\n      \"dimension3From\": \"\",\n      \"dimension3To\": \"\",\n      \"dimension4\": \"\",\n      \"dimension4From\": \"\",\n      \"dimension4To\": \"\",\n      \"dimension5\": \"\",\n      \"dimension5From\": \"\",\n      \"dimension5To\": \"\",\n      \"dimension6\": \"\",\n      \"dimension6From\": \"\",\n      \"dimension6To\": \"\",\n      \"dimension7\": \"\",\n      \"dimension7From\": \"\",\n      \"dimension7To\": \"\",\n      \"companies\": [\n        {\n          \"active\": true,\n          \"companyCode\": \"BW01\"\n        },\n        {\n          \"active\": true,\n          \"companyCode\": \"BW01\"\n        }\n      ],\n      \"lastUpdated\": \"2026-01-23T10:35:16.829Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "afcf20f4-9ff3-4ecc-9c39-343a0c776a5c",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "advancedValidations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "500"
+                    },
+                    {
+                      "key": "companyCode",
+                      "value": ""
+                    },
+                    {
+                      "key": "lastUpdated",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Used to get next page of results when item count indicated by 'pageSize' is exceeded. A token is returned in header (not body) parameter 'X-amz-meta-continuationToken' of the response whenever there are more records to fetch. Post the received value here in a new HEADER parameter on the next GET request to receive the next page of results. When getting the next page of results, you must include the same query parameters that were used when getting the first page.",
+                    "key": "x-amz-meta-continuationtoken",
+                    "value": "359557b5-7f8b-4ec1-a65c-ec8a362640ea"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e3167dc9-84ad-4f2a-afd8-46a512aeb64f",
+              "name": "Not found. Request was successful and no records were found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "advancedValidations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "500"
+                    },
+                    {
+                      "key": "companyCode",
+                      "value": ""
+                    },
+                    {
+                      "key": "lastUpdated",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Used to get next page of results when item count indicated by 'pageSize' is exceeded. A token is returned in header (not body) parameter 'X-amz-meta-continuationToken' of the response whenever there are more records to fetch. Post the received value here in a new HEADER parameter on the next GET request to receive the next page of results. When getting the next page of results, you must include the same query parameters that were used when getting the first page.",
+                    "key": "x-amz-meta-continuationtoken",
+                    "value": "359557b5-7f8b-4ec1-a65c-ec8a362640ea"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "1fe2cd9e-4bd9-41ce-bc67-22fa41807cc0",
+              "name": "Unexpected error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "advancedValidations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "500"
+                    },
+                    {
+                      "key": "companyCode",
+                      "value": ""
+                    },
+                    {
+                      "key": "lastUpdated",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Used to get next page of results when item count indicated by 'pageSize' is exceeded. A token is returned in header (not body) parameter 'X-amz-meta-continuationToken' of the response whenever there are more records to fetch. Post the received value here in a new HEADER parameter on the next GET request to receive the next page of results. When getting the next page of results, you must include the same query parameters that were used when getting the first page.",
+                    "key": "x-amz-meta-continuationtoken",
+                    "value": "359557b5-7f8b-4ec1-a65c-ec8a362640ea"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"fbc082a2-65a4-469c-b230-d84a252f18fc\",\n  \"hasErrors\": true,\n  \"errors\": [\n    {\n      \"externalCode\": \"4847-31231212-212121-1212\",\n      \"type\": \"SECURITY\",\n      \"code\": \"EXTERNAL_CODE_MISMATCH\",\n      \"message\": \"\",\n      \"info\": \"\"\n    },\n    {\n      \"externalCode\": \"4847-31231212-212121-1212\",\n      \"type\": \"SECURITY\",\n      \"code\": \"SNS_PUBLISH_ERROR\",\n      \"message\": \"\",\n      \"info\": \"\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6709b97e-39a8-4349-964f-a90d7470ea0d",
+          "name": "Creates new coding row validation rule(s), fully overwrites previous record if exists.",
+          "request": {
+            "name": "Creates new coding row validation rule(s), fully overwrites previous record if exists.",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "advancedValidations"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "[\n  {\n    \"dimension1\": \"<string>\",\n    \"externalCode\": \"<string>\",\n    \"interface\": \"<string>\",\n    \"keyValue\": \"<string>\",\n    \"dimension1From\": \"<string>\",\n    \"dimension1To\": \"<string>\",\n    \"dimension2\": \"<string>\",\n    \"dimension2From\": \"<string>\",\n    \"dimension2To\": \"<string>\",\n    \"dimension3\": \"<string>\",\n    \"dimension3From\": \"<string>\",\n    \"dimension3To\": \"<string>\",\n    \"dimension4\": \"<string>\",\n    \"dimension4From\": \"<string>\",\n    \"dimension4To\": \"<string>\",\n    \"dimension5\": \"<string>\",\n    \"dimension5From\": \"<string>\",\n    \"dimension5To\": \"<string>\",\n    \"dimension6\": \"<string>\",\n    \"dimension6From\": \"<string>\",\n    \"dimension6To\": \"<string>\",\n    \"dimension7\": \"<string>\",\n    \"dimension7From\": \"<string>\",\n    \"dimension7To\": \"<string>\",\n    \"companies\": [\n      {\n        \"active\": \"<boolean>\",\n        \"companyCode\": \"<string>\"\n      },\n      {\n        \"active\": \"<boolean>\",\n        \"companyCode\": \"<string>\"\n      }\n    ],\n    \"lastUpdated\": \"<dateTime>\"\n  },\n  {\n    \"dimension1\": \"<string>\",\n    \"externalCode\": \"<string>\",\n    \"interface\": \"<string>\",\n    \"keyValue\": \"<string>\",\n    \"dimension1From\": \"<string>\",\n    \"dimension1To\": \"<string>\",\n    \"dimension2\": \"<string>\",\n    \"dimension2From\": \"<string>\",\n    \"dimension2To\": \"<string>\",\n    \"dimension3\": \"<string>\",\n    \"dimension3From\": \"<string>\",\n    \"dimension3To\": \"<string>\",\n    \"dimension4\": \"<string>\",\n    \"dimension4From\": \"<string>\",\n    \"dimension4To\": \"<string>\",\n    \"dimension5\": \"<string>\",\n    \"dimension5From\": \"<string>\",\n    \"dimension5To\": \"<string>\",\n    \"dimension6\": \"<string>\",\n    \"dimension6From\": \"<string>\",\n    \"dimension6To\": \"<string>\",\n    \"dimension7\": \"<string>\",\n    \"dimension7From\": \"<string>\",\n    \"dimension7To\": \"<string>\",\n    \"companies\": [\n      {\n        \"active\": \"<boolean>\",\n        \"companyCode\": \"<string>\"\n      },\n      {\n        \"active\": \"<boolean>\",\n        \"companyCode\": \"<string>\"\n      }\n    ],\n    \"lastUpdated\": \"<dateTime>\"\n  }\n]",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "fa9e41e8-d4f5-49ff-9d84-30f629275e3c",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "advancedValidations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Specifies the media type of the resource. Value application/json is supported.",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"dimension1\": \"1\",\n    \"externalCode\": \"4847-31231212-212121-1212\",\n    \"interface\": \"AdvancedValidation\",\n    \"keyValue\": \"10012\",\n    \"dimension1From\": \"10000\",\n    \"dimension1To\": \"20000\",\n    \"dimension2\": \"2\",\n    \"dimension2From\": \"18200\",\n    \"dimension2To\": \"18300\",\n    \"dimension3\": \"3\",\n    \"dimension3From\": \"\",\n    \"dimension3To\": \"\",\n    \"dimension4\": \"\",\n    \"dimension4From\": \"\",\n    \"dimension4To\": \"\",\n    \"dimension5\": \"\",\n    \"dimension5From\": \"\",\n    \"dimension5To\": \"\",\n    \"dimension6\": \"\",\n    \"dimension6From\": \"\",\n    \"dimension6To\": \"\",\n    \"dimension7\": \"\",\n    \"dimension7From\": \"\",\n    \"dimension7To\": \"\",\n    \"companies\": [\n      {\n        \"active\": true,\n        \"companyCode\": \"BW01\"\n      },\n      {\n        \"active\": true,\n        \"companyCode\": \"BW01\"\n      }\n    ],\n    \"lastUpdated\": \"<dateTime>\"\n  },\n  {\n    \"dimension1\": \"1\",\n    \"externalCode\": \"4847-31231212-212121-1212\",\n    \"interface\": \"AdvancedValidation\",\n    \"keyValue\": \"10012\",\n    \"dimension1From\": \"10000\",\n    \"dimension1To\": \"20000\",\n    \"dimension2\": \"2\",\n    \"dimension2From\": \"18200\",\n    \"dimension2To\": \"18300\",\n    \"dimension3\": \"3\",\n    \"dimension3From\": \"\",\n    \"dimension3To\": \"\",\n    \"dimension4\": \"\",\n    \"dimension4From\": \"\",\n    \"dimension4To\": \"\",\n    \"dimension5\": \"\",\n    \"dimension5From\": \"\",\n    \"dimension5To\": \"\",\n    \"dimension6\": \"\",\n    \"dimension6From\": \"\",\n    \"dimension6To\": \"\",\n    \"dimension7\": \"\",\n    \"dimension7From\": \"\",\n    \"dimension7To\": \"\",\n    \"companies\": [\n      {\n        \"active\": true,\n        \"companyCode\": \"BW01\"\n      },\n      {\n        \"active\": true,\n        \"companyCode\": \"BW01\"\n      }\n    ],\n    \"lastUpdated\": \"<dateTime>\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"dimension1\": \"1\",\n    \"externalCode\": \"4847-31231212-212121-1212\",\n    \"interface\": \"AdvancedValidation\",\n    \"keyValue\": \"10012\",\n    \"dimension1From\": \"10000\",\n    \"dimension1To\": \"20000\",\n    \"dimension2\": \"2\",\n    \"dimension2From\": \"18200\",\n    \"dimension2To\": \"18300\",\n    \"dimension3\": \"3\",\n    \"dimension3From\": \"\",\n    \"dimension3To\": \"\",\n    \"dimension4\": \"\",\n    \"dimension4From\": \"\",\n    \"dimension4To\": \"\",\n    \"dimension5\": \"\",\n    \"dimension5From\": \"\",\n    \"dimension5To\": \"\",\n    \"dimension6\": \"\",\n    \"dimension6From\": \"\",\n    \"dimension6To\": \"\",\n    \"dimension7\": \"\",\n    \"dimension7From\": \"\",\n    \"dimension7To\": \"\",\n    \"companies\": [\n      {\n        \"active\": true,\n        \"companyCode\": \"BW01\"\n      },\n      {\n        \"active\": true,\n        \"companyCode\": \"BW01\"\n      }\n    ],\n    \"lastUpdated\": \"<dateTime>\"\n  },\n  {\n    \"dimension1\": \"1\",\n    \"externalCode\": \"4847-31231212-212121-1212\",\n    \"interface\": \"AdvancedValidation\",\n    \"keyValue\": \"10012\",\n    \"dimension1From\": \"10000\",\n    \"dimension1To\": \"20000\",\n    \"dimension2\": \"2\",\n    \"dimension2From\": \"18200\",\n    \"dimension2To\": \"18300\",\n    \"dimension3\": \"3\",\n    \"dimension3From\": \"\",\n    \"dimension3To\": \"\",\n    \"dimension4\": \"\",\n    \"dimension4From\": \"\",\n    \"dimension4To\": \"\",\n    \"dimension5\": \"\",\n    \"dimension5From\": \"\",\n    \"dimension5To\": \"\",\n    \"dimension6\": \"\",\n    \"dimension6From\": \"\",\n    \"dimension6To\": \"\",\n    \"dimension7\": \"\",\n    \"dimension7From\": \"\",\n    \"dimension7To\": \"\",\n    \"companies\": [\n      {\n        \"active\": true,\n        \"companyCode\": \"BW01\"\n      },\n      {\n        \"active\": true,\n        \"companyCode\": \"BW01\"\n      }\n    ],\n    \"lastUpdated\": \"<dateTime>\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d9efdfe9-cd02-4b0d-9a01-db0b55d64486",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "advancedValidations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Specifies the media type of the resource. Value application/json is supported.",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"dimension1\": \"1\",\n    \"externalCode\": \"4847-31231212-212121-1212\",\n    \"interface\": \"AdvancedValidation\",\n    \"keyValue\": \"10012\",\n    \"dimension1From\": \"10000\",\n    \"dimension1To\": \"20000\",\n    \"dimension2\": \"2\",\n    \"dimension2From\": \"18200\",\n    \"dimension2To\": \"18300\",\n    \"dimension3\": \"3\",\n    \"dimension3From\": \"\",\n    \"dimension3To\": \"\",\n    \"dimension4\": \"\",\n    \"dimension4From\": \"\",\n    \"dimension4To\": \"\",\n    \"dimension5\": \"\",\n    \"dimension5From\": \"\",\n    \"dimension5To\": \"\",\n    \"dimension6\": \"\",\n    \"dimension6From\": \"\",\n    \"dimension6To\": \"\",\n    \"dimension7\": \"\",\n    \"dimension7From\": \"\",\n    \"dimension7To\": \"\",\n    \"companies\": [\n      {\n        \"active\": true,\n        \"companyCode\": \"BW01\"\n      },\n      {\n        \"active\": true,\n        \"companyCode\": \"BW01\"\n      }\n    ],\n    \"lastUpdated\": \"<dateTime>\"\n  },\n  {\n    \"dimension1\": \"1\",\n    \"externalCode\": \"4847-31231212-212121-1212\",\n    \"interface\": \"AdvancedValidation\",\n    \"keyValue\": \"10012\",\n    \"dimension1From\": \"10000\",\n    \"dimension1To\": \"20000\",\n    \"dimension2\": \"2\",\n    \"dimension2From\": \"18200\",\n    \"dimension2To\": \"18300\",\n    \"dimension3\": \"3\",\n    \"dimension3From\": \"\",\n    \"dimension3To\": \"\",\n    \"dimension4\": \"\",\n    \"dimension4From\": \"\",\n    \"dimension4To\": \"\",\n    \"dimension5\": \"\",\n    \"dimension5From\": \"\",\n    \"dimension5To\": \"\",\n    \"dimension6\": \"\",\n    \"dimension6From\": \"\",\n    \"dimension6To\": \"\",\n    \"dimension7\": \"\",\n    \"dimension7From\": \"\",\n    \"dimension7To\": \"\",\n    \"companies\": [\n      {\n        \"active\": true,\n        \"companyCode\": \"BW01\"\n      },\n      {\n        \"active\": true,\n        \"companyCode\": \"BW01\"\n      }\n    ],\n    \"lastUpdated\": \"<dateTime>\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"fbc082a2-65a4-469c-b230-d84a252f18fc\",\n  \"hasErrors\": true,\n  \"errors\": [\n    {\n      \"externalCode\": \"4847-31231212-212121-1212\",\n      \"type\": \"TECHNICAL\",\n      \"code\": \"SNS_PUBLISH_ERROR\",\n      \"message\": \"\",\n      \"info\": \"\"\n    },\n    {\n      \"externalCode\": \"4847-31231212-212121-1212\",\n      \"type\": \"TECHNICAL\",\n      \"code\": \"SCHEMA_VALIDATION_ERROR\",\n      \"message\": \"\",\n      \"info\": \"\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "685c67f1-3bf5-4cef-885c-8a8e9a3c0cb8",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "advancedValidations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Specifies the media type of the resource. Value application/json is supported.",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"dimension1\": \"1\",\n    \"externalCode\": \"4847-31231212-212121-1212\",\n    \"interface\": \"AdvancedValidation\",\n    \"keyValue\": \"10012\",\n    \"dimension1From\": \"10000\",\n    \"dimension1To\": \"20000\",\n    \"dimension2\": \"2\",\n    \"dimension2From\": \"18200\",\n    \"dimension2To\": \"18300\",\n    \"dimension3\": \"3\",\n    \"dimension3From\": \"\",\n    \"dimension3To\": \"\",\n    \"dimension4\": \"\",\n    \"dimension4From\": \"\",\n    \"dimension4To\": \"\",\n    \"dimension5\": \"\",\n    \"dimension5From\": \"\",\n    \"dimension5To\": \"\",\n    \"dimension6\": \"\",\n    \"dimension6From\": \"\",\n    \"dimension6To\": \"\",\n    \"dimension7\": \"\",\n    \"dimension7From\": \"\",\n    \"dimension7To\": \"\",\n    \"companies\": [\n      {\n        \"active\": true,\n        \"companyCode\": \"BW01\"\n      },\n      {\n        \"active\": true,\n        \"companyCode\": \"BW01\"\n      }\n    ],\n    \"lastUpdated\": \"<dateTime>\"\n  },\n  {\n    \"dimension1\": \"1\",\n    \"externalCode\": \"4847-31231212-212121-1212\",\n    \"interface\": \"AdvancedValidation\",\n    \"keyValue\": \"10012\",\n    \"dimension1From\": \"10000\",\n    \"dimension1To\": \"20000\",\n    \"dimension2\": \"2\",\n    \"dimension2From\": \"18200\",\n    \"dimension2To\": \"18300\",\n    \"dimension3\": \"3\",\n    \"dimension3From\": \"\",\n    \"dimension3To\": \"\",\n    \"dimension4\": \"\",\n    \"dimension4From\": \"\",\n    \"dimension4To\": \"\",\n    \"dimension5\": \"\",\n    \"dimension5From\": \"\",\n    \"dimension5To\": \"\",\n    \"dimension6\": \"\",\n    \"dimension6From\": \"\",\n    \"dimension6To\": \"\",\n    \"dimension7\": \"\",\n    \"dimension7From\": \"\",\n    \"dimension7To\": \"\",\n    \"companies\": [\n      {\n        \"active\": true,\n        \"companyCode\": \"BW01\"\n      },\n      {\n        \"active\": true,\n        \"companyCode\": \"BW01\"\n      }\n    ],\n    \"lastUpdated\": \"<dateTime>\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b6a160fe-4a1a-4abe-9a97-a1ccba3c052d",
+              "name": "Conflict",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "advancedValidations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Specifies the media type of the resource. Value application/json is supported.",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"dimension1\": \"1\",\n    \"externalCode\": \"4847-31231212-212121-1212\",\n    \"interface\": \"AdvancedValidation\",\n    \"keyValue\": \"10012\",\n    \"dimension1From\": \"10000\",\n    \"dimension1To\": \"20000\",\n    \"dimension2\": \"2\",\n    \"dimension2From\": \"18200\",\n    \"dimension2To\": \"18300\",\n    \"dimension3\": \"3\",\n    \"dimension3From\": \"\",\n    \"dimension3To\": \"\",\n    \"dimension4\": \"\",\n    \"dimension4From\": \"\",\n    \"dimension4To\": \"\",\n    \"dimension5\": \"\",\n    \"dimension5From\": \"\",\n    \"dimension5To\": \"\",\n    \"dimension6\": \"\",\n    \"dimension6From\": \"\",\n    \"dimension6To\": \"\",\n    \"dimension7\": \"\",\n    \"dimension7From\": \"\",\n    \"dimension7To\": \"\",\n    \"companies\": [\n      {\n        \"active\": true,\n        \"companyCode\": \"BW01\"\n      },\n      {\n        \"active\": true,\n        \"companyCode\": \"BW01\"\n      }\n    ],\n    \"lastUpdated\": \"<dateTime>\"\n  },\n  {\n    \"dimension1\": \"1\",\n    \"externalCode\": \"4847-31231212-212121-1212\",\n    \"interface\": \"AdvancedValidation\",\n    \"keyValue\": \"10012\",\n    \"dimension1From\": \"10000\",\n    \"dimension1To\": \"20000\",\n    \"dimension2\": \"2\",\n    \"dimension2From\": \"18200\",\n    \"dimension2To\": \"18300\",\n    \"dimension3\": \"3\",\n    \"dimension3From\": \"\",\n    \"dimension3To\": \"\",\n    \"dimension4\": \"\",\n    \"dimension4From\": \"\",\n    \"dimension4To\": \"\",\n    \"dimension5\": \"\",\n    \"dimension5From\": \"\",\n    \"dimension5To\": \"\",\n    \"dimension6\": \"\",\n    \"dimension6From\": \"\",\n    \"dimension6To\": \"\",\n    \"dimension7\": \"\",\n    \"dimension7From\": \"\",\n    \"dimension7To\": \"\",\n    \"companies\": [\n      {\n        \"active\": true,\n        \"companyCode\": \"BW01\"\n      },\n      {\n        \"active\": true,\n        \"companyCode\": \"BW01\"\n      }\n    ],\n    \"lastUpdated\": \"<dateTime>\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"fbc082a2-65a4-469c-b230-d84a252f18fc\",\n  \"hasErrors\": true,\n  \"errors\": [\n    {\n      \"externalCode\": \"4847-31231212-212121-1212\",\n      \"type\": \"TECHNICAL\",\n      \"code\": \"SNS_PUBLISH_ERROR\",\n      \"message\": \"\",\n      \"info\": \"\"\n    },\n    {\n      \"externalCode\": \"4847-31231212-212121-1212\",\n      \"type\": \"TECHNICAL\",\n      \"code\": \"SCHEMA_VALIDATION_ERROR\",\n      \"message\": \"\",\n      \"info\": \"\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bd51088a-da63-4e15-951d-4f1395286445",
+              "name": "Unexpected error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "advancedValidations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Specifies the media type of the resource. Value application/json is supported.",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"dimension1\": \"1\",\n    \"externalCode\": \"4847-31231212-212121-1212\",\n    \"interface\": \"AdvancedValidation\",\n    \"keyValue\": \"10012\",\n    \"dimension1From\": \"10000\",\n    \"dimension1To\": \"20000\",\n    \"dimension2\": \"2\",\n    \"dimension2From\": \"18200\",\n    \"dimension2To\": \"18300\",\n    \"dimension3\": \"3\",\n    \"dimension3From\": \"\",\n    \"dimension3To\": \"\",\n    \"dimension4\": \"\",\n    \"dimension4From\": \"\",\n    \"dimension4To\": \"\",\n    \"dimension5\": \"\",\n    \"dimension5From\": \"\",\n    \"dimension5To\": \"\",\n    \"dimension6\": \"\",\n    \"dimension6From\": \"\",\n    \"dimension6To\": \"\",\n    \"dimension7\": \"\",\n    \"dimension7From\": \"\",\n    \"dimension7To\": \"\",\n    \"companies\": [\n      {\n        \"active\": true,\n        \"companyCode\": \"BW01\"\n      },\n      {\n        \"active\": true,\n        \"companyCode\": \"BW01\"\n      }\n    ],\n    \"lastUpdated\": \"<dateTime>\"\n  },\n  {\n    \"dimension1\": \"1\",\n    \"externalCode\": \"4847-31231212-212121-1212\",\n    \"interface\": \"AdvancedValidation\",\n    \"keyValue\": \"10012\",\n    \"dimension1From\": \"10000\",\n    \"dimension1To\": \"20000\",\n    \"dimension2\": \"2\",\n    \"dimension2From\": \"18200\",\n    \"dimension2To\": \"18300\",\n    \"dimension3\": \"3\",\n    \"dimension3From\": \"\",\n    \"dimension3To\": \"\",\n    \"dimension4\": \"\",\n    \"dimension4From\": \"\",\n    \"dimension4To\": \"\",\n    \"dimension5\": \"\",\n    \"dimension5From\": \"\",\n    \"dimension5To\": \"\",\n    \"dimension6\": \"\",\n    \"dimension6From\": \"\",\n    \"dimension6To\": \"\",\n    \"dimension7\": \"\",\n    \"dimension7From\": \"\",\n    \"dimension7To\": \"\",\n    \"companies\": [\n      {\n        \"active\": true,\n        \"companyCode\": \"BW01\"\n      },\n      {\n        \"active\": true,\n        \"companyCode\": \"BW01\"\n      }\n    ],\n    \"lastUpdated\": \"<dateTime>\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"fbc082a2-65a4-469c-b230-d84a252f18fc\",\n  \"hasErrors\": true,\n  \"errors\": [\n    {\n      \"externalCode\": \"4847-31231212-212121-1212\",\n      \"type\": \"TECHNICAL\",\n      \"code\": \"SNS_PUBLISH_ERROR\",\n      \"message\": \"\",\n      \"info\": \"\"\n    },\n    {\n      \"externalCode\": \"4847-31231212-212121-1212\",\n      \"type\": \"TECHNICAL\",\n      \"code\": \"SCHEMA_VALIDATION_ERROR\",\n      \"message\": \"\",\n      \"info\": \"\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6a187c25-3878-4a90-b96c-7efe5224f89e",
+          "name": "Deletes data from Basware API. For manual one-time operations.",
+          "request": {
+            "name": "Deletes data from Basware API. For manual one-time operations.",
+            "description": {
+              "content": "For manual one-time operations only, such as a manual clean-up to remove test data generated during API integration development. Only removes records from API layer. \r\nDeletion in target systems needs to be done separately using the data deletion mechanisms available in each of the target system in addition to deleting the data in Basware API.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "advancedValidations"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"lastUpdated\": \"<dateTime>\",\n  \"externalCode\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "7b5f80aa-9a52-4745-8abd-1b749122321c",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "advancedValidations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"lastUpdated\": \"<dateTime>\",\n  \"externalCode\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusApiLink\": \"string\",\n  \"taskName\": \"string\",\n  \"taskStatus\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5e162152-31e1-4f66-aae9-a61618b10263",
+              "name": "RequestAccepted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "advancedValidations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"lastUpdated\": \"<dateTime>\",\n  \"externalCode\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusApiLink\": \"string\",\n  \"taskName\": \"string\",\n  \"taskStatus\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e7fca6f8-7fe9-414b-a4e5-bcf94bca8eba",
+              "name": "BadRequest",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "advancedValidations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"lastUpdated\": \"<dateTime>\",\n  \"externalCode\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"fbc082a2-65a4-469c-b230-d84a252f18fc\",\n  \"hasErrors\": true,\n  \"errors\": [\n    {\n      \"externalCode\": \"4847-31231212-212121-1212\",\n      \"type\": \"TECHNICAL\",\n      \"code\": \"SNS_PUBLISH_ERROR\",\n      \"message\": \"\",\n      \"info\": \"\"\n    },\n    {\n      \"externalCode\": \"4847-31231212-212121-1212\",\n      \"type\": \"TECHNICAL\",\n      \"code\": \"SCHEMA_VALIDATION_ERROR\",\n      \"message\": \"\",\n      \"info\": \"\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3c0c0804-f37a-470f-8cbc-2d5608dc2bd7",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "advancedValidations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"lastUpdated\": \"<dateTime>\",\n  \"externalCode\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ca3e1f44-48ed-48b5-910a-cd11ab3c3c57",
+              "name": "Unexpected error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "advancedValidations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"lastUpdated\": \"<dateTime>\",\n  \"externalCode\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"fbc082a2-65a4-469c-b230-d84a252f18fc\",\n  \"hasErrors\": true,\n  \"errors\": [\n    {\n      \"externalCode\": \"4847-31231212-212121-1212\",\n      \"type\": \"TECHNICAL\",\n      \"code\": \"SNS_PUBLISH_ERROR\",\n      \"message\": \"\",\n      \"info\": \"\"\n    },\n    {\n      \"externalCode\": \"4847-31231212-212121-1212\",\n      \"type\": \"TECHNICAL\",\n      \"code\": \"SCHEMA_VALIDATION_ERROR\",\n      \"message\": \"\",\n      \"info\": \"\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e538f445-6a35-40ba-963a-8a4edc9ab3d4",
+          "name": "Returns single coding row validation rules by externalCode -identifier.",
+          "request": {
+            "name": "Returns single coding row validation rules by externalCode -identifier.",
+            "description": {
+              "content": "",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "advancedValidations",
+                ":externalCode"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "externalCode",
+                  "description": "(Required) The ExternalCode of the entity to be fetched"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4946c8f0-0082-48d2-986c-75072a1b8206",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "advancedValidations",
+                    ":externalCode"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "externalCode",
+                      "description": "(Required) The ExternalCode of the entity to be fetched"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"dimension1\": \"1\",\n  \"externalCode\": \"4847-31231212-212121-1212\",\n  \"interface\": \"AdvancedValidation\",\n  \"keyValue\": \"10012\",\n  \"dimension1From\": \"10000\",\n  \"dimension1To\": \"20000\",\n  \"dimension2\": \"2\",\n  \"dimension2From\": \"18200\",\n  \"dimension2To\": \"18300\",\n  \"dimension3\": \"3\",\n  \"dimension3From\": \"\",\n  \"dimension3To\": \"\",\n  \"dimension4\": \"\",\n  \"dimension4From\": \"\",\n  \"dimension4To\": \"\",\n  \"dimension5\": \"\",\n  \"dimension5From\": \"\",\n  \"dimension5To\": \"\",\n  \"dimension6\": \"\",\n  \"dimension6From\": \"\",\n  \"dimension6To\": \"\",\n  \"dimension7\": \"\",\n  \"dimension7From\": \"\",\n  \"dimension7To\": \"\",\n  \"companies\": [\n    {\n      \"active\": true,\n      \"companyCode\": \"BW01\"\n    },\n    {\n      \"active\": true,\n      \"companyCode\": \"BW01\"\n    }\n  ],\n  \"lastUpdated\": \"<dateTime>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4c0b7744-897b-45d8-8879-b66118e0449b",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "advancedValidations",
+                    ":externalCode"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "externalCode",
+                      "description": "(Required) The ExternalCode of the entity to be fetched"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "1583aee3-3b19-4dab-97bd-c91e8db43acd",
+              "name": "Not found. Request was successful and no records were found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "advancedValidations",
+                    ":externalCode"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "externalCode",
+                      "description": "(Required) The ExternalCode of the entity to be fetched"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "dfdceede-b59c-4172-9578-d1e3d459b73c",
+              "name": "Unexpected error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "advancedValidations",
+                    ":externalCode"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "externalCode",
+                      "description": "(Required) The ExternalCode of the entity to be fetched"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"fbc082a2-65a4-469c-b230-d84a252f18fc\",\n  \"hasErrors\": true,\n  \"errors\": [\n    {\n      \"externalCode\": \"4847-31231212-212121-1212\",\n      \"type\": \"TECHNICAL\",\n      \"code\": \"SNS_PUBLISH_ERROR\",\n      \"message\": \"\",\n      \"info\": \"\"\n    },\n    {\n      \"externalCode\": \"4847-31231212-212121-1212\",\n      \"type\": \"TECHNICAL\",\n      \"code\": \"SCHEMA_VALIDATION_ERROR\",\n      \"message\": \"\",\n      \"info\": \"\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "03abb853-9f5c-4608-8ae0-a4e1ddb3055d",
+          "name": "Updates fields on spefified coding row validation rule. Preserves existing values in fields, which were not updated.",
+          "request": {
+            "name": "Updates fields on spefified coding row validation rule. Preserves existing values in fields, which were not updated.",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "advancedValidations",
+                ":externalCode"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "externalCode",
+                  "description": "(Required) The ExternalCode of the advancedValidation to be updated"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"dimension1\": \"<string>\",\n  \"externalCode\": \"<string>\",\n  \"interface\": \"<string>\",\n  \"keyValue\": \"<string>\",\n  \"dimension1From\": \"<string>\",\n  \"dimension1To\": \"<string>\",\n  \"dimension2\": \"<string>\",\n  \"dimension2From\": \"<string>\",\n  \"dimension2To\": \"<string>\",\n  \"dimension3\": \"<string>\",\n  \"dimension3From\": \"<string>\",\n  \"dimension3To\": \"<string>\",\n  \"dimension4\": \"<string>\",\n  \"dimension4From\": \"<string>\",\n  \"dimension4To\": \"<string>\",\n  \"dimension5\": \"<string>\",\n  \"dimension5From\": \"<string>\",\n  \"dimension5To\": \"<string>\",\n  \"dimension6\": \"<string>\",\n  \"dimension6From\": \"<string>\",\n  \"dimension6To\": \"<string>\",\n  \"dimension7\": \"<string>\",\n  \"dimension7From\": \"<string>\",\n  \"dimension7To\": \"<string>\",\n  \"companies\": [\n    {\n      \"active\": \"<boolean>\",\n      \"companyCode\": \"<string>\"\n    },\n    {\n      \"active\": \"<boolean>\",\n      \"companyCode\": \"<string>\"\n    }\n  ],\n  \"lastUpdated\": \"<dateTime>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "60f96b68-00e9-44b6-bc50-f81135c9c1c1",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "advancedValidations",
+                    ":externalCode"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "externalCode",
+                      "description": "(Required) The ExternalCode of the advancedValidation to be updated"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"dimension1\": \"1\",\n  \"externalCode\": \"4847-31231212-212121-1212\",\n  \"interface\": \"AdvancedValidation\",\n  \"keyValue\": \"10012\",\n  \"dimension1From\": \"10000\",\n  \"dimension1To\": \"20000\",\n  \"dimension2\": \"2\",\n  \"dimension2From\": \"18200\",\n  \"dimension2To\": \"18300\",\n  \"dimension3\": \"3\",\n  \"dimension3From\": \"\",\n  \"dimension3To\": \"\",\n  \"dimension4\": \"\",\n  \"dimension4From\": \"\",\n  \"dimension4To\": \"\",\n  \"dimension5\": \"\",\n  \"dimension5From\": \"\",\n  \"dimension5To\": \"\",\n  \"dimension6\": \"\",\n  \"dimension6From\": \"\",\n  \"dimension6To\": \"\",\n  \"dimension7\": \"\",\n  \"dimension7From\": \"\",\n  \"dimension7To\": \"\",\n  \"companies\": [\n    {\n      \"active\": true,\n      \"companyCode\": \"BW01\"\n    },\n    {\n      \"active\": true,\n      \"companyCode\": \"BW01\"\n    }\n  ],\n  \"lastUpdated\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"dimension1\": \"1\",\n  \"externalCode\": \"4847-31231212-212121-1212\",\n  \"interface\": \"AdvancedValidation\",\n  \"keyValue\": \"10012\",\n  \"dimension1From\": \"10000\",\n  \"dimension1To\": \"20000\",\n  \"dimension2\": \"2\",\n  \"dimension2From\": \"18200\",\n  \"dimension2To\": \"18300\",\n  \"dimension3\": \"3\",\n  \"dimension3From\": \"\",\n  \"dimension3To\": \"\",\n  \"dimension4\": \"\",\n  \"dimension4From\": \"\",\n  \"dimension4To\": \"\",\n  \"dimension5\": \"\",\n  \"dimension5From\": \"\",\n  \"dimension5To\": \"\",\n  \"dimension6\": \"\",\n  \"dimension6From\": \"\",\n  \"dimension6To\": \"\",\n  \"dimension7\": \"\",\n  \"dimension7From\": \"\",\n  \"dimension7To\": \"\",\n  \"companies\": [\n    {\n      \"active\": true,\n      \"companyCode\": \"BW01\"\n    },\n    {\n      \"active\": true,\n      \"companyCode\": \"BW01\"\n    }\n  ],\n  \"lastUpdated\": \"<dateTime>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "426d4078-0999-4c36-8b9c-bdd746b107f3",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "advancedValidations",
+                    ":externalCode"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "externalCode",
+                      "description": "(Required) The ExternalCode of the advancedValidation to be updated"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"dimension1\": \"1\",\n  \"externalCode\": \"4847-31231212-212121-1212\",\n  \"interface\": \"AdvancedValidation\",\n  \"keyValue\": \"10012\",\n  \"dimension1From\": \"10000\",\n  \"dimension1To\": \"20000\",\n  \"dimension2\": \"2\",\n  \"dimension2From\": \"18200\",\n  \"dimension2To\": \"18300\",\n  \"dimension3\": \"3\",\n  \"dimension3From\": \"\",\n  \"dimension3To\": \"\",\n  \"dimension4\": \"\",\n  \"dimension4From\": \"\",\n  \"dimension4To\": \"\",\n  \"dimension5\": \"\",\n  \"dimension5From\": \"\",\n  \"dimension5To\": \"\",\n  \"dimension6\": \"\",\n  \"dimension6From\": \"\",\n  \"dimension6To\": \"\",\n  \"dimension7\": \"\",\n  \"dimension7From\": \"\",\n  \"dimension7To\": \"\",\n  \"companies\": [\n    {\n      \"active\": true,\n      \"companyCode\": \"BW01\"\n    },\n    {\n      \"active\": true,\n      \"companyCode\": \"BW01\"\n    }\n  ],\n  \"lastUpdated\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"fbc082a2-65a4-469c-b230-d84a252f18fc\",\n  \"hasErrors\": true,\n  \"errors\": [\n    {\n      \"externalCode\": \"4847-31231212-212121-1212\",\n      \"type\": \"TECHNICAL\",\n      \"code\": \"SNS_PUBLISH_ERROR\",\n      \"message\": \"\",\n      \"info\": \"\"\n    },\n    {\n      \"externalCode\": \"4847-31231212-212121-1212\",\n      \"type\": \"TECHNICAL\",\n      \"code\": \"SCHEMA_VALIDATION_ERROR\",\n      \"message\": \"\",\n      \"info\": \"\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "aaeaa1b9-f9b5-4ca1-9a72-647c2a19eba5",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "advancedValidations",
+                    ":externalCode"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "externalCode",
+                      "description": "(Required) The ExternalCode of the advancedValidation to be updated"
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"dimension1\": \"1\",\n  \"externalCode\": \"4847-31231212-212121-1212\",\n  \"interface\": \"AdvancedValidation\",\n  \"keyValue\": \"10012\",\n  \"dimension1From\": \"10000\",\n  \"dimension1To\": \"20000\",\n  \"dimension2\": \"2\",\n  \"dimension2From\": \"18200\",\n  \"dimension2To\": \"18300\",\n  \"dimension3\": \"3\",\n  \"dimension3From\": \"\",\n  \"dimension3To\": \"\",\n  \"dimension4\": \"\",\n  \"dimension4From\": \"\",\n  \"dimension4To\": \"\",\n  \"dimension5\": \"\",\n  \"dimension5From\": \"\",\n  \"dimension5To\": \"\",\n  \"dimension6\": \"\",\n  \"dimension6From\": \"\",\n  \"dimension6To\": \"\",\n  \"dimension7\": \"\",\n  \"dimension7From\": \"\",\n  \"dimension7To\": \"\",\n  \"companies\": [\n    {\n      \"active\": true,\n      \"companyCode\": \"BW01\"\n    },\n    {\n      \"active\": true,\n      \"companyCode\": \"BW01\"\n    }\n  ],\n  \"lastUpdated\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "db8df002-d758-4b5b-9fb5-142e3b3a40ac",
+              "name": "Not found. Record to update not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "advancedValidations",
+                    ":externalCode"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "externalCode",
+                      "description": "(Required) The ExternalCode of the advancedValidation to be updated"
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"dimension1\": \"1\",\n  \"externalCode\": \"4847-31231212-212121-1212\",\n  \"interface\": \"AdvancedValidation\",\n  \"keyValue\": \"10012\",\n  \"dimension1From\": \"10000\",\n  \"dimension1To\": \"20000\",\n  \"dimension2\": \"2\",\n  \"dimension2From\": \"18200\",\n  \"dimension2To\": \"18300\",\n  \"dimension3\": \"3\",\n  \"dimension3From\": \"\",\n  \"dimension3To\": \"\",\n  \"dimension4\": \"\",\n  \"dimension4From\": \"\",\n  \"dimension4To\": \"\",\n  \"dimension5\": \"\",\n  \"dimension5From\": \"\",\n  \"dimension5To\": \"\",\n  \"dimension6\": \"\",\n  \"dimension6From\": \"\",\n  \"dimension6To\": \"\",\n  \"dimension7\": \"\",\n  \"dimension7From\": \"\",\n  \"dimension7To\": \"\",\n  \"companies\": [\n    {\n      \"active\": true,\n      \"companyCode\": \"BW01\"\n    },\n    {\n      \"active\": true,\n      \"companyCode\": \"BW01\"\n    }\n  ],\n  \"lastUpdated\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ed3ec07b-8b95-420f-9111-c3a891bf560e",
+              "name": "Unexpected error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "advancedValidations",
+                    ":externalCode"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "externalCode",
+                      "description": "(Required) The ExternalCode of the advancedValidation to be updated"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"dimension1\": \"1\",\n  \"externalCode\": \"4847-31231212-212121-1212\",\n  \"interface\": \"AdvancedValidation\",\n  \"keyValue\": \"10012\",\n  \"dimension1From\": \"10000\",\n  \"dimension1To\": \"20000\",\n  \"dimension2\": \"2\",\n  \"dimension2From\": \"18200\",\n  \"dimension2To\": \"18300\",\n  \"dimension3\": \"3\",\n  \"dimension3From\": \"\",\n  \"dimension3To\": \"\",\n  \"dimension4\": \"\",\n  \"dimension4From\": \"\",\n  \"dimension4To\": \"\",\n  \"dimension5\": \"\",\n  \"dimension5From\": \"\",\n  \"dimension5To\": \"\",\n  \"dimension6\": \"\",\n  \"dimension6From\": \"\",\n  \"dimension6To\": \"\",\n  \"dimension7\": \"\",\n  \"dimension7From\": \"\",\n  \"dimension7To\": \"\",\n  \"companies\": [\n    {\n      \"active\": true,\n      \"companyCode\": \"BW01\"\n    },\n    {\n      \"active\": true,\n      \"companyCode\": \"BW01\"\n    }\n  ],\n  \"lastUpdated\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"fbc082a2-65a4-469c-b230-d84a252f18fc\",\n  \"hasErrors\": true,\n  \"errors\": [\n    {\n      \"externalCode\": \"4847-31231212-212121-1212\",\n      \"type\": \"TECHNICAL\",\n      \"code\": \"SNS_PUBLISH_ERROR\",\n      \"message\": \"\",\n      \"info\": \"\"\n    },\n    {\n      \"externalCode\": \"4847-31231212-212121-1212\",\n      \"type\": \"TECHNICAL\",\n      \"code\": \"SCHEMA_VALIDATION_ERROR\",\n      \"message\": \"\",\n      \"info\": \"\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "09d1e5c4-2c1b-4b78-9d05-d35adaf1a063",
+    "name": "Basware OAUTH2 authentication APIs AccountingDocuments AdvancedValidations API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "**Using OAUTH2.0 authentication:**\n\nGet API access token from api.basware.com/tokens\n1. Using client id and client secret, which you can obtain from Basware. \n2. Specify which APIs can be accessed by using the token e.g. Read only access to vendors API only (these are called scopes). Available scopes are listed at <https://developer.basware.com/api/p2p/manual#AccessRights>. \n3. Each token has an expiration time, until which it can be used to call APIs.\n\nWhen using OAUTH2 authentication, you need to pass the OAUTH2 authentication token when calling Basware API endpoints. Available Basware API operations are documented at <https://api.basware.com/swagger>. \n\nSee the Basware API developer site at <https://developer.basware.com/api/p2p/manual#Authentication> for more details on API authentication.",
+      "type": "text/plain"
+    }
+  }
+}

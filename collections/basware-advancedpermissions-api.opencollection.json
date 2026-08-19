@@ -1,0 +1,133 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Basware OAUTH2 authentication APIs AccountingDocuments AdvancedPermissions API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "AdvancedPermissions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Returns advanced user rights -records posted to Basware API.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/advancedPermissions",
+            "headers": [
+              {
+                "name": "x-amz-meta-continuationtoken",
+                "value": "2701ea15-a2c9-43b1-a48b-3a840c78b668"
+              }
+            ],
+            "params": [
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "A limit for the number of items to be returned for one request. Li\r\n            items."
+              },
+              {
+                "name": "companyCode",
+                "value": "",
+                "type": "query",
+                "description": "Company filter. Returns items for specific company."
+              },
+              {
+                "name": "lastUpdated",
+                "value": "",
+                "type": "query",
+                "description": "Date Filter. Returns items that have been updated after specified date."
+              }
+            ]
+          },
+          "docs": "Returns advanced user rights -records posted to Basware API."
+        },
+        {
+          "info": {
+            "name": "Creates new advanced user rights -record(s), fully overwrites previous record if exists.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/advancedPermissions",
+            "headers": [
+              {
+                "name": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates new advanced user rights -record(s), fully overwrites previous record if exists."
+        },
+        {
+          "info": {
+            "name": "Deletes data from Basware API. For manual one-time operations.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/v1/advancedPermissions",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "For manual one-time operations only, such as a manual clean-up to remove test data generated during API integration development. Only removes records from API layer. \r\nDeletion in target systems needs to be done separately using the data deletion mechanisms available in each of the target system in addition to deleting the data in Basware API."
+        },
+        {
+          "info": {
+            "name": "Returns single advanced user rights -record by externalCode -identifier.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/advancedPermissions/:externalCode",
+            "params": [
+              {
+                "name": "externalCode",
+                "value": "",
+                "type": "path",
+                "description": "The ExternalCode of the entity to be fetched"
+              }
+            ]
+          },
+          "docs": "Returns single advanced user rights -record by externalCode -identifier."
+        },
+        {
+          "info": {
+            "name": "Updates fields on specified advanced user rights -record. Preserves existing values in fields, which were not updated.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/v1/advancedPermissions/:externalCode",
+            "params": [
+              {
+                "name": "externalCode",
+                "value": "",
+                "type": "path",
+                "description": "The ExternalCode of the AdvancedPermission to be updated"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Note: Basware API considers 'null' value in field(s) equivalent to the field(s) not being sent. For this reason patch method does not support setting field values to 'null'."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

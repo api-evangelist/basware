@@ -1,0 +1,55 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Basware OAUTH2 authentication APIs AccountingDocuments Vault Indexing API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Vault Indexing",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve index of archived documents.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/vaults/:vaultId/index",
+            "params": [
+              {
+                "name": "vaultId",
+                "value": "",
+                "type": "path",
+                "description": "Vault ID to be checked from"
+              },
+              {
+                "name": "size",
+                "value": "",
+                "type": "query",
+                "description": "Number of items to return. Default is 100, maximum is 1000."
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "Sort order of the results.  Default is \"archiveDate desc\".  It is possible to sort by \"archiveDate\" and \"documentDate\" fields. Use \"asc\" or \"desc\" for ascending or descending order."
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Cursor for deep pagination. Use the cursor returned in the previous response to get the next page of results. If not provided, the first page is returned."
+              }
+            ]
+          },
+          "docs": "Retrieve index of archived documents."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

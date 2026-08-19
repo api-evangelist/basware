@@ -1,0 +1,100 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Basware OAUTH2 authentication APIs AccountingDocuments Vault Archiving API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Vault Archiving",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Send the document metadata for archiving and receive pre-signed URL to upload document ZIP file.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/vaults/:vaultId/documents",
+            "params": [
+              {
+                "name": "vaultId",
+                "value": "",
+                "type": "path",
+                "description": "Vault ID to be posted to"
+              }
+            ]
+          },
+          "docs": "Send the document metadata for archiving and receive pre-signed URL to upload document ZIP file."
+        },
+        {
+          "info": {
+            "name": "Upload the document ZIP file to be archived using a pre-signed URL.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/:pre-signed URL",
+            "params": [
+              {
+                "name": "pre-signed URL",
+                "value": "",
+                "type": "path",
+                "description": "URL where to PUT the file. Use the pre-signed URL returned from POST request. Uses a different domain from api.basware.com."
+              }
+            ]
+          },
+          "docs": "Upload the document ZIP file to be archived using a pre-signed URL."
+        },
+        {
+          "info": {
+            "name": "Returns the status of archived documents. Response limited to 500 most recent documents.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/vaults/:vaultId/documents/status",
+            "params": [
+              {
+                "name": "vaultId",
+                "value": "",
+                "type": "path",
+                "description": "Vault ID to be checked from"
+              }
+            ]
+          },
+          "docs": "Returns the status of archived documents. Response limited to 500 most recent documents."
+        },
+        {
+          "info": {
+            "name": "Return archival status a document.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/vaults/:vaultId/documents/:bumid/status",
+            "params": [
+              {
+                "name": "bumid",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the document. Issued by Basware. BUMID must belong to user."
+              },
+              {
+                "name": "vaultId",
+                "value": "",
+                "type": "path",
+                "description": "Vault ID to be checked from"
+              }
+            ]
+          },
+          "docs": "Return archival status a document."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

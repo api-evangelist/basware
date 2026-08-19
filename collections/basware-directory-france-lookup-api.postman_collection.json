@@ -1,0 +1,438 @@
+{
+  "item": [
+    {
+      "id": "59c2644d-8ce7-4cd8-a04f-34dbf0a14aa4",
+      "name": "Directory France lookup",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c342e1c1-cd07-4129-8961-99a3eb4cee3c",
+          "name": "Search",
+          "request": {
+            "name": "Search",
+            "description": {},
+            "url": {
+              "path": [
+                "directory",
+                "fr"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "siren",
+                  "value": "<string>",
+                  "description": "SIREN number, min_length=9, max_length=9 regex=^[0-9]{9}$"
+                },
+                {
+                  "disabled": false,
+                  "key": "siret",
+                  "value": "<string>",
+                  "description": "SIRET number, min_length=14, max_length=14, regex=^[0-9]{14}$"
+                },
+                {
+                  "disabled": false,
+                  "key": "addressing_suffix",
+                  "value": "<string>",
+                  "description": "Addressing Suffix, min_length=1"
+                },
+                {
+                  "disabled": false,
+                  "key": "addressing_identifier",
+                  "value": "<string>",
+                  "description": "Addressing Identifier, min_length=9"
+                },
+                {
+                  "disabled": false,
+                  "key": "routing_identifier",
+                  "value": "<string>",
+                  "description": "Routing Identifier, min_length=5"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "65c66f81-9cf4-4912-9d1f-f5c5e8d8335f",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "directory",
+                    "fr"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "siren",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "siret",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "addressing_suffix",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "addressing_identifier",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "routing_identifier",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"routingIdentifier\": \"string\",\n    \"addressingIdentifier\": \"string\",\n    \"siren\": \"string\",\n    \"siret\": \"string\",\n    \"addressingSuffix\": \"string\",\n    \"dateTo\": \"string\",\n    \"effectiveEndDate\": \"string\",\n    \"history\": {\n      \"definitionDate\": \"string\",\n      \"dateFrom\": \"string\",\n      \"createdBy\": \"string\",\n      \"idInstance\": \"string\"\n    },\n    \"routingCode\": {\n      \"routingIdentifier\": \"string\",\n      \"routingIdentifierType\": \"string\",\n      \"routingCodeName\": \"string\",\n      \"managesLegalCommitment\": false,\n      \"administrativeStatus\": \"string\",\n      \"address\": {\n        \"addressLine1\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"addressLine2\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"addressLine3\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"postalCode\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"countrySubdivision\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"locality\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"countryCode\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"countryName\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    },\n    \"legalUnit\": {\n      \"siren\": \"string\",\n      \"businessName\": \"string\",\n      \"entityType\": \"string\",\n      \"administrativeStatus\": \"string\",\n      \"diffusible\": \"string\"\n    },\n    \"facility\": {\n      \"siret\": \"string\",\n      \"siren\": \"string\",\n      \"name\": \"string\",\n      \"facilityType\": \"string\",\n      \"diffusible\": \"string\",\n      \"administrativeStatus\": \"string\",\n      \"address\": {\n        \"addressLine1\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"addressLine2\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"addressLine3\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"postalCode\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"countrySubdivision\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"locality\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"countryCode\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"countryName\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    }\n  },\n  {\n    \"routingIdentifier\": \"string\",\n    \"addressingIdentifier\": \"string\",\n    \"siren\": \"string\",\n    \"siret\": \"string\",\n    \"addressingSuffix\": \"string\",\n    \"dateTo\": \"string\",\n    \"effectiveEndDate\": \"string\",\n    \"history\": {\n      \"definitionDate\": \"string\",\n      \"dateFrom\": \"string\",\n      \"createdBy\": \"string\",\n      \"idInstance\": \"string\"\n    },\n    \"routingCode\": {\n      \"routingIdentifier\": \"string\",\n      \"routingIdentifierType\": \"string\",\n      \"routingCodeName\": \"string\",\n      \"managesLegalCommitment\": true,\n      \"administrativeStatus\": \"string\",\n      \"address\": {\n        \"addressLine1\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"addressLine2\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"addressLine3\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"postalCode\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"countrySubdivision\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"locality\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"countryCode\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"countryName\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    },\n    \"legalUnit\": {\n      \"siren\": \"string\",\n      \"businessName\": \"string\",\n      \"entityType\": \"string\",\n      \"administrativeStatus\": \"string\",\n      \"diffusible\": \"string\"\n    },\n    \"facility\": {\n      \"siret\": \"string\",\n      \"siren\": \"string\",\n      \"name\": \"string\",\n      \"facilityType\": \"string\",\n      \"diffusible\": \"string\",\n      \"administrativeStatus\": \"string\",\n      \"address\": {\n        \"addressLine1\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"addressLine2\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"addressLine3\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"postalCode\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"countrySubdivision\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"locality\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"countryCode\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"countryName\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "17201bf3-b8d9-49c5-9039-5c4afaef6ae1",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "directory",
+                    "fr"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "siren",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "siret",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "addressing_suffix",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "addressing_identifier",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "routing_identifier",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Message\": \"User is not authorized to access this resource with an explicit deny in an identity-based policy\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "919b2306-be7d-47d6-95a5-edad5df5a00f",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "directory",
+                    "fr"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "siren",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "siret",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "addressing_suffix",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "addressing_identifier",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "routing_identifier",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7baf2bd9-37e7-4bbb-9ecc-8415ad381491",
+              "name": "Unknown error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "directory",
+                    "fr"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "siren",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "siret",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "addressing_suffix",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "addressing_identifier",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "routing_identifier",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"unknown\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "429bf22b-984e-4da8-993d-6adb938065b1",
+              "name": "Service unreachable",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "directory",
+                    "fr"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "siren",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "siret",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "addressing_suffix",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "addressing_identifier",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "routing_identifier",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Service Unavailable",
+              "code": 503,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"unreachable\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6f716556-5b45-4147-bf70-41103c62c515",
+              "name": "Timeout",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "directory",
+                    "fr"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "siren",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "siret",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "addressing_suffix",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "addressing_identifier",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "routing_identifier",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Gateway Timeout",
+              "code": 504,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"timeout\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "a1801e73-06c2-4400-b7b5-995e1fb55d99",
+    "name": "Basware OAUTH2 authentication APIs AccountingDocuments Directory France lookup API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "**Using OAUTH2.0 authentication:**\n\nGet API access token from api.basware.com/tokens\n1. Using client id and client secret, which you can obtain from Basware. \n2. Specify which APIs can be accessed by using the token e.g. Read only access to vendors API only (these are called scopes). Available scopes are listed at <https://developer.basware.com/api/p2p/manual#AccessRights>. \n3. Each token has an expiration time, until which it can be used to call APIs.\n\nWhen using OAUTH2 authentication, you need to pass the OAUTH2 authentication token when calling Basware API endpoints. Available Basware API operations are documented at <https://api.basware.com/swagger>. \n\nSee the Basware API developer site at <https://developer.basware.com/api/p2p/manual#Authentication> for more details on API authentication.",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Basware OAUTH2 authentication APIs AccountingDocuments Tokens API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Tokens",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Returns OAUTH2 access tokens.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/tokens",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "form-urlencoded",
+              "data": []
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Tokens returned by this API are used to provide access to Basware API operations when OAUTH2 authorization is used for the API requests. The available operations are defined at <https://api.basware.com/swagger>.\n             \nNote: the request body parameters are sent as HTTP form parameters ('application/x-www-form-urlencoded') for this authentication API, while they are sent as raw application/json in the API operations defined at https://api.basware.com/swagger."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

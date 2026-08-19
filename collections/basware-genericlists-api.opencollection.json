@@ -1,0 +1,167 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Basware OAUTH2 authentication APIs AccountingDocuments GenericLists API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "GenericLists",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Returns list items posted to Basware API for specified list.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/lists/:listKey",
+            "headers": [
+              {
+                "name": "x-amz-meta-continuationtoken",
+                "value": "0d0f6d24-758e-4889-95ec-321f4036e146"
+              }
+            ],
+            "params": [
+              {
+                "name": "listKey",
+                "value": "",
+                "type": "path",
+                "description": "ListKey defines the target table in Alusta. e.g. List with listKey 'ACC_LIST_5' will be mapped to EXT_ACC_LIST_5."
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "A limit for the number of items to be returned for one request. Limit can range between 1 and 500 items."
+              },
+              {
+                "name": "companyCode",
+                "value": "",
+                "type": "query",
+                "description": "Company filter. Returns items for specific company."
+              },
+              {
+                "name": "lastUpdated",
+                "value": "",
+                "type": "query",
+                "description": "Date Filter. Returns items that have been updated after specified date."
+              }
+            ]
+          },
+          "docs": "Returns list items posted to Basware API for specified list."
+        },
+        {
+          "info": {
+            "name": "Creates new list item(s), fully overwrites previous record if exists.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/lists/:listKey",
+            "headers": [
+              {
+                "name": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "params": [
+              {
+                "name": "listKey",
+                "value": "",
+                "type": "path",
+                "description": "ListKey defines the target table in Alusta. e.g. List with listKey 'ACC_LIST_5' will be mapped to EXT_ACC_LIST_5."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "In Basware P2P, the following lists are available. Please note the list-specific differences in available columns and column lengths. \r\n1) ACC_LIST_1  - ACC_LIST_10: Text1 - Text5  (250 chars), Num1 - Num3\r\n2) ACC_LIST_11 - ACC_LIST_20: Text1 - Text5  (50 chars), Num1 - Num3\r\n3) ACC_LIST_21 - ACC_LIST_30: Text1 - Text10 (250 chars), Num1 - Num5,  Date1 - Date5\r\n4) ACC_LIST_31 - ACC_LIST_35: Text1 - Text25 (250 chars), Num1 - Num10, Date1 - Date10\r\n5) INV_LIST_1  - INV_LIST_10: Text1 - Text5  (25"
+        },
+        {
+          "info": {
+            "name": "Deletes data from Basware API. For manual one-time operations.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/v1/lists/:listKey",
+            "params": [
+              {
+                "name": "listKey",
+                "value": "",
+                "type": "path",
+                "description": "Contains list item name to be deleted."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "For manual one-time operations only, such as a manual clean-up to remove test data generated during API integration development. Only removes records from API layer. \r\nDeletion in target systems needs to be done separately using the data deletion mechanisms available in each of the target system in addition to deleting the data in Basware API."
+        },
+        {
+          "info": {
+            "name": "Returns single list item, based on specified list and externalCode -identifier of the record.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/lists/:listKey/:externalCode",
+            "params": [
+              {
+                "name": "listKey",
+                "value": "",
+                "type": "path",
+                "description": "ListKey defines the target table in Alusta. e.g. List with listKey 'ACC_LIST_5' will be mapped to EXT_ACC_LIST_5."
+              },
+              {
+                "name": "externalCode",
+                "value": "",
+                "type": "path",
+                "description": "The ExternalCode of the list item"
+              }
+            ]
+          },
+          "docs": "Returns single list item, based on specified list and externalCode -identifier of the record."
+        },
+        {
+          "info": {
+            "name": "Updates fields on specified list item. Preserves existing values in omitted fields.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/v1/lists/:listKey/:externalCode",
+            "params": [
+              {
+                "name": "listKey",
+                "value": "",
+                "type": "path",
+                "description": "ListKey defines the target table in Alusta. e.g. List with listKey 'ACC_LIST_5' will be mapped to EXT_ACC_LIST_5."
+              },
+              {
+                "name": "externalCode",
+                "value": "",
+                "type": "path",
+                "description": "The ExternalCode of the genericList to be updated"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "In Basware P2P, the following lists are available. Please note the list-specific differences in available columns and column lengths. \r\n1) ACC_LIST_1  - ACC_LIST_10: Text1 - Text5  (250 chars), Num1 - Num3\r\n2) ACC_LIST_11 - ACC_LIST_20: Text1 - Text5  (50 chars), Num1 - Num3\r\n3) ACC_LIST_21 - ACC_LIST_30: Text1 - Text10 (250 chars), Num1 - Num5,  Date1 - Date5\r\n4) ACC_LIST_31 - ACC_LIST_35: Text1 - Text25 (250 chars), Num1 - Num10, Date1 - Date10\r\n5) INV_LIST_1  - INV_LIST_10: Text1 - Text5  (25"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

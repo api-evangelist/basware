@@ -1,0 +1,80 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Basware OAUTH2 authentication APIs AccountingDocuments Notification history API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Notification history",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Used to check status of an individual task by taskId. Does not contain task payload.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/tasks/:taskId",
+            "params": [
+              {
+                "name": "taskId",
+                "value": "",
+                "type": "path",
+                "description": "TaskId of the task to be returned."
+              }
+            ]
+          },
+          "docs": "Used to check status of an individual task by taskId. Does not contain task payload."
+        },
+        {
+          "info": {
+            "name": "Returns task status by search criteria. Does not contain task payload.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/tasks",
+            "headers": [
+              {
+                "name": "x-amz-meta-continuationtoken",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "taskType",
+                "value": "",
+                "type": "query",
+                "description": "Task type (InvoiceGenericTask, InvoiceCalcTax, etc)"
+              },
+              {
+                "name": "taskStatus",
+                "value": "",
+                "type": "query",
+                "description": "Status of the task. Available values: 'New', 'Completed', 'Failed'."
+              },
+              {
+                "name": "documentId",
+                "value": "",
+                "type": "query",
+                "description": "Returns all tasks for a specific document (for example all tasks related to one AccountingDocument)."
+              },
+              {
+                "name": "lastUpdated",
+                "value": "",
+                "type": "query",
+                "description": "Date Filter. Returns tasks which have been updated after specified datetime."
+              }
+            ]
+          },
+          "docs": "Returns task status by search criteria. Does not contain task payload."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

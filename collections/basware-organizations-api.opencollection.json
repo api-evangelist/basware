@@ -1,0 +1,109 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Basware OAUTH2 authentication APIs AccountingDocuments Organizations API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Organizations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Returns existing organization elements.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/organizations",
+            "params": [
+              {
+                "name": "level",
+                "value": "",
+                "type": "query",
+                "description": "Sets how many levels of the organization to include. If no parentExternalCode is given, it starts from the top and goes down to the specified level."
+              },
+              {
+                "name": "parentExternalCode",
+                "value": "",
+                "type": "query",
+                "description": "Returns child organizations linked to the specified parentExternalCode. When level is also provided, it includes all child organizations up to the given level."
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "A limit for the number of items to be returned for one request. Limit can range between 1 and 300 items."
+              },
+              {
+                "name": "lastUpdated",
+                "value": "",
+                "type": "query",
+                "description": "Date Filter. Returns items that have been updated after specified date. The lastUpdated filter is ignored when used together with level or parentExternalCode. Use it alone for the filter to apply."
+              }
+            ]
+          },
+          "docs": "Returns existing organization elements."
+        },
+        {
+          "info": {
+            "name": "Creates new organization element(s), fully overwrites previous record if exists. Available for pilot customers.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/organizations",
+            "headers": [
+              {
+                "name": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Notes: \r\n 1. Organization element type 'Company' requires fields 'homeCurrency' and 'countryCode' to have values. \r\n 2. Organization element type 'Group' does not support adding organization identifiers."
+        },
+        {
+          "info": {
+            "name": "Can be used for removing existing organization elements in draft state (published = false).",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/v1/organizations",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Notes: \r\n 1. Only unpublished, draft state organization elements can be removed (those having 'published' = 'false').\r\n 2. Removing an organization element will also remove it's child organization elements."
+        },
+        {
+          "info": {
+            "name": "Returns a single organization element by externalCode -identifier.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/organizations/:externalCode",
+            "params": [
+              {
+                "name": "externalCode",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns a single organization element by externalCode -identifier."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

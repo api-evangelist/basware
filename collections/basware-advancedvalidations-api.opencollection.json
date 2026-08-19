@@ -1,0 +1,133 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Basware OAUTH2 authentication APIs AccountingDocuments AdvancedValidations API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "AdvancedValidations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Returns coding row validation rules posted to Basware API.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/advancedValidations",
+            "headers": [
+              {
+                "name": "x-amz-meta-continuationtoken",
+                "value": "359557b5-7f8b-4ec1-a65c-ec8a362640ea"
+              }
+            ],
+            "params": [
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "A limit for the number of items to be returned for one request. Limit can range between 1 and 500 items."
+              },
+              {
+                "name": "companyCode",
+                "value": "",
+                "type": "query",
+                "description": "Company filter. Returns items for specific company."
+              },
+              {
+                "name": "lastUpdated",
+                "value": "",
+                "type": "query",
+                "description": "Date Filter. Returns items that have been updated after specified date."
+              }
+            ]
+          },
+          "docs": "Returns coding row validation rules posted to Basware API."
+        },
+        {
+          "info": {
+            "name": "Creates new coding row validation rule(s), fully overwrites previous record if exists.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/advancedValidations",
+            "headers": [
+              {
+                "name": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates new coding row validation rule(s), fully overwrites previous record if exists."
+        },
+        {
+          "info": {
+            "name": "Deletes data from Basware API. For manual one-time operations.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/v1/advancedValidations",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "For manual one-time operations only, such as a manual clean-up to remove test data generated during API integration development. Only removes records from API layer. \r\nDeletion in target systems needs to be done separately using the data deletion mechanisms available in each of the target system in addition to deleting the data in Basware API."
+        },
+        {
+          "info": {
+            "name": "Returns single coding row validation rules by externalCode -identifier.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/advancedValidations/:externalCode",
+            "params": [
+              {
+                "name": "externalCode",
+                "value": "",
+                "type": "path",
+                "description": "The ExternalCode of the entity to be fetched"
+              }
+            ]
+          },
+          "docs": "Returns single coding row validation rules by externalCode -identifier."
+        },
+        {
+          "info": {
+            "name": "Updates fields on spefified coding row validation rule. Preserves existing values in fields, which were not updated.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/v1/advancedValidations/:externalCode",
+            "params": [
+              {
+                "name": "externalCode",
+                "value": "",
+                "type": "path",
+                "description": "The ExternalCode of the advancedValidation to be updated"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates fields on spefified coding row validation rule. Preserves existing values in fields, which were not updated."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

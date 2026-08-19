@@ -1,0 +1,40 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Basware OAUTH2 authentication APIs AccountingDocuments .well-known API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": ".well-known",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Provides jwks.json containing metadata to validate token signature.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/.well-known/jwks.json"
+          },
+          "docs": "Returns signature keys for verifying authenticity of OAUTH2 tokens issued by Basware API. This endpoint is used by Basware to validate tokens passed by API clients in API operation requests using OAUTH2 authentication. It is good practice for the oauth2 tokens (from 'tokens' API) to be validated also by the API client."
+        },
+        {
+          "info": {
+            "name": "Provides configuration information about the Basware API Authentication Service (IDP).",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/.well-known/openid-configuration"
+          },
+          "docs": "This is a discovery endpoint to locate public keys used to validate Basware API access tokens."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

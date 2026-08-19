@@ -1,0 +1,1384 @@
+{
+  "item": [
+    {
+      "id": "a8598de0-e28a-4f49-a8ac-cb57c56cf8de",
+      "name": "AdvancedPermissions",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "156e435a-13b0-4b46-95e8-fefc998a4d3c",
+          "name": "Returns advanced user rights -records posted to Basware API.",
+          "request": {
+            "name": "Returns advanced user rights -records posted to Basware API.",
+            "description": {
+              "content": "",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "advancedPermissions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "pageSize",
+                  "value": "500",
+                  "description": "A limit for the number of items to be returned for one request. Li\r\n            items."
+                },
+                {
+                  "disabled": false,
+                  "key": "companyCode",
+                  "value": "",
+                  "description": "Company filter. Returns items for specific company."
+                },
+                {
+                  "disabled": false,
+                  "key": "lastUpdated",
+                  "value": "<dateTime>",
+                  "description": "Date Filter. Returns items that have been updated after specified date."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Used to get next page of results when item count indicated by 'pageSize' is exceeded. A token is returned in header (not body) parameter 'X-amz-meta-continuationToken' of the response whenever there are more records to fetch. Post the received value here in a new HEADER parameter on the next GET request to receive the next page of results. When getting the next page of results, you must include the same query parameters that were used when getting the first page.",
+                "key": "x-amz-meta-continuationtoken",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "60355678-1207-4590-b093-f7fde5ed5144",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "advancedPermissions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "500"
+                    },
+                    {
+                      "key": "companyCode",
+                      "value": ""
+                    },
+                    {
+                      "key": "lastUpdated",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Used to get next page of results when item count indicated by 'pageSize' is exceeded. A token is returned in header (not body) parameter 'X-amz-meta-continuationToken' of the response whenever there are more records to fetch. Post the received value here in a new HEADER parameter on the next GET request to receive the next page of results. When getting the next page of results, you must include the same query parameters that were used when getting the first page.",
+                    "key": "x-amz-meta-continuationtoken",
+                    "value": "2701ea15-a2c9-43b1-a48b-3a840c78b668"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"advancedPermissions\": [\n    {\n      \"companies\": [\n        {\n          \"active\": true,\n          \"companyCode\": \"BW01\"\n        },\n        {\n          \"active\": false,\n          \"companyCode\": \"BW01\"\n        }\n      ],\n      \"externalCode\": \"4847-31231212-212121-1212\",\n      \"limit\": 0,\n      \"loginAccount\": \"jyrki@basware.com\",\n      \"priorityIndex\": 0,\n      \"rowApproveIterationCount\": 0,\n      \"permissionCode1\": \"6210\",\n      \"permissionCode2\": \"6210,6211\",\n      \"permissionCode3\": \"6209-6230\",\n      \"permissionCode4\": \"*\",\n      \"permissionCode5\": \"\",\n      \"permissionCode6\": \"\",\n      \"permissionCode7\": \"\",\n      \"module\": \"Purchase\",\n      \"excludedValue\": \"ExcludedValue1\",\n      \"lastUpdated\": \"1963-03-07T18:21:22.889Z\"\n    },\n    {\n      \"companies\": [\n        {\n          \"active\": false,\n          \"companyCode\": \"BW01\"\n        },\n        {\n          \"active\": true,\n          \"companyCode\": \"BW01\"\n        }\n      ],\n      \"externalCode\": \"4847-31231212-212121-1212\",\n      \"limit\": 0,\n      \"loginAccount\": \"jyrki@basware.com\",\n      \"priorityIndex\": 0,\n      \"rowApproveIterationCount\": 0,\n      \"permissionCode1\": \"6210\",\n      \"permissionCode2\": \"6210,6211\",\n      \"permissionCode3\": \"6209-6230\",\n      \"permissionCode4\": \"*\",\n      \"permissionCode5\": \"\",\n      \"permissionCode6\": \"\",\n      \"permissionCode7\": \"\",\n      \"module\": \"Purchase\",\n      \"excludedValue\": \"ExcludedValue1\",\n      \"lastUpdated\": \"2024-02-09T02:02:08.375Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7cf90e41-522a-4642-98ef-7b031894100b",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "advancedPermissions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "500"
+                    },
+                    {
+                      "key": "companyCode",
+                      "value": ""
+                    },
+                    {
+                      "key": "lastUpdated",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Used to get next page of results when item count indicated by 'pageSize' is exceeded. A token is returned in header (not body) parameter 'X-amz-meta-continuationToken' of the response whenever there are more records to fetch. Post the received value here in a new HEADER parameter on the next GET request to receive the next page of results. When getting the next page of results, you must include the same query parameters that were used when getting the first page.",
+                    "key": "x-amz-meta-continuationtoken",
+                    "value": "2701ea15-a2c9-43b1-a48b-3a840c78b668"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "a0481987-3096-4f8a-b14a-2f908e338963",
+              "name": "Not found. Request was successful and no records were found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "advancedPermissions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "500"
+                    },
+                    {
+                      "key": "companyCode",
+                      "value": ""
+                    },
+                    {
+                      "key": "lastUpdated",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Used to get next page of results when item count indicated by 'pageSize' is exceeded. A token is returned in header (not body) parameter 'X-amz-meta-continuationToken' of the response whenever there are more records to fetch. Post the received value here in a new HEADER parameter on the next GET request to receive the next page of results. When getting the next page of results, you must include the same query parameters that were used when getting the first page.",
+                    "key": "x-amz-meta-continuationtoken",
+                    "value": "2701ea15-a2c9-43b1-a48b-3a840c78b668"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "78725547-6c7f-4d0f-b926-f0e51c2e1805",
+              "name": "Unexpected error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "advancedPermissions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "500"
+                    },
+                    {
+                      "key": "companyCode",
+                      "value": ""
+                    },
+                    {
+                      "key": "lastUpdated",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Used to get next page of results when item count indicated by 'pageSize' is exceeded. A token is returned in header (not body) parameter 'X-amz-meta-continuationToken' of the response whenever there are more records to fetch. Post the received value here in a new HEADER parameter on the next GET request to receive the next page of results. When getting the next page of results, you must include the same query parameters that were used when getting the first page.",
+                    "key": "x-amz-meta-continuationtoken",
+                    "value": "2701ea15-a2c9-43b1-a48b-3a840c78b668"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"fbc082a2-65a4-469c-b230-d84a252f18fc\",\n  \"hasErrors\": false,\n  \"errors\": [\n    {\n      \"externalCode\": \"4847-31231212-212121-1212\",\n      \"type\": \"SECURITY\",\n      \"code\": \"SQS_PUBLISH_ERROR\",\n      \"message\": \"\",\n      \"info\": \"\"\n    },\n    {\n      \"externalCode\": \"4847-31231212-212121-1212\",\n      \"type\": \"BUSINESS\",\n      \"code\": \"ENTITY_NOT_FOUND\",\n      \"message\": \"\",\n      \"info\": \"\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a55db6bd-3553-4197-a61b-f329c2f9369f",
+          "name": "Creates new advanced user rights -record(s), fully overwrites previous record if exists.",
+          "request": {
+            "name": "Creates new advanced user rights -record(s), fully overwrites previous record if exists.",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "advancedPermissions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "[\n  {\n    \"companies\": [\n      {\n        \"active\": \"<boolean>\",\n        \"companyCode\": \"<string>\"\n      },\n      {\n        \"active\": \"<boolean>\",\n        \"companyCode\": \"<string>\"\n      }\n    ],\n    \"externalCode\": \"<string>\",\n    \"limit\": \"<double>\",\n    \"loginAccount\": \"<string>\",\n    \"priorityIndex\": \"<integer>\",\n    \"rowApproveIterationCount\": \"<integer>\",\n    \"permissionCode1\": \"<string>\",\n    \"permissionCode2\": \"<string>\",\n    \"permissionCode3\": \"<string>\",\n    \"permissionCode4\": \"<string>\",\n    \"permissionCode5\": \"<string>\",\n    \"permissionCode6\": \"<string>\",\n    \"permissionCode7\": \"<string>\",\n    \"module\": \"<string>\",\n    \"excludedValue\": \"<string>\",\n    \"lastUpdated\": \"<dateTime>\"\n  },\n  {\n    \"companies\": [\n      {\n        \"active\": \"<boolean>\",\n        \"companyCode\": \"<string>\"\n      },\n      {\n        \"active\": \"<boolean>\",\n        \"companyCode\": \"<string>\"\n      }\n    ],\n    \"externalCode\": \"<string>\",\n    \"limit\": \"<double>\",\n    \"loginAccount\": \"<string>\",\n    \"priorityIndex\": \"<integer>\",\n    \"rowApproveIterationCount\": \"<integer>\",\n    \"permissionCode1\": \"<string>\",\n    \"permissionCode2\": \"<string>\",\n    \"permissionCode3\": \"<string>\",\n    \"permissionCode4\": \"<string>\",\n    \"permissionCode5\": \"<string>\",\n    \"permissionCode6\": \"<string>\",\n    \"permissionCode7\": \"<string>\",\n    \"module\": \"<string>\",\n    \"excludedValue\": \"<string>\",\n    \"lastUpdated\": \"<dateTime>\"\n  }\n]",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "61c93889-4705-479a-8b4a-7b2109d02cfb",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "advancedPermissions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Specifies the media type of the resource. Value application/json is supported.",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"companies\": [\n      {\n        \"active\": \"<boolean>\",\n        \"companyCode\": \"BW01\"\n      },\n      {\n        \"active\": \"<boolean>\",\n        \"companyCode\": \"BW01\"\n      }\n    ],\n    \"externalCode\": \"4847-31231212-212121-1212\",\n    \"limit\": 0,\n    \"loginAccount\": \"jyrki@basware.com\",\n    \"priorityIndex\": 0,\n    \"rowApproveIterationCount\": 0,\n    \"permissionCode1\": \"6210\",\n    \"permissionCode2\": \"6210,6211\",\n    \"permissionCode3\": \"6209-6230\",\n    \"permissionCode4\": \"*\",\n    \"permissionCode5\": \"\",\n    \"permissionCode6\": \"\",\n    \"permissionCode7\": \"\",\n    \"module\": \"Purchase\",\n    \"excludedValue\": \"ExcludedValue1\",\n    \"lastUpdated\": \"<dateTime>\"\n  },\n  {\n    \"companies\": [\n      {\n        \"active\": \"<boolean>\",\n        \"companyCode\": \"BW01\"\n      },\n      {\n        \"active\": \"<boolean>\",\n        \"companyCode\": \"BW01\"\n      }\n    ],\n    \"externalCode\": \"4847-31231212-212121-1212\",\n    \"limit\": 0,\n    \"loginAccount\": \"jyrki@basware.com\",\n    \"priorityIndex\": 0,\n    \"rowApproveIterationCount\": 0,\n    \"permissionCode1\": \"6210\",\n    \"permissionCode2\": \"6210,6211\",\n    \"permissionCode3\": \"6209-6230\",\n    \"permissionCode4\": \"*\",\n    \"permissionCode5\": \"\",\n    \"permissionCode6\": \"\",\n    \"permissionCode7\": \"\",\n    \"module\": \"Purchase\",\n    \"excludedValue\": \"ExcludedValue1\",\n    \"lastUpdated\": \"<dateTime>\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"companies\": [\n      {\n        \"active\": \"<boolean>\",\n        \"companyCode\": \"BW01\"\n      },\n      {\n        \"active\": \"<boolean>\",\n        \"companyCode\": \"BW01\"\n      }\n    ],\n    \"externalCode\": \"4847-31231212-212121-1212\",\n    \"limit\": 0,\n    \"loginAccount\": \"jyrki@basware.com\",\n    \"priorityIndex\": 0,\n    \"rowApproveIterationCount\": 0,\n    \"permissionCode1\": \"6210\",\n    \"permissionCode2\": \"6210,6211\",\n    \"permissionCode3\": \"6209-6230\",\n    \"permissionCode4\": \"*\",\n    \"permissionCode5\": \"\",\n    \"permissionCode6\": \"\",\n    \"permissionCode7\": \"\",\n    \"module\": \"Purchase\",\n    \"excludedValue\": \"ExcludedValue1\",\n    \"lastUpdated\": \"<dateTime>\"\n  },\n  {\n    \"companies\": [\n      {\n        \"active\": \"<boolean>\",\n        \"companyCode\": \"BW01\"\n      },\n      {\n        \"active\": \"<boolean>\",\n        \"companyCode\": \"BW01\"\n      }\n    ],\n    \"externalCode\": \"4847-31231212-212121-1212\",\n    \"limit\": 0,\n    \"loginAccount\": \"jyrki@basware.com\",\n    \"priorityIndex\": 0,\n    \"rowApproveIterationCount\": 0,\n    \"permissionCode1\": \"6210\",\n    \"permissionCode2\": \"6210,6211\",\n    \"permissionCode3\": \"6209-6230\",\n    \"permissionCode4\": \"*\",\n    \"permissionCode5\": \"\",\n    \"permissionCode6\": \"\",\n    \"permissionCode7\": \"\",\n    \"module\": \"Purchase\",\n    \"excludedValue\": \"ExcludedValue1\",\n    \"lastUpdated\": \"<dateTime>\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c2b0ccc4-0ab6-4a91-bd01-1b7d9c118f26",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "advancedPermissions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Specifies the media type of the resource. Value application/json is supported.",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"companies\": [\n      {\n        \"active\": \"<boolean>\",\n        \"companyCode\": \"BW01\"\n      },\n      {\n        \"active\": \"<boolean>\",\n        \"companyCode\": \"BW01\"\n      }\n    ],\n    \"externalCode\": \"4847-31231212-212121-1212\",\n    \"limit\": 0,\n    \"loginAccount\": \"jyrki@basware.com\",\n    \"priorityIndex\": 0,\n    \"rowApproveIterationCount\": 0,\n    \"permissionCode1\": \"6210\",\n    \"permissionCode2\": \"6210,6211\",\n    \"permissionCode3\": \"6209-6230\",\n    \"permissionCode4\": \"*\",\n    \"permissionCode5\": \"\",\n    \"permissionCode6\": \"\",\n    \"permissionCode7\": \"\",\n    \"module\": \"Purchase\",\n    \"excludedValue\": \"ExcludedValue1\",\n    \"lastUpdated\": \"<dateTime>\"\n  },\n  {\n    \"companies\": [\n      {\n        \"active\": \"<boolean>\",\n        \"companyCode\": \"BW01\"\n      },\n      {\n        \"active\": \"<boolean>\",\n        \"companyCode\": \"BW01\"\n      }\n    ],\n    \"externalCode\": \"4847-31231212-212121-1212\",\n    \"limit\": 0,\n    \"loginAccount\": \"jyrki@basware.com\",\n    \"priorityIndex\": 0,\n    \"rowApproveIterationCount\": 0,\n    \"permissionCode1\": \"6210\",\n    \"permissionCode2\": \"6210,6211\",\n    \"permissionCode3\": \"6209-6230\",\n    \"permissionCode4\": \"*\",\n    \"permissionCode5\": \"\",\n    \"permissionCode6\": \"\",\n    \"permissionCode7\": \"\",\n    \"module\": \"Purchase\",\n    \"excludedValue\": \"ExcludedValue1\",\n    \"lastUpdated\": \"<dateTime>\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"fbc082a2-65a4-469c-b230-d84a252f18fc\",\n  \"hasErrors\": false,\n  \"errors\": [\n    {\n      \"externalCode\": \"4847-31231212-212121-1212\",\n      \"type\": \"VALIDATION\",\n      \"code\": \"SQS_PUBLISH_ERROR\",\n      \"message\": \"\",\n      \"info\": \"\"\n    },\n    {\n      \"externalCode\": \"4847-31231212-212121-1212\",\n      \"type\": \"TECHNICAL\",\n      \"code\": \"DATA_VALIDATION_FAILED\",\n      \"message\": \"\",\n      \"info\": \"\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e81c5a8a-3fad-4639-9e5d-a097be80f944",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "advancedPermissions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Specifies the media type of the resource. Value application/json is supported.",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"companies\": [\n      {\n        \"active\": \"<boolean>\",\n        \"companyCode\": \"BW01\"\n      },\n      {\n        \"active\": \"<boolean>\",\n        \"companyCode\": \"BW01\"\n      }\n    ],\n    \"externalCode\": \"4847-31231212-212121-1212\",\n    \"limit\": 0,\n    \"loginAccount\": \"jyrki@basware.com\",\n    \"priorityIndex\": 0,\n    \"rowApproveIterationCount\": 0,\n    \"permissionCode1\": \"6210\",\n    \"permissionCode2\": \"6210,6211\",\n    \"permissionCode3\": \"6209-6230\",\n    \"permissionCode4\": \"*\",\n    \"permissionCode5\": \"\",\n    \"permissionCode6\": \"\",\n    \"permissionCode7\": \"\",\n    \"module\": \"Purchase\",\n    \"excludedValue\": \"ExcludedValue1\",\n    \"lastUpdated\": \"<dateTime>\"\n  },\n  {\n    \"companies\": [\n      {\n        \"active\": \"<boolean>\",\n        \"companyCode\": \"BW01\"\n      },\n      {\n        \"active\": \"<boolean>\",\n        \"companyCode\": \"BW01\"\n      }\n    ],\n    \"externalCode\": \"4847-31231212-212121-1212\",\n    \"limit\": 0,\n    \"loginAccount\": \"jyrki@basware.com\",\n    \"priorityIndex\": 0,\n    \"rowApproveIterationCount\": 0,\n    \"permissionCode1\": \"6210\",\n    \"permissionCode2\": \"6210,6211\",\n    \"permissionCode3\": \"6209-6230\",\n    \"permissionCode4\": \"*\",\n    \"permissionCode5\": \"\",\n    \"permissionCode6\": \"\",\n    \"permissionCode7\": \"\",\n    \"module\": \"Purchase\",\n    \"excludedValue\": \"ExcludedValue1\",\n    \"lastUpdated\": \"<dateTime>\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b902c3a2-02a8-46a3-a2a4-f318d21edc56",
+              "name": "Conflict",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "advancedPermissions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Specifies the media type of the resource. Value application/json is supported.",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"companies\": [\n      {\n        \"active\": \"<boolean>\",\n        \"companyCode\": \"BW01\"\n      },\n      {\n        \"active\": \"<boolean>\",\n        \"companyCode\": \"BW01\"\n      }\n    ],\n    \"externalCode\": \"4847-31231212-212121-1212\",\n    \"limit\": 0,\n    \"loginAccount\": \"jyrki@basware.com\",\n    \"priorityIndex\": 0,\n    \"rowApproveIterationCount\": 0,\n    \"permissionCode1\": \"6210\",\n    \"permissionCode2\": \"6210,6211\",\n    \"permissionCode3\": \"6209-6230\",\n    \"permissionCode4\": \"*\",\n    \"permissionCode5\": \"\",\n    \"permissionCode6\": \"\",\n    \"permissionCode7\": \"\",\n    \"module\": \"Purchase\",\n    \"excludedValue\": \"ExcludedValue1\",\n    \"lastUpdated\": \"<dateTime>\"\n  },\n  {\n    \"companies\": [\n      {\n        \"active\": \"<boolean>\",\n        \"companyCode\": \"BW01\"\n      },\n      {\n        \"active\": \"<boolean>\",\n        \"companyCode\": \"BW01\"\n      }\n    ],\n    \"externalCode\": \"4847-31231212-212121-1212\",\n    \"limit\": 0,\n    \"loginAccount\": \"jyrki@basware.com\",\n    \"priorityIndex\": 0,\n    \"rowApproveIterationCount\": 0,\n    \"permissionCode1\": \"6210\",\n    \"permissionCode2\": \"6210,6211\",\n    \"permissionCode3\": \"6209-6230\",\n    \"permissionCode4\": \"*\",\n    \"permissionCode5\": \"\",\n    \"permissionCode6\": \"\",\n    \"permissionCode7\": \"\",\n    \"module\": \"Purchase\",\n    \"excludedValue\": \"ExcludedValue1\",\n    \"lastUpdated\": \"<dateTime>\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"fbc082a2-65a4-469c-b230-d84a252f18fc\",\n  \"hasErrors\": false,\n  \"errors\": [\n    {\n      \"externalCode\": \"4847-31231212-212121-1212\",\n      \"type\": \"VALIDATION\",\n      \"code\": \"SQS_PUBLISH_ERROR\",\n      \"message\": \"\",\n      \"info\": \"\"\n    },\n    {\n      \"externalCode\": \"4847-31231212-212121-1212\",\n      \"type\": \"TECHNICAL\",\n      \"code\": \"DATA_VALIDATION_FAILED\",\n      \"message\": \"\",\n      \"info\": \"\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "df7d34ec-5ed8-409b-8e83-5a6e5312087d",
+              "name": "Unexpected error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "advancedPermissions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Specifies the media type of the resource. Value application/json is supported.",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"companies\": [\n      {\n        \"active\": \"<boolean>\",\n        \"companyCode\": \"BW01\"\n      },\n      {\n        \"active\": \"<boolean>\",\n        \"companyCode\": \"BW01\"\n      }\n    ],\n    \"externalCode\": \"4847-31231212-212121-1212\",\n    \"limit\": 0,\n    \"loginAccount\": \"jyrki@basware.com\",\n    \"priorityIndex\": 0,\n    \"rowApproveIterationCount\": 0,\n    \"permissionCode1\": \"6210\",\n    \"permissionCode2\": \"6210,6211\",\n    \"permissionCode3\": \"6209-6230\",\n    \"permissionCode4\": \"*\",\n    \"permissionCode5\": \"\",\n    \"permissionCode6\": \"\",\n    \"permissionCode7\": \"\",\n    \"module\": \"Purchase\",\n    \"excludedValue\": \"ExcludedValue1\",\n    \"lastUpdated\": \"<dateTime>\"\n  },\n  {\n    \"companies\": [\n      {\n        \"active\": \"<boolean>\",\n        \"companyCode\": \"BW01\"\n      },\n      {\n        \"active\": \"<boolean>\",\n        \"companyCode\": \"BW01\"\n      }\n    ],\n    \"externalCode\": \"4847-31231212-212121-1212\",\n    \"limit\": 0,\n    \"loginAccount\": \"jyrki@basware.com\",\n    \"priorityIndex\": 0,\n    \"rowApproveIterationCount\": 0,\n    \"permissionCode1\": \"6210\",\n    \"permissionCode2\": \"6210,6211\",\n    \"permissionCode3\": \"6209-6230\",\n    \"permissionCode4\": \"*\",\n    \"permissionCode5\": \"\",\n    \"permissionCode6\": \"\",\n    \"permissionCode7\": \"\",\n    \"module\": \"Purchase\",\n    \"excludedValue\": \"ExcludedValue1\",\n    \"lastUpdated\": \"<dateTime>\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"fbc082a2-65a4-469c-b230-d84a252f18fc\",\n  \"hasErrors\": false,\n  \"errors\": [\n    {\n      \"externalCode\": \"4847-31231212-212121-1212\",\n      \"type\": \"VALIDATION\",\n      \"code\": \"SQS_PUBLISH_ERROR\",\n      \"message\": \"\",\n      \"info\": \"\"\n    },\n    {\n      \"externalCode\": \"4847-31231212-212121-1212\",\n      \"type\": \"TECHNICAL\",\n      \"code\": \"DATA_VALIDATION_FAILED\",\n      \"message\": \"\",\n      \"info\": \"\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7b10c884-c6e1-469f-805d-03b38d8eddcc",
+          "name": "Deletes data from Basware API. For manual one-time operations.",
+          "request": {
+            "name": "Deletes data from Basware API. For manual one-time operations.",
+            "description": {
+              "content": "For manual one-time operations only, such as a manual clean-up to remove test data generated during API integration development. Only removes records from API layer. \r\nDeletion in target systems needs to be done separately using the data deletion mechanisms available in each of the target system in addition to deleting the data in Basware API.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "advancedPermissions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"lastUpdated\": \"<dateTime>\",\n  \"externalCode\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "3593868b-300d-4a13-b25d-4571fbe4218e",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "advancedPermissions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"lastUpdated\": \"<dateTime>\",\n  \"externalCode\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusApiLink\": \"string\",\n  \"taskName\": \"string\",\n  \"taskStatus\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f547585a-4e6a-4d33-b975-3e56406b794f",
+              "name": "RequestAccepted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "advancedPermissions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"lastUpdated\": \"<dateTime>\",\n  \"externalCode\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusApiLink\": \"string\",\n  \"taskName\": \"string\",\n  \"taskStatus\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d0ac8860-67c0-413d-8fb3-0c1d91c046a4",
+              "name": "BadRequest",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "advancedPermissions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"lastUpdated\": \"<dateTime>\",\n  \"externalCode\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"fbc082a2-65a4-469c-b230-d84a252f18fc\",\n  \"hasErrors\": false,\n  \"errors\": [\n    {\n      \"externalCode\": \"4847-31231212-212121-1212\",\n      \"type\": \"VALIDATION\",\n      \"code\": \"SQS_PUBLISH_ERROR\",\n      \"message\": \"\",\n      \"info\": \"\"\n    },\n    {\n      \"externalCode\": \"4847-31231212-212121-1212\",\n      \"type\": \"TECHNICAL\",\n      \"code\": \"DATA_VALIDATION_FAILED\",\n      \"message\": \"\",\n      \"info\": \"\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5ec191ea-10a8-4282-b625-44d443256ada",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "advancedPermissions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"lastUpdated\": \"<dateTime>\",\n  \"externalCode\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "dfff4519-d5b0-4a03-975d-d448e01d62ba",
+              "name": "Unexpected error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "advancedPermissions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"lastUpdated\": \"<dateTime>\",\n  \"externalCode\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"fbc082a2-65a4-469c-b230-d84a252f18fc\",\n  \"hasErrors\": false,\n  \"errors\": [\n    {\n      \"externalCode\": \"4847-31231212-212121-1212\",\n      \"type\": \"VALIDATION\",\n      \"code\": \"SQS_PUBLISH_ERROR\",\n      \"message\": \"\",\n      \"info\": \"\"\n    },\n    {\n      \"externalCode\": \"4847-31231212-212121-1212\",\n      \"type\": \"TECHNICAL\",\n      \"code\": \"DATA_VALIDATION_FAILED\",\n      \"message\": \"\",\n      \"info\": \"\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9765a67d-1f41-44d0-89e4-ce7a85ca3c9e",
+          "name": "Returns single advanced user rights -record by externalCode -identifier.",
+          "request": {
+            "name": "Returns single advanced user rights -record by externalCode -identifier.",
+            "description": {
+              "content": "",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "advancedPermissions",
+                ":externalCode"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "externalCode",
+                  "description": "(Required) The ExternalCode of the entity to be fetched"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c488bd66-e7f6-4d11-9f89-14d00a81cca9",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "advancedPermissions",
+                    ":externalCode"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "externalCode",
+                      "description": "(Required) The ExternalCode of the entity to be fetched"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"companies\": [\n    {\n      \"active\": \"<boolean>\",\n      \"companyCode\": \"BW01\"\n    },\n    {\n      \"active\": \"<boolean>\",\n      \"companyCode\": \"BW01\"\n    }\n  ],\n  \"externalCode\": \"4847-31231212-212121-1212\",\n  \"limit\": 0,\n  \"loginAccount\": \"jyrki@basware.com\",\n  \"priorityIndex\": 0,\n  \"rowApproveIterationCount\": 0,\n  \"permissionCode1\": \"6210\",\n  \"permissionCode2\": \"6210,6211\",\n  \"permissionCode3\": \"6209-6230\",\n  \"permissionCode4\": \"*\",\n  \"permissionCode5\": \"\",\n  \"permissionCode6\": \"\",\n  \"permissionCode7\": \"\",\n  \"module\": \"Purchase\",\n  \"excludedValue\": \"ExcludedValue1\",\n  \"lastUpdated\": \"<dateTime>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bad60a07-ba1e-4ef3-977d-1e87ecb4c974",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "advancedPermissions",
+                    ":externalCode"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "externalCode",
+                      "description": "(Required) The ExternalCode of the entity to be fetched"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b34227a6-556d-4955-9d96-3bd6e302a4e0",
+              "name": "Not found. Request was successful and no records were found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "advancedPermissions",
+                    ":externalCode"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "externalCode",
+                      "description": "(Required) The ExternalCode of the entity to be fetched"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "dc2782c8-34d8-4d33-954f-7e7d44dac2a8",
+              "name": "Unexpected error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "advancedPermissions",
+                    ":externalCode"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "externalCode",
+                      "description": "(Required) The ExternalCode of the entity to be fetched"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"fbc082a2-65a4-469c-b230-d84a252f18fc\",\n  \"hasErrors\": false,\n  \"errors\": [\n    {\n      \"externalCode\": \"4847-31231212-212121-1212\",\n      \"type\": \"VALIDATION\",\n      \"code\": \"SQS_PUBLISH_ERROR\",\n      \"message\": \"\",\n      \"info\": \"\"\n    },\n    {\n      \"externalCode\": \"4847-31231212-212121-1212\",\n      \"type\": \"TECHNICAL\",\n      \"code\": \"DATA_VALIDATION_FAILED\",\n      \"message\": \"\",\n      \"info\": \"\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4e5098cd-1899-4dbf-a2f9-79771d0b87a6",
+          "name": "Updates fields on specified advanced user rights -record. Preserves existing values in fields, which were not updated.",
+          "request": {
+            "name": "Updates fields on specified advanced user rights -record. Preserves existing values in fields, which were not updated.",
+            "description": {
+              "content": "Note: Basware API considers 'null' value in field(s) equivalent to the field(s) not being sent. For this reason patch method does not support setting field values to 'null'.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "advancedPermissions",
+                ":externalCode"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "externalCode",
+                  "description": "(Required) The ExternalCode of the AdvancedPermission to be updated"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"companies\": [\n    {\n      \"active\": \"<boolean>\",\n      \"companyCode\": \"<string>\"\n    },\n    {\n      \"active\": \"<boolean>\",\n      \"companyCode\": \"<string>\"\n    }\n  ],\n  \"externalCode\": \"<string>\",\n  \"limit\": \"<double>\",\n  \"loginAccount\": \"<string>\",\n  \"priorityIndex\": \"<integer>\",\n  \"rowApproveIterationCount\": \"<integer>\",\n  \"permissionCode1\": \"<string>\",\n  \"permissionCode2\": \"<string>\",\n  \"permissionCode3\": \"<string>\",\n  \"permissionCode4\": \"<string>\",\n  \"permissionCode5\": \"<string>\",\n  \"permissionCode6\": \"<string>\",\n  \"permissionCode7\": \"<string>\",\n  \"module\": \"<string>\",\n  \"excludedValue\": \"<string>\",\n  \"lastUpdated\": \"<dateTime>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "7cf4a10e-568a-4a92-98bd-2d23aeb93af4",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "advancedPermissions",
+                    ":externalCode"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "externalCode",
+                      "description": "(Required) The ExternalCode of the AdvancedPermission to be updated"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"companies\": [\n    {\n      \"active\": \"<boolean>\",\n      \"companyCode\": \"BW01\"\n    },\n    {\n      \"active\": \"<boolean>\",\n      \"companyCode\": \"BW01\"\n    }\n  ],\n  \"externalCode\": \"4847-31231212-212121-1212\",\n  \"limit\": 0,\n  \"loginAccount\": \"jyrki@basware.com\",\n  \"priorityIndex\": 0,\n  \"rowApproveIterationCount\": 0,\n  \"permissionCode1\": \"6210\",\n  \"permissionCode2\": \"6210,6211\",\n  \"permissionCode3\": \"6209-6230\",\n  \"permissionCode4\": \"*\",\n  \"permissionCode5\": \"\",\n  \"permissionCode6\": \"\",\n  \"permissionCode7\": \"\",\n  \"module\": \"Purchase\",\n  \"excludedValue\": \"ExcludedValue1\",\n  \"lastUpdated\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"companies\": [\n    {\n      \"active\": \"<boolean>\",\n      \"companyCode\": \"BW01\"\n    },\n    {\n      \"active\": \"<boolean>\",\n      \"companyCode\": \"BW01\"\n    }\n  ],\n  \"externalCode\": \"4847-31231212-212121-1212\",\n  \"limit\": 0,\n  \"loginAccount\": \"jyrki@basware.com\",\n  \"priorityIndex\": 0,\n  \"rowApproveIterationCount\": 0,\n  \"permissionCode1\": \"6210\",\n  \"permissionCode2\": \"6210,6211\",\n  \"permissionCode3\": \"6209-6230\",\n  \"permissionCode4\": \"*\",\n  \"permissionCode5\": \"\",\n  \"permissionCode6\": \"\",\n  \"permissionCode7\": \"\",\n  \"module\": \"Purchase\",\n  \"excludedValue\": \"ExcludedValue1\",\n  \"lastUpdated\": \"<dateTime>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f49f3a83-4a6d-4cea-a4ca-85be556fd084",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "advancedPermissions",
+                    ":externalCode"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "externalCode",
+                      "description": "(Required) The ExternalCode of the AdvancedPermission to be updated"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"companies\": [\n    {\n      \"active\": \"<boolean>\",\n      \"companyCode\": \"BW01\"\n    },\n    {\n      \"active\": \"<boolean>\",\n      \"companyCode\": \"BW01\"\n    }\n  ],\n  \"externalCode\": \"4847-31231212-212121-1212\",\n  \"limit\": 0,\n  \"loginAccount\": \"jyrki@basware.com\",\n  \"priorityIndex\": 0,\n  \"rowApproveIterationCount\": 0,\n  \"permissionCode1\": \"6210\",\n  \"permissionCode2\": \"6210,6211\",\n  \"permissionCode3\": \"6209-6230\",\n  \"permissionCode4\": \"*\",\n  \"permissionCode5\": \"\",\n  \"permissionCode6\": \"\",\n  \"permissionCode7\": \"\",\n  \"module\": \"Purchase\",\n  \"excludedValue\": \"ExcludedValue1\",\n  \"lastUpdated\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"fbc082a2-65a4-469c-b230-d84a252f18fc\",\n  \"hasErrors\": false,\n  \"errors\": [\n    {\n      \"externalCode\": \"4847-31231212-212121-1212\",\n      \"type\": \"VALIDATION\",\n      \"code\": \"SQS_PUBLISH_ERROR\",\n      \"message\": \"\",\n      \"info\": \"\"\n    },\n    {\n      \"externalCode\": \"4847-31231212-212121-1212\",\n      \"type\": \"TECHNICAL\",\n      \"code\": \"DATA_VALIDATION_FAILED\",\n      \"message\": \"\",\n      \"info\": \"\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "390ebc86-4926-47ec-a0cb-dc842500dd1f",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "advancedPermissions",
+                    ":externalCode"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "externalCode",
+                      "description": "(Required) The ExternalCode of the AdvancedPermission to be updated"
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"companies\": [\n    {\n      \"active\": \"<boolean>\",\n      \"companyCode\": \"BW01\"\n    },\n    {\n      \"active\": \"<boolean>\",\n      \"companyCode\": \"BW01\"\n    }\n  ],\n  \"externalCode\": \"4847-31231212-212121-1212\",\n  \"limit\": 0,\n  \"loginAccount\": \"jyrki@basware.com\",\n  \"priorityIndex\": 0,\n  \"rowApproveIterationCount\": 0,\n  \"permissionCode1\": \"6210\",\n  \"permissionCode2\": \"6210,6211\",\n  \"permissionCode3\": \"6209-6230\",\n  \"permissionCode4\": \"*\",\n  \"permissionCode5\": \"\",\n  \"permissionCode6\": \"\",\n  \"permissionCode7\": \"\",\n  \"module\": \"Purchase\",\n  \"excludedValue\": \"ExcludedValue1\",\n  \"lastUpdated\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c12a068d-cbdd-45d6-a760-eb3d65c358eb",
+              "name": "Not found. Record to update not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "advancedPermissions",
+                    ":externalCode"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "externalCode",
+                      "description": "(Required) The ExternalCode of the AdvancedPermission to be updated"
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"companies\": [\n    {\n      \"active\": \"<boolean>\",\n      \"companyCode\": \"BW01\"\n    },\n    {\n      \"active\": \"<boolean>\",\n      \"companyCode\": \"BW01\"\n    }\n  ],\n  \"externalCode\": \"4847-31231212-212121-1212\",\n  \"limit\": 0,\n  \"loginAccount\": \"jyrki@basware.com\",\n  \"priorityIndex\": 0,\n  \"rowApproveIterationCount\": 0,\n  \"permissionCode1\": \"6210\",\n  \"permissionCode2\": \"6210,6211\",\n  \"permissionCode3\": \"6209-6230\",\n  \"permissionCode4\": \"*\",\n  \"permissionCode5\": \"\",\n  \"permissionCode6\": \"\",\n  \"permissionCode7\": \"\",\n  \"module\": \"Purchase\",\n  \"excludedValue\": \"ExcludedValue1\",\n  \"lastUpdated\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "eaf90ace-636c-41fa-81e2-4ea142402a67",
+              "name": "Unexpected error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "advancedPermissions",
+                    ":externalCode"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "externalCode",
+                      "description": "(Required) The ExternalCode of the AdvancedPermission to be updated"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"companies\": [\n    {\n      \"active\": \"<boolean>\",\n      \"companyCode\": \"BW01\"\n    },\n    {\n      \"active\": \"<boolean>\",\n      \"companyCode\": \"BW01\"\n    }\n  ],\n  \"externalCode\": \"4847-31231212-212121-1212\",\n  \"limit\": 0,\n  \"loginAccount\": \"jyrki@basware.com\",\n  \"priorityIndex\": 0,\n  \"rowApproveIterationCount\": 0,\n  \"permissionCode1\": \"6210\",\n  \"permissionCode2\": \"6210,6211\",\n  \"permissionCode3\": \"6209-6230\",\n  \"permissionCode4\": \"*\",\n  \"permissionCode5\": \"\",\n  \"permissionCode6\": \"\",\n  \"permissionCode7\": \"\",\n  \"module\": \"Purchase\",\n  \"excludedValue\": \"ExcludedValue1\",\n  \"lastUpdated\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"fbc082a2-65a4-469c-b230-d84a252f18fc\",\n  \"hasErrors\": false,\n  \"errors\": [\n    {\n      \"externalCode\": \"4847-31231212-212121-1212\",\n      \"type\": \"VALIDATION\",\n      \"code\": \"SQS_PUBLISH_ERROR\",\n      \"message\": \"\",\n      \"info\": \"\"\n    },\n    {\n      \"externalCode\": \"4847-31231212-212121-1212\",\n      \"type\": \"TECHNICAL\",\n      \"code\": \"DATA_VALIDATION_FAILED\",\n      \"message\": \"\",\n      \"info\": \"\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "001958bd-de85-494e-8a55-6e92da22d8ae",
+    "name": "Basware OAUTH2 authentication APIs AccountingDocuments AdvancedPermissions API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "**Using OAUTH2.0 authentication:**\n\nGet API access token from api.basware.com/tokens\n1. Using client id and client secret, which you can obtain from Basware. \n2. Specify which APIs can be accessed by using the token e.g. Read only access to vendors API only (these are called scopes). Available scopes are listed at <https://developer.basware.com/api/p2p/manual#AccessRights>. \n3. Each token has an expiration time, until which it can be used to call APIs.\n\nWhen using OAUTH2 authentication, you need to pass the OAUTH2 authentication token when calling Basware API endpoints. Available Basware API operations are documented at <https://api.basware.com/swagger>. \n\nSee the Basware API developer site at <https://developer.basware.com/api/p2p/manual#Authentication> for more details on API authentication.",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,133 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Basware OAUTH2 authentication APIs AccountingDocuments Users API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Users",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Returns users posted to Basware API.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/users",
+            "headers": [
+              {
+                "name": "x-amz-meta-continuationtoken",
+                "value": "436d78dd-3579-4346-9115-0d3ad9933703"
+              }
+            ],
+            "params": [
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "A limit for the number of items to be returned for one request. Limit can range between 1 and 500 items."
+              },
+              {
+                "name": "companyCode",
+                "value": "",
+                "type": "query",
+                "description": "Company filter. Returns items for specific company."
+              },
+              {
+                "name": "lastUpdated",
+                "value": "",
+                "type": "query",
+                "description": "Date Filter. Returns items that have been updated after specified date."
+              }
+            ]
+          },
+          "docs": "Returns users posted to Basware API."
+        },
+        {
+          "info": {
+            "name": "Creates new user(s), fully overwrites previous record if exists.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/users",
+            "headers": [
+              {
+                "name": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Basware applications accessible to a user are controlled through 'users' and 'applicationGroups' APIs. Applications in a group are defined through 'applicationGroups' API. Application groups are assigned to users through the 'applicationGroups' -block in users API.\r\n\r\nNotes: \r\n1. You need to have at least one applicationGroup for posting users to Basware API. The applicationGroups are available in applicationGroups API.  \r\n2. Application groups are assigned to users through the 'applicationGroup"
+        },
+        {
+          "info": {
+            "name": "Deletes data from Basware API. For manual one-time operations.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/v1/users",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "For manual one-time operations only, such as a manual clean-up to remove test data generated during API integration development. Only removes records from API layer. \r\nDeletion in target systems needs to be done separately using the data deletion mechanisms available in each of the target system in addition to deleting the data in Basware API."
+        },
+        {
+          "info": {
+            "name": "Returns single user by externalCode -identifier.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/users/:externalCode",
+            "params": [
+              {
+                "name": "externalCode",
+                "value": "",
+                "type": "path",
+                "description": "The ExternalCode of the entity to be fetched"
+              }
+            ]
+          },
+          "docs": "Returns single user by externalCode -identifier."
+        },
+        {
+          "info": {
+            "name": "Updates fields on specified user. Preserves existing values in fields, which were not updated.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/v1/users/:externalCode",
+            "params": [
+              {
+                "name": "externalCode",
+                "value": "",
+                "type": "path",
+                "description": "The ExternalCode of the User to be updated"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Basware applications accessible to a user are controlled through 'users' and 'applicationGroups' APIs. Applications in a group are defined through 'applicationGroups' API. Application groups are assigned to users through the 'applicationGroups' -block in users API.\r\n\r\nNotes: \r\n1. You need to have at least one applicationGroup for posting users to Basware API. The applicationGroups are available in applicationGroups API.  \r\n2. Application groups are assigned to users through the 'applicationGroup"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

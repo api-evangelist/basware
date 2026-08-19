@@ -1,0 +1,1381 @@
+{
+  "item": [
+    {
+      "id": "1b6d705a-38f5-4d58-ad3f-5d7aa01ba092",
+      "name": "TaxCodes",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "9caa60f1-42f4-4964-9877-b531da237b99",
+          "name": "Returns tax codes posted to Basware API.",
+          "request": {
+            "name": "Returns tax codes posted to Basware API.",
+            "description": {
+              "content": "",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "taxCodes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "pageSize",
+                  "value": "500",
+                  "description": "A limit for the number of items to be returned for one request. Limit can range between 1 and 500 items."
+                },
+                {
+                  "disabled": false,
+                  "key": "companyCode",
+                  "value": "",
+                  "description": "Company filter. Returns items for specific company."
+                },
+                {
+                  "disabled": false,
+                  "key": "lastUpdated",
+                  "value": "<dateTime>",
+                  "description": "Date Filter. Returns items that have been updated after specified date."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Used to get next page of results when item count indicated by 'pageSize' is exceeded. A token is returned in header (not body) parameter 'X-amz-meta-continuationToken' of the response whenever there are more records to fetch. Post the received value here in a new HEADER parameter on the next GET request to receive the next page of results. When getting the next page of results, you must include the same query parameters that were used when getting the first page.",
+                "key": "x-amz-meta-continuationtoken",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d98ea9fd-9cff-4f59-b882-690b1563e214",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "taxCodes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "500"
+                    },
+                    {
+                      "key": "companyCode",
+                      "value": ""
+                    },
+                    {
+                      "key": "lastUpdated",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Used to get next page of results when item count indicated by 'pageSize' is exceeded. A token is returned in header (not body) parameter 'X-amz-meta-continuationToken' of the response whenever there are more records to fetch. Post the received value here in a new HEADER parameter on the next GET request to receive the next page of results. When getting the next page of results, you must include the same query parameters that were used when getting the first page.",
+                    "key": "x-amz-meta-continuationtoken",
+                    "value": "349f0630-6f63-448c-82dd-3961ae642201"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"taxCodes\": [\n    {\n      \"companies\": [\n        {\n          \"active\": true,\n          \"companyCode\": \"BW01\",\n          \"inherit\": false\n        },\n        {\n          \"active\": true,\n          \"companyCode\": \"BW01\",\n          \"inherit\": false\n        }\n      ],\n      \"externalCode\": \"4847-31231212-212121-1212\",\n      \"taxCode\": \"B9\",\n      \"taxCodeNames\": [\n        {\n          \"language\": \"en-US\",\n          \"translation\": \"Office supplies\"\n        },\n        {\n          \"language\": \"en-US\",\n          \"translation\": \"Office supplies\"\n        }\n      ],\n      \"taxPercentage\": 10,\n      \"taxGroup\": \"\",\n      \"taxPercentage2\": 0,\n      \"additionalData\": [\n        {\n          \"externalCode\": \"c9921a52-6d8b-1017-cb8c-923d\",\n          \"account\": \"46860\",\n          \"statistical\": \"X\",\n          \"transactionType\": \"MWST\",\n          \"taxPercent\": 25,\n          \"country\": \"EN\",\n          \"condition\": \"MWVS\",\n          \"active\": true\n        },\n        {\n          \"externalCode\": \"c9921a52-6d8b-1017-cb8c-923d\",\n          \"account\": \"46860\",\n          \"statistical\": \"X\",\n          \"transactionType\": \"MWST\",\n          \"taxPercent\": 25,\n          \"country\": \"EN\",\n          \"condition\": \"MWVS\",\n          \"active\": false\n        }\n      ],\n      \"lastUpdated\": \"1995-03-13T08:17:19.592Z\"\n    },\n    {\n      \"companies\": [\n        {\n          \"active\": true,\n          \"companyCode\": \"BW01\",\n          \"inherit\": false\n        },\n        {\n          \"active\": true,\n          \"companyCode\": \"BW01\",\n          \"inherit\": false\n        }\n      ],\n      \"externalCode\": \"4847-31231212-212121-1212\",\n      \"taxCode\": \"B9\",\n      \"taxCodeNames\": [\n        {\n          \"language\": \"en-US\",\n          \"translation\": \"Office supplies\"\n        },\n        {\n          \"language\": \"en-US\",\n          \"translation\": \"Office supplies\"\n        }\n      ],\n      \"taxPercentage\": 10,\n      \"taxGroup\": \"\",\n      \"taxPercentage2\": 0,\n      \"additionalData\": [\n        {\n          \"externalCode\": \"c9921a52-6d8b-1017-cb8c-923d\",\n          \"account\": \"46860\",\n          \"statistical\": \"X\",\n          \"transactionType\": \"MWST\",\n          \"taxPercent\": 25,\n          \"country\": \"EN\",\n          \"condition\": \"MWVS\",\n          \"active\": true\n        },\n        {\n          \"externalCode\": \"c9921a52-6d8b-1017-cb8c-923d\",\n          \"account\": \"46860\",\n          \"statistical\": \"X\",\n          \"transactionType\": \"MWST\",\n          \"taxPercent\": 25,\n          \"country\": \"EN\",\n          \"condition\": \"MWVS\",\n          \"active\": false\n        }\n      ],\n      \"lastUpdated\": \"1998-08-25T09:08:32.113Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "31b7b04c-1cb6-4d77-8ab3-8af537a33b3a",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "taxCodes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "500"
+                    },
+                    {
+                      "key": "companyCode",
+                      "value": ""
+                    },
+                    {
+                      "key": "lastUpdated",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Used to get next page of results when item count indicated by 'pageSize' is exceeded. A token is returned in header (not body) parameter 'X-amz-meta-continuationToken' of the response whenever there are more records to fetch. Post the received value here in a new HEADER parameter on the next GET request to receive the next page of results. When getting the next page of results, you must include the same query parameters that were used when getting the first page.",
+                    "key": "x-amz-meta-continuationtoken",
+                    "value": "349f0630-6f63-448c-82dd-3961ae642201"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "2fdecacd-6b4e-4a4b-9b74-dc4373d9e7a4",
+              "name": "Not found. Request was successful and no records were found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "taxCodes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "500"
+                    },
+                    {
+                      "key": "companyCode",
+                      "value": ""
+                    },
+                    {
+                      "key": "lastUpdated",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Used to get next page of results when item count indicated by 'pageSize' is exceeded. A token is returned in header (not body) parameter 'X-amz-meta-continuationToken' of the response whenever there are more records to fetch. Post the received value here in a new HEADER parameter on the next GET request to receive the next page of results. When getting the next page of results, you must include the same query parameters that were used when getting the first page.",
+                    "key": "x-amz-meta-continuationtoken",
+                    "value": "349f0630-6f63-448c-82dd-3961ae642201"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "88abb26f-5a0c-4c7e-9d9d-f8b03b5e6d0d",
+              "name": "Unexpected error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "taxCodes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "500"
+                    },
+                    {
+                      "key": "companyCode",
+                      "value": ""
+                    },
+                    {
+                      "key": "lastUpdated",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Used to get next page of results when item count indicated by 'pageSize' is exceeded. A token is returned in header (not body) parameter 'X-amz-meta-continuationToken' of the response whenever there are more records to fetch. Post the received value here in a new HEADER parameter on the next GET request to receive the next page of results. When getting the next page of results, you must include the same query parameters that were used when getting the first page.",
+                    "key": "x-amz-meta-continuationtoken",
+                    "value": "349f0630-6f63-448c-82dd-3961ae642201"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"fbc082a2-65a4-469c-b230-d84a252f18fc\",\n  \"hasErrors\": false,\n  \"errors\": [\n    {\n      \"externalCode\": \"4847-31231212-212121-1212\",\n      \"type\": \"TECHNICAL\",\n      \"code\": \"SQS_PUBLISH_ERROR\",\n      \"message\": \"\",\n      \"info\": \"\"\n    },\n    {\n      \"externalCode\": \"4847-31231212-212121-1212\",\n      \"type\": \"SECURITY\",\n      \"code\": \"ENTITY_NOT_FOUND\",\n      \"message\": \"\",\n      \"info\": \"\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8f6b386b-bb39-4517-bdbe-39cb10e2670b",
+          "name": "Creates new tax code(s), fully overwrites previous record if exists.",
+          "request": {
+            "name": "Creates new tax code(s), fully overwrites previous record if exists.",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "taxCodes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "[\n  {\n    \"companies\": [\n      {\n        \"active\": \"<boolean>\",\n        \"companyCode\": \"<string>\",\n        \"inherit\": \"<boolean>\"\n      },\n      {\n        \"active\": \"<boolean>\",\n        \"companyCode\": \"<string>\",\n        \"inherit\": \"<boolean>\"\n      }\n    ],\n    \"externalCode\": \"<string>\",\n    \"taxCode\": \"<string>\",\n    \"taxCodeNames\": [\n      {\n        \"language\": \"<string>\",\n        \"translation\": \"<string>\"\n      },\n      {\n        \"language\": \"<string>\",\n        \"translation\": \"<string>\"\n      }\n    ],\n    \"taxPercentage\": \"<double>\",\n    \"taxGroup\": \"<string>\",\n    \"taxPercentage2\": \"<double>\",\n    \"additionalData\": [\n      {\n        \"externalCode\": \"<string>\",\n        \"account\": \"<string>\",\n        \"statistical\": \"<string>\",\n        \"transactionType\": \"<string>\",\n        \"taxPercent\": \"<double>\",\n        \"country\": \"<string>\",\n        \"condition\": \"<string>\",\n        \"active\": \"<boolean>\"\n      },\n      {\n        \"externalCode\": \"<string>\",\n        \"account\": \"<string>\",\n        \"statistical\": \"<string>\",\n        \"transactionType\": \"<string>\",\n        \"taxPercent\": \"<double>\",\n        \"country\": \"<string>\",\n        \"condition\": \"<string>\",\n        \"active\": \"<boolean>\"\n      }\n    ],\n    \"lastUpdated\": \"<dateTime>\"\n  },\n  {\n    \"companies\": [\n      {\n        \"active\": \"<boolean>\",\n        \"companyCode\": \"<string>\",\n        \"inherit\": \"<boolean>\"\n      },\n      {\n        \"active\": \"<boolean>\",\n        \"companyCode\": \"<string>\",\n        \"inherit\": \"<boolean>\"\n      }\n    ],\n    \"externalCode\": \"<string>\",\n    \"taxCode\": \"<string>\",\n    \"taxCodeNames\": [\n      {\n        \"language\": \"<string>\",\n        \"translation\": \"<string>\"\n      },\n      {\n        \"language\": \"<string>\",\n        \"translation\": \"<string>\"\n      }\n    ],\n    \"taxPercentage\": \"<double>\",\n    \"taxGroup\": \"<string>\",\n    \"taxPercentage2\": \"<double>\",\n    \"additionalData\": [\n      {\n        \"externalCode\": \"<string>\",\n        \"account\": \"<string>\",\n        \"statistical\": \"<string>\",\n        \"transactionType\": \"<string>\",\n        \"taxPercent\": \"<double>\",\n        \"country\": \"<string>\",\n        \"condition\": \"<string>\",\n        \"active\": \"<boolean>\"\n      },\n      {\n        \"externalCode\": \"<string>\",\n        \"account\": \"<string>\",\n        \"statistical\": \"<string>\",\n        \"transactionType\": \"<string>\",\n        \"taxPercent\": \"<double>\",\n        \"country\": \"<string>\",\n        \"condition\": \"<string>\",\n        \"active\": \"<boolean>\"\n      }\n    ],\n    \"lastUpdated\": \"<dateTime>\"\n  }\n]",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f6e17740-50b6-42b0-adb7-3610f68db32c",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "taxCodes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Specifies the media type of the resource. Value application/json is supported.",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"companies\": [\n      {\n        \"active\": true,\n        \"companyCode\": \"BW01\",\n        \"inherit\": false\n      },\n      {\n        \"active\": true,\n        \"companyCode\": \"BW01\",\n        \"inherit\": false\n      }\n    ],\n    \"externalCode\": \"4847-31231212-212121-1212\",\n    \"taxCode\": \"B9\",\n    \"taxCodeNames\": [\n      {\n        \"language\": \"en-US\",\n        \"translation\": \"Office supplies\"\n      },\n      {\n        \"language\": \"en-US\",\n        \"translation\": \"Office supplies\"\n      }\n    ],\n    \"taxPercentage\": 10,\n    \"taxGroup\": \"\",\n    \"taxPercentage2\": 0,\n    \"additionalData\": [\n      {\n        \"externalCode\": \"c9921a52-6d8b-1017-cb8c-923d\",\n        \"account\": \"46860\",\n        \"statistical\": \"X\",\n        \"transactionType\": \"MWST\",\n        \"taxPercent\": 25,\n        \"country\": \"EN\",\n        \"condition\": \"MWVS\",\n        \"active\": \"<boolean>\"\n      },\n      {\n        \"externalCode\": \"c9921a52-6d8b-1017-cb8c-923d\",\n        \"account\": \"46860\",\n        \"statistical\": \"X\",\n        \"transactionType\": \"MWST\",\n        \"taxPercent\": 25,\n        \"country\": \"EN\",\n        \"condition\": \"MWVS\",\n        \"active\": \"<boolean>\"\n      }\n    ],\n    \"lastUpdated\": \"<dateTime>\"\n  },\n  {\n    \"companies\": [\n      {\n        \"active\": true,\n        \"companyCode\": \"BW01\",\n        \"inherit\": false\n      },\n      {\n        \"active\": true,\n        \"companyCode\": \"BW01\",\n        \"inherit\": false\n      }\n    ],\n    \"externalCode\": \"4847-31231212-212121-1212\",\n    \"taxCode\": \"B9\",\n    \"taxCodeNames\": [\n      {\n        \"language\": \"en-US\",\n        \"translation\": \"Office supplies\"\n      },\n      {\n        \"language\": \"en-US\",\n        \"translation\": \"Office supplies\"\n      }\n    ],\n    \"taxPercentage\": 10,\n    \"taxGroup\": \"\",\n    \"taxPercentage2\": 0,\n    \"additionalData\": [\n      {\n        \"externalCode\": \"c9921a52-6d8b-1017-cb8c-923d\",\n        \"account\": \"46860\",\n        \"statistical\": \"X\",\n        \"transactionType\": \"MWST\",\n        \"taxPercent\": 25,\n        \"country\": \"EN\",\n        \"condition\": \"MWVS\",\n        \"active\": \"<boolean>\"\n      },\n      {\n        \"externalCode\": \"c9921a52-6d8b-1017-cb8c-923d\",\n        \"account\": \"46860\",\n        \"statistical\": \"X\",\n        \"transactionType\": \"MWST\",\n        \"taxPercent\": 25,\n        \"country\": \"EN\",\n        \"condition\": \"MWVS\",\n        \"active\": \"<boolean>\"\n      }\n    ],\n    \"lastUpdated\": \"<dateTime>\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"companies\": [\n      {\n        \"active\": true,\n        \"companyCode\": \"BW01\",\n        \"inherit\": false\n      },\n      {\n        \"active\": true,\n        \"companyCode\": \"BW01\",\n        \"inherit\": false\n      }\n    ],\n    \"externalCode\": \"4847-31231212-212121-1212\",\n    \"taxCode\": \"B9\",\n    \"taxCodeNames\": [\n      {\n        \"language\": \"en-US\",\n        \"translation\": \"Office supplies\"\n      },\n      {\n        \"language\": \"en-US\",\n        \"translation\": \"Office supplies\"\n      }\n    ],\n    \"taxPercentage\": 10,\n    \"taxGroup\": \"\",\n    \"taxPercentage2\": 0,\n    \"additionalData\": [\n      {\n        \"externalCode\": \"c9921a52-6d8b-1017-cb8c-923d\",\n        \"account\": \"46860\",\n        \"statistical\": \"X\",\n        \"transactionType\": \"MWST\",\n        \"taxPercent\": 25,\n        \"country\": \"EN\",\n        \"condition\": \"MWVS\",\n        \"active\": \"<boolean>\"\n      },\n      {\n        \"externalCode\": \"c9921a52-6d8b-1017-cb8c-923d\",\n        \"account\": \"46860\",\n        \"statistical\": \"X\",\n        \"transactionType\": \"MWST\",\n        \"taxPercent\": 25,\n        \"country\": \"EN\",\n        \"condition\": \"MWVS\",\n        \"active\": \"<boolean>\"\n      }\n    ],\n    \"lastUpdated\": \"<dateTime>\"\n  },\n  {\n    \"companies\": [\n      {\n        \"active\": true,\n        \"companyCode\": \"BW01\",\n        \"inherit\": false\n      },\n      {\n        \"active\": true,\n        \"companyCode\": \"BW01\",\n        \"inherit\": false\n      }\n    ],\n    \"externalCode\": \"4847-31231212-212121-1212\",\n    \"taxCode\": \"B9\",\n    \"taxCodeNames\": [\n      {\n        \"language\": \"en-US\",\n        \"translation\": \"Office supplies\"\n      },\n      {\n        \"language\": \"en-US\",\n        \"translation\": \"Office supplies\"\n      }\n    ],\n    \"taxPercentage\": 10,\n    \"taxGroup\": \"\",\n    \"taxPercentage2\": 0,\n    \"additionalData\": [\n      {\n        \"externalCode\": \"c9921a52-6d8b-1017-cb8c-923d\",\n        \"account\": \"46860\",\n        \"statistical\": \"X\",\n        \"transactionType\": \"MWST\",\n        \"taxPercent\": 25,\n        \"country\": \"EN\",\n        \"condition\": \"MWVS\",\n        \"active\": \"<boolean>\"\n      },\n      {\n        \"externalCode\": \"c9921a52-6d8b-1017-cb8c-923d\",\n        \"account\": \"46860\",\n        \"statistical\": \"X\",\n        \"transactionType\": \"MWST\",\n        \"taxPercent\": 25,\n        \"country\": \"EN\",\n        \"condition\": \"MWVS\",\n        \"active\": \"<boolean>\"\n      }\n    ],\n    \"lastUpdated\": \"<dateTime>\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b2e54b55-ed23-4d5c-bf16-324ab267becd",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "taxCodes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Specifies the media type of the resource. Value application/json is supported.",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"companies\": [\n      {\n        \"active\": true,\n        \"companyCode\": \"BW01\",\n        \"inherit\": false\n      },\n      {\n        \"active\": true,\n        \"companyCode\": \"BW01\",\n        \"inherit\": false\n      }\n    ],\n    \"externalCode\": \"4847-31231212-212121-1212\",\n    \"taxCode\": \"B9\",\n    \"taxCodeNames\": [\n      {\n        \"language\": \"en-US\",\n        \"translation\": \"Office supplies\"\n      },\n      {\n        \"language\": \"en-US\",\n        \"translation\": \"Office supplies\"\n      }\n    ],\n    \"taxPercentage\": 10,\n    \"taxGroup\": \"\",\n    \"taxPercentage2\": 0,\n    \"additionalData\": [\n      {\n        \"externalCode\": \"c9921a52-6d8b-1017-cb8c-923d\",\n        \"account\": \"46860\",\n        \"statistical\": \"X\",\n        \"transactionType\": \"MWST\",\n        \"taxPercent\": 25,\n        \"country\": \"EN\",\n        \"condition\": \"MWVS\",\n        \"active\": \"<boolean>\"\n      },\n      {\n        \"externalCode\": \"c9921a52-6d8b-1017-cb8c-923d\",\n        \"account\": \"46860\",\n        \"statistical\": \"X\",\n        \"transactionType\": \"MWST\",\n        \"taxPercent\": 25,\n        \"country\": \"EN\",\n        \"condition\": \"MWVS\",\n        \"active\": \"<boolean>\"\n      }\n    ],\n    \"lastUpdated\": \"<dateTime>\"\n  },\n  {\n    \"companies\": [\n      {\n        \"active\": true,\n        \"companyCode\": \"BW01\",\n        \"inherit\": false\n      },\n      {\n        \"active\": true,\n        \"companyCode\": \"BW01\",\n        \"inherit\": false\n      }\n    ],\n    \"externalCode\": \"4847-31231212-212121-1212\",\n    \"taxCode\": \"B9\",\n    \"taxCodeNames\": [\n      {\n        \"language\": \"en-US\",\n        \"translation\": \"Office supplies\"\n      },\n      {\n        \"language\": \"en-US\",\n        \"translation\": \"Office supplies\"\n      }\n    ],\n    \"taxPercentage\": 10,\n    \"taxGroup\": \"\",\n    \"taxPercentage2\": 0,\n    \"additionalData\": [\n      {\n        \"externalCode\": \"c9921a52-6d8b-1017-cb8c-923d\",\n        \"account\": \"46860\",\n        \"statistical\": \"X\",\n        \"transactionType\": \"MWST\",\n        \"taxPercent\": 25,\n        \"country\": \"EN\",\n        \"condition\": \"MWVS\",\n        \"active\": \"<boolean>\"\n      },\n      {\n        \"externalCode\": \"c9921a52-6d8b-1017-cb8c-923d\",\n        \"account\": \"46860\",\n        \"statistical\": \"X\",\n        \"transactionType\": \"MWST\",\n        \"taxPercent\": 25,\n        \"country\": \"EN\",\n        \"condition\": \"MWVS\",\n        \"active\": \"<boolean>\"\n      }\n    ],\n    \"lastUpdated\": \"<dateTime>\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"fbc082a2-65a4-469c-b230-d84a252f18fc\",\n  \"hasErrors\": true,\n  \"errors\": [\n    {\n      \"externalCode\": \"4847-31231212-212121-1212\",\n      \"type\": \"VALIDATION\",\n      \"code\": \"SCHEMA_VALIDATION_ERROR\",\n      \"message\": \"\",\n      \"info\": \"\"\n    },\n    {\n      \"externalCode\": \"4847-31231212-212121-1212\",\n      \"type\": \"TECHNICAL\",\n      \"code\": \"DATA_ORIGIN_VALIDATION_ERROR\",\n      \"message\": \"\",\n      \"info\": \"\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a18b781a-c328-4f20-83c4-95c77fdac104",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "taxCodes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Specifies the media type of the resource. Value application/json is supported.",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"companies\": [\n      {\n        \"active\": true,\n        \"companyCode\": \"BW01\",\n        \"inherit\": false\n      },\n      {\n        \"active\": true,\n        \"companyCode\": \"BW01\",\n        \"inherit\": false\n      }\n    ],\n    \"externalCode\": \"4847-31231212-212121-1212\",\n    \"taxCode\": \"B9\",\n    \"taxCodeNames\": [\n      {\n        \"language\": \"en-US\",\n        \"translation\": \"Office supplies\"\n      },\n      {\n        \"language\": \"en-US\",\n        \"translation\": \"Office supplies\"\n      }\n    ],\n    \"taxPercentage\": 10,\n    \"taxGroup\": \"\",\n    \"taxPercentage2\": 0,\n    \"additionalData\": [\n      {\n        \"externalCode\": \"c9921a52-6d8b-1017-cb8c-923d\",\n        \"account\": \"46860\",\n        \"statistical\": \"X\",\n        \"transactionType\": \"MWST\",\n        \"taxPercent\": 25,\n        \"country\": \"EN\",\n        \"condition\": \"MWVS\",\n        \"active\": \"<boolean>\"\n      },\n      {\n        \"externalCode\": \"c9921a52-6d8b-1017-cb8c-923d\",\n        \"account\": \"46860\",\n        \"statistical\": \"X\",\n        \"transactionType\": \"MWST\",\n        \"taxPercent\": 25,\n        \"country\": \"EN\",\n        \"condition\": \"MWVS\",\n        \"active\": \"<boolean>\"\n      }\n    ],\n    \"lastUpdated\": \"<dateTime>\"\n  },\n  {\n    \"companies\": [\n      {\n        \"active\": true,\n        \"companyCode\": \"BW01\",\n        \"inherit\": false\n      },\n      {\n        \"active\": true,\n        \"companyCode\": \"BW01\",\n        \"inherit\": false\n      }\n    ],\n    \"externalCode\": \"4847-31231212-212121-1212\",\n    \"taxCode\": \"B9\",\n    \"taxCodeNames\": [\n      {\n        \"language\": \"en-US\",\n        \"translation\": \"Office supplies\"\n      },\n      {\n        \"language\": \"en-US\",\n        \"translation\": \"Office supplies\"\n      }\n    ],\n    \"taxPercentage\": 10,\n    \"taxGroup\": \"\",\n    \"taxPercentage2\": 0,\n    \"additionalData\": [\n      {\n        \"externalCode\": \"c9921a52-6d8b-1017-cb8c-923d\",\n        \"account\": \"46860\",\n        \"statistical\": \"X\",\n        \"transactionType\": \"MWST\",\n        \"taxPercent\": 25,\n        \"country\": \"EN\",\n        \"condition\": \"MWVS\",\n        \"active\": \"<boolean>\"\n      },\n      {\n        \"externalCode\": \"c9921a52-6d8b-1017-cb8c-923d\",\n        \"account\": \"46860\",\n        \"statistical\": \"X\",\n        \"transactionType\": \"MWST\",\n        \"taxPercent\": 25,\n        \"country\": \"EN\",\n        \"condition\": \"MWVS\",\n        \"active\": \"<boolean>\"\n      }\n    ],\n    \"lastUpdated\": \"<dateTime>\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e27bdc95-a2b8-4f18-a2b0-69ba61f978b8",
+              "name": "Conflict",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "taxCodes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Specifies the media type of the resource. Value application/json is supported.",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"companies\": [\n      {\n        \"active\": true,\n        \"companyCode\": \"BW01\",\n        \"inherit\": false\n      },\n      {\n        \"active\": true,\n        \"companyCode\": \"BW01\",\n        \"inherit\": false\n      }\n    ],\n    \"externalCode\": \"4847-31231212-212121-1212\",\n    \"taxCode\": \"B9\",\n    \"taxCodeNames\": [\n      {\n        \"language\": \"en-US\",\n        \"translation\": \"Office supplies\"\n      },\n      {\n        \"language\": \"en-US\",\n        \"translation\": \"Office supplies\"\n      }\n    ],\n    \"taxPercentage\": 10,\n    \"taxGroup\": \"\",\n    \"taxPercentage2\": 0,\n    \"additionalData\": [\n      {\n        \"externalCode\": \"c9921a52-6d8b-1017-cb8c-923d\",\n        \"account\": \"46860\",\n        \"statistical\": \"X\",\n        \"transactionType\": \"MWST\",\n        \"taxPercent\": 25,\n        \"country\": \"EN\",\n        \"condition\": \"MWVS\",\n        \"active\": \"<boolean>\"\n      },\n      {\n        \"externalCode\": \"c9921a52-6d8b-1017-cb8c-923d\",\n        \"account\": \"46860\",\n        \"statistical\": \"X\",\n        \"transactionType\": \"MWST\",\n        \"taxPercent\": 25,\n        \"country\": \"EN\",\n        \"condition\": \"MWVS\",\n        \"active\": \"<boolean>\"\n      }\n    ],\n    \"lastUpdated\": \"<dateTime>\"\n  },\n  {\n    \"companies\": [\n      {\n        \"active\": true,\n        \"companyCode\": \"BW01\",\n        \"inherit\": false\n      },\n      {\n        \"active\": true,\n        \"companyCode\": \"BW01\",\n        \"inherit\": false\n      }\n    ],\n    \"externalCode\": \"4847-31231212-212121-1212\",\n    \"taxCode\": \"B9\",\n    \"taxCodeNames\": [\n      {\n        \"language\": \"en-US\",\n        \"translation\": \"Office supplies\"\n      },\n      {\n        \"language\": \"en-US\",\n        \"translation\": \"Office supplies\"\n      }\n    ],\n    \"taxPercentage\": 10,\n    \"taxGroup\": \"\",\n    \"taxPercentage2\": 0,\n    \"additionalData\": [\n      {\n        \"externalCode\": \"c9921a52-6d8b-1017-cb8c-923d\",\n        \"account\": \"46860\",\n        \"statistical\": \"X\",\n        \"transactionType\": \"MWST\",\n        \"taxPercent\": 25,\n        \"country\": \"EN\",\n        \"condition\": \"MWVS\",\n        \"active\": \"<boolean>\"\n      },\n      {\n        \"externalCode\": \"c9921a52-6d8b-1017-cb8c-923d\",\n        \"account\": \"46860\",\n        \"statistical\": \"X\",\n        \"transactionType\": \"MWST\",\n        \"taxPercent\": 25,\n        \"country\": \"EN\",\n        \"condition\": \"MWVS\",\n        \"active\": \"<boolean>\"\n      }\n    ],\n    \"lastUpdated\": \"<dateTime>\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"fbc082a2-65a4-469c-b230-d84a252f18fc\",\n  \"hasErrors\": true,\n  \"errors\": [\n    {\n      \"externalCode\": \"4847-31231212-212121-1212\",\n      \"type\": \"VALIDATION\",\n      \"code\": \"SCHEMA_VALIDATION_ERROR\",\n      \"message\": \"\",\n      \"info\": \"\"\n    },\n    {\n      \"externalCode\": \"4847-31231212-212121-1212\",\n      \"type\": \"TECHNICAL\",\n      \"code\": \"DATA_ORIGIN_VALIDATION_ERROR\",\n      \"message\": \"\",\n      \"info\": \"\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2d1a7d99-aaf9-4701-8be5-1ce38e38b170",
+              "name": "Unexpected error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "taxCodes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Specifies the media type of the resource. Value application/json is supported.",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"companies\": [\n      {\n        \"active\": true,\n        \"companyCode\": \"BW01\",\n        \"inherit\": false\n      },\n      {\n        \"active\": true,\n        \"companyCode\": \"BW01\",\n        \"inherit\": false\n      }\n    ],\n    \"externalCode\": \"4847-31231212-212121-1212\",\n    \"taxCode\": \"B9\",\n    \"taxCodeNames\": [\n      {\n        \"language\": \"en-US\",\n        \"translation\": \"Office supplies\"\n      },\n      {\n        \"language\": \"en-US\",\n        \"translation\": \"Office supplies\"\n      }\n    ],\n    \"taxPercentage\": 10,\n    \"taxGroup\": \"\",\n    \"taxPercentage2\": 0,\n    \"additionalData\": [\n      {\n        \"externalCode\": \"c9921a52-6d8b-1017-cb8c-923d\",\n        \"account\": \"46860\",\n        \"statistical\": \"X\",\n        \"transactionType\": \"MWST\",\n        \"taxPercent\": 25,\n        \"country\": \"EN\",\n        \"condition\": \"MWVS\",\n        \"active\": \"<boolean>\"\n      },\n      {\n        \"externalCode\": \"c9921a52-6d8b-1017-cb8c-923d\",\n        \"account\": \"46860\",\n        \"statistical\": \"X\",\n        \"transactionType\": \"MWST\",\n        \"taxPercent\": 25,\n        \"country\": \"EN\",\n        \"condition\": \"MWVS\",\n        \"active\": \"<boolean>\"\n      }\n    ],\n    \"lastUpdated\": \"<dateTime>\"\n  },\n  {\n    \"companies\": [\n      {\n        \"active\": true,\n        \"companyCode\": \"BW01\",\n        \"inherit\": false\n      },\n      {\n        \"active\": true,\n        \"companyCode\": \"BW01\",\n        \"inherit\": false\n      }\n    ],\n    \"externalCode\": \"4847-31231212-212121-1212\",\n    \"taxCode\": \"B9\",\n    \"taxCodeNames\": [\n      {\n        \"language\": \"en-US\",\n        \"translation\": \"Office supplies\"\n      },\n      {\n        \"language\": \"en-US\",\n        \"translation\": \"Office supplies\"\n      }\n    ],\n    \"taxPercentage\": 10,\n    \"taxGroup\": \"\",\n    \"taxPercentage2\": 0,\n    \"additionalData\": [\n      {\n        \"externalCode\": \"c9921a52-6d8b-1017-cb8c-923d\",\n        \"account\": \"46860\",\n        \"statistical\": \"X\",\n        \"transactionType\": \"MWST\",\n        \"taxPercent\": 25,\n        \"country\": \"EN\",\n        \"condition\": \"MWVS\",\n        \"active\": \"<boolean>\"\n      },\n      {\n        \"externalCode\": \"c9921a52-6d8b-1017-cb8c-923d\",\n        \"account\": \"46860\",\n        \"statistical\": \"X\",\n        \"transactionType\": \"MWST\",\n        \"taxPercent\": 25,\n        \"country\": \"EN\",\n        \"condition\": \"MWVS\",\n        \"active\": \"<boolean>\"\n      }\n    ],\n    \"lastUpdated\": \"<dateTime>\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"fbc082a2-65a4-469c-b230-d84a252f18fc\",\n  \"hasErrors\": true,\n  \"errors\": [\n    {\n      \"externalCode\": \"4847-31231212-212121-1212\",\n      \"type\": \"VALIDATION\",\n      \"code\": \"SCHEMA_VALIDATION_ERROR\",\n      \"message\": \"\",\n      \"info\": \"\"\n    },\n    {\n      \"externalCode\": \"4847-31231212-212121-1212\",\n      \"type\": \"TECHNICAL\",\n      \"code\": \"DATA_ORIGIN_VALIDATION_ERROR\",\n      \"message\": \"\",\n      \"info\": \"\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "46f1f392-4a34-4310-9ee7-6a6efc796ef1",
+          "name": "Deletes data from Basware API. For manual one-time operations.",
+          "request": {
+            "name": "Deletes data from Basware API. For manual one-time operations.",
+            "description": {
+              "content": "For manual one-time operations only, such as a manual clean-up to remove test data generated during API integration development. Only removes records from API layer. \r\nDeletion in target systems needs to be done separately using the data deletion mechanisms available in each of the target system in addition to deleting the data in Basware API.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "taxCodes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"lastUpdated\": \"<dateTime>\",\n  \"externalCode\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "be8c1d9a-643b-44b2-a74a-02baa8b59713",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "taxCodes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"lastUpdated\": \"<dateTime>\",\n  \"externalCode\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusApiLink\": \"string\",\n  \"taskName\": \"string\",\n  \"taskStatus\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8ddce3ae-aa5e-412a-90d9-52044f04e07b",
+              "name": "RequestAccepted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "taxCodes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"lastUpdated\": \"<dateTime>\",\n  \"externalCode\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusApiLink\": \"string\",\n  \"taskName\": \"string\",\n  \"taskStatus\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8657661b-4b8f-40bc-9ad0-dd822c945c8b",
+              "name": "BadRequest",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "taxCodes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"lastUpdated\": \"<dateTime>\",\n  \"externalCode\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"fbc082a2-65a4-469c-b230-d84a252f18fc\",\n  \"hasErrors\": true,\n  \"errors\": [\n    {\n      \"externalCode\": \"4847-31231212-212121-1212\",\n      \"type\": \"VALIDATION\",\n      \"code\": \"SCHEMA_VALIDATION_ERROR\",\n      \"message\": \"\",\n      \"info\": \"\"\n    },\n    {\n      \"externalCode\": \"4847-31231212-212121-1212\",\n      \"type\": \"TECHNICAL\",\n      \"code\": \"DATA_ORIGIN_VALIDATION_ERROR\",\n      \"message\": \"\",\n      \"info\": \"\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c21118c2-acba-41d7-8e64-fd8036d0c8d7",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "taxCodes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"lastUpdated\": \"<dateTime>\",\n  \"externalCode\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "941a2e11-b44c-4416-8f94-b335866c377e",
+              "name": "Unexpected error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "taxCodes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"lastUpdated\": \"<dateTime>\",\n  \"externalCode\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"fbc082a2-65a4-469c-b230-d84a252f18fc\",\n  \"hasErrors\": true,\n  \"errors\": [\n    {\n      \"externalCode\": \"4847-31231212-212121-1212\",\n      \"type\": \"VALIDATION\",\n      \"code\": \"SCHEMA_VALIDATION_ERROR\",\n      \"message\": \"\",\n      \"info\": \"\"\n    },\n    {\n      \"externalCode\": \"4847-31231212-212121-1212\",\n      \"type\": \"TECHNICAL\",\n      \"code\": \"DATA_ORIGIN_VALIDATION_ERROR\",\n      \"message\": \"\",\n      \"info\": \"\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cdc7f04a-0a1c-4625-b04f-818cb15ec3ef",
+          "name": "Returns single tax code by externalCode identifier.",
+          "request": {
+            "name": "Returns single tax code by externalCode identifier.",
+            "description": {
+              "content": "",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "taxCodes",
+                ":externalCode"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "externalCode",
+                  "description": "(Required) The ExternalCode of the entity to be fetched"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4e3fe186-ca32-4b19-8f82-a1af8b889ddd",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "taxCodes",
+                    ":externalCode"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "externalCode",
+                      "description": "(Required) The ExternalCode of the entity to be fetched"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"companies\": [\n    {\n      \"active\": true,\n      \"companyCode\": \"BW01\",\n      \"inherit\": false\n    },\n    {\n      \"active\": true,\n      \"companyCode\": \"BW01\",\n      \"inherit\": false\n    }\n  ],\n  \"externalCode\": \"4847-31231212-212121-1212\",\n  \"taxCode\": \"B9\",\n  \"taxCodeNames\": [\n    {\n      \"language\": \"en-US\",\n      \"translation\": \"Office supplies\"\n    },\n    {\n      \"language\": \"en-US\",\n      \"translation\": \"Office supplies\"\n    }\n  ],\n  \"taxPercentage\": 10,\n  \"taxGroup\": \"\",\n  \"taxPercentage2\": 0,\n  \"additionalData\": [\n    {\n      \"externalCode\": \"c9921a52-6d8b-1017-cb8c-923d\",\n      \"account\": \"46860\",\n      \"statistical\": \"X\",\n      \"transactionType\": \"MWST\",\n      \"taxPercent\": 25,\n      \"country\": \"EN\",\n      \"condition\": \"MWVS\",\n      \"active\": \"<boolean>\"\n    },\n    {\n      \"externalCode\": \"c9921a52-6d8b-1017-cb8c-923d\",\n      \"account\": \"46860\",\n      \"statistical\": \"X\",\n      \"transactionType\": \"MWST\",\n      \"taxPercent\": 25,\n      \"country\": \"EN\",\n      \"condition\": \"MWVS\",\n      \"active\": \"<boolean>\"\n    }\n  ],\n  \"lastUpdated\": \"<dateTime>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f71da919-996c-4d84-a6d9-635c26b92558",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "taxCodes",
+                    ":externalCode"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "externalCode",
+                      "description": "(Required) The ExternalCode of the entity to be fetched"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "46fc4aab-45fb-4799-8325-87b1f420e8f9",
+              "name": "Not found. Request was successful and no records were found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "taxCodes",
+                    ":externalCode"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "externalCode",
+                      "description": "(Required) The ExternalCode of the entity to be fetched"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "15217da6-1f2c-4b9d-8f6c-dadab23da3bb",
+              "name": "Unexpected error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "taxCodes",
+                    ":externalCode"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "externalCode",
+                      "description": "(Required) The ExternalCode of the entity to be fetched"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"fbc082a2-65a4-469c-b230-d84a252f18fc\",\n  \"hasErrors\": true,\n  \"errors\": [\n    {\n      \"externalCode\": \"4847-31231212-212121-1212\",\n      \"type\": \"VALIDATION\",\n      \"code\": \"SCHEMA_VALIDATION_ERROR\",\n      \"message\": \"\",\n      \"info\": \"\"\n    },\n    {\n      \"externalCode\": \"4847-31231212-212121-1212\",\n      \"type\": \"TECHNICAL\",\n      \"code\": \"DATA_ORIGIN_VALIDATION_ERROR\",\n      \"message\": \"\",\n      \"info\": \"\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5b454ac3-f971-4abf-a23d-2c574fb1230d",
+          "name": "Updates on specified taxCode. Preserves existing values in fields, which were not updated.",
+          "request": {
+            "name": "Updates on specified taxCode. Preserves existing values in fields, which were not updated.",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "taxCodes",
+                ":externalCode"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "externalCode",
+                  "description": "(Required) The ExternalCode of the taxCodes to be updated"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"companies\": [\n    {\n      \"active\": \"<boolean>\",\n      \"companyCode\": \"<string>\",\n      \"inherit\": \"<boolean>\"\n    },\n    {\n      \"active\": \"<boolean>\",\n      \"companyCode\": \"<string>\",\n      \"inherit\": \"<boolean>\"\n    }\n  ],\n  \"externalCode\": \"<string>\",\n  \"taxCode\": \"<string>\",\n  \"taxCodeNames\": [\n    {\n      \"language\": \"<string>\",\n      \"translation\": \"<string>\"\n    },\n    {\n      \"language\": \"<string>\",\n      \"translation\": \"<string>\"\n    }\n  ],\n  \"taxPercentage\": \"<double>\",\n  \"taxGroup\": \"<string>\",\n  \"taxPercentage2\": \"<double>\",\n  \"additionalData\": [\n    {\n      \"externalCode\": \"<string>\",\n      \"account\": \"<string>\",\n      \"statistical\": \"<string>\",\n      \"transactionType\": \"<string>\",\n      \"taxPercent\": \"<double>\",\n      \"country\": \"<string>\",\n      \"condition\": \"<string>\",\n      \"active\": \"<boolean>\"\n    },\n    {\n      \"externalCode\": \"<string>\",\n      \"account\": \"<string>\",\n      \"statistical\": \"<string>\",\n      \"transactionType\": \"<string>\",\n      \"taxPercent\": \"<double>\",\n      \"country\": \"<string>\",\n      \"condition\": \"<string>\",\n      \"active\": \"<boolean>\"\n    }\n  ],\n  \"lastUpdated\": \"<dateTime>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "5c1ca957-0dfa-4e11-8003-98a938e7f0ad",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "taxCodes",
+                    ":externalCode"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "externalCode",
+                      "description": "(Required) The ExternalCode of the taxCodes to be updated"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"companies\": [\n    {\n      \"active\": true,\n      \"companyCode\": \"BW01\",\n      \"inherit\": false\n    },\n    {\n      \"active\": true,\n      \"companyCode\": \"BW01\",\n      \"inherit\": false\n    }\n  ],\n  \"externalCode\": \"4847-31231212-212121-1212\",\n  \"taxCode\": \"B9\",\n  \"taxCodeNames\": [\n    {\n      \"language\": \"en-US\",\n      \"translation\": \"Office supplies\"\n    },\n    {\n      \"language\": \"en-US\",\n      \"translation\": \"Office supplies\"\n    }\n  ],\n  \"taxPercentage\": 10,\n  \"taxGroup\": \"\",\n  \"taxPercentage2\": 0,\n  \"additionalData\": [\n    {\n      \"externalCode\": \"c9921a52-6d8b-1017-cb8c-923d\",\n      \"account\": \"46860\",\n      \"statistical\": \"X\",\n      \"transactionType\": \"MWST\",\n      \"taxPercent\": 25,\n      \"country\": \"EN\",\n      \"condition\": \"MWVS\",\n      \"active\": \"<boolean>\"\n    },\n    {\n      \"externalCode\": \"c9921a52-6d8b-1017-cb8c-923d\",\n      \"account\": \"46860\",\n      \"statistical\": \"X\",\n      \"transactionType\": \"MWST\",\n      \"taxPercent\": 25,\n      \"country\": \"EN\",\n      \"condition\": \"MWVS\",\n      \"active\": \"<boolean>\"\n    }\n  ],\n  \"lastUpdated\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"companies\": [\n    {\n      \"active\": true,\n      \"companyCode\": \"BW01\",\n      \"inherit\": false\n    },\n    {\n      \"active\": true,\n      \"companyCode\": \"BW01\",\n      \"inherit\": false\n    }\n  ],\n  \"externalCode\": \"4847-31231212-212121-1212\",\n  \"taxCode\": \"B9\",\n  \"taxCodeNames\": [\n    {\n      \"language\": \"en-US\",\n      \"translation\": \"Office supplies\"\n    },\n    {\n      \"language\": \"en-US\",\n      \"translation\": \"Office supplies\"\n    }\n  ],\n  \"taxPercentage\": 10,\n  \"taxGroup\": \"\",\n  \"taxPercentage2\": 0,\n  \"additionalData\": [\n    {\n      \"externalCode\": \"c9921a52-6d8b-1017-cb8c-923d\",\n      \"account\": \"46860\",\n      \"statistical\": \"X\",\n      \"transactionType\": \"MWST\",\n      \"taxPercent\": 25,\n      \"country\": \"EN\",\n      \"condition\": \"MWVS\",\n      \"active\": \"<boolean>\"\n    },\n    {\n      \"externalCode\": \"c9921a52-6d8b-1017-cb8c-923d\",\n      \"account\": \"46860\",\n      \"statistical\": \"X\",\n      \"transactionType\": \"MWST\",\n      \"taxPercent\": 25,\n      \"country\": \"EN\",\n      \"condition\": \"MWVS\",\n      \"active\": \"<boolean>\"\n    }\n  ],\n  \"lastUpdated\": \"<dateTime>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a05ef32c-470a-4a94-830c-40dfa1626820",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "taxCodes",
+                    ":externalCode"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "externalCode",
+                      "description": "(Required) The ExternalCode of the taxCodes to be updated"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"companies\": [\n    {\n      \"active\": true,\n      \"companyCode\": \"BW01\",\n      \"inherit\": false\n    },\n    {\n      \"active\": true,\n      \"companyCode\": \"BW01\",\n      \"inherit\": false\n    }\n  ],\n  \"externalCode\": \"4847-31231212-212121-1212\",\n  \"taxCode\": \"B9\",\n  \"taxCodeNames\": [\n    {\n      \"language\": \"en-US\",\n      \"translation\": \"Office supplies\"\n    },\n    {\n      \"language\": \"en-US\",\n      \"translation\": \"Office supplies\"\n    }\n  ],\n  \"taxPercentage\": 10,\n  \"taxGroup\": \"\",\n  \"taxPercentage2\": 0,\n  \"additionalData\": [\n    {\n      \"externalCode\": \"c9921a52-6d8b-1017-cb8c-923d\",\n      \"account\": \"46860\",\n      \"statistical\": \"X\",\n      \"transactionType\": \"MWST\",\n      \"taxPercent\": 25,\n      \"country\": \"EN\",\n      \"condition\": \"MWVS\",\n      \"active\": \"<boolean>\"\n    },\n    {\n      \"externalCode\": \"c9921a52-6d8b-1017-cb8c-923d\",\n      \"account\": \"46860\",\n      \"statistical\": \"X\",\n      \"transactionType\": \"MWST\",\n      \"taxPercent\": 25,\n      \"country\": \"EN\",\n      \"condition\": \"MWVS\",\n      \"active\": \"<boolean>\"\n    }\n  ],\n  \"lastUpdated\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"fbc082a2-65a4-469c-b230-d84a252f18fc\",\n  \"hasErrors\": true,\n  \"errors\": [\n    {\n      \"externalCode\": \"4847-31231212-212121-1212\",\n      \"type\": \"VALIDATION\",\n      \"code\": \"SCHEMA_VALIDATION_ERROR\",\n      \"message\": \"\",\n      \"info\": \"\"\n    },\n    {\n      \"externalCode\": \"4847-31231212-212121-1212\",\n      \"type\": \"TECHNICAL\",\n      \"code\": \"DATA_ORIGIN_VALIDATION_ERROR\",\n      \"message\": \"\",\n      \"info\": \"\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f646aeb6-f0b3-462f-944f-e5436f80f85f",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "taxCodes",
+                    ":externalCode"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "externalCode",
+                      "description": "(Required) The ExternalCode of the taxCodes to be updated"
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"companies\": [\n    {\n      \"active\": true,\n      \"companyCode\": \"BW01\",\n      \"inherit\": false\n    },\n    {\n      \"active\": true,\n      \"companyCode\": \"BW01\",\n      \"inherit\": false\n    }\n  ],\n  \"externalCode\": \"4847-31231212-212121-1212\",\n  \"taxCode\": \"B9\",\n  \"taxCodeNames\": [\n    {\n      \"language\": \"en-US\",\n      \"translation\": \"Office supplies\"\n    },\n    {\n      \"language\": \"en-US\",\n      \"translation\": \"Office supplies\"\n    }\n  ],\n  \"taxPercentage\": 10,\n  \"taxGroup\": \"\",\n  \"taxPercentage2\": 0,\n  \"additionalData\": [\n    {\n      \"externalCode\": \"c9921a52-6d8b-1017-cb8c-923d\",\n      \"account\": \"46860\",\n      \"statistical\": \"X\",\n      \"transactionType\": \"MWST\",\n      \"taxPercent\": 25,\n      \"country\": \"EN\",\n      \"condition\": \"MWVS\",\n      \"active\": \"<boolean>\"\n    },\n    {\n      \"externalCode\": \"c9921a52-6d8b-1017-cb8c-923d\",\n      \"account\": \"46860\",\n      \"statistical\": \"X\",\n      \"transactionType\": \"MWST\",\n      \"taxPercent\": 25,\n      \"country\": \"EN\",\n      \"condition\": \"MWVS\",\n      \"active\": \"<boolean>\"\n    }\n  ],\n  \"lastUpdated\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "08b37739-8a48-4e8c-9ad6-cace707c34da",
+              "name": "Not found. Record to update not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "taxCodes",
+                    ":externalCode"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "externalCode",
+                      "description": "(Required) The ExternalCode of the taxCodes to be updated"
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"companies\": [\n    {\n      \"active\": true,\n      \"companyCode\": \"BW01\",\n      \"inherit\": false\n    },\n    {\n      \"active\": true,\n      \"companyCode\": \"BW01\",\n      \"inherit\": false\n    }\n  ],\n  \"externalCode\": \"4847-31231212-212121-1212\",\n  \"taxCode\": \"B9\",\n  \"taxCodeNames\": [\n    {\n      \"language\": \"en-US\",\n      \"translation\": \"Office supplies\"\n    },\n    {\n      \"language\": \"en-US\",\n      \"translation\": \"Office supplies\"\n    }\n  ],\n  \"taxPercentage\": 10,\n  \"taxGroup\": \"\",\n  \"taxPercentage2\": 0,\n  \"additionalData\": [\n    {\n      \"externalCode\": \"c9921a52-6d8b-1017-cb8c-923d\",\n      \"account\": \"46860\",\n      \"statistical\": \"X\",\n      \"transactionType\": \"MWST\",\n      \"taxPercent\": 25,\n      \"country\": \"EN\",\n      \"condition\": \"MWVS\",\n      \"active\": \"<boolean>\"\n    },\n    {\n      \"externalCode\": \"c9921a52-6d8b-1017-cb8c-923d\",\n      \"account\": \"46860\",\n      \"statistical\": \"X\",\n      \"transactionType\": \"MWST\",\n      \"taxPercent\": 25,\n      \"country\": \"EN\",\n      \"condition\": \"MWVS\",\n      \"active\": \"<boolean>\"\n    }\n  ],\n  \"lastUpdated\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "403d4ff6-2226-4950-9a1f-d58201216a94",
+              "name": "Unexpected error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "taxCodes",
+                    ":externalCode"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "externalCode",
+                      "description": "(Required) The ExternalCode of the taxCodes to be updated"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"companies\": [\n    {\n      \"active\": true,\n      \"companyCode\": \"BW01\",\n      \"inherit\": false\n    },\n    {\n      \"active\": true,\n      \"companyCode\": \"BW01\",\n      \"inherit\": false\n    }\n  ],\n  \"externalCode\": \"4847-31231212-212121-1212\",\n  \"taxCode\": \"B9\",\n  \"taxCodeNames\": [\n    {\n      \"language\": \"en-US\",\n      \"translation\": \"Office supplies\"\n    },\n    {\n      \"language\": \"en-US\",\n      \"translation\": \"Office supplies\"\n    }\n  ],\n  \"taxPercentage\": 10,\n  \"taxGroup\": \"\",\n  \"taxPercentage2\": 0,\n  \"additionalData\": [\n    {\n      \"externalCode\": \"c9921a52-6d8b-1017-cb8c-923d\",\n      \"account\": \"46860\",\n      \"statistical\": \"X\",\n      \"transactionType\": \"MWST\",\n      \"taxPercent\": 25,\n      \"country\": \"EN\",\n      \"condition\": \"MWVS\",\n      \"active\": \"<boolean>\"\n    },\n    {\n      \"externalCode\": \"c9921a52-6d8b-1017-cb8c-923d\",\n      \"account\": \"46860\",\n      \"statistical\": \"X\",\n      \"transactionType\": \"MWST\",\n      \"taxPercent\": 25,\n      \"country\": \"EN\",\n      \"condition\": \"MWVS\",\n      \"active\": \"<boolean>\"\n    }\n  ],\n  \"lastUpdated\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"fbc082a2-65a4-469c-b230-d84a252f18fc\",\n  \"hasErrors\": true,\n  \"errors\": [\n    {\n      \"externalCode\": \"4847-31231212-212121-1212\",\n      \"type\": \"VALIDATION\",\n      \"code\": \"SCHEMA_VALIDATION_ERROR\",\n      \"message\": \"\",\n      \"info\": \"\"\n    },\n    {\n      \"externalCode\": \"4847-31231212-212121-1212\",\n      \"type\": \"TECHNICAL\",\n      \"code\": \"DATA_ORIGIN_VALIDATION_ERROR\",\n      \"message\": \"\",\n      \"info\": \"\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "5362ebb0-9908-4070-8b56-08893ced57c5",
+    "name": "Basware OAUTH2 authentication APIs AccountingDocuments TaxCodes API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "**Using OAUTH2.0 authentication:**\n\nGet API access token from api.basware.com/tokens\n1. Using client id and client secret, which you can obtain from Basware. \n2. Specify which APIs can be accessed by using the token e.g. Read only access to vendors API only (these are called scopes). Available scopes are listed at <https://developer.basware.com/api/p2p/manual#AccessRights>. \n3. Each token has an expiration time, until which it can be used to call APIs.\n\nWhen using OAUTH2 authentication, you need to pass the OAUTH2 authentication token when calling Basware API endpoints. Available Basware API operations are documented at <https://api.basware.com/swagger>. \n\nSee the Basware API developer site at <https://developer.basware.com/api/p2p/manual#Authentication> for more details on API authentication.",
+      "type": "text/plain"
+    }
+  }
+}

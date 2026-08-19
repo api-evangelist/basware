@@ -1,0 +1,1384 @@
+{
+  "item": [
+    {
+      "id": "ae0f5dce-a039-487b-a88d-c93699c24e52",
+      "name": "Accounts",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "10e1b377-4aa2-4659-b714-f369496608bc",
+          "name": "Returns accounts posted to Basware API.",
+          "request": {
+            "name": "Returns accounts posted to Basware API.",
+            "description": {
+              "content": "",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "accounts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "pageSize",
+                  "value": "500",
+                  "description": "A limit for the number of items to be returned for one request. Li\r\n            items."
+                },
+                {
+                  "disabled": false,
+                  "key": "companyCode",
+                  "value": "",
+                  "description": "Company filter. Returns items for specific company."
+                },
+                {
+                  "disabled": false,
+                  "key": "lastUpdated",
+                  "value": "<dateTime>",
+                  "description": "Date Filter. Returns items that have been updated after specified date."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Used to get next page of results when item count indicated by 'pageSize' is exceeded. A token is returned in header (not body) parameter 'X-amz-meta-continuationToken' of the response whenever there are more records to fetch. Post the received value here in a new HEADER parameter on the next GET request to receive the next page of results. When getting the next page of results, you must include the same query parameters that were used when getting the first page.",
+                "key": "x-amz-meta-continuationtoken",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "73702650-2f0a-4b63-acae-4f2e78bff336",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "accounts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "500"
+                    },
+                    {
+                      "key": "companyCode",
+                      "value": ""
+                    },
+                    {
+                      "key": "lastUpdated",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Used to get next page of results when item count indicated by 'pageSize' is exceeded. A token is returned in header (not body) parameter 'X-amz-meta-continuationToken' of the response whenever there are more records to fetch. Post the received value here in a new HEADER parameter on the next GET request to receive the next page of results. When getting the next page of results, you must include the same query parameters that were used when getting the first page.",
+                    "key": "x-amz-meta-continuationtoken",
+                    "value": "221441a1-6c9a-42e2-a83d-0dae76effbf5"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"accounts\": [\n    {\n      \"accountCode\": \"10012\",\n      \"accountNames\": [\n        {\n          \"language\": \"en-US\",\n          \"translation\": \"Office supplies\"\n        },\n        {\n          \"language\": \"en-US\",\n          \"translation\": \"Office supplies\"\n        }\n      ],\n      \"companies\": [\n        {\n          \"active\": true,\n          \"companyCode\": \"BW01\",\n          \"inherit\": false\n        },\n        {\n          \"active\": true,\n          \"companyCode\": \"BW01\",\n          \"inherit\": false\n        }\n      ],\n      \"externalCode\": \"4847-31231212-212121-1212\",\n      \"taxCode\": \"T25\",\n      \"text1\": \"\",\n      \"text2\": \"\",\n      \"text3\": \"\",\n      \"text4\": \"\",\n      \"text5\": \"\",\n      \"lastUpdated\": \"2003-09-25T08:54:10.180Z\"\n    },\n    {\n      \"accountCode\": \"10012\",\n      \"accountNames\": [\n        {\n          \"language\": \"en-US\",\n          \"translation\": \"Office supplies\"\n        },\n        {\n          \"language\": \"en-US\",\n          \"translation\": \"Office supplies\"\n        }\n      ],\n      \"companies\": [\n        {\n          \"active\": true,\n          \"companyCode\": \"BW01\",\n          \"inherit\": false\n        },\n        {\n          \"active\": true,\n          \"companyCode\": \"BW01\",\n          \"inherit\": false\n        }\n      ],\n      \"externalCode\": \"4847-31231212-212121-1212\",\n      \"taxCode\": \"T25\",\n      \"text1\": \"\",\n      \"text2\": \"\",\n      \"text3\": \"\",\n      \"text4\": \"\",\n      \"text5\": \"\",\n      \"lastUpdated\": \"1974-07-13T17:44:34.535Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e691b4fe-d5f7-487d-8716-cc965ba202f1",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "accounts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "500"
+                    },
+                    {
+                      "key": "companyCode",
+                      "value": ""
+                    },
+                    {
+                      "key": "lastUpdated",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Used to get next page of results when item count indicated by 'pageSize' is exceeded. A token is returned in header (not body) parameter 'X-amz-meta-continuationToken' of the response whenever there are more records to fetch. Post the received value here in a new HEADER parameter on the next GET request to receive the next page of results. When getting the next page of results, you must include the same query parameters that were used when getting the first page.",
+                    "key": "x-amz-meta-continuationtoken",
+                    "value": "221441a1-6c9a-42e2-a83d-0dae76effbf5"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "22e2bc1e-a338-4699-89b3-de8a91aa2c67",
+              "name": "Not found. Request was successful and no records were found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "accounts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "500"
+                    },
+                    {
+                      "key": "companyCode",
+                      "value": ""
+                    },
+                    {
+                      "key": "lastUpdated",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Used to get next page of results when item count indicated by 'pageSize' is exceeded. A token is returned in header (not body) parameter 'X-amz-meta-continuationToken' of the response whenever there are more records to fetch. Post the received value here in a new HEADER parameter on the next GET request to receive the next page of results. When getting the next page of results, you must include the same query parameters that were used when getting the first page.",
+                    "key": "x-amz-meta-continuationtoken",
+                    "value": "221441a1-6c9a-42e2-a83d-0dae76effbf5"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "a7e0d575-a81c-4252-93c8-1a55efa2e369",
+              "name": "Unexpected error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "accounts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "500"
+                    },
+                    {
+                      "key": "companyCode",
+                      "value": ""
+                    },
+                    {
+                      "key": "lastUpdated",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Used to get next page of results when item count indicated by 'pageSize' is exceeded. A token is returned in header (not body) parameter 'X-amz-meta-continuationToken' of the response whenever there are more records to fetch. Post the received value here in a new HEADER parameter on the next GET request to receive the next page of results. When getting the next page of results, you must include the same query parameters that were used when getting the first page.",
+                    "key": "x-amz-meta-continuationtoken",
+                    "value": "221441a1-6c9a-42e2-a83d-0dae76effbf5"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"fbc082a2-65a4-469c-b230-d84a252f18fc\",\n  \"hasErrors\": false,\n  \"errors\": [\n    {\n      \"externalCode\": \"4847-31231212-212121-1212\",\n      \"type\": \"BUSINESS\",\n      \"code\": \"METHOD_NOT_ALLOWED\",\n      \"message\": \"\",\n      \"info\": \"\"\n    },\n    {\n      \"externalCode\": \"4847-31231212-212121-1212\",\n      \"type\": \"SECURITY\",\n      \"code\": \"CONFLICT_IN_POST\",\n      \"message\": \"\",\n      \"info\": \"\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6e230568-4ce0-445d-95ef-14340e43fd6a",
+          "name": "Creates new account(s), fully overwrites previous record if exists.",
+          "request": {
+            "name": "Creates new account(s), fully overwrites previous record if exists.",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "accounts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "[\n  {\n    \"accountCode\": \"<string>\",\n    \"accountNames\": [\n      {\n        \"language\": \"<string>\",\n        \"translation\": \"<string>\"\n      },\n      {\n        \"language\": \"<string>\",\n        \"translation\": \"<string>\"\n      }\n    ],\n    \"companies\": [\n      {\n        \"active\": \"<boolean>\",\n        \"companyCode\": \"<string>\",\n        \"inherit\": \"<boolean>\"\n      },\n      {\n        \"active\": \"<boolean>\",\n        \"companyCode\": \"<string>\",\n        \"inherit\": \"<boolean>\"\n      }\n    ],\n    \"externalCode\": \"<string>\",\n    \"taxCode\": \"<string>\",\n    \"text1\": \"<string>\",\n    \"text2\": \"<string>\",\n    \"text3\": \"<string>\",\n    \"text4\": \"<string>\",\n    \"text5\": \"<string>\",\n    \"lastUpdated\": \"<dateTime>\"\n  },\n  {\n    \"accountCode\": \"<string>\",\n    \"accountNames\": [\n      {\n        \"language\": \"<string>\",\n        \"translation\": \"<string>\"\n      },\n      {\n        \"language\": \"<string>\",\n        \"translation\": \"<string>\"\n      }\n    ],\n    \"companies\": [\n      {\n        \"active\": \"<boolean>\",\n        \"companyCode\": \"<string>\",\n        \"inherit\": \"<boolean>\"\n      },\n      {\n        \"active\": \"<boolean>\",\n        \"companyCode\": \"<string>\",\n        \"inherit\": \"<boolean>\"\n      }\n    ],\n    \"externalCode\": \"<string>\",\n    \"taxCode\": \"<string>\",\n    \"text1\": \"<string>\",\n    \"text2\": \"<string>\",\n    \"text3\": \"<string>\",\n    \"text4\": \"<string>\",\n    \"text5\": \"<string>\",\n    \"lastUpdated\": \"<dateTime>\"\n  }\n]",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "93646147-a8d1-4cff-a3e7-c050482cc036",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "accounts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Specifies the media type of the resource. Value application/json is supported.",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"accountCode\": \"10012\",\n    \"accountNames\": [\n      {\n        \"language\": \"en-US\",\n        \"translation\": \"Office supplies\"\n      },\n      {\n        \"language\": \"en-US\",\n        \"translation\": \"Office supplies\"\n      }\n    ],\n    \"companies\": [\n      {\n        \"active\": true,\n        \"companyCode\": \"BW01\",\n        \"inherit\": false\n      },\n      {\n        \"active\": true,\n        \"companyCode\": \"BW01\",\n        \"inherit\": false\n      }\n    ],\n    \"externalCode\": \"4847-31231212-212121-1212\",\n    \"taxCode\": \"T25\",\n    \"text1\": \"\",\n    \"text2\": \"\",\n    \"text3\": \"\",\n    \"text4\": \"\",\n    \"text5\": \"\",\n    \"lastUpdated\": \"<dateTime>\"\n  },\n  {\n    \"accountCode\": \"10012\",\n    \"accountNames\": [\n      {\n        \"language\": \"en-US\",\n        \"translation\": \"Office supplies\"\n      },\n      {\n        \"language\": \"en-US\",\n        \"translation\": \"Office supplies\"\n      }\n    ],\n    \"companies\": [\n      {\n        \"active\": true,\n        \"companyCode\": \"BW01\",\n        \"inherit\": false\n      },\n      {\n        \"active\": true,\n        \"companyCode\": \"BW01\",\n        \"inherit\": false\n      }\n    ],\n    \"externalCode\": \"4847-31231212-212121-1212\",\n    \"taxCode\": \"T25\",\n    \"text1\": \"\",\n    \"text2\": \"\",\n    \"text3\": \"\",\n    \"text4\": \"\",\n    \"text5\": \"\",\n    \"lastUpdated\": \"<dateTime>\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"accountCode\": \"10012\",\n    \"accountNames\": [\n      {\n        \"language\": \"en-US\",\n        \"translation\": \"Office supplies\"\n      },\n      {\n        \"language\": \"en-US\",\n        \"translation\": \"Office supplies\"\n      }\n    ],\n    \"companies\": [\n      {\n        \"active\": true,\n        \"companyCode\": \"BW01\",\n        \"inherit\": false\n      },\n      {\n        \"active\": true,\n        \"companyCode\": \"BW01\",\n        \"inherit\": false\n      }\n    ],\n    \"externalCode\": \"4847-31231212-212121-1212\",\n    \"taxCode\": \"T25\",\n    \"text1\": \"\",\n    \"text2\": \"\",\n    \"text3\": \"\",\n    \"text4\": \"\",\n    \"text5\": \"\",\n    \"lastUpdated\": \"<dateTime>\"\n  },\n  {\n    \"accountCode\": \"10012\",\n    \"accountNames\": [\n      {\n        \"language\": \"en-US\",\n        \"translation\": \"Office supplies\"\n      },\n      {\n        \"language\": \"en-US\",\n        \"translation\": \"Office supplies\"\n      }\n    ],\n    \"companies\": [\n      {\n        \"active\": true,\n        \"companyCode\": \"BW01\",\n        \"inherit\": false\n      },\n      {\n        \"active\": true,\n        \"companyCode\": \"BW01\",\n        \"inherit\": false\n      }\n    ],\n    \"externalCode\": \"4847-31231212-212121-1212\",\n    \"taxCode\": \"T25\",\n    \"text1\": \"\",\n    \"text2\": \"\",\n    \"text3\": \"\",\n    \"text4\": \"\",\n    \"text5\": \"\",\n    \"lastUpdated\": \"<dateTime>\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ed49c85b-ba22-4801-b48b-6f05034b084f",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "accounts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Specifies the media type of the resource. Value application/json is supported.",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"accountCode\": \"10012\",\n    \"accountNames\": [\n      {\n        \"language\": \"en-US\",\n        \"translation\": \"Office supplies\"\n      },\n      {\n        \"language\": \"en-US\",\n        \"translation\": \"Office supplies\"\n      }\n    ],\n    \"companies\": [\n      {\n        \"active\": true,\n        \"companyCode\": \"BW01\",\n        \"inherit\": false\n      },\n      {\n        \"active\": true,\n        \"companyCode\": \"BW01\",\n        \"inherit\": false\n      }\n    ],\n    \"externalCode\": \"4847-31231212-212121-1212\",\n    \"taxCode\": \"T25\",\n    \"text1\": \"\",\n    \"text2\": \"\",\n    \"text3\": \"\",\n    \"text4\": \"\",\n    \"text5\": \"\",\n    \"lastUpdated\": \"<dateTime>\"\n  },\n  {\n    \"accountCode\": \"10012\",\n    \"accountNames\": [\n      {\n        \"language\": \"en-US\",\n        \"translation\": \"Office supplies\"\n      },\n      {\n        \"language\": \"en-US\",\n        \"translation\": \"Office supplies\"\n      }\n    ],\n    \"companies\": [\n      {\n        \"active\": true,\n        \"companyCode\": \"BW01\",\n        \"inherit\": false\n      },\n      {\n        \"active\": true,\n        \"companyCode\": \"BW01\",\n        \"inherit\": false\n      }\n    ],\n    \"externalCode\": \"4847-31231212-212121-1212\",\n    \"taxCode\": \"T25\",\n    \"text1\": \"\",\n    \"text2\": \"\",\n    \"text3\": \"\",\n    \"text4\": \"\",\n    \"text5\": \"\",\n    \"lastUpdated\": \"<dateTime>\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"fbc082a2-65a4-469c-b230-d84a252f18fc\",\n  \"hasErrors\": false,\n  \"errors\": [\n    {\n      \"externalCode\": \"4847-31231212-212121-1212\",\n      \"type\": \"VALIDATION\",\n      \"code\": \"DATA_VALIDATION_FAILED\",\n      \"message\": \"\",\n      \"info\": \"\"\n    },\n    {\n      \"externalCode\": \"4847-31231212-212121-1212\",\n      \"type\": \"BUSINESS\",\n      \"code\": \"DATA_VALIDATION_FAILED\",\n      \"message\": \"\",\n      \"info\": \"\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "436c6fc0-7f01-4a21-95e1-c49ebbe8ce6e",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "accounts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Specifies the media type of the resource. Value application/json is supported.",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"accountCode\": \"10012\",\n    \"accountNames\": [\n      {\n        \"language\": \"en-US\",\n        \"translation\": \"Office supplies\"\n      },\n      {\n        \"language\": \"en-US\",\n        \"translation\": \"Office supplies\"\n      }\n    ],\n    \"companies\": [\n      {\n        \"active\": true,\n        \"companyCode\": \"BW01\",\n        \"inherit\": false\n      },\n      {\n        \"active\": true,\n        \"companyCode\": \"BW01\",\n        \"inherit\": false\n      }\n    ],\n    \"externalCode\": \"4847-31231212-212121-1212\",\n    \"taxCode\": \"T25\",\n    \"text1\": \"\",\n    \"text2\": \"\",\n    \"text3\": \"\",\n    \"text4\": \"\",\n    \"text5\": \"\",\n    \"lastUpdated\": \"<dateTime>\"\n  },\n  {\n    \"accountCode\": \"10012\",\n    \"accountNames\": [\n      {\n        \"language\": \"en-US\",\n        \"translation\": \"Office supplies\"\n      },\n      {\n        \"language\": \"en-US\",\n        \"translation\": \"Office supplies\"\n      }\n    ],\n    \"companies\": [\n      {\n        \"active\": true,\n        \"companyCode\": \"BW01\",\n        \"inherit\": false\n      },\n      {\n        \"active\": true,\n        \"companyCode\": \"BW01\",\n        \"inherit\": false\n      }\n    ],\n    \"externalCode\": \"4847-31231212-212121-1212\",\n    \"taxCode\": \"T25\",\n    \"text1\": \"\",\n    \"text2\": \"\",\n    \"text3\": \"\",\n    \"text4\": \"\",\n    \"text5\": \"\",\n    \"lastUpdated\": \"<dateTime>\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "505ed9ab-8cda-4e80-a233-f42a15193b08",
+              "name": "Conflict",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "accounts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Specifies the media type of the resource. Value application/json is supported.",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"accountCode\": \"10012\",\n    \"accountNames\": [\n      {\n        \"language\": \"en-US\",\n        \"translation\": \"Office supplies\"\n      },\n      {\n        \"language\": \"en-US\",\n        \"translation\": \"Office supplies\"\n      }\n    ],\n    \"companies\": [\n      {\n        \"active\": true,\n        \"companyCode\": \"BW01\",\n        \"inherit\": false\n      },\n      {\n        \"active\": true,\n        \"companyCode\": \"BW01\",\n        \"inherit\": false\n      }\n    ],\n    \"externalCode\": \"4847-31231212-212121-1212\",\n    \"taxCode\": \"T25\",\n    \"text1\": \"\",\n    \"text2\": \"\",\n    \"text3\": \"\",\n    \"text4\": \"\",\n    \"text5\": \"\",\n    \"lastUpdated\": \"<dateTime>\"\n  },\n  {\n    \"accountCode\": \"10012\",\n    \"accountNames\": [\n      {\n        \"language\": \"en-US\",\n        \"translation\": \"Office supplies\"\n      },\n      {\n        \"language\": \"en-US\",\n        \"translation\": \"Office supplies\"\n      }\n    ],\n    \"companies\": [\n      {\n        \"active\": true,\n        \"companyCode\": \"BW01\",\n        \"inherit\": false\n      },\n      {\n        \"active\": true,\n        \"companyCode\": \"BW01\",\n        \"inherit\": false\n      }\n    ],\n    \"externalCode\": \"4847-31231212-212121-1212\",\n    \"taxCode\": \"T25\",\n    \"text1\": \"\",\n    \"text2\": \"\",\n    \"text3\": \"\",\n    \"text4\": \"\",\n    \"text5\": \"\",\n    \"lastUpdated\": \"<dateTime>\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"fbc082a2-65a4-469c-b230-d84a252f18fc\",\n  \"hasErrors\": false,\n  \"errors\": [\n    {\n      \"externalCode\": \"4847-31231212-212121-1212\",\n      \"type\": \"VALIDATION\",\n      \"code\": \"DATA_VALIDATION_FAILED\",\n      \"message\": \"\",\n      \"info\": \"\"\n    },\n    {\n      \"externalCode\": \"4847-31231212-212121-1212\",\n      \"type\": \"BUSINESS\",\n      \"code\": \"DATA_VALIDATION_FAILED\",\n      \"message\": \"\",\n      \"info\": \"\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b8a08154-eecb-400c-9fe5-c8a5a9629b3a",
+              "name": "Unexpected error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "accounts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Specifies the media type of the resource. Value application/json is supported.",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"accountCode\": \"10012\",\n    \"accountNames\": [\n      {\n        \"language\": \"en-US\",\n        \"translation\": \"Office supplies\"\n      },\n      {\n        \"language\": \"en-US\",\n        \"translation\": \"Office supplies\"\n      }\n    ],\n    \"companies\": [\n      {\n        \"active\": true,\n        \"companyCode\": \"BW01\",\n        \"inherit\": false\n      },\n      {\n        \"active\": true,\n        \"companyCode\": \"BW01\",\n        \"inherit\": false\n      }\n    ],\n    \"externalCode\": \"4847-31231212-212121-1212\",\n    \"taxCode\": \"T25\",\n    \"text1\": \"\",\n    \"text2\": \"\",\n    \"text3\": \"\",\n    \"text4\": \"\",\n    \"text5\": \"\",\n    \"lastUpdated\": \"<dateTime>\"\n  },\n  {\n    \"accountCode\": \"10012\",\n    \"accountNames\": [\n      {\n        \"language\": \"en-US\",\n        \"translation\": \"Office supplies\"\n      },\n      {\n        \"language\": \"en-US\",\n        \"translation\": \"Office supplies\"\n      }\n    ],\n    \"companies\": [\n      {\n        \"active\": true,\n        \"companyCode\": \"BW01\",\n        \"inherit\": false\n      },\n      {\n        \"active\": true,\n        \"companyCode\": \"BW01\",\n        \"inherit\": false\n      }\n    ],\n    \"externalCode\": \"4847-31231212-212121-1212\",\n    \"taxCode\": \"T25\",\n    \"text1\": \"\",\n    \"text2\": \"\",\n    \"text3\": \"\",\n    \"text4\": \"\",\n    \"text5\": \"\",\n    \"lastUpdated\": \"<dateTime>\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"fbc082a2-65a4-469c-b230-d84a252f18fc\",\n  \"hasErrors\": false,\n  \"errors\": [\n    {\n      \"externalCode\": \"4847-31231212-212121-1212\",\n      \"type\": \"VALIDATION\",\n      \"code\": \"DATA_VALIDATION_FAILED\",\n      \"message\": \"\",\n      \"info\": \"\"\n    },\n    {\n      \"externalCode\": \"4847-31231212-212121-1212\",\n      \"type\": \"BUSINESS\",\n      \"code\": \"DATA_VALIDATION_FAILED\",\n      \"message\": \"\",\n      \"info\": \"\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a2e6aa4c-ebd1-40e1-a136-0d2a3a995d81",
+          "name": "Deletes data from Basware API. For manual one-time operations.",
+          "request": {
+            "name": "Deletes data from Basware API. For manual one-time operations.",
+            "description": {
+              "content": "For manual one-time operations only, such as a manual clean-up to remove test data generated during API integration development. Only removes records from API layer. \r\nDeletion in target systems needs to be done separately using the data deletion mechanisms available in each of the target system in addition to deleting the data in Basware API.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "accounts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"lastUpdated\": \"<dateTime>\",\n  \"externalCode\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "27cd1617-2b6c-418a-b6ae-8f294fd9baf8",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "accounts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"lastUpdated\": \"<dateTime>\",\n  \"externalCode\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusApiLink\": \"string\",\n  \"taskName\": \"string\",\n  \"taskStatus\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2b92b859-15b1-4b3a-903d-bd6f17e16175",
+              "name": "RequestAccepted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "accounts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"lastUpdated\": \"<dateTime>\",\n  \"externalCode\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusApiLink\": \"string\",\n  \"taskName\": \"string\",\n  \"taskStatus\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "59dad9db-a1f8-45fe-a29c-f990c48b30e7",
+              "name": "BadRequest",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "accounts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"lastUpdated\": \"<dateTime>\",\n  \"externalCode\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"fbc082a2-65a4-469c-b230-d84a252f18fc\",\n  \"hasErrors\": false,\n  \"errors\": [\n    {\n      \"externalCode\": \"4847-31231212-212121-1212\",\n      \"type\": \"VALIDATION\",\n      \"code\": \"DATA_VALIDATION_FAILED\",\n      \"message\": \"\",\n      \"info\": \"\"\n    },\n    {\n      \"externalCode\": \"4847-31231212-212121-1212\",\n      \"type\": \"BUSINESS\",\n      \"code\": \"DATA_VALIDATION_FAILED\",\n      \"message\": \"\",\n      \"info\": \"\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2213db8c-bd50-4109-8e1d-25d0d8bae0ec",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "accounts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"lastUpdated\": \"<dateTime>\",\n  \"externalCode\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "279f6b10-6043-44af-9606-2acbbcece93e",
+              "name": "Unexpected error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "accounts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"lastUpdated\": \"<dateTime>\",\n  \"externalCode\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"fbc082a2-65a4-469c-b230-d84a252f18fc\",\n  \"hasErrors\": false,\n  \"errors\": [\n    {\n      \"externalCode\": \"4847-31231212-212121-1212\",\n      \"type\": \"VALIDATION\",\n      \"code\": \"DATA_VALIDATION_FAILED\",\n      \"message\": \"\",\n      \"info\": \"\"\n    },\n    {\n      \"externalCode\": \"4847-31231212-212121-1212\",\n      \"type\": \"BUSINESS\",\n      \"code\": \"DATA_VALIDATION_FAILED\",\n      \"message\": \"\",\n      \"info\": \"\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bd931a69-b90b-416b-b1c4-9f9e7b01a472",
+          "name": "Returns single account record by externalCode -identifier.",
+          "request": {
+            "name": "Returns single account record by externalCode -identifier.",
+            "description": {
+              "content": "",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "accounts",
+                ":externalCode"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "externalCode",
+                  "description": "(Required) The ExternalCode of the entity to be fetched"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "bf5722f9-69e2-4661-8e61-444fabb48c38",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "accounts",
+                    ":externalCode"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "externalCode",
+                      "description": "(Required) The ExternalCode of the entity to be fetched"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"accountCode\": \"10012\",\n  \"accountNames\": [\n    {\n      \"language\": \"en-US\",\n      \"translation\": \"Office supplies\"\n    },\n    {\n      \"language\": \"en-US\",\n      \"translation\": \"Office supplies\"\n    }\n  ],\n  \"companies\": [\n    {\n      \"active\": true,\n      \"companyCode\": \"BW01\",\n      \"inherit\": false\n    },\n    {\n      \"active\": true,\n      \"companyCode\": \"BW01\",\n      \"inherit\": false\n    }\n  ],\n  \"externalCode\": \"4847-31231212-212121-1212\",\n  \"taxCode\": \"T25\",\n  \"text1\": \"\",\n  \"text2\": \"\",\n  \"text3\": \"\",\n  \"text4\": \"\",\n  \"text5\": \"\",\n  \"lastUpdated\": \"<dateTime>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3e0633cf-431c-4217-b4a2-31a5ee60c0c5",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "accounts",
+                    ":externalCode"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "externalCode",
+                      "description": "(Required) The ExternalCode of the entity to be fetched"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "2361ba4b-302c-4e05-8793-b8e14c4b5a27",
+              "name": "Not found. Request was successful and no records were found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "accounts",
+                    ":externalCode"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "externalCode",
+                      "description": "(Required) The ExternalCode of the entity to be fetched"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "8ae9b9a3-361e-4989-a286-b4c446e7f7f4",
+              "name": "Unexpected error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "accounts",
+                    ":externalCode"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "externalCode",
+                      "description": "(Required) The ExternalCode of the entity to be fetched"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"fbc082a2-65a4-469c-b230-d84a252f18fc\",\n  \"hasErrors\": false,\n  \"errors\": [\n    {\n      \"externalCode\": \"4847-31231212-212121-1212\",\n      \"type\": \"VALIDATION\",\n      \"code\": \"DATA_VALIDATION_FAILED\",\n      \"message\": \"\",\n      \"info\": \"\"\n    },\n    {\n      \"externalCode\": \"4847-31231212-212121-1212\",\n      \"type\": \"BUSINESS\",\n      \"code\": \"DATA_VALIDATION_FAILED\",\n      \"message\": \"\",\n      \"info\": \"\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "dd1e182f-e0cb-4472-83f0-81d946bf9c58",
+          "name": "Updates fields on specified account. Preserves existing values in fields, which were not updated.",
+          "request": {
+            "name": "Updates fields on specified account. Preserves existing values in fields, which were not updated.",
+            "description": {
+              "content": "Note: Basware API considers 'null' value in field(s) equivalent to the field(s) not being sent. For this reason patch method does not support setting field values to 'null'.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "accounts",
+                ":externalCode"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "externalCode",
+                  "description": "(Required) The ExternalCode of the account to be updated"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"accountCode\": \"<string>\",\n  \"accountNames\": [\n    {\n      \"language\": \"<string>\",\n      \"translation\": \"<string>\"\n    },\n    {\n      \"language\": \"<string>\",\n      \"translation\": \"<string>\"\n    }\n  ],\n  \"companies\": [\n    {\n      \"active\": \"<boolean>\",\n      \"companyCode\": \"<string>\",\n      \"inherit\": \"<boolean>\"\n    },\n    {\n      \"active\": \"<boolean>\",\n      \"companyCode\": \"<string>\",\n      \"inherit\": \"<boolean>\"\n    }\n  ],\n  \"externalCode\": \"<string>\",\n  \"taxCode\": \"<string>\",\n  \"text1\": \"<string>\",\n  \"text2\": \"<string>\",\n  \"text3\": \"<string>\",\n  \"text4\": \"<string>\",\n  \"text5\": \"<string>\",\n  \"lastUpdated\": \"<dateTime>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "98339be5-59e3-4956-ad59-2f56ed42a6f6",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "accounts",
+                    ":externalCode"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "externalCode",
+                      "description": "(Required) The ExternalCode of the account to be updated"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"accountCode\": \"10012\",\n  \"accountNames\": [\n    {\n      \"language\": \"en-US\",\n      \"translation\": \"Office supplies\"\n    },\n    {\n      \"language\": \"en-US\",\n      \"translation\": \"Office supplies\"\n    }\n  ],\n  \"companies\": [\n    {\n      \"active\": true,\n      \"companyCode\": \"BW01\",\n      \"inherit\": false\n    },\n    {\n      \"active\": true,\n      \"companyCode\": \"BW01\",\n      \"inherit\": false\n    }\n  ],\n  \"externalCode\": \"4847-31231212-212121-1212\",\n  \"taxCode\": \"T25\",\n  \"text1\": \"\",\n  \"text2\": \"\",\n  \"text3\": \"\",\n  \"text4\": \"\",\n  \"text5\": \"\",\n  \"lastUpdated\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"accountCode\": \"10012\",\n  \"accountNames\": [\n    {\n      \"language\": \"en-US\",\n      \"translation\": \"Office supplies\"\n    },\n    {\n      \"language\": \"en-US\",\n      \"translation\": \"Office supplies\"\n    }\n  ],\n  \"companies\": [\n    {\n      \"active\": true,\n      \"companyCode\": \"BW01\",\n      \"inherit\": false\n    },\n    {\n      \"active\": true,\n      \"companyCode\": \"BW01\",\n      \"inherit\": false\n    }\n  ],\n  \"externalCode\": \"4847-31231212-212121-1212\",\n  \"taxCode\": \"T25\",\n  \"text1\": \"\",\n  \"text2\": \"\",\n  \"text3\": \"\",\n  \"text4\": \"\",\n  \"text5\": \"\",\n  \"lastUpdated\": \"<dateTime>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d8f19bca-d55a-49da-b35c-6415165002ca",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "accounts",
+                    ":externalCode"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "externalCode",
+                      "description": "(Required) The ExternalCode of the account to be updated"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"accountCode\": \"10012\",\n  \"accountNames\": [\n    {\n      \"language\": \"en-US\",\n      \"translation\": \"Office supplies\"\n    },\n    {\n      \"language\": \"en-US\",\n      \"translation\": \"Office supplies\"\n    }\n  ],\n  \"companies\": [\n    {\n      \"active\": true,\n      \"companyCode\": \"BW01\",\n      \"inherit\": false\n    },\n    {\n      \"active\": true,\n      \"companyCode\": \"BW01\",\n      \"inherit\": false\n    }\n  ],\n  \"externalCode\": \"4847-31231212-212121-1212\",\n  \"taxCode\": \"T25\",\n  \"text1\": \"\",\n  \"text2\": \"\",\n  \"text3\": \"\",\n  \"text4\": \"\",\n  \"text5\": \"\",\n  \"lastUpdated\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"fbc082a2-65a4-469c-b230-d84a252f18fc\",\n  \"hasErrors\": false,\n  \"errors\": [\n    {\n      \"externalCode\": \"4847-31231212-212121-1212\",\n      \"type\": \"VALIDATION\",\n      \"code\": \"DATA_VALIDATION_FAILED\",\n      \"message\": \"\",\n      \"info\": \"\"\n    },\n    {\n      \"externalCode\": \"4847-31231212-212121-1212\",\n      \"type\": \"BUSINESS\",\n      \"code\": \"DATA_VALIDATION_FAILED\",\n      \"message\": \"\",\n      \"info\": \"\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3dd53316-8e56-4c57-a2a7-332bddfdd023",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "accounts",
+                    ":externalCode"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "externalCode",
+                      "description": "(Required) The ExternalCode of the account to be updated"
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"accountCode\": \"10012\",\n  \"accountNames\": [\n    {\n      \"language\": \"en-US\",\n      \"translation\": \"Office supplies\"\n    },\n    {\n      \"language\": \"en-US\",\n      \"translation\": \"Office supplies\"\n    }\n  ],\n  \"companies\": [\n    {\n      \"active\": true,\n      \"companyCode\": \"BW01\",\n      \"inherit\": false\n    },\n    {\n      \"active\": true,\n      \"companyCode\": \"BW01\",\n      \"inherit\": false\n    }\n  ],\n  \"externalCode\": \"4847-31231212-212121-1212\",\n  \"taxCode\": \"T25\",\n  \"text1\": \"\",\n  \"text2\": \"\",\n  \"text3\": \"\",\n  \"text4\": \"\",\n  \"text5\": \"\",\n  \"lastUpdated\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "7819226a-4e7d-446f-9bf2-825f543c2638",
+              "name": "Not found. Record to update not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "accounts",
+                    ":externalCode"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "externalCode",
+                      "description": "(Required) The ExternalCode of the account to be updated"
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"accountCode\": \"10012\",\n  \"accountNames\": [\n    {\n      \"language\": \"en-US\",\n      \"translation\": \"Office supplies\"\n    },\n    {\n      \"language\": \"en-US\",\n      \"translation\": \"Office supplies\"\n    }\n  ],\n  \"companies\": [\n    {\n      \"active\": true,\n      \"companyCode\": \"BW01\",\n      \"inherit\": false\n    },\n    {\n      \"active\": true,\n      \"companyCode\": \"BW01\",\n      \"inherit\": false\n    }\n  ],\n  \"externalCode\": \"4847-31231212-212121-1212\",\n  \"taxCode\": \"T25\",\n  \"text1\": \"\",\n  \"text2\": \"\",\n  \"text3\": \"\",\n  \"text4\": \"\",\n  \"text5\": \"\",\n  \"lastUpdated\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "16268c6a-2a3f-40c3-9658-916f703a8944",
+              "name": "Unexpected error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "accounts",
+                    ":externalCode"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "externalCode",
+                      "description": "(Required) The ExternalCode of the account to be updated"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"accountCode\": \"10012\",\n  \"accountNames\": [\n    {\n      \"language\": \"en-US\",\n      \"translation\": \"Office supplies\"\n    },\n    {\n      \"language\": \"en-US\",\n      \"translation\": \"Office supplies\"\n    }\n  ],\n  \"companies\": [\n    {\n      \"active\": true,\n      \"companyCode\": \"BW01\",\n      \"inherit\": false\n    },\n    {\n      \"active\": true,\n      \"companyCode\": \"BW01\",\n      \"inherit\": false\n    }\n  ],\n  \"externalCode\": \"4847-31231212-212121-1212\",\n  \"taxCode\": \"T25\",\n  \"text1\": \"\",\n  \"text2\": \"\",\n  \"text3\": \"\",\n  \"text4\": \"\",\n  \"text5\": \"\",\n  \"lastUpdated\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"fbc082a2-65a4-469c-b230-d84a252f18fc\",\n  \"hasErrors\": false,\n  \"errors\": [\n    {\n      \"externalCode\": \"4847-31231212-212121-1212\",\n      \"type\": \"VALIDATION\",\n      \"code\": \"DATA_VALIDATION_FAILED\",\n      \"message\": \"\",\n      \"info\": \"\"\n    },\n    {\n      \"externalCode\": \"4847-31231212-212121-1212\",\n      \"type\": \"BUSINESS\",\n      \"code\": \"DATA_VALIDATION_FAILED\",\n      \"message\": \"\",\n      \"info\": \"\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "86d270b1-e1dd-4ead-8352-9b3ffe2c2574",
+    "name": "Basware OAUTH2 authentication APIs AccountingDocuments Accounts API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "**Using OAUTH2.0 authentication:**\n\nGet API access token from api.basware.com/tokens\n1. Using client id and client secret, which you can obtain from Basware. \n2. Specify which APIs can be accessed by using the token e.g. Read only access to vendors API only (these are called scopes). Available scopes are listed at <https://developer.basware.com/api/p2p/manual#AccessRights>. \n3. Each token has an expiration time, until which it can be used to call APIs.\n\nWhen using OAUTH2 authentication, you need to pass the OAUTH2 authentication token when calling Basware API endpoints. Available Basware API operations are documented at <https://api.basware.com/swagger>. \n\nSee the Basware API developer site at <https://developer.basware.com/api/p2p/manual#Authentication> for more details on API authentication.",
+      "type": "text/plain"
+    }
+  }
+}

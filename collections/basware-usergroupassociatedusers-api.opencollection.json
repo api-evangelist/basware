@@ -1,0 +1,83 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Basware OAUTH2 authentication APIs AccountingDocuments UserGroupAssociatedUsers API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "UserGroupAssociatedUsers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Returns user associations with user Groups",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/userGroupAssociatedUsers",
+            "headers": [
+              {
+                "name": "x-amz-meta-continuationToken",
+                "value": "00fbeb94-7644-4877-8086-d5a22fd299b1"
+              }
+            ],
+            "params": [
+              {
+                "name": "UserGroupExternalCode",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "UserExternalCode",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns user associations with user Groups"
+        },
+        {
+          "info": {
+            "name": "Associates users with userGroup",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/userGroupAssociatedUsers",
+            "headers": [
+              {
+                "name": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Associates users with userGroup"
+        },
+        {
+          "info": {
+            "name": "Deletes user association with user group.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/v1/userGroupAssociatedUsers",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "For manual one-time operations only, such as a manual clean-up to remove test data generated during API integration development. Only removes records from API layer. \r\nDeletion in target systems needs to be done separately using the data deletion mechanisms available in each of the target system in addition to deleting the data in Basware API."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

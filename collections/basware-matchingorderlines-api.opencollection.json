@@ -1,0 +1,133 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Basware OAUTH2 authentication APIs AccountingDocuments MatchingOrderLines API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "MatchingOrderLines",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Returns matching order lines posted to Basware API.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/matchingOrderLines",
+            "headers": [
+              {
+                "name": "x-amz-meta-continuationtoken",
+                "value": "194943db-da52-4167-a464-d348bb1ced18"
+              }
+            ],
+            "params": [
+              {
+                "name": "orderExternalCode",
+                "value": "",
+                "type": "query",
+                "description": "The externalCode of the order."
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "A limit for the number of items to be returned for one request. Limit can range between 1 and 100 items."
+              },
+              {
+                "name": "lastUpdated",
+                "value": "",
+                "type": "query",
+                "description": "Date Filter. Returns items that have been updated after specified date."
+              }
+            ]
+          },
+          "docs": "Returns matching order lines posted to Basware API."
+        },
+        {
+          "info": {
+            "name": "Creates new matching order line(s), fully overwrites previous record if exists.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/matchingOrderLines",
+            "headers": [
+              {
+                "name": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Notes:\r\n1) Please make sure you have POSTed the order header through matchingOrders API before posting lines to the same order to matchingOrderLines API. It is enough to POST the order header only once (unless updates are neede to the order header). \r\n2) Up to 100 order lines can be posted in one request. Order lines for an order containing more than 100 lines need to be posted in several requets.\r\n3) A single POST operation is saved to P2P in a single transaction. Multiple POST operations will "
+        },
+        {
+          "info": {
+            "name": "Deletes data from Basware API. For manual one-time operations.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/v1/matchingOrderLines",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "For manual one-time operations only, such as a manual clean-up to remove test data generated during API integration development. Only removes records from API layer. \r\nDeletion in target systems needs to be done separately using the data deletion mechanisms available in each of the target system in addition to deleting the data in Basware API."
+        },
+        {
+          "info": {
+            "name": "Returns single matching order line by externalCode -identifier.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/matchingOrderLines/:externalCode",
+            "params": [
+              {
+                "name": "externalCode",
+                "value": "",
+                "type": "path",
+                "description": "ExternalCode of the entity to be fetched"
+              }
+            ]
+          },
+          "docs": "Returns single matching order line by externalCode -identifier."
+        },
+        {
+          "info": {
+            "name": "Updates fields on specified matching order line. Can be used for adding new goods receipts to the order line. Preserves existing values in fields, which were not updated.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/v1/matchingOrderLines/:externalCode",
+            "params": [
+              {
+                "name": "externalCode",
+                "value": "",
+                "type": "path",
+                "description": "The ExternalCode of the orderLine to be updated"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Notes: \r\n1) Concurrent PATCH operations to the same matchingOrderline can fail with error HTTP 503 due to concurrency issues. In such a case the failed request should be retried after a few seconds delay. \r\n2) Basware API considers 'null' value in field(s) equivalent to the field(s) not being sent. For this reason patch method does not support setting field values to 'null'.\r\n\r\nPlease see section \"[Usage scenario 2: Import external purchase orders for Order Matching](https://developer.basware.co"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

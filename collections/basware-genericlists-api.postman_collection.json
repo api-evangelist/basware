@@ -1,0 +1,1625 @@
+{
+  "item": [
+    {
+      "id": "3ad7cfaf-8c18-4263-b5a1-5d9e86c09b8f",
+      "name": "GenericLists",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "6adb4491-aed9-46d9-9f70-772952aa3053",
+          "name": "Returns list items posted to Basware API for specified list.",
+          "request": {
+            "name": "Returns list items posted to Basware API for specified list.",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "lists",
+                ":listKey"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "pageSize",
+                  "value": "500",
+                  "description": "A limit for the number of items to be returned for one request. Limit can range between 1 and 500 items."
+                },
+                {
+                  "disabled": false,
+                  "key": "companyCode",
+                  "value": "",
+                  "description": "Company filter. Returns items for specific company."
+                },
+                {
+                  "disabled": false,
+                  "key": "lastUpdated",
+                  "value": "<dateTime>",
+                  "description": "Date Filter. Returns items that have been updated after specified date."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "listKey",
+                  "description": "(Required) ListKey defines the target table in Alusta. e.g. List with listKey 'ACC_LIST_5' will be mapped to EXT_ACC_LIST_5."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Used to get next page of results when item count indicated by 'pageSize' is exceeded. A token is returned in header (not body) parameter 'X-amz-meta-continuationToken' of the response whenever there are more records to fetch. Post the received value here in a new HEADER parameter on the next GET request to receive the next page of results. When getting the next page of results, you must include the same query parameters that were used when getting the first page.",
+                "key": "x-amz-meta-continuationtoken",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e697485d-7086-4ae3-bf17-6233141317b1",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "lists",
+                    ":listKey"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "500"
+                    },
+                    {
+                      "key": "companyCode",
+                      "value": ""
+                    },
+                    {
+                      "key": "lastUpdated",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "listKey",
+                      "description": "(Required) ListKey defines the target table in Alusta. e.g. List with listKey 'ACC_LIST_5' will be mapped to EXT_ACC_LIST_5."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Used to get next page of results when item count indicated by 'pageSize' is exceeded. A token is returned in header (not body) parameter 'X-amz-meta-continuationToken' of the response whenever there are more records to fetch. Post the received value here in a new HEADER parameter on the next GET request to receive the next page of results. When getting the next page of results, you must include the same query parameters that were used when getting the first page.",
+                    "key": "x-amz-meta-continuationtoken",
+                    "value": "0d0f6d24-758e-4889-95ec-321f4036e146"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"listItems\": [\n    {\n      \"externalCode\": \"6532e1d70e194ff8a193e42beab4a0d9\",\n      \"text_1\": \"032141\",\n      \"text_2\": \"John Smith\",\n      \"text_3\": \"true\",\n      \"text_4\": \"false\",\n      \"text_5\": \"620018A\",\n      \"text_6\": \"\",\n      \"text_7\": \"\",\n      \"text_8\": \"\",\n      \"text_9\": \"\",\n      \"text_10\": \"\",\n      \"text_11\": \"\",\n      \"text_12\": \"\",\n      \"text_13\": \"\",\n      \"text_14\": \"\",\n      \"text_15\": \"\",\n      \"text_16\": \"\",\n      \"text_17\": \"\",\n      \"text_18\": \"\",\n      \"text_19\": \"\",\n      \"text_20\": \"\",\n      \"text_21\": \"\",\n      \"text_22\": \"\",\n      \"text_23\": \"\",\n      \"text_24\": \"\",\n      \"text_25\": \"\",\n      \"number_1\": 10000,\n      \"number_2\": 0,\n      \"number_3\": 0,\n      \"number_4\": 0,\n      \"number_5\": 0,\n      \"number_6\": 0,\n      \"number_7\": 0,\n      \"number_8\": 0,\n      \"number_9\": 0,\n      \"number_10\": 0,\n      \"number_11\": 0,\n      \"number_12\": 0,\n      \"number_13\": 0,\n      \"number_14\": 0,\n      \"number_15\": 0,\n      \"dateValue_1\": \"2019-10-21T12:01:42.937Z\",\n      \"dateValue_2\": \"1982-11-28T20:57:55.358Z\",\n      \"dateValue_3\": \"1985-03-31T17:50:23.686Z\",\n      \"dateValue_4\": \"2018-01-28T18:16:08.240Z\",\n      \"dateValue_5\": \"1998-10-01T05:17:10.266Z\",\n      \"dateValue_6\": \"1991-08-22T19:38:21.300Z\",\n      \"dateValue_7\": \"1971-03-13T19:16:36.451Z\",\n      \"dateValue_8\": \"1969-01-06T19:00:30.549Z\",\n      \"dateValue_9\": \"1982-11-10T08:35:46.704Z\",\n      \"dateValue_10\": \"1976-08-28T14:08:43.691Z\",\n      \"dateValue_11\": \"1992-01-31T23:04:52.401Z\",\n      \"dateValue_12\": \"2020-10-03T16:56:43.049Z\",\n      \"dateValue_13\": \"2003-04-28T22:19:53.658Z\",\n      \"dateValue_14\": \"1974-10-31T10:47:14.251Z\",\n      \"dateValue_15\": \"2013-07-09T01:26:29.155Z\",\n      \"lastUpdated\": \"2016-04-16T13:44:39.646Z\",\n      \"companies\": [\n        {\n          \"active\": false,\n          \"companyCode\": \"BW01\"\n        },\n        {\n          \"active\": false,\n          \"companyCode\": \"BW01\"\n        }\n      ],\n      \"listContent\": \"AccAssignmentCategory\"\n    },\n    {\n      \"externalCode\": \"6532e1d70e194ff8a193e42beab4a0d9\",\n      \"text_1\": \"032141\",\n      \"text_2\": \"John Smith\",\n      \"text_3\": \"true\",\n      \"text_4\": \"false\",\n      \"text_5\": \"620018A\",\n      \"text_6\": \"\",\n      \"text_7\": \"\",\n      \"text_8\": \"\",\n      \"text_9\": \"\",\n      \"text_10\": \"\",\n      \"text_11\": \"\",\n      \"text_12\": \"\",\n      \"text_13\": \"\",\n      \"text_14\": \"\",\n      \"text_15\": \"\",\n      \"text_16\": \"\",\n      \"text_17\": \"\",\n      \"text_18\": \"\",\n      \"text_19\": \"\",\n      \"text_20\": \"\",\n      \"text_21\": \"\",\n      \"text_22\": \"\",\n      \"text_23\": \"\",\n      \"text_24\": \"\",\n      \"text_25\": \"\",\n      \"number_1\": 10000,\n      \"number_2\": 0,\n      \"number_3\": 0,\n      \"number_4\": 0,\n      \"number_5\": 0,\n      \"number_6\": 0,\n      \"number_7\": 0,\n      \"number_8\": 0,\n      \"number_9\": 0,\n      \"number_10\": 0,\n      \"number_11\": 0,\n      \"number_12\": 0,\n      \"number_13\": 0,\n      \"number_14\": 0,\n      \"number_15\": 0,\n      \"dateValue_1\": \"2009-04-24T21:26:22.519Z\",\n      \"dateValue_2\": \"2022-07-01T13:17:34.742Z\",\n      \"dateValue_3\": \"2024-04-10T09:46:58.710Z\",\n      \"dateValue_4\": \"1986-04-02T02:57:19.739Z\",\n      \"dateValue_5\": \"1987-12-14T03:19:05.934Z\",\n      \"dateValue_6\": \"1998-03-26T09:38:01.957Z\",\n      \"dateValue_7\": \"1946-08-18T00:25:47.357Z\",\n      \"dateValue_8\": \"1955-11-09T16:40:41.108Z\",\n      \"dateValue_9\": \"1978-06-26T16:07:58.881Z\",\n      \"dateValue_10\": \"1961-04-29T18:58:27.221Z\",\n      \"dateValue_11\": \"2001-01-20T20:46:26.816Z\",\n      \"dateValue_12\": \"2024-06-20T01:27:25.663Z\",\n      \"dateValue_13\": \"2002-07-19T12:13:10.073Z\",\n      \"dateValue_14\": \"1958-08-31T19:59:28.112Z\",\n      \"dateValue_15\": \"1996-08-12T00:49:18.863Z\",\n      \"lastUpdated\": \"2016-04-06T05:00:39.157Z\",\n      \"companies\": [\n        {\n          \"active\": true,\n          \"companyCode\": \"BW01\"\n        },\n        {\n          \"active\": false,\n          \"companyCode\": \"BW01\"\n        }\n      ],\n      \"listContent\": \"ControllingArea\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "96dc49a2-b9cd-41b1-a114-3cc8f625ba0c",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "lists",
+                    ":listKey"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "500"
+                    },
+                    {
+                      "key": "companyCode",
+                      "value": ""
+                    },
+                    {
+                      "key": "lastUpdated",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "listKey",
+                      "description": "(Required) ListKey defines the target table in Alusta. e.g. List with listKey 'ACC_LIST_5' will be mapped to EXT_ACC_LIST_5."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Used to get next page of results when item count indicated by 'pageSize' is exceeded. A token is returned in header (not body) parameter 'X-amz-meta-continuationToken' of the response whenever there are more records to fetch. Post the received value here in a new HEADER parameter on the next GET request to receive the next page of results. When getting the next page of results, you must include the same query parameters that were used when getting the first page.",
+                    "key": "x-amz-meta-continuationtoken",
+                    "value": "0d0f6d24-758e-4889-95ec-321f4036e146"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e618e42b-9ee7-4c95-8689-155b42609a10",
+              "name": "Not found. Request was successful and no records were found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "lists",
+                    ":listKey"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "500"
+                    },
+                    {
+                      "key": "companyCode",
+                      "value": ""
+                    },
+                    {
+                      "key": "lastUpdated",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "listKey",
+                      "description": "(Required) ListKey defines the target table in Alusta. e.g. List with listKey 'ACC_LIST_5' will be mapped to EXT_ACC_LIST_5."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Used to get next page of results when item count indicated by 'pageSize' is exceeded. A token is returned in header (not body) parameter 'X-amz-meta-continuationToken' of the response whenever there are more records to fetch. Post the received value here in a new HEADER parameter on the next GET request to receive the next page of results. When getting the next page of results, you must include the same query parameters that were used when getting the first page.",
+                    "key": "x-amz-meta-continuationtoken",
+                    "value": "0d0f6d24-758e-4889-95ec-321f4036e146"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "24bc4670-88d1-4665-a520-59f78e36842f",
+              "name": "Unexpected error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "lists",
+                    ":listKey"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "500"
+                    },
+                    {
+                      "key": "companyCode",
+                      "value": ""
+                    },
+                    {
+                      "key": "lastUpdated",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "listKey",
+                      "description": "(Required) ListKey defines the target table in Alusta. e.g. List with listKey 'ACC_LIST_5' will be mapped to EXT_ACC_LIST_5."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Used to get next page of results when item count indicated by 'pageSize' is exceeded. A token is returned in header (not body) parameter 'X-amz-meta-continuationToken' of the response whenever there are more records to fetch. Post the received value here in a new HEADER parameter on the next GET request to receive the next page of results. When getting the next page of results, you must include the same query parameters that were used when getting the first page.",
+                    "key": "x-amz-meta-continuationtoken",
+                    "value": "0d0f6d24-758e-4889-95ec-321f4036e146"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"fbc082a2-65a4-469c-b230-d84a252f18fc\",\n  \"hasErrors\": true,\n  \"errors\": [\n    {\n      \"externalCode\": \"4847-31231212-212121-1212\",\n      \"type\": \"VALIDATION\",\n      \"code\": \"METHOD_NOT_ALLOWED\",\n      \"message\": \"\",\n      \"info\": \"\"\n    },\n    {\n      \"externalCode\": \"4847-31231212-212121-1212\",\n      \"type\": \"TECHNICAL\",\n      \"code\": \"UNEXPECTED_ERROR\",\n      \"message\": \"\",\n      \"info\": \"\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "50acfa64-3056-4efd-a4e4-5e1149b551ee",
+          "name": "Creates new list item(s), fully overwrites previous record if exists.",
+          "request": {
+            "name": "Creates new list item(s), fully overwrites previous record if exists.",
+            "description": {
+              "content": "In Basware P2P, the following lists are available. Please note the list-specific differences in available columns and column lengths. \r\n1) ACC_LIST_1  - ACC_LIST_10: Text1 - Text5  (250 chars), Num1 - Num3\r\n2) ACC_LIST_11 - ACC_LIST_20: Text1 - Text5  (50 chars), Num1 - Num3\r\n3) ACC_LIST_21 - ACC_LIST_30: Text1 - Text10 (250 chars), Num1 - Num5,  Date1 - Date5\r\n4) ACC_LIST_31 - ACC_LIST_35: Text1 - Text25 (250 chars), Num1 - Num10, Date1 - Date10\r\n5) INV_LIST_1  - INV_LIST_10: Text1 - Text5  (250 chars)\r\n6) INV_LIST_11 - INV_LIST_20: Text1 - Text10 (250 chars), Num1 - Num5,  Date1 - Date5\r\n7) CUST_RESOLVER_1 - CUST_RESOLVER_5: Text1 - Text15 (250 chars), Num1 - Num15, Date1 - Date15",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "lists",
+                ":listKey"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "listKey",
+                  "description": "(Required) ListKey defines the target table in Alusta. e.g. List with listKey 'ACC_LIST_5' will be mapped to EXT_ACC_LIST_5."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "[\n  {\n    \"externalCode\": \"<string>\",\n    \"text_1\": \"<string>\",\n    \"text_2\": \"<string>\",\n    \"text_3\": \"<string>\",\n    \"text_4\": \"<string>\",\n    \"text_5\": \"<string>\",\n    \"text_6\": \"<string>\",\n    \"text_7\": \"<string>\",\n    \"text_8\": \"<string>\",\n    \"text_9\": \"<string>\",\n    \"text_10\": \"<string>\",\n    \"text_11\": \"<string>\",\n    \"text_12\": \"<string>\",\n    \"text_13\": \"<string>\",\n    \"text_14\": \"<string>\",\n    \"text_15\": \"<string>\",\n    \"text_16\": \"<string>\",\n    \"text_17\": \"<string>\",\n    \"text_18\": \"<string>\",\n    \"text_19\": \"<string>\",\n    \"text_20\": \"<string>\",\n    \"text_21\": \"<string>\",\n    \"text_22\": \"<string>\",\n    \"text_23\": \"<string>\",\n    \"text_24\": \"<string>\",\n    \"text_25\": \"<string>\",\n    \"number_1\": \"<double>\",\n    \"number_2\": \"<double>\",\n    \"number_3\": \"<double>\",\n    \"number_4\": \"<double>\",\n    \"number_5\": \"<double>\",\n    \"number_6\": \"<double>\",\n    \"number_7\": \"<double>\",\n    \"number_8\": \"<double>\",\n    \"number_9\": \"<double>\",\n    \"number_10\": \"<double>\",\n    \"number_11\": \"<double>\",\n    \"number_12\": \"<double>\",\n    \"number_13\": \"<double>\",\n    \"number_14\": \"<double>\",\n    \"number_15\": \"<double>\",\n    \"dateValue_1\": \"<dateTime>\",\n    \"dateValue_2\": \"<dateTime>\",\n    \"dateValue_3\": \"<dateTime>\",\n    \"dateValue_4\": \"<dateTime>\",\n    \"dateValue_5\": \"<dateTime>\",\n    \"dateValue_6\": \"<dateTime>\",\n    \"dateValue_7\": \"<dateTime>\",\n    \"dateValue_8\": \"<dateTime>\",\n    \"dateValue_9\": \"<dateTime>\",\n    \"dateValue_10\": \"<dateTime>\",\n    \"dateValue_11\": \"<dateTime>\",\n    \"dateValue_12\": \"<dateTime>\",\n    \"dateValue_13\": \"<dateTime>\",\n    \"dateValue_14\": \"<dateTime>\",\n    \"dateValue_15\": \"<dateTime>\",\n    \"lastUpdated\": \"<dateTime>\",\n    \"companies\": [\n      {\n        \"active\": \"<boolean>\",\n        \"companyCode\": \"<string>\"\n      },\n      {\n        \"active\": \"<boolean>\",\n        \"companyCode\": \"<string>\"\n      }\n    ],\n    \"listContent\": \"<string>\"\n  },\n  {\n    \"externalCode\": \"<string>\",\n    \"text_1\": \"<string>\",\n    \"text_2\": \"<string>\",\n    \"text_3\": \"<string>\",\n    \"text_4\": \"<string>\",\n    \"text_5\": \"<string>\",\n    \"text_6\": \"<string>\",\n    \"text_7\": \"<string>\",\n    \"text_8\": \"<string>\",\n    \"text_9\": \"<string>\",\n    \"text_10\": \"<string>\",\n    \"text_11\": \"<string>\",\n    \"text_12\": \"<string>\",\n    \"text_13\": \"<string>\",\n    \"text_14\": \"<string>\",\n    \"text_15\": \"<string>\",\n    \"text_16\": \"<string>\",\n    \"text_17\": \"<string>\",\n    \"text_18\": \"<string>\",\n    \"text_19\": \"<string>\",\n    \"text_20\": \"<string>\",\n    \"text_21\": \"<string>\",\n    \"text_22\": \"<string>\",\n    \"text_23\": \"<string>\",\n    \"text_24\": \"<string>\",\n    \"text_25\": \"<string>\",\n    \"number_1\": \"<double>\",\n    \"number_2\": \"<double>\",\n    \"number_3\": \"<double>\",\n    \"number_4\": \"<double>\",\n    \"number_5\": \"<double>\",\n    \"number_6\": \"<double>\",\n    \"number_7\": \"<double>\",\n    \"number_8\": \"<double>\",\n    \"number_9\": \"<double>\",\n    \"number_10\": \"<double>\",\n    \"number_11\": \"<double>\",\n    \"number_12\": \"<double>\",\n    \"number_13\": \"<double>\",\n    \"number_14\": \"<double>\",\n    \"number_15\": \"<double>\",\n    \"dateValue_1\": \"<dateTime>\",\n    \"dateValue_2\": \"<dateTime>\",\n    \"dateValue_3\": \"<dateTime>\",\n    \"dateValue_4\": \"<dateTime>\",\n    \"dateValue_5\": \"<dateTime>\",\n    \"dateValue_6\": \"<dateTime>\",\n    \"dateValue_7\": \"<dateTime>\",\n    \"dateValue_8\": \"<dateTime>\",\n    \"dateValue_9\": \"<dateTime>\",\n    \"dateValue_10\": \"<dateTime>\",\n    \"dateValue_11\": \"<dateTime>\",\n    \"dateValue_12\": \"<dateTime>\",\n    \"dateValue_13\": \"<dateTime>\",\n    \"dateValue_14\": \"<dateTime>\",\n    \"dateValue_15\": \"<dateTime>\",\n    \"lastUpdated\": \"<dateTime>\",\n    \"companies\": [\n      {\n        \"active\": \"<boolean>\",\n        \"companyCode\": \"<string>\"\n      },\n      {\n        \"active\": \"<boolean>\",\n        \"companyCode\": \"<string>\"\n      }\n    ],\n    \"listContent\": \"<string>\"\n  }\n]",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "bf1857c7-fdb3-4352-aca0-e0ef1b8a3c37",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "lists",
+                    ":listKey"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "listKey",
+                      "description": "(Required) ListKey defines the target table in Alusta. e.g. List with listKey 'ACC_LIST_5' will be mapped to EXT_ACC_LIST_5."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Specifies the media type of the resource. Value application/json is supported.",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"externalCode\": \"6532e1d70e194ff8a193e42beab4a0d9\",\n    \"text_1\": \"032141\",\n    \"text_2\": \"John Smith\",\n    \"text_3\": \"true\",\n    \"text_4\": \"false\",\n    \"text_5\": \"620018A\",\n    \"text_6\": \"\",\n    \"text_7\": \"\",\n    \"text_8\": \"\",\n    \"text_9\": \"\",\n    \"text_10\": \"\",\n    \"text_11\": \"\",\n    \"text_12\": \"\",\n    \"text_13\": \"\",\n    \"text_14\": \"\",\n    \"text_15\": \"\",\n    \"text_16\": \"\",\n    \"text_17\": \"\",\n    \"text_18\": \"\",\n    \"text_19\": \"\",\n    \"text_20\": \"\",\n    \"text_21\": \"\",\n    \"text_22\": \"\",\n    \"text_23\": \"\",\n    \"text_24\": \"\",\n    \"text_25\": \"\",\n    \"number_1\": 10000,\n    \"number_2\": 0,\n    \"number_3\": 0,\n    \"number_4\": 0,\n    \"number_5\": 0,\n    \"number_6\": 0,\n    \"number_7\": 0,\n    \"number_8\": 0,\n    \"number_9\": 0,\n    \"number_10\": 0,\n    \"number_11\": 0,\n    \"number_12\": 0,\n    \"number_13\": 0,\n    \"number_14\": 0,\n    \"number_15\": 0,\n    \"dateValue_1\": \"<dateTime>\",\n    \"dateValue_2\": \"<dateTime>\",\n    \"dateValue_3\": \"<dateTime>\",\n    \"dateValue_4\": \"<dateTime>\",\n    \"dateValue_5\": \"<dateTime>\",\n    \"dateValue_6\": \"<dateTime>\",\n    \"dateValue_7\": \"<dateTime>\",\n    \"dateValue_8\": \"<dateTime>\",\n    \"dateValue_9\": \"<dateTime>\",\n    \"dateValue_10\": \"<dateTime>\",\n    \"dateValue_11\": \"<dateTime>\",\n    \"dateValue_12\": \"<dateTime>\",\n    \"dateValue_13\": \"<dateTime>\",\n    \"dateValue_14\": \"<dateTime>\",\n    \"dateValue_15\": \"<dateTime>\",\n    \"lastUpdated\": \"<dateTime>\",\n    \"companies\": [\n      {\n        \"active\": \"<boolean>\",\n        \"companyCode\": \"BW01\"\n      },\n      {\n        \"active\": \"<boolean>\",\n        \"companyCode\": \"BW01\"\n      }\n    ],\n    \"listContent\": \"<string>\"\n  },\n  {\n    \"externalCode\": \"6532e1d70e194ff8a193e42beab4a0d9\",\n    \"text_1\": \"032141\",\n    \"text_2\": \"John Smith\",\n    \"text_3\": \"true\",\n    \"text_4\": \"false\",\n    \"text_5\": \"620018A\",\n    \"text_6\": \"\",\n    \"text_7\": \"\",\n    \"text_8\": \"\",\n    \"text_9\": \"\",\n    \"text_10\": \"\",\n    \"text_11\": \"\",\n    \"text_12\": \"\",\n    \"text_13\": \"\",\n    \"text_14\": \"\",\n    \"text_15\": \"\",\n    \"text_16\": \"\",\n    \"text_17\": \"\",\n    \"text_18\": \"\",\n    \"text_19\": \"\",\n    \"text_20\": \"\",\n    \"text_21\": \"\",\n    \"text_22\": \"\",\n    \"text_23\": \"\",\n    \"text_24\": \"\",\n    \"text_25\": \"\",\n    \"number_1\": 10000,\n    \"number_2\": 0,\n    \"number_3\": 0,\n    \"number_4\": 0,\n    \"number_5\": 0,\n    \"number_6\": 0,\n    \"number_7\": 0,\n    \"number_8\": 0,\n    \"number_9\": 0,\n    \"number_10\": 0,\n    \"number_11\": 0,\n    \"number_12\": 0,\n    \"number_13\": 0,\n    \"number_14\": 0,\n    \"number_15\": 0,\n    \"dateValue_1\": \"<dateTime>\",\n    \"dateValue_2\": \"<dateTime>\",\n    \"dateValue_3\": \"<dateTime>\",\n    \"dateValue_4\": \"<dateTime>\",\n    \"dateValue_5\": \"<dateTime>\",\n    \"dateValue_6\": \"<dateTime>\",\n    \"dateValue_7\": \"<dateTime>\",\n    \"dateValue_8\": \"<dateTime>\",\n    \"dateValue_9\": \"<dateTime>\",\n    \"dateValue_10\": \"<dateTime>\",\n    \"dateValue_11\": \"<dateTime>\",\n    \"dateValue_12\": \"<dateTime>\",\n    \"dateValue_13\": \"<dateTime>\",\n    \"dateValue_14\": \"<dateTime>\",\n    \"dateValue_15\": \"<dateTime>\",\n    \"lastUpdated\": \"<dateTime>\",\n    \"companies\": [\n      {\n        \"active\": \"<boolean>\",\n        \"companyCode\": \"BW01\"\n      },\n      {\n        \"active\": \"<boolean>\",\n        \"companyCode\": \"BW01\"\n      }\n    ],\n    \"listContent\": \"<string>\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"externalCode\": \"6532e1d70e194ff8a193e42beab4a0d9\",\n    \"text_1\": \"032141\",\n    \"text_2\": \"John Smith\",\n    \"text_3\": \"true\",\n    \"text_4\": \"false\",\n    \"text_5\": \"620018A\",\n    \"text_6\": \"\",\n    \"text_7\": \"\",\n    \"text_8\": \"\",\n    \"text_9\": \"\",\n    \"text_10\": \"\",\n    \"text_11\": \"\",\n    \"text_12\": \"\",\n    \"text_13\": \"\",\n    \"text_14\": \"\",\n    \"text_15\": \"\",\n    \"text_16\": \"\",\n    \"text_17\": \"\",\n    \"text_18\": \"\",\n    \"text_19\": \"\",\n    \"text_20\": \"\",\n    \"text_21\": \"\",\n    \"text_22\": \"\",\n    \"text_23\": \"\",\n    \"text_24\": \"\",\n    \"text_25\": \"\",\n    \"number_1\": 10000,\n    \"number_2\": 0,\n    \"number_3\": 0,\n    \"number_4\": 0,\n    \"number_5\": 0,\n    \"number_6\": 0,\n    \"number_7\": 0,\n    \"number_8\": 0,\n    \"number_9\": 0,\n    \"number_10\": 0,\n    \"number_11\": 0,\n    \"number_12\": 0,\n    \"number_13\": 0,\n    \"number_14\": 0,\n    \"number_15\": 0,\n    \"dateValue_1\": \"<dateTime>\",\n    \"dateValue_2\": \"<dateTime>\",\n    \"dateValue_3\": \"<dateTime>\",\n    \"dateValue_4\": \"<dateTime>\",\n    \"dateValue_5\": \"<dateTime>\",\n    \"dateValue_6\": \"<dateTime>\",\n    \"dateValue_7\": \"<dateTime>\",\n    \"dateValue_8\": \"<dateTime>\",\n    \"dateValue_9\": \"<dateTime>\",\n    \"dateValue_10\": \"<dateTime>\",\n    \"dateValue_11\": \"<dateTime>\",\n    \"dateValue_12\": \"<dateTime>\",\n    \"dateValue_13\": \"<dateTime>\",\n    \"dateValue_14\": \"<dateTime>\",\n    \"dateValue_15\": \"<dateTime>\",\n    \"lastUpdated\": \"<dateTime>\",\n    \"companies\": [\n      {\n        \"active\": \"<boolean>\",\n        \"companyCode\": \"BW01\"\n      },\n      {\n        \"active\": \"<boolean>\",\n        \"companyCode\": \"BW01\"\n      }\n    ],\n    \"listContent\": \"<string>\"\n  },\n  {\n    \"externalCode\": \"6532e1d70e194ff8a193e42beab4a0d9\",\n    \"text_1\": \"032141\",\n    \"text_2\": \"John Smith\",\n    \"text_3\": \"true\",\n    \"text_4\": \"false\",\n    \"text_5\": \"620018A\",\n    \"text_6\": \"\",\n    \"text_7\": \"\",\n    \"text_8\": \"\",\n    \"text_9\": \"\",\n    \"text_10\": \"\",\n    \"text_11\": \"\",\n    \"text_12\": \"\",\n    \"text_13\": \"\",\n    \"text_14\": \"\",\n    \"text_15\": \"\",\n    \"text_16\": \"\",\n    \"text_17\": \"\",\n    \"text_18\": \"\",\n    \"text_19\": \"\",\n    \"text_20\": \"\",\n    \"text_21\": \"\",\n    \"text_22\": \"\",\n    \"text_23\": \"\",\n    \"text_24\": \"\",\n    \"text_25\": \"\",\n    \"number_1\": 10000,\n    \"number_2\": 0,\n    \"number_3\": 0,\n    \"number_4\": 0,\n    \"number_5\": 0,\n    \"number_6\": 0,\n    \"number_7\": 0,\n    \"number_8\": 0,\n    \"number_9\": 0,\n    \"number_10\": 0,\n    \"number_11\": 0,\n    \"number_12\": 0,\n    \"number_13\": 0,\n    \"number_14\": 0,\n    \"number_15\": 0,\n    \"dateValue_1\": \"<dateTime>\",\n    \"dateValue_2\": \"<dateTime>\",\n    \"dateValue_3\": \"<dateTime>\",\n    \"dateValue_4\": \"<dateTime>\",\n    \"dateValue_5\": \"<dateTime>\",\n    \"dateValue_6\": \"<dateTime>\",\n    \"dateValue_7\": \"<dateTime>\",\n    \"dateValue_8\": \"<dateTime>\",\n    \"dateValue_9\": \"<dateTime>\",\n    \"dateValue_10\": \"<dateTime>\",\n    \"dateValue_11\": \"<dateTime>\",\n    \"dateValue_12\": \"<dateTime>\",\n    \"dateValue_13\": \"<dateTime>\",\n    \"dateValue_14\": \"<dateTime>\",\n    \"dateValue_15\": \"<dateTime>\",\n    \"lastUpdated\": \"<dateTime>\",\n    \"companies\": [\n      {\n        \"active\": \"<boolean>\",\n        \"companyCode\": \"BW01\"\n      },\n      {\n        \"active\": \"<boolean>\",\n        \"companyCode\": \"BW01\"\n      }\n    ],\n    \"listContent\": \"<string>\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f11b3b98-9967-43d8-ad0f-96e92bdbd076",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "lists",
+                    ":listKey"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "listKey",
+                      "description": "(Required) ListKey defines the target table in Alusta. e.g. List with listKey 'ACC_LIST_5' will be mapped to EXT_ACC_LIST_5."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Specifies the media type of the resource. Value application/json is supported.",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"externalCode\": \"6532e1d70e194ff8a193e42beab4a0d9\",\n    \"text_1\": \"032141\",\n    \"text_2\": \"John Smith\",\n    \"text_3\": \"true\",\n    \"text_4\": \"false\",\n    \"text_5\": \"620018A\",\n    \"text_6\": \"\",\n    \"text_7\": \"\",\n    \"text_8\": \"\",\n    \"text_9\": \"\",\n    \"text_10\": \"\",\n    \"text_11\": \"\",\n    \"text_12\": \"\",\n    \"text_13\": \"\",\n    \"text_14\": \"\",\n    \"text_15\": \"\",\n    \"text_16\": \"\",\n    \"text_17\": \"\",\n    \"text_18\": \"\",\n    \"text_19\": \"\",\n    \"text_20\": \"\",\n    \"text_21\": \"\",\n    \"text_22\": \"\",\n    \"text_23\": \"\",\n    \"text_24\": \"\",\n    \"text_25\": \"\",\n    \"number_1\": 10000,\n    \"number_2\": 0,\n    \"number_3\": 0,\n    \"number_4\": 0,\n    \"number_5\": 0,\n    \"number_6\": 0,\n    \"number_7\": 0,\n    \"number_8\": 0,\n    \"number_9\": 0,\n    \"number_10\": 0,\n    \"number_11\": 0,\n    \"number_12\": 0,\n    \"number_13\": 0,\n    \"number_14\": 0,\n    \"number_15\": 0,\n    \"dateValue_1\": \"<dateTime>\",\n    \"dateValue_2\": \"<dateTime>\",\n    \"dateValue_3\": \"<dateTime>\",\n    \"dateValue_4\": \"<dateTime>\",\n    \"dateValue_5\": \"<dateTime>\",\n    \"dateValue_6\": \"<dateTime>\",\n    \"dateValue_7\": \"<dateTime>\",\n    \"dateValue_8\": \"<dateTime>\",\n    \"dateValue_9\": \"<dateTime>\",\n    \"dateValue_10\": \"<dateTime>\",\n    \"dateValue_11\": \"<dateTime>\",\n    \"dateValue_12\": \"<dateTime>\",\n    \"dateValue_13\": \"<dateTime>\",\n    \"dateValue_14\": \"<dateTime>\",\n    \"dateValue_15\": \"<dateTime>\",\n    \"lastUpdated\": \"<dateTime>\",\n    \"companies\": [\n      {\n        \"active\": \"<boolean>\",\n        \"companyCode\": \"BW01\"\n      },\n      {\n        \"active\": \"<boolean>\",\n        \"companyCode\": \"BW01\"\n      }\n    ],\n    \"listContent\": \"<string>\"\n  },\n  {\n    \"externalCode\": \"6532e1d70e194ff8a193e42beab4a0d9\",\n    \"text_1\": \"032141\",\n    \"text_2\": \"John Smith\",\n    \"text_3\": \"true\",\n    \"text_4\": \"false\",\n    \"text_5\": \"620018A\",\n    \"text_6\": \"\",\n    \"text_7\": \"\",\n    \"text_8\": \"\",\n    \"text_9\": \"\",\n    \"text_10\": \"\",\n    \"text_11\": \"\",\n    \"text_12\": \"\",\n    \"text_13\": \"\",\n    \"text_14\": \"\",\n    \"text_15\": \"\",\n    \"text_16\": \"\",\n    \"text_17\": \"\",\n    \"text_18\": \"\",\n    \"text_19\": \"\",\n    \"text_20\": \"\",\n    \"text_21\": \"\",\n    \"text_22\": \"\",\n    \"text_23\": \"\",\n    \"text_24\": \"\",\n    \"text_25\": \"\",\n    \"number_1\": 10000,\n    \"number_2\": 0,\n    \"number_3\": 0,\n    \"number_4\": 0,\n    \"number_5\": 0,\n    \"number_6\": 0,\n    \"number_7\": 0,\n    \"number_8\": 0,\n    \"number_9\": 0,\n    \"number_10\": 0,\n    \"number_11\": 0,\n    \"number_12\": 0,\n    \"number_13\": 0,\n    \"number_14\": 0,\n    \"number_15\": 0,\n    \"dateValue_1\": \"<dateTime>\",\n    \"dateValue_2\": \"<dateTime>\",\n    \"dateValue_3\": \"<dateTime>\",\n    \"dateValue_4\": \"<dateTime>\",\n    \"dateValue_5\": \"<dateTime>\",\n    \"dateValue_6\": \"<dateTime>\",\n    \"dateValue_7\": \"<dateTime>\",\n    \"dateValue_8\": \"<dateTime>\",\n    \"dateValue_9\": \"<dateTime>\",\n    \"dateValue_10\": \"<dateTime>\",\n    \"dateValue_11\": \"<dateTime>\",\n    \"dateValue_12\": \"<dateTime>\",\n    \"dateValue_13\": \"<dateTime>\",\n    \"dateValue_14\": \"<dateTime>\",\n    \"dateValue_15\": \"<dateTime>\",\n    \"lastUpdated\": \"<dateTime>\",\n    \"companies\": [\n      {\n        \"active\": \"<boolean>\",\n        \"companyCode\": \"BW01\"\n      },\n      {\n        \"active\": \"<boolean>\",\n        \"companyCode\": \"BW01\"\n      }\n    ],\n    \"listContent\": \"<string>\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"fbc082a2-65a4-469c-b230-d84a252f18fc\",\n  \"hasErrors\": false,\n  \"errors\": [\n    {\n      \"externalCode\": \"4847-31231212-212121-1212\",\n      \"type\": \"TECHNICAL\",\n      \"code\": \"PARAMETER_VALIDATION_ERROR\",\n      \"message\": \"\",\n      \"info\": \"\"\n    },\n    {\n      \"externalCode\": \"4847-31231212-212121-1212\",\n      \"type\": \"VALIDATION\",\n      \"code\": \"CONFLICT_IN_POST\",\n      \"message\": \"\",\n      \"info\": \"\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "285d6452-2935-4d49-a871-c3272f132a07",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "lists",
+                    ":listKey"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "listKey",
+                      "description": "(Required) ListKey defines the target table in Alusta. e.g. List with listKey 'ACC_LIST_5' will be mapped to EXT_ACC_LIST_5."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Specifies the media type of the resource. Value application/json is supported.",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"externalCode\": \"6532e1d70e194ff8a193e42beab4a0d9\",\n    \"text_1\": \"032141\",\n    \"text_2\": \"John Smith\",\n    \"text_3\": \"true\",\n    \"text_4\": \"false\",\n    \"text_5\": \"620018A\",\n    \"text_6\": \"\",\n    \"text_7\": \"\",\n    \"text_8\": \"\",\n    \"text_9\": \"\",\n    \"text_10\": \"\",\n    \"text_11\": \"\",\n    \"text_12\": \"\",\n    \"text_13\": \"\",\n    \"text_14\": \"\",\n    \"text_15\": \"\",\n    \"text_16\": \"\",\n    \"text_17\": \"\",\n    \"text_18\": \"\",\n    \"text_19\": \"\",\n    \"text_20\": \"\",\n    \"text_21\": \"\",\n    \"text_22\": \"\",\n    \"text_23\": \"\",\n    \"text_24\": \"\",\n    \"text_25\": \"\",\n    \"number_1\": 10000,\n    \"number_2\": 0,\n    \"number_3\": 0,\n    \"number_4\": 0,\n    \"number_5\": 0,\n    \"number_6\": 0,\n    \"number_7\": 0,\n    \"number_8\": 0,\n    \"number_9\": 0,\n    \"number_10\": 0,\n    \"number_11\": 0,\n    \"number_12\": 0,\n    \"number_13\": 0,\n    \"number_14\": 0,\n    \"number_15\": 0,\n    \"dateValue_1\": \"<dateTime>\",\n    \"dateValue_2\": \"<dateTime>\",\n    \"dateValue_3\": \"<dateTime>\",\n    \"dateValue_4\": \"<dateTime>\",\n    \"dateValue_5\": \"<dateTime>\",\n    \"dateValue_6\": \"<dateTime>\",\n    \"dateValue_7\": \"<dateTime>\",\n    \"dateValue_8\": \"<dateTime>\",\n    \"dateValue_9\": \"<dateTime>\",\n    \"dateValue_10\": \"<dateTime>\",\n    \"dateValue_11\": \"<dateTime>\",\n    \"dateValue_12\": \"<dateTime>\",\n    \"dateValue_13\": \"<dateTime>\",\n    \"dateValue_14\": \"<dateTime>\",\n    \"dateValue_15\": \"<dateTime>\",\n    \"lastUpdated\": \"<dateTime>\",\n    \"companies\": [\n      {\n        \"active\": \"<boolean>\",\n        \"companyCode\": \"BW01\"\n      },\n      {\n        \"active\": \"<boolean>\",\n        \"companyCode\": \"BW01\"\n      }\n    ],\n    \"listContent\": \"<string>\"\n  },\n  {\n    \"externalCode\": \"6532e1d70e194ff8a193e42beab4a0d9\",\n    \"text_1\": \"032141\",\n    \"text_2\": \"John Smith\",\n    \"text_3\": \"true\",\n    \"text_4\": \"false\",\n    \"text_5\": \"620018A\",\n    \"text_6\": \"\",\n    \"text_7\": \"\",\n    \"text_8\": \"\",\n    \"text_9\": \"\",\n    \"text_10\": \"\",\n    \"text_11\": \"\",\n    \"text_12\": \"\",\n    \"text_13\": \"\",\n    \"text_14\": \"\",\n    \"text_15\": \"\",\n    \"text_16\": \"\",\n    \"text_17\": \"\",\n    \"text_18\": \"\",\n    \"text_19\": \"\",\n    \"text_20\": \"\",\n    \"text_21\": \"\",\n    \"text_22\": \"\",\n    \"text_23\": \"\",\n    \"text_24\": \"\",\n    \"text_25\": \"\",\n    \"number_1\": 10000,\n    \"number_2\": 0,\n    \"number_3\": 0,\n    \"number_4\": 0,\n    \"number_5\": 0,\n    \"number_6\": 0,\n    \"number_7\": 0,\n    \"number_8\": 0,\n    \"number_9\": 0,\n    \"number_10\": 0,\n    \"number_11\": 0,\n    \"number_12\": 0,\n    \"number_13\": 0,\n    \"number_14\": 0,\n    \"number_15\": 0,\n    \"dateValue_1\": \"<dateTime>\",\n    \"dateValue_2\": \"<dateTime>\",\n    \"dateValue_3\": \"<dateTime>\",\n    \"dateValue_4\": \"<dateTime>\",\n    \"dateValue_5\": \"<dateTime>\",\n    \"dateValue_6\": \"<dateTime>\",\n    \"dateValue_7\": \"<dateTime>\",\n    \"dateValue_8\": \"<dateTime>\",\n    \"dateValue_9\": \"<dateTime>\",\n    \"dateValue_10\": \"<dateTime>\",\n    \"dateValue_11\": \"<dateTime>\",\n    \"dateValue_12\": \"<dateTime>\",\n    \"dateValue_13\": \"<dateTime>\",\n    \"dateValue_14\": \"<dateTime>\",\n    \"dateValue_15\": \"<dateTime>\",\n    \"lastUpdated\": \"<dateTime>\",\n    \"companies\": [\n      {\n        \"active\": \"<boolean>\",\n        \"companyCode\": \"BW01\"\n      },\n      {\n        \"active\": \"<boolean>\",\n        \"companyCode\": \"BW01\"\n      }\n    ],\n    \"listContent\": \"<string>\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "eafe4b8a-e269-42c2-ab68-24c30b655f71",
+              "name": "Conflict",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "lists",
+                    ":listKey"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "listKey",
+                      "description": "(Required) ListKey defines the target table in Alusta. e.g. List with listKey 'ACC_LIST_5' will be mapped to EXT_ACC_LIST_5."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Specifies the media type of the resource. Value application/json is supported.",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"externalCode\": \"6532e1d70e194ff8a193e42beab4a0d9\",\n    \"text_1\": \"032141\",\n    \"text_2\": \"John Smith\",\n    \"text_3\": \"true\",\n    \"text_4\": \"false\",\n    \"text_5\": \"620018A\",\n    \"text_6\": \"\",\n    \"text_7\": \"\",\n    \"text_8\": \"\",\n    \"text_9\": \"\",\n    \"text_10\": \"\",\n    \"text_11\": \"\",\n    \"text_12\": \"\",\n    \"text_13\": \"\",\n    \"text_14\": \"\",\n    \"text_15\": \"\",\n    \"text_16\": \"\",\n    \"text_17\": \"\",\n    \"text_18\": \"\",\n    \"text_19\": \"\",\n    \"text_20\": \"\",\n    \"text_21\": \"\",\n    \"text_22\": \"\",\n    \"text_23\": \"\",\n    \"text_24\": \"\",\n    \"text_25\": \"\",\n    \"number_1\": 10000,\n    \"number_2\": 0,\n    \"number_3\": 0,\n    \"number_4\": 0,\n    \"number_5\": 0,\n    \"number_6\": 0,\n    \"number_7\": 0,\n    \"number_8\": 0,\n    \"number_9\": 0,\n    \"number_10\": 0,\n    \"number_11\": 0,\n    \"number_12\": 0,\n    \"number_13\": 0,\n    \"number_14\": 0,\n    \"number_15\": 0,\n    \"dateValue_1\": \"<dateTime>\",\n    \"dateValue_2\": \"<dateTime>\",\n    \"dateValue_3\": \"<dateTime>\",\n    \"dateValue_4\": \"<dateTime>\",\n    \"dateValue_5\": \"<dateTime>\",\n    \"dateValue_6\": \"<dateTime>\",\n    \"dateValue_7\": \"<dateTime>\",\n    \"dateValue_8\": \"<dateTime>\",\n    \"dateValue_9\": \"<dateTime>\",\n    \"dateValue_10\": \"<dateTime>\",\n    \"dateValue_11\": \"<dateTime>\",\n    \"dateValue_12\": \"<dateTime>\",\n    \"dateValue_13\": \"<dateTime>\",\n    \"dateValue_14\": \"<dateTime>\",\n    \"dateValue_15\": \"<dateTime>\",\n    \"lastUpdated\": \"<dateTime>\",\n    \"companies\": [\n      {\n        \"active\": \"<boolean>\",\n        \"companyCode\": \"BW01\"\n      },\n      {\n        \"active\": \"<boolean>\",\n        \"companyCode\": \"BW01\"\n      }\n    ],\n    \"listContent\": \"<string>\"\n  },\n  {\n    \"externalCode\": \"6532e1d70e194ff8a193e42beab4a0d9\",\n    \"text_1\": \"032141\",\n    \"text_2\": \"John Smith\",\n    \"text_3\": \"true\",\n    \"text_4\": \"false\",\n    \"text_5\": \"620018A\",\n    \"text_6\": \"\",\n    \"text_7\": \"\",\n    \"text_8\": \"\",\n    \"text_9\": \"\",\n    \"text_10\": \"\",\n    \"text_11\": \"\",\n    \"text_12\": \"\",\n    \"text_13\": \"\",\n    \"text_14\": \"\",\n    \"text_15\": \"\",\n    \"text_16\": \"\",\n    \"text_17\": \"\",\n    \"text_18\": \"\",\n    \"text_19\": \"\",\n    \"text_20\": \"\",\n    \"text_21\": \"\",\n    \"text_22\": \"\",\n    \"text_23\": \"\",\n    \"text_24\": \"\",\n    \"text_25\": \"\",\n    \"number_1\": 10000,\n    \"number_2\": 0,\n    \"number_3\": 0,\n    \"number_4\": 0,\n    \"number_5\": 0,\n    \"number_6\": 0,\n    \"number_7\": 0,\n    \"number_8\": 0,\n    \"number_9\": 0,\n    \"number_10\": 0,\n    \"number_11\": 0,\n    \"number_12\": 0,\n    \"number_13\": 0,\n    \"number_14\": 0,\n    \"number_15\": 0,\n    \"dateValue_1\": \"<dateTime>\",\n    \"dateValue_2\": \"<dateTime>\",\n    \"dateValue_3\": \"<dateTime>\",\n    \"dateValue_4\": \"<dateTime>\",\n    \"dateValue_5\": \"<dateTime>\",\n    \"dateValue_6\": \"<dateTime>\",\n    \"dateValue_7\": \"<dateTime>\",\n    \"dateValue_8\": \"<dateTime>\",\n    \"dateValue_9\": \"<dateTime>\",\n    \"dateValue_10\": \"<dateTime>\",\n    \"dateValue_11\": \"<dateTime>\",\n    \"dateValue_12\": \"<dateTime>\",\n    \"dateValue_13\": \"<dateTime>\",\n    \"dateValue_14\": \"<dateTime>\",\n    \"dateValue_15\": \"<dateTime>\",\n    \"lastUpdated\": \"<dateTime>\",\n    \"companies\": [\n      {\n        \"active\": \"<boolean>\",\n        \"companyCode\": \"BW01\"\n      },\n      {\n        \"active\": \"<boolean>\",\n        \"companyCode\": \"BW01\"\n      }\n    ],\n    \"listContent\": \"<string>\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"fbc082a2-65a4-469c-b230-d84a252f18fc\",\n  \"hasErrors\": false,\n  \"errors\": [\n    {\n      \"externalCode\": \"4847-31231212-212121-1212\",\n      \"type\": \"TECHNICAL\",\n      \"code\": \"PARAMETER_VALIDATION_ERROR\",\n      \"message\": \"\",\n      \"info\": \"\"\n    },\n    {\n      \"externalCode\": \"4847-31231212-212121-1212\",\n      \"type\": \"VALIDATION\",\n      \"code\": \"CONFLICT_IN_POST\",\n      \"message\": \"\",\n      \"info\": \"\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e09885a2-69d4-4600-869d-225603ccc08a",
+              "name": "Unexpected error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "lists",
+                    ":listKey"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "listKey",
+                      "description": "(Required) ListKey defines the target table in Alusta. e.g. List with listKey 'ACC_LIST_5' will be mapped to EXT_ACC_LIST_5."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Specifies the media type of the resource. Value application/json is supported.",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"externalCode\": \"6532e1d70e194ff8a193e42beab4a0d9\",\n    \"text_1\": \"032141\",\n    \"text_2\": \"John Smith\",\n    \"text_3\": \"true\",\n    \"text_4\": \"false\",\n    \"text_5\": \"620018A\",\n    \"text_6\": \"\",\n    \"text_7\": \"\",\n    \"text_8\": \"\",\n    \"text_9\": \"\",\n    \"text_10\": \"\",\n    \"text_11\": \"\",\n    \"text_12\": \"\",\n    \"text_13\": \"\",\n    \"text_14\": \"\",\n    \"text_15\": \"\",\n    \"text_16\": \"\",\n    \"text_17\": \"\",\n    \"text_18\": \"\",\n    \"text_19\": \"\",\n    \"text_20\": \"\",\n    \"text_21\": \"\",\n    \"text_22\": \"\",\n    \"text_23\": \"\",\n    \"text_24\": \"\",\n    \"text_25\": \"\",\n    \"number_1\": 10000,\n    \"number_2\": 0,\n    \"number_3\": 0,\n    \"number_4\": 0,\n    \"number_5\": 0,\n    \"number_6\": 0,\n    \"number_7\": 0,\n    \"number_8\": 0,\n    \"number_9\": 0,\n    \"number_10\": 0,\n    \"number_11\": 0,\n    \"number_12\": 0,\n    \"number_13\": 0,\n    \"number_14\": 0,\n    \"number_15\": 0,\n    \"dateValue_1\": \"<dateTime>\",\n    \"dateValue_2\": \"<dateTime>\",\n    \"dateValue_3\": \"<dateTime>\",\n    \"dateValue_4\": \"<dateTime>\",\n    \"dateValue_5\": \"<dateTime>\",\n    \"dateValue_6\": \"<dateTime>\",\n    \"dateValue_7\": \"<dateTime>\",\n    \"dateValue_8\": \"<dateTime>\",\n    \"dateValue_9\": \"<dateTime>\",\n    \"dateValue_10\": \"<dateTime>\",\n    \"dateValue_11\": \"<dateTime>\",\n    \"dateValue_12\": \"<dateTime>\",\n    \"dateValue_13\": \"<dateTime>\",\n    \"dateValue_14\": \"<dateTime>\",\n    \"dateValue_15\": \"<dateTime>\",\n    \"lastUpdated\": \"<dateTime>\",\n    \"companies\": [\n      {\n        \"active\": \"<boolean>\",\n        \"companyCode\": \"BW01\"\n      },\n      {\n        \"active\": \"<boolean>\",\n        \"companyCode\": \"BW01\"\n      }\n    ],\n    \"listContent\": \"<string>\"\n  },\n  {\n    \"externalCode\": \"6532e1d70e194ff8a193e42beab4a0d9\",\n    \"text_1\": \"032141\",\n    \"text_2\": \"John Smith\",\n    \"text_3\": \"true\",\n    \"text_4\": \"false\",\n    \"text_5\": \"620018A\",\n    \"text_6\": \"\",\n    \"text_7\": \"\",\n    \"text_8\": \"\",\n    \"text_9\": \"\",\n    \"text_10\": \"\",\n    \"text_11\": \"\",\n    \"text_12\": \"\",\n    \"text_13\": \"\",\n    \"text_14\": \"\",\n    \"text_15\": \"\",\n    \"text_16\": \"\",\n    \"text_17\": \"\",\n    \"text_18\": \"\",\n    \"text_19\": \"\",\n    \"text_20\": \"\",\n    \"text_21\": \"\",\n    \"text_22\": \"\",\n    \"text_23\": \"\",\n    \"text_24\": \"\",\n    \"text_25\": \"\",\n    \"number_1\": 10000,\n    \"number_2\": 0,\n    \"number_3\": 0,\n    \"number_4\": 0,\n    \"number_5\": 0,\n    \"number_6\": 0,\n    \"number_7\": 0,\n    \"number_8\": 0,\n    \"number_9\": 0,\n    \"number_10\": 0,\n    \"number_11\": 0,\n    \"number_12\": 0,\n    \"number_13\": 0,\n    \"number_14\": 0,\n    \"number_15\": 0,\n    \"dateValue_1\": \"<dateTime>\",\n    \"dateValue_2\": \"<dateTime>\",\n    \"dateValue_3\": \"<dateTime>\",\n    \"dateValue_4\": \"<dateTime>\",\n    \"dateValue_5\": \"<dateTime>\",\n    \"dateValue_6\": \"<dateTime>\",\n    \"dateValue_7\": \"<dateTime>\",\n    \"dateValue_8\": \"<dateTime>\",\n    \"dateValue_9\": \"<dateTime>\",\n    \"dateValue_10\": \"<dateTime>\",\n    \"dateValue_11\": \"<dateTime>\",\n    \"dateValue_12\": \"<dateTime>\",\n    \"dateValue_13\": \"<dateTime>\",\n    \"dateValue_14\": \"<dateTime>\",\n    \"dateValue_15\": \"<dateTime>\",\n    \"lastUpdated\": \"<dateTime>\",\n    \"companies\": [\n      {\n        \"active\": \"<boolean>\",\n        \"companyCode\": \"BW01\"\n      },\n      {\n        \"active\": \"<boolean>\",\n        \"companyCode\": \"BW01\"\n      }\n    ],\n    \"listContent\": \"<string>\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"fbc082a2-65a4-469c-b230-d84a252f18fc\",\n  \"hasErrors\": false,\n  \"errors\": [\n    {\n      \"externalCode\": \"4847-31231212-212121-1212\",\n      \"type\": \"TECHNICAL\",\n      \"code\": \"PARAMETER_VALIDATION_ERROR\",\n      \"message\": \"\",\n      \"info\": \"\"\n    },\n    {\n      \"externalCode\": \"4847-31231212-212121-1212\",\n      \"type\": \"VALIDATION\",\n      \"code\": \"CONFLICT_IN_POST\",\n      \"message\": \"\",\n      \"info\": \"\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e07916c5-1662-429f-8594-9fe520565ff9",
+          "name": "Deletes data from Basware API. For manual one-time operations.",
+          "request": {
+            "name": "Deletes data from Basware API. For manual one-time operations.",
+            "description": {
+              "content": "For manual one-time operations only, such as a manual clean-up to remove test data generated during API integration development. Only removes records from API layer. \r\nDeletion in target systems needs to be done separately using the data deletion mechanisms available in each of the target system in addition to deleting the data in Basware API.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "lists",
+                ":listKey"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "listKey",
+                  "description": "(Required) Contains list item name to be deleted."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"lastUpdated\": \"<dateTime>\",\n  \"externalCode\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "beea3d10-b3b5-45f8-b626-d8b5134a1ad0",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "lists",
+                    ":listKey"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "listKey",
+                      "description": "(Required) Contains list item name to be deleted."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"lastUpdated\": \"<dateTime>\",\n  \"externalCode\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusApiLink\": \"string\",\n  \"taskName\": \"string\",\n  \"taskStatus\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "41f12b8a-f23f-42c4-aafa-9f78345cfbfb",
+              "name": "RequestAccepted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "lists",
+                    ":listKey"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "listKey",
+                      "description": "(Required) Contains list item name to be deleted."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"lastUpdated\": \"<dateTime>\",\n  \"externalCode\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusApiLink\": \"string\",\n  \"taskName\": \"string\",\n  \"taskStatus\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c3fd0dc0-fbc1-4839-b498-6bfe65c221e8",
+              "name": "BadRequest",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "lists",
+                    ":listKey"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "listKey",
+                      "description": "(Required) Contains list item name to be deleted."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"lastUpdated\": \"<dateTime>\",\n  \"externalCode\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"fbc082a2-65a4-469c-b230-d84a252f18fc\",\n  \"hasErrors\": false,\n  \"errors\": [\n    {\n      \"externalCode\": \"4847-31231212-212121-1212\",\n      \"type\": \"TECHNICAL\",\n      \"code\": \"PARAMETER_VALIDATION_ERROR\",\n      \"message\": \"\",\n      \"info\": \"\"\n    },\n    {\n      \"externalCode\": \"4847-31231212-212121-1212\",\n      \"type\": \"VALIDATION\",\n      \"code\": \"CONFLICT_IN_POST\",\n      \"message\": \"\",\n      \"info\": \"\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5d2bd627-fd2d-424b-ab93-199e517a6cb1",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "lists",
+                    ":listKey"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "listKey",
+                      "description": "(Required) Contains list item name to be deleted."
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"lastUpdated\": \"<dateTime>\",\n  \"externalCode\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "3f0d7513-e244-4a25-9735-9b3e3fde9ccf",
+              "name": "Unexpected error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "lists",
+                    ":listKey"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "listKey",
+                      "description": "(Required) Contains list item name to be deleted."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"lastUpdated\": \"<dateTime>\",\n  \"externalCode\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"fbc082a2-65a4-469c-b230-d84a252f18fc\",\n  \"hasErrors\": false,\n  \"errors\": [\n    {\n      \"externalCode\": \"4847-31231212-212121-1212\",\n      \"type\": \"TECHNICAL\",\n      \"code\": \"PARAMETER_VALIDATION_ERROR\",\n      \"message\": \"\",\n      \"info\": \"\"\n    },\n    {\n      \"externalCode\": \"4847-31231212-212121-1212\",\n      \"type\": \"VALIDATION\",\n      \"code\": \"CONFLICT_IN_POST\",\n      \"message\": \"\",\n      \"info\": \"\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "52fe7f11-37e0-44b2-8b9d-77b756aee357",
+          "name": "Returns single list item, based on specified list and externalCode -identifier of the record.",
+          "request": {
+            "name": "Returns single list item, based on specified list and externalCode -identifier of the record.",
+            "description": {
+              "content": "",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "lists",
+                ":listKey",
+                ":externalCode"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "listKey",
+                  "description": "(Required) ListKey defines the target table in Alusta. e.g. List with listKey 'ACC_LIST_5' will be mapped to EXT_ACC_LIST_5."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "externalCode",
+                  "description": "(Required) The ExternalCode of the list item"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "24aed67f-d1cd-4f5c-9f89-77fcf73e26f1",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "lists",
+                    ":listKey",
+                    ":externalCode"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "listKey",
+                      "description": "(Required) ListKey defines the target table in Alusta. e.g. List with listKey 'ACC_LIST_5' will be mapped to EXT_ACC_LIST_5."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "externalCode",
+                      "description": "(Required) The ExternalCode of the list item"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"externalCode\": \"6532e1d70e194ff8a193e42beab4a0d9\",\n  \"text_1\": \"032141\",\n  \"text_2\": \"John Smith\",\n  \"text_3\": \"true\",\n  \"text_4\": \"false\",\n  \"text_5\": \"620018A\",\n  \"text_6\": \"\",\n  \"text_7\": \"\",\n  \"text_8\": \"\",\n  \"text_9\": \"\",\n  \"text_10\": \"\",\n  \"text_11\": \"\",\n  \"text_12\": \"\",\n  \"text_13\": \"\",\n  \"text_14\": \"\",\n  \"text_15\": \"\",\n  \"text_16\": \"\",\n  \"text_17\": \"\",\n  \"text_18\": \"\",\n  \"text_19\": \"\",\n  \"text_20\": \"\",\n  \"text_21\": \"\",\n  \"text_22\": \"\",\n  \"text_23\": \"\",\n  \"text_24\": \"\",\n  \"text_25\": \"\",\n  \"number_1\": 10000,\n  \"number_2\": 0,\n  \"number_3\": 0,\n  \"number_4\": 0,\n  \"number_5\": 0,\n  \"number_6\": 0,\n  \"number_7\": 0,\n  \"number_8\": 0,\n  \"number_9\": 0,\n  \"number_10\": 0,\n  \"number_11\": 0,\n  \"number_12\": 0,\n  \"number_13\": 0,\n  \"number_14\": 0,\n  \"number_15\": 0,\n  \"dateValue_1\": \"<dateTime>\",\n  \"dateValue_2\": \"<dateTime>\",\n  \"dateValue_3\": \"<dateTime>\",\n  \"dateValue_4\": \"<dateTime>\",\n  \"dateValue_5\": \"<dateTime>\",\n  \"dateValue_6\": \"<dateTime>\",\n  \"dateValue_7\": \"<dateTime>\",\n  \"dateValue_8\": \"<dateTime>\",\n  \"dateValue_9\": \"<dateTime>\",\n  \"dateValue_10\": \"<dateTime>\",\n  \"dateValue_11\": \"<dateTime>\",\n  \"dateValue_12\": \"<dateTime>\",\n  \"dateValue_13\": \"<dateTime>\",\n  \"dateValue_14\": \"<dateTime>\",\n  \"dateValue_15\": \"<dateTime>\",\n  \"lastUpdated\": \"<dateTime>\",\n  \"companies\": [\n    {\n      \"active\": \"<boolean>\",\n      \"companyCode\": \"BW01\"\n    },\n    {\n      \"active\": \"<boolean>\",\n      \"companyCode\": \"BW01\"\n    }\n  ],\n  \"listContent\": \"<string>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bb079c40-083b-485d-9beb-6d0bd0505dfd",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "lists",
+                    ":listKey",
+                    ":externalCode"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "listKey",
+                      "description": "(Required) ListKey defines the target table in Alusta. e.g. List with listKey 'ACC_LIST_5' will be mapped to EXT_ACC_LIST_5."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "externalCode",
+                      "description": "(Required) The ExternalCode of the list item"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "d21ed8bd-ae7d-48cb-9c3b-3fc7a7eacad3",
+              "name": "Not found. Request was successful and no records were found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "lists",
+                    ":listKey",
+                    ":externalCode"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "listKey",
+                      "description": "(Required) ListKey defines the target table in Alusta. e.g. List with listKey 'ACC_LIST_5' will be mapped to EXT_ACC_LIST_5."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "externalCode",
+                      "description": "(Required) The ExternalCode of the list item"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e4ea298a-9d0a-4794-818d-18b2f974177b",
+              "name": "Unexpected error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "lists",
+                    ":listKey",
+                    ":externalCode"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "listKey",
+                      "description": "(Required) ListKey defines the target table in Alusta. e.g. List with listKey 'ACC_LIST_5' will be mapped to EXT_ACC_LIST_5."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "externalCode",
+                      "description": "(Required) The ExternalCode of the list item"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"fbc082a2-65a4-469c-b230-d84a252f18fc\",\n  \"hasErrors\": false,\n  \"errors\": [\n    {\n      \"externalCode\": \"4847-31231212-212121-1212\",\n      \"type\": \"TECHNICAL\",\n      \"code\": \"PARAMETER_VALIDATION_ERROR\",\n      \"message\": \"\",\n      \"info\": \"\"\n    },\n    {\n      \"externalCode\": \"4847-31231212-212121-1212\",\n      \"type\": \"VALIDATION\",\n      \"code\": \"CONFLICT_IN_POST\",\n      \"message\": \"\",\n      \"info\": \"\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "36a844c3-b15c-47d6-99a2-414af76692bb",
+          "name": "Updates fields on specified list item. Preserves existing values in omitted fields.",
+          "request": {
+            "name": "Updates fields on specified list item. Preserves existing values in omitted fields.",
+            "description": {
+              "content": "In Basware P2P, the following lists are available. Please note the list-specific differences in available columns and column lengths. \r\n1) ACC_LIST_1  - ACC_LIST_10: Text1 - Text5  (250 chars), Num1 - Num3\r\n2) ACC_LIST_11 - ACC_LIST_20: Text1 - Text5  (50 chars), Num1 - Num3\r\n3) ACC_LIST_21 - ACC_LIST_30: Text1 - Text10 (250 chars), Num1 - Num5,  Date1 - Date5\r\n4) ACC_LIST_31 - ACC_LIST_35: Text1 - Text25 (250 chars), Num1 - Num10, Date1 - Date10\r\n5) INV_LIST_1  - INV_LIST_10: Text1 - Text5  (250 chars)\r\n6) INV_LIST_11 - INV_LIST_20: Text1 - Text10 (250 chars), Num1 - Num5,  Date1 - Date5\r\n7) CUST_RESOLVER_1 - CUST_RESOLVER_5: Text1 - Text15 (250 chars), Num1 - Num15, Date1 - Date15\r\n\r\nNote: Basware API considers 'null' value in field(s) equivalent to the field(s) not being sent. For this reason patch method does not support setting field values to 'null'.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "lists",
+                ":listKey",
+                ":externalCode"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "listKey",
+                  "description": "(Required) ListKey defines the target table in Alusta. e.g. List with listKey 'ACC_LIST_5' will be mapped to EXT_ACC_LIST_5."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "externalCode",
+                  "description": "(Required) The ExternalCode of the genericList to be updated"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"externalCode\": \"<string>\",\n  \"text_1\": \"<string>\",\n  \"text_2\": \"<string>\",\n  \"text_3\": \"<string>\",\n  \"text_4\": \"<string>\",\n  \"text_5\": \"<string>\",\n  \"text_6\": \"<string>\",\n  \"text_7\": \"<string>\",\n  \"text_8\": \"<string>\",\n  \"text_9\": \"<string>\",\n  \"text_10\": \"<string>\",\n  \"text_11\": \"<string>\",\n  \"text_12\": \"<string>\",\n  \"text_13\": \"<string>\",\n  \"text_14\": \"<string>\",\n  \"text_15\": \"<string>\",\n  \"text_16\": \"<string>\",\n  \"text_17\": \"<string>\",\n  \"text_18\": \"<string>\",\n  \"text_19\": \"<string>\",\n  \"text_20\": \"<string>\",\n  \"text_21\": \"<string>\",\n  \"text_22\": \"<string>\",\n  \"text_23\": \"<string>\",\n  \"text_24\": \"<string>\",\n  \"text_25\": \"<string>\",\n  \"number_1\": \"<double>\",\n  \"number_2\": \"<double>\",\n  \"number_3\": \"<double>\",\n  \"number_4\": \"<double>\",\n  \"number_5\": \"<double>\",\n  \"number_6\": \"<double>\",\n  \"number_7\": \"<double>\",\n  \"number_8\": \"<double>\",\n  \"number_9\": \"<double>\",\n  \"number_10\": \"<double>\",\n  \"number_11\": \"<double>\",\n  \"number_12\": \"<double>\",\n  \"number_13\": \"<double>\",\n  \"number_14\": \"<double>\",\n  \"number_15\": \"<double>\",\n  \"dateValue_1\": \"<dateTime>\",\n  \"dateValue_2\": \"<dateTime>\",\n  \"dateValue_3\": \"<dateTime>\",\n  \"dateValue_4\": \"<dateTime>\",\n  \"dateValue_5\": \"<dateTime>\",\n  \"dateValue_6\": \"<dateTime>\",\n  \"dateValue_7\": \"<dateTime>\",\n  \"dateValue_8\": \"<dateTime>\",\n  \"dateValue_9\": \"<dateTime>\",\n  \"dateValue_10\": \"<dateTime>\",\n  \"dateValue_11\": \"<dateTime>\",\n  \"dateValue_12\": \"<dateTime>\",\n  \"dateValue_13\": \"<dateTime>\",\n  \"dateValue_14\": \"<dateTime>\",\n  \"dateValue_15\": \"<dateTime>\",\n  \"lastUpdated\": \"<dateTime>\",\n  \"companies\": [\n    {\n      \"active\": \"<boolean>\",\n      \"companyCode\": \"<string>\"\n    },\n    {\n      \"active\": \"<boolean>\",\n      \"companyCode\": \"<string>\"\n    }\n  ],\n  \"listContent\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c7ac4e4f-2136-4eb0-991b-e4a24398cdd9",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "lists",
+                    ":listKey",
+                    ":externalCode"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "listKey",
+                      "description": "(Required) ListKey defines the target table in Alusta. e.g. List with listKey 'ACC_LIST_5' will be mapped to EXT_ACC_LIST_5."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "externalCode",
+                      "description": "(Required) The ExternalCode of the genericList to be updated"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"externalCode\": \"6532e1d70e194ff8a193e42beab4a0d9\",\n  \"text_1\": \"032141\",\n  \"text_2\": \"John Smith\",\n  \"text_3\": \"true\",\n  \"text_4\": \"false\",\n  \"text_5\": \"620018A\",\n  \"text_6\": \"\",\n  \"text_7\": \"\",\n  \"text_8\": \"\",\n  \"text_9\": \"\",\n  \"text_10\": \"\",\n  \"text_11\": \"\",\n  \"text_12\": \"\",\n  \"text_13\": \"\",\n  \"text_14\": \"\",\n  \"text_15\": \"\",\n  \"text_16\": \"\",\n  \"text_17\": \"\",\n  \"text_18\": \"\",\n  \"text_19\": \"\",\n  \"text_20\": \"\",\n  \"text_21\": \"\",\n  \"text_22\": \"\",\n  \"text_23\": \"\",\n  \"text_24\": \"\",\n  \"text_25\": \"\",\n  \"number_1\": 10000,\n  \"number_2\": 0,\n  \"number_3\": 0,\n  \"number_4\": 0,\n  \"number_5\": 0,\n  \"number_6\": 0,\n  \"number_7\": 0,\n  \"number_8\": 0,\n  \"number_9\": 0,\n  \"number_10\": 0,\n  \"number_11\": 0,\n  \"number_12\": 0,\n  \"number_13\": 0,\n  \"number_14\": 0,\n  \"number_15\": 0,\n  \"dateValue_1\": \"<dateTime>\",\n  \"dateValue_2\": \"<dateTime>\",\n  \"dateValue_3\": \"<dateTime>\",\n  \"dateValue_4\": \"<dateTime>\",\n  \"dateValue_5\": \"<dateTime>\",\n  \"dateValue_6\": \"<dateTime>\",\n  \"dateValue_7\": \"<dateTime>\",\n  \"dateValue_8\": \"<dateTime>\",\n  \"dateValue_9\": \"<dateTime>\",\n  \"dateValue_10\": \"<dateTime>\",\n  \"dateValue_11\": \"<dateTime>\",\n  \"dateValue_12\": \"<dateTime>\",\n  \"dateValue_13\": \"<dateTime>\",\n  \"dateValue_14\": \"<dateTime>\",\n  \"dateValue_15\": \"<dateTime>\",\n  \"lastUpdated\": \"<dateTime>\",\n  \"companies\": [\n    {\n      \"active\": \"<boolean>\",\n      \"companyCode\": \"BW01\"\n    },\n    {\n      \"active\": \"<boolean>\",\n      \"companyCode\": \"BW01\"\n    }\n  ],\n  \"listContent\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"externalCode\": \"6532e1d70e194ff8a193e42beab4a0d9\",\n  \"text_1\": \"032141\",\n  \"text_2\": \"John Smith\",\n  \"text_3\": \"true\",\n  \"text_4\": \"false\",\n  \"text_5\": \"620018A\",\n  \"text_6\": \"\",\n  \"text_7\": \"\",\n  \"text_8\": \"\",\n  \"text_9\": \"\",\n  \"text_10\": \"\",\n  \"text_11\": \"\",\n  \"text_12\": \"\",\n  \"text_13\": \"\",\n  \"text_14\": \"\",\n  \"text_15\": \"\",\n  \"text_16\": \"\",\n  \"text_17\": \"\",\n  \"text_18\": \"\",\n  \"text_19\": \"\",\n  \"text_20\": \"\",\n  \"text_21\": \"\",\n  \"text_22\": \"\",\n  \"text_23\": \"\",\n  \"text_24\": \"\",\n  \"text_25\": \"\",\n  \"number_1\": 10000,\n  \"number_2\": 0,\n  \"number_3\": 0,\n  \"number_4\": 0,\n  \"number_5\": 0,\n  \"number_6\": 0,\n  \"number_7\": 0,\n  \"number_8\": 0,\n  \"number_9\": 0,\n  \"number_10\": 0,\n  \"number_11\": 0,\n  \"number_12\": 0,\n  \"number_13\": 0,\n  \"number_14\": 0,\n  \"number_15\": 0,\n  \"dateValue_1\": \"<dateTime>\",\n  \"dateValue_2\": \"<dateTime>\",\n  \"dateValue_3\": \"<dateTime>\",\n  \"dateValue_4\": \"<dateTime>\",\n  \"dateValue_5\": \"<dateTime>\",\n  \"dateValue_6\": \"<dateTime>\",\n  \"dateValue_7\": \"<dateTime>\",\n  \"dateValue_8\": \"<dateTime>\",\n  \"dateValue_9\": \"<dateTime>\",\n  \"dateValue_10\": \"<dateTime>\",\n  \"dateValue_11\": \"<dateTime>\",\n  \"dateValue_12\": \"<dateTime>\",\n  \"dateValue_13\": \"<dateTime>\",\n  \"dateValue_14\": \"<dateTime>\",\n  \"dateValue_15\": \"<dateTime>\",\n  \"lastUpdated\": \"<dateTime>\",\n  \"companies\": [\n    {\n      \"active\": \"<boolean>\",\n      \"companyCode\": \"BW01\"\n    },\n    {\n      \"active\": \"<boolean>\",\n      \"companyCode\": \"BW01\"\n    }\n  ],\n  \"listContent\": \"<string>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "567a0645-657a-4e5c-b599-5c6ade45b84d",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "lists",
+                    ":listKey",
+                    ":externalCode"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "listKey",
+                      "description": "(Required) ListKey defines the target table in Alusta. e.g. List with listKey 'ACC_LIST_5' will be mapped to EXT_ACC_LIST_5."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "externalCode",
+                      "description": "(Required) The ExternalCode of the genericList to be updated"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"externalCode\": \"6532e1d70e194ff8a193e42beab4a0d9\",\n  \"text_1\": \"032141\",\n  \"text_2\": \"John Smith\",\n  \"text_3\": \"true\",\n  \"text_4\": \"false\",\n  \"text_5\": \"620018A\",\n  \"text_6\": \"\",\n  \"text_7\": \"\",\n  \"text_8\": \"\",\n  \"text_9\": \"\",\n  \"text_10\": \"\",\n  \"text_11\": \"\",\n  \"text_12\": \"\",\n  \"text_13\": \"\",\n  \"text_14\": \"\",\n  \"text_15\": \"\",\n  \"text_16\": \"\",\n  \"text_17\": \"\",\n  \"text_18\": \"\",\n  \"text_19\": \"\",\n  \"text_20\": \"\",\n  \"text_21\": \"\",\n  \"text_22\": \"\",\n  \"text_23\": \"\",\n  \"text_24\": \"\",\n  \"text_25\": \"\",\n  \"number_1\": 10000,\n  \"number_2\": 0,\n  \"number_3\": 0,\n  \"number_4\": 0,\n  \"number_5\": 0,\n  \"number_6\": 0,\n  \"number_7\": 0,\n  \"number_8\": 0,\n  \"number_9\": 0,\n  \"number_10\": 0,\n  \"number_11\": 0,\n  \"number_12\": 0,\n  \"number_13\": 0,\n  \"number_14\": 0,\n  \"number_15\": 0,\n  \"dateValue_1\": \"<dateTime>\",\n  \"dateValue_2\": \"<dateTime>\",\n  \"dateValue_3\": \"<dateTime>\",\n  \"dateValue_4\": \"<dateTime>\",\n  \"dateValue_5\": \"<dateTime>\",\n  \"dateValue_6\": \"<dateTime>\",\n  \"dateValue_7\": \"<dateTime>\",\n  \"dateValue_8\": \"<dateTime>\",\n  \"dateValue_9\": \"<dateTime>\",\n  \"dateValue_10\": \"<dateTime>\",\n  \"dateValue_11\": \"<dateTime>\",\n  \"dateValue_12\": \"<dateTime>\",\n  \"dateValue_13\": \"<dateTime>\",\n  \"dateValue_14\": \"<dateTime>\",\n  \"dateValue_15\": \"<dateTime>\",\n  \"lastUpdated\": \"<dateTime>\",\n  \"companies\": [\n    {\n      \"active\": \"<boolean>\",\n      \"companyCode\": \"BW01\"\n    },\n    {\n      \"active\": \"<boolean>\",\n      \"companyCode\": \"BW01\"\n    }\n  ],\n  \"listContent\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"fbc082a2-65a4-469c-b230-d84a252f18fc\",\n  \"hasErrors\": false,\n  \"errors\": [\n    {\n      \"externalCode\": \"4847-31231212-212121-1212\",\n      \"type\": \"TECHNICAL\",\n      \"code\": \"PARAMETER_VALIDATION_ERROR\",\n      \"message\": \"\",\n      \"info\": \"\"\n    },\n    {\n      \"externalCode\": \"4847-31231212-212121-1212\",\n      \"type\": \"VALIDATION\",\n      \"code\": \"CONFLICT_IN_POST\",\n      \"message\": \"\",\n      \"info\": \"\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "23df8b39-4d0f-43b2-bc53-f330f7de57df",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "lists",
+                    ":listKey",
+                    ":externalCode"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "listKey",
+                      "description": "(Required) ListKey defines the target table in Alusta. e.g. List with listKey 'ACC_LIST_5' will be mapped to EXT_ACC_LIST_5."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "externalCode",
+                      "description": "(Required) The ExternalCode of the genericList to be updated"
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"externalCode\": \"6532e1d70e194ff8a193e42beab4a0d9\",\n  \"text_1\": \"032141\",\n  \"text_2\": \"John Smith\",\n  \"text_3\": \"true\",\n  \"text_4\": \"false\",\n  \"text_5\": \"620018A\",\n  \"text_6\": \"\",\n  \"text_7\": \"\",\n  \"text_8\": \"\",\n  \"text_9\": \"\",\n  \"text_10\": \"\",\n  \"text_11\": \"\",\n  \"text_12\": \"\",\n  \"text_13\": \"\",\n  \"text_14\": \"\",\n  \"text_15\": \"\",\n  \"text_16\": \"\",\n  \"text_17\": \"\",\n  \"text_18\": \"\",\n  \"text_19\": \"\",\n  \"text_20\": \"\",\n  \"text_21\": \"\",\n  \"text_22\": \"\",\n  \"text_23\": \"\",\n  \"text_24\": \"\",\n  \"text_25\": \"\",\n  \"number_1\": 10000,\n  \"number_2\": 0,\n  \"number_3\": 0,\n  \"number_4\": 0,\n  \"number_5\": 0,\n  \"number_6\": 0,\n  \"number_7\": 0,\n  \"number_8\": 0,\n  \"number_9\": 0,\n  \"number_10\": 0,\n  \"number_11\": 0,\n  \"number_12\": 0,\n  \"number_13\": 0,\n  \"number_14\": 0,\n  \"number_15\": 0,\n  \"dateValue_1\": \"<dateTime>\",\n  \"dateValue_2\": \"<dateTime>\",\n  \"dateValue_3\": \"<dateTime>\",\n  \"dateValue_4\": \"<dateTime>\",\n  \"dateValue_5\": \"<dateTime>\",\n  \"dateValue_6\": \"<dateTime>\",\n  \"dateValue_7\": \"<dateTime>\",\n  \"dateValue_8\": \"<dateTime>\",\n  \"dateValue_9\": \"<dateTime>\",\n  \"dateValue_10\": \"<dateTime>\",\n  \"dateValue_11\": \"<dateTime>\",\n  \"dateValue_12\": \"<dateTime>\",\n  \"dateValue_13\": \"<dateTime>\",\n  \"dateValue_14\": \"<dateTime>\",\n  \"dateValue_15\": \"<dateTime>\",\n  \"lastUpdated\": \"<dateTime>\",\n  \"companies\": [\n    {\n      \"active\": \"<boolean>\",\n      \"companyCode\": \"BW01\"\n    },\n    {\n      \"active\": \"<boolean>\",\n      \"companyCode\": \"BW01\"\n    }\n  ],\n  \"listContent\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "107a1b94-84ae-43a7-8957-2653d3849be7",
+              "name": "Not found. Record to update not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "lists",
+                    ":listKey",
+                    ":externalCode"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "listKey",
+                      "description": "(Required) ListKey defines the target table in Alusta. e.g. List with listKey 'ACC_LIST_5' will be mapped to EXT_ACC_LIST_5."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "externalCode",
+                      "description": "(Required) The ExternalCode of the genericList to be updated"
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"externalCode\": \"6532e1d70e194ff8a193e42beab4a0d9\",\n  \"text_1\": \"032141\",\n  \"text_2\": \"John Smith\",\n  \"text_3\": \"true\",\n  \"text_4\": \"false\",\n  \"text_5\": \"620018A\",\n  \"text_6\": \"\",\n  \"text_7\": \"\",\n  \"text_8\": \"\",\n  \"text_9\": \"\",\n  \"text_10\": \"\",\n  \"text_11\": \"\",\n  \"text_12\": \"\",\n  \"text_13\": \"\",\n  \"text_14\": \"\",\n  \"text_15\": \"\",\n  \"text_16\": \"\",\n  \"text_17\": \"\",\n  \"text_18\": \"\",\n  \"text_19\": \"\",\n  \"text_20\": \"\",\n  \"text_21\": \"\",\n  \"text_22\": \"\",\n  \"text_23\": \"\",\n  \"text_24\": \"\",\n  \"text_25\": \"\",\n  \"number_1\": 10000,\n  \"number_2\": 0,\n  \"number_3\": 0,\n  \"number_4\": 0,\n  \"number_5\": 0,\n  \"number_6\": 0,\n  \"number_7\": 0,\n  \"number_8\": 0,\n  \"number_9\": 0,\n  \"number_10\": 0,\n  \"number_11\": 0,\n  \"number_12\": 0,\n  \"number_13\": 0,\n  \"number_14\": 0,\n  \"number_15\": 0,\n  \"dateValue_1\": \"<dateTime>\",\n  \"dateValue_2\": \"<dateTime>\",\n  \"dateValue_3\": \"<dateTime>\",\n  \"dateValue_4\": \"<dateTime>\",\n  \"dateValue_5\": \"<dateTime>\",\n  \"dateValue_6\": \"<dateTime>\",\n  \"dateValue_7\": \"<dateTime>\",\n  \"dateValue_8\": \"<dateTime>\",\n  \"dateValue_9\": \"<dateTime>\",\n  \"dateValue_10\": \"<dateTime>\",\n  \"dateValue_11\": \"<dateTime>\",\n  \"dateValue_12\": \"<dateTime>\",\n  \"dateValue_13\": \"<dateTime>\",\n  \"dateValue_14\": \"<dateTime>\",\n  \"dateValue_15\": \"<dateTime>\",\n  \"lastUpdated\": \"<dateTime>\",\n  \"companies\": [\n    {\n      \"active\": \"<boolean>\",\n      \"companyCode\": \"BW01\"\n    },\n    {\n      \"active\": \"<boolean>\",\n      \"companyCode\": \"BW01\"\n    }\n  ],\n  \"listContent\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e5a2051c-91bd-405d-b5a6-38cb3c4d4692",
+              "name": "Unexpected error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "lists",
+                    ":listKey",
+                    ":externalCode"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "listKey",
+                      "description": "(Required) ListKey defines the target table in Alusta. e.g. List with listKey 'ACC_LIST_5' will be mapped to EXT_ACC_LIST_5."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "externalCode",
+                      "description": "(Required) The ExternalCode of the genericList to be updated"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"externalCode\": \"6532e1d70e194ff8a193e42beab4a0d9\",\n  \"text_1\": \"032141\",\n  \"text_2\": \"John Smith\",\n  \"text_3\": \"true\",\n  \"text_4\": \"false\",\n  \"text_5\": \"620018A\",\n  \"text_6\": \"\",\n  \"text_7\": \"\",\n  \"text_8\": \"\",\n  \"text_9\": \"\",\n  \"text_10\": \"\",\n  \"text_11\": \"\",\n  \"text_12\": \"\",\n  \"text_13\": \"\",\n  \"text_14\": \"\",\n  \"text_15\": \"\",\n  \"text_16\": \"\",\n  \"text_17\": \"\",\n  \"text_18\": \"\",\n  \"text_19\": \"\",\n  \"text_20\": \"\",\n  \"text_21\": \"\",\n  \"text_22\": \"\",\n  \"text_23\": \"\",\n  \"text_24\": \"\",\n  \"text_25\": \"\",\n  \"number_1\": 10000,\n  \"number_2\": 0,\n  \"number_3\": 0,\n  \"number_4\": 0,\n  \"number_5\": 0,\n  \"number_6\": 0,\n  \"number_7\": 0,\n  \"number_8\": 0,\n  \"number_9\": 0,\n  \"number_10\": 0,\n  \"number_11\": 0,\n  \"number_12\": 0,\n  \"number_13\": 0,\n  \"number_14\": 0,\n  \"number_15\": 0,\n  \"dateValue_1\": \"<dateTime>\",\n  \"dateValue_2\": \"<dateTime>\",\n  \"dateValue_3\": \"<dateTime>\",\n  \"dateValue_4\": \"<dateTime>\",\n  \"dateValue_5\": \"<dateTime>\",\n  \"dateValue_6\": \"<dateTime>\",\n  \"dateValue_7\": \"<dateTime>\",\n  \"dateValue_8\": \"<dateTime>\",\n  \"dateValue_9\": \"<dateTime>\",\n  \"dateValue_10\": \"<dateTime>\",\n  \"dateValue_11\": \"<dateTime>\",\n  \"dateValue_12\": \"<dateTime>\",\n  \"dateValue_13\": \"<dateTime>\",\n  \"dateValue_14\": \"<dateTime>\",\n  \"dateValue_15\": \"<dateTime>\",\n  \"lastUpdated\": \"<dateTime>\",\n  \"companies\": [\n    {\n      \"active\": \"<boolean>\",\n      \"companyCode\": \"BW01\"\n    },\n    {\n      \"active\": \"<boolean>\",\n      \"companyCode\": \"BW01\"\n    }\n  ],\n  \"listContent\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"fbc082a2-65a4-469c-b230-d84a252f18fc\",\n  \"hasErrors\": false,\n  \"errors\": [\n    {\n      \"externalCode\": \"4847-31231212-212121-1212\",\n      \"type\": \"TECHNICAL\",\n      \"code\": \"PARAMETER_VALIDATION_ERROR\",\n      \"message\": \"\",\n      \"info\": \"\"\n    },\n    {\n      \"externalCode\": \"4847-31231212-212121-1212\",\n      \"type\": \"VALIDATION\",\n      \"code\": \"CONFLICT_IN_POST\",\n      \"message\": \"\",\n      \"info\": \"\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "eb01a4f7-fbc4-47e3-b5ea-b722b1a19aba",
+    "name": "Basware OAUTH2 authentication APIs AccountingDocuments GenericLists API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "**Using OAUTH2.0 authentication:**\n\nGet API access token from api.basware.com/tokens\n1. Using client id and client secret, which you can obtain from Basware. \n2. Specify which APIs can be accessed by using the token e.g. Read only access to vendors API only (these are called scopes). Available scopes are listed at <https://developer.basware.com/api/p2p/manual#AccessRights>. \n3. Each token has an expiration time, until which it can be used to call APIs.\n\nWhen using OAUTH2 authentication, you need to pass the OAUTH2 authentication token when calling Basware API endpoints. Available Basware API operations are documented at <https://api.basware.com/swagger>. \n\nSee the Basware API developer site at <https://developer.basware.com/api/p2p/manual#Authentication> for more details on API authentication.",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,120 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Basware OAUTH2 authentication APIs AccountingDocuments ExportedPurchaseOrders API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "ExportedPurchaseOrders",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Returns purchase orders exported from Basware P2P.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/exportedPurchaseOrders",
+            "headers": [
+              {
+                "name": "x-amz-meta-continuationtoken",
+                "value": "f0054d6b-f6d9-42ec-8391-7f94738dad4d"
+              }
+            ],
+            "params": [
+              {
+                "name": "orderStatus",
+                "value": "",
+                "type": "query",
+                "description": "Document status filter. Returns items by order document status."
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "A limit for the number of items to be returned for one request. Limit can range between 1 and 100 items."
+              },
+              {
+                "name": "companyCode",
+                "value": "",
+                "type": "query",
+                "description": "Company filter. Returns items for specific company."
+              },
+              {
+                "name": "lastUpdated",
+                "value": "",
+                "type": "query",
+                "description": "Date filter. Returns items that have been updated after specified date."
+              }
+            ]
+          },
+          "docs": "Notes: \r\n1) This API supports sending webhook based  [push notifications](https://developer.basware.com/api/p2p/manual#PushNotifications) when new data is available to be exported. \r\n2) This GET operation returns a HTTP redirect, which the API client needs to follow. \r\n * 'Authorization' header must not be included in the redirected request (the second request after receiving a redirect). \r\n * 'Host' header needs to be included.\r\n\r\nPlease see section \"[Usage scenario 4: Import and export procure"
+        },
+        {
+          "info": {
+            "name": "Deletes data from Basware API. For manual one-time operations.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/v1/exportedPurchaseOrders",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "For manual one-time operations only, such as a manual clean-up to remove test data generated during API integration development. Only removes records from API layer. \r\nDeletion in target systems needs to be done separately using the data deletion mechanisms available in each of the target system in addition to deleting the data in Basware API."
+        },
+        {
+          "info": {
+            "name": "Returns single exported order by externalCode - identifier.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/exportedPurchaseOrders/:externalCode",
+            "params": [
+              {
+                "name": "externalCode",
+                "value": "",
+                "type": "path",
+                "description": "ExternalCode of the order to be retrieved."
+              }
+            ]
+          },
+          "docs": "Note: This GET operation returns a HTTP redirect, which the API client needs to follow. \r\n* 'Authorization' header must not be included in the redirected request (the second request after receiving a redirect). \r\n* 'Host' header needs to be included.\r\n\r\nPlease see section \"[Usage scenario 4: Import and export procurement data](https://developer.basware.com/api/p2p/manual#usage4)\" for details on implementing this API."
+        },
+        {
+          "info": {
+            "name": "Acknowledged orders are no longer returned for next GET operation.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/exportedPurchaseOrders/:externalCode/acknowledge",
+            "headers": [
+              {
+                "name": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "params": [
+              {
+                "name": "externalCode",
+                "value": "",
+                "type": "path",
+                "description": "ExternalCode of the order to be acknowledged. Note: For an order which is already acknowledged, API will return 405 'Method not allowed'."
+              }
+            ]
+          },
+          "docs": "Notes:\r\n1. Updates 'processingStatus' -field on the document to allow filtering out the document on the next GET operation\r\n2. For a document which is already acknowledged (processingStatus: 'Exported'), API will return 405 'Method not allowed' if acknowledge is attempted again on the document.\r\n\r\nPlease see section \"[Usage scenario 4: Import and export procurement data](https://developer.basware.com/api/p2p/manual#usage4)\" for details on implementing this API."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

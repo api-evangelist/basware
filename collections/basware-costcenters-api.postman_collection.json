@@ -1,0 +1,1381 @@
+{
+  "item": [
+    {
+      "id": "e7a8f363-ab56-45ac-8f61-8ebb7b22fe81",
+      "name": "CostCenters",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "cad3b6a3-cd68-4baf-9cce-3293c3aec4c7",
+          "name": "Returns cost centers posted to Basware API.",
+          "request": {
+            "name": "Returns cost centers posted to Basware API.",
+            "description": {
+              "content": "",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "costCenters"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "pageSize",
+                  "value": "500",
+                  "description": "A limit for the number of items to be returned for one request. Limit can range between 1 and 500 items."
+                },
+                {
+                  "disabled": false,
+                  "key": "companyCode",
+                  "value": "",
+                  "description": "Company filter. Returns items for specific company."
+                },
+                {
+                  "disabled": false,
+                  "key": "lastUpdated",
+                  "value": "<dateTime>",
+                  "description": "Date Filter. Returns items that have been updated after specified date."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Used to get next page of results when item count indicated by 'pageSize' is exceeded. A token is returned in header (not body) parameter 'X-amz-meta-continuationToken' of the response whenever there are more records to fetch. Post the received value here in a new HEADER parameter on the next GET request to receive the next page of results. When getting the next page of results, you must include the same query parameters that were used when getting the first page.",
+                "key": "x-amz-meta-continuationtoken",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "23d066cd-566c-4e5c-b02b-3e484c1e414b",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "costCenters"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "500"
+                    },
+                    {
+                      "key": "companyCode",
+                      "value": ""
+                    },
+                    {
+                      "key": "lastUpdated",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Used to get next page of results when item count indicated by 'pageSize' is exceeded. A token is returned in header (not body) parameter 'X-amz-meta-continuationToken' of the response whenever there are more records to fetch. Post the received value here in a new HEADER parameter on the next GET request to receive the next page of results. When getting the next page of results, you must include the same query parameters that were used when getting the first page.",
+                    "key": "x-amz-meta-continuationtoken",
+                    "value": "15a915c6-569a-48d7-be45-97f807d322cb"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"costCenters\": [\n    {\n      \"companies\": [\n        {\n          \"active\": true,\n          \"companyCode\": \"BW00\"\n        },\n        {\n          \"active\": false,\n          \"companyCode\": \"BW00\"\n        }\n      ],\n      \"costCenterCode\": \"35680\",\n      \"costCenterNames\": [\n        {\n          \"language\": \"en-US\",\n          \"translation\": \"Office supplies\"\n        },\n        {\n          \"language\": \"en-US\",\n          \"translation\": \"Office supplies\"\n        }\n      ],\n      \"externalCode\": \"4847-31231212-212121-1212\",\n      \"text1\": \"\",\n      \"text2\": \"\",\n      \"text3\": \"\",\n      \"text4\": \"\",\n      \"text5\": \"\",\n      \"text6\": \"\",\n      \"text7\": \"\",\n      \"text8\": \"\",\n      \"text9\": \"\",\n      \"text10\": \"\",\n      \"date1\": \"2020-02-10T16:53:00.654Z\",\n      \"date2\": \"1997-07-28T21:56:42.810Z\",\n      \"date3\": \"2012-09-25T21:13:24.379Z\",\n      \"date4\": \"1948-02-28T10:48:27.922Z\",\n      \"date5\": \"1987-09-01T03:29:48.758Z\",\n      \"int1\": 7140,\n      \"int2\": 3286,\n      \"int3\": 8100,\n      \"int4\": 6381,\n      \"int5\": 1171,\n      \"lastUpdated\": \"1958-04-25T02:36:45.512Z\"\n    },\n    {\n      \"companies\": [\n        {\n          \"active\": false,\n          \"companyCode\": \"BW00\"\n        },\n        {\n          \"active\": true,\n          \"companyCode\": \"BW00\"\n        }\n      ],\n      \"costCenterCode\": \"35680\",\n      \"costCenterNames\": [\n        {\n          \"language\": \"en-US\",\n          \"translation\": \"Office supplies\"\n        },\n        {\n          \"language\": \"en-US\",\n          \"translation\": \"Office supplies\"\n        }\n      ],\n      \"externalCode\": \"4847-31231212-212121-1212\",\n      \"text1\": \"\",\n      \"text2\": \"\",\n      \"text3\": \"\",\n      \"text4\": \"\",\n      \"text5\": \"\",\n      \"text6\": \"\",\n      \"text7\": \"\",\n      \"text8\": \"\",\n      \"text9\": \"\",\n      \"text10\": \"\",\n      \"date1\": \"1989-10-15T09:53:05.876Z\",\n      \"date2\": \"1953-04-23T10:18:13.115Z\",\n      \"date3\": \"2011-03-18T03:44:55.244Z\",\n      \"date4\": \"2004-02-23T01:03:35.656Z\",\n      \"date5\": \"2024-10-12T15:15:36.176Z\",\n      \"int1\": 2993,\n      \"int2\": 2503,\n      \"int3\": 1356,\n      \"int4\": 2141,\n      \"int5\": 6582,\n      \"lastUpdated\": \"1984-11-06T08:58:46.287Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e2ad1efc-f15c-4e1f-99bb-3a3cfbcc371c",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "costCenters"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "500"
+                    },
+                    {
+                      "key": "companyCode",
+                      "value": ""
+                    },
+                    {
+                      "key": "lastUpdated",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Used to get next page of results when item count indicated by 'pageSize' is exceeded. A token is returned in header (not body) parameter 'X-amz-meta-continuationToken' of the response whenever there are more records to fetch. Post the received value here in a new HEADER parameter on the next GET request to receive the next page of results. When getting the next page of results, you must include the same query parameters that were used when getting the first page.",
+                    "key": "x-amz-meta-continuationtoken",
+                    "value": "15a915c6-569a-48d7-be45-97f807d322cb"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "9601010e-e900-46b5-8ad3-f6ac2b0466b1",
+              "name": "Not found. Request was successful and no records were found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "costCenters"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "500"
+                    },
+                    {
+                      "key": "companyCode",
+                      "value": ""
+                    },
+                    {
+                      "key": "lastUpdated",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Used to get next page of results when item count indicated by 'pageSize' is exceeded. A token is returned in header (not body) parameter 'X-amz-meta-continuationToken' of the response whenever there are more records to fetch. Post the received value here in a new HEADER parameter on the next GET request to receive the next page of results. When getting the next page of results, you must include the same query parameters that were used when getting the first page.",
+                    "key": "x-amz-meta-continuationtoken",
+                    "value": "15a915c6-569a-48d7-be45-97f807d322cb"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "06cb2904-f1e6-4e80-ad1a-8c826293198c",
+              "name": "Unexpected error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "costCenters"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "500"
+                    },
+                    {
+                      "key": "companyCode",
+                      "value": ""
+                    },
+                    {
+                      "key": "lastUpdated",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Used to get next page of results when item count indicated by 'pageSize' is exceeded. A token is returned in header (not body) parameter 'X-amz-meta-continuationToken' of the response whenever there are more records to fetch. Post the received value here in a new HEADER parameter on the next GET request to receive the next page of results. When getting the next page of results, you must include the same query parameters that were used when getting the first page.",
+                    "key": "x-amz-meta-continuationtoken",
+                    "value": "15a915c6-569a-48d7-be45-97f807d322cb"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"fbc082a2-65a4-469c-b230-d84a252f18fc\",\n  \"hasErrors\": false,\n  \"errors\": [\n    {\n      \"externalCode\": \"4847-31231212-212121-1212\",\n      \"type\": \"TECHNICAL\",\n      \"code\": \"UNEXPECTED_ERROR\",\n      \"message\": \"\",\n      \"info\": \"\"\n    },\n    {\n      \"externalCode\": \"4847-31231212-212121-1212\",\n      \"type\": \"TECHNICAL\",\n      \"code\": \"METHOD_NOT_ALLOWED\",\n      \"message\": \"\",\n      \"info\": \"\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d3f809ea-fed5-43f8-8ec1-e922c83f18f9",
+          "name": "Creates new cost center(s), fully overwrites previous record if exists.",
+          "request": {
+            "name": "Creates new cost center(s), fully overwrites previous record if exists.",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "costCenters"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "[\n  {\n    \"companies\": [\n      {\n        \"active\": \"<boolean>\",\n        \"companyCode\": \"<string>\"\n      },\n      {\n        \"active\": \"<boolean>\",\n        \"companyCode\": \"<string>\"\n      }\n    ],\n    \"costCenterCode\": \"<string>\",\n    \"costCenterNames\": [\n      {\n        \"language\": \"<string>\",\n        \"translation\": \"<string>\"\n      },\n      {\n        \"language\": \"<string>\",\n        \"translation\": \"<string>\"\n      }\n    ],\n    \"externalCode\": \"<string>\",\n    \"text1\": \"<string>\",\n    \"text2\": \"<string>\",\n    \"text3\": \"<string>\",\n    \"text4\": \"<string>\",\n    \"text5\": \"<string>\",\n    \"text6\": \"<string>\",\n    \"text7\": \"<string>\",\n    \"text8\": \"<string>\",\n    \"text9\": \"<string>\",\n    \"text10\": \"<string>\",\n    \"date1\": \"<dateTime>\",\n    \"date2\": \"<dateTime>\",\n    \"date3\": \"<dateTime>\",\n    \"date4\": \"<dateTime>\",\n    \"date5\": \"<dateTime>\",\n    \"int1\": \"<integer>\",\n    \"int2\": \"<integer>\",\n    \"int3\": \"<integer>\",\n    \"int4\": \"<integer>\",\n    \"int5\": \"<integer>\",\n    \"lastUpdated\": \"<dateTime>\"\n  },\n  {\n    \"companies\": [\n      {\n        \"active\": \"<boolean>\",\n        \"companyCode\": \"<string>\"\n      },\n      {\n        \"active\": \"<boolean>\",\n        \"companyCode\": \"<string>\"\n      }\n    ],\n    \"costCenterCode\": \"<string>\",\n    \"costCenterNames\": [\n      {\n        \"language\": \"<string>\",\n        \"translation\": \"<string>\"\n      },\n      {\n        \"language\": \"<string>\",\n        \"translation\": \"<string>\"\n      }\n    ],\n    \"externalCode\": \"<string>\",\n    \"text1\": \"<string>\",\n    \"text2\": \"<string>\",\n    \"text3\": \"<string>\",\n    \"text4\": \"<string>\",\n    \"text5\": \"<string>\",\n    \"text6\": \"<string>\",\n    \"text7\": \"<string>\",\n    \"text8\": \"<string>\",\n    \"text9\": \"<string>\",\n    \"text10\": \"<string>\",\n    \"date1\": \"<dateTime>\",\n    \"date2\": \"<dateTime>\",\n    \"date3\": \"<dateTime>\",\n    \"date4\": \"<dateTime>\",\n    \"date5\": \"<dateTime>\",\n    \"int1\": \"<integer>\",\n    \"int2\": \"<integer>\",\n    \"int3\": \"<integer>\",\n    \"int4\": \"<integer>\",\n    \"int5\": \"<integer>\",\n    \"lastUpdated\": \"<dateTime>\"\n  }\n]",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "7b4f5161-65b5-44f3-a8c8-fe502fd02dd9",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "costCenters"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Specifies the media type of the resource. Value application/json is supported.",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"companies\": [\n      {\n        \"active\": \"<boolean>\",\n        \"companyCode\": \"BW00\"\n      },\n      {\n        \"active\": \"<boolean>\",\n        \"companyCode\": \"BW00\"\n      }\n    ],\n    \"costCenterCode\": \"35680\",\n    \"costCenterNames\": [\n      {\n        \"language\": \"en-US\",\n        \"translation\": \"Office supplies\"\n      },\n      {\n        \"language\": \"en-US\",\n        \"translation\": \"Office supplies\"\n      }\n    ],\n    \"externalCode\": \"4847-31231212-212121-1212\",\n    \"text1\": \"\",\n    \"text2\": \"\",\n    \"text3\": \"\",\n    \"text4\": \"\",\n    \"text5\": \"\",\n    \"text6\": \"\",\n    \"text7\": \"\",\n    \"text8\": \"\",\n    \"text9\": \"\",\n    \"text10\": \"\",\n    \"date1\": \"<dateTime>\",\n    \"date2\": \"<dateTime>\",\n    \"date3\": \"<dateTime>\",\n    \"date4\": \"<dateTime>\",\n    \"date5\": \"<dateTime>\",\n    \"int1\": \"<integer>\",\n    \"int2\": \"<integer>\",\n    \"int3\": \"<integer>\",\n    \"int4\": \"<integer>\",\n    \"int5\": \"<integer>\",\n    \"lastUpdated\": \"<dateTime>\"\n  },\n  {\n    \"companies\": [\n      {\n        \"active\": \"<boolean>\",\n        \"companyCode\": \"BW00\"\n      },\n      {\n        \"active\": \"<boolean>\",\n        \"companyCode\": \"BW00\"\n      }\n    ],\n    \"costCenterCode\": \"35680\",\n    \"costCenterNames\": [\n      {\n        \"language\": \"en-US\",\n        \"translation\": \"Office supplies\"\n      },\n      {\n        \"language\": \"en-US\",\n        \"translation\": \"Office supplies\"\n      }\n    ],\n    \"externalCode\": \"4847-31231212-212121-1212\",\n    \"text1\": \"\",\n    \"text2\": \"\",\n    \"text3\": \"\",\n    \"text4\": \"\",\n    \"text5\": \"\",\n    \"text6\": \"\",\n    \"text7\": \"\",\n    \"text8\": \"\",\n    \"text9\": \"\",\n    \"text10\": \"\",\n    \"date1\": \"<dateTime>\",\n    \"date2\": \"<dateTime>\",\n    \"date3\": \"<dateTime>\",\n    \"date4\": \"<dateTime>\",\n    \"date5\": \"<dateTime>\",\n    \"int1\": \"<integer>\",\n    \"int2\": \"<integer>\",\n    \"int3\": \"<integer>\",\n    \"int4\": \"<integer>\",\n    \"int5\": \"<integer>\",\n    \"lastUpdated\": \"<dateTime>\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"companies\": [\n      {\n        \"active\": \"<boolean>\",\n        \"companyCode\": \"BW00\"\n      },\n      {\n        \"active\": \"<boolean>\",\n        \"companyCode\": \"BW00\"\n      }\n    ],\n    \"costCenterCode\": \"35680\",\n    \"costCenterNames\": [\n      {\n        \"language\": \"en-US\",\n        \"translation\": \"Office supplies\"\n      },\n      {\n        \"language\": \"en-US\",\n        \"translation\": \"Office supplies\"\n      }\n    ],\n    \"externalCode\": \"4847-31231212-212121-1212\",\n    \"text1\": \"\",\n    \"text2\": \"\",\n    \"text3\": \"\",\n    \"text4\": \"\",\n    \"text5\": \"\",\n    \"text6\": \"\",\n    \"text7\": \"\",\n    \"text8\": \"\",\n    \"text9\": \"\",\n    \"text10\": \"\",\n    \"date1\": \"<dateTime>\",\n    \"date2\": \"<dateTime>\",\n    \"date3\": \"<dateTime>\",\n    \"date4\": \"<dateTime>\",\n    \"date5\": \"<dateTime>\",\n    \"int1\": \"<integer>\",\n    \"int2\": \"<integer>\",\n    \"int3\": \"<integer>\",\n    \"int4\": \"<integer>\",\n    \"int5\": \"<integer>\",\n    \"lastUpdated\": \"<dateTime>\"\n  },\n  {\n    \"companies\": [\n      {\n        \"active\": \"<boolean>\",\n        \"companyCode\": \"BW00\"\n      },\n      {\n        \"active\": \"<boolean>\",\n        \"companyCode\": \"BW00\"\n      }\n    ],\n    \"costCenterCode\": \"35680\",\n    \"costCenterNames\": [\n      {\n        \"language\": \"en-US\",\n        \"translation\": \"Office supplies\"\n      },\n      {\n        \"language\": \"en-US\",\n        \"translation\": \"Office supplies\"\n      }\n    ],\n    \"externalCode\": \"4847-31231212-212121-1212\",\n    \"text1\": \"\",\n    \"text2\": \"\",\n    \"text3\": \"\",\n    \"text4\": \"\",\n    \"text5\": \"\",\n    \"text6\": \"\",\n    \"text7\": \"\",\n    \"text8\": \"\",\n    \"text9\": \"\",\n    \"text10\": \"\",\n    \"date1\": \"<dateTime>\",\n    \"date2\": \"<dateTime>\",\n    \"date3\": \"<dateTime>\",\n    \"date4\": \"<dateTime>\",\n    \"date5\": \"<dateTime>\",\n    \"int1\": \"<integer>\",\n    \"int2\": \"<integer>\",\n    \"int3\": \"<integer>\",\n    \"int4\": \"<integer>\",\n    \"int5\": \"<integer>\",\n    \"lastUpdated\": \"<dateTime>\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a432b332-a9ad-45a4-9469-4e99b93493c3",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "costCenters"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Specifies the media type of the resource. Value application/json is supported.",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"companies\": [\n      {\n        \"active\": \"<boolean>\",\n        \"companyCode\": \"BW00\"\n      },\n      {\n        \"active\": \"<boolean>\",\n        \"companyCode\": \"BW00\"\n      }\n    ],\n    \"costCenterCode\": \"35680\",\n    \"costCenterNames\": [\n      {\n        \"language\": \"en-US\",\n        \"translation\": \"Office supplies\"\n      },\n      {\n        \"language\": \"en-US\",\n        \"translation\": \"Office supplies\"\n      }\n    ],\n    \"externalCode\": \"4847-31231212-212121-1212\",\n    \"text1\": \"\",\n    \"text2\": \"\",\n    \"text3\": \"\",\n    \"text4\": \"\",\n    \"text5\": \"\",\n    \"text6\": \"\",\n    \"text7\": \"\",\n    \"text8\": \"\",\n    \"text9\": \"\",\n    \"text10\": \"\",\n    \"date1\": \"<dateTime>\",\n    \"date2\": \"<dateTime>\",\n    \"date3\": \"<dateTime>\",\n    \"date4\": \"<dateTime>\",\n    \"date5\": \"<dateTime>\",\n    \"int1\": \"<integer>\",\n    \"int2\": \"<integer>\",\n    \"int3\": \"<integer>\",\n    \"int4\": \"<integer>\",\n    \"int5\": \"<integer>\",\n    \"lastUpdated\": \"<dateTime>\"\n  },\n  {\n    \"companies\": [\n      {\n        \"active\": \"<boolean>\",\n        \"companyCode\": \"BW00\"\n      },\n      {\n        \"active\": \"<boolean>\",\n        \"companyCode\": \"BW00\"\n      }\n    ],\n    \"costCenterCode\": \"35680\",\n    \"costCenterNames\": [\n      {\n        \"language\": \"en-US\",\n        \"translation\": \"Office supplies\"\n      },\n      {\n        \"language\": \"en-US\",\n        \"translation\": \"Office supplies\"\n      }\n    ],\n    \"externalCode\": \"4847-31231212-212121-1212\",\n    \"text1\": \"\",\n    \"text2\": \"\",\n    \"text3\": \"\",\n    \"text4\": \"\",\n    \"text5\": \"\",\n    \"text6\": \"\",\n    \"text7\": \"\",\n    \"text8\": \"\",\n    \"text9\": \"\",\n    \"text10\": \"\",\n    \"date1\": \"<dateTime>\",\n    \"date2\": \"<dateTime>\",\n    \"date3\": \"<dateTime>\",\n    \"date4\": \"<dateTime>\",\n    \"date5\": \"<dateTime>\",\n    \"int1\": \"<integer>\",\n    \"int2\": \"<integer>\",\n    \"int3\": \"<integer>\",\n    \"int4\": \"<integer>\",\n    \"int5\": \"<integer>\",\n    \"lastUpdated\": \"<dateTime>\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"fbc082a2-65a4-469c-b230-d84a252f18fc\",\n  \"hasErrors\": true,\n  \"errors\": [\n    {\n      \"externalCode\": \"4847-31231212-212121-1212\",\n      \"type\": \"VALIDATION\",\n      \"code\": \"ENTITY_NOT_FOUND\",\n      \"message\": \"\",\n      \"info\": \"\"\n    },\n    {\n      \"externalCode\": \"4847-31231212-212121-1212\",\n      \"type\": \"SECURITY\",\n      \"code\": \"ENTITY_NOT_FOUND\",\n      \"message\": \"\",\n      \"info\": \"\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e7862d3b-1571-4bc9-819e-bd0d37d9c16e",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "costCenters"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Specifies the media type of the resource. Value application/json is supported.",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"companies\": [\n      {\n        \"active\": \"<boolean>\",\n        \"companyCode\": \"BW00\"\n      },\n      {\n        \"active\": \"<boolean>\",\n        \"companyCode\": \"BW00\"\n      }\n    ],\n    \"costCenterCode\": \"35680\",\n    \"costCenterNames\": [\n      {\n        \"language\": \"en-US\",\n        \"translation\": \"Office supplies\"\n      },\n      {\n        \"language\": \"en-US\",\n        \"translation\": \"Office supplies\"\n      }\n    ],\n    \"externalCode\": \"4847-31231212-212121-1212\",\n    \"text1\": \"\",\n    \"text2\": \"\",\n    \"text3\": \"\",\n    \"text4\": \"\",\n    \"text5\": \"\",\n    \"text6\": \"\",\n    \"text7\": \"\",\n    \"text8\": \"\",\n    \"text9\": \"\",\n    \"text10\": \"\",\n    \"date1\": \"<dateTime>\",\n    \"date2\": \"<dateTime>\",\n    \"date3\": \"<dateTime>\",\n    \"date4\": \"<dateTime>\",\n    \"date5\": \"<dateTime>\",\n    \"int1\": \"<integer>\",\n    \"int2\": \"<integer>\",\n    \"int3\": \"<integer>\",\n    \"int4\": \"<integer>\",\n    \"int5\": \"<integer>\",\n    \"lastUpdated\": \"<dateTime>\"\n  },\n  {\n    \"companies\": [\n      {\n        \"active\": \"<boolean>\",\n        \"companyCode\": \"BW00\"\n      },\n      {\n        \"active\": \"<boolean>\",\n        \"companyCode\": \"BW00\"\n      }\n    ],\n    \"costCenterCode\": \"35680\",\n    \"costCenterNames\": [\n      {\n        \"language\": \"en-US\",\n        \"translation\": \"Office supplies\"\n      },\n      {\n        \"language\": \"en-US\",\n        \"translation\": \"Office supplies\"\n      }\n    ],\n    \"externalCode\": \"4847-31231212-212121-1212\",\n    \"text1\": \"\",\n    \"text2\": \"\",\n    \"text3\": \"\",\n    \"text4\": \"\",\n    \"text5\": \"\",\n    \"text6\": \"\",\n    \"text7\": \"\",\n    \"text8\": \"\",\n    \"text9\": \"\",\n    \"text10\": \"\",\n    \"date1\": \"<dateTime>\",\n    \"date2\": \"<dateTime>\",\n    \"date3\": \"<dateTime>\",\n    \"date4\": \"<dateTime>\",\n    \"date5\": \"<dateTime>\",\n    \"int1\": \"<integer>\",\n    \"int2\": \"<integer>\",\n    \"int3\": \"<integer>\",\n    \"int4\": \"<integer>\",\n    \"int5\": \"<integer>\",\n    \"lastUpdated\": \"<dateTime>\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "3b566297-215a-4c5a-992a-14e0bfffd20f",
+              "name": "Conflict",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "costCenters"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Specifies the media type of the resource. Value application/json is supported.",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"companies\": [\n      {\n        \"active\": \"<boolean>\",\n        \"companyCode\": \"BW00\"\n      },\n      {\n        \"active\": \"<boolean>\",\n        \"companyCode\": \"BW00\"\n      }\n    ],\n    \"costCenterCode\": \"35680\",\n    \"costCenterNames\": [\n      {\n        \"language\": \"en-US\",\n        \"translation\": \"Office supplies\"\n      },\n      {\n        \"language\": \"en-US\",\n        \"translation\": \"Office supplies\"\n      }\n    ],\n    \"externalCode\": \"4847-31231212-212121-1212\",\n    \"text1\": \"\",\n    \"text2\": \"\",\n    \"text3\": \"\",\n    \"text4\": \"\",\n    \"text5\": \"\",\n    \"text6\": \"\",\n    \"text7\": \"\",\n    \"text8\": \"\",\n    \"text9\": \"\",\n    \"text10\": \"\",\n    \"date1\": \"<dateTime>\",\n    \"date2\": \"<dateTime>\",\n    \"date3\": \"<dateTime>\",\n    \"date4\": \"<dateTime>\",\n    \"date5\": \"<dateTime>\",\n    \"int1\": \"<integer>\",\n    \"int2\": \"<integer>\",\n    \"int3\": \"<integer>\",\n    \"int4\": \"<integer>\",\n    \"int5\": \"<integer>\",\n    \"lastUpdated\": \"<dateTime>\"\n  },\n  {\n    \"companies\": [\n      {\n        \"active\": \"<boolean>\",\n        \"companyCode\": \"BW00\"\n      },\n      {\n        \"active\": \"<boolean>\",\n        \"companyCode\": \"BW00\"\n      }\n    ],\n    \"costCenterCode\": \"35680\",\n    \"costCenterNames\": [\n      {\n        \"language\": \"en-US\",\n        \"translation\": \"Office supplies\"\n      },\n      {\n        \"language\": \"en-US\",\n        \"translation\": \"Office supplies\"\n      }\n    ],\n    \"externalCode\": \"4847-31231212-212121-1212\",\n    \"text1\": \"\",\n    \"text2\": \"\",\n    \"text3\": \"\",\n    \"text4\": \"\",\n    \"text5\": \"\",\n    \"text6\": \"\",\n    \"text7\": \"\",\n    \"text8\": \"\",\n    \"text9\": \"\",\n    \"text10\": \"\",\n    \"date1\": \"<dateTime>\",\n    \"date2\": \"<dateTime>\",\n    \"date3\": \"<dateTime>\",\n    \"date4\": \"<dateTime>\",\n    \"date5\": \"<dateTime>\",\n    \"int1\": \"<integer>\",\n    \"int2\": \"<integer>\",\n    \"int3\": \"<integer>\",\n    \"int4\": \"<integer>\",\n    \"int5\": \"<integer>\",\n    \"lastUpdated\": \"<dateTime>\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"fbc082a2-65a4-469c-b230-d84a252f18fc\",\n  \"hasErrors\": true,\n  \"errors\": [\n    {\n      \"externalCode\": \"4847-31231212-212121-1212\",\n      \"type\": \"VALIDATION\",\n      \"code\": \"ENTITY_NOT_FOUND\",\n      \"message\": \"\",\n      \"info\": \"\"\n    },\n    {\n      \"externalCode\": \"4847-31231212-212121-1212\",\n      \"type\": \"SECURITY\",\n      \"code\": \"ENTITY_NOT_FOUND\",\n      \"message\": \"\",\n      \"info\": \"\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0c97bb1b-fc23-4ac9-baec-b956781fa2a9",
+              "name": "Unexpected error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "costCenters"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Specifies the media type of the resource. Value application/json is supported.",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"companies\": [\n      {\n        \"active\": \"<boolean>\",\n        \"companyCode\": \"BW00\"\n      },\n      {\n        \"active\": \"<boolean>\",\n        \"companyCode\": \"BW00\"\n      }\n    ],\n    \"costCenterCode\": \"35680\",\n    \"costCenterNames\": [\n      {\n        \"language\": \"en-US\",\n        \"translation\": \"Office supplies\"\n      },\n      {\n        \"language\": \"en-US\",\n        \"translation\": \"Office supplies\"\n      }\n    ],\n    \"externalCode\": \"4847-31231212-212121-1212\",\n    \"text1\": \"\",\n    \"text2\": \"\",\n    \"text3\": \"\",\n    \"text4\": \"\",\n    \"text5\": \"\",\n    \"text6\": \"\",\n    \"text7\": \"\",\n    \"text8\": \"\",\n    \"text9\": \"\",\n    \"text10\": \"\",\n    \"date1\": \"<dateTime>\",\n    \"date2\": \"<dateTime>\",\n    \"date3\": \"<dateTime>\",\n    \"date4\": \"<dateTime>\",\n    \"date5\": \"<dateTime>\",\n    \"int1\": \"<integer>\",\n    \"int2\": \"<integer>\",\n    \"int3\": \"<integer>\",\n    \"int4\": \"<integer>\",\n    \"int5\": \"<integer>\",\n    \"lastUpdated\": \"<dateTime>\"\n  },\n  {\n    \"companies\": [\n      {\n        \"active\": \"<boolean>\",\n        \"companyCode\": \"BW00\"\n      },\n      {\n        \"active\": \"<boolean>\",\n        \"companyCode\": \"BW00\"\n      }\n    ],\n    \"costCenterCode\": \"35680\",\n    \"costCenterNames\": [\n      {\n        \"language\": \"en-US\",\n        \"translation\": \"Office supplies\"\n      },\n      {\n        \"language\": \"en-US\",\n        \"translation\": \"Office supplies\"\n      }\n    ],\n    \"externalCode\": \"4847-31231212-212121-1212\",\n    \"text1\": \"\",\n    \"text2\": \"\",\n    \"text3\": \"\",\n    \"text4\": \"\",\n    \"text5\": \"\",\n    \"text6\": \"\",\n    \"text7\": \"\",\n    \"text8\": \"\",\n    \"text9\": \"\",\n    \"text10\": \"\",\n    \"date1\": \"<dateTime>\",\n    \"date2\": \"<dateTime>\",\n    \"date3\": \"<dateTime>\",\n    \"date4\": \"<dateTime>\",\n    \"date5\": \"<dateTime>\",\n    \"int1\": \"<integer>\",\n    \"int2\": \"<integer>\",\n    \"int3\": \"<integer>\",\n    \"int4\": \"<integer>\",\n    \"int5\": \"<integer>\",\n    \"lastUpdated\": \"<dateTime>\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"fbc082a2-65a4-469c-b230-d84a252f18fc\",\n  \"hasErrors\": true,\n  \"errors\": [\n    {\n      \"externalCode\": \"4847-31231212-212121-1212\",\n      \"type\": \"VALIDATION\",\n      \"code\": \"ENTITY_NOT_FOUND\",\n      \"message\": \"\",\n      \"info\": \"\"\n    },\n    {\n      \"externalCode\": \"4847-31231212-212121-1212\",\n      \"type\": \"SECURITY\",\n      \"code\": \"ENTITY_NOT_FOUND\",\n      \"message\": \"\",\n      \"info\": \"\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "35780300-edb3-4d9f-a250-e710173436af",
+          "name": "Deletes data from Basware API. For manual one-time operations.",
+          "request": {
+            "name": "Deletes data from Basware API. For manual one-time operations.",
+            "description": {
+              "content": "For manual one-time operations only, such as a manual clean-up to remove test data generated during API integration development. Only removes records from API layer. \r\nDeletion in target systems needs to be done separately using the data deletion mechanisms available in each of the target system in addition to deleting the data in Basware API.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "costCenters"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"lastUpdated\": \"<dateTime>\",\n  \"externalCode\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "572fe599-28a6-4272-bf0c-32b07585709b",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "costCenters"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"lastUpdated\": \"<dateTime>\",\n  \"externalCode\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusApiLink\": \"string\",\n  \"taskName\": \"string\",\n  \"taskStatus\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e755e5aa-f950-41b7-823b-fdea5bbfa8bb",
+              "name": "RequestAccepted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "costCenters"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"lastUpdated\": \"<dateTime>\",\n  \"externalCode\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusApiLink\": \"string\",\n  \"taskName\": \"string\",\n  \"taskStatus\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "941662f8-dd41-4055-b6b2-b1cfd0ef11e0",
+              "name": "BadRequest",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "costCenters"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"lastUpdated\": \"<dateTime>\",\n  \"externalCode\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"fbc082a2-65a4-469c-b230-d84a252f18fc\",\n  \"hasErrors\": true,\n  \"errors\": [\n    {\n      \"externalCode\": \"4847-31231212-212121-1212\",\n      \"type\": \"VALIDATION\",\n      \"code\": \"ENTITY_NOT_FOUND\",\n      \"message\": \"\",\n      \"info\": \"\"\n    },\n    {\n      \"externalCode\": \"4847-31231212-212121-1212\",\n      \"type\": \"SECURITY\",\n      \"code\": \"ENTITY_NOT_FOUND\",\n      \"message\": \"\",\n      \"info\": \"\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2aa4ce65-0c06-4ddf-854e-7689e76b223a",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "costCenters"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"lastUpdated\": \"<dateTime>\",\n  \"externalCode\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "8844302e-f123-47a6-a510-e60709e2ebc3",
+              "name": "Unexpected error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "costCenters"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"lastUpdated\": \"<dateTime>\",\n  \"externalCode\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"fbc082a2-65a4-469c-b230-d84a252f18fc\",\n  \"hasErrors\": true,\n  \"errors\": [\n    {\n      \"externalCode\": \"4847-31231212-212121-1212\",\n      \"type\": \"VALIDATION\",\n      \"code\": \"ENTITY_NOT_FOUND\",\n      \"message\": \"\",\n      \"info\": \"\"\n    },\n    {\n      \"externalCode\": \"4847-31231212-212121-1212\",\n      \"type\": \"SECURITY\",\n      \"code\": \"ENTITY_NOT_FOUND\",\n      \"message\": \"\",\n      \"info\": \"\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5f9f5c12-159b-4c2a-b075-2f9e9d1e9e8b",
+          "name": "Returns single cost center -record by externalCode -identifier.",
+          "request": {
+            "name": "Returns single cost center -record by externalCode -identifier.",
+            "description": {
+              "content": "",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "costCenters",
+                ":externalCode"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "externalCode",
+                  "description": "(Required) The ExternalCode of the entity to be fetched"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2e96ae68-8c02-4085-9a4e-42734c87ee92",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "costCenters",
+                    ":externalCode"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "externalCode",
+                      "description": "(Required) The ExternalCode of the entity to be fetched"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"companies\": [\n    {\n      \"active\": \"<boolean>\",\n      \"companyCode\": \"BW00\"\n    },\n    {\n      \"active\": \"<boolean>\",\n      \"companyCode\": \"BW00\"\n    }\n  ],\n  \"costCenterCode\": \"35680\",\n  \"costCenterNames\": [\n    {\n      \"language\": \"en-US\",\n      \"translation\": \"Office supplies\"\n    },\n    {\n      \"language\": \"en-US\",\n      \"translation\": \"Office supplies\"\n    }\n  ],\n  \"externalCode\": \"4847-31231212-212121-1212\",\n  \"text1\": \"\",\n  \"text2\": \"\",\n  \"text3\": \"\",\n  \"text4\": \"\",\n  \"text5\": \"\",\n  \"text6\": \"\",\n  \"text7\": \"\",\n  \"text8\": \"\",\n  \"text9\": \"\",\n  \"text10\": \"\",\n  \"date1\": \"<dateTime>\",\n  \"date2\": \"<dateTime>\",\n  \"date3\": \"<dateTime>\",\n  \"date4\": \"<dateTime>\",\n  \"date5\": \"<dateTime>\",\n  \"int1\": \"<integer>\",\n  \"int2\": \"<integer>\",\n  \"int3\": \"<integer>\",\n  \"int4\": \"<integer>\",\n  \"int5\": \"<integer>\",\n  \"lastUpdated\": \"<dateTime>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ee2da4a1-2a9c-4296-83bc-a2dba25f2e01",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "costCenters",
+                    ":externalCode"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "externalCode",
+                      "description": "(Required) The ExternalCode of the entity to be fetched"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "eed04ec0-515d-4bba-8bac-ae15bd05588e",
+              "name": "Not found. Request was successful and no records were found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "costCenters",
+                    ":externalCode"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "externalCode",
+                      "description": "(Required) The ExternalCode of the entity to be fetched"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f24b7311-d490-4ac1-9100-bf6df63c712d",
+              "name": "Unexpected error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "costCenters",
+                    ":externalCode"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "externalCode",
+                      "description": "(Required) The ExternalCode of the entity to be fetched"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"fbc082a2-65a4-469c-b230-d84a252f18fc\",\n  \"hasErrors\": true,\n  \"errors\": [\n    {\n      \"externalCode\": \"4847-31231212-212121-1212\",\n      \"type\": \"VALIDATION\",\n      \"code\": \"ENTITY_NOT_FOUND\",\n      \"message\": \"\",\n      \"info\": \"\"\n    },\n    {\n      \"externalCode\": \"4847-31231212-212121-1212\",\n      \"type\": \"SECURITY\",\n      \"code\": \"ENTITY_NOT_FOUND\",\n      \"message\": \"\",\n      \"info\": \"\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d72c3c5f-211a-41cb-b5e0-ee47819d665f",
+          "name": "Updates fields on speficied cost center. Preserves existing values in fields, which were not updated.",
+          "request": {
+            "name": "Updates fields on speficied cost center. Preserves existing values in fields, which were not updated.",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "costCenters",
+                ":externalCode"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "externalCode",
+                  "description": "(Required) The ExternalCode of the CostCenter to be updated"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"companies\": [\n    {\n      \"active\": \"<boolean>\",\n      \"companyCode\": \"<string>\"\n    },\n    {\n      \"active\": \"<boolean>\",\n      \"companyCode\": \"<string>\"\n    }\n  ],\n  \"costCenterCode\": \"<string>\",\n  \"costCenterNames\": [\n    {\n      \"language\": \"<string>\",\n      \"translation\": \"<string>\"\n    },\n    {\n      \"language\": \"<string>\",\n      \"translation\": \"<string>\"\n    }\n  ],\n  \"externalCode\": \"<string>\",\n  \"text1\": \"<string>\",\n  \"text2\": \"<string>\",\n  \"text3\": \"<string>\",\n  \"text4\": \"<string>\",\n  \"text5\": \"<string>\",\n  \"text6\": \"<string>\",\n  \"text7\": \"<string>\",\n  \"text8\": \"<string>\",\n  \"text9\": \"<string>\",\n  \"text10\": \"<string>\",\n  \"date1\": \"<dateTime>\",\n  \"date2\": \"<dateTime>\",\n  \"date3\": \"<dateTime>\",\n  \"date4\": \"<dateTime>\",\n  \"date5\": \"<dateTime>\",\n  \"int1\": \"<integer>\",\n  \"int2\": \"<integer>\",\n  \"int3\": \"<integer>\",\n  \"int4\": \"<integer>\",\n  \"int5\": \"<integer>\",\n  \"lastUpdated\": \"<dateTime>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c3f4e909-2a51-4e4c-a4a3-d39031eb99f9",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "costCenters",
+                    ":externalCode"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "externalCode",
+                      "description": "(Required) The ExternalCode of the CostCenter to be updated"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"companies\": [\n    {\n      \"active\": \"<boolean>\",\n      \"companyCode\": \"BW00\"\n    },\n    {\n      \"active\": \"<boolean>\",\n      \"companyCode\": \"BW00\"\n    }\n  ],\n  \"costCenterCode\": \"35680\",\n  \"costCenterNames\": [\n    {\n      \"language\": \"en-US\",\n      \"translation\": \"Office supplies\"\n    },\n    {\n      \"language\": \"en-US\",\n      \"translation\": \"Office supplies\"\n    }\n  ],\n  \"externalCode\": \"4847-31231212-212121-1212\",\n  \"text1\": \"\",\n  \"text2\": \"\",\n  \"text3\": \"\",\n  \"text4\": \"\",\n  \"text5\": \"\",\n  \"text6\": \"\",\n  \"text7\": \"\",\n  \"text8\": \"\",\n  \"text9\": \"\",\n  \"text10\": \"\",\n  \"date1\": \"<dateTime>\",\n  \"date2\": \"<dateTime>\",\n  \"date3\": \"<dateTime>\",\n  \"date4\": \"<dateTime>\",\n  \"date5\": \"<dateTime>\",\n  \"int1\": \"<integer>\",\n  \"int2\": \"<integer>\",\n  \"int3\": \"<integer>\",\n  \"int4\": \"<integer>\",\n  \"int5\": \"<integer>\",\n  \"lastUpdated\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"companies\": [\n    {\n      \"active\": \"<boolean>\",\n      \"companyCode\": \"BW00\"\n    },\n    {\n      \"active\": \"<boolean>\",\n      \"companyCode\": \"BW00\"\n    }\n  ],\n  \"costCenterCode\": \"35680\",\n  \"costCenterNames\": [\n    {\n      \"language\": \"en-US\",\n      \"translation\": \"Office supplies\"\n    },\n    {\n      \"language\": \"en-US\",\n      \"translation\": \"Office supplies\"\n    }\n  ],\n  \"externalCode\": \"4847-31231212-212121-1212\",\n  \"text1\": \"\",\n  \"text2\": \"\",\n  \"text3\": \"\",\n  \"text4\": \"\",\n  \"text5\": \"\",\n  \"text6\": \"\",\n  \"text7\": \"\",\n  \"text8\": \"\",\n  \"text9\": \"\",\n  \"text10\": \"\",\n  \"date1\": \"<dateTime>\",\n  \"date2\": \"<dateTime>\",\n  \"date3\": \"<dateTime>\",\n  \"date4\": \"<dateTime>\",\n  \"date5\": \"<dateTime>\",\n  \"int1\": \"<integer>\",\n  \"int2\": \"<integer>\",\n  \"int3\": \"<integer>\",\n  \"int4\": \"<integer>\",\n  \"int5\": \"<integer>\",\n  \"lastUpdated\": \"<dateTime>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6a1329e1-4af5-478c-a332-409d442f15ae",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "costCenters",
+                    ":externalCode"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "externalCode",
+                      "description": "(Required) The ExternalCode of the CostCenter to be updated"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"companies\": [\n    {\n      \"active\": \"<boolean>\",\n      \"companyCode\": \"BW00\"\n    },\n    {\n      \"active\": \"<boolean>\",\n      \"companyCode\": \"BW00\"\n    }\n  ],\n  \"costCenterCode\": \"35680\",\n  \"costCenterNames\": [\n    {\n      \"language\": \"en-US\",\n      \"translation\": \"Office supplies\"\n    },\n    {\n      \"language\": \"en-US\",\n      \"translation\": \"Office supplies\"\n    }\n  ],\n  \"externalCode\": \"4847-31231212-212121-1212\",\n  \"text1\": \"\",\n  \"text2\": \"\",\n  \"text3\": \"\",\n  \"text4\": \"\",\n  \"text5\": \"\",\n  \"text6\": \"\",\n  \"text7\": \"\",\n  \"text8\": \"\",\n  \"text9\": \"\",\n  \"text10\": \"\",\n  \"date1\": \"<dateTime>\",\n  \"date2\": \"<dateTime>\",\n  \"date3\": \"<dateTime>\",\n  \"date4\": \"<dateTime>\",\n  \"date5\": \"<dateTime>\",\n  \"int1\": \"<integer>\",\n  \"int2\": \"<integer>\",\n  \"int3\": \"<integer>\",\n  \"int4\": \"<integer>\",\n  \"int5\": \"<integer>\",\n  \"lastUpdated\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"fbc082a2-65a4-469c-b230-d84a252f18fc\",\n  \"hasErrors\": true,\n  \"errors\": [\n    {\n      \"externalCode\": \"4847-31231212-212121-1212\",\n      \"type\": \"VALIDATION\",\n      \"code\": \"ENTITY_NOT_FOUND\",\n      \"message\": \"\",\n      \"info\": \"\"\n    },\n    {\n      \"externalCode\": \"4847-31231212-212121-1212\",\n      \"type\": \"SECURITY\",\n      \"code\": \"ENTITY_NOT_FOUND\",\n      \"message\": \"\",\n      \"info\": \"\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "86300b95-cde5-4924-96b4-314bce84452a",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "costCenters",
+                    ":externalCode"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "externalCode",
+                      "description": "(Required) The ExternalCode of the CostCenter to be updated"
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"companies\": [\n    {\n      \"active\": \"<boolean>\",\n      \"companyCode\": \"BW00\"\n    },\n    {\n      \"active\": \"<boolean>\",\n      \"companyCode\": \"BW00\"\n    }\n  ],\n  \"costCenterCode\": \"35680\",\n  \"costCenterNames\": [\n    {\n      \"language\": \"en-US\",\n      \"translation\": \"Office supplies\"\n    },\n    {\n      \"language\": \"en-US\",\n      \"translation\": \"Office supplies\"\n    }\n  ],\n  \"externalCode\": \"4847-31231212-212121-1212\",\n  \"text1\": \"\",\n  \"text2\": \"\",\n  \"text3\": \"\",\n  \"text4\": \"\",\n  \"text5\": \"\",\n  \"text6\": \"\",\n  \"text7\": \"\",\n  \"text8\": \"\",\n  \"text9\": \"\",\n  \"text10\": \"\",\n  \"date1\": \"<dateTime>\",\n  \"date2\": \"<dateTime>\",\n  \"date3\": \"<dateTime>\",\n  \"date4\": \"<dateTime>\",\n  \"date5\": \"<dateTime>\",\n  \"int1\": \"<integer>\",\n  \"int2\": \"<integer>\",\n  \"int3\": \"<integer>\",\n  \"int4\": \"<integer>\",\n  \"int5\": \"<integer>\",\n  \"lastUpdated\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "48d19da4-895f-4047-9e4a-7dee020f5177",
+              "name": "Not found. Record to update not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "costCenters",
+                    ":externalCode"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "externalCode",
+                      "description": "(Required) The ExternalCode of the CostCenter to be updated"
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"companies\": [\n    {\n      \"active\": \"<boolean>\",\n      \"companyCode\": \"BW00\"\n    },\n    {\n      \"active\": \"<boolean>\",\n      \"companyCode\": \"BW00\"\n    }\n  ],\n  \"costCenterCode\": \"35680\",\n  \"costCenterNames\": [\n    {\n      \"language\": \"en-US\",\n      \"translation\": \"Office supplies\"\n    },\n    {\n      \"language\": \"en-US\",\n      \"translation\": \"Office supplies\"\n    }\n  ],\n  \"externalCode\": \"4847-31231212-212121-1212\",\n  \"text1\": \"\",\n  \"text2\": \"\",\n  \"text3\": \"\",\n  \"text4\": \"\",\n  \"text5\": \"\",\n  \"text6\": \"\",\n  \"text7\": \"\",\n  \"text8\": \"\",\n  \"text9\": \"\",\n  \"text10\": \"\",\n  \"date1\": \"<dateTime>\",\n  \"date2\": \"<dateTime>\",\n  \"date3\": \"<dateTime>\",\n  \"date4\": \"<dateTime>\",\n  \"date5\": \"<dateTime>\",\n  \"int1\": \"<integer>\",\n  \"int2\": \"<integer>\",\n  \"int3\": \"<integer>\",\n  \"int4\": \"<integer>\",\n  \"int5\": \"<integer>\",\n  \"lastUpdated\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "3ff5f842-3fb7-4609-ba12-6e77e764cb82",
+              "name": "Unexpected error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "costCenters",
+                    ":externalCode"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "externalCode",
+                      "description": "(Required) The ExternalCode of the CostCenter to be updated"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"companies\": [\n    {\n      \"active\": \"<boolean>\",\n      \"companyCode\": \"BW00\"\n    },\n    {\n      \"active\": \"<boolean>\",\n      \"companyCode\": \"BW00\"\n    }\n  ],\n  \"costCenterCode\": \"35680\",\n  \"costCenterNames\": [\n    {\n      \"language\": \"en-US\",\n      \"translation\": \"Office supplies\"\n    },\n    {\n      \"language\": \"en-US\",\n      \"translation\": \"Office supplies\"\n    }\n  ],\n  \"externalCode\": \"4847-31231212-212121-1212\",\n  \"text1\": \"\",\n  \"text2\": \"\",\n  \"text3\": \"\",\n  \"text4\": \"\",\n  \"text5\": \"\",\n  \"text6\": \"\",\n  \"text7\": \"\",\n  \"text8\": \"\",\n  \"text9\": \"\",\n  \"text10\": \"\",\n  \"date1\": \"<dateTime>\",\n  \"date2\": \"<dateTime>\",\n  \"date3\": \"<dateTime>\",\n  \"date4\": \"<dateTime>\",\n  \"date5\": \"<dateTime>\",\n  \"int1\": \"<integer>\",\n  \"int2\": \"<integer>\",\n  \"int3\": \"<integer>\",\n  \"int4\": \"<integer>\",\n  \"int5\": \"<integer>\",\n  \"lastUpdated\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"fbc082a2-65a4-469c-b230-d84a252f18fc\",\n  \"hasErrors\": true,\n  \"errors\": [\n    {\n      \"externalCode\": \"4847-31231212-212121-1212\",\n      \"type\": \"VALIDATION\",\n      \"code\": \"ENTITY_NOT_FOUND\",\n      \"message\": \"\",\n      \"info\": \"\"\n    },\n    {\n      \"externalCode\": \"4847-31231212-212121-1212\",\n      \"type\": \"SECURITY\",\n      \"code\": \"ENTITY_NOT_FOUND\",\n      \"message\": \"\",\n      \"info\": \"\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "0ddf6912-0d49-4499-aa6a-3e21a2db505b",
+    "name": "Basware OAUTH2 authentication APIs AccountingDocuments CostCenters API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "**Using OAUTH2.0 authentication:**\n\nGet API access token from api.basware.com/tokens\n1. Using client id and client secret, which you can obtain from Basware. \n2. Specify which APIs can be accessed by using the token e.g. Read only access to vendors API only (these are called scopes). Available scopes are listed at <https://developer.basware.com/api/p2p/manual#AccessRights>. \n3. Each token has an expiration time, until which it can be used to call APIs.\n\nWhen using OAUTH2 authentication, you need to pass the OAUTH2 authentication token when calling Basware API endpoints. Available Basware API operations are documented at <https://api.basware.com/swagger>. \n\nSee the Basware API developer site at <https://developer.basware.com/api/p2p/manual#Authentication> for more details on API authentication.",
+      "type": "text/plain"
+    }
+  }
+}

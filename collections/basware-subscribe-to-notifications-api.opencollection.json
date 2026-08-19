@@ -1,0 +1,95 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Basware OAUTH2 authentication APIs AccountingDocuments Subscribe to notifications API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Subscribe to notifications",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List existing subscriptions.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/subscriptions",
+            "params": [
+              {
+                "name": "taskType",
+                "value": "",
+                "type": "query",
+                "description": "The task type of the subscription(s) to be returned."
+              },
+              {
+                "name": "taskSubType",
+                "value": "",
+                "type": "query",
+                "description": "Task sub type of the subscriptions(s) to be returned."
+              },
+              {
+                "name": "lastUpdated",
+                "value": "",
+                "type": "query",
+                "description": "Date Filter. Returns items that have been updated after specified date."
+              }
+            ]
+          },
+          "docs": "List existing subscriptions."
+        },
+        {
+          "info": {
+            "name": "Subscribes to receive push notifications.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/subscriptions",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Use this API to subscribe to task notifications. See <https://developer.basware.com/api/p2p/manual#PushNotifications> for notification format which needs to be supported by the receiving endpoint. \n\nNote: Basware API validates the receiving endpoint by sending a notification with taskType 'ConnectionTest', to which a 200 OK HTTP response needs to be returned."
+        },
+        {
+          "info": {
+            "name": "Deletes existing subscriptions.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/v1/subscriptions",
+            "params": [
+              {
+                "name": "lastUpdated",
+                "value": "",
+                "type": "query",
+                "description": "Deletes subscriptions where lastUpdated is after specified datetime."
+              },
+              {
+                "name": "taskType",
+                "value": "",
+                "type": "query",
+                "description": "TaskType of subscription(s) to delete. ‘All’ can be used to specify any taskType."
+              },
+              {
+                "name": "taskSubType",
+                "value": "",
+                "type": "query",
+                "description": "TaskSubType of subscription(s) to delete. ‘All’ can be used to speciy any taskSubType."
+              }
+            ]
+          },
+          "docs": "Deletes existing subscriptions."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

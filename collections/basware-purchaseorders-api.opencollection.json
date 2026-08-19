@@ -1,0 +1,133 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Basware OAUTH2 authentication APIs AccountingDocuments PurchaseOrders API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "PurchaseOrders",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Returns imported purchase orders.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/purchaseOrders",
+            "headers": [
+              {
+                "name": "x-amz-meta-continuationtoken",
+                "value": "ac0108a2-5ade-4b78-8d57-1e4d5999cb83"
+              }
+            ],
+            "params": [
+              {
+                "name": "processingStatus",
+                "value": "",
+                "type": "query",
+                "description": "Document status filter. Returns items by purchase order status."
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "A limit for the number of items to be returned for one request. Limit can range between 1 and 100 items."
+              },
+              {
+                "name": "lastUpdated",
+                "value": "",
+                "type": "query",
+                "description": "Date filter. Returns items that have been updated after specified date."
+              }
+            ]
+          },
+          "docs": "Note: This GET operation returns a HTTP redirect, which the API client needs to follow. \r\n* 'Authorization' header must not be included in the redirected request (the second request after receiving a redirect). \r\n* 'Host' header needs to be included."
+        },
+        {
+          "info": {
+            "name": "Creates new purchase order(s), fully overwrites previous record if exists. P2P Purchase does not allow updates to purchase orders after import.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/purchaseOrders",
+            "headers": [
+              {
+                "name": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Notes: \r\n1. Any referenced vendors, users, payment terms, purchasing categories, quantity units, etc. need to exist in P2P when the purchase order is posted.\r\n2. Orders are technically handled as auto-approved requisitions resulting in a corresponding order being created. If you don't find the order in P2P UI, try looking for it as a requisition. It might have invalid data (see above) or the requisition approval process may be configured in a way to block automatic order creation.\r\n3. Field 'pro"
+        },
+        {
+          "info": {
+            "name": "Deletes data from Basware API. For manual one-time operations.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/v1/purchaseOrders",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "For manual one-time operations only, such as a manual clean-up to remove test data generated during API integration development. Only removes records from API layer. \r\nDeletion in target systems needs to be done separately using the data deletion mechanisms available in each of the target system in addition to deleting the data in Basware API."
+        },
+        {
+          "info": {
+            "name": "Returns single imported purchase order by orderId - identifier.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/purchaseOrders/:externalCode",
+            "params": [
+              {
+                "name": "externalCode",
+                "value": "",
+                "type": "path",
+                "description": "The externalCode of the purchaseOrder to be fetched"
+              }
+            ]
+          },
+          "docs": "Note: This GET operation returns a HTTP redirect, which the API client needs to follow. \r\n* 'Authorization' header must not be included in the redirected request (the second request after receiving a redirect). \r\n* 'Host' header needs to be included."
+        },
+        {
+          "info": {
+            "name": "Updates fields on specified order line. Can be used for adding new goods receipts to existing order lines when order is in 'Uncompleted' state. Preserves existing values in fields, which were not updated.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/v1/purchaseOrders/:externalCode",
+            "params": [
+              {
+                "name": "externalCode",
+                "value": "",
+                "type": "path",
+                "description": "The externalCode of the imported purchase order to be updated"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Notes: \r\n1) Field 'processingStatus' requires a value from API user in POST and PATCH request. If you need to import an order with more than 200 lines, this can be done by setting 'processingStatus' to 'Uncompleted' when POSTing the purchaseOrder and then adding additional lines to it using the PATCH method. ProcessingStaus: 'Uncompleted' prevents the order from being set to P2P so that more lines can be added. When all lines have been added, set 'processingStaus' = 'ReadyForImport' using PATCH "
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

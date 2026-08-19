@@ -1,0 +1,110 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Basware OAUTH2 authentication APIs AccountingDocuments PurchaseGoodsReceipts API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "PurchaseGoodsReceipts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Returns purchase goods receipts.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/purchaseGoodsReceipts",
+            "headers": [
+              {
+                "name": "x-amz-meta-continuationtoken",
+                "value": "78b71d6b-b219-494d-860e-8f1aa8945d8c"
+              }
+            ],
+            "params": [
+              {
+                "name": "processingStatus",
+                "value": "",
+                "type": "query",
+                "description": "Document status filter. Returns items by purchase goods receipt status."
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "A limit for the number of items to be returned for one request. Limit can range between 1 and 100 items."
+              },
+              {
+                "name": "lastUpdated",
+                "value": "",
+                "type": "query",
+                "description": "Date filter. Returns items that have been updated after specified date."
+              }
+            ]
+          },
+          "docs": "Returns purchase goods receipts."
+        },
+        {
+          "info": {
+            "name": "Creates new purchase goods receipts, fully overwrites previous record if exists.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/purchaseGoodsReceipts",
+            "headers": [
+              {
+                "name": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Specifies a single goods receipt or reverse goods receipt document concerning one purchase order. Goods receipt document can contain single receiving for some or all PO lines. So you can receive all order lines, some order lines or some order lines partly. Reversing has reference to GR document and line to reverse with negative quanties. For receiving or reversing to succeed all lines need to exist in order having sufficient quantity to receive. They cannot be closed, cancelled or matched. Sever"
+        },
+        {
+          "info": {
+            "name": "Deletes data from Basware API. For manual one-time operations.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/v1/purchaseGoodsReceipts",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "For manual one-time operations only, such as a manual clean-up to remove test data generated during API integration development. Only removes records from API layer. \r\nDeletion in target systems needs to be done separately using the data deletion mechanisms available in each of the target system in addition to deleting the data in Basware API."
+        },
+        {
+          "info": {
+            "name": "Returns single purchase goods receipts by orderId - identifier.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/purchaseGoodsReceipts/:externalCode",
+            "params": [
+              {
+                "name": "externalCode",
+                "value": "",
+                "type": "path",
+                "description": "The external code of the entity to be fetched"
+              }
+            ]
+          },
+          "docs": "Returns single purchase goods receipts by orderId - identifier."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

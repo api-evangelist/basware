@@ -1,0 +1,89 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Basware OAUTH2 authentication APIs AccountingDocuments Companies (deprecated) API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Companies (deprecated)",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Returns companies posted to Basware API.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/companies",
+            "headers": [
+              {
+                "name": "x-amz-meta-continuationtoken",
+                "value": "181e100d-88ea-4e60-a183-06eacc69334d"
+              }
+            ],
+            "params": [
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "A limit for the number of items to be returned for one request. Limit can range between 1 and 500 items."
+              },
+              {
+                "name": "lastUpdated",
+                "value": "",
+                "type": "query",
+                "description": "Date Filter. Returns items that have been updated after specified date."
+              }
+            ]
+          },
+          "docs": "Returns companies posted to Basware API."
+        },
+        {
+          "info": {
+            "name": "Creates new companies, fully overwrites previous record if exists.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/companies",
+            "headers": [
+              {
+                "name": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Note: Only consuming target system at the moment is Open Network Portal (incl. Vendor manager). Companies cannot be imported to P2P through this API. \r\n\r\nPlease see section \"[Usage scenario 6: Import companies](https://developer.basware.com/api/p2p/manual#usage6)\" of Basware Purchase-to-Pay API manual for details on implementing this API."
+        },
+        {
+          "info": {
+            "name": "Returns single company record by companyCode - identifier.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/companies/:companyCode",
+            "params": [
+              {
+                "name": "companyCode",
+                "value": "",
+                "type": "path",
+                "description": "The companyCode of the entity to be fetched"
+              }
+            ]
+          },
+          "docs": "Returns single company record by companyCode - identifier."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

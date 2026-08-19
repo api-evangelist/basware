@@ -1,0 +1,658 @@
+{
+  "item": [
+    {
+      "id": "63489bdc-b89b-4a57-9c48-388cb4e29fd3",
+      "name": "Notification history",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a20ab407-86aa-4bbc-b482-ddd3a76ac086",
+          "name": "Used to check status of an individual task by taskId. Does not contain task payload.",
+          "request": {
+            "name": "Used to check status of an individual task by taskId. Does not contain task payload.",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "tasks",
+                ":taskId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "taskId",
+                  "description": "(Required) TaskId of the task to be returned."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a0b3eba0-dd37-412e-ab60-d781a8643d7a",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "tasks",
+                    ":taskId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "taskId",
+                      "description": "(Required) TaskId of the task to be returned."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"taskStatus\": [\n    {\n      \"taskId\": \"sajkhe1i87yhdgdi6sad7iyahljh1ut1\",\n      \"taskStatus\": \"New\",\n      \"taskType\": \"AccountingDocuments\",\n      \"taskSubType\": \"WaitingForTransfer\",\n      \"documentId\": \"198phejkbaku7dilj12kdg867hbdsmag\",\n      \"expirationTime\": \"2020-12-04T08:39:13Z\",\n      \"externalProcessingTime\": \"2020-12-04T08:39:13Z\",\n      \"isSimulatedTask\": false,\n      \"lastUpdated\": \"2020-12-04T08:39:13Z\",\n      \"taskHistory\": [\n        {\n          \"action\": \"New\",\n          \"timeStamp\": \"2021-08-12T08:39:13Z\",\n          \"messages\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        {\n          \"action\": \"New\",\n          \"timeStamp\": \"2021-08-12T08:39:13Z\",\n          \"messages\": [\n            \"string\",\n            \"string\"\n          ]\n        }\n      ]\n    },\n    {\n      \"taskId\": \"sajkhe1i87yhdgdi6sad7iyahljh1ut1\",\n      \"taskStatus\": \"New\",\n      \"taskType\": \"AccountingDocuments\",\n      \"taskSubType\": \"WaitingForTransfer\",\n      \"documentId\": \"198phejkbaku7dilj12kdg867hbdsmag\",\n      \"expirationTime\": \"2020-12-04T08:39:13Z\",\n      \"externalProcessingTime\": \"2020-12-04T08:39:13Z\",\n      \"isSimulatedTask\": true,\n      \"lastUpdated\": \"2020-12-04T08:39:13Z\",\n      \"taskHistory\": [\n        {\n          \"action\": \"New\",\n          \"timeStamp\": \"2021-08-12T08:39:13Z\",\n          \"messages\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        {\n          \"action\": \"New\",\n          \"timeStamp\": \"2021-08-12T08:39:13Z\",\n          \"messages\": [\n            \"string\",\n            \"string\"\n          ]\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7abd9b6a-cdf4-45bf-a19c-0ea2c5644b25",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "tasks",
+                    ":taskId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "taskId",
+                      "description": "(Required) TaskId of the task to be returned."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "756b70ea-45a2-467c-958a-93bf7a04617e",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "tasks",
+                    ":taskId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "taskId",
+                      "description": "(Required) TaskId of the task to be returned."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"Not Found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f5e6099f-886b-412e-9237-9fa0b847bc77",
+              "name": "Unprocessable Entity",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "tasks",
+                    ":taskId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "taskId",
+                      "description": "(Required) TaskId of the task to be returned."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"UnprocessableEntity\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d453ffbe-1e88-4c5a-b54d-570a32dd8664",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "tasks",
+                    ":taskId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "taskId",
+                      "description": "(Required) TaskId of the task to be returned."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Internal server error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a9baea05-4780-4979-a28c-05a1cfb6ffd4",
+          "name": "Returns task status by search criteria. Does not contain task payload.",
+          "request": {
+            "name": "Returns task status by search criteria. Does not contain task payload.",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "tasks"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "taskType",
+                  "value": "<string>",
+                  "description": "Task type (InvoiceGenericTask, InvoiceCalcTax, etc)"
+                },
+                {
+                  "disabled": false,
+                  "key": "taskStatus",
+                  "value": "<string>",
+                  "description": "Status of the task. Available values: 'New', 'Completed', 'Failed'."
+                },
+                {
+                  "disabled": false,
+                  "key": "documentId",
+                  "value": "<string>",
+                  "description": "Returns all tasks for a specific document (for example all tasks related to one AccountingDocument)."
+                },
+                {
+                  "disabled": false,
+                  "key": "lastUpdated",
+                  "value": "<string>",
+                  "description": "Date Filter. Returns tasks which have been updated after specified datetime."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Used to get next page of results when item count indicated by 'pageSize' is exceeded. A token is returned in header (not body) parameter 'X-amz-meta-continuationToken' of the response whenever there are more records to fetch. Post the received value here in a new GET request to receive the next page of results.",
+                "key": "x-amz-meta-continuationtoken",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "58c340b7-96dd-462e-866a-5d2c41b4f171",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "tasks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "taskType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "taskStatus",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "documentId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "lastUpdated",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Used to get next page of results when item count indicated by 'pageSize' is exceeded. A token is returned in header (not body) parameter 'X-amz-meta-continuationToken' of the response whenever there are more records to fetch. Post the received value here in a new GET request to receive the next page of results.",
+                    "key": "x-amz-meta-continuationtoken",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"taskStatus\": [\n    {\n      \"taskId\": \"sajkhe1i87yhdgdi6sad7iyahljh1ut1\",\n      \"taskStatus\": \"New\",\n      \"taskType\": \"AccountingDocuments\",\n      \"taskSubType\": \"WaitingForTransfer\",\n      \"documentId\": \"198phejkbaku7dilj12kdg867hbdsmag\",\n      \"expirationTime\": \"2020-12-04T08:39:13Z\",\n      \"externalProcessingTime\": \"2020-12-04T08:39:13Z\",\n      \"isSimulatedTask\": true,\n      \"lastUpdated\": \"2020-12-04T08:39:13Z\",\n      \"taskHistory\": [\n        {\n          \"action\": \"New\",\n          \"timeStamp\": \"2021-08-12T08:39:13Z\",\n          \"messages\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        {\n          \"action\": \"New\",\n          \"timeStamp\": \"2021-08-12T08:39:13Z\",\n          \"messages\": [\n            \"string\",\n            \"string\"\n          ]\n        }\n      ]\n    },\n    {\n      \"taskId\": \"sajkhe1i87yhdgdi6sad7iyahljh1ut1\",\n      \"taskStatus\": \"New\",\n      \"taskType\": \"AccountingDocuments\",\n      \"taskSubType\": \"WaitingForTransfer\",\n      \"documentId\": \"198phejkbaku7dilj12kdg867hbdsmag\",\n      \"expirationTime\": \"2020-12-04T08:39:13Z\",\n      \"externalProcessingTime\": \"2020-12-04T08:39:13Z\",\n      \"isSimulatedTask\": true,\n      \"lastUpdated\": \"2020-12-04T08:39:13Z\",\n      \"taskHistory\": [\n        {\n          \"action\": \"New\",\n          \"timeStamp\": \"2021-08-12T08:39:13Z\",\n          \"messages\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        {\n          \"action\": \"New\",\n          \"timeStamp\": \"2021-08-12T08:39:13Z\",\n          \"messages\": [\n            \"string\",\n            \"string\"\n          ]\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "516ec115-de9c-41c1-b066-e26dd989a7a2",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "tasks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "taskType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "taskStatus",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "documentId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "lastUpdated",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Used to get next page of results when item count indicated by 'pageSize' is exceeded. A token is returned in header (not body) parameter 'X-amz-meta-continuationToken' of the response whenever there are more records to fetch. Post the received value here in a new GET request to receive the next page of results.",
+                    "key": "x-amz-meta-continuationtoken",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b2a5e625-b641-4801-a43a-91c0546ab782",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "tasks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "taskType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "taskStatus",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "documentId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "lastUpdated",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Used to get next page of results when item count indicated by 'pageSize' is exceeded. A token is returned in header (not body) parameter 'X-amz-meta-continuationToken' of the response whenever there are more records to fetch. Post the received value here in a new GET request to receive the next page of results.",
+                    "key": "x-amz-meta-continuationtoken",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"Not Found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2e861bae-94e2-45d1-8544-24606b8d06a5",
+              "name": "Unprocessable Entity",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "tasks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "taskType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "taskStatus",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "documentId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "lastUpdated",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Used to get next page of results when item count indicated by 'pageSize' is exceeded. A token is returned in header (not body) parameter 'X-amz-meta-continuationToken' of the response whenever there are more records to fetch. Post the received value here in a new GET request to receive the next page of results.",
+                    "key": "x-amz-meta-continuationtoken",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"UnprocessableEntity\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c04d48bc-bd96-47b3-b870-78beff3c8b39",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "tasks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "taskType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "taskStatus",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "documentId",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "lastUpdated",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Used to get next page of results when item count indicated by 'pageSize' is exceeded. A token is returned in header (not body) parameter 'X-amz-meta-continuationToken' of the response whenever there are more records to fetch. Post the received value here in a new GET request to receive the next page of results.",
+                    "key": "x-amz-meta-continuationtoken",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Internal server error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "fe168c08-14b1-4ef1-b618-f381e7325a86",
+    "name": "Basware OAUTH2 authentication APIs AccountingDocuments Notification history API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "**Using OAUTH2.0 authentication:**\n\nGet API access token from api.basware.com/tokens\n1. Using client id and client secret, which you can obtain from Basware. \n2. Specify which APIs can be accessed by using the token e.g. Read only access to vendors API only (these are called scopes). Available scopes are listed at <https://developer.basware.com/api/p2p/manual#AccessRights>. \n3. Each token has an expiration time, until which it can be used to call APIs.\n\nWhen using OAUTH2 authentication, you need to pass the OAUTH2 authentication token when calling Basware API endpoints. Available Basware API operations are documented at <https://api.basware.com/swagger>. \n\nSee the Basware API developer site at <https://developer.basware.com/api/p2p/manual#Authentication> for more details on API authentication.",
+      "type": "text/plain"
+    }
+  }
+}

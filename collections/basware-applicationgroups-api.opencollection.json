@@ -1,0 +1,89 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Basware OAUTH2 authentication APIs AccountingDocuments ApplicationGroups API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "ApplicationGroups",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Returns application groups.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/applicationGroups",
+            "headers": [
+              {
+                "name": "x-amz-meta-continuationtoken",
+                "value": "2913fb86-1258-4372-8e2c-d149ad982c6a"
+              }
+            ],
+            "params": [
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "A limit for the number of items to be returned for one request. Limit can range between 1 and 100 items."
+              },
+              {
+                "name": "lastUpdated",
+                "value": "",
+                "type": "query",
+                "description": "Date filter. Returns items that have been updated after specified date."
+              }
+            ]
+          },
+          "docs": "Application groups give access to a specific set of applications for users imported through 'users' API. Each user needs to be assigned to one or more application group(s) by specifying 'applicationGroupCode' values in users API."
+        },
+        {
+          "info": {
+            "name": "Creates new Application groups, fully overwrites previous record if exists.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/applicationGroups",
+            "headers": [
+              {
+                "name": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Application groups give access to a specific set of applications for users imported through 'users' API. Each user needs to be assigned to one or more application group(s) by specifying 'applicationGroupCode' values in users API. \r\nNotes: \r\n1. User 'loginType' (set on users API) needs to be '4' (user authentication through Basware Access) when the user is imported to any system besides (or in addition to) P2P.\r\n2. POSTing to applicationGroups API returns a link to 'redistribute users' task statu"
+        },
+        {
+          "info": {
+            "name": "Returns single Application Group by application group code - identifier.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/applicationGroups/:applicationGroupCode",
+            "params": [
+              {
+                "name": "applicationGroupCode",
+                "value": "",
+                "type": "path",
+                "description": "The external code of the entity to be fetched"
+              }
+            ]
+          },
+          "docs": "Application groups give access to a specific set of applications for users imported through 'users' API. Each user needs to be assigned to one or more application group(s) by specifying 'applicationGroupCode' values in users API."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

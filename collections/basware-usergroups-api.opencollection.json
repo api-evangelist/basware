@@ -1,0 +1,103 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Basware OAUTH2 authentication APIs AccountingDocuments UserGroups API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "UserGroups",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Returns user group by externalCode",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/userGroups/:externalCode",
+            "headers": [
+              {
+                "name": "x-amz-meta-continuationToken",
+                "value": "7a71f046-4450-47b1-9ee9-8af480f5be1b"
+              }
+            ],
+            "params": [
+              {
+                "name": "externalCode",
+                "value": "",
+                "type": "path",
+                "description": "The ExternalCode of the entity to be fetched"
+              }
+            ]
+          },
+          "docs": "Returns user group by externalCode"
+        },
+        {
+          "info": {
+            "name": "Returns a list of available user groups.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/userGroups",
+            "headers": [
+              {
+                "name": "x-amz-meta-continuationToken",
+                "value": "4ef57cfb-145c-4e44-9337-ff363180c1c1"
+              }
+            ],
+            "params": [
+              {
+                "name": "OrganizationExternalCode",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns a list of available user groups."
+        },
+        {
+          "info": {
+            "name": "Create or update user group",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/userGroups",
+            "headers": [
+              {
+                "name": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create or update user group"
+        },
+        {
+          "info": {
+            "name": "Delete user groups",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/v1/userGroups",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "For manual one-time operations only, such as a manual clean-up to remove test data generated during API integration development. Only removes records from API layer. \r\nDeletion in target systems needs to be done separately using the data deletion mechanisms available in each of the target system in addition to deleting the data in Basware API."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

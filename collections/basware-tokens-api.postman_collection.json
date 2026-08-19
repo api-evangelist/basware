@@ -1,0 +1,389 @@
+{
+  "item": [
+    {
+      "id": "8c53d19e-b8ca-462c-8b45-81d0fcb591aa",
+      "name": "Tokens",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "6045ea60-6017-4936-a24d-00911508f183",
+          "name": "Returns OAUTH2 access tokens.",
+          "request": {
+            "name": "Returns OAUTH2 access tokens.",
+            "description": {
+              "content": "Tokens returned by this API are used to provide access to Basware API operations when OAUTH2 authorization is used for the API requests. The available operations are defined at <https://api.basware.com/swagger>.\n             \nNote: the request body parameters are sent as HTTP form parameters ('application/x-www-form-urlencoded') for this authentication API, while they are sent as raw application/json in the API operations defined at https://api.basware.com/swagger.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "tokens"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "grant_type",
+                  "value": "<string>",
+                  "description": "(Required) Oauth2 grant type. Supported value(s): 'client_credentials' = Client credential authentication flow."
+                },
+                {
+                  "disabled": false,
+                  "key": "scope",
+                  "value": "<string>",
+                  "description": "(Required) Scopes define the operations (e.g. vendors.write) allowed using the returned access token. See <https://developer.basware.com/api/p2p/manual#AccessRights> for list of available operations. Passed as HTTP form parameter."
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "2eb08822-4a89-4141-a0f8-b374cf0825d3",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "tokens"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) To authorize your access token request, please pass the client id and client secret of your oAUTH2 client as username and password. These are sent by using Basic HTTP authorization, in the 'authorization' header. Passed as HTTP form parameter.",
+                    "key": "authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Oauth2 grant type. Supported value(s): 'client_credentials' = Client credential authentication flow.",
+                        "type": "text/plain"
+                      },
+                      "key": "grant_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Scopes define the operations (e.g. vendors.write) allowed using the returned access token. See <https://developer.basware.com/api/p2p/manual#AccessRights> for list of available operations. Passed as HTTP form parameter.",
+                        "type": "text/plain"
+                      },
+                      "key": "scope",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"access_token\": \"eyJhbGciOiJSUzI1NiIsImtpZCI6Il9BNHRlRFh6THR2Rm1zeXF5YkloRjJQbHVIaHU3QW1yZUw2aURLdF9xS1kiLCJ0eXAiOiJhdCtqd3QifQ.eyJzdWIiOiAiMWRyMm44cjNwMTg2czd1amc0dmpzNXJraXEiLCAic2NvcGUiOiAidXNlcnMucmVhZCB1c2Vycy53cml0ZSBhY2NvdW50cy5yZWFkIHZlbmRvcnMucmVhZCB2ZW5kb3JzLndyaXRlIiwgImF1dGhfdGltZSI6IDE2Mzc5MDUwMTMsICJpc3MiOiAiaHR0cHM6Ly9hcGkuYmFzd2FyZS5jb20iLCAiYXVkIjogIk9wZW5BUEkiLCAiZXhwIjogMTYzNzkwODYxMywgImlhdCI6IDE2Mzc5MDUwMTMsICJqdGkiOiAiZGM4ZDA4YjgtNGU3YS0xMWVjLTlkZTEtYjJkOGY2OGY5N2VkIiwgImJ3Y2lkIjogIjAyMDc3OS1URVNUMSJ9.LNkXSTw6GICKv7UAdn7IcB75ze6Yvp8PelpgzZ9wBbsTGDTPWV6K397Z-vGn_zJevKSXxmQlbxVPuhHnmo9JI7zZtjEJ7t8Tw2VJl9sQOeZTFkt7QDn6FNFTIGhP7aE-AgJOyTswedp0r9EUoFc8DddB49vytyMwpHtHRnUz1TOVIexh0mcS225cwV4zZmI0PUCvY-GKUlJTm9QNruDVEJ-K2wun9PvH3S31PtGkVfS-2GThjtJN7tOK0tsO9sRf3oqvRAvf93TxCoSg_CKyZRGUWCruV9ayu0m8dTrOfuKnOlG4-eTpDtUWDZACdkZZvbzOBT5_Ikm59LHHXBs5QA\",\n  \"scope\": \"users.read users.write accounts.read vendors.read vendors.write\",\n  \"expires_in\": 3600,\n  \"token_type\": \"Bearer\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b904a4e6-1524-49fc-99a2-4e0c8c0f1e81",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "tokens"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) To authorize your access token request, please pass the client id and client secret of your oAUTH2 client as username and password. These are sent by using Basic HTTP authorization, in the 'authorization' header. Passed as HTTP form parameter.",
+                    "key": "authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Oauth2 grant type. Supported value(s): 'client_credentials' = Client credential authentication flow.",
+                        "type": "text/plain"
+                      },
+                      "key": "grant_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Scopes define the operations (e.g. vendors.write) allowed using the returned access token. See <https://developer.basware.com/api/p2p/manual#AccessRights> for list of available operations. Passed as HTTP form parameter.",
+                        "type": "text/plain"
+                      },
+                      "key": "scope",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"invalid_request\",\n  \"error_description\": \"grant_type field required\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "17baa6c3-7ab9-4103-a579-4061ce13d774",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "tokens"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) To authorize your access token request, please pass the client id and client secret of your oAUTH2 client as username and password. These are sent by using Basic HTTP authorization, in the 'authorization' header. Passed as HTTP form parameter.",
+                    "key": "authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Oauth2 grant type. Supported value(s): 'client_credentials' = Client credential authentication flow.",
+                        "type": "text/plain"
+                      },
+                      "key": "grant_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Scopes define the operations (e.g. vendors.write) allowed using the returned access token. See <https://developer.basware.com/api/p2p/manual#AccessRights> for list of available operations. Passed as HTTP form parameter.",
+                        "type": "text/plain"
+                      },
+                      "key": "scope",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"invalid_client\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dbf927d1-71d8-4a03-94af-ea468a8cf6f2",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "tokens"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) To authorize your access token request, please pass the client id and client secret of your oAUTH2 client as username and password. These are sent by using Basic HTTP authorization, in the 'authorization' header. Passed as HTTP form parameter.",
+                    "key": "authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Oauth2 grant type. Supported value(s): 'client_credentials' = Client credential authentication flow.",
+                        "type": "text/plain"
+                      },
+                      "key": "grant_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Scopes define the operations (e.g. vendors.write) allowed using the returned access token. See <https://developer.basware.com/api/p2p/manual#AccessRights> for list of available operations. Passed as HTTP form parameter.",
+                        "type": "text/plain"
+                      },
+                      "key": "scope",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "f1979086-5fef-4cf2-b637-e2f9ae3fe3d2",
+    "name": "Basware OAUTH2 authentication APIs AccountingDocuments Tokens API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "**Using OAUTH2.0 authentication:**\n\nGet API access token from api.basware.com/tokens\n1. Using client id and client secret, which you can obtain from Basware. \n2. Specify which APIs can be accessed by using the token e.g. Read only access to vendors API only (these are called scopes). Available scopes are listed at <https://developer.basware.com/api/p2p/manual#AccessRights>. \n3. Each token has an expiration time, until which it can be used to call APIs.\n\nWhen using OAUTH2 authentication, you need to pass the OAUTH2 authentication token when calling Basware API endpoints. Available Basware API operations are documented at <https://api.basware.com/swagger>. \n\nSee the Basware API developer site at <https://developer.basware.com/api/p2p/manual#Authentication> for more details on API authentication.",
+      "type": "text/plain"
+    }
+  }
+}

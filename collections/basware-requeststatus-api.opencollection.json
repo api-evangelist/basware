@@ -1,0 +1,125 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Basware OAUTH2 authentication APIs AccountingDocuments RequestStatus API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "RequestStatus",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Returns request status responses from receiving end-system(s), based on request id.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/requestStatus/:requestId",
+            "params": [
+              {
+                "name": "requestId",
+                "value": "",
+                "type": "path",
+                "description": "The request id used to post in the data. This is returned in request header parameter 'x-amzn-RequestId', in response of the original request."
+              },
+              {
+                "name": "system",
+                "value": "",
+                "type": "query",
+                "description": "Allows limiting the responses to requests routed to a particular target system."
+              },
+              {
+                "name": "ignoreSuccessfulItems",
+                "value": "",
+                "type": "query",
+                "description": "Allows filtering out succesful records within the response. Can be used to show only records with errors and records in progress."
+              }
+            ]
+          },
+          "docs": "Note: RequestStatus functionality is not yet available for 'users' API for 'Basware network' target system, which uses application codes 'SupplierPortal' and 'SupplierManagement'). \r\n\r\nPlease see section \"[Usage scenario 5: Error handling and monitoring](https://developer.basware.com/api/p2p/manual#usage5)\" in Basware Purchase-to-Pay API manual for details on implementing error handling with Basware API."
+        },
+        {
+          "info": {
+            "name": "Returns request status responses from receiving end-system(s), based on status and time stamp.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/requestStatus",
+            "headers": [
+              {
+                "name": "x-amz-meta-continuationtoken",
+                "value": "273705a0-c35a-4fda-8f98-450705ac5e96"
+              }
+            ],
+            "params": [
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Allows filtering requests by status. Defaults to status ‘Error’ if search is not narrowed-down by entityType or system."
+              },
+              {
+                "name": "entityType",
+                "value": "",
+                "type": "query",
+                "description": "Allows filtering requests by EntityType."
+              },
+              {
+                "name": "ignoreSuccessfullItems",
+                "value": "",
+                "type": "query",
+                "description": "Allows filtering out succesful records within the response. Can be used to show only records with errors and records in progress."
+              },
+              {
+                "name": "system",
+                "value": "",
+                "type": "query",
+                "description": "Allows limiting the responses to requests routed to a particular target system."
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "A limit for the number of items to be returned for one request. Limit can range between 1 and 500 items."
+              },
+              {
+                "name": "lastUpdated",
+                "value": "",
+                "type": "query",
+                "description": "Date Filter. Returns items that have been updated after specified date."
+              }
+            ]
+          },
+          "docs": "Notes:\r\n1) This API supports sending webhook based [push notifications](https://developer.basware.com/api/p2p/manual#PushNotifications) when new data is available to be exported. \r\n2) RequestStatus functionality is not yet available for 'users' API for 'Basware network' target system, which uses application codes 'SupplierPortal' and 'SupplierManagement'). \r\n\r\nPlease see section \"[Usage scenario 5: Error handling and monitoring](https://developer.basware.com/api/p2p/manual#usage5)\" in Basware Pu"
+        },
+        {
+          "info": {
+            "name": "Acknowledged request status responses are no longer offered for next GET operation.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/requestStatus/acknowledge",
+            "headers": [
+              {
+                "name": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Acknowledging will status from 'Success' or 'Error' to indicate the request has already been acknowledged. Please see section \"[Usage scenario 5: Error handling and monitoring](https://developer.basware.com/api/p2p/manual#usage5)\" in Basware Purchase-to-Pay API manual for details on implementing error handling with Basware API."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,33 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Basware OAUTH2 authentication APIs AccountingDocuments Document Import API API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Document Import API",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Upload Document Basic Auth",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v2/smartpdf/invoiceUpload",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Post upload document metadata and receive a presigned URL for uploading the document"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

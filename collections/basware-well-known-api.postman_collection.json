@@ -1,0 +1,176 @@
+{
+  "item": [
+    {
+      "id": "d14a3ab6-012b-47ac-ac9f-73a688fc4195",
+      "name": ".well-known",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "385a8a7d-c013-4caf-b137-3c82bd03cdd8",
+          "name": "Provides jwks.json containing metadata to validate token signature.",
+          "request": {
+            "name": "Provides jwks.json containing metadata to validate token signature.",
+            "description": {
+              "content": "Returns signature keys for verifying authenticity of OAUTH2 tokens issued by Basware API. This endpoint is used by Basware to validate tokens passed by API clients in API operation requests using OAUTH2 authentication. It is good practice for the oauth2 tokens (from 'tokens' API) to be validated also by the API client.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ".well-known",
+                "jwks.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "44c4bb1c-82e4-4590-948c-f1e46b3162cc",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ".well-known",
+                    "jwks.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"keys\": [\n    {\n      \"e\": \"AQAB\",\n      \"kid\": \"_A4teDXzLtvFmsyqybIhF2PluHhu7AmreL6iDKt_qKY\",\n      \"kty\": \"RSA\",\n      \"n\": \"3BrQ9O9qpvQFtFHuUE5DkYztxtHuyZvOXwX-AYc1fhgnM__WIocrQITVRez-OMJUDhFvM2n8c9CrzDxlywnAtsm-wwDnH-aauKSqA5Nd1UxXTFDreRqGcM--ohSb0zFW2XltsADIIuyO5IE6Vy_TX9xOpsb0NfWGG_iumQya0zIM7-4TKaorUMyi-hwVrRa82jIDYCBgJMw2KJp4HlYCxY75LXz-zie7CN4QNXq7omtSvOBfxBEYicFjGQgAFBwIhZfOT8u1N_7dwW7K-2LHtVkdVeX6pEtVvFwz9FRL67rfCyTiTjzPa-1LIEPWtBfVsckru8_TaKyhF5yrQUcFMQ\",\n      \"use\": \"sig\",\n      \"alg\": \"RS256\"\n    },\n    {\n      \"e\": \"AQAB\",\n      \"kid\": \"_A4teDXzLtvFmsyqybIhF2PluHhu7AmreL6iDKt_qKY\",\n      \"kty\": \"RSA\",\n      \"n\": \"3BrQ9O9qpvQFtFHuUE5DkYztxtHuyZvOXwX-AYc1fhgnM__WIocrQITVRez-OMJUDhFvM2n8c9CrzDxlywnAtsm-wwDnH-aauKSqA5Nd1UxXTFDreRqGcM--ohSb0zFW2XltsADIIuyO5IE6Vy_TX9xOpsb0NfWGG_iumQya0zIM7-4TKaorUMyi-hwVrRa82jIDYCBgJMw2KJp4HlYCxY75LXz-zie7CN4QNXq7omtSvOBfxBEYicFjGQgAFBwIhZfOT8u1N_7dwW7K-2LHtVkdVeX6pEtVvFwz9FRL67rfCyTiTjzPa-1LIEPWtBfVsckru8_TaKyhF5yrQUcFMQ\",\n      \"use\": \"sig\",\n      \"alg\": \"RS256\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6931533c-5275-4d2a-800d-242bf0ce021d",
+          "name": "Provides configuration information about the Basware API Authentication Service (IDP).",
+          "request": {
+            "name": "Provides configuration information about the Basware API Authentication Service (IDP).",
+            "description": {
+              "content": "This is a discovery endpoint to locate public keys used to validate Basware API access tokens.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ".well-known",
+                "openid-configuration"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9e0ddabc-1178-4833-afcc-ccab009b0c40",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ".well-known",
+                    "openid-configuration"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"issuer\": \"https://api.basware.com/\",\n  \"jwks_uri\": \"https://api.basware.com/.well-known/jwks.json\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "525a1a6a-dd28-40d6-85d8-cff3bcd02f82",
+    "name": "Basware OAUTH2 authentication APIs AccountingDocuments .well-known API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "**Using OAUTH2.0 authentication:**\n\nGet API access token from api.basware.com/tokens\n1. Using client id and client secret, which you can obtain from Basware. \n2. Specify which APIs can be accessed by using the token e.g. Read only access to vendors API only (these are called scopes). Available scopes are listed at <https://developer.basware.com/api/p2p/manual#AccessRights>. \n3. Each token has an expiration time, until which it can be used to call APIs.\n\nWhen using OAUTH2 authentication, you need to pass the OAUTH2 authentication token when calling Basware API endpoints. Available Basware API operations are documented at <https://api.basware.com/swagger>. \n\nSee the Basware API developer site at <https://developer.basware.com/api/p2p/manual#Authentication> for more details on API authentication.",
+      "type": "text/plain"
+    }
+  }
+}

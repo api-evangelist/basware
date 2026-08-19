@@ -1,0 +1,122 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Basware OAUTH2 authentication APIs AccountingDocuments ExportedContractSpends API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "ExportedContractSpends",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Returns contract spends exported from Basware P2P.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/exportedContractSpends",
+            "headers": [
+              {
+                "name": "x-amz-meta-continuationtoken",
+                "value": "4e1c0aa1-5478-4396-a6c1-4fd816030924"
+              }
+            ],
+            "params": [
+              {
+                "name": "processingStatus",
+                "value": "",
+                "type": "query",
+                "description": "Document status filter. Returns records by document status. Use 'WaitingForExport' to retrieve unacknowledged records."
+              },
+              {
+                "name": "documentType",
+                "value": "",
+                "type": "query",
+                "description": "Document type filter. Returns items for specific document type."
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "A limit for the number of items to be returned for one request. Limit can range between 1 and 500 items."
+              },
+              {
+                "name": "contractExternalCode",
+                "value": "",
+                "type": "query",
+                "description": "Contract code filter. Returns items for specific contract."
+              },
+              {
+                "name": "lastUpdated",
+                "value": "",
+                "type": "query",
+                "description": "Date Filter. Returns items that have been updated after specified date."
+              }
+            ]
+          },
+          "docs": "Notes: \r\n1) Whether contract spends are collected is controlled by the fields 'invoiceSpend', 'orderSpend' and 'spendPlanSpend'. Spend is not collected when these fields are set to 'false'.\r\n2) This API supports sending webhook based  [push notifications](https://developer.basware.com/api/p2p/manual#PushNotifications) when new data is available to be exported. \r\n3) This API exports spends for contracts imported through Basware API. Spend is not exported for contracts imported through anyerp.\r\n\r\n"
+        },
+        {
+          "info": {
+            "name": "Deletes data from Basware API. For manual one-time operations.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/v1/exportedContractSpends",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "For manual one-time operations only, such as a manual clean-up to remove test data generated during API integration development. Only removes records from API layer. \r\nDeletion in target systems needs to be done separately using the data deletion mechanisms available in each of the target system in addition to deleting the data in Basware API."
+        },
+        {
+          "info": {
+            "name": "Returns contract spend details exported from Basware P2P by externalCode.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/exportedContractSpends/:externalCode",
+            "params": [
+              {
+                "name": "externalCode",
+                "value": "",
+                "type": "path",
+                "description": "The ExternalCode of the ContractSpend to be fetched."
+              }
+            ]
+          },
+          "docs": "Notes: \r\n1) Whether contract spends are collected is controlled by the fields 'invoiceSpend', 'orderSpend' and 'spendPlanSpend'. Spend is not collected when these fields are set to 'false'.\r\n2) This API exports spends for contracts imported through Basware API. Spend is not exported for contracts imported through anyerp. \r\n\r\nPlease see section \"[Usage scenario 4: Import and export procurement data](https://developer.basware.com/api/p2p/manual#usage4)\" for details on implementing this API. Check "
+        },
+        {
+          "info": {
+            "name": "Acknowledged contract spends are no longer returned on the next GET operation.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/exportedContractSpends/acknowledge",
+            "headers": [
+              {
+                "name": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Notes: \r\n1) Updates 'processingStatus' -field on the document to allow filtering out already acknowledged documents on the next GET operation. \r\n2) For a document which is already acknowledged (processingStatus: 'Exported'), API will return 405 'Method not allowed' if acknowledge is attempted again on the document.\r\n\r\nPlease see section \"[Usage scenario 4: Import and export procurement data](https://developer.basware.com/api/p2p/manual#usage4)\" for details on implementing this API. Check out als"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

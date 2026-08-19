@@ -1,0 +1,846 @@
+{
+  "item": [
+    {
+      "id": "b89da167-540c-43ee-9e53-0a4adb5fb963",
+      "name": "Subscribe to notifications",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f1d999dc-9f24-445f-a711-de386b8e86b9",
+          "name": "Subscribes to receive push notifications.",
+          "request": {
+            "name": "Subscribes to receive push notifications.",
+            "description": {
+              "content": "Use this API to subscribe to task notifications. See <https://developer.basware.com/api/p2p/manual#PushNotifications> for notification format which needs to be supported by the receiving endpoint. \n\nNote: Basware API validates the receiving endpoint by sending a notification with taskType 'ConnectionTest', to which a 200 OK HTTP response needs to be returned.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "subscriptions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "[\n  {\n    \"taskType\": \"<string>\",\n    \"subscriptionType\": \"<string>\",\n    \"notificationWebhookURL\": \"<uri>\",\n    \"webhookAuthenticationToken\": \"<string>\",\n    \"taskSubType\": \"<string>\",\n    \"lastUpdated\": \"<dateTime>\",\n    \"autoResponder\": {\n      \"autoResponseMode\": \"<string>\",\n      \"autoResponseMessage\": \"<string>\",\n      \"fieldUpdateArray\": [\n        {\n          \"fieldId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"updateToValue\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"fieldId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"updateToValue\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ]\n    }\n  },\n  {\n    \"taskType\": \"<string>\",\n    \"subscriptionType\": \"<string>\",\n    \"notificationWebhookURL\": \"<uri>\",\n    \"webhookAuthenticationToken\": \"<string>\",\n    \"taskSubType\": \"<string>\",\n    \"lastUpdated\": \"<dateTime>\",\n    \"autoResponder\": {\n      \"autoResponseMode\": \"<string>\",\n      \"autoResponseMessage\": \"<string>\",\n      \"fieldUpdateArray\": [\n        {\n          \"fieldId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"updateToValue\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"fieldId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"updateToValue\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ]\n    }\n  }\n]",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "250ae466-1df7-4b36-bdc4-1d2ed5653533",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "subscriptions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"taskType\": \"AccountingDocuments\",\n    \"subscriptionType\": \"Webhook\",\n    \"notificationWebhookURL\": \"https://bwnotificationapi.customer.com/accountingdocumentnotifications\",\n    \"webhookAuthenticationToken\": \"ad65rujltr9093ijhdkutiyua09döijhsa76d8799w8pqugdfafjdhfkjhadls\",\n    \"taskSubType\": \"All\",\n    \"lastUpdated\": \"2021-08-04T08:39:13Z\",\n    \"autoResponder\": {\n      \"autoResponseMode\": \"Disabled\",\n      \"autoResponseMessage\": \"Updated coding details.\",\n      \"fieldUpdateArray\": [\n        {\n          \"fieldId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"updateToValue\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"fieldId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"updateToValue\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ]\n    }\n  },\n  {\n    \"taskType\": \"AccountingDocuments\",\n    \"subscriptionType\": \"Webhook\",\n    \"notificationWebhookURL\": \"https://bwnotificationapi.customer.com/accountingdocumentnotifications\",\n    \"webhookAuthenticationToken\": \"ad65rujltr9093ijhdkutiyua09döijhsa76d8799w8pqugdfafjdhfkjhadls\",\n    \"taskSubType\": \"All\",\n    \"lastUpdated\": \"2021-08-04T08:39:13Z\",\n    \"autoResponder\": {\n      \"autoResponseMode\": \"Disabled\",\n      \"autoResponseMessage\": \"Updated coding details.\",\n      \"fieldUpdateArray\": [\n        {\n          \"fieldId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"updateToValue\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"fieldId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"updateToValue\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ]\n    }\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"taskType\": \"AccountingDocuments\",\n    \"subscriptionType\": \"Webhook\",\n    \"notificationWebhookURL\": \"https://bwnotificationapi.customer.com/accountingdocumentnotifications\",\n    \"webhookAuthenticationToken\": \"ad65rujltr9093ijhdkutiyua09döijhsa76d8799w8pqugdfafjdhfkjhadls\",\n    \"taskSubType\": \"All\",\n    \"lastUpdated\": \"2021-08-04T08:39:13Z\",\n    \"autoResponder\": {\n      \"autoResponseMode\": \"Disabled\",\n      \"autoResponseMessage\": \"Updated coding details.\",\n      \"fieldUpdateArray\": [\n        {\n          \"fieldId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"updateToValue\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"fieldId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"updateToValue\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ]\n    }\n  },\n  {\n    \"taskType\": \"AccountingDocuments\",\n    \"subscriptionType\": \"Webhook\",\n    \"notificationWebhookURL\": \"https://bwnotificationapi.customer.com/accountingdocumentnotifications\",\n    \"webhookAuthenticationToken\": \"ad65rujltr9093ijhdkutiyua09döijhsa76d8799w8pqugdfafjdhfkjhadls\",\n    \"taskSubType\": \"All\",\n    \"lastUpdated\": \"2021-08-04T08:39:13Z\",\n    \"autoResponder\": {\n      \"autoResponseMode\": \"Disabled\",\n      \"autoResponseMessage\": \"Updated coding details.\",\n      \"fieldUpdateArray\": [\n        {\n          \"fieldId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"updateToValue\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"fieldId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"updateToValue\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ]\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6ed35a21-a4c8-4b2c-844d-de8aa00ca3a0",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "subscriptions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"taskType\": \"AccountingDocuments\",\n    \"subscriptionType\": \"Webhook\",\n    \"notificationWebhookURL\": \"https://bwnotificationapi.customer.com/accountingdocumentnotifications\",\n    \"webhookAuthenticationToken\": \"ad65rujltr9093ijhdkutiyua09döijhsa76d8799w8pqugdfafjdhfkjhadls\",\n    \"taskSubType\": \"All\",\n    \"lastUpdated\": \"2021-08-04T08:39:13Z\",\n    \"autoResponder\": {\n      \"autoResponseMode\": \"Disabled\",\n      \"autoResponseMessage\": \"Updated coding details.\",\n      \"fieldUpdateArray\": [\n        {\n          \"fieldId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"updateToValue\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"fieldId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"updateToValue\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ]\n    }\n  },\n  {\n    \"taskType\": \"AccountingDocuments\",\n    \"subscriptionType\": \"Webhook\",\n    \"notificationWebhookURL\": \"https://bwnotificationapi.customer.com/accountingdocumentnotifications\",\n    \"webhookAuthenticationToken\": \"ad65rujltr9093ijhdkutiyua09döijhsa76d8799w8pqugdfafjdhfkjhadls\",\n    \"taskSubType\": \"All\",\n    \"lastUpdated\": \"2021-08-04T08:39:13Z\",\n    \"autoResponder\": {\n      \"autoResponseMode\": \"Disabled\",\n      \"autoResponseMessage\": \"Updated coding details.\",\n      \"fieldUpdateArray\": [\n        {\n          \"fieldId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"updateToValue\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"fieldId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"updateToValue\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ]\n    }\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"KLF5BiZ9DoEEMlQ=\",\n  \"hasError\": true,\n  \"errorMessages\": [\n    {\n      \"type\": \"VALIDATION\",\n      \"code\": \"SCHEMA_VALIDATION_ERROR\",\n      \"message\": \"taskType field required\"\n    },\n    {\n      \"type\": \"VALIDATION\",\n      \"code\": \"SCHEMA_VALIDATION_ERROR\",\n      \"message\": \"taskType field required\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6ad6e62d-8211-4da6-86ed-4200c6255b28",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "subscriptions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"taskType\": \"AccountingDocuments\",\n    \"subscriptionType\": \"Webhook\",\n    \"notificationWebhookURL\": \"https://bwnotificationapi.customer.com/accountingdocumentnotifications\",\n    \"webhookAuthenticationToken\": \"ad65rujltr9093ijhdkutiyua09döijhsa76d8799w8pqugdfafjdhfkjhadls\",\n    \"taskSubType\": \"All\",\n    \"lastUpdated\": \"2021-08-04T08:39:13Z\",\n    \"autoResponder\": {\n      \"autoResponseMode\": \"Disabled\",\n      \"autoResponseMessage\": \"Updated coding details.\",\n      \"fieldUpdateArray\": [\n        {\n          \"fieldId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"updateToValue\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"fieldId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"updateToValue\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ]\n    }\n  },\n  {\n    \"taskType\": \"AccountingDocuments\",\n    \"subscriptionType\": \"Webhook\",\n    \"notificationWebhookURL\": \"https://bwnotificationapi.customer.com/accountingdocumentnotifications\",\n    \"webhookAuthenticationToken\": \"ad65rujltr9093ijhdkutiyua09döijhsa76d8799w8pqugdfafjdhfkjhadls\",\n    \"taskSubType\": \"All\",\n    \"lastUpdated\": \"2021-08-04T08:39:13Z\",\n    \"autoResponder\": {\n      \"autoResponseMode\": \"Disabled\",\n      \"autoResponseMessage\": \"Updated coding details.\",\n      \"fieldUpdateArray\": [\n        {\n          \"fieldId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"updateToValue\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"fieldId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"updateToValue\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ]\n    }\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7372ffc3-9d44-44b3-bf78-fb499e1ee4c7",
+              "name": "Unprocessable Entity",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "subscriptions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"taskType\": \"AccountingDocuments\",\n    \"subscriptionType\": \"Webhook\",\n    \"notificationWebhookURL\": \"https://bwnotificationapi.customer.com/accountingdocumentnotifications\",\n    \"webhookAuthenticationToken\": \"ad65rujltr9093ijhdkutiyua09döijhsa76d8799w8pqugdfafjdhfkjhadls\",\n    \"taskSubType\": \"All\",\n    \"lastUpdated\": \"2021-08-04T08:39:13Z\",\n    \"autoResponder\": {\n      \"autoResponseMode\": \"Disabled\",\n      \"autoResponseMessage\": \"Updated coding details.\",\n      \"fieldUpdateArray\": [\n        {\n          \"fieldId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"updateToValue\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"fieldId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"updateToValue\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ]\n    }\n  },\n  {\n    \"taskType\": \"AccountingDocuments\",\n    \"subscriptionType\": \"Webhook\",\n    \"notificationWebhookURL\": \"https://bwnotificationapi.customer.com/accountingdocumentnotifications\",\n    \"webhookAuthenticationToken\": \"ad65rujltr9093ijhdkutiyua09döijhsa76d8799w8pqugdfafjdhfkjhadls\",\n    \"taskSubType\": \"All\",\n    \"lastUpdated\": \"2021-08-04T08:39:13Z\",\n    \"autoResponder\": {\n      \"autoResponseMode\": \"Disabled\",\n      \"autoResponseMessage\": \"Updated coding details.\",\n      \"fieldUpdateArray\": [\n        {\n          \"fieldId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"updateToValue\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"fieldId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"updateToValue\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ]\n    }\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"UnprocessableEntity\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "de107826-9ae9-4152-8af4-d3748fd92260",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "subscriptions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"taskType\": \"AccountingDocuments\",\n    \"subscriptionType\": \"Webhook\",\n    \"notificationWebhookURL\": \"https://bwnotificationapi.customer.com/accountingdocumentnotifications\",\n    \"webhookAuthenticationToken\": \"ad65rujltr9093ijhdkutiyua09döijhsa76d8799w8pqugdfafjdhfkjhadls\",\n    \"taskSubType\": \"All\",\n    \"lastUpdated\": \"2021-08-04T08:39:13Z\",\n    \"autoResponder\": {\n      \"autoResponseMode\": \"Disabled\",\n      \"autoResponseMessage\": \"Updated coding details.\",\n      \"fieldUpdateArray\": [\n        {\n          \"fieldId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"updateToValue\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"fieldId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"updateToValue\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ]\n    }\n  },\n  {\n    \"taskType\": \"AccountingDocuments\",\n    \"subscriptionType\": \"Webhook\",\n    \"notificationWebhookURL\": \"https://bwnotificationapi.customer.com/accountingdocumentnotifications\",\n    \"webhookAuthenticationToken\": \"ad65rujltr9093ijhdkutiyua09döijhsa76d8799w8pqugdfafjdhfkjhadls\",\n    \"taskSubType\": \"All\",\n    \"lastUpdated\": \"2021-08-04T08:39:13Z\",\n    \"autoResponder\": {\n      \"autoResponseMode\": \"Disabled\",\n      \"autoResponseMessage\": \"Updated coding details.\",\n      \"fieldUpdateArray\": [\n        {\n          \"fieldId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"updateToValue\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"fieldId\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"updateToValue\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ]\n    }\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Internal server error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "97171737-d6f5-4f9d-886e-197f4a8a565f",
+          "name": "List existing subscriptions.",
+          "request": {
+            "name": "List existing subscriptions.",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "subscriptions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "taskType",
+                  "value": "<string>",
+                  "description": "The task type of the subscription(s) to be returned."
+                },
+                {
+                  "disabled": false,
+                  "key": "taskSubType",
+                  "value": "<string>",
+                  "description": "Task sub type of the subscriptions(s) to be returned."
+                },
+                {
+                  "disabled": false,
+                  "key": "lastUpdated",
+                  "value": "<string>",
+                  "description": "Date Filter. Returns items that have been updated after specified date."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "eb320b3a-2b6d-4cef-b5ba-7f03d9ea12e5",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "subscriptions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "taskType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "taskSubType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "lastUpdated",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"subscriptions\": [\n    {\n      \"taskType\": \"AccountingDocuments\",\n      \"subscriptionType\": \"Webhook\",\n      \"notificationWebhookURL\": \"https://bwnotificationapi.customer.com/accountingdocumentnotifications\",\n      \"webhookAuthenticationToken\": \"ad65rujltr9093ijhdkutiyua09döijhsa76d8799w8pqugdfafjdhfkjhadls\",\n      \"taskSubType\": \"All\",\n      \"lastUpdated\": \"2021-08-04T08:39:13Z\",\n      \"autoResponder\": {\n        \"autoResponseMode\": \"Disabled\",\n        \"autoResponseMessage\": \"Updated coding details.\",\n        \"fieldUpdateArray\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ]\n      }\n    },\n    {\n      \"taskType\": \"AccountingDocuments\",\n      \"subscriptionType\": \"Webhook\",\n      \"notificationWebhookURL\": \"https://bwnotificationapi.customer.com/accountingdocumentnotifications\",\n      \"webhookAuthenticationToken\": \"ad65rujltr9093ijhdkutiyua09döijhsa76d8799w8pqugdfafjdhfkjhadls\",\n      \"taskSubType\": \"All\",\n      \"lastUpdated\": \"2021-08-04T08:39:13Z\",\n      \"autoResponder\": {\n        \"autoResponseMode\": \"Disabled\",\n        \"autoResponseMessage\": \"Updated coding details.\",\n        \"fieldUpdateArray\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ]\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3f4abc1d-ec1c-4bce-ae7c-a19273b17ab7",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "subscriptions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "taskType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "taskSubType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "lastUpdated",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "94296930-b5b5-439b-b6a2-93ac2e9fdb32",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "subscriptions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "taskType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "taskSubType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "lastUpdated",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": \"Not Found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a446c594-4e7d-4568-8016-cdc1e34d53f4",
+              "name": "Unprocessable Entity",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "subscriptions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "taskType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "taskSubType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "lastUpdated",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"UnprocessableEntity\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fe028c94-7ec9-40fd-b2e7-47ce4f41da2c",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "subscriptions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "taskType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "taskSubType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "lastUpdated",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Internal server error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6237ae2f-0077-450d-a981-d02aa709841d",
+          "name": "Deletes existing subscriptions.",
+          "request": {
+            "name": "Deletes existing subscriptions.",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "subscriptions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "lastUpdated",
+                  "value": "<string>",
+                  "description": "(Required) Deletes subscriptions where lastUpdated is after specified datetime."
+                },
+                {
+                  "disabled": false,
+                  "key": "taskType",
+                  "value": "<string>",
+                  "description": "(Required) TaskType of subscription(s) to delete. ‘All’ can be used to specify any taskType."
+                },
+                {
+                  "disabled": false,
+                  "key": "taskSubType",
+                  "value": "<string>",
+                  "description": "(Required) TaskSubType of subscription(s) to delete. ‘All’ can be used to speciy any taskSubType."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "46994a8b-8a3f-455e-9e7d-12bf6ee123e7",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "subscriptions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "lastUpdated",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "taskType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "taskSubType",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"Deleted successfully\",\n  \"numberOfRecordsDeleted\": 757\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "393e1c9c-b581-47fe-9a8e-5af52dbc9969",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "subscriptions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "lastUpdated",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "taskType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "taskSubType",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0a27e28d-fc64-4d78-a789-6ecf837466ad",
+              "name": "Unprocessable Entity",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "subscriptions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "lastUpdated",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "taskType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "taskSubType",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"UnprocessableEntity\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f8c3ec04-14a9-4b90-b25e-82e44018a481",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "subscriptions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "lastUpdated",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "taskType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "taskSubType",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Internal server error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "23616445-f4c3-44a7-888a-8e5b514b00ea",
+    "name": "Basware OAUTH2 authentication APIs AccountingDocuments Subscribe to notifications API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "**Using OAUTH2.0 authentication:**\n\nGet API access token from api.basware.com/tokens\n1. Using client id and client secret, which you can obtain from Basware. \n2. Specify which APIs can be accessed by using the token e.g. Read only access to vendors API only (these are called scopes). Available scopes are listed at <https://developer.basware.com/api/p2p/manual#AccessRights>. \n3. Each token has an expiration time, until which it can be used to call APIs.\n\nWhen using OAUTH2 authentication, you need to pass the OAUTH2 authentication token when calling Basware API endpoints. Available Basware API operations are documented at <https://api.basware.com/swagger>. \n\nSee the Basware API developer site at <https://developer.basware.com/api/p2p/manual#Authentication> for more details on API authentication.",
+      "type": "text/plain"
+    }
+  }
+}

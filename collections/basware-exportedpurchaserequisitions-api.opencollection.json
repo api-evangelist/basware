@@ -1,0 +1,120 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Basware OAUTH2 authentication APIs AccountingDocuments ExportedPurchaseRequisitions API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "ExportedPurchaseRequisitions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Returns purchase requisitions exported fom Basware P2P.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/exportedPurchaseRequisitions",
+            "headers": [
+              {
+                "name": "x-amz-meta-continuationtoken",
+                "value": "1093edb3-7620-4986-b46b-985c3f9addd4"
+              }
+            ],
+            "params": [
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Document status filter. Returns items by order document status."
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "A limit for the number of items to be returned for one request. Limit can range between 1 and 100 items."
+              },
+              {
+                "name": "companyCode",
+                "value": "",
+                "type": "query",
+                "description": "Company filter. Returns items for specific company."
+              },
+              {
+                "name": "lastUpdated",
+                "value": "",
+                "type": "query",
+                "description": "Date filter. Returns items that have been updated after specified date."
+              }
+            ]
+          },
+          "docs": "Notes:\r\n1) A purchase requisition is exported from P2P when the requisition is approved, rejected or canceled. Requisitions are not exported while they are in approval process. \r\n2) This API supports sending webhook based  [push notifications](https://developer.basware.com/api/p2p/manual#PushNotifications) when new data is available to be exported. \r\n3) This GET operation returns a HTTP redirect, which the API client needs to follow. \r\n * 'Authorization' header must not be included in the redire"
+        },
+        {
+          "info": {
+            "name": "Deletes data from Basware API. For manual one-time operations.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/v1/exportedPurchaseRequisitions",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "For manual one-time operations only, such as a manual clean-up to remove test data generated during API integration development. Only removes records from API layer. \r\nDeletion in target systems needs to be done separately using the data deletion mechanisms available in each of the target system in addition to deleting the data in Basware API."
+        },
+        {
+          "info": {
+            "name": "Returns a single purchase requisition by external code - identifier.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/exportedPurchaseRequisitions/:externalCode",
+            "params": [
+              {
+                "name": "externalCode",
+                "value": "",
+                "type": "path",
+                "description": "ExternalCode of the requisition to be retrieved."
+              }
+            ]
+          },
+          "docs": "Note: This GET operation returns a HTTP redirect, which the API client needs to follow. \r\n* 'Authorization' header must not be included in the redirected request (the second request after receiving a redirect). \r\n* 'Host' header needs to be included.\r\n\r\nPlease see section \"[Usage scenario 4: Import and export procurement data](https://developer.basware.com/api/p2p/manual#usage4)\" for details on implementing this API."
+        },
+        {
+          "info": {
+            "name": "Acknowledged requisitions are no longer returned for next GET operation.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/exportedPurchaseRequisitions/:externalCode/acknowledge",
+            "headers": [
+              {
+                "name": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "params": [
+              {
+                "name": "externalCode",
+                "value": "",
+                "type": "path",
+                "description": "External Code of the purchase requisition to be acknowledged. Note: For a purchase requisition which is already acknowledged, API will return 405 'Method not allowed'."
+              }
+            ]
+          },
+          "docs": "Notes:\r\n1. Updates 'processingStatus' -field on the document to allow filtering out the document on the next GET operation\r\n2. For a document which is already acknowledged (processingStatus: 'Exported'), API will return 405 'Method not allowed' if acknowledge is attempted again on the document.\r\n\r\nPlease see section \"[Usage scenario 4: Import and export procurement data](https://developer.basware.com/api/p2p/manual#usage4)\" for details on implementing this API."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

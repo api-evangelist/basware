@@ -1,0 +1,97 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Basware OAUTH2 authentication APIs AccountingDocuments Data extract API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Data extract",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Returns information about available data extracts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/dataExtracts",
+            "params": [
+              {
+                "name": "processingStatus",
+                "value": "",
+                "type": "query",
+                "description": "Extract processing status filter. Returns extracts by processing status. Available values: 'WaitingForExport', 'Exported'"
+              }
+            ]
+          },
+          "docs": "Returns information about available data extracts"
+        },
+        {
+          "info": {
+            "name": "Returns information about files for one data extract. Download url in file information can be used to download file. Download url does not expire but it requires following redirects.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/dataExtracts/:extract_id",
+            "params": [
+              {
+                "name": "extract_id",
+                "value": "",
+                "type": "path",
+                "description": "Id of the data extract for which file information should be returned"
+              }
+            ]
+          },
+          "docs": "Returns information about files for one data extract. Download url in file information can be used to download file. Download url does not expire but it requires following redirects."
+        },
+        {
+          "info": {
+            "name": "Acknowledged extracts are marked as exported",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/dataExtracts/:extract_id/acknowledge",
+            "params": [
+              {
+                "name": "extract_id",
+                "value": "",
+                "type": "path",
+                "description": "Id of the data extract which is going to be acknowledged"
+              }
+            ]
+          },
+          "docs": "Acknowledged extracts are marked as exported"
+        },
+        {
+          "info": {
+            "name": "Returns definition of supported tables",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/dataExtracts/specification/tableDefinition"
+          },
+          "docs": "Returns definition of supported tables"
+        },
+        {
+          "info": {
+            "name": "Returns change log for definition of supported tables",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/dataExtracts/specification/tableDefinition/changeLog"
+          },
+          "docs": "Returns change log for definition of supported tables"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

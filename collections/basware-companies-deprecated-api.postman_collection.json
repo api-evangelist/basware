@@ -1,0 +1,791 @@
+{
+  "item": [
+    {
+      "id": "3f6a394f-4c8e-49f0-8981-1f9eb96c2e36",
+      "name": "Companies (deprecated)",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "4f3e87fe-7e16-46f0-a330-544e24a41da0",
+          "name": "Returns companies posted to Basware API.",
+          "request": {
+            "name": "Returns companies posted to Basware API.",
+            "description": {
+              "content": "",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "companies"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "pageSize",
+                  "value": "500",
+                  "description": "A limit for the number of items to be returned for one request. Limit can range between 1 and 500 items."
+                },
+                {
+                  "disabled": false,
+                  "key": "lastUpdated",
+                  "value": "<dateTime>",
+                  "description": "Date Filter. Returns items that have been updated after specified date."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Used to get next page of results when item count indicated by 'pageSize' is exceeded. A token is returned in header (not body) parameter 'X-amz-meta-continuationToken' of the response whenever there are more records to fetch. Post the received value here in a new HEADER parameter on the next GET request to receive the next page of results. When getting the next page of results, you must include the same query parameters that were used when getting the first page.",
+                "key": "x-amz-meta-continuationtoken",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a7f475ae-116e-4c53-aba3-8e6c8bf76b6d",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "companies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "500"
+                    },
+                    {
+                      "key": "lastUpdated",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Used to get next page of results when item count indicated by 'pageSize' is exceeded. A token is returned in header (not body) parameter 'X-amz-meta-continuationToken' of the response whenever there are more records to fetch. Post the received value here in a new HEADER parameter on the next GET request to receive the next page of results. When getting the next page of results, you must include the same query parameters that were used when getting the first page.",
+                    "key": "x-amz-meta-continuationtoken",
+                    "value": "181e100d-88ea-4e60-a183-06eacc69334d"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"companies\": [\n    {\n      \"active\": true,\n      \"companyCode\": \"200\",\n      \"name\": \"Acme corporation\",\n      \"sourceSystem\": \"SAP_1\",\n      \"description\": \"\",\n      \"lastUpdated\": \"1978-09-06T02:49:48.034Z\",\n      \"bucompid\": \"c61f8a6f-140f-423b-b9fd-3ae32345febb\",\n      \"identifiers\": [\n        {\n          \"id\": \"GB190101452\",\n          \"schemeId\": \"EU:VAT\"\n        },\n        {\n          \"id\": \"GB190101452\",\n          \"schemeId\": \"EU:VAT\"\n        }\n      ],\n      \"addresses\": [\n        {\n          \"addressType\": \"DeliveryAddress\",\n          \"externalCode\": \"d6437eef-0d71-4cb0-8a6e-7f114831479d\",\n          \"name\": \"Remittance address\",\n          \"description\": \"This is used as Remit To address\",\n          \"addressLine1\": \"1800 Main Street\",\n          \"addressLine2\": \"strin\",\n          \"addressLine3\": \"string\",\n          \"cityName\": \"Dallas\",\n          \"postalZone\": \"75201\",\n          \"poBox\": \"724\",\n          \"streetName\": \"Burlington Avenue\",\n          \"locality\": \"Burlington\",\n          \"countrySubEntity\": \"TX\",\n          \"countrySubEntityDescription\": \"Texas\",\n          \"countryId\": \"US\",\n          \"default\": true\n        },\n        {\n          \"addressType\": \"DeliveryAddress\",\n          \"externalCode\": \"d6437eef-0d71-4cb0-8a6e-7f114831479d\",\n          \"name\": \"Remittance address\",\n          \"description\": \"This is used as Remit To address\",\n          \"addressLine1\": \"1800 Main Street\",\n          \"addressLine2\": \"string\",\n          \"addressLine3\": \"string\",\n          \"cityName\": \"Dallas\",\n          \"postalZone\": \"75201\",\n          \"poBox\": \"724\",\n          \"streetName\": \"Burlington Avenue\",\n          \"locality\": \"Burlington\",\n          \"countrySubEntity\": \"TX\",\n          \"countrySubEntityDescription\": \"Texas\",\n          \"countryId\": \"US\",\n          \"default\": false\n        }\n      ],\n      \"contacts\": [\n        {\n          \"name\": \"DeliveryContact1\",\n          \"role\": \"PrimaryContact\",\n          \"description\": \"Use this as a primary contact\",\n          \"telephone\": \"555-3342-454\",\n          \"telefax\": \"555-3342-45412\",\n          \"email\": \"mrsmith@business.org\",\n          \"website\": \"www.mrSmith.com\"\n        },\n        {\n          \"name\": \"DeliveryContact1\",\n          \"role\": \"SecondaryContact\",\n          \"description\": \"Use this as a primary contact\",\n          \"telephone\": \"555-3342-454\",\n          \"telefax\": \"555-3342-45412\",\n          \"email\": \"mrsmith@business.org\",\n          \"website\": \"www.mrSmith.com\"\n        }\n      ],\n      \"userDefaultLanguage\": \"en-US\",\n      \"homeCurrency\": \"EUR\",\n      \"publishToBusinessDirectory\": true\n    },\n    {\n      \"active\": true,\n      \"companyCode\": \"200\",\n      \"name\": \"Acme corporation\",\n      \"sourceSystem\": \"SAP_1\",\n      \"description\": \"\",\n      \"lastUpdated\": \"1956-04-16T23:22:00.307Z\",\n      \"bucompid\": \"c61f8a6f-140f-423b-b9fd-3ae32345febb\",\n      \"identifiers\": [\n        {\n          \"id\": \"GB190101452\",\n          \"schemeId\": \"EU:VAT\"\n        },\n        {\n          \"id\": \"GB190101452\",\n          \"schemeId\": \"EU:VAT\"\n        }\n      ],\n      \"addresses\": [\n        {\n          \"addressType\": \"DeliveryAddress\",\n          \"externalCode\": \"d6437eef-0d71-4cb0-8a6e-7f114831479d\",\n          \"name\": \"Remittance address\",\n          \"description\": \"This is used as Remit To address\",\n          \"addressLine1\": \"1800 Main Street\",\n          \"addressLine2\": \"string\",\n          \"addressLine3\": \"string\",\n          \"cityName\": \"Dallas\",\n          \"postalZone\": \"75201\",\n          \"poBox\": \"724\",\n          \"streetName\": \"Burlington Avenue\",\n          \"locality\": \"Burlington\",\n          \"countrySubEntity\": \"TX\",\n          \"countrySubEntityDescription\": \"Texas\",\n          \"countryId\": \"US\",\n          \"default\": false\n        },\n        {\n          \"addressType\": \"DeliveryAddress\",\n          \"externalCode\": \"d6437eef-0d71-4cb0-8a6e-7f114831479d\",\n          \"name\": \"Remittance address\",\n          \"description\": \"This is used as Remit To address\",\n          \"addressLine1\": \"1800 Main Street\",\n          \"addressLine2\": \"string\",\n          \"addressLine3\": \"string\",\n          \"cityName\": \"Dallas\",\n          \"postalZone\": \"75201\",\n          \"poBox\": \"724\",\n          \"streetName\": \"Burlington Avenue\",\n          \"locality\": \"Burlington\",\n          \"countrySubEntity\": \"TX\",\n          \"countrySubEntityDescription\": \"Texas\",\n          \"countryId\": \"US\",\n          \"default\": false\n        }\n      ],\n      \"contacts\": [\n        {\n          \"name\": \"DeliveryContact1\",\n          \"role\": \"SecondaryContact\",\n          \"description\": \"Use this as a primary contact\",\n          \"telephone\": \"555-3342-454\",\n          \"telefax\": \"555-3342-45412\",\n          \"email\": \"mrsmith@business.org\",\n          \"website\": \"www.mrSmith.com\"\n        },\n        {\n          \"name\": \"DeliveryContact1\",\n          \"role\": \"SecondaryContact\",\n          \"description\": \"Use this as a primary contact\",\n          \"telephone\": \"555-3342-454\",\n          \"telefax\": \"555-3342-45412\",\n          \"email\": \"mrsmith@business.org\",\n          \"website\": \"www.mrSmith.com\"\n        }\n      ],\n      \"userDefaultLanguage\": \"en-US\",\n      \"homeCurrency\": \"EUR\",\n      \"publishToBusinessDirectory\": true\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7c886189-f5d9-4b80-9270-20229888865d",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "companies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "500"
+                    },
+                    {
+                      "key": "lastUpdated",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Used to get next page of results when item count indicated by 'pageSize' is exceeded. A token is returned in header (not body) parameter 'X-amz-meta-continuationToken' of the response whenever there are more records to fetch. Post the received value here in a new HEADER parameter on the next GET request to receive the next page of results. When getting the next page of results, you must include the same query parameters that were used when getting the first page.",
+                    "key": "x-amz-meta-continuationtoken",
+                    "value": "181e100d-88ea-4e60-a183-06eacc69334d"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "23b04b10-7338-47f2-8734-7a71b51b502d",
+              "name": "Not found. Request was successful and no records were found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "companies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "500"
+                    },
+                    {
+                      "key": "lastUpdated",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Used to get next page of results when item count indicated by 'pageSize' is exceeded. A token is returned in header (not body) parameter 'X-amz-meta-continuationToken' of the response whenever there are more records to fetch. Post the received value here in a new HEADER parameter on the next GET request to receive the next page of results. When getting the next page of results, you must include the same query parameters that were used when getting the first page.",
+                    "key": "x-amz-meta-continuationtoken",
+                    "value": "181e100d-88ea-4e60-a183-06eacc69334d"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "37e272ea-4bd5-4637-9a6f-f5a74f82d3bb",
+              "name": "Unexpected error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "companies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "500"
+                    },
+                    {
+                      "key": "lastUpdated",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Used to get next page of results when item count indicated by 'pageSize' is exceeded. A token is returned in header (not body) parameter 'X-amz-meta-continuationToken' of the response whenever there are more records to fetch. Post the received value here in a new HEADER parameter on the next GET request to receive the next page of results. When getting the next page of results, you must include the same query parameters that were used when getting the first page.",
+                    "key": "x-amz-meta-continuationtoken",
+                    "value": "181e100d-88ea-4e60-a183-06eacc69334d"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"fbc082a2-65a4-469c-b230-d84a252f18fc\",\n  \"hasErrors\": false,\n  \"errors\": [\n    {\n      \"externalCode\": \"4847-31231212-212121-1212\",\n      \"type\": \"VALIDATION\",\n      \"code\": \"SCHEMA_VALIDATION_ERROR\",\n      \"message\": \"\",\n      \"info\": \"\"\n    },\n    {\n      \"externalCode\": \"4847-31231212-212121-1212\",\n      \"type\": \"VALIDATION\",\n      \"code\": \"ACCESS_TOKEN_VALIDATION_ERROR\",\n      \"message\": \"\",\n      \"info\": \"\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2e355e3b-e0b6-4bbf-ae96-7f6a197e99c3",
+          "name": "Creates new companies, fully overwrites previous record if exists.",
+          "request": {
+            "name": "Creates new companies, fully overwrites previous record if exists.",
+            "description": {
+              "content": "Note: Only consuming target system at the moment is Open Network Portal (incl. Vendor manager). Companies cannot be imported to P2P through this API. \r\n\r\nPlease see section \"[Usage scenario 6: Import companies](https://developer.basware.com/api/p2p/manual#usage6)\" of Basware Purchase-to-Pay API manual for details on implementing this API.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "companies"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "[\n  {\n    \"active\": \"<boolean>\",\n    \"companyCode\": \"<string>\",\n    \"name\": \"<string>\",\n    \"sourceSystem\": \"<string>\",\n    \"description\": \"<string>\",\n    \"lastUpdated\": \"<dateTime>\",\n    \"bucompid\": \"<string>\",\n    \"identifiers\": [\n      {\n        \"id\": \"<string>\",\n        \"schemeId\": \"<string>\"\n      },\n      {\n        \"id\": \"<string>\",\n        \"schemeId\": \"<string>\"\n      }\n    ],\n    \"addresses\": [\n      {\n        \"addressType\": \"<string>\",\n        \"externalCode\": \"<string>\",\n        \"name\": \"<string>\",\n        \"description\": \"<string>\",\n        \"addressLine1\": \"<string>\",\n        \"addressLine2\": \"<string>\",\n        \"addressLine3\": \"<string>\",\n        \"cityName\": \"<string>\",\n        \"postalZone\": \"<string>\",\n        \"poBox\": \"<string>\",\n        \"streetName\": \"<string>\",\n        \"locality\": \"<string>\",\n        \"countrySubEntity\": \"<string>\",\n        \"countrySubEntityDescription\": \"<string>\",\n        \"countryId\": \"<string>\",\n        \"default\": \"<boolean>\"\n      },\n      {\n        \"addressType\": \"<string>\",\n        \"externalCode\": \"<string>\",\n        \"name\": \"<string>\",\n        \"description\": \"<string>\",\n        \"addressLine1\": \"<string>\",\n        \"addressLine2\": \"<string>\",\n        \"addressLine3\": \"<string>\",\n        \"cityName\": \"<string>\",\n        \"postalZone\": \"<string>\",\n        \"poBox\": \"<string>\",\n        \"streetName\": \"<string>\",\n        \"locality\": \"<string>\",\n        \"countrySubEntity\": \"<string>\",\n        \"countrySubEntityDescription\": \"<string>\",\n        \"countryId\": \"<string>\",\n        \"default\": \"<boolean>\"\n      }\n    ],\n    \"contacts\": [\n      {\n        \"name\": \"<string>\",\n        \"role\": \"<string>\",\n        \"description\": \"<string>\",\n        \"telephone\": \"<string>\",\n        \"telefax\": \"<string>\",\n        \"email\": \"<string>\",\n        \"website\": \"<string>\"\n      },\n      {\n        \"name\": \"<string>\",\n        \"role\": \"<string>\",\n        \"description\": \"<string>\",\n        \"telephone\": \"<string>\",\n        \"telefax\": \"<string>\",\n        \"email\": \"<string>\",\n        \"website\": \"<string>\"\n      }\n    ],\n    \"userDefaultLanguage\": \"<string>\",\n    \"homeCurrency\": \"<string>\",\n    \"publishToBusinessDirectory\": \"<boolean>\"\n  },\n  {\n    \"active\": \"<boolean>\",\n    \"companyCode\": \"<string>\",\n    \"name\": \"<string>\",\n    \"sourceSystem\": \"<string>\",\n    \"description\": \"<string>\",\n    \"lastUpdated\": \"<dateTime>\",\n    \"bucompid\": \"<string>\",\n    \"identifiers\": [\n      {\n        \"id\": \"<string>\",\n        \"schemeId\": \"<string>\"\n      },\n      {\n        \"id\": \"<string>\",\n        \"schemeId\": \"<string>\"\n      }\n    ],\n    \"addresses\": [\n      {\n        \"addressType\": \"<string>\",\n        \"externalCode\": \"<string>\",\n        \"name\": \"<string>\",\n        \"description\": \"<string>\",\n        \"addressLine1\": \"<string>\",\n        \"addressLine2\": \"<string>\",\n        \"addressLine3\": \"<string>\",\n        \"cityName\": \"<string>\",\n        \"postalZone\": \"<string>\",\n        \"poBox\": \"<string>\",\n        \"streetName\": \"<string>\",\n        \"locality\": \"<string>\",\n        \"countrySubEntity\": \"<string>\",\n        \"countrySubEntityDescription\": \"<string>\",\n        \"countryId\": \"<string>\",\n        \"default\": \"<boolean>\"\n      },\n      {\n        \"addressType\": \"<string>\",\n        \"externalCode\": \"<string>\",\n        \"name\": \"<string>\",\n        \"description\": \"<string>\",\n        \"addressLine1\": \"<string>\",\n        \"addressLine2\": \"<string>\",\n        \"addressLine3\": \"<string>\",\n        \"cityName\": \"<string>\",\n        \"postalZone\": \"<string>\",\n        \"poBox\": \"<string>\",\n        \"streetName\": \"<string>\",\n        \"locality\": \"<string>\",\n        \"countrySubEntity\": \"<string>\",\n        \"countrySubEntityDescription\": \"<string>\",\n        \"countryId\": \"<string>\",\n        \"default\": \"<boolean>\"\n      }\n    ],\n    \"contacts\": [\n      {\n        \"name\": \"<string>\",\n        \"role\": \"<string>\",\n        \"description\": \"<string>\",\n        \"telephone\": \"<string>\",\n        \"telefax\": \"<string>\",\n        \"email\": \"<string>\",\n        \"website\": \"<string>\"\n      },\n      {\n        \"name\": \"<string>\",\n        \"role\": \"<string>\",\n        \"description\": \"<string>\",\n        \"telephone\": \"<string>\",\n        \"telefax\": \"<string>\",\n        \"email\": \"<string>\",\n        \"website\": \"<string>\"\n      }\n    ],\n    \"userDefaultLanguage\": \"<string>\",\n    \"homeCurrency\": \"<string>\",\n    \"publishToBusinessDirectory\": \"<boolean>\"\n  }\n]",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "640003d4-dc14-4b83-a19d-ddfeb41b70d7",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "companies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Specifies the media type of the resource. Value application/json is supported.",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"active\": true,\n    \"companyCode\": \"200\",\n    \"name\": \"Acme corporation\",\n    \"sourceSystem\": \"SAP_1\",\n    \"description\": \"\",\n    \"lastUpdated\": \"<dateTime>\",\n    \"bucompid\": \"c61f8a6f-140f-423b-b9fd-3ae32345febb\",\n    \"identifiers\": [\n      {\n        \"id\": \"GB190101452\",\n        \"schemeId\": \"EU:VAT\"\n      },\n      {\n        \"id\": \"GB190101452\",\n        \"schemeId\": \"EU:VAT\"\n      }\n    ],\n    \"addresses\": [\n      {\n        \"addressType\": \"DeliveryAddress\",\n        \"externalCode\": \"d6437eef-0d71-4cb0-8a6e-7f114831479d\",\n        \"name\": \"Remittance address\",\n        \"description\": \"This is used as Remit To address\",\n        \"addressLine1\": \"1800 Main Street\",\n        \"addressLine2\": \"<string>\",\n        \"addressLine3\": \"<string>\",\n        \"cityName\": \"Dallas\",\n        \"postalZone\": \"75201\",\n        \"poBox\": \"724\",\n        \"streetName\": \"Burlington Avenue\",\n        \"locality\": \"Burlington\",\n        \"countrySubEntity\": \"TX\",\n        \"countrySubEntityDescription\": \"Texas\",\n        \"countryId\": \"US\",\n        \"default\": \"<boolean>\"\n      },\n      {\n        \"addressType\": \"DeliveryAddress\",\n        \"externalCode\": \"d6437eef-0d71-4cb0-8a6e-7f114831479d\",\n        \"name\": \"Remittance address\",\n        \"description\": \"This is used as Remit To address\",\n        \"addressLine1\": \"1800 Main Street\",\n        \"addressLine2\": \"<string>\",\n        \"addressLine3\": \"<string>\",\n        \"cityName\": \"Dallas\",\n        \"postalZone\": \"75201\",\n        \"poBox\": \"724\",\n        \"streetName\": \"Burlington Avenue\",\n        \"locality\": \"Burlington\",\n        \"countrySubEntity\": \"TX\",\n        \"countrySubEntityDescription\": \"Texas\",\n        \"countryId\": \"US\",\n        \"default\": \"<boolean>\"\n      }\n    ],\n    \"contacts\": [\n      {\n        \"name\": \"DeliveryContact1\",\n        \"role\": \"<string>\",\n        \"description\": \"Use this as a primary contact\",\n        \"telephone\": \"555-3342-454\",\n        \"telefax\": \"555-3342-45412\",\n        \"email\": \"mrsmith@business.org\",\n        \"website\": \"www.mrSmith.com\"\n      },\n      {\n        \"name\": \"DeliveryContact1\",\n        \"role\": \"<string>\",\n        \"description\": \"Use this as a primary contact\",\n        \"telephone\": \"555-3342-454\",\n        \"telefax\": \"555-3342-45412\",\n        \"email\": \"mrsmith@business.org\",\n        \"website\": \"www.mrSmith.com\"\n      }\n    ],\n    \"userDefaultLanguage\": \"en-US\",\n    \"homeCurrency\": \"EUR\",\n    \"publishToBusinessDirectory\": true\n  },\n  {\n    \"active\": true,\n    \"companyCode\": \"200\",\n    \"name\": \"Acme corporation\",\n    \"sourceSystem\": \"SAP_1\",\n    \"description\": \"\",\n    \"lastUpdated\": \"<dateTime>\",\n    \"bucompid\": \"c61f8a6f-140f-423b-b9fd-3ae32345febb\",\n    \"identifiers\": [\n      {\n        \"id\": \"GB190101452\",\n        \"schemeId\": \"EU:VAT\"\n      },\n      {\n        \"id\": \"GB190101452\",\n        \"schemeId\": \"EU:VAT\"\n      }\n    ],\n    \"addresses\": [\n      {\n        \"addressType\": \"DeliveryAddress\",\n        \"externalCode\": \"d6437eef-0d71-4cb0-8a6e-7f114831479d\",\n        \"name\": \"Remittance address\",\n        \"description\": \"This is used as Remit To address\",\n        \"addressLine1\": \"1800 Main Street\",\n        \"addressLine2\": \"<string>\",\n        \"addressLine3\": \"<string>\",\n        \"cityName\": \"Dallas\",\n        \"postalZone\": \"75201\",\n        \"poBox\": \"724\",\n        \"streetName\": \"Burlington Avenue\",\n        \"locality\": \"Burlington\",\n        \"countrySubEntity\": \"TX\",\n        \"countrySubEntityDescription\": \"Texas\",\n        \"countryId\": \"US\",\n        \"default\": \"<boolean>\"\n      },\n      {\n        \"addressType\": \"DeliveryAddress\",\n        \"externalCode\": \"d6437eef-0d71-4cb0-8a6e-7f114831479d\",\n        \"name\": \"Remittance address\",\n        \"description\": \"This is used as Remit To address\",\n        \"addressLine1\": \"1800 Main Street\",\n        \"addressLine2\": \"<string>\",\n        \"addressLine3\": \"<string>\",\n        \"cityName\": \"Dallas\",\n        \"postalZone\": \"75201\",\n        \"poBox\": \"724\",\n        \"streetName\": \"Burlington Avenue\",\n        \"locality\": \"Burlington\",\n        \"countrySubEntity\": \"TX\",\n        \"countrySubEntityDescription\": \"Texas\",\n        \"countryId\": \"US\",\n        \"default\": \"<boolean>\"\n      }\n    ],\n    \"contacts\": [\n      {\n        \"name\": \"DeliveryContact1\",\n        \"role\": \"<string>\",\n        \"description\": \"Use this as a primary contact\",\n        \"telephone\": \"555-3342-454\",\n        \"telefax\": \"555-3342-45412\",\n        \"email\": \"mrsmith@business.org\",\n        \"website\": \"www.mrSmith.com\"\n      },\n      {\n        \"name\": \"DeliveryContact1\",\n        \"role\": \"<string>\",\n        \"description\": \"Use this as a primary contact\",\n        \"telephone\": \"555-3342-454\",\n        \"telefax\": \"555-3342-45412\",\n        \"email\": \"mrsmith@business.org\",\n        \"website\": \"www.mrSmith.com\"\n      }\n    ],\n    \"userDefaultLanguage\": \"en-US\",\n    \"homeCurrency\": \"EUR\",\n    \"publishToBusinessDirectory\": true\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"active\": true,\n    \"companyCode\": \"200\",\n    \"name\": \"Acme corporation\",\n    \"sourceSystem\": \"SAP_1\",\n    \"description\": \"\",\n    \"lastUpdated\": \"<dateTime>\",\n    \"bucompid\": \"c61f8a6f-140f-423b-b9fd-3ae32345febb\",\n    \"identifiers\": [\n      {\n        \"id\": \"GB190101452\",\n        \"schemeId\": \"EU:VAT\"\n      },\n      {\n        \"id\": \"GB190101452\",\n        \"schemeId\": \"EU:VAT\"\n      }\n    ],\n    \"addresses\": [\n      {\n        \"addressType\": \"DeliveryAddress\",\n        \"externalCode\": \"d6437eef-0d71-4cb0-8a6e-7f114831479d\",\n        \"name\": \"Remittance address\",\n        \"description\": \"This is used as Remit To address\",\n        \"addressLine1\": \"1800 Main Street\",\n        \"addressLine2\": \"<string>\",\n        \"addressLine3\": \"<string>\",\n        \"cityName\": \"Dallas\",\n        \"postalZone\": \"75201\",\n        \"poBox\": \"724\",\n        \"streetName\": \"Burlington Avenue\",\n        \"locality\": \"Burlington\",\n        \"countrySubEntity\": \"TX\",\n        \"countrySubEntityDescription\": \"Texas\",\n        \"countryId\": \"US\",\n        \"default\": \"<boolean>\"\n      },\n      {\n        \"addressType\": \"DeliveryAddress\",\n        \"externalCode\": \"d6437eef-0d71-4cb0-8a6e-7f114831479d\",\n        \"name\": \"Remittance address\",\n        \"description\": \"This is used as Remit To address\",\n        \"addressLine1\": \"1800 Main Street\",\n        \"addressLine2\": \"<string>\",\n        \"addressLine3\": \"<string>\",\n        \"cityName\": \"Dallas\",\n        \"postalZone\": \"75201\",\n        \"poBox\": \"724\",\n        \"streetName\": \"Burlington Avenue\",\n        \"locality\": \"Burlington\",\n        \"countrySubEntity\": \"TX\",\n        \"countrySubEntityDescription\": \"Texas\",\n        \"countryId\": \"US\",\n        \"default\": \"<boolean>\"\n      }\n    ],\n    \"contacts\": [\n      {\n        \"name\": \"DeliveryContact1\",\n        \"role\": \"<string>\",\n        \"description\": \"Use this as a primary contact\",\n        \"telephone\": \"555-3342-454\",\n        \"telefax\": \"555-3342-45412\",\n        \"email\": \"mrsmith@business.org\",\n        \"website\": \"www.mrSmith.com\"\n      },\n      {\n        \"name\": \"DeliveryContact1\",\n        \"role\": \"<string>\",\n        \"description\": \"Use this as a primary contact\",\n        \"telephone\": \"555-3342-454\",\n        \"telefax\": \"555-3342-45412\",\n        \"email\": \"mrsmith@business.org\",\n        \"website\": \"www.mrSmith.com\"\n      }\n    ],\n    \"userDefaultLanguage\": \"en-US\",\n    \"homeCurrency\": \"EUR\",\n    \"publishToBusinessDirectory\": true\n  },\n  {\n    \"active\": true,\n    \"companyCode\": \"200\",\n    \"name\": \"Acme corporation\",\n    \"sourceSystem\": \"SAP_1\",\n    \"description\": \"\",\n    \"lastUpdated\": \"<dateTime>\",\n    \"bucompid\": \"c61f8a6f-140f-423b-b9fd-3ae32345febb\",\n    \"identifiers\": [\n      {\n        \"id\": \"GB190101452\",\n        \"schemeId\": \"EU:VAT\"\n      },\n      {\n        \"id\": \"GB190101452\",\n        \"schemeId\": \"EU:VAT\"\n      }\n    ],\n    \"addresses\": [\n      {\n        \"addressType\": \"DeliveryAddress\",\n        \"externalCode\": \"d6437eef-0d71-4cb0-8a6e-7f114831479d\",\n        \"name\": \"Remittance address\",\n        \"description\": \"This is used as Remit To address\",\n        \"addressLine1\": \"1800 Main Street\",\n        \"addressLine2\": \"<string>\",\n        \"addressLine3\": \"<string>\",\n        \"cityName\": \"Dallas\",\n        \"postalZone\": \"75201\",\n        \"poBox\": \"724\",\n        \"streetName\": \"Burlington Avenue\",\n        \"locality\": \"Burlington\",\n        \"countrySubEntity\": \"TX\",\n        \"countrySubEntityDescription\": \"Texas\",\n        \"countryId\": \"US\",\n        \"default\": \"<boolean>\"\n      },\n      {\n        \"addressType\": \"DeliveryAddress\",\n        \"externalCode\": \"d6437eef-0d71-4cb0-8a6e-7f114831479d\",\n        \"name\": \"Remittance address\",\n        \"description\": \"This is used as Remit To address\",\n        \"addressLine1\": \"1800 Main Street\",\n        \"addressLine2\": \"<string>\",\n        \"addressLine3\": \"<string>\",\n        \"cityName\": \"Dallas\",\n        \"postalZone\": \"75201\",\n        \"poBox\": \"724\",\n        \"streetName\": \"Burlington Avenue\",\n        \"locality\": \"Burlington\",\n        \"countrySubEntity\": \"TX\",\n        \"countrySubEntityDescription\": \"Texas\",\n        \"countryId\": \"US\",\n        \"default\": \"<boolean>\"\n      }\n    ],\n    \"contacts\": [\n      {\n        \"name\": \"DeliveryContact1\",\n        \"role\": \"<string>\",\n        \"description\": \"Use this as a primary contact\",\n        \"telephone\": \"555-3342-454\",\n        \"telefax\": \"555-3342-45412\",\n        \"email\": \"mrsmith@business.org\",\n        \"website\": \"www.mrSmith.com\"\n      },\n      {\n        \"name\": \"DeliveryContact1\",\n        \"role\": \"<string>\",\n        \"description\": \"Use this as a primary contact\",\n        \"telephone\": \"555-3342-454\",\n        \"telefax\": \"555-3342-45412\",\n        \"email\": \"mrsmith@business.org\",\n        \"website\": \"www.mrSmith.com\"\n      }\n    ],\n    \"userDefaultLanguage\": \"en-US\",\n    \"homeCurrency\": \"EUR\",\n    \"publishToBusinessDirectory\": true\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1f4b58f9-159e-4a4d-a2ce-b21467c3987a",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "companies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Specifies the media type of the resource. Value application/json is supported.",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"active\": true,\n    \"companyCode\": \"200\",\n    \"name\": \"Acme corporation\",\n    \"sourceSystem\": \"SAP_1\",\n    \"description\": \"\",\n    \"lastUpdated\": \"<dateTime>\",\n    \"bucompid\": \"c61f8a6f-140f-423b-b9fd-3ae32345febb\",\n    \"identifiers\": [\n      {\n        \"id\": \"GB190101452\",\n        \"schemeId\": \"EU:VAT\"\n      },\n      {\n        \"id\": \"GB190101452\",\n        \"schemeId\": \"EU:VAT\"\n      }\n    ],\n    \"addresses\": [\n      {\n        \"addressType\": \"DeliveryAddress\",\n        \"externalCode\": \"d6437eef-0d71-4cb0-8a6e-7f114831479d\",\n        \"name\": \"Remittance address\",\n        \"description\": \"This is used as Remit To address\",\n        \"addressLine1\": \"1800 Main Street\",\n        \"addressLine2\": \"<string>\",\n        \"addressLine3\": \"<string>\",\n        \"cityName\": \"Dallas\",\n        \"postalZone\": \"75201\",\n        \"poBox\": \"724\",\n        \"streetName\": \"Burlington Avenue\",\n        \"locality\": \"Burlington\",\n        \"countrySubEntity\": \"TX\",\n        \"countrySubEntityDescription\": \"Texas\",\n        \"countryId\": \"US\",\n        \"default\": \"<boolean>\"\n      },\n      {\n        \"addressType\": \"DeliveryAddress\",\n        \"externalCode\": \"d6437eef-0d71-4cb0-8a6e-7f114831479d\",\n        \"name\": \"Remittance address\",\n        \"description\": \"This is used as Remit To address\",\n        \"addressLine1\": \"1800 Main Street\",\n        \"addressLine2\": \"<string>\",\n        \"addressLine3\": \"<string>\",\n        \"cityName\": \"Dallas\",\n        \"postalZone\": \"75201\",\n        \"poBox\": \"724\",\n        \"streetName\": \"Burlington Avenue\",\n        \"locality\": \"Burlington\",\n        \"countrySubEntity\": \"TX\",\n        \"countrySubEntityDescription\": \"Texas\",\n        \"countryId\": \"US\",\n        \"default\": \"<boolean>\"\n      }\n    ],\n    \"contacts\": [\n      {\n        \"name\": \"DeliveryContact1\",\n        \"role\": \"<string>\",\n        \"description\": \"Use this as a primary contact\",\n        \"telephone\": \"555-3342-454\",\n        \"telefax\": \"555-3342-45412\",\n        \"email\": \"mrsmith@business.org\",\n        \"website\": \"www.mrSmith.com\"\n      },\n      {\n        \"name\": \"DeliveryContact1\",\n        \"role\": \"<string>\",\n        \"description\": \"Use this as a primary contact\",\n        \"telephone\": \"555-3342-454\",\n        \"telefax\": \"555-3342-45412\",\n        \"email\": \"mrsmith@business.org\",\n        \"website\": \"www.mrSmith.com\"\n      }\n    ],\n    \"userDefaultLanguage\": \"en-US\",\n    \"homeCurrency\": \"EUR\",\n    \"publishToBusinessDirectory\": true\n  },\n  {\n    \"active\": true,\n    \"companyCode\": \"200\",\n    \"name\": \"Acme corporation\",\n    \"sourceSystem\": \"SAP_1\",\n    \"description\": \"\",\n    \"lastUpdated\": \"<dateTime>\",\n    \"bucompid\": \"c61f8a6f-140f-423b-b9fd-3ae32345febb\",\n    \"identifiers\": [\n      {\n        \"id\": \"GB190101452\",\n        \"schemeId\": \"EU:VAT\"\n      },\n      {\n        \"id\": \"GB190101452\",\n        \"schemeId\": \"EU:VAT\"\n      }\n    ],\n    \"addresses\": [\n      {\n        \"addressType\": \"DeliveryAddress\",\n        \"externalCode\": \"d6437eef-0d71-4cb0-8a6e-7f114831479d\",\n        \"name\": \"Remittance address\",\n        \"description\": \"This is used as Remit To address\",\n        \"addressLine1\": \"1800 Main Street\",\n        \"addressLine2\": \"<string>\",\n        \"addressLine3\": \"<string>\",\n        \"cityName\": \"Dallas\",\n        \"postalZone\": \"75201\",\n        \"poBox\": \"724\",\n        \"streetName\": \"Burlington Avenue\",\n        \"locality\": \"Burlington\",\n        \"countrySubEntity\": \"TX\",\n        \"countrySubEntityDescription\": \"Texas\",\n        \"countryId\": \"US\",\n        \"default\": \"<boolean>\"\n      },\n      {\n        \"addressType\": \"DeliveryAddress\",\n        \"externalCode\": \"d6437eef-0d71-4cb0-8a6e-7f114831479d\",\n        \"name\": \"Remittance address\",\n        \"description\": \"This is used as Remit To address\",\n        \"addressLine1\": \"1800 Main Street\",\n        \"addressLine2\": \"<string>\",\n        \"addressLine3\": \"<string>\",\n        \"cityName\": \"Dallas\",\n        \"postalZone\": \"75201\",\n        \"poBox\": \"724\",\n        \"streetName\": \"Burlington Avenue\",\n        \"locality\": \"Burlington\",\n        \"countrySubEntity\": \"TX\",\n        \"countrySubEntityDescription\": \"Texas\",\n        \"countryId\": \"US\",\n        \"default\": \"<boolean>\"\n      }\n    ],\n    \"contacts\": [\n      {\n        \"name\": \"DeliveryContact1\",\n        \"role\": \"<string>\",\n        \"description\": \"Use this as a primary contact\",\n        \"telephone\": \"555-3342-454\",\n        \"telefax\": \"555-3342-45412\",\n        \"email\": \"mrsmith@business.org\",\n        \"website\": \"www.mrSmith.com\"\n      },\n      {\n        \"name\": \"DeliveryContact1\",\n        \"role\": \"<string>\",\n        \"description\": \"Use this as a primary contact\",\n        \"telephone\": \"555-3342-454\",\n        \"telefax\": \"555-3342-45412\",\n        \"email\": \"mrsmith@business.org\",\n        \"website\": \"www.mrSmith.com\"\n      }\n    ],\n    \"userDefaultLanguage\": \"en-US\",\n    \"homeCurrency\": \"EUR\",\n    \"publishToBusinessDirectory\": true\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"fbc082a2-65a4-469c-b230-d84a252f18fc\",\n  \"hasErrors\": true,\n  \"errors\": [\n    {\n      \"externalCode\": \"4847-31231212-212121-1212\",\n      \"type\": \"SECURITY\",\n      \"code\": \"UNEXPECTED_ERROR\",\n      \"message\": \"\",\n      \"info\": \"\"\n    },\n    {\n      \"externalCode\": \"4847-31231212-212121-1212\",\n      \"type\": \"VALIDATION\",\n      \"code\": \"SQS_PUBLISH_ERROR\",\n      \"message\": \"\",\n      \"info\": \"\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4692443c-26cb-48d6-9e47-6635a9b37585",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "companies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Specifies the media type of the resource. Value application/json is supported.",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"active\": true,\n    \"companyCode\": \"200\",\n    \"name\": \"Acme corporation\",\n    \"sourceSystem\": \"SAP_1\",\n    \"description\": \"\",\n    \"lastUpdated\": \"<dateTime>\",\n    \"bucompid\": \"c61f8a6f-140f-423b-b9fd-3ae32345febb\",\n    \"identifiers\": [\n      {\n        \"id\": \"GB190101452\",\n        \"schemeId\": \"EU:VAT\"\n      },\n      {\n        \"id\": \"GB190101452\",\n        \"schemeId\": \"EU:VAT\"\n      }\n    ],\n    \"addresses\": [\n      {\n        \"addressType\": \"DeliveryAddress\",\n        \"externalCode\": \"d6437eef-0d71-4cb0-8a6e-7f114831479d\",\n        \"name\": \"Remittance address\",\n        \"description\": \"This is used as Remit To address\",\n        \"addressLine1\": \"1800 Main Street\",\n        \"addressLine2\": \"<string>\",\n        \"addressLine3\": \"<string>\",\n        \"cityName\": \"Dallas\",\n        \"postalZone\": \"75201\",\n        \"poBox\": \"724\",\n        \"streetName\": \"Burlington Avenue\",\n        \"locality\": \"Burlington\",\n        \"countrySubEntity\": \"TX\",\n        \"countrySubEntityDescription\": \"Texas\",\n        \"countryId\": \"US\",\n        \"default\": \"<boolean>\"\n      },\n      {\n        \"addressType\": \"DeliveryAddress\",\n        \"externalCode\": \"d6437eef-0d71-4cb0-8a6e-7f114831479d\",\n        \"name\": \"Remittance address\",\n        \"description\": \"This is used as Remit To address\",\n        \"addressLine1\": \"1800 Main Street\",\n        \"addressLine2\": \"<string>\",\n        \"addressLine3\": \"<string>\",\n        \"cityName\": \"Dallas\",\n        \"postalZone\": \"75201\",\n        \"poBox\": \"724\",\n        \"streetName\": \"Burlington Avenue\",\n        \"locality\": \"Burlington\",\n        \"countrySubEntity\": \"TX\",\n        \"countrySubEntityDescription\": \"Texas\",\n        \"countryId\": \"US\",\n        \"default\": \"<boolean>\"\n      }\n    ],\n    \"contacts\": [\n      {\n        \"name\": \"DeliveryContact1\",\n        \"role\": \"<string>\",\n        \"description\": \"Use this as a primary contact\",\n        \"telephone\": \"555-3342-454\",\n        \"telefax\": \"555-3342-45412\",\n        \"email\": \"mrsmith@business.org\",\n        \"website\": \"www.mrSmith.com\"\n      },\n      {\n        \"name\": \"DeliveryContact1\",\n        \"role\": \"<string>\",\n        \"description\": \"Use this as a primary contact\",\n        \"telephone\": \"555-3342-454\",\n        \"telefax\": \"555-3342-45412\",\n        \"email\": \"mrsmith@business.org\",\n        \"website\": \"www.mrSmith.com\"\n      }\n    ],\n    \"userDefaultLanguage\": \"en-US\",\n    \"homeCurrency\": \"EUR\",\n    \"publishToBusinessDirectory\": true\n  },\n  {\n    \"active\": true,\n    \"companyCode\": \"200\",\n    \"name\": \"Acme corporation\",\n    \"sourceSystem\": \"SAP_1\",\n    \"description\": \"\",\n    \"lastUpdated\": \"<dateTime>\",\n    \"bucompid\": \"c61f8a6f-140f-423b-b9fd-3ae32345febb\",\n    \"identifiers\": [\n      {\n        \"id\": \"GB190101452\",\n        \"schemeId\": \"EU:VAT\"\n      },\n      {\n        \"id\": \"GB190101452\",\n        \"schemeId\": \"EU:VAT\"\n      }\n    ],\n    \"addresses\": [\n      {\n        \"addressType\": \"DeliveryAddress\",\n        \"externalCode\": \"d6437eef-0d71-4cb0-8a6e-7f114831479d\",\n        \"name\": \"Remittance address\",\n        \"description\": \"This is used as Remit To address\",\n        \"addressLine1\": \"1800 Main Street\",\n        \"addressLine2\": \"<string>\",\n        \"addressLine3\": \"<string>\",\n        \"cityName\": \"Dallas\",\n        \"postalZone\": \"75201\",\n        \"poBox\": \"724\",\n        \"streetName\": \"Burlington Avenue\",\n        \"locality\": \"Burlington\",\n        \"countrySubEntity\": \"TX\",\n        \"countrySubEntityDescription\": \"Texas\",\n        \"countryId\": \"US\",\n        \"default\": \"<boolean>\"\n      },\n      {\n        \"addressType\": \"DeliveryAddress\",\n        \"externalCode\": \"d6437eef-0d71-4cb0-8a6e-7f114831479d\",\n        \"name\": \"Remittance address\",\n        \"description\": \"This is used as Remit To address\",\n        \"addressLine1\": \"1800 Main Street\",\n        \"addressLine2\": \"<string>\",\n        \"addressLine3\": \"<string>\",\n        \"cityName\": \"Dallas\",\n        \"postalZone\": \"75201\",\n        \"poBox\": \"724\",\n        \"streetName\": \"Burlington Avenue\",\n        \"locality\": \"Burlington\",\n        \"countrySubEntity\": \"TX\",\n        \"countrySubEntityDescription\": \"Texas\",\n        \"countryId\": \"US\",\n        \"default\": \"<boolean>\"\n      }\n    ],\n    \"contacts\": [\n      {\n        \"name\": \"DeliveryContact1\",\n        \"role\": \"<string>\",\n        \"description\": \"Use this as a primary contact\",\n        \"telephone\": \"555-3342-454\",\n        \"telefax\": \"555-3342-45412\",\n        \"email\": \"mrsmith@business.org\",\n        \"website\": \"www.mrSmith.com\"\n      },\n      {\n        \"name\": \"DeliveryContact1\",\n        \"role\": \"<string>\",\n        \"description\": \"Use this as a primary contact\",\n        \"telephone\": \"555-3342-454\",\n        \"telefax\": \"555-3342-45412\",\n        \"email\": \"mrsmith@business.org\",\n        \"website\": \"www.mrSmith.com\"\n      }\n    ],\n    \"userDefaultLanguage\": \"en-US\",\n    \"homeCurrency\": \"EUR\",\n    \"publishToBusinessDirectory\": true\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f08bed56-8983-41da-94d6-711f1f80a1ee",
+              "name": "Conflict",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "companies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Specifies the media type of the resource. Value application/json is supported.",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"active\": true,\n    \"companyCode\": \"200\",\n    \"name\": \"Acme corporation\",\n    \"sourceSystem\": \"SAP_1\",\n    \"description\": \"\",\n    \"lastUpdated\": \"<dateTime>\",\n    \"bucompid\": \"c61f8a6f-140f-423b-b9fd-3ae32345febb\",\n    \"identifiers\": [\n      {\n        \"id\": \"GB190101452\",\n        \"schemeId\": \"EU:VAT\"\n      },\n      {\n        \"id\": \"GB190101452\",\n        \"schemeId\": \"EU:VAT\"\n      }\n    ],\n    \"addresses\": [\n      {\n        \"addressType\": \"DeliveryAddress\",\n        \"externalCode\": \"d6437eef-0d71-4cb0-8a6e-7f114831479d\",\n        \"name\": \"Remittance address\",\n        \"description\": \"This is used as Remit To address\",\n        \"addressLine1\": \"1800 Main Street\",\n        \"addressLine2\": \"<string>\",\n        \"addressLine3\": \"<string>\",\n        \"cityName\": \"Dallas\",\n        \"postalZone\": \"75201\",\n        \"poBox\": \"724\",\n        \"streetName\": \"Burlington Avenue\",\n        \"locality\": \"Burlington\",\n        \"countrySubEntity\": \"TX\",\n        \"countrySubEntityDescription\": \"Texas\",\n        \"countryId\": \"US\",\n        \"default\": \"<boolean>\"\n      },\n      {\n        \"addressType\": \"DeliveryAddress\",\n        \"externalCode\": \"d6437eef-0d71-4cb0-8a6e-7f114831479d\",\n        \"name\": \"Remittance address\",\n        \"description\": \"This is used as Remit To address\",\n        \"addressLine1\": \"1800 Main Street\",\n        \"addressLine2\": \"<string>\",\n        \"addressLine3\": \"<string>\",\n        \"cityName\": \"Dallas\",\n        \"postalZone\": \"75201\",\n        \"poBox\": \"724\",\n        \"streetName\": \"Burlington Avenue\",\n        \"locality\": \"Burlington\",\n        \"countrySubEntity\": \"TX\",\n        \"countrySubEntityDescription\": \"Texas\",\n        \"countryId\": \"US\",\n        \"default\": \"<boolean>\"\n      }\n    ],\n    \"contacts\": [\n      {\n        \"name\": \"DeliveryContact1\",\n        \"role\": \"<string>\",\n        \"description\": \"Use this as a primary contact\",\n        \"telephone\": \"555-3342-454\",\n        \"telefax\": \"555-3342-45412\",\n        \"email\": \"mrsmith@business.org\",\n        \"website\": \"www.mrSmith.com\"\n      },\n      {\n        \"name\": \"DeliveryContact1\",\n        \"role\": \"<string>\",\n        \"description\": \"Use this as a primary contact\",\n        \"telephone\": \"555-3342-454\",\n        \"telefax\": \"555-3342-45412\",\n        \"email\": \"mrsmith@business.org\",\n        \"website\": \"www.mrSmith.com\"\n      }\n    ],\n    \"userDefaultLanguage\": \"en-US\",\n    \"homeCurrency\": \"EUR\",\n    \"publishToBusinessDirectory\": true\n  },\n  {\n    \"active\": true,\n    \"companyCode\": \"200\",\n    \"name\": \"Acme corporation\",\n    \"sourceSystem\": \"SAP_1\",\n    \"description\": \"\",\n    \"lastUpdated\": \"<dateTime>\",\n    \"bucompid\": \"c61f8a6f-140f-423b-b9fd-3ae32345febb\",\n    \"identifiers\": [\n      {\n        \"id\": \"GB190101452\",\n        \"schemeId\": \"EU:VAT\"\n      },\n      {\n        \"id\": \"GB190101452\",\n        \"schemeId\": \"EU:VAT\"\n      }\n    ],\n    \"addresses\": [\n      {\n        \"addressType\": \"DeliveryAddress\",\n        \"externalCode\": \"d6437eef-0d71-4cb0-8a6e-7f114831479d\",\n        \"name\": \"Remittance address\",\n        \"description\": \"This is used as Remit To address\",\n        \"addressLine1\": \"1800 Main Street\",\n        \"addressLine2\": \"<string>\",\n        \"addressLine3\": \"<string>\",\n        \"cityName\": \"Dallas\",\n        \"postalZone\": \"75201\",\n        \"poBox\": \"724\",\n        \"streetName\": \"Burlington Avenue\",\n        \"locality\": \"Burlington\",\n        \"countrySubEntity\": \"TX\",\n        \"countrySubEntityDescription\": \"Texas\",\n        \"countryId\": \"US\",\n        \"default\": \"<boolean>\"\n      },\n      {\n        \"addressType\": \"DeliveryAddress\",\n        \"externalCode\": \"d6437eef-0d71-4cb0-8a6e-7f114831479d\",\n        \"name\": \"Remittance address\",\n        \"description\": \"This is used as Remit To address\",\n        \"addressLine1\": \"1800 Main Street\",\n        \"addressLine2\": \"<string>\",\n        \"addressLine3\": \"<string>\",\n        \"cityName\": \"Dallas\",\n        \"postalZone\": \"75201\",\n        \"poBox\": \"724\",\n        \"streetName\": \"Burlington Avenue\",\n        \"locality\": \"Burlington\",\n        \"countrySubEntity\": \"TX\",\n        \"countrySubEntityDescription\": \"Texas\",\n        \"countryId\": \"US\",\n        \"default\": \"<boolean>\"\n      }\n    ],\n    \"contacts\": [\n      {\n        \"name\": \"DeliveryContact1\",\n        \"role\": \"<string>\",\n        \"description\": \"Use this as a primary contact\",\n        \"telephone\": \"555-3342-454\",\n        \"telefax\": \"555-3342-45412\",\n        \"email\": \"mrsmith@business.org\",\n        \"website\": \"www.mrSmith.com\"\n      },\n      {\n        \"name\": \"DeliveryContact1\",\n        \"role\": \"<string>\",\n        \"description\": \"Use this as a primary contact\",\n        \"telephone\": \"555-3342-454\",\n        \"telefax\": \"555-3342-45412\",\n        \"email\": \"mrsmith@business.org\",\n        \"website\": \"www.mrSmith.com\"\n      }\n    ],\n    \"userDefaultLanguage\": \"en-US\",\n    \"homeCurrency\": \"EUR\",\n    \"publishToBusinessDirectory\": true\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"fbc082a2-65a4-469c-b230-d84a252f18fc\",\n  \"hasErrors\": true,\n  \"errors\": [\n    {\n      \"externalCode\": \"4847-31231212-212121-1212\",\n      \"type\": \"SECURITY\",\n      \"code\": \"UNEXPECTED_ERROR\",\n      \"message\": \"\",\n      \"info\": \"\"\n    },\n    {\n      \"externalCode\": \"4847-31231212-212121-1212\",\n      \"type\": \"VALIDATION\",\n      \"code\": \"SQS_PUBLISH_ERROR\",\n      \"message\": \"\",\n      \"info\": \"\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7a0e0209-868d-4e5f-8623-b798d506615c",
+              "name": "Unexpected error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "companies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Specifies the media type of the resource. Value application/json is supported.",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"active\": true,\n    \"companyCode\": \"200\",\n    \"name\": \"Acme corporation\",\n    \"sourceSystem\": \"SAP_1\",\n    \"description\": \"\",\n    \"lastUpdated\": \"<dateTime>\",\n    \"bucompid\": \"c61f8a6f-140f-423b-b9fd-3ae32345febb\",\n    \"identifiers\": [\n      {\n        \"id\": \"GB190101452\",\n        \"schemeId\": \"EU:VAT\"\n      },\n      {\n        \"id\": \"GB190101452\",\n        \"schemeId\": \"EU:VAT\"\n      }\n    ],\n    \"addresses\": [\n      {\n        \"addressType\": \"DeliveryAddress\",\n        \"externalCode\": \"d6437eef-0d71-4cb0-8a6e-7f114831479d\",\n        \"name\": \"Remittance address\",\n        \"description\": \"This is used as Remit To address\",\n        \"addressLine1\": \"1800 Main Street\",\n        \"addressLine2\": \"<string>\",\n        \"addressLine3\": \"<string>\",\n        \"cityName\": \"Dallas\",\n        \"postalZone\": \"75201\",\n        \"poBox\": \"724\",\n        \"streetName\": \"Burlington Avenue\",\n        \"locality\": \"Burlington\",\n        \"countrySubEntity\": \"TX\",\n        \"countrySubEntityDescription\": \"Texas\",\n        \"countryId\": \"US\",\n        \"default\": \"<boolean>\"\n      },\n      {\n        \"addressType\": \"DeliveryAddress\",\n        \"externalCode\": \"d6437eef-0d71-4cb0-8a6e-7f114831479d\",\n        \"name\": \"Remittance address\",\n        \"description\": \"This is used as Remit To address\",\n        \"addressLine1\": \"1800 Main Street\",\n        \"addressLine2\": \"<string>\",\n        \"addressLine3\": \"<string>\",\n        \"cityName\": \"Dallas\",\n        \"postalZone\": \"75201\",\n        \"poBox\": \"724\",\n        \"streetName\": \"Burlington Avenue\",\n        \"locality\": \"Burlington\",\n        \"countrySubEntity\": \"TX\",\n        \"countrySubEntityDescription\": \"Texas\",\n        \"countryId\": \"US\",\n        \"default\": \"<boolean>\"\n      }\n    ],\n    \"contacts\": [\n      {\n        \"name\": \"DeliveryContact1\",\n        \"role\": \"<string>\",\n        \"description\": \"Use this as a primary contact\",\n        \"telephone\": \"555-3342-454\",\n        \"telefax\": \"555-3342-45412\",\n        \"email\": \"mrsmith@business.org\",\n        \"website\": \"www.mrSmith.com\"\n      },\n      {\n        \"name\": \"DeliveryContact1\",\n        \"role\": \"<string>\",\n        \"description\": \"Use this as a primary contact\",\n        \"telephone\": \"555-3342-454\",\n        \"telefax\": \"555-3342-45412\",\n        \"email\": \"mrsmith@business.org\",\n        \"website\": \"www.mrSmith.com\"\n      }\n    ],\n    \"userDefaultLanguage\": \"en-US\",\n    \"homeCurrency\": \"EUR\",\n    \"publishToBusinessDirectory\": true\n  },\n  {\n    \"active\": true,\n    \"companyCode\": \"200\",\n    \"name\": \"Acme corporation\",\n    \"sourceSystem\": \"SAP_1\",\n    \"description\": \"\",\n    \"lastUpdated\": \"<dateTime>\",\n    \"bucompid\": \"c61f8a6f-140f-423b-b9fd-3ae32345febb\",\n    \"identifiers\": [\n      {\n        \"id\": \"GB190101452\",\n        \"schemeId\": \"EU:VAT\"\n      },\n      {\n        \"id\": \"GB190101452\",\n        \"schemeId\": \"EU:VAT\"\n      }\n    ],\n    \"addresses\": [\n      {\n        \"addressType\": \"DeliveryAddress\",\n        \"externalCode\": \"d6437eef-0d71-4cb0-8a6e-7f114831479d\",\n        \"name\": \"Remittance address\",\n        \"description\": \"This is used as Remit To address\",\n        \"addressLine1\": \"1800 Main Street\",\n        \"addressLine2\": \"<string>\",\n        \"addressLine3\": \"<string>\",\n        \"cityName\": \"Dallas\",\n        \"postalZone\": \"75201\",\n        \"poBox\": \"724\",\n        \"streetName\": \"Burlington Avenue\",\n        \"locality\": \"Burlington\",\n        \"countrySubEntity\": \"TX\",\n        \"countrySubEntityDescription\": \"Texas\",\n        \"countryId\": \"US\",\n        \"default\": \"<boolean>\"\n      },\n      {\n        \"addressType\": \"DeliveryAddress\",\n        \"externalCode\": \"d6437eef-0d71-4cb0-8a6e-7f114831479d\",\n        \"name\": \"Remittance address\",\n        \"description\": \"This is used as Remit To address\",\n        \"addressLine1\": \"1800 Main Street\",\n        \"addressLine2\": \"<string>\",\n        \"addressLine3\": \"<string>\",\n        \"cityName\": \"Dallas\",\n        \"postalZone\": \"75201\",\n        \"poBox\": \"724\",\n        \"streetName\": \"Burlington Avenue\",\n        \"locality\": \"Burlington\",\n        \"countrySubEntity\": \"TX\",\n        \"countrySubEntityDescription\": \"Texas\",\n        \"countryId\": \"US\",\n        \"default\": \"<boolean>\"\n      }\n    ],\n    \"contacts\": [\n      {\n        \"name\": \"DeliveryContact1\",\n        \"role\": \"<string>\",\n        \"description\": \"Use this as a primary contact\",\n        \"telephone\": \"555-3342-454\",\n        \"telefax\": \"555-3342-45412\",\n        \"email\": \"mrsmith@business.org\",\n        \"website\": \"www.mrSmith.com\"\n      },\n      {\n        \"name\": \"DeliveryContact1\",\n        \"role\": \"<string>\",\n        \"description\": \"Use this as a primary contact\",\n        \"telephone\": \"555-3342-454\",\n        \"telefax\": \"555-3342-45412\",\n        \"email\": \"mrsmith@business.org\",\n        \"website\": \"www.mrSmith.com\"\n      }\n    ],\n    \"userDefaultLanguage\": \"en-US\",\n    \"homeCurrency\": \"EUR\",\n    \"publishToBusinessDirectory\": true\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"fbc082a2-65a4-469c-b230-d84a252f18fc\",\n  \"hasErrors\": true,\n  \"errors\": [\n    {\n      \"externalCode\": \"4847-31231212-212121-1212\",\n      \"type\": \"SECURITY\",\n      \"code\": \"UNEXPECTED_ERROR\",\n      \"message\": \"\",\n      \"info\": \"\"\n    },\n    {\n      \"externalCode\": \"4847-31231212-212121-1212\",\n      \"type\": \"VALIDATION\",\n      \"code\": \"SQS_PUBLISH_ERROR\",\n      \"message\": \"\",\n      \"info\": \"\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4deebae8-05b2-4563-ab12-ca56817607fe",
+          "name": "Returns single company record by companyCode - identifier.",
+          "request": {
+            "name": "Returns single company record by companyCode - identifier.",
+            "description": {
+              "content": "",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "companies",
+                ":companyCode"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "companyCode",
+                  "description": "(Required) The companyCode of the entity to be fetched"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2174c1ee-57b0-48e9-819e-ccfb0b81964a",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "companies",
+                    ":companyCode"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "companyCode",
+                      "description": "(Required) The companyCode of the entity to be fetched"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"active\": true,\n  \"companyCode\": \"200\",\n  \"name\": \"Acme corporation\",\n  \"sourceSystem\": \"SAP_1\",\n  \"description\": \"\",\n  \"lastUpdated\": \"<dateTime>\",\n  \"bucompid\": \"c61f8a6f-140f-423b-b9fd-3ae32345febb\",\n  \"identifiers\": [\n    {\n      \"id\": \"GB190101452\",\n      \"schemeId\": \"EU:VAT\"\n    },\n    {\n      \"id\": \"GB190101452\",\n      \"schemeId\": \"EU:VAT\"\n    }\n  ],\n  \"addresses\": [\n    {\n      \"addressType\": \"DeliveryAddress\",\n      \"externalCode\": \"d6437eef-0d71-4cb0-8a6e-7f114831479d\",\n      \"name\": \"Remittance address\",\n      \"description\": \"This is used as Remit To address\",\n      \"addressLine1\": \"1800 Main Street\",\n      \"addressLine2\": \"<string>\",\n      \"addressLine3\": \"<string>\",\n      \"cityName\": \"Dallas\",\n      \"postalZone\": \"75201\",\n      \"poBox\": \"724\",\n      \"streetName\": \"Burlington Avenue\",\n      \"locality\": \"Burlington\",\n      \"countrySubEntity\": \"TX\",\n      \"countrySubEntityDescription\": \"Texas\",\n      \"countryId\": \"US\",\n      \"default\": \"<boolean>\"\n    },\n    {\n      \"addressType\": \"DeliveryAddress\",\n      \"externalCode\": \"d6437eef-0d71-4cb0-8a6e-7f114831479d\",\n      \"name\": \"Remittance address\",\n      \"description\": \"This is used as Remit To address\",\n      \"addressLine1\": \"1800 Main Street\",\n      \"addressLine2\": \"<string>\",\n      \"addressLine3\": \"<string>\",\n      \"cityName\": \"Dallas\",\n      \"postalZone\": \"75201\",\n      \"poBox\": \"724\",\n      \"streetName\": \"Burlington Avenue\",\n      \"locality\": \"Burlington\",\n      \"countrySubEntity\": \"TX\",\n      \"countrySubEntityDescription\": \"Texas\",\n      \"countryId\": \"US\",\n      \"default\": \"<boolean>\"\n    }\n  ],\n  \"contacts\": [\n    {\n      \"name\": \"DeliveryContact1\",\n      \"role\": \"<string>\",\n      \"description\": \"Use this as a primary contact\",\n      \"telephone\": \"555-3342-454\",\n      \"telefax\": \"555-3342-45412\",\n      \"email\": \"mrsmith@business.org\",\n      \"website\": \"www.mrSmith.com\"\n    },\n    {\n      \"name\": \"DeliveryContact1\",\n      \"role\": \"<string>\",\n      \"description\": \"Use this as a primary contact\",\n      \"telephone\": \"555-3342-454\",\n      \"telefax\": \"555-3342-45412\",\n      \"email\": \"mrsmith@business.org\",\n      \"website\": \"www.mrSmith.com\"\n    }\n  ],\n  \"userDefaultLanguage\": \"en-US\",\n  \"homeCurrency\": \"EUR\",\n  \"publishToBusinessDirectory\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "367b91c3-3a71-4917-8dea-296baf1ee78a",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "companies",
+                    ":companyCode"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "companyCode",
+                      "description": "(Required) The companyCode of the entity to be fetched"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "0c32929f-650a-49fa-996a-db1b18899dee",
+              "name": "Not found. Request was successful and no records were found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "companies",
+                    ":companyCode"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "companyCode",
+                      "description": "(Required) The companyCode of the entity to be fetched"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b415cf01-9bea-49e1-9160-4ee9137c2ca1",
+              "name": "Unexpected error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "companies",
+                    ":companyCode"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "companyCode",
+                      "description": "(Required) The companyCode of the entity to be fetched"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"fbc082a2-65a4-469c-b230-d84a252f18fc\",\n  \"hasErrors\": true,\n  \"errors\": [\n    {\n      \"externalCode\": \"4847-31231212-212121-1212\",\n      \"type\": \"SECURITY\",\n      \"code\": \"UNEXPECTED_ERROR\",\n      \"message\": \"\",\n      \"info\": \"\"\n    },\n    {\n      \"externalCode\": \"4847-31231212-212121-1212\",\n      \"type\": \"VALIDATION\",\n      \"code\": \"SQS_PUBLISH_ERROR\",\n      \"message\": \"\",\n      \"info\": \"\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "0b817dd2-30f8-4966-82c3-c563b1dd58d9",
+    "name": "Basware OAUTH2 authentication APIs AccountingDocuments Companies (deprecated) API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "**Using OAUTH2.0 authentication:**\n\nGet API access token from api.basware.com/tokens\n1. Using client id and client secret, which you can obtain from Basware. \n2. Specify which APIs can be accessed by using the token e.g. Read only access to vendors API only (these are called scopes). Available scopes are listed at <https://developer.basware.com/api/p2p/manual#AccessRights>. \n3. Each token has an expiration time, until which it can be used to call APIs.\n\nWhen using OAUTH2 authentication, you need to pass the OAUTH2 authentication token when calling Basware API endpoints. Available Basware API operations are documented at <https://api.basware.com/swagger>. \n\nSee the Basware API developer site at <https://developer.basware.com/api/p2p/manual#Authentication> for more details on API authentication.",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Basware OAUTH2 authentication APIs AccountingDocuments Directory France lookup API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Directory France lookup",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/directory/fr",
+            "params": [
+              {
+                "name": "siren",
+                "value": "",
+                "type": "query",
+                "description": "SIREN number, min_length=9, max_length=9 regex=^[0-9]{9}$"
+              },
+              {
+                "name": "siret",
+                "value": "",
+                "type": "query",
+                "description": "SIRET number, min_length=14, max_length=14, regex=^[0-9]{14}$"
+              },
+              {
+                "name": "addressing_suffix",
+                "value": "",
+                "type": "query",
+                "description": "Addressing Suffix, min_length=1"
+              },
+              {
+                "name": "addressing_identifier",
+                "value": "",
+                "type": "query",
+                "description": "Addressing Identifier, min_length=9"
+              },
+              {
+                "name": "routing_identifier",
+                "value": "",
+                "type": "query",
+                "description": "Routing Identifier, min_length=5"
+              }
+            ]
+          },
+          "docs": "Search"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

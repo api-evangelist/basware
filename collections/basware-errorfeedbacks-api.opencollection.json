@@ -1,0 +1,134 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Basware OAUTH2 authentication APIs AccountingDocuments ErrorFeedbacks API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "ErrorFeedbacks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Returns error messages from receiving end-system(s), based on error time stamp.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/errorFeedbacks",
+            "headers": [
+              {
+                "name": "x-amz-meta-continuationtoken",
+                "value": "ac70cf44-8179-4f90-b2b4-97d6b4b896ef"
+              }
+            ],
+            "params": [
+              {
+                "name": "targetSystem",
+                "value": "",
+                "type": "query",
+                "description": "Basware application module which has posted error (\"P2P\", \"Vendor Manager\", \"Purchase Manager\", etc.)"
+              },
+              {
+                "name": "entityType",
+                "value": "",
+                "type": "query",
+                "description": "The EntityType of the entities to be fetched."
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "A limit for the number of items to be returned for one request. Limit can range between 1 and 500 items."
+              },
+              {
+                "name": "lastUpdated",
+                "value": "",
+                "type": "query",
+                "description": "Date Filter. Returns items that have been updated after specified date."
+              }
+            ]
+          },
+          "docs": "The 'errorFeedbacks' API has been replaced by 'requestStatus' API and is likely to be deprecated at a later time. There will be a 12 months notice period before eventual deprecation. Currently both APIs are functioning side by side and are returning same errors. \r\n\r\nIf errors occur after Basware API has validated the data schema, these will be returned from target systems asynchronously in this interface. Please see section \"[Usage scenario 5: Error handling and monitoring](https://developer.bas"
+        },
+        {
+          "info": {
+            "name": "Deletes data from Basware API. For manual one-time operations.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/v1/errorFeedbacks",
+            "params": [
+              {
+                "name": "entityType",
+                "value": "",
+                "type": "query",
+                "description": "Name of entity for which records to be deleted from errorFeedback table."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "For manual one-time operations only, such as a manual clean-up to remove test data generated during API integration development. Only removes records from API layer. \r\nDeletion in target systems needs to be done separately using the data deletion mechanisms available in each of the target system in addition to deleting the data in Basware API."
+        },
+        {
+          "info": {
+            "name": "Returns error messages from receiving end-system(s), based on webservice request id.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/errorFeedbacks/:requestId",
+            "params": [
+              {
+                "name": "requestId",
+                "value": "",
+                "type": "path",
+                "description": "The RequestId of the entity to be fetched"
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "A limit for the number of items to be returned for one request. Limit can range between 1 and 500 items."
+              }
+            ]
+          },
+          "docs": "The 'errorFeedbacks' API has been replaced by 'requestStatus' API and is likely to be deprecated at a later time. There will be a 12 months notice period before eventual deprecation. Currently both APIs are functioning side by side and are returning same errors. \r\n\r\nIf errors occur after Basware API has validated the data schema, these will be returned from target systems asynchronously in this interface. Please see section \"[Usage scenario 5: Error handling and monitoring](https://developer.bas"
+        },
+        {
+          "info": {
+            "name": "Returns error messages from receiving end-system(s), based on interface and exernalCode -identifier of record.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/errorFeedbacks/:entityType/:errorEntityExternalCode",
+            "params": [
+              {
+                "name": "entityType",
+                "value": "",
+                "type": "path",
+                "description": "The entityType of the entities to be fetched"
+              },
+              {
+                "name": "errorEntityExternalCode",
+                "value": "",
+                "type": "path",
+                "description": "The ExternalCode of the entities to be fetched"
+              }
+            ]
+          },
+          "docs": "The 'errorFeedbacks' API has been replaced by 'requestStatus' API and is likely to be deprecated at a later time. There will be a 12 months notice period before eventual deprecation. Currently both APIs are functioning side by side and are returning same errors. \r\n\r\nIf errors occur after Basware API has validated the data schema, these will be returned from target systems asynchronously in this interface. Please see section \"[Usage scenario 5: Error handling and monitoring](https://developer.bas"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

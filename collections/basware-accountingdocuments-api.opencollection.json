@@ -1,0 +1,308 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Basware OAUTH2 authentication APIs AccountingDocuments API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "AccountingDocuments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Returns invoices approved for transfer to accounting.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/accountingDocuments",
+            "headers": [
+              {
+                "name": "x-amz-meta-continuationtoken",
+                "value": "e799fdb7-222c-4e0f-af2f-881f4beae654"
+              }
+            ],
+            "params": [
+              {
+                "name": "ProcessingStatus",
+                "value": "",
+                "type": "query",
+                "description": "Document status filter. Returns items by accounting document status.\r\n            \n To get new invoices waiting for transfer, use filter 'WaitingForTransfer'. See [diagram on developer site](https://developer.basware.com/api/p2p/manual#ProcessingStatusDiagram) for details on available status transitions.\r\n            \n⚠️ Important: Enrichment-related statuses (e.g. 'WaitingForEnrichmentTransfer', 'EnrichmentTransferInProgress', 'EnrichmentTransferred', 'EnrichmentTransferFailed') are only applicable when 'p2pProcessingMode=InvoiceEnrichment' is used.\r\n            \nIf these statuses are used without setting 'p2pProcessingMode=InvoiceEnrichment', no results will be returned.\n"
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "A limit for the number of items to be returned for one request. Limit can range between 1 and 100 items. For invoices with large numbers of coding rows, number of invoices returned will be less in order to limit response message size."
+              },
+              {
+                "name": "companyCode",
+                "value": "",
+                "type": "query",
+                "description": "Company filter. Returns items for specific company."
+              },
+              {
+                "name": "lastUpdated",
+                "value": "",
+                "type": "query",
+                "description": "Date filter. Returns items that have been updated after specified date."
+              },
+              {
+                "name": "p2pProcessingMode",
+                "value": "",
+                "type": "query",
+                "description": "Defines the P2P flow type for which invoices are being returned. 'Standard' refers to the standard P2P flow where transferred invoices are already approved for payment. 'InvoiceEnrichment' refers to using P2P to only validate and enrich invoice contents - in this case the approval for payment is expected to be done in another system. Default: Standard. Both types of documents are not returned in the same request.\r\n            \n⚠️ Note: To retrieve documents in enrichment-related ProcessingStatus values, this parameter must be set to 'InvoiceEnrichment'.\n"
+              }
+            ]
+          },
+          "docs": "Notes: \r\n1) This API supports sending webhook based  [push notifications](https://developer.basware.com/api/p2p/manual#PushNotifications) when new data is available to be exported. \r\n2) This GET operation returns a HTTP redirect, which the API client needs to follow. \r\nPlease see section \"[Usage scenario 3: Prebook and transfer invoice to Accounting](https://developer.basware.com/api/p2p/manual#usage3)\" of Basware Purchase-to-Pay API manual for details on implementing invoice transfer process wi"
+        },
+        {
+          "info": {
+            "name": "Deletes data from Basware API. For manual one-time operations.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/v1/accountingDocuments",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "For manual one-time operations only, such as a manual clean-up to remove test data generated during API integration development. Only removes records from API layer. \r\nDeletion in target systems needs to be done separately using the data deletion mechanisms available in each of the target system in addition to deleting the data in Basware API."
+        },
+        {
+          "info": {
+            "name": "Returns single approved invoice by invoiceId -identifier.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/accountingDocuments/:invoiceId",
+            "params": [
+              {
+                "name": "invoiceId",
+                "value": "",
+                "type": "path",
+                "description": "The Invoice Id of the entity to be fetched"
+              }
+            ]
+          },
+          "docs": "Note: This GET operation returns a HTTP redirect, which the API client needs to follow. \r\n* 'Authorization' header must not be included in the redirected request (the second request after receiving a redirect). \r\n* 'Host' header needs to be included.\r\n\r\nPlease see section \"[Usage scenario 3: Prebook and transfer invoice to Accounting](https://developer.basware.com/api/p2p/manual#usage3)\" of Basware Purchase-to-Pay API manual for details on implementing invoice transfer process with Basware API."
+        },
+        {
+          "info": {
+            "name": "Acknowledged invoices are no longer offered for next GET operation. Done right after GET, before transferResponse.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/accountingDocuments/:invoiceId/acknowledge",
+            "headers": [
+              {
+                "name": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "params": [
+              {
+                "name": "invoiceId",
+                "value": "",
+                "type": "path",
+                "description": "Invoice Id of the accountingDocument to be acknowledged."
+              }
+            ]
+          },
+          "docs": "Notes: \r\n1) Updates 'processingStatus' -field on the invoice to allow filtering out the invoice on the next GET operation. \r\n2) For an invoice which is already acknowledged (processingStatus: 'TransferInProgress' or 'PrebookInProgress'), API will return 405 'Method not allowed' if acknowledge is attempted again on the invoice.\r\n      \r\nPlease see section \"[Usage scenario 3: Prebook and transfer invoice to Accounting](https://developer.basware.com/api/p2p/manual#usage3)\" of Basware Purchase-to-Pa"
+        },
+        {
+          "info": {
+            "name": "Marks invoice transfer P2P as accepted / rejected by receiving system. Used with invoices having 'p2pProcessingMode' = 'InvoiceEnrichment' which are not approved for payment.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/accountingDocuments/:invoiceId/enrichmentResponses",
+            "headers": [
+              {
+                "name": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "params": [
+              {
+                "name": "invoiceId",
+                "value": "",
+                "type": "path",
+                "description": "Invoice Id of the accountingDocument to be updated"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Notes: \r\n1) Enrichment responses for already enrichment transferred invoices are not allowed.\r\n2) Please do not send acknowledge and enrichmentResponse for at the same time for the same invoice. If acknowledge is used, please wait for acknowledge to complete before sending the enrichmentResponse.\r\n3) Only latest 100 responses will be saved per invoice.\r\n\r\nPlease see section \"[Usage scenario 3: Prebook and transfer invoice to Accounting](https://developer.basware.com/api/p2p/manual#usage3)\" of Ba"
+        },
+        {
+          "info": {
+            "name": "Marks invoice prebooking as accepted / rejected by receiving system.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/accountingDocuments/:invoiceId/prebookResponses",
+            "headers": [
+              {
+                "name": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "params": [
+              {
+                "name": "invoiceId",
+                "value": "",
+                "type": "path",
+                "description": "Invoice Id of the accountingDocument to be updated"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Notes: \r\n1. Prebook responses for already prebooked invoices (where processingStatus = 'Prebooked') are not allowed.\r\n2. Saving voucher numbers and payment block -information to the invoice in P2P requires a succesful prebook response from ERP ('success' = 'true'). The responseMessage gets saved also when success = false.\r\n3. Please do not send acknowledge and prebookResponse at the same time for the same invoice. If acknowledge is used, please wait for acknowledge to complete before sending the"
+        },
+        {
+          "info": {
+            "name": "Marks invoice transfer as accepted / rejected by receiving system. Used with invoices having 'p2pProcessingMode' = 'Standard' which are approved for payment.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/accountingDocuments/:invoiceId/transferResponses",
+            "headers": [
+              {
+                "name": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "params": [
+              {
+                "name": "invoiceId",
+                "value": "",
+                "type": "path",
+                "description": "Invoice Id of the accountingDocument to be updated"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Notes: \r\n1) Transfer responses for already transferred invoices (where processingStatus = 'Transferred') are not allowed. \r\n2) Saving voucher numbers and payment block -information to the invoice in P2P requires a succesful transfer to ERP ('success' = 'true'). The responseMessage gets saved also when success = false. \r\n3) Please do not send acknowledge and transferResponse for at the same time for the same invoice. If acknowledge is used, please wait for acknowledge to complete before sending t"
+        },
+        {
+          "info": {
+            "name": "Updates invoice payment information, including payment date.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/accountingDocuments/:invoiceId/paymentResponses",
+            "headers": [
+              {
+                "name": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "params": [
+              {
+                "name": "invoiceId",
+                "value": "",
+                "type": "path",
+                "description": "Invoice Id of the accountingDocument to be updated"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Notes: \r\n1) Payment response can be sent multiple times for the same invoice (for example when updating partial payments). When sending multiple payment responses to the same invoice, externalCode needs to be different on each of the paymentResponse updates. \r\n2) Please post a payment response only when data related to it on the invoice has changed (do not post same contents repeatedly).\r\n3) Fields not included on the payment response will be cleared (e.g. paymentMethod). \r\n4) Current date is de"
+        },
+        {
+          "info": {
+            "name": "Returns high level invoice status by search criteria such as company code, invoice number and invoice date.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/accountingDocuments/status",
+            "params": [
+              {
+                "name": "companyCode",
+                "value": "",
+                "type": "query",
+                "description": "Company filter. Returns invoices for specified company."
+              },
+              {
+                "name": "invoiceNumber",
+                "value": "",
+                "type": "query",
+                "description": "Invoice number filter. Returns invoices having specified invoice number."
+              },
+              {
+                "name": "invoiceDate",
+                "value": "",
+                "type": "query",
+                "description": "Invoice date filter. Returns invoices having specified invoice date."
+              },
+              {
+                "name": "grossSum",
+                "value": "",
+                "type": "query",
+                "description": "Gross sum filter. Returns invoices having specified gross sum."
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Page size filter. A limit for the number of items to be returned for one request. Limit can range between 1 and 500 items."
+              }
+            ]
+          },
+          "docs": "This API receives search criteria such as company code, invoice number, invoice date and gross sum and returns the status, i.e. ‘In Approval Process’, ‘Ready For Payment’, ‘Paid’ or ‘Rejected’. This API can return data also for invoices transferred to ERP outside of Basware API using a webservice or file based integration (Anyerp transferred invoices). \r\n\r\nFollowing high-level statuses are returned. \r\n* InApprovalProcess - Invoice has been received in Basware P2P and is being processed. This inc"
+        },
+        {
+          "info": {
+            "name": "Returns invoice attachment(s) by attachmentExternalCode identifier.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/accountingDocuments/:invoiceId/attachments/:attachmentExternalCode",
+            "params": [
+              {
+                "name": "invoiceId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "attachmentExternalCode",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "This API returns invoice attachments(s) by invoiceId and attachmentExternalCode identifiers. The attachmentExternalCode identifiers are available on the attachments block in main accountingDocuments API. \r\n\r\nNotes: \r\n 1) The API response redirects to a pre-signed URL. Make sure your API client will follow the '302' redirect to the returned new URL. The pre-signed URL will be valid for 15min.\r\n 2) This API is enabled manually through CMN_TENANT_SETTINGS parameter 'OpenApi.SendInvoiceAttachments' "
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

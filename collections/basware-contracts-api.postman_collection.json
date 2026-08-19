@@ -1,0 +1,1387 @@
+{
+  "item": [
+    {
+      "id": "35c5e86c-f8c6-4745-941a-22c2602a44ec",
+      "name": "Contracts",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c8f41941-20ba-43d0-a667-82b1af526b7d",
+          "name": "Returns contract entities",
+          "request": {
+            "name": "Returns contract entities",
+            "description": {
+              "content": "",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "contracts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "pageSize",
+                  "value": "500",
+                  "description": "A limit for the number of items to be returned for one request. Limit can range between 1 and 500 items."
+                },
+                {
+                  "disabled": false,
+                  "key": "companyCode",
+                  "value": "",
+                  "description": "Company filter. Returns items for specific company."
+                },
+                {
+                  "disabled": false,
+                  "key": "lastUpdated",
+                  "value": "<dateTime>",
+                  "description": "Date Filter. Returns items that have been updated after specified date."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Used to get next page of results when item count indicated by 'pageSize' is exceeded. A token is returned in header (not body) parameter 'X-amz-meta-continuationToken' of the response whenever there are more records to fetch. Post the received value here in a new HEADER parameter on the next GET request to receive the next page of results. When getting the next page of results, you must include the same query parameters that were used when getting the first page.",
+                "key": "x-amz-meta-continuationtoken",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "32bd6bf5-ab63-4be8-bb35-9ee0eca83b3e",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "contracts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "500"
+                    },
+                    {
+                      "key": "companyCode",
+                      "value": ""
+                    },
+                    {
+                      "key": "lastUpdated",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Used to get next page of results when item count indicated by 'pageSize' is exceeded. A token is returned in header (not body) parameter 'X-amz-meta-continuationToken' of the response whenever there are more records to fetch. Post the received value here in a new HEADER parameter on the next GET request to receive the next page of results. When getting the next page of results, you must include the same query parameters that were used when getting the first page.",
+                    "key": "x-amz-meta-continuationtoken",
+                    "value": "20577767-3fd9-4dda-9667-a7d7ee00ac95"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"contracts\": [\n    {\n      \"active\": true,\n      \"companyCode\": \"200\",\n      \"currencyCode\": \"EUR\",\n      \"externalCode\": \"4847-31231212-212121-1212\",\n      \"owner\": \"Liz Black\",\n      \"referenceCode\": \"12197627\",\n      \"suppliers\": [\n        {\n          \"supplierCode\": \"32789\",\n          \"supplierName\": \"Acme Motor Leasing inc.\"\n        },\n        {\n          \"supplierCode\": \"32789\",\n          \"supplierName\": \"Acme Motor Leasing inc.\"\n        }\n      ],\n      \"title\": \"Car leasing\",\n      \"total\": 10000,\n      \"validFrom\": \"1952-01-15T08:50:39.279Z\",\n      \"validTo\": \"1970-02-02T03:11:36.769Z\",\n      \"description\": \"This contract is for car leasing for Acme Motor leasing inc.\",\n      \"type\": \"Leasing\",\n      \"amountType\": \"Net\",\n      \"paymentTermCode\": \"NET30\",\n      \"contactPerson\": \"Liz Black\",\n      \"externalLinks\": [\n        {\n          \"externalLinkName\": \"Acme motor leasing\",\n          \"externalLinkURL\": \"https://www.acmemotorsinc.com\"\n        },\n        {\n          \"externalLinkName\": \"Acme motor leasing\",\n          \"externalLinkURL\": \"https://www.acmemotorsinc.com\"\n        }\n      ],\n      \"orderSpend\": true,\n      \"spendPlanSpend\": false,\n      \"invoiceSpend\": false,\n      \"lastUpdated\": \"1954-08-17T01:03:36.969Z\"\n    },\n    {\n      \"active\": true,\n      \"companyCode\": \"200\",\n      \"currencyCode\": \"EUR\",\n      \"externalCode\": \"4847-31231212-212121-1212\",\n      \"owner\": \"Liz Black\",\n      \"referenceCode\": \"12197627\",\n      \"suppliers\": [\n        {\n          \"supplierCode\": \"32789\",\n          \"supplierName\": \"Acme Motor Leasing inc.\"\n        },\n        {\n          \"supplierCode\": \"32789\",\n          \"supplierName\": \"Acme Motor Leasing inc.\"\n        }\n      ],\n      \"title\": \"Car leasing\",\n      \"total\": 10000,\n      \"validFrom\": \"1971-12-11T10:19:27.940Z\",\n      \"validTo\": \"1960-05-05T11:39:49.521Z\",\n      \"description\": \"This contract is for car leasing for Acme Motor leasing inc.\",\n      \"type\": \"Leasing\",\n      \"amountType\": \"Gross\",\n      \"paymentTermCode\": \"NET30\",\n      \"contactPerson\": \"Liz Black\",\n      \"externalLinks\": [\n        {\n          \"externalLinkName\": \"Acme motor leasing\",\n          \"externalLinkURL\": \"https://www.acmemotorsinc.com\"\n        },\n        {\n          \"externalLinkName\": \"Acme motor leasing\",\n          \"externalLinkURL\": \"https://www.acmemotorsinc.com\"\n        }\n      ],\n      \"orderSpend\": true,\n      \"spendPlanSpend\": false,\n      \"invoiceSpend\": false,\n      \"lastUpdated\": \"1954-05-18T16:40:19.691Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "20c9dedb-ea72-4f76-bca4-0b787d0a9163",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "contracts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "500"
+                    },
+                    {
+                      "key": "companyCode",
+                      "value": ""
+                    },
+                    {
+                      "key": "lastUpdated",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Used to get next page of results when item count indicated by 'pageSize' is exceeded. A token is returned in header (not body) parameter 'X-amz-meta-continuationToken' of the response whenever there are more records to fetch. Post the received value here in a new HEADER parameter on the next GET request to receive the next page of results. When getting the next page of results, you must include the same query parameters that were used when getting the first page.",
+                    "key": "x-amz-meta-continuationtoken",
+                    "value": "20577767-3fd9-4dda-9667-a7d7ee00ac95"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e6761df1-7278-4c0c-b192-db8fc717a7cc",
+              "name": "Not found. Request was successful and no records were found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "contracts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "500"
+                    },
+                    {
+                      "key": "companyCode",
+                      "value": ""
+                    },
+                    {
+                      "key": "lastUpdated",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Used to get next page of results when item count indicated by 'pageSize' is exceeded. A token is returned in header (not body) parameter 'X-amz-meta-continuationToken' of the response whenever there are more records to fetch. Post the received value here in a new HEADER parameter on the next GET request to receive the next page of results. When getting the next page of results, you must include the same query parameters that were used when getting the first page.",
+                    "key": "x-amz-meta-continuationtoken",
+                    "value": "20577767-3fd9-4dda-9667-a7d7ee00ac95"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "02661cd8-d825-40ec-bbec-6384b53a7a86",
+              "name": "Unexpected error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "contracts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "500"
+                    },
+                    {
+                      "key": "companyCode",
+                      "value": ""
+                    },
+                    {
+                      "key": "lastUpdated",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Used to get next page of results when item count indicated by 'pageSize' is exceeded. A token is returned in header (not body) parameter 'X-amz-meta-continuationToken' of the response whenever there are more records to fetch. Post the received value here in a new HEADER parameter on the next GET request to receive the next page of results. When getting the next page of results, you must include the same query parameters that were used when getting the first page.",
+                    "key": "x-amz-meta-continuationtoken",
+                    "value": "20577767-3fd9-4dda-9667-a7d7ee00ac95"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"fbc082a2-65a4-469c-b230-d84a252f18fc\",\n  \"hasErrors\": false,\n  \"errors\": [\n    {\n      \"externalCode\": \"4847-31231212-212121-1212\",\n      \"type\": \"TECHNICAL\",\n      \"code\": \"EXTERNAL_CODE_MISMATCH\",\n      \"message\": \"\",\n      \"info\": \"\"\n    },\n    {\n      \"externalCode\": \"4847-31231212-212121-1212\",\n      \"type\": \"VALIDATION\",\n      \"code\": \"DATA_VALIDATION_FAILED\",\n      \"message\": \"\",\n      \"info\": \"\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "258fbe82-a2da-4c87-ba7d-2433ec341b48",
+          "name": "Creates new contract entity, overwrites previous if exists.",
+          "request": {
+            "name": "Creates new contract entity, overwrites previous if exists.",
+            "description": {
+              "content": "Notes: \r\n1. The supplier and company code used need to exist in P2P. \r\n2. P2P needs to know the exchange rate from contract currency to company currency (if there are different).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "contracts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "[\n  {\n    \"active\": \"<boolean>\",\n    \"companyCode\": \"<string>\",\n    \"currencyCode\": \"<string>\",\n    \"externalCode\": \"<string>\",\n    \"owner\": \"<string>\",\n    \"referenceCode\": \"<string>\",\n    \"suppliers\": [\n      {\n        \"supplierCode\": \"<string>\",\n        \"supplierName\": \"<string>\"\n      },\n      {\n        \"supplierCode\": \"<string>\",\n        \"supplierName\": \"<string>\"\n      }\n    ],\n    \"title\": \"<string>\",\n    \"total\": \"<double>\",\n    \"validFrom\": \"<dateTime>\",\n    \"validTo\": \"<dateTime>\",\n    \"description\": \"<string>\",\n    \"type\": \"<string>\",\n    \"amountType\": \"<string>\",\n    \"paymentTermCode\": \"<string>\",\n    \"contactPerson\": \"<string>\",\n    \"externalLinks\": [\n      {\n        \"externalLinkName\": \"<string>\",\n        \"externalLinkURL\": \"<string>\"\n      },\n      {\n        \"externalLinkName\": \"<string>\",\n        \"externalLinkURL\": \"<string>\"\n      }\n    ],\n    \"orderSpend\": \"<boolean>\",\n    \"spendPlanSpend\": \"<boolean>\",\n    \"invoiceSpend\": \"<boolean>\",\n    \"lastUpdated\": \"<dateTime>\"\n  },\n  {\n    \"active\": \"<boolean>\",\n    \"companyCode\": \"<string>\",\n    \"currencyCode\": \"<string>\",\n    \"externalCode\": \"<string>\",\n    \"owner\": \"<string>\",\n    \"referenceCode\": \"<string>\",\n    \"suppliers\": [\n      {\n        \"supplierCode\": \"<string>\",\n        \"supplierName\": \"<string>\"\n      },\n      {\n        \"supplierCode\": \"<string>\",\n        \"supplierName\": \"<string>\"\n      }\n    ],\n    \"title\": \"<string>\",\n    \"total\": \"<double>\",\n    \"validFrom\": \"<dateTime>\",\n    \"validTo\": \"<dateTime>\",\n    \"description\": \"<string>\",\n    \"type\": \"<string>\",\n    \"amountType\": \"<string>\",\n    \"paymentTermCode\": \"<string>\",\n    \"contactPerson\": \"<string>\",\n    \"externalLinks\": [\n      {\n        \"externalLinkName\": \"<string>\",\n        \"externalLinkURL\": \"<string>\"\n      },\n      {\n        \"externalLinkName\": \"<string>\",\n        \"externalLinkURL\": \"<string>\"\n      }\n    ],\n    \"orderSpend\": \"<boolean>\",\n    \"spendPlanSpend\": \"<boolean>\",\n    \"invoiceSpend\": \"<boolean>\",\n    \"lastUpdated\": \"<dateTime>\"\n  }\n]",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d71f7798-13d9-4dd2-8ea3-537387e19cb0",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "contracts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Specifies the media type of the resource. Value application/json is supported.",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"active\": true,\n    \"companyCode\": \"200\",\n    \"currencyCode\": \"EUR\",\n    \"externalCode\": \"4847-31231212-212121-1212\",\n    \"owner\": \"Liz Black\",\n    \"referenceCode\": \"12197627\",\n    \"suppliers\": [\n      {\n        \"supplierCode\": \"32789\",\n        \"supplierName\": \"Acme Motor Leasing inc.\"\n      },\n      {\n        \"supplierCode\": \"32789\",\n        \"supplierName\": \"Acme Motor Leasing inc.\"\n      }\n    ],\n    \"title\": \"Car leasing\",\n    \"total\": 10000,\n    \"validFrom\": \"<dateTime>\",\n    \"validTo\": \"<dateTime>\",\n    \"description\": \"This contract is for car leasing for Acme Motor leasing inc.\",\n    \"type\": \"Leasing\",\n    \"amountType\": \"<string>\",\n    \"paymentTermCode\": \"NET30\",\n    \"contactPerson\": \"Liz Black\",\n    \"externalLinks\": [\n      {\n        \"externalLinkName\": \"Acme motor leasing\",\n        \"externalLinkURL\": \"https://www.acmemotorsinc.com\"\n      },\n      {\n        \"externalLinkName\": \"Acme motor leasing\",\n        \"externalLinkURL\": \"https://www.acmemotorsinc.com\"\n      }\n    ],\n    \"orderSpend\": true,\n    \"spendPlanSpend\": false,\n    \"invoiceSpend\": false,\n    \"lastUpdated\": \"<dateTime>\"\n  },\n  {\n    \"active\": true,\n    \"companyCode\": \"200\",\n    \"currencyCode\": \"EUR\",\n    \"externalCode\": \"4847-31231212-212121-1212\",\n    \"owner\": \"Liz Black\",\n    \"referenceCode\": \"12197627\",\n    \"suppliers\": [\n      {\n        \"supplierCode\": \"32789\",\n        \"supplierName\": \"Acme Motor Leasing inc.\"\n      },\n      {\n        \"supplierCode\": \"32789\",\n        \"supplierName\": \"Acme Motor Leasing inc.\"\n      }\n    ],\n    \"title\": \"Car leasing\",\n    \"total\": 10000,\n    \"validFrom\": \"<dateTime>\",\n    \"validTo\": \"<dateTime>\",\n    \"description\": \"This contract is for car leasing for Acme Motor leasing inc.\",\n    \"type\": \"Leasing\",\n    \"amountType\": \"<string>\",\n    \"paymentTermCode\": \"NET30\",\n    \"contactPerson\": \"Liz Black\",\n    \"externalLinks\": [\n      {\n        \"externalLinkName\": \"Acme motor leasing\",\n        \"externalLinkURL\": \"https://www.acmemotorsinc.com\"\n      },\n      {\n        \"externalLinkName\": \"Acme motor leasing\",\n        \"externalLinkURL\": \"https://www.acmemotorsinc.com\"\n      }\n    ],\n    \"orderSpend\": true,\n    \"spendPlanSpend\": false,\n    \"invoiceSpend\": false,\n    \"lastUpdated\": \"<dateTime>\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"active\": true,\n    \"companyCode\": \"200\",\n    \"currencyCode\": \"EUR\",\n    \"externalCode\": \"4847-31231212-212121-1212\",\n    \"owner\": \"Liz Black\",\n    \"referenceCode\": \"12197627\",\n    \"suppliers\": [\n      {\n        \"supplierCode\": \"32789\",\n        \"supplierName\": \"Acme Motor Leasing inc.\"\n      },\n      {\n        \"supplierCode\": \"32789\",\n        \"supplierName\": \"Acme Motor Leasing inc.\"\n      }\n    ],\n    \"title\": \"Car leasing\",\n    \"total\": 10000,\n    \"validFrom\": \"<dateTime>\",\n    \"validTo\": \"<dateTime>\",\n    \"description\": \"This contract is for car leasing for Acme Motor leasing inc.\",\n    \"type\": \"Leasing\",\n    \"amountType\": \"<string>\",\n    \"paymentTermCode\": \"NET30\",\n    \"contactPerson\": \"Liz Black\",\n    \"externalLinks\": [\n      {\n        \"externalLinkName\": \"Acme motor leasing\",\n        \"externalLinkURL\": \"https://www.acmemotorsinc.com\"\n      },\n      {\n        \"externalLinkName\": \"Acme motor leasing\",\n        \"externalLinkURL\": \"https://www.acmemotorsinc.com\"\n      }\n    ],\n    \"orderSpend\": true,\n    \"spendPlanSpend\": false,\n    \"invoiceSpend\": false,\n    \"lastUpdated\": \"<dateTime>\"\n  },\n  {\n    \"active\": true,\n    \"companyCode\": \"200\",\n    \"currencyCode\": \"EUR\",\n    \"externalCode\": \"4847-31231212-212121-1212\",\n    \"owner\": \"Liz Black\",\n    \"referenceCode\": \"12197627\",\n    \"suppliers\": [\n      {\n        \"supplierCode\": \"32789\",\n        \"supplierName\": \"Acme Motor Leasing inc.\"\n      },\n      {\n        \"supplierCode\": \"32789\",\n        \"supplierName\": \"Acme Motor Leasing inc.\"\n      }\n    ],\n    \"title\": \"Car leasing\",\n    \"total\": 10000,\n    \"validFrom\": \"<dateTime>\",\n    \"validTo\": \"<dateTime>\",\n    \"description\": \"This contract is for car leasing for Acme Motor leasing inc.\",\n    \"type\": \"Leasing\",\n    \"amountType\": \"<string>\",\n    \"paymentTermCode\": \"NET30\",\n    \"contactPerson\": \"Liz Black\",\n    \"externalLinks\": [\n      {\n        \"externalLinkName\": \"Acme motor leasing\",\n        \"externalLinkURL\": \"https://www.acmemotorsinc.com\"\n      },\n      {\n        \"externalLinkName\": \"Acme motor leasing\",\n        \"externalLinkURL\": \"https://www.acmemotorsinc.com\"\n      }\n    ],\n    \"orderSpend\": true,\n    \"spendPlanSpend\": false,\n    \"invoiceSpend\": false,\n    \"lastUpdated\": \"<dateTime>\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9ec0fbed-80be-4a0f-8215-7153db287d84",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "contracts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Specifies the media type of the resource. Value application/json is supported.",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"active\": true,\n    \"companyCode\": \"200\",\n    \"currencyCode\": \"EUR\",\n    \"externalCode\": \"4847-31231212-212121-1212\",\n    \"owner\": \"Liz Black\",\n    \"referenceCode\": \"12197627\",\n    \"suppliers\": [\n      {\n        \"supplierCode\": \"32789\",\n        \"supplierName\": \"Acme Motor Leasing inc.\"\n      },\n      {\n        \"supplierCode\": \"32789\",\n        \"supplierName\": \"Acme Motor Leasing inc.\"\n      }\n    ],\n    \"title\": \"Car leasing\",\n    \"total\": 10000,\n    \"validFrom\": \"<dateTime>\",\n    \"validTo\": \"<dateTime>\",\n    \"description\": \"This contract is for car leasing for Acme Motor leasing inc.\",\n    \"type\": \"Leasing\",\n    \"amountType\": \"<string>\",\n    \"paymentTermCode\": \"NET30\",\n    \"contactPerson\": \"Liz Black\",\n    \"externalLinks\": [\n      {\n        \"externalLinkName\": \"Acme motor leasing\",\n        \"externalLinkURL\": \"https://www.acmemotorsinc.com\"\n      },\n      {\n        \"externalLinkName\": \"Acme motor leasing\",\n        \"externalLinkURL\": \"https://www.acmemotorsinc.com\"\n      }\n    ],\n    \"orderSpend\": true,\n    \"spendPlanSpend\": false,\n    \"invoiceSpend\": false,\n    \"lastUpdated\": \"<dateTime>\"\n  },\n  {\n    \"active\": true,\n    \"companyCode\": \"200\",\n    \"currencyCode\": \"EUR\",\n    \"externalCode\": \"4847-31231212-212121-1212\",\n    \"owner\": \"Liz Black\",\n    \"referenceCode\": \"12197627\",\n    \"suppliers\": [\n      {\n        \"supplierCode\": \"32789\",\n        \"supplierName\": \"Acme Motor Leasing inc.\"\n      },\n      {\n        \"supplierCode\": \"32789\",\n        \"supplierName\": \"Acme Motor Leasing inc.\"\n      }\n    ],\n    \"title\": \"Car leasing\",\n    \"total\": 10000,\n    \"validFrom\": \"<dateTime>\",\n    \"validTo\": \"<dateTime>\",\n    \"description\": \"This contract is for car leasing for Acme Motor leasing inc.\",\n    \"type\": \"Leasing\",\n    \"amountType\": \"<string>\",\n    \"paymentTermCode\": \"NET30\",\n    \"contactPerson\": \"Liz Black\",\n    \"externalLinks\": [\n      {\n        \"externalLinkName\": \"Acme motor leasing\",\n        \"externalLinkURL\": \"https://www.acmemotorsinc.com\"\n      },\n      {\n        \"externalLinkName\": \"Acme motor leasing\",\n        \"externalLinkURL\": \"https://www.acmemotorsinc.com\"\n      }\n    ],\n    \"orderSpend\": true,\n    \"spendPlanSpend\": false,\n    \"invoiceSpend\": false,\n    \"lastUpdated\": \"<dateTime>\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"fbc082a2-65a4-469c-b230-d84a252f18fc\",\n  \"hasErrors\": true,\n  \"errors\": [\n    {\n      \"externalCode\": \"4847-31231212-212121-1212\",\n      \"type\": \"TECHNICAL\",\n      \"code\": \"DATA_VALIDATION_FAILED\",\n      \"message\": \"\",\n      \"info\": \"\"\n    },\n    {\n      \"externalCode\": \"4847-31231212-212121-1212\",\n      \"type\": \"SECURITY\",\n      \"code\": \"SQS_PUBLISH_ERROR\",\n      \"message\": \"\",\n      \"info\": \"\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b26d8755-753b-497f-bd59-7d6fad4a5fe9",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "contracts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Specifies the media type of the resource. Value application/json is supported.",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"active\": true,\n    \"companyCode\": \"200\",\n    \"currencyCode\": \"EUR\",\n    \"externalCode\": \"4847-31231212-212121-1212\",\n    \"owner\": \"Liz Black\",\n    \"referenceCode\": \"12197627\",\n    \"suppliers\": [\n      {\n        \"supplierCode\": \"32789\",\n        \"supplierName\": \"Acme Motor Leasing inc.\"\n      },\n      {\n        \"supplierCode\": \"32789\",\n        \"supplierName\": \"Acme Motor Leasing inc.\"\n      }\n    ],\n    \"title\": \"Car leasing\",\n    \"total\": 10000,\n    \"validFrom\": \"<dateTime>\",\n    \"validTo\": \"<dateTime>\",\n    \"description\": \"This contract is for car leasing for Acme Motor leasing inc.\",\n    \"type\": \"Leasing\",\n    \"amountType\": \"<string>\",\n    \"paymentTermCode\": \"NET30\",\n    \"contactPerson\": \"Liz Black\",\n    \"externalLinks\": [\n      {\n        \"externalLinkName\": \"Acme motor leasing\",\n        \"externalLinkURL\": \"https://www.acmemotorsinc.com\"\n      },\n      {\n        \"externalLinkName\": \"Acme motor leasing\",\n        \"externalLinkURL\": \"https://www.acmemotorsinc.com\"\n      }\n    ],\n    \"orderSpend\": true,\n    \"spendPlanSpend\": false,\n    \"invoiceSpend\": false,\n    \"lastUpdated\": \"<dateTime>\"\n  },\n  {\n    \"active\": true,\n    \"companyCode\": \"200\",\n    \"currencyCode\": \"EUR\",\n    \"externalCode\": \"4847-31231212-212121-1212\",\n    \"owner\": \"Liz Black\",\n    \"referenceCode\": \"12197627\",\n    \"suppliers\": [\n      {\n        \"supplierCode\": \"32789\",\n        \"supplierName\": \"Acme Motor Leasing inc.\"\n      },\n      {\n        \"supplierCode\": \"32789\",\n        \"supplierName\": \"Acme Motor Leasing inc.\"\n      }\n    ],\n    \"title\": \"Car leasing\",\n    \"total\": 10000,\n    \"validFrom\": \"<dateTime>\",\n    \"validTo\": \"<dateTime>\",\n    \"description\": \"This contract is for car leasing for Acme Motor leasing inc.\",\n    \"type\": \"Leasing\",\n    \"amountType\": \"<string>\",\n    \"paymentTermCode\": \"NET30\",\n    \"contactPerson\": \"Liz Black\",\n    \"externalLinks\": [\n      {\n        \"externalLinkName\": \"Acme motor leasing\",\n        \"externalLinkURL\": \"https://www.acmemotorsinc.com\"\n      },\n      {\n        \"externalLinkName\": \"Acme motor leasing\",\n        \"externalLinkURL\": \"https://www.acmemotorsinc.com\"\n      }\n    ],\n    \"orderSpend\": true,\n    \"spendPlanSpend\": false,\n    \"invoiceSpend\": false,\n    \"lastUpdated\": \"<dateTime>\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "7f3f63ad-6242-45fc-af19-3240f3c74f01",
+              "name": "Conflict",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "contracts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Specifies the media type of the resource. Value application/json is supported.",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"active\": true,\n    \"companyCode\": \"200\",\n    \"currencyCode\": \"EUR\",\n    \"externalCode\": \"4847-31231212-212121-1212\",\n    \"owner\": \"Liz Black\",\n    \"referenceCode\": \"12197627\",\n    \"suppliers\": [\n      {\n        \"supplierCode\": \"32789\",\n        \"supplierName\": \"Acme Motor Leasing inc.\"\n      },\n      {\n        \"supplierCode\": \"32789\",\n        \"supplierName\": \"Acme Motor Leasing inc.\"\n      }\n    ],\n    \"title\": \"Car leasing\",\n    \"total\": 10000,\n    \"validFrom\": \"<dateTime>\",\n    \"validTo\": \"<dateTime>\",\n    \"description\": \"This contract is for car leasing for Acme Motor leasing inc.\",\n    \"type\": \"Leasing\",\n    \"amountType\": \"<string>\",\n    \"paymentTermCode\": \"NET30\",\n    \"contactPerson\": \"Liz Black\",\n    \"externalLinks\": [\n      {\n        \"externalLinkName\": \"Acme motor leasing\",\n        \"externalLinkURL\": \"https://www.acmemotorsinc.com\"\n      },\n      {\n        \"externalLinkName\": \"Acme motor leasing\",\n        \"externalLinkURL\": \"https://www.acmemotorsinc.com\"\n      }\n    ],\n    \"orderSpend\": true,\n    \"spendPlanSpend\": false,\n    \"invoiceSpend\": false,\n    \"lastUpdated\": \"<dateTime>\"\n  },\n  {\n    \"active\": true,\n    \"companyCode\": \"200\",\n    \"currencyCode\": \"EUR\",\n    \"externalCode\": \"4847-31231212-212121-1212\",\n    \"owner\": \"Liz Black\",\n    \"referenceCode\": \"12197627\",\n    \"suppliers\": [\n      {\n        \"supplierCode\": \"32789\",\n        \"supplierName\": \"Acme Motor Leasing inc.\"\n      },\n      {\n        \"supplierCode\": \"32789\",\n        \"supplierName\": \"Acme Motor Leasing inc.\"\n      }\n    ],\n    \"title\": \"Car leasing\",\n    \"total\": 10000,\n    \"validFrom\": \"<dateTime>\",\n    \"validTo\": \"<dateTime>\",\n    \"description\": \"This contract is for car leasing for Acme Motor leasing inc.\",\n    \"type\": \"Leasing\",\n    \"amountType\": \"<string>\",\n    \"paymentTermCode\": \"NET30\",\n    \"contactPerson\": \"Liz Black\",\n    \"externalLinks\": [\n      {\n        \"externalLinkName\": \"Acme motor leasing\",\n        \"externalLinkURL\": \"https://www.acmemotorsinc.com\"\n      },\n      {\n        \"externalLinkName\": \"Acme motor leasing\",\n        \"externalLinkURL\": \"https://www.acmemotorsinc.com\"\n      }\n    ],\n    \"orderSpend\": true,\n    \"spendPlanSpend\": false,\n    \"invoiceSpend\": false,\n    \"lastUpdated\": \"<dateTime>\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"fbc082a2-65a4-469c-b230-d84a252f18fc\",\n  \"hasErrors\": true,\n  \"errors\": [\n    {\n      \"externalCode\": \"4847-31231212-212121-1212\",\n      \"type\": \"TECHNICAL\",\n      \"code\": \"DATA_VALIDATION_FAILED\",\n      \"message\": \"\",\n      \"info\": \"\"\n    },\n    {\n      \"externalCode\": \"4847-31231212-212121-1212\",\n      \"type\": \"SECURITY\",\n      \"code\": \"SQS_PUBLISH_ERROR\",\n      \"message\": \"\",\n      \"info\": \"\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1e672222-b2b9-4f24-a28f-efb458f5d5b5",
+              "name": "Unexpected error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "contracts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Specifies the media type of the resource. Value application/json is supported.",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"active\": true,\n    \"companyCode\": \"200\",\n    \"currencyCode\": \"EUR\",\n    \"externalCode\": \"4847-31231212-212121-1212\",\n    \"owner\": \"Liz Black\",\n    \"referenceCode\": \"12197627\",\n    \"suppliers\": [\n      {\n        \"supplierCode\": \"32789\",\n        \"supplierName\": \"Acme Motor Leasing inc.\"\n      },\n      {\n        \"supplierCode\": \"32789\",\n        \"supplierName\": \"Acme Motor Leasing inc.\"\n      }\n    ],\n    \"title\": \"Car leasing\",\n    \"total\": 10000,\n    \"validFrom\": \"<dateTime>\",\n    \"validTo\": \"<dateTime>\",\n    \"description\": \"This contract is for car leasing for Acme Motor leasing inc.\",\n    \"type\": \"Leasing\",\n    \"amountType\": \"<string>\",\n    \"paymentTermCode\": \"NET30\",\n    \"contactPerson\": \"Liz Black\",\n    \"externalLinks\": [\n      {\n        \"externalLinkName\": \"Acme motor leasing\",\n        \"externalLinkURL\": \"https://www.acmemotorsinc.com\"\n      },\n      {\n        \"externalLinkName\": \"Acme motor leasing\",\n        \"externalLinkURL\": \"https://www.acmemotorsinc.com\"\n      }\n    ],\n    \"orderSpend\": true,\n    \"spendPlanSpend\": false,\n    \"invoiceSpend\": false,\n    \"lastUpdated\": \"<dateTime>\"\n  },\n  {\n    \"active\": true,\n    \"companyCode\": \"200\",\n    \"currencyCode\": \"EUR\",\n    \"externalCode\": \"4847-31231212-212121-1212\",\n    \"owner\": \"Liz Black\",\n    \"referenceCode\": \"12197627\",\n    \"suppliers\": [\n      {\n        \"supplierCode\": \"32789\",\n        \"supplierName\": \"Acme Motor Leasing inc.\"\n      },\n      {\n        \"supplierCode\": \"32789\",\n        \"supplierName\": \"Acme Motor Leasing inc.\"\n      }\n    ],\n    \"title\": \"Car leasing\",\n    \"total\": 10000,\n    \"validFrom\": \"<dateTime>\",\n    \"validTo\": \"<dateTime>\",\n    \"description\": \"This contract is for car leasing for Acme Motor leasing inc.\",\n    \"type\": \"Leasing\",\n    \"amountType\": \"<string>\",\n    \"paymentTermCode\": \"NET30\",\n    \"contactPerson\": \"Liz Black\",\n    \"externalLinks\": [\n      {\n        \"externalLinkName\": \"Acme motor leasing\",\n        \"externalLinkURL\": \"https://www.acmemotorsinc.com\"\n      },\n      {\n        \"externalLinkName\": \"Acme motor leasing\",\n        \"externalLinkURL\": \"https://www.acmemotorsinc.com\"\n      }\n    ],\n    \"orderSpend\": true,\n    \"spendPlanSpend\": false,\n    \"invoiceSpend\": false,\n    \"lastUpdated\": \"<dateTime>\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"fbc082a2-65a4-469c-b230-d84a252f18fc\",\n  \"hasErrors\": true,\n  \"errors\": [\n    {\n      \"externalCode\": \"4847-31231212-212121-1212\",\n      \"type\": \"TECHNICAL\",\n      \"code\": \"DATA_VALIDATION_FAILED\",\n      \"message\": \"\",\n      \"info\": \"\"\n    },\n    {\n      \"externalCode\": \"4847-31231212-212121-1212\",\n      \"type\": \"SECURITY\",\n      \"code\": \"SQS_PUBLISH_ERROR\",\n      \"message\": \"\",\n      \"info\": \"\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a4583571-e1e3-4821-94be-cb53599809bc",
+          "name": "Deletes data from Basware API. For manual one-time operations.",
+          "request": {
+            "name": "Deletes data from Basware API. For manual one-time operations.",
+            "description": {
+              "content": "For manual one-time operations only, such as a manual clean-up to remove test data generated during API integration development. Only removes records from API layer. \r\nDeletion in target systems needs to be done separately using the data deletion mechanisms available in each of the target system in addition to deleting the data in Basware API.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "contracts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"lastUpdated\": \"<dateTime>\",\n  \"externalCode\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "0b704756-5fa3-48af-b8ea-4950e4c33c09",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "contracts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"lastUpdated\": \"<dateTime>\",\n  \"externalCode\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusApiLink\": \"string\",\n  \"taskName\": \"string\",\n  \"taskStatus\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0358ef9b-f172-46cf-a126-6f4e38022a62",
+              "name": "RequestAccepted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "contracts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"lastUpdated\": \"<dateTime>\",\n  \"externalCode\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusApiLink\": \"string\",\n  \"taskName\": \"string\",\n  \"taskStatus\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4dfc2004-a77f-453b-b3c8-05e60f523d3a",
+              "name": "BadRequest",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "contracts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"lastUpdated\": \"<dateTime>\",\n  \"externalCode\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"fbc082a2-65a4-469c-b230-d84a252f18fc\",\n  \"hasErrors\": true,\n  \"errors\": [\n    {\n      \"externalCode\": \"4847-31231212-212121-1212\",\n      \"type\": \"TECHNICAL\",\n      \"code\": \"DATA_VALIDATION_FAILED\",\n      \"message\": \"\",\n      \"info\": \"\"\n    },\n    {\n      \"externalCode\": \"4847-31231212-212121-1212\",\n      \"type\": \"SECURITY\",\n      \"code\": \"SQS_PUBLISH_ERROR\",\n      \"message\": \"\",\n      \"info\": \"\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c7facec7-aaa4-4b4f-b42e-23e4483d334e",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "contracts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"lastUpdated\": \"<dateTime>\",\n  \"externalCode\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "5baa4758-ebaf-4e5a-96f3-560837b4faa8",
+              "name": "Unexpected error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "contracts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"lastUpdated\": \"<dateTime>\",\n  \"externalCode\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"fbc082a2-65a4-469c-b230-d84a252f18fc\",\n  \"hasErrors\": true,\n  \"errors\": [\n    {\n      \"externalCode\": \"4847-31231212-212121-1212\",\n      \"type\": \"TECHNICAL\",\n      \"code\": \"DATA_VALIDATION_FAILED\",\n      \"message\": \"\",\n      \"info\": \"\"\n    },\n    {\n      \"externalCode\": \"4847-31231212-212121-1212\",\n      \"type\": \"SECURITY\",\n      \"code\": \"SQS_PUBLISH_ERROR\",\n      \"message\": \"\",\n      \"info\": \"\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "08b6f793-66f3-41c5-a8c0-0d7f1e15d9c2",
+          "name": "Returns single contract entity by ID",
+          "request": {
+            "name": "Returns single contract entity by ID",
+            "description": {
+              "content": "",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "contracts",
+                ":externalCode"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "externalCode",
+                  "description": "(Required) The ExternalCode of the contract to be fetched"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c701026b-6089-458c-b220-e4d4cc54bd60",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "contracts",
+                    ":externalCode"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "externalCode",
+                      "description": "(Required) The ExternalCode of the contract to be fetched"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"active\": true,\n  \"companyCode\": \"200\",\n  \"currencyCode\": \"EUR\",\n  \"externalCode\": \"4847-31231212-212121-1212\",\n  \"owner\": \"Liz Black\",\n  \"referenceCode\": \"12197627\",\n  \"suppliers\": [\n    {\n      \"supplierCode\": \"32789\",\n      \"supplierName\": \"Acme Motor Leasing inc.\"\n    },\n    {\n      \"supplierCode\": \"32789\",\n      \"supplierName\": \"Acme Motor Leasing inc.\"\n    }\n  ],\n  \"title\": \"Car leasing\",\n  \"total\": 10000,\n  \"validFrom\": \"<dateTime>\",\n  \"validTo\": \"<dateTime>\",\n  \"description\": \"This contract is for car leasing for Acme Motor leasing inc.\",\n  \"type\": \"Leasing\",\n  \"amountType\": \"<string>\",\n  \"paymentTermCode\": \"NET30\",\n  \"contactPerson\": \"Liz Black\",\n  \"externalLinks\": [\n    {\n      \"externalLinkName\": \"Acme motor leasing\",\n      \"externalLinkURL\": \"https://www.acmemotorsinc.com\"\n    },\n    {\n      \"externalLinkName\": \"Acme motor leasing\",\n      \"externalLinkURL\": \"https://www.acmemotorsinc.com\"\n    }\n  ],\n  \"orderSpend\": true,\n  \"spendPlanSpend\": false,\n  \"invoiceSpend\": false,\n  \"lastUpdated\": \"<dateTime>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "33a7e5ee-46e1-4ebe-a9e2-b2a35307dbd5",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "contracts",
+                    ":externalCode"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "externalCode",
+                      "description": "(Required) The ExternalCode of the contract to be fetched"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "16530263-3a55-42e2-9737-aa987f6a523c",
+              "name": "Not found. Request was successful and no records were found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "contracts",
+                    ":externalCode"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "externalCode",
+                      "description": "(Required) The ExternalCode of the contract to be fetched"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f38ee7f1-f30b-4357-aa24-9b90b29ecbec",
+              "name": "Unexpected error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "contracts",
+                    ":externalCode"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "externalCode",
+                      "description": "(Required) The ExternalCode of the contract to be fetched"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"fbc082a2-65a4-469c-b230-d84a252f18fc\",\n  \"hasErrors\": true,\n  \"errors\": [\n    {\n      \"externalCode\": \"4847-31231212-212121-1212\",\n      \"type\": \"TECHNICAL\",\n      \"code\": \"DATA_VALIDATION_FAILED\",\n      \"message\": \"\",\n      \"info\": \"\"\n    },\n    {\n      \"externalCode\": \"4847-31231212-212121-1212\",\n      \"type\": \"SECURITY\",\n      \"code\": \"SQS_PUBLISH_ERROR\",\n      \"message\": \"\",\n      \"info\": \"\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f075f47b-4ff7-48d8-8548-6745641adf03",
+          "name": "Updates contract entity. To do a partial update consumer needs to provide changed properties.",
+          "request": {
+            "name": "Updates contract entity. To do a partial update consumer needs to provide changed properties.",
+            "description": {
+              "content": "Note: Contract currency can no longer be changed if spend has been collected for the contract.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "contracts",
+                ":externalCode"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "externalCode",
+                  "description": "(Required) The ExternalCode of the contract to be updated"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"active\": \"<boolean>\",\n  \"companyCode\": \"<string>\",\n  \"currencyCode\": \"<string>\",\n  \"externalCode\": \"<string>\",\n  \"owner\": \"<string>\",\n  \"referenceCode\": \"<string>\",\n  \"suppliers\": [\n    {\n      \"supplierCode\": \"<string>\",\n      \"supplierName\": \"<string>\"\n    },\n    {\n      \"supplierCode\": \"<string>\",\n      \"supplierName\": \"<string>\"\n    }\n  ],\n  \"title\": \"<string>\",\n  \"total\": \"<double>\",\n  \"validFrom\": \"<dateTime>\",\n  \"validTo\": \"<dateTime>\",\n  \"description\": \"<string>\",\n  \"type\": \"<string>\",\n  \"amountType\": \"<string>\",\n  \"paymentTermCode\": \"<string>\",\n  \"contactPerson\": \"<string>\",\n  \"externalLinks\": [\n    {\n      \"externalLinkName\": \"<string>\",\n      \"externalLinkURL\": \"<string>\"\n    },\n    {\n      \"externalLinkName\": \"<string>\",\n      \"externalLinkURL\": \"<string>\"\n    }\n  ],\n  \"orderSpend\": \"<boolean>\",\n  \"spendPlanSpend\": \"<boolean>\",\n  \"invoiceSpend\": \"<boolean>\",\n  \"lastUpdated\": \"<dateTime>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b972da6e-3f67-4c68-81b1-a0162d452497",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "contracts",
+                    ":externalCode"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "externalCode",
+                      "description": "(Required) The ExternalCode of the contract to be updated"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"active\": true,\n  \"companyCode\": \"200\",\n  \"currencyCode\": \"EUR\",\n  \"externalCode\": \"4847-31231212-212121-1212\",\n  \"owner\": \"Liz Black\",\n  \"referenceCode\": \"12197627\",\n  \"suppliers\": [\n    {\n      \"supplierCode\": \"32789\",\n      \"supplierName\": \"Acme Motor Leasing inc.\"\n    },\n    {\n      \"supplierCode\": \"32789\",\n      \"supplierName\": \"Acme Motor Leasing inc.\"\n    }\n  ],\n  \"title\": \"Car leasing\",\n  \"total\": 10000,\n  \"validFrom\": \"<dateTime>\",\n  \"validTo\": \"<dateTime>\",\n  \"description\": \"This contract is for car leasing for Acme Motor leasing inc.\",\n  \"type\": \"Leasing\",\n  \"amountType\": \"<string>\",\n  \"paymentTermCode\": \"NET30\",\n  \"contactPerson\": \"Liz Black\",\n  \"externalLinks\": [\n    {\n      \"externalLinkName\": \"Acme motor leasing\",\n      \"externalLinkURL\": \"https://www.acmemotorsinc.com\"\n    },\n    {\n      \"externalLinkName\": \"Acme motor leasing\",\n      \"externalLinkURL\": \"https://www.acmemotorsinc.com\"\n    }\n  ],\n  \"orderSpend\": true,\n  \"spendPlanSpend\": false,\n  \"invoiceSpend\": false,\n  \"lastUpdated\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"active\": true,\n  \"companyCode\": \"200\",\n  \"currencyCode\": \"EUR\",\n  \"externalCode\": \"4847-31231212-212121-1212\",\n  \"owner\": \"Liz Black\",\n  \"referenceCode\": \"12197627\",\n  \"suppliers\": [\n    {\n      \"supplierCode\": \"32789\",\n      \"supplierName\": \"Acme Motor Leasing inc.\"\n    },\n    {\n      \"supplierCode\": \"32789\",\n      \"supplierName\": \"Acme Motor Leasing inc.\"\n    }\n  ],\n  \"title\": \"Car leasing\",\n  \"total\": 10000,\n  \"validFrom\": \"<dateTime>\",\n  \"validTo\": \"<dateTime>\",\n  \"description\": \"This contract is for car leasing for Acme Motor leasing inc.\",\n  \"type\": \"Leasing\",\n  \"amountType\": \"<string>\",\n  \"paymentTermCode\": \"NET30\",\n  \"contactPerson\": \"Liz Black\",\n  \"externalLinks\": [\n    {\n      \"externalLinkName\": \"Acme motor leasing\",\n      \"externalLinkURL\": \"https://www.acmemotorsinc.com\"\n    },\n    {\n      \"externalLinkName\": \"Acme motor leasing\",\n      \"externalLinkURL\": \"https://www.acmemotorsinc.com\"\n    }\n  ],\n  \"orderSpend\": true,\n  \"spendPlanSpend\": false,\n  \"invoiceSpend\": false,\n  \"lastUpdated\": \"<dateTime>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "11694810-076e-49dc-8631-e6f06f622aac",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "contracts",
+                    ":externalCode"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "externalCode",
+                      "description": "(Required) The ExternalCode of the contract to be updated"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"active\": true,\n  \"companyCode\": \"200\",\n  \"currencyCode\": \"EUR\",\n  \"externalCode\": \"4847-31231212-212121-1212\",\n  \"owner\": \"Liz Black\",\n  \"referenceCode\": \"12197627\",\n  \"suppliers\": [\n    {\n      \"supplierCode\": \"32789\",\n      \"supplierName\": \"Acme Motor Leasing inc.\"\n    },\n    {\n      \"supplierCode\": \"32789\",\n      \"supplierName\": \"Acme Motor Leasing inc.\"\n    }\n  ],\n  \"title\": \"Car leasing\",\n  \"total\": 10000,\n  \"validFrom\": \"<dateTime>\",\n  \"validTo\": \"<dateTime>\",\n  \"description\": \"This contract is for car leasing for Acme Motor leasing inc.\",\n  \"type\": \"Leasing\",\n  \"amountType\": \"<string>\",\n  \"paymentTermCode\": \"NET30\",\n  \"contactPerson\": \"Liz Black\",\n  \"externalLinks\": [\n    {\n      \"externalLinkName\": \"Acme motor leasing\",\n      \"externalLinkURL\": \"https://www.acmemotorsinc.com\"\n    },\n    {\n      \"externalLinkName\": \"Acme motor leasing\",\n      \"externalLinkURL\": \"https://www.acmemotorsinc.com\"\n    }\n  ],\n  \"orderSpend\": true,\n  \"spendPlanSpend\": false,\n  \"invoiceSpend\": false,\n  \"lastUpdated\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"fbc082a2-65a4-469c-b230-d84a252f18fc\",\n  \"hasErrors\": true,\n  \"errors\": [\n    {\n      \"externalCode\": \"4847-31231212-212121-1212\",\n      \"type\": \"TECHNICAL\",\n      \"code\": \"DATA_VALIDATION_FAILED\",\n      \"message\": \"\",\n      \"info\": \"\"\n    },\n    {\n      \"externalCode\": \"4847-31231212-212121-1212\",\n      \"type\": \"SECURITY\",\n      \"code\": \"SQS_PUBLISH_ERROR\",\n      \"message\": \"\",\n      \"info\": \"\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9226127c-5f5e-43de-b50a-ba6354ea848b",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "contracts",
+                    ":externalCode"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "externalCode",
+                      "description": "(Required) The ExternalCode of the contract to be updated"
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"active\": true,\n  \"companyCode\": \"200\",\n  \"currencyCode\": \"EUR\",\n  \"externalCode\": \"4847-31231212-212121-1212\",\n  \"owner\": \"Liz Black\",\n  \"referenceCode\": \"12197627\",\n  \"suppliers\": [\n    {\n      \"supplierCode\": \"32789\",\n      \"supplierName\": \"Acme Motor Leasing inc.\"\n    },\n    {\n      \"supplierCode\": \"32789\",\n      \"supplierName\": \"Acme Motor Leasing inc.\"\n    }\n  ],\n  \"title\": \"Car leasing\",\n  \"total\": 10000,\n  \"validFrom\": \"<dateTime>\",\n  \"validTo\": \"<dateTime>\",\n  \"description\": \"This contract is for car leasing for Acme Motor leasing inc.\",\n  \"type\": \"Leasing\",\n  \"amountType\": \"<string>\",\n  \"paymentTermCode\": \"NET30\",\n  \"contactPerson\": \"Liz Black\",\n  \"externalLinks\": [\n    {\n      \"externalLinkName\": \"Acme motor leasing\",\n      \"externalLinkURL\": \"https://www.acmemotorsinc.com\"\n    },\n    {\n      \"externalLinkName\": \"Acme motor leasing\",\n      \"externalLinkURL\": \"https://www.acmemotorsinc.com\"\n    }\n  ],\n  \"orderSpend\": true,\n  \"spendPlanSpend\": false,\n  \"invoiceSpend\": false,\n  \"lastUpdated\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c0b961e3-64f0-4f1d-9cd6-a5311724e457",
+              "name": "Not found. Record to update not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "contracts",
+                    ":externalCode"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "externalCode",
+                      "description": "(Required) The ExternalCode of the contract to be updated"
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"active\": true,\n  \"companyCode\": \"200\",\n  \"currencyCode\": \"EUR\",\n  \"externalCode\": \"4847-31231212-212121-1212\",\n  \"owner\": \"Liz Black\",\n  \"referenceCode\": \"12197627\",\n  \"suppliers\": [\n    {\n      \"supplierCode\": \"32789\",\n      \"supplierName\": \"Acme Motor Leasing inc.\"\n    },\n    {\n      \"supplierCode\": \"32789\",\n      \"supplierName\": \"Acme Motor Leasing inc.\"\n    }\n  ],\n  \"title\": \"Car leasing\",\n  \"total\": 10000,\n  \"validFrom\": \"<dateTime>\",\n  \"validTo\": \"<dateTime>\",\n  \"description\": \"This contract is for car leasing for Acme Motor leasing inc.\",\n  \"type\": \"Leasing\",\n  \"amountType\": \"<string>\",\n  \"paymentTermCode\": \"NET30\",\n  \"contactPerson\": \"Liz Black\",\n  \"externalLinks\": [\n    {\n      \"externalLinkName\": \"Acme motor leasing\",\n      \"externalLinkURL\": \"https://www.acmemotorsinc.com\"\n    },\n    {\n      \"externalLinkName\": \"Acme motor leasing\",\n      \"externalLinkURL\": \"https://www.acmemotorsinc.com\"\n    }\n  ],\n  \"orderSpend\": true,\n  \"spendPlanSpend\": false,\n  \"invoiceSpend\": false,\n  \"lastUpdated\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "8b047ca8-d8a3-4bac-a8c6-72629a20f0e6",
+              "name": "Unexpected error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "contracts",
+                    ":externalCode"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "externalCode",
+                      "description": "(Required) The ExternalCode of the contract to be updated"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"active\": true,\n  \"companyCode\": \"200\",\n  \"currencyCode\": \"EUR\",\n  \"externalCode\": \"4847-31231212-212121-1212\",\n  \"owner\": \"Liz Black\",\n  \"referenceCode\": \"12197627\",\n  \"suppliers\": [\n    {\n      \"supplierCode\": \"32789\",\n      \"supplierName\": \"Acme Motor Leasing inc.\"\n    },\n    {\n      \"supplierCode\": \"32789\",\n      \"supplierName\": \"Acme Motor Leasing inc.\"\n    }\n  ],\n  \"title\": \"Car leasing\",\n  \"total\": 10000,\n  \"validFrom\": \"<dateTime>\",\n  \"validTo\": \"<dateTime>\",\n  \"description\": \"This contract is for car leasing for Acme Motor leasing inc.\",\n  \"type\": \"Leasing\",\n  \"amountType\": \"<string>\",\n  \"paymentTermCode\": \"NET30\",\n  \"contactPerson\": \"Liz Black\",\n  \"externalLinks\": [\n    {\n      \"externalLinkName\": \"Acme motor leasing\",\n      \"externalLinkURL\": \"https://www.acmemotorsinc.com\"\n    },\n    {\n      \"externalLinkName\": \"Acme motor leasing\",\n      \"externalLinkURL\": \"https://www.acmemotorsinc.com\"\n    }\n  ],\n  \"orderSpend\": true,\n  \"spendPlanSpend\": false,\n  \"invoiceSpend\": false,\n  \"lastUpdated\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestId\": \"fbc082a2-65a4-469c-b230-d84a252f18fc\",\n  \"hasErrors\": true,\n  \"errors\": [\n    {\n      \"externalCode\": \"4847-31231212-212121-1212\",\n      \"type\": \"TECHNICAL\",\n      \"code\": \"DATA_VALIDATION_FAILED\",\n      \"message\": \"\",\n      \"info\": \"\"\n    },\n    {\n      \"externalCode\": \"4847-31231212-212121-1212\",\n      \"type\": \"SECURITY\",\n      \"code\": \"SQS_PUBLISH_ERROR\",\n      \"message\": \"\",\n      \"info\": \"\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "6336c4a7-66c3-4e06-968e-69dc77f5986a",
+    "name": "Basware OAUTH2 authentication APIs AccountingDocuments Contracts API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "**Using OAUTH2.0 authentication:**\n\nGet API access token from api.basware.com/tokens\n1. Using client id and client secret, which you can obtain from Basware. \n2. Specify which APIs can be accessed by using the token e.g. Read only access to vendors API only (these are called scopes). Available scopes are listed at <https://developer.basware.com/api/p2p/manual#AccessRights>. \n3. Each token has an expiration time, until which it can be used to call APIs.\n\nWhen using OAUTH2 authentication, you need to pass the OAUTH2 authentication token when calling Basware API endpoints. Available Basware API operations are documented at <https://api.basware.com/swagger>. \n\nSee the Basware API developer site at <https://developer.basware.com/api/p2p/manual#Authentication> for more details on API authentication.",
+      "type": "text/plain"
+    }
+  }
+}
