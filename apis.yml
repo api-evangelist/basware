@@ -28,6 +28,14 @@ modified: "2026-06-13"
 specificationVersion: '0.23'
 tags:
   - E-Invoicing
+  - Purchase-To-Pay
+  - Accounts Payable
+  - Procurement
+  - Electronic Invoicing
+  - Finance Automation
+  - B2B Payments
+tags_raw:
+  - E-Invoicing
   - Purchase-to-Pay
   - Accounts Payable
   - Procurement
@@ -99,6 +107,8 @@ apis:
   humanURL: https://developer.basware.com/en/api/basware
   baseURL: https://api.basware.com
   tags:
+  - Account
+  tags_raw:
   - Accounts
   properties:
   - type: OpenAPI
@@ -231,6 +241,8 @@ apis:
   humanURL: https://developer.basware.com/en/api/basware
   baseURL: https://api.basware.com
   tags:
+  - Cost Centers
+  tags_raw:
   - CostCenters
   properties:
   - type: OpenAPI
@@ -253,6 +265,8 @@ apis:
   humanURL: https://developer.basware.com/en/api/basware
   baseURL: https://api.basware.com
   tags:
+  - Data Extract
+  tags_raw:
   - Data extract
   properties:
   - type: OpenAPI
@@ -342,6 +356,8 @@ apis:
   humanURL: https://developer.basware.com/en/api/basware
   baseURL: https://api.basware.com
   tags:
+  - Exchange Rates
+  tags_raw:
   - ExchangeRates
   properties:
   - type: OpenAPI
@@ -519,6 +535,8 @@ apis:
   humanURL: https://developer.basware.com/en/api/basware
   baseURL: https://api.basware.com
   tags:
+  - Notification History
+  tags_raw:
   - Notification history
   properties:
   - type: OpenAPI
@@ -541,6 +559,8 @@ apis:
   humanURL: https://developer.basware.com/en/api/basware
   baseURL: https://api.basware.com
   tags:
+  - Organization
+  tags_raw:
   - Organizations
   properties:
   - type: OpenAPI
@@ -563,6 +583,8 @@ apis:
   humanURL: https://developer.basware.com/en/api/basware
   baseURL: https://api.basware.com
   tags:
+  - Payment Terms
+  tags_raw:
   - PaymentTerms
   properties:
   - type: OpenAPI
@@ -608,6 +630,8 @@ apis:
   humanURL: https://developer.basware.com/en/api/basware
   baseURL: https://api.basware.com
   tags:
+  - Projects V2
+  tags_raw:
   - Projects v2
   properties:
   - type: OpenAPI
@@ -652,6 +676,8 @@ apis:
   humanURL: https://developer.basware.com/en/api/basware
   baseURL: https://api.basware.com
   tags:
+  - Purchase Orders
+  tags_raw:
   - PurchaseOrders
   properties:
   - type: OpenAPI
@@ -674,6 +700,8 @@ apis:
   humanURL: https://developer.basware.com/en/api/basware
   baseURL: https://api.basware.com
   tags:
+  - Purchase Requisitions
+  tags_raw:
   - PurchaseRequisitions
   properties:
   - type: OpenAPI
@@ -696,6 +724,8 @@ apis:
   humanURL: https://developer.basware.com/en/api/basware
   baseURL: https://api.basware.com
   tags:
+  - Request Status
+  tags_raw:
   - RequestStatus
   properties:
   - type: OpenAPI
@@ -741,6 +771,8 @@ apis:
   humanURL: https://developer.basware.com/en/api/basware
   baseURL: https://api.basware.com
   tags:
+  - Tax Codes
+  tags_raw:
   - TaxCodes
   properties:
   - type: OpenAPI
@@ -808,6 +840,8 @@ apis:
   humanURL: https://developer.basware.com/en/api/basware
   baseURL: https://api.basware.com
   tags:
+  - User Groups
+  tags_raw:
   - UserGroups
   properties:
   - type: OpenAPI
@@ -830,6 +864,8 @@ apis:
   humanURL: https://developer.basware.com/en/api/basware
   baseURL: https://api.basware.com
   tags:
+  - User
+  tags_raw:
   - Users
   properties:
   - type: OpenAPI
@@ -918,6 +954,8 @@ apis:
   humanURL: https://developer.basware.com/en/api/basware
   baseURL: https://api.basware.com
   tags:
+  - .well Known
+  tags_raw:
   - .well-known
   properties:
   - type: OpenAPI
