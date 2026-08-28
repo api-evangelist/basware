@@ -7,6 +7,18 @@ description: Basware is a cloud-based e-invoicing and purchase-to-pay platform t
   point, handling format conversion and delivery. The APIs support master data management,
   user administration, document archiving, and real-time transaction data access for
   finance and procurement operations.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: enterprise
   onboarding: self-serve
