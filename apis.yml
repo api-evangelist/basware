@@ -985,6 +985,9 @@ apis:
   - type: GettingStarted
     url: https://developer.basware.com/en/api/vault
 common:
+  - type: CapabilityMap
+    url: capabilities/basware-capability-edges.yml
+    name: Basware Business Capability Map
   - type: AgenticAccess
     url: agentic-access/basware-agentic-access.yml
   - type: DomainSecurity
