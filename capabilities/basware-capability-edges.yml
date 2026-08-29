@@ -3,7 +3,7 @@ provider: Basware
 generated_by: planning/capability-mapping/scripts/classify_capabilities.py
 model: claude-opus-5
 frame:
-- Software & Technology
+- Transportation & Logistics
 min_confidence: 0.7
 capability_model:
   source: https://github.com/vincentmakes/turbo-ea-capabilities
@@ -11,95 +11,110 @@ capability_model:
   attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
     CC BY 4.0
   notice: NOTICE
-edge_count: 9
+edge_count: 11
 edges:
 - tag: AccountingDocuments
   spec_file: basware-accountingdocuments-api-openapi.yml
   capability_id: BC-200.20
   capability_id_l1: BC-200
   capability_name: Accounts Payable Management
-  confidence: 0.92
-  evidence: GET /v1/accountingDocuments  Returns invoices approved for transfer to accounting; POST /v1/accountingDocuments/{invoiceId}/paymentResponses  Updates
-    invoice payment information, including payment date.
-  reason: Operations move approved supplier invoices into accounting and record payment/transfer status
-    — squarely invoice processing and vendor payment, i.e. Accounts Payable Management.
+  confidence: 0.9
+  evidence: GET /v1/accountingDocuments — Returns invoices approved for transfer to accounting; POST /v1/accountingDocuments/{invoiceId}/paymentResponses
+    — Updates invoice payment information, including payment date.
+  reason: Retrieval of supplier invoices approved for transfer to the ERP, acknowledgement, transfer/prebook/enrichment
+    responses and payment status updates. This is squarely purchase-to-pay invoice processing and vendor
+    payment accounting, i.e. Accounts Payable Management.
 - tag: ExportedPurchaseOrders
   spec_file: basware-exportedpurchaseorders-api-openapi.yml
   capability_id: BC-500.30
   capability_id_l1: BC-500
   capability_name: Purchase Order Management
   confidence: 0.9
-  evidence: GET /v1/exportedPurchaseOrders "Returns purchase orders exported from Basware P2P"; ExportedPurchaseOrderLineEntity,
-    ExportedPurchaseOrderGoodsReceiptEntity
-  reason: Purchase order headers, lines, coding rows and goods receipts — plainly purchase order management
-    within procurement.
+  evidence: GET /v1/exportedPurchaseOrders "Returns purchase orders exported from Basware P2P."; schemas
+    ExportedPurchaseOrderEntity, ExportedPurchaseOrderLineEntity, ExportedPurchaseOrderGoodsReceiptEntity
+  reason: Operations retrieve purchase order headers, lines and receipts from a P2P platform — plainly
+    Purchase Order Management.
 - tag: PurchaseOrders
   spec_file: basware-purchaseorders-api-openapi.yml
   capability_id: BC-500.30
   capability_id_l1: BC-500
   capability_name: Purchase Order Management
   confidence: 0.9
-  evidence: GET /v1/purchaseOrders "Returns imported purchase orders."; POST "Creates new purchase order(s)...
-    P2P Purchase does not allow updates to purchase orders after import"; schema PurchaseOrderEntity
-  reason: Operations create, retrieve and update purchase orders and order lines — plainly purchase order
-    management within procurement.
-- tag: PurchaseRequisitions
-  spec_file: basware-purchaserequisitions-api-openapi.yml
-  capability_id: BC-500.40
-  capability_id_l1: BC-500
-  capability_name: Procure-to-Pay Operations Management
-  confidence: 0.85
-  evidence: POST /v1/purchaseRequisitions "Creates new purchase requisition(s)"; schemas PurchaseRequisitionEntity,
-    RequisitionLine, RequisitionCodingRow
-  reason: Requisition creation and retrieval is explicitly part of day-to-day procure-to-pay operations
-    (requisitions, receipts).
+  evidence: POST /v1/purchaseOrders Creates new purchase order(s)... 'Can be used for adding new goods
+    receipts to existing order lines'
+  reason: Operations create, read and update purchase orders and order lines in a purchase-to-pay platform
+    — squarely Purchase Order Management.
 - tag: ExportedPurchaseRequisitions
   spec_file: basware-exportedpurchaserequisitions-api-openapi.yml
   capability_id: BC-500.40
   capability_id_l1: BC-500
   capability_name: Procure-to-Pay Operations Management
   confidence: 0.8
-  evidence: GET /v1/exportedPurchaseRequisitions "Returns purchase requisitions exported fom Basware P2P";
-    ExportedPurchaseRequisitionLineEntity, OrderGrouping
-  reason: Requisition records with lines, coding rows and order grouping — day-to-day procure-to-pay operations
-    (requisitioning). Sub-capability could arguably be PO management, hence 0.8.
+  evidence: GET /v1/exportedPurchaseRequisitions "Returns purchase requisitions exported fom Basware P2P.";
+    schema ExportedPurchaseRequisitionLineEntity
+  reason: Requisition documents are the intake step of procure-to-pay operations; the L2 for requisitions
+    is Procure-to-Pay Operations Management.
 - tag: PurchaseGoodsReceipts
   spec_file: basware-purchasegoodsreceipts-api-openapi.yml
   capability_id: BC-500.40
   capability_id_l1: BC-500
   capability_name: Procure-to-Pay Operations Management
   confidence: 0.8
-  evidence: GET /v1/purchaseGoodsReceipts "Returns purchase goods receipts."; schemas GoodsReceiptLine,
-    GoodsReceiver
-  reason: Goods receipt capture against purchase orders is a core procure-to-pay operational step (receipts),
-    squarely within procurement operations.
-- tag: Contracts
-  spec_file: basware-contracts-api-openapi.yml
-  capability_id: BC-500.20
+  evidence: POST /v1/purchaseGoodsReceipts "Creates new purchase goods receipts, fully overwrites previous
+    record if exists."; schemas GoodsReceiptLine, GoodsReceiver
+  reason: Goods receipt capture against purchase orders is explicitly part of procure-to-pay operations
+    (requisitions, receipts) in the candidate definition.
+- tag: PurchaseRequisitions
+  spec_file: basware-purchaserequisitions-api-openapi.yml
+  capability_id: BC-500.40
   capability_id_l1: BC-500
-  capability_name: Procurement Contract Management
-  confidence: 0.75
-  evidence: POST /v1/contracts "Creates new contract entity"; schemas ContractEntity, ContractSuppliers
-  reason: CRUD over supplier contract entities inside a purchase-to-pay platform — procurement contract
-    lifecycle data, not general legal contracting. Sub-capability choice (procurement contract vs generic
-    contract management) carries some ambiguity, but the ContractSuppliers schema and P2P context favour
-    procurement.
-- tag: Document Import API
-  spec_file: basware-document-import-api-api-openapi.yml
-  capability_id: BC-200.20
-  capability_id_l1: BC-200
-  capability_name: Accounts Payable Management
-  confidence: 0.75
-  evidence: POST /v2/smartpdf/invoiceUpload upload_document_basic_auth
-  reason: Uploads invoice documents (SmartPDF) for capture and processing in the AP automation platform
-    — invoice intake for accounts payable. Only one operation, and it is arguably a generic file-upload
-    endpoint, so confidence is moderate.
+  capability_name: Procure-to-Pay Operations Management
+  confidence: 0.8
+  evidence: POST /v1/purchaseRequisitions Creates new purchase requisition(s)
+  reason: Requisition creation/retrieval is day-to-day procure-to-pay operations (requisitions, receipts).
 - tag: ExportedContracts
   spec_file: basware-exportedcontracts-api-openapi.yml
   capability_id: BC-500.20
   capability_id_l1: BC-500
   capability_name: Procurement Contract Management
+  confidence: 0.75
+  evidence: GET /v1/exportedContracts "Returns contracts (along with spend totals) exported from Basware
+    P2P."; schema ExportedContractSupplier, ExportedContractSpendTotal
+  reason: Contracts with supplier and spend totals exported from a purchase-to-pay platform are procurement
+    contracts; the surface exposes their data and spend consumption, which sits in Procurement Contract
+    Management. Some chance it should be read as spend analysis instead, hence 0.75.
+- tag: Contracts
+  spec_file: basware-contracts-api-openapi.yml
+  capability_id: BC-500.20
+  capability_id_l1: BC-500
+  capability_name: Procurement Contract Management
+  confidence: 0.72
+  evidence: '"Creates new contract entity, overwrites previous if exists."; schemas ContractEntity, ContractSuppliers'
+  reason: Contract entities carrying supplier links inside a purchase-to-pay platform indicate procurement
+    contract lifecycle data rather than general legal contract management.
+- tag: Document Import API
+  spec_file: basware-document-import-api-api-openapi.yml
+  capability_id: BC-200.20
+  capability_id_l1: BC-200
+  capability_name: Accounts Payable Management
+  confidence: 0.72
+  evidence: POST /v2/smartpdf/invoiceUpload — "Upload Document Basic Auth"; schemas UploadRequest, UploadResponse
+  reason: Although only a single upload operation, the path is invoiceUpload into Basware's SmartPDF invoice
+    capture, i.e. inbound supplier invoice intake for AP processing. File upload alone is plumbing, so
+    confidence is bounded.
+- tag: UserGroupAssociatedUsers
+  spec_file: basware-usergroupassociatedusers-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
   confidence: 0.7
-  evidence: '"Returns contracts (along with spend totals) exported from Basware P2P"; ExportedContractSupplier'
-  reason: Export of supplier contract records with spend totals from a purchase-to-pay suite — procurement
-    contract data. Read/acknowledge-only export, so slightly weaker than a full lifecycle surface.
+  evidence: POST /v1/userGroupAssociatedUsers Associates users with userGroup
+  reason: Managing user-to-group associations is access/identity administration for the platform.
+- tag: UserGroups
+  spec_file: basware-usergroups-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.7
+  evidence: POST /v1/userGroups Create or update user group
+  reason: User group provisioning underpins access rights administration; identity & access management.
