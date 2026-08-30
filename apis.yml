@@ -40,7 +40,7 @@ modified: "2026-06-13"
 specificationVersion: '0.23'
 tags:
   - E-Invoicing
-  - Purchase-To-Pay
+  - Purchase-to-Pay
   - Accounts Payable
   - Procurement
   - Electronic Invoicing
@@ -253,7 +253,7 @@ apis:
   humanURL: https://developer.basware.com/en/api/basware
   baseURL: https://api.basware.com
   tags:
-  - Cost Centers
+  - CostCenters
   tags_raw:
   - CostCenters
   properties:
@@ -277,7 +277,7 @@ apis:
   humanURL: https://developer.basware.com/en/api/basware
   baseURL: https://api.basware.com
   tags:
-  - Data Extract
+  - Data extract
   tags_raw:
   - Data extract
   properties:
@@ -547,7 +547,7 @@ apis:
   humanURL: https://developer.basware.com/en/api/basware
   baseURL: https://api.basware.com
   tags:
-  - Notification History
+  - Notification history
   tags_raw:
   - Notification history
   properties:
@@ -642,7 +642,7 @@ apis:
   humanURL: https://developer.basware.com/en/api/basware
   baseURL: https://api.basware.com
   tags:
-  - Projects V2
+  - Projects v2
   tags_raw:
   - Projects v2
   properties:
@@ -712,7 +712,7 @@ apis:
   humanURL: https://developer.basware.com/en/api/basware
   baseURL: https://api.basware.com
   tags:
-  - Purchase Requisitions
+  - PurchaseRequisitions
   tags_raw:
   - PurchaseRequisitions
   properties:
@@ -736,7 +736,7 @@ apis:
   humanURL: https://developer.basware.com/en/api/basware
   baseURL: https://api.basware.com
   tags:
-  - Request Status
+  - RequestStatus
   tags_raw:
   - RequestStatus
   properties:
@@ -783,7 +783,7 @@ apis:
   humanURL: https://developer.basware.com/en/api/basware
   baseURL: https://api.basware.com
   tags:
-  - Tax Codes
+  - TaxCodes
   tags_raw:
   - TaxCodes
   properties:
@@ -966,7 +966,7 @@ apis:
   humanURL: https://developer.basware.com/en/api/basware
   baseURL: https://api.basware.com
   tags:
-  - .well Known
+  - .well-known
   tags_raw:
   - .well-known
   properties:
