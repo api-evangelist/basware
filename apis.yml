@@ -1,12 +1,10 @@
 name: Basware
-description: Basware is a cloud-based e-invoicing and purchase-to-pay platform that
-  enables global enterprises to automate their invoice and procurement processes. The
-  platform provides REST APIs for submitting and receiving electronic invoices across
-  70+ formats, managing purchase orders, and processing accounts payable workflows.
-  Basware Network connects buyers and suppliers worldwide through a single integration
-  point, handling format conversion and delivery. The APIs support master data management,
-  user administration, document archiving, and real-time transaction data access for
-  finance and procurement operations.
+description: Basware is a cloud-based e-invoicing and purchase-to-pay platform that enables global enterprises
+  to automate their invoice and procurement processes. The platform provides REST APIs for submitting
+  and receiving electronic invoices across 70+ formats, managing purchase orders, and processing accounts
+  payable workflows. Basware Network connects buyers and suppliers worldwide through a single integration
+  point, handling format conversion and delivery. The APIs support master data management, user administration,
+  document archiving, and real-time transaction data access for finance and procurement operations.
 deliveryModel:
   model: saas
   open_source: false
@@ -35,32 +33,31 @@ accessModel:
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/basware.png
 url: https://raw.githubusercontent.com/api-evangelist/basware/refs/heads/main/apis.yml
 type: Index
-created: "2026-06-13"
-modified: "2026-06-13"
+created: '2026-06-13'
+modified: '2026-09-16'
 specificationVersion: '0.23'
 tags:
-  - E-Invoicing
-  - Purchase-To-Pay
-  - Accounts Payable
-  - Procurement
-  - Electronic Invoicing
-  - Finance Automation
-  - B2B Payments
+- E-Invoicing
+- Purchase-To-Pay
+- Accounts Payable
+- Procurement
+- Electronic Invoicing
+- Finance Automation
+- B2B Payments
 tags_raw:
-  - E-Invoicing
-  - Purchase-to-Pay
-  - Accounts Payable
-  - Procurement
-  - Electronic Invoicing
-  - Finance Automation
-  - B2B Payments
+- E-Invoicing
+- Purchase-to-Pay
+- Accounts Payable
+- Procurement
+- Electronic Invoicing
+- Finance Automation
+- B2B Payments
 apis:
 - name: Basware Data Access API
-  description: >-
-    The Basware Data Access API allows organizations to query and extract data from Basware systems for
-    reporting, analytics, and integration purposes. It enables programmatic retrieval of transaction data,
-    invoice records, and operational metrics from the Basware platform to feed downstream business intelligence
-    and ERP systems.
+  description: The Basware Data Access API allows organizations to query and extract data from Basware
+    systems for reporting, analytics, and integration purposes. It enables programmatic retrieval of transaction
+    data, invoice records, and operational metrics from the Basware platform to feed downstream business
+    intelligence and ERP systems.
   image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
   humanURL: https://developer.basware.com/en/api/basware
   baseURL: https://api.basware.com/data
@@ -75,10 +72,10 @@ apis:
   - type: GettingStarted
     url: https://developer.basware.com/en/api/basware/get-started
 - name: Basware SmartPDF API
-  description: >-
-    The Basware SmartPDF API provides PDF document processing and conversion capabilities within the Basware
-    platform. It enables automated extraction and processing of invoice data from PDF documents, supporting
-    touchless invoice processing workflows and integration with accounts payable automation systems.
+  description: The Basware SmartPDF API provides PDF document processing and conversion capabilities within
+    the Basware platform. It enables automated extraction and processing of invoice data from PDF documents,
+    supporting touchless invoice processing workflows and integration with accounts payable automation
+    systems.
   image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
   humanURL: https://developer.basware.com/en/api/basware
   baseURL: https://api.basware.com/smartpdf
@@ -297,8 +294,7 @@ apis:
     url: https://developer.basware.com/en/api/vault
 - aid: basware:basware-directory-france-lookup-api
   name: Basware Directory France lookup API
-  description: >-
-    The Directory France lookup API from Basware — 1 operation(s) for directory france lookup.
+  description: The Directory France lookup API from Basware — 1 operation(s) for directory france lookup.
   humanURL: https://developer.basware.com/en/api/basware
   baseURL: https://api.basware.com
   tags:
@@ -319,7 +315,7 @@ apis:
   - type: GettingStarted
     url: https://developer.basware.com/en/api/vault
 - aid: basware:basware-document-import-api-api
-  name: Basware Document Import API API
+  name: Basware Document Import API
   description: The Document Import API API from Basware — 1 operation(s) for document import api.
   humanURL: https://developer.basware.com/en/api/basware
   baseURL: https://api.basware.com
@@ -454,8 +450,7 @@ apis:
     url: https://developer.basware.com/en/api/vault
 - aid: basware:basware-exportedpurchaserequisitions-api
   name: Basware ExportedPurchaseRequisitions API
-  description: >-
-    The ExportedPurchaseRequisitions API from Basware — 3 operation(s) for exportedpurchaserequisitions.
+  description: The ExportedPurchaseRequisitions API from Basware — 3 operation(s) for exportedpurchaserequisitions.
   humanURL: https://developer.basware.com/en/api/basware
   baseURL: https://api.basware.com
   tags:
@@ -615,8 +610,7 @@ apis:
     url: https://developer.basware.com/en/api/vault
 - aid: basware:basware-projects-v1-deprecated-api
   name: Basware Projects v1 (deprecated) API
-  description: >-
-    The Projects v1 (deprecated) API from Basware — 2 operation(s) for projects v1 (deprecated).
+  description: The Projects v1 (deprecated) API from Basware — 2 operation(s) for projects v1 (deprecated).
   humanURL: https://developer.basware.com/en/api/basware
   baseURL: https://api.basware.com
   tags:
@@ -756,8 +750,7 @@ apis:
     url: https://developer.basware.com/en/api/vault
 - aid: basware:basware-subscribe-to-notifications-api
   name: Basware Subscribe to notifications API
-  description: >-
-    The Subscribe to notifications API from Basware — 1 operation(s) for subscribe to notifications.
+  description: The Subscribe to notifications API from Basware — 1 operation(s) for subscribe to notifications.
   humanURL: https://developer.basware.com/en/api/basware
   baseURL: https://api.basware.com
   tags:
@@ -825,8 +818,7 @@ apis:
     url: https://developer.basware.com/en/api/vault
 - aid: basware:basware-usergroupassociatedusers-api
   name: Basware UserGroupAssociatedUsers API
-  description: >-
-    The UserGroupAssociatedUsers API from Basware — 1 operation(s) for usergroupassociatedusers.
+  description: The UserGroupAssociatedUsers API from Basware — 1 operation(s) for usergroupassociatedusers.
   humanURL: https://developer.basware.com/en/api/basware
   baseURL: https://api.basware.com
   tags:
@@ -985,39 +977,39 @@ apis:
   - type: GettingStarted
     url: https://developer.basware.com/en/api/vault
 common:
-  - type: CapabilityMap
-    url: capabilities/basware-capability-edges.yml
-    name: Basware Business Capability Map
-  - type: AgenticAccess
-    url: agentic-access/basware-agentic-access.yml
-  - type: DomainSecurity
-    url: security/basware-domain-security.yml
-  - type: Authentication
-    url: authentication/basware-authentication.yml
-  - type: OAuthScopes
-    url: scopes/basware-scopes.yml
-  - type: Website
-    url: https://www.basware.com
-  - type: Documentation
-    url: https://developer.basware.com
-  - type: GitHubOrg
-    url: https://github.com/Basware
-  - type: LinkedIn
-    url: https://www.linkedin.com/company/basware
-  - type: Blog
-    url: https://blog.basware.com/en
-  - type: Pricing
-    url: https://www.basware.com/en-us/pricing/
-  - type: StatusPage
-    url: https://basware.service-now.com/bw?id=services_status
-  - type: X
-    url: https://x.com/basware
-  - type: Plans
-    url: plans/basware-plans-pricing.yml
-  - type: RateLimits
-    url: rate-limits/basware-rate-limits.yml
-  - type: FinOps
-    url: finops/basware-finops.yml
+- type: CapabilityMap
+  url: capabilities/basware-capability-edges.yml
+  name: Basware Business Capability Map
+- type: AgenticAccess
+  url: agentic-access/basware-agentic-access.yml
+- type: DomainSecurity
+  url: security/basware-domain-security.yml
+- type: Authentication
+  url: authentication/basware-authentication.yml
+- type: OAuthScopes
+  url: scopes/basware-scopes.yml
+- type: Website
+  url: https://www.basware.com
+- type: Documentation
+  url: https://developer.basware.com
+- type: GitHubOrg
+  url: https://github.com/Basware
+- type: LinkedIn
+  url: https://www.linkedin.com/company/basware
+- type: Blog
+  url: https://blog.basware.com/en
+- type: Pricing
+  url: https://www.basware.com/en-us/pricing/
+- type: StatusPage
+  url: https://basware.service-now.com/bw?id=services_status
+- type: X
+  url: https://x.com/basware
+- type: Plans
+  url: plans/basware-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/basware-rate-limits.yml
+- type: FinOps
+  url: finops/basware-finops.yml
 maintainers:
-  - FN: Kin Lane
-    email: kin@apievangelist.com
+- FN: Kin Lane
+  email: kin@apievangelist.com
