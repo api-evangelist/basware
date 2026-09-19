@@ -774,6 +774,8 @@ apis:
   humanURL: https://developer.basware.com/en/api/basware
   baseURL: https://api.basware.com/data
   tags:
+  - ApplicationGroups
+  tags_raw:
   - Application Groups
   properties:
   - type: OpenAPI
