@@ -35,7 +35,8 @@ edges:
   reason: Operations retrieve purchase order headers, lines and receipts from a P2P platform — plainly
     Purchase Order Management.
 - tag: PurchaseOrders
-  spec_file: basware-purchaseorders-api-openapi.yml
+  spec_file: basware-purchase-orders-api-openapi.yml
+  reanchored_from: basware-purchaseorders-api-openapi.yml
   capability_id: BC-500.30
   capability_id_l1: BC-500
   capability_name: Purchase Order Management
@@ -65,7 +66,8 @@ edges:
   reason: Goods receipt capture against purchase orders is explicitly part of procure-to-pay operations
     (requisitions, receipts) in the candidate definition.
 - tag: PurchaseRequisitions
-  spec_file: basware-purchaserequisitions-api-openapi.yml
+  spec_file: basware-purchase-requisitions-api-openapi.yml
+  reanchored_from: basware-purchaserequisitions-api-openapi.yml
   capability_id: BC-500.40
   capability_id_l1: BC-500
   capability_name: Procure-to-Pay Operations Management
@@ -111,7 +113,8 @@ edges:
   evidence: POST /v1/userGroupAssociatedUsers Associates users with userGroup
   reason: Managing user-to-group associations is access/identity administration for the platform.
 - tag: UserGroups
-  spec_file: basware-usergroups-api-openapi.yml
+  spec_file: basware-user-groups-api-openapi.yml
+  reanchored_from: basware-usergroups-api-openapi.yml
   capability_id: BC-620.20
   capability_id_l1: BC-620
   capability_name: Identity & Access Management
