@@ -1,18 +1,21 @@
-openapi: 3.0.2
+openapi: 3.2.0
 info:
-  title: Basware OAUTH2 authentication APIs AccountingDocuments ExchangeRates API
-  description: "**Using OAUTH2.0 authentication:**\n\nGet API access token from api.basware.com/tokens\n1. Using client id and client secret, which you can obtain from Basware. \n2. Specify which APIs can be accessed by using the token e.g. Read only access to vendors API only (these are called scopes). Available scopes are listed at <https://developer.basware.com/api/p2p/manual#AccessRights>. \n3. Each token has an expiration time, until which it can be used to call APIs.\n\nWhen using OAUTH2 authentication, you need to pass the OAUTH2 authentication token when calling Basware API endpoints. Available Basware API operations are documented at <https://api.basware.com/swagger>. \n\nSee the Basware API developer site at <https://developer.basware.com/api/p2p/manual#Authentication> for more details on API authentication."
-  version: 1.0.0
-  x-logo:
-    url: https://fastapi.tiangolo.com/img/logo-margin/logo-teal.png
+  title: Basware APIs for Purchase-to-Pay and Master Data import…
+  description: The Basware APIs documented here are for Purchase-to-Pay use cases and for importing Master Data to Basware services.
+  version: v1
+servers:
+- url: ''
+security:
+- Bearer: []
+- oauth2authentication: []
 tags:
-- name: ExchangeRates
+- name: Exchange Rates
 paths:
   /v1/exchangeRates:
     get:
       tags:
-      - ExchangeRates
-      summary: Returns exchange rates posted to Basware API.
+      - Exchange Rates
+      summary: Returns exchange rates posted to Basware API
       description: ''
       parameters:
       - name: pageSize
@@ -69,11 +72,19 @@ paths:
             text/json:
               schema:
                 $ref: '#/components/schemas/ResponseEntityList'
+      operationId: getV1ExchangeRates
+      x-operation-id-source: derived
     post:
       tags:
-      - ExchangeRates
-      summary: Creates new exchange rate(s), fully overwrites previous record if exists.
-      description: "Notes:\r\n1) Please provide exchange rates to 1) the currency used by entire organization as well as 2) to currencies used by individual companies. \r\n2) Exchange rates are inherited in P2P from top level organizations down if company-specific rates are not provided.  \r\n3) Multiplying 'from' currency amount by rate needs to give amount in 'to' -currency."
+      - Exchange Rates
+      summary: Creates new exchange rate(s), fully overwrites previous record if exists
+      description: 'Notes:
+
+        1) Please provide exchange rates to 1) the currency used by entire organization as well as 2) to currencies used by individual companies.
+
+        2) Exchange rates are inherited in P2P from top level organizations down if company-specific rates are not provided.
+
+        3) Multiplying ''from'' currency amount by rate needs to give amount in ''to'' -currency.'
       parameters:
       - name: Content-Type
         in: header
@@ -160,13 +171,17 @@ paths:
             text/json:
               schema:
                 $ref: '#/components/schemas/ResponseEntityList'
+      operationId: postV1ExchangeRates
+      x-operation-id-source: derived
     delete:
       tags:
-      - ExchangeRates
-      summary: Deletes data from Basware API. For manual one-time operations.
-      description: "For manual one-time operations only, such as a manual clean-up to remove test data generated during API integration development. Only removes records from API layer. \r\nDeletion in target systems needs to be done separately using the data deletion mechanisms available in each of the target system in addition to deleting the data in Basware API."
+      - Exchange Rates
+      summary: Deletes data from Basware API. For manual one-time operations
+      description: 'For manual one-time operations only, such as a manual clean-up to remove test data generated during API integration development. Only removes records from API layer.
+
+        Deletion in target systems needs to be done separately using the data deletion mechanisms available in each of the target system in addition to deleting the data in Basware API.'
       requestBody:
-        description: "Contains the body of the request.\r\n            Either externalCode or lastUpdated -field is required. If both values are provided, externalCode will have the priority."
+        description: "Contains the body of the request.\n            Either externalCode or lastUpdated -field is required. If both values are provided, externalCode will have the priority."
         content:
           application/json-patch+json:
             schema:
@@ -231,11 +246,13 @@ paths:
             text/json:
               schema:
                 $ref: '#/components/schemas/ResponseEntityList'
+      operationId: deleteV1ExchangeRates
+      x-operation-id-source: derived
   /v1/exchangeRates/{externalCode}:
     get:
       tags:
-      - ExchangeRates
-      summary: Returns single exchange rate -record by externalCode -identifier.
+      - Exchange Rates
+      summary: Returns single exchange rate -record by externalCode -identifier
       description: ''
       parameters:
       - name: externalCode
@@ -273,10 +290,12 @@ paths:
             text/json:
               schema:
                 $ref: '#/components/schemas/ResponseEntityList'
+      operationId: getV1ExchangeRatesByExternalCode
+      x-operation-id-source: derived
     patch:
       tags:
-      - ExchangeRates
-      summary: Updates fields on specified exchange rate. Preserves existing values in non-updated fields.
+      - Exchange Rates
+      summary: Updates fields on specified exchange rate.
       description: 'Note: Basware API considers ''null'' value in field(s) equivalent to the field(s) not being sent. For this reason patch method does not support setting field values to ''null''.'
       parameters:
       - name: externalCode
@@ -341,35 +360,58 @@ paths:
             text/json:
               schema:
                 $ref: '#/components/schemas/ResponseEntityList'
+      operationId: patchV1ExchangeRatesByExternalCode
+      x-operation-id-source: derived
 components:
   schemas:
-    DeleteRequest:
+    ErrorEntity:
       type: object
       properties:
-        lastUpdated:
-          type: string
-          description: 'To delete records updated after specific time, use lastUpdated -field. This will delete all items that have been updated after the specified date. In response, user will get the taskStatus api link where the task status can be checked. Note: ''0001-01-01'' can be used to delete all records.'
-          format: date-time
-          nullable: true
         externalCode:
-          maxLength: 36
-          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: External code of record on which error occurred (when available).
+          example: 4847-31231212-212121-1212
+        type:
+          enum:
+          - BUSINESS
+          - VALIDATION
+          - TECHNICAL
+          - SECURITY
           type: string
-          description: Single item can be deleted using externalCode and final status is returned immediately.
-          nullable: true
-      additionalProperties: false
-    DeleteResponse:
-      type: object
-      properties:
-        statusApiLink:
+          description: Error type.
+          example: ''
+        code:
+          enum:
+          - EXTERNAL_CODE_MISMATCH
+          - SCHEMA_VALIDATION_ERROR
+          - CONFLICT_IN_POST
+          - DATA_ORIGIN_VALIDATION_ERROR
+          - ACCESS_TOKEN_VALIDATION_ERROR
+          - CREDENTIAL_VALIDATION_ERROR
+          - PARAMETER_VALIDATION_ERROR
+          - UNEXPECTED_ERROR
+          - METHOD_NOT_ALLOWED
+          - ENTITY_NOT_FOUND
+          - DATA_VALIDATION_FAILED
+          - SNS_PUBLISH_ERROR
+          - SQS_PUBLISH_ERROR
           type: string
-          nullable: true
-        taskName:
-          type: string
-          nullable: true
-        taskStatus:
-          type: string
-          nullable: true
+          description: Error code.
+          example: ''
+        message:
+          type:
+          - string
+          - 'null'
+          description: Specific error message.
+          example: ''
+        info:
+          type:
+          - string
+          - 'null'
+          description: Information about type of the error.
+          example: ''
       additionalProperties: false
     ExchangeRateResponse:
       required:
@@ -431,68 +473,57 @@ components:
           description: Timestamp when the record was last sent to API. Set automatically.
           format: date-time
       additionalProperties: false
-    ErrorEntity:
+    DeleteRequest:
       type: object
       properties:
+        lastUpdated:
+          type:
+          - string
+          - 'null'
+          description: 'To delete records updated after specific time, use lastUpdated -field. This will delete all items that have been updated after the specified date. In response, user will get the taskStatus api link where the task status can be checked. Note: ''0001-01-01'' can be used to delete all records.'
+          format: date-time
         externalCode:
-          type: string
-          description: External code of record on which error occurred (when available).
-          nullable: true
-          example: 4847-31231212-212121-1212
-        type:
-          enum:
-          - BUSINESS
-          - VALIDATION
-          - TECHNICAL
-          - SECURITY
-          type: string
-          description: Error type.
-          example: ''
-        code:
-          enum:
-          - EXTERNAL_CODE_MISMATCH
-          - SCHEMA_VALIDATION_ERROR
-          - CONFLICT_IN_POST
-          - DATA_ORIGIN_VALIDATION_ERROR
-          - ACCESS_TOKEN_VALIDATION_ERROR
-          - CREDENTIAL_VALIDATION_ERROR
-          - PARAMETER_VALIDATION_ERROR
-          - UNEXPECTED_ERROR
-          - METHOD_NOT_ALLOWED
-          - ENTITY_NOT_FOUND
-          - DATA_VALIDATION_FAILED
-          - SNS_PUBLISH_ERROR
-          - SQS_PUBLISH_ERROR
-          type: string
-          description: Error code.
-          example: ''
-        message:
-          type: string
-          description: Specific error message.
-          nullable: true
-          example: ''
-        info:
-          type: string
-          description: Information about type of the error.
-          nullable: true
-          example: ''
+          maxLength: 36
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Single item can be deleted using externalCode and final status is returned immediately.
+      additionalProperties: false
+    DeleteResponse:
+      type: object
+      properties:
+        statusApiLink:
+          type:
+          - string
+          - 'null'
+        taskName:
+          type:
+          - string
+          - 'null'
+        taskStatus:
+          type:
+          - string
+          - 'null'
       additionalProperties: false
     ResponseEntityList:
       type: object
       properties:
         requestId:
-          type: string
+          type:
+          - string
+          - 'null'
           description: ID of the request on which error occurred (generated by Basware API).
-          nullable: true
           example: fbc082a2-65a4-469c-b230-d84a252f18fc
         hasErrors:
           type: boolean
           description: Specifies whether the request has errors.
         errors:
-          type: array
+          type:
+          - array
+          - 'null'
           items:
             $ref: '#/components/schemas/ErrorEntity'
-          nullable: true
       additionalProperties: false
       description: Errors returned here are returned synchronously from Basware API middle layer. Additional errors coming from target system(s) may be returned through errorFeedbacks API.
     ExchangeRateCompanyEntity:
@@ -513,6 +544,94 @@ components:
           example: true
       additionalProperties: false
   securitySchemes:
-    HTTPBasic:
+    Bearer:
       type: http
+      description: Please insert basic authentication credentials into fields
       scheme: basic
+    oauth2authentication:
+      type: oauth2
+      description: Oauth2 client credentials flow.
+      flows:
+        clientCredentials:
+          tokenUrl: https://api.basware.com/v1/tokens
+          scopes:
+            accountingDocuments.read: GET accountingDocuments
+            accountingDocuments.write: POST/PATCH accountingDocuments
+            accountingDocuments.delete: DELETE accountingDocuments
+            accounts.read: GET accounts
+            accounts.write: POST/PATCH accounts
+            accounts.delete: DELETE accounts
+            advancedPermissions.read: GET advancedPermissions
+            advancedPermissions.write: POST/PATCH advancedPermissions
+            advancedPermissions.delete: DELETE advancedPermissions
+            advancedValidations.read: GET advancedValidations
+            advancedValidations.write: POST/PATCH advancedValidations
+            advancedValidations.delete: DELETE advancedValidations
+            applicationGroups.read: GET applicationGroups
+            applicationGroups.write: POST/PATCH applicationGroups
+            companies.read: GET companies
+            companies.write: POST/PATCH companies
+            contracts.delete: DELETE contracts
+            contracts.read: GET contracts
+            contracts.write: POST/PATCH contracts
+            costCenters.read: GET costCenters
+            costCenters.write: POST/PATCH costCenters
+            costCenters.delete: DELETE costCenters
+            errorFeedbacks.read: GET errorFeedbacks
+            errorFeedbacks.write: POST/PATCH errorFeedbacks
+            errorFeedbacks.delete: DELETE errorFeedbacks
+            exchangeRates.read: GET exchangeRates
+            exchangeRates.write: POST/PATCH exchangeRates
+            exchangeRates.delete: DELETE exchangeRates
+            exportedContracts.read: GET exportedContracts
+            exportedContracts.write: POST/PATCH exportedContracts
+            exportedContracts.delete: DELETE exportedContracts
+            exportedContractSpends.read: GET exportedContractSpends
+            exportedContractSpends.write: POST/PATCH exportedContractSpends
+            exportedContractSpends.delete: DELETE exportedContractSpends
+            exportedPurchaseOrders.read: GET exportedPurchaseOrders
+            exportedPurchaseOrders.write: POST/PATCH exportedPurchaseOrders
+            exportedPurchaseOrders.delete: DELETE exportedPurchaseOrders
+            exportedPurchaseRequisitions.read: GET exportedPurchaseRequisitions
+            exportedPurchaseRequisitions.write: POST/PATCH exportedPurchaseRequisitions
+            exportedPurchaseRequisitions.delete: DELETE exportedPurchaseRequisitions
+            lists.read: GET lists
+            lists.write: POST/PATCH lists
+            lists.delete: DELETE lists
+            matchingOrders.read: GET matchingOrders
+            matchingOrders.write: POST/PATCH matchingOrders
+            matchingOrders.delete: DELETE matchingOrders
+            matchingOrderLines.read: GET matchingOrderLines
+            matchingOrderLines.write: POST/PATCH matchingOrderLines
+            matchingOrderLines.delete: DELETE matchingOrderLines
+            paymentTerms.read: GET paymentTerms
+            paymentTerms.write: POST/PATCH paymentTerms
+            paymentTerms.delete: DELETE paymentTerms
+            projects.read: GET projects
+            projects.write: POST/PATCH projects
+            projects.delete: DELETE projects
+            purchaseOrders.read: GET purchaseOrders
+            purchaseOrders.write: POST/PATCH purchaseOrders
+            purchaseOrders.delete: DELETE purchaseOrders
+            purchaseRequisitions.read: GET purchaseRequisitions
+            purchaseRequisitions.write: POST/PATCH purchaseRequisitions
+            purchaseRequisitions.delete: DELETE purchaseRequisitions
+            purchaseGoodsReceipts.read: GET purchaseGoodsReceipts
+            purchaseGoodsReceipts.write: POST/PATCH purchaseGoodsReceipts
+            purchaseGoodsReceipts.delete: DELETE purchaseGoodsReceipts
+            requestStatus.read: GET requestStatus
+            requestStatus.write: POST/PATCH requestStatus
+            subscriptions.read: GET subscriptions
+            subscriptions.write: POST/PATCH subscriptions
+            subscriptions.delete: DELETE subscriptions
+            tasks.read: GET tasks
+            taskStatus.read: GET taskStatus
+            taxCodes.read: GET taxCodes
+            taxCodes.write: POST/PATCH taxCodes
+            taxCodes.delete: DELETE taxCodes
+            users.read: GET users
+            users.write: POST/PATCH users
+            users.delete: DELETE users
+            vendors.read: GET vendors
+            vendors.write: POST/PATCH vendors
+            vendors.delete: DELETE vendors

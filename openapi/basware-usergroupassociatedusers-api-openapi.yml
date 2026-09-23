@@ -1,10 +1,16 @@
-openapi: 3.0.2
+openapi: 3.2.0
 info:
-  title: Basware OAUTH2 authentication APIs AccountingDocuments UserGroupAssociatedUsers API
-  description: "**Using OAUTH2.0 authentication:**\n\nGet API access token from api.basware.com/tokens\n1. Using client id and client secret, which you can obtain from Basware. \n2. Specify which APIs can be accessed by using the token e.g. Read only access to vendors API only (these are called scopes). Available scopes are listed at <https://developer.basware.com/api/p2p/manual#AccessRights>. \n3. Each token has an expiration time, until which it can be used to call APIs.\n\nWhen using OAUTH2 authentication, you need to pass the OAUTH2 authentication token when calling Basware API endpoints. Available Basware API operations are documented at <https://api.basware.com/swagger>. \n\nSee the Basware API developer site at <https://developer.basware.com/api/p2p/manual#Authentication> for more details on API authentication."
-  version: 1.0.0
-  x-logo:
-    url: https://fastapi.tiangolo.com/img/logo-margin/logo-teal.png
+  title: User Permission Management User Group Associated Users API
+  description: 'This set of APIs allows managing user groups and associating users to the user groups. These user groups grant granular user permissions across Basware applications. The permissions granted by the user groups are managed in Basware Admin application.
+
+
+    Each of the managed applications needs to support permission management through cross application user groups and be configured to have cross application user groups enabled. Supported applications include AP Automation, SmartPDF and Vault.'
+  version: v1
+servers:
+- url: ''
+security:
+- Bearer: []
+- oauth2authentication: []
 tags:
 - name: UserGroupAssociatedUsers
 paths:
@@ -78,6 +84,8 @@ paths:
           description: Unauthorized
         '403':
           description: Forbidden
+      operationId: postV1UserGroupAssociatedUsers
+      x-operation-id-source: derived
     get:
       tags:
       - UserGroupAssociatedUsers
@@ -122,13 +130,17 @@ paths:
           description: Forbidden
         '404':
           description: Not Found
+      operationId: getV1UserGroupAssociatedUsers
+      x-operation-id-source: derived
     delete:
       tags:
       - UserGroupAssociatedUsers
-      summary: Deletes user association with user group.
-      description: "For manual one-time operations only, such as a manual clean-up to remove test data generated during API integration development. Only removes records from API layer. \r\nDeletion in target systems needs to be done separately using the data deletion mechanisms available in each of the target system in addition to deleting the data in Basware API."
+      summary: Deletes user association with user group
+      description: 'For manual one-time operations only, such as a manual clean-up to remove test data generated during API integration development. Only removes records from API layer.
+
+        Deletion in target systems needs to be done separately using the data deletion mechanisms available in each of the target system in addition to deleting the data in Basware API.'
       requestBody:
-        description: "Contains the body of the request.\r\n            If both (userGroupExternalCode and UserExternalCode) values are provided then the record will be deleted directly, else delete lambda will be triggered."
+        description: "Contains the body of the request.\n            If both (userGroupExternalCode and UserExternalCode) values are provided then the record will be deleted directly, else delete lambda will be triggered."
         content:
           application/json-patch+json:
             schema:
@@ -167,67 +179,23 @@ paths:
           description: RequestAccepted
         '500':
           description: Unexpected error
+      operationId: deleteV1UserGroupAssociatedUsers
+      x-operation-id-source: derived
 components:
   schemas:
-    UserGroupAssociationsDeleteRequest:
-      type: object
-      properties:
-        userGroupExternalCode:
-          maxLength: 36
-          minLength: 0
-          type: string
-          nullable: true
-        userExternalCode:
-          maxLength: 36
-          minLength: 0
-          type: string
-          nullable: true
-        lastUpdated:
-          type: string
-          format: date-time
-          nullable: true
-      additionalProperties: false
-    DeleteResponse:
-      type: object
-      properties:
-        statusApiLink:
-          type: string
-          description: Gets or sets the API link to check the status of the delete operation.
-          nullable: true
-        taskName:
-          type: string
-          description: Gets or sets the name of the delete task.
-          nullable: true
-        taskStatus:
-          type: string
-          description: Gets or sets the current status of the delete task.
-          nullable: true
-          readOnly: true
-        statusEnum:
-          $ref: '#/components/schemas/BulkOperationStatus'
-      additionalProperties: false
-      description: Represents the response returned after a delete operation.
-    BulkOperationStatus:
-      enum:
-      - 0
-      - 1
-      - 2
-      - 3
-      - 4
-      type: integer
-      description: Represents the possible statuses of a bulk operation.
-      format: int32
     IModelValidationResult:
       type: object
       properties:
         requestId:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         errors:
-          type: array
+          type:
+          - array
+          - 'null'
           items:
             $ref: '#/components/schemas/IModelValidationError'
-          nullable: true
           readOnly: true
         hasErrors:
           type: boolean
@@ -252,29 +220,103 @@ components:
           description: External code of the user associated to the user group.
           example: joe@basware.com
       additionalProperties: false
+    UserGroupAssociationsDeleteRequest:
+      type: object
+      properties:
+        userGroupExternalCode:
+          maxLength: 36
+          minLength: 0
+          type:
+          - string
+          - 'null'
+        userExternalCode:
+          maxLength: 36
+          minLength: 0
+          type:
+          - string
+          - 'null'
+        lastUpdated:
+          type:
+          - string
+          - 'null'
+          format: date-time
+      additionalProperties: false
     IModelValidationError:
       type: object
       properties:
         code:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         externalCode:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         info:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         message:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         type:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         cdmErrorMappingOrganizationCode:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
       additionalProperties: false
+    BulkOperationStatus:
+      enum:
+      - 0
+      - 1
+      - 2
+      - 3
+      - 4
+      type: integer
+      description: Represents the possible statuses of a bulk operation.
+      format: int32
+    DeleteResponse:
+      type: object
+      properties:
+        statusApiLink:
+          type:
+          - string
+          - 'null'
+          description: Gets or sets the API link to check the status of the delete operation.
+        taskName:
+          type:
+          - string
+          - 'null'
+          description: Gets or sets the name of the delete task.
+        taskStatus:
+          type:
+          - string
+          - 'null'
+          description: Gets or sets the current status of the delete task.
+          readOnly: true
+        statusEnum:
+          $ref: '#/components/schemas/BulkOperationStatus'
+      additionalProperties: false
+      description: Represents the response returned after a delete operation.
   securitySchemes:
-    HTTPBasic:
+    Bearer:
       type: http
+      description: Please insert basic authentication credentials into fields
       scheme: basic
+    oauth2authentication:
+      type: oauth2
+      description: OAuth2 client credentials flow.
+      flows:
+        clientCredentials:
+          tokenUrl: https://api.basware.com/v1/tokens
+          scopes:
+            userGroups.read: GET user groups
+            userGroups.write: POST user groups
+            userGroups.delete: DELETE user groups
+            userGroupAssociatedUsers.read: GET user associations with user group
+            userGroupAssociatedUsers.write: POST user associations to user group
+            userGroupAssociatedUsers.delete: DELETE user associations from user group

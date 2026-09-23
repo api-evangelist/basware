@@ -1,7 +1,12 @@
-openapi: 3.0.2
+openapi: 3.2.0
 info:
-  title: Basware OAUTH2 authentication APIs AccountingDocuments Tokens API
-  description: "**Using OAUTH2.0 authentication:**\n\nGet API access token from api.basware.com/tokens\n1. Using client id and client secret, which you can obtain from Basware. \n2. Specify which APIs can be accessed by using the token e.g. Read only access to vendors API only (these are called scopes). Available scopes are listed at <https://developer.basware.com/api/p2p/manual#AccessRights>. \n3. Each token has an expiration time, until which it can be used to call APIs.\n\nWhen using OAUTH2 authentication, you need to pass the OAUTH2 authentication token when calling Basware API endpoints. Available Basware API operations are documented at <https://api.basware.com/swagger>. \n\nSee the Basware API developer site at <https://developer.basware.com/api/p2p/manual#Authentication> for more details on API authentication."
+  title: Basware OAUTH2 authentication Tokens API
+  description: '**Using OAUTH2.0 authentication:**
+
+
+    Get API access token from api.basware.com/tokens
+
+    1.'
   version: 1.0.0
   x-logo:
     url: https://fastapi.tiangolo.com/img/logo-margin/logo-teal.png
@@ -12,8 +17,11 @@ paths:
     post:
       tags:
       - Tokens
-      summary: Returns OAUTH2 access tokens.
-      description: "Tokens returned by this API are used to provide access to Basware API operations when OAUTH2 authorization is used for the API requests. The available operations are defined at <https://api.basware.com/swagger>.\n             \nNote: the request body parameters are sent as HTTP form parameters ('application/x-www-form-urlencoded') for this authentication API, while they are sent as raw application/json in the API operations defined at https://api.basware.com/swagger."
+      summary: Returns OAUTH2 access tokens
+      description: 'Tokens returned by this API are used to provide access to Basware API operations when OAUTH2 authorization is used for the API requests. The available operations are defined at .
+
+
+        Note: the request body parameters are sent as HTTP form parameters (''application/x-www-form-urlencoded'') for this authentication API, while they are sent as raw application/json in the API operations defined at https://api.basware.com/swagger.'
       operationId: get_token_v1_tokens_post
       security:
       - HTTPBasic: []
@@ -59,6 +67,74 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
+    UnauthorizedErrorResponse:
+      properties:
+        error:
+          type: string
+          title: Error
+          description: 'Defines error '
+          example: invalid_client
+      type: object
+      title: UnauthorizedErrorResponse
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    Body_get_token_v1_tokens_post:
+      properties:
+        grant_type:
+          type: string
+          title: Grant Type
+          description: 'Oauth2 grant type. Supported value(s): ''client_credentials'' = Client credential authentication flow.'
+        scope:
+          type: string
+          title: Scope
+          description: Scopes define the operations (e.g. vendors.write) allowed using the returned access token. See <https://developer.basware.com/api/p2p/manual#AccessRights> for list of available operations. Passed as HTTP form parameter.
+      type: object
+      required:
+      - grant_type
+      - scope
+      title: Body_get_token_v1_tokens_post
+    ValidationErrorResponse:
+      properties:
+        error:
+          type: string
+          title: Error
+          description: Defines error
+          example: invalid_request
+        error_description:
+          type: string
+          title: Error Description
+          description: Defines error details
+          example: grant_type field required
+      type: object
+      title: ValidationErrorResponse
     AccessTokenResponse:
       properties:
         access_token:
@@ -84,74 +160,6 @@ components:
           example: Bearer
       type: object
       title: AccessTokenResponse
-    ValidationErrorResponse:
-      properties:
-        error:
-          type: string
-          title: Error
-          description: Defines error
-          example: invalid_request
-        error_description:
-          type: string
-          title: Error Description
-          description: Defines error details
-          example: grant_type field required
-      type: object
-      title: ValidationErrorResponse
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
-    UnauthorizedErrorResponse:
-      properties:
-        error:
-          type: string
-          title: Error
-          description: 'Defines error '
-          example: invalid_client
-      type: object
-      title: UnauthorizedErrorResponse
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
-    Body_get_token_v1_tokens_post:
-      properties:
-        grant_type:
-          type: string
-          title: Grant Type
-          description: 'Oauth2 grant type. Supported value(s): ''client_credentials'' = Client credential authentication flow.'
-        scope:
-          type: string
-          title: Scope
-          description: Scopes define the operations (e.g. vendors.write) allowed using the returned access token. See <https://developer.basware.com/api/p2p/manual#AccessRights> for list of available operations. Passed as HTTP form parameter.
-      type: object
-      required:
-      - grant_type
-      - scope
-      title: Body_get_token_v1_tokens_post
   securitySchemes:
     HTTPBasic:
       type: http

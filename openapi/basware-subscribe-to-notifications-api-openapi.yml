@@ -1,7 +1,9 @@
-openapi: 3.0.2
+openapi: 3.2.0
 info:
-  title: Basware OAUTH2 authentication APIs AccountingDocuments Subscribe to notifications API
-  description: "**Using OAUTH2.0 authentication:**\n\nGet API access token from api.basware.com/tokens\n1. Using client id and client secret, which you can obtain from Basware. \n2. Specify which APIs can be accessed by using the token e.g. Read only access to vendors API only (these are called scopes). Available scopes are listed at <https://developer.basware.com/api/p2p/manual#AccessRights>. \n3. Each token has an expiration time, until which it can be used to call APIs.\n\nWhen using OAUTH2 authentication, you need to pass the OAUTH2 authentication token when calling Basware API endpoints. Available Basware API operations are documented at <https://api.basware.com/swagger>. \n\nSee the Basware API developer site at <https://developer.basware.com/api/p2p/manual#Authentication> for more details on API authentication."
+  title: Basware push notification Subscribe to notifications API
+  description: 'Steps to use:
+
+    1.'
   version: 1.0.0
   x-logo:
     url: https://fastapi.tiangolo.com/img/logo-margin/logo-teal.png
@@ -12,8 +14,11 @@ paths:
     post:
       tags:
       - Subscribe to notifications
-      summary: Subscribes to receive push notifications.
-      description: "Use this API to subscribe to task notifications. See <https://developer.basware.com/api/p2p/manual#PushNotifications> for notification format which needs to be supported by the receiving endpoint. \n\nNote: Basware API validates the receiving endpoint by sending a notification with taskType 'ConnectionTest', to which a 200 OK HTTP response needs to be returned."
+      summary: Subscribes to receive push notifications
+      description: 'Use this API to subscribe to task notifications. See for notification format which needs to be supported by the receiving endpoint.
+
+
+        Note: Basware API validates the receiving endpoint by sending a notification with taskType ''ConnectionTest'', to which a 200 OK HTTP response needs to be returned.'
       operationId: create_item_v1_subscriptions_post
       requestBody:
         required: true
@@ -86,7 +91,7 @@ paths:
     get:
       tags:
       - Subscribe to notifications
-      summary: List existing subscriptions.
+      summary: List existing subscriptions
       operationId: read_items_v1_subscriptions_get
       parameters:
       - name: taskType
@@ -147,7 +152,7 @@ paths:
     delete:
       tags:
       - Subscribe to notifications
-      summary: Deletes existing subscriptions.
+      summary: Deletes existing subscriptions
       operationId: delete_item_v1_subscriptions_delete
       parameters:
       - name: lastUpdated
@@ -201,6 +206,59 @@ paths:
           description: Unprocessable Entity
 components:
   schemas:
+    FieldUpdateArray:
+      properties:
+        fieldId:
+          type: string
+          title: Fieldid
+          description: Specifies the field to update. Use JSONpath to identify the value on response schema to update.
+          example: codingRows[2]/accountCode
+        updateToValue:
+          type: string
+          title: Updatetovalue
+          description: Specifies value to which field contents are set by the autoresponder.
+          example: '02600'
+      type: object
+      title: FieldUpdateArray
+    NotificationPayload:
+      properties:
+        taskId:
+          type: string
+          title: Taskid
+          description: Defines id of task
+          example: eb9ea3fa-69de-4a5a-8a1a-f4347cd18626
+        taskStatus:
+          type: string
+          title: Taskstatus
+          description: Defines status of task
+          example: New
+        taskType:
+          type: string
+          title: Tasktype
+          description: Defines task type
+          example: AccoutingDocuments
+        taskSubType:
+          type: string
+          title: Tasksubtype
+          description: Defines sub task type
+          example: WaitingForTransfer
+        documentId:
+          type: string
+          title: Documentid
+          description: Defines document id
+          example: 63255782d0a04d8d8defcc6a0062101d
+        expirationTime:
+          type: string
+          title: Expirationtime
+          description: Defines notification's expiration time
+          example: '2021-12-11T08:53:31Z'
+      type: object
+      required:
+      - taskId
+      - taskStatus
+      - taskType
+      - documentId
+      title: NotificationPayload
     RecordNotFoundResponse:
       properties:
         detail:
@@ -211,53 +269,6 @@ components:
           example: Not Found
       type: object
       title: RecordNotFoundResponse
-    SubscriptionType:
-      type: string
-      enum:
-      - Webhook
-      - Polling
-      title: SubscriptionType
-    AutoResponder:
-      properties:
-        autoResponseMode:
-          allOf:
-          - $ref: '#/components/schemas/AutoResponseModeEnum'
-          description: Determines whether task autoresponder is enabled and whether it returns task responses with status 'Success' or 'Failed'. The entire autoresponder functionality is reserved for later use.
-          example: Disabled
-        autoResponseMessage:
-          type: string
-          title: Autoresponsemessage
-          description: Determines message returned by task autoresponser to P2P.
-          example: Updated coding details.
-        fieldUpdateArray:
-          anyOf:
-          - items:
-              $ref: '#/components/schemas/FieldUpdateArray'
-            type: array
-          - type: 'null'
-          title: Fieldupdatearray
-          description: Reserved for later use. Array of field values to automatically update when autoresponder is enabled.
-      type: object
-      title: AutoResponder
-    ValidationErrorResponse:
-      properties:
-        requestId:
-          type: string
-          title: Requestid
-          description: RequestId of request
-          example: KLF5BiZ9DoEEMlQ=
-        hasError:
-          type: boolean
-          title: Haserror
-          description: Tells that request has error
-          example: true
-        errorMessages:
-          items:
-            $ref: '#/components/schemas/SchemaValidationError'
-          type: array
-          title: Errormessages
-      type: object
-      title: ValidationErrorResponse
     InternalServerErrorResponse:
       properties:
         message:
@@ -289,86 +300,6 @@ components:
       required:
       - subscriptions
       title: SubscriptionsResponse
-    FieldUpdateArray:
-      properties:
-        fieldId:
-          type: string
-          title: Fieldid
-          description: Specifies the field to update. Use JSONpath to identify the value on response schema to update.
-          example: codingRows[2]/accountCode
-        updateToValue:
-          type: string
-          title: Updatetovalue
-          description: Specifies value to which field contents are set by the autoresponder.
-          example: '02600'
-      type: object
-      title: FieldUpdateArray
-    DeleteSubscriptionResponse:
-      properties:
-        status:
-          type: string
-          title: Status
-          description: Success message
-          default: Deleted successfully
-          example: Deleted successfully
-        numberOfRecordsDeleted:
-          type: integer
-          title: Numberofrecordsdeleted
-          description: Number of records deleted
-          example: '1'
-      type: object
-      title: DeleteSubscriptionResponse
-    Subscription-Input:
-      properties:
-        taskType:
-          type: string
-          minLength: 1
-          title: Tasktype
-          description: 'Task type for which notifications are sent. Supported values: ''AccountingDocuments'', ''ExportedPurchaseRequisitions'', ''ExportedPurchaseOrders'', ''RequestStatus'', ''ExportedContracts'' , ''ExportedContractSpends''.'
-          example: AccountingDocuments
-        taskSubType:
-          type: string
-          title: Tasksubtype
-          description: 'Task subtype for which webhook notifications are sent. Supported values: ''WaitingForPrebook'', ''WaitingForTransfer'', ''WaitingForPrebookCancelation'', ''WaitingToBeRemoved'', ''WaitingToBeReturned'', ''WaitingToBeCompleted'', ''WaitingForExport'', ''Error'', ''Success'', ''All''. Available values depend on taskType. If null, defaults to ''Error'' for RequestStatus taskType and ''All'' for other taskTypes.'
-          example: All
-        subscriptionType:
-          allOf:
-          - $ref: '#/components/schemas/SubscriptionType'
-          description: 'Subscription type. Supported values: ''Webhook''. ''Polling'' subscription type is reserved for later use.'
-          example: Webhook
-        notificationWebhookURL:
-          type: string
-          maxLength: 2083
-          minLength: 1
-          format: uri
-          title: Notificationwebhookurl
-          description: URL where API posts push notifications when subscriptionType = 'Webhook' (then field is mandatory). This URL needs to implement the Basware's notification receival API specification.
-          example: https://bwnotificationapi.customer.com/accountingdocumentnotifications
-        webhookAuthenticationToken:
-          type: string
-          minLength: 1
-          title: Webhookauthenticationtoken
-          description: Secret key used by API to sign sent push notifications so authenticity can be verified by customer. Mandatory when subscription type is 'Webhook'.
-          example: ad65rujltr9093ijhdkutiyua09döijhsa76d8799w8pqugdfafjdhfkjhadls
-        lastUpdated:
-          type: string
-          format: date-time
-          title: Lastupdated
-          description: Timestamp when this subscription has been last updated (set automatically by Basware API).
-          example: '2021-08-04T08:39:13Z'
-        autoResponder:
-          anyOf:
-          - $ref: '#/components/schemas/AutoResponder'
-          - type: 'null'
-          description: Reserved for later use.
-      additionalProperties: false
-      type: object
-      required:
-      - taskType
-      - subscriptionType
-      - notificationWebhookURL
-      - webhookAuthenticationToken
-      title: Subscription
     Subscription-Output:
       properties:
         taskType:
@@ -420,45 +351,6 @@ components:
       - notificationWebhookURL
       - webhookAuthenticationToken
       title: Subscription
-    NotificationPayload:
-      properties:
-        taskId:
-          type: string
-          title: Taskid
-          description: Defines id of task
-          example: eb9ea3fa-69de-4a5a-8a1a-f4347cd18626
-        taskStatus:
-          type: string
-          title: Taskstatus
-          description: Defines status of task
-          example: New
-        taskType:
-          type: string
-          title: Tasktype
-          description: Defines task type
-          example: AccoutingDocuments
-        taskSubType:
-          type: string
-          title: Tasksubtype
-          description: Defines sub task type
-          example: WaitingForTransfer
-        documentId:
-          type: string
-          title: Documentid
-          description: Defines document id
-          example: 63255782d0a04d8d8defcc6a0062101d
-        expirationTime:
-          type: string
-          title: Expirationtime
-          description: Defines notification's expiration time
-          example: '2021-12-11T08:53:31Z'
-      type: object
-      required:
-      - taskId
-      - taskStatus
-      - taskType
-      - documentId
-      title: NotificationPayload
     SchemaValidationError:
       properties:
         type:
@@ -478,6 +370,104 @@ components:
           example: taskType field required
       type: object
       title: SchemaValidationError
+    Subscription-Input:
+      properties:
+        taskType:
+          type: string
+          minLength: 1
+          title: Tasktype
+          description: 'Task type for which notifications are sent. Supported values: ''AccountingDocuments'', ''ExportedPurchaseRequisitions'', ''ExportedPurchaseOrders'', ''RequestStatus'', ''ExportedContracts'' , ''ExportedContractSpends''.'
+          example: AccountingDocuments
+        taskSubType:
+          type: string
+          title: Tasksubtype
+          description: 'Task subtype for which webhook notifications are sent. Supported values: ''WaitingForPrebook'', ''WaitingForTransfer'', ''WaitingForPrebookCancelation'', ''WaitingToBeRemoved'', ''WaitingToBeReturned'', ''WaitingToBeCompleted'', ''WaitingForExport'', ''Error'', ''Success'', ''All''. Available values depend on taskType. If null, defaults to ''Error'' for RequestStatus taskType and ''All'' for other taskTypes.'
+          example: All
+        subscriptionType:
+          allOf:
+          - $ref: '#/components/schemas/SubscriptionType'
+          description: 'Subscription type. Supported values: ''Webhook''. ''Polling'' subscription type is reserved for later use.'
+          example: Webhook
+        notificationWebhookURL:
+          type: string
+          maxLength: 2083
+          minLength: 1
+          format: uri
+          title: Notificationwebhookurl
+          description: URL where API posts push notifications when subscriptionType = 'Webhook' (then field is mandatory). This URL needs to implement the Basware's notification receival API specification.
+          example: https://bwnotificationapi.customer.com/accountingdocumentnotifications
+        webhookAuthenticationToken:
+          type: string
+          minLength: 1
+          title: Webhookauthenticationtoken
+          description: Secret key used by API to sign sent push notifications so authenticity can be verified by customer. Mandatory when subscription type is 'Webhook'.
+          example: ad65rujltr9093ijhdkutiyua09döijhsa76d8799w8pqugdfafjdhfkjhadls
+        lastUpdated:
+          type: string
+          format: date-time
+          title: Lastupdated
+          description: Timestamp when this subscription has been last updated (set automatically by Basware API).
+          example: '2021-08-04T08:39:13Z'
+        autoResponder:
+          anyOf:
+          - $ref: '#/components/schemas/AutoResponder'
+          - type: 'null'
+          description: Reserved for later use.
+      additionalProperties: false
+      type: object
+      required:
+      - taskType
+      - subscriptionType
+      - notificationWebhookURL
+      - webhookAuthenticationToken
+      title: Subscription
+    DeleteSubscriptionResponse:
+      properties:
+        status:
+          type: string
+          title: Status
+          description: Success message
+          default: Deleted successfully
+          example: Deleted successfully
+        numberOfRecordsDeleted:
+          type: integer
+          title: Numberofrecordsdeleted
+          description: Number of records deleted
+          example: '1'
+      type: object
+      title: DeleteSubscriptionResponse
+    SubscriptionType:
+      type: string
+      enum:
+      - Webhook
+      - Polling
+      title: SubscriptionType
+    ValidationErrorResponse:
+      properties:
+        requestId:
+          type: string
+          title: Requestid
+          description: RequestId of request
+          example: KLF5BiZ9DoEEMlQ=
+        hasError:
+          type: boolean
+          title: Haserror
+          description: Tells that request has error
+          example: true
+        errorMessages:
+          items:
+            $ref: '#/components/schemas/SchemaValidationError'
+          type: array
+          title: Errormessages
+      type: object
+      title: ValidationErrorResponse
+    AutoResponseModeEnum:
+      type: string
+      enum:
+      - Disabled
+      - Success
+      - Failed
+      title: AutoResponseModeEnum
     UnprocessableEntityErrorResponse:
       properties:
         message:
@@ -488,14 +478,25 @@ components:
           example: UnprocessableEntity
       type: object
       title: UnprocessableEntityErrorResponse
-    AutoResponseModeEnum:
-      type: string
-      enum:
-      - Disabled
-      - Success
-      - Failed
-      title: AutoResponseModeEnum
-  securitySchemes:
-    HTTPBasic:
-      type: http
-      scheme: basic
+    AutoResponder:
+      properties:
+        autoResponseMode:
+          allOf:
+          - $ref: '#/components/schemas/AutoResponseModeEnum'
+          description: Determines whether task autoresponder is enabled and whether it returns task responses with status 'Success' or 'Failed'. The entire autoresponder functionality is reserved for later use.
+          example: Disabled
+        autoResponseMessage:
+          type: string
+          title: Autoresponsemessage
+          description: Determines message returned by task autoresponser to P2P.
+          example: Updated coding details.
+        fieldUpdateArray:
+          anyOf:
+          - items:
+              $ref: '#/components/schemas/FieldUpdateArray'
+            type: array
+          - type: 'null'
+          title: Fieldupdatearray
+          description: Reserved for later use. Array of field values to automatically update when autoresponder is enabled.
+      type: object
+      title: AutoResponder

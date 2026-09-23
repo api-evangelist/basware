@@ -1,10 +1,14 @@
-openapi: 3.0.2
+openapi: 3.2.0
 info:
-  title: Basware OAUTH2 authentication APIs AccountingDocuments Directory France lookup API
-  description: "**Using OAUTH2.0 authentication:**\n\nGet API access token from api.basware.com/tokens\n1. Using client id and client secret, which you can obtain from Basware. \n2. Specify which APIs can be accessed by using the token e.g. Read only access to vendors API only (these are called scopes). Available scopes are listed at <https://developer.basware.com/api/p2p/manual#AccessRights>. \n3. Each token has an expiration time, until which it can be used to call APIs.\n\nWhen using OAUTH2 authentication, you need to pass the OAUTH2 authentication token when calling Basware API endpoints. Available Basware API operations are documented at <https://api.basware.com/swagger>. \n\nSee the Basware API developer site at <https://developer.basware.com/api/p2p/manual#Authentication> for more details on API authentication."
+  title: 'Directory API. Stage: prod Directory France lookup API'
+  description: The Directory API is a search service for receiver-specific e-invoicing endpoints. Based on given search criteria (for example, a French SIREN), it returns possible matches and their endpoints to help customers determine how to send e-invoices to their buyers.
   version: 1.0.0
-  x-logo:
-    url: https://fastapi.tiangolo.com/img/logo-margin/logo-teal.png
+servers:
+- url: /v1
+- url: https://api.basware.com/v1
+security:
+- BearerAuth: []
+- HTTPBasic: []
 tags:
 - name: Directory France lookup
 paths:
@@ -114,176 +118,30 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    RoutingCode:
+    History:
       properties:
-        routingIdentifier:
+        definitionDate:
           anyOf:
           - type: string
           - type: 'null'
-          title: Routingidentifier
-        routingIdentifierType:
+          title: Definitiondate
+        dateFrom:
           anyOf:
           - type: string
           - type: 'null'
-          title: Routingidentifiertype
-        routingCodeName:
+          title: Datefrom
+        createdBy:
           anyOf:
           - type: string
           - type: 'null'
-          title: Routingcodename
-        managesLegalCommitment:
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          title: Manageslegalcommitment
-        administrativeStatus:
+          title: Createdby
+        idInstance:
           anyOf:
           - type: string
           - type: 'null'
-          title: Administrativestatus
-        address:
-          anyOf:
-          - $ref: '#/components/schemas/Address'
-          - type: 'null'
+          title: Idinstance
       type: object
-      title: RoutingCode
-    Address:
-      properties:
-        addressLine1:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Addressline1
-        addressLine2:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Addressline2
-        addressLine3:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Addressline3
-        postalCode:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Postalcode
-        countrySubdivision:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Countrysubdivision
-        locality:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Locality
-        countryCode:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Countrycode
-        countryName:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Countryname
-      type: object
-      title: Address
-    LegalUnit:
-      properties:
-        siren:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Siren
-        businessName:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Businessname
-        entityType:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Entitytype
-        administrativeStatus:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Administrativestatus
-        diffusible:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Diffusible
-      type: object
-      title: LegalUnit
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-        input:
-          title: Input
-        ctx:
-          type: object
-          title: Context
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
-    Facility:
-      properties:
-        siret:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Siret
-        siren:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Siren
-        name:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Name
-        facilityType:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Facilitytype
-        diffusible:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Diffusible
-        administrativeStatus:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Administrativestatus
-        address:
-          anyOf:
-          - $ref: '#/components/schemas/Address'
-          - type: 'null'
-      type: object
-      title: Facility
+      title: History
     DirectoryEntry:
       properties:
         routingIdentifier:
@@ -339,30 +197,185 @@ components:
           - type: 'null'
       type: object
       title: DirectoryEntry
-    History:
+    ValidationError:
       properties:
-        definitionDate:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Definitiondate
-        dateFrom:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Datefrom
-        createdBy:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Createdby
-        idInstance:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Idinstance
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+        input:
+          title: Input
+        ctx:
+          type: object
+          title: Context
       type: object
-      title: History
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    LegalUnit:
+      properties:
+        siren:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Siren
+        businessName:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Businessname
+        entityType:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Entitytype
+        administrativeStatus:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Administrativestatus
+        diffusible:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Diffusible
+      type: object
+      title: LegalUnit
+    RoutingCode:
+      properties:
+        routingIdentifier:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Routingidentifier
+        routingIdentifierType:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Routingidentifiertype
+        routingCodeName:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Routingcodename
+        managesLegalCommitment:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Manageslegalcommitment
+        administrativeStatus:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Administrativestatus
+        address:
+          anyOf:
+          - $ref: '#/components/schemas/Address'
+          - type: 'null'
+      type: object
+      title: RoutingCode
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    Facility:
+      properties:
+        siret:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Siret
+        siren:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Siren
+        name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Name
+        facilityType:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Facilitytype
+        diffusible:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Diffusible
+        administrativeStatus:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Administrativestatus
+        address:
+          anyOf:
+          - $ref: '#/components/schemas/Address'
+          - type: 'null'
+      type: object
+      title: Facility
+    Address:
+      properties:
+        addressLine1:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Addressline1
+        addressLine2:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Addressline2
+        addressLine3:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Addressline3
+        postalCode:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Postalcode
+        countrySubdivision:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Countrysubdivision
+        locality:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Locality
+        countryCode:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Countrycode
+        countryName:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Countryname
+      type: object
+      title: Address
     ErrorResponse:
       properties:
         error:
@@ -374,16 +387,11 @@ components:
       title: ErrorResponse
       example:
         error: timeout
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
   securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
     HTTPBasic:
       type: http
       scheme: basic

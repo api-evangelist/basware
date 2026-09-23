@@ -1,18 +1,20 @@
-openapi: 3.0.2
+openapi: 3.2.0
 info:
-  title: Basware OAUTH2 authentication APIs AccountingDocuments Notification history API
-  description: "**Using OAUTH2.0 authentication:**\n\nGet API access token from api.basware.com/tokens\n1. Using client id and client secret, which you can obtain from Basware. \n2. Specify which APIs can be accessed by using the token e.g. Read only access to vendors API only (these are called scopes). Available scopes are listed at <https://developer.basware.com/api/p2p/manual#AccessRights>. \n3. Each token has an expiration time, until which it can be used to call APIs.\n\nWhen using OAUTH2 authentication, you need to pass the OAUTH2 authentication token when calling Basware API endpoints. Available Basware API operations are documented at <https://api.basware.com/swagger>. \n\nSee the Basware API developer site at <https://developer.basware.com/api/p2p/manual#Authentication> for more details on API authentication."
+  title: Basware push notification Notification history API
+  description: 'Steps to use:
+
+    1.'
   version: 1.0.0
   x-logo:
     url: https://fastapi.tiangolo.com/img/logo-margin/logo-teal.png
 tags:
-- name: Notification history
+- name: Notification History
 paths:
   /v1/tasks/{taskId}:
     get:
       tags:
-      - Notification history
-      summary: Used to check status of an individual task by taskId. Does not contain task payload.
+      - Notification History
+      summary: Used to check status of an individual task by taskId.
       operationId: read_item_v1_tasks__taskId__get
       parameters:
       - name: taskId
@@ -57,8 +59,8 @@ paths:
   /v1/tasks:
     get:
       tags:
-      - Notification history
-      summary: Returns task status by search criteria. Does not contain task payload.
+      - Notification History
+      summary: Returns task status by search criteria. Does not contain task payload
       operationId: read_item_v1_tasks_get
       parameters:
       - name: taskType
@@ -136,17 +138,6 @@ paths:
           description: Unprocessable Entity
 components:
   schemas:
-    TasksResponse:
-      properties:
-        taskStatus:
-          items:
-            $ref: '#/components/schemas/Task'
-          type: array
-          title: Taskstatus
-      type: object
-      required:
-      - taskStatus
-      title: TasksResponse
     RecordNotFoundResponse:
       properties:
         detail:
@@ -157,6 +148,26 @@ components:
           example: Not Found
       type: object
       title: RecordNotFoundResponse
+    InternalServerErrorResponse:
+      properties:
+        message:
+          type: string
+          title: Message
+          description: Detail of error
+          default: Internal server error
+          example: Internal server error
+      type: object
+      title: InternalServerErrorResponse
+    UnauthorizeErrorResponse:
+      properties:
+        message:
+          type: string
+          title: Message
+          description: Detail of error
+          default: Unauthorized
+          example: Unauthorized
+      type: object
+      title: UnauthorizeErrorResponse
     Task:
       properties:
         taskId:
@@ -212,36 +223,6 @@ components:
           description: Shows information aboout task status changes.
       type: object
       title: Task
-    InternalServerErrorResponse:
-      properties:
-        message:
-          type: string
-          title: Message
-          description: Detail of error
-          default: Internal server error
-          example: Internal server error
-      type: object
-      title: InternalServerErrorResponse
-    UnauthorizeErrorResponse:
-      properties:
-        message:
-          type: string
-          title: Message
-          description: Detail of error
-          default: Unauthorized
-          example: Unauthorized
-      type: object
-      title: UnauthorizeErrorResponse
-    UnprocessableEntityErrorResponse:
-      properties:
-        message:
-          type: string
-          title: Message
-          description: Detail of error
-          default: UnprocessableEntity
-          example: UnprocessableEntity
-      type: object
-      title: UnprocessableEntityErrorResponse
     TaskHistory:
       properties:
         action:
@@ -263,7 +244,24 @@ components:
           example: Task Created
       type: object
       title: TaskHistory
-  securitySchemes:
-    HTTPBasic:
-      type: http
-      scheme: basic
+    TasksResponse:
+      properties:
+        taskStatus:
+          items:
+            $ref: '#/components/schemas/Task'
+          type: array
+          title: Taskstatus
+      type: object
+      required:
+      - taskStatus
+      title: TasksResponse
+    UnprocessableEntityErrorResponse:
+      properties:
+        message:
+          type: string
+          title: Message
+          description: Detail of error
+          default: UnprocessableEntity
+          example: UnprocessableEntity
+      type: object
+      title: UnprocessableEntityErrorResponse
