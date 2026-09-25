@@ -37,11 +37,11 @@ artifacts:
     method: derived
     evidence: openapi/basware-advancedvalidations-api
   collections/basware-applicationgroups-api.opencollection.json:
-    method: derived
-    evidence: openapi/basware-applicationgroups-api
+    method: unknown
+    evidence: no authorship recorded
   collections/basware-applicationgroups-api.postman_collection.json:
-    method: derived
-    evidence: openapi/basware-applicationgroups-api
+    method: unknown
+    evidence: no authorship recorded
   collections/basware-companies-deprecated-api.opencollection.json:
     method: derived
     evidence: openapi/basware-companies-deprecated-api
@@ -55,11 +55,11 @@ artifacts:
     method: derived
     evidence: openapi/basware-contracts-api
   collections/basware-costcenters-api.opencollection.json:
-    method: derived
-    evidence: openapi/basware-costcenters-api
+    method: unknown
+    evidence: no authorship recorded
   collections/basware-costcenters-api.postman_collection.json:
-    method: derived
-    evidence: openapi/basware-costcenters-api
+    method: unknown
+    evidence: no authorship recorded
   collections/basware-data-extract-api.opencollection.json:
     method: derived
     evidence: openapi/basware-data-extract-api
@@ -85,11 +85,11 @@ artifacts:
     method: derived
     evidence: openapi/basware-errorfeedbacks-api
   collections/basware-exchangerates-api.opencollection.json:
-    method: derived
-    evidence: openapi/basware-exchangerates-api
+    method: unknown
+    evidence: no authorship recorded
   collections/basware-exchangerates-api.postman_collection.json:
-    method: derived
-    evidence: openapi/basware-exchangerates-api
+    method: unknown
+    evidence: no authorship recorded
   collections/basware-exportedcontracts-api.opencollection.json:
     method: derived
     evidence: openapi/basware-exportedcontracts-api
@@ -145,11 +145,11 @@ artifacts:
     method: derived
     evidence: openapi/basware-organizations-api
   collections/basware-paymentterms-api.opencollection.json:
-    method: derived
-    evidence: openapi/basware-paymentterms-api
+    method: unknown
+    evidence: no authorship recorded
   collections/basware-paymentterms-api.postman_collection.json:
-    method: derived
-    evidence: openapi/basware-paymentterms-api
+    method: unknown
+    evidence: no authorship recorded
   collections/basware-projects-v1-deprecated-api.opencollection.json:
     method: derived
     evidence: openapi/basware-projects-v1-deprecated-api
@@ -169,23 +169,23 @@ artifacts:
     method: derived
     evidence: openapi/basware-purchasegoodsreceipts-api
   collections/basware-purchaseorders-api.opencollection.json:
-    method: derived
-    evidence: openapi/basware-purchaseorders-api
+    method: unknown
+    evidence: no authorship recorded
   collections/basware-purchaseorders-api.postman_collection.json:
-    method: derived
-    evidence: openapi/basware-purchaseorders-api
+    method: unknown
+    evidence: no authorship recorded
   collections/basware-purchaserequisitions-api.opencollection.json:
-    method: derived
-    evidence: openapi/basware-purchaserequisitions-api
+    method: unknown
+    evidence: no authorship recorded
   collections/basware-purchaserequisitions-api.postman_collection.json:
-    method: derived
-    evidence: openapi/basware-purchaserequisitions-api
+    method: unknown
+    evidence: no authorship recorded
   collections/basware-requeststatus-api.opencollection.json:
-    method: derived
-    evidence: openapi/basware-requeststatus-api
+    method: unknown
+    evidence: no authorship recorded
   collections/basware-requeststatus-api.postman_collection.json:
-    method: derived
-    evidence: openapi/basware-requeststatus-api
+    method: unknown
+    evidence: no authorship recorded
   collections/basware-subscribe-to-notifications-api.opencollection.json:
     method: derived
     evidence: openapi/basware-subscribe-to-notifications-api
@@ -193,11 +193,11 @@ artifacts:
     method: derived
     evidence: openapi/basware-subscribe-to-notifications-api
   collections/basware-taxcodes-api.opencollection.json:
-    method: derived
-    evidence: openapi/basware-taxcodes-api
+    method: unknown
+    evidence: no authorship recorded
   collections/basware-taxcodes-api.postman_collection.json:
-    method: derived
-    evidence: openapi/basware-taxcodes-api
+    method: unknown
+    evidence: no authorship recorded
   collections/basware-tokens-api.opencollection.json:
     method: derived
     evidence: openapi/basware-tokens-api
@@ -211,11 +211,11 @@ artifacts:
     method: derived
     evidence: openapi/basware-usergroupassociatedusers-api
   collections/basware-usergroups-api.opencollection.json:
-    method: derived
-    evidence: openapi/basware-usergroups-api
+    method: unknown
+    evidence: no authorship recorded
   collections/basware-usergroups-api.postman_collection.json:
-    method: derived
-    evidence: openapi/basware-usergroups-api
+    method: unknown
+    evidence: no authorship recorded
   collections/basware-users-api.opencollection.json:
     method: derived
     evidence: openapi/basware-users-api
@@ -252,6 +252,9 @@ artifacts:
   finops/basware-finops.yml:
     method: unknown
     evidence: no authorship recorded
+  front-door-ai/2026-09-17.yml:
+    method: unknown
+    evidence: no authorship recorded
   json-ld/basware-context.jsonld:
     method: unknown
     evidence: no authorship recorded
@@ -279,55 +282,7 @@ artifacts:
   json-schema/basware-vault-schema.json:
     method: unknown
     evidence: no authorship recorded
-  kin/checks-2026-09-05T072335.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-06T210741.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-07T135032.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-10T093022.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-10T111628.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-11T211707.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-12T193225.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-17T064519.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-19T080027.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-19T082702.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-19T114122.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-20T165047.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-20T191845.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-20T205517.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-21T110057.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-24T064859.yml:
-    method: generated
-    evidence: Kin Score snapshot written by score.rb
-  kin/score-2026-08-24T171257.yml:
+  kin/checks-2026-09-24T161608.yml:
     method: generated
     evidence: Kin Score snapshot written by score.rb
   kin/score-2026-08-25T125852.yml:
@@ -414,30 +369,155 @@ artifacts:
   kin/score-2026-09-05T072335.yml:
     method: generated
     evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-05T144739.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-05T195450.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-05T211839.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-06T011047.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-06T211804.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-06T224210.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-07T200636.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-07T213054.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-08T214843.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-08T232836.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-10T204815.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-10T222408.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-12T062655.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-12T080032.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-12T204651.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-12T221936.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-13T214537.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-14T064754.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-14T210656.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-14T225847.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-15T211329.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-15T230249.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-16T210549.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-16T225339.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-17T211151.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-17T233623.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-18T205255.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-18T231945.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-19T165737.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-19T193153.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-20T205903.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-20T232958.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-21T211425.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-21T233935.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-22T213221.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-23T000603.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-24T064009.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-24T090406.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
+  kin/score-2026-09-24T161608.yml:
+    method: generated
+    evidence: Kin Score snapshot written by score.rb
   openapi/_original/basware-authentication-openapi.json:
     method: harvested
-    evidence: fetched from the provider as-is; byte-identical to the source
+    evidence: found in openapi/_original/; the fetch URL and bytes were not recorded, so byte-identity
+      to the provider's source is unverified
   openapi/_original/basware-data-extract-openapi.json:
     method: harvested
-    evidence: fetched from the provider as-is; byte-identical to the source
+    evidence: found in openapi/_original/; the fetch URL and bytes were not recorded, so byte-identity
+      to the provider's source is unverified
   openapi/_original/basware-directory-openapi.json:
     method: harvested
-    evidence: fetched from the provider as-is; byte-identical to the source
+    evidence: found in openapi/_original/; the fetch URL and bytes were not recorded, so byte-identity
+      to the provider's source is unverified
   openapi/_original/basware-p2p-openapi.json:
     method: harvested
-    evidence: fetched from the provider as-is; byte-identical to the source
+    evidence: found in openapi/_original/; the fetch URL and bytes were not recorded, so byte-identity
+      to the provider's source is unverified
   openapi/_original/basware-push-notification-openapi.json:
     method: harvested
-    evidence: fetched from the provider as-is; byte-identical to the source
+    evidence: found in openapi/_original/; the fetch URL and bytes were not recorded, so byte-identity
+      to the provider's source is unverified
   openapi/_original/basware-smart-pdf-openapi.json:
     method: harvested
-    evidence: fetched from the provider as-is; byte-identical to the source
+    evidence: found in openapi/_original/; the fetch URL and bytes were not recorded, so byte-identity
+      to the provider's source is unverified
   openapi/_original/basware-user-permission-openapi.json:
     method: harvested
-    evidence: fetched from the provider as-is; byte-identical to the source
+    evidence: found in openapi/_original/; the fetch URL and bytes were not recorded, so byte-identity
+      to the provider's source is unverified
   openapi/_original/basware-vault-openapi.yaml:
     method: harvested
-    evidence: fetched from the provider as-is; byte-identical to the source
+    evidence: found in openapi/_original/; the fetch URL and bytes were not recorded, so byte-identity
+      to the provider's source is unverified
   openapi/basware-accountingdocuments-api-openapi.yml:
     method: derived
     evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
@@ -450,7 +530,7 @@ artifacts:
   openapi/basware-advancedvalidations-api-openapi.yml:
     method: derived
     evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
-  openapi/basware-applicationgroups-api-openapi.yml:
+  openapi/basware-application-groups-api-openapi.yml:
     method: derived
     evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
   openapi/basware-companies-deprecated-api-openapi.yml:
@@ -459,7 +539,7 @@ artifacts:
   openapi/basware-contracts-api-openapi.yml:
     method: derived
     evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
-  openapi/basware-costcenters-api-openapi.yml:
+  openapi/basware-cost-centers-api-openapi.yml:
     method: derived
     evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
   openapi/basware-data-extract-api-openapi.yml:
@@ -474,7 +554,7 @@ artifacts:
   openapi/basware-errorfeedbacks-api-openapi.yml:
     method: derived
     evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
-  openapi/basware-exchangerates-api-openapi.yml:
+  openapi/basware-exchange-rates-api-openapi.yml:
     method: derived
     evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
   openapi/basware-exportedcontracts-api-openapi.yml:
@@ -504,7 +584,7 @@ artifacts:
   openapi/basware-organizations-api-openapi.yml:
     method: derived
     evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
-  openapi/basware-paymentterms-api-openapi.yml:
+  openapi/basware-payment-terms-api-openapi.yml:
     method: derived
     evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
   openapi/basware-projects-v1-deprecated-api-openapi.yml:
@@ -513,31 +593,31 @@ artifacts:
   openapi/basware-projects-v2-api-openapi.yml:
     method: derived
     evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+  openapi/basware-purchase-orders-api-openapi.yml:
+    method: derived
+    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
+  openapi/basware-purchase-requisitions-api-openapi.yml:
+    method: derived
+    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
   openapi/basware-purchasegoodsreceipts-api-openapi.yml:
     method: derived
     evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
-  openapi/basware-purchaseorders-api-openapi.yml:
-    method: derived
-    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
-  openapi/basware-purchaserequisitions-api-openapi.yml:
-    method: derived
-    evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
-  openapi/basware-requeststatus-api-openapi.yml:
+  openapi/basware-request-status-api-openapi.yml:
     method: derived
     evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
   openapi/basware-subscribe-to-notifications-api-openapi.yml:
     method: derived
     evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
-  openapi/basware-taxcodes-api-openapi.yml:
+  openapi/basware-tax-codes-api-openapi.yml:
     method: derived
     evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
   openapi/basware-tokens-api-openapi.yml:
     method: derived
     evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
-  openapi/basware-usergroupassociatedusers-api-openapi.yml:
+  openapi/basware-user-groups-api-openapi.yml:
     method: derived
     evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
-  openapi/basware-usergroups-api-openapi.yml:
+  openapi/basware-usergroupassociatedusers-api-openapi.yml:
     method: derived
     evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
   openapi/basware-users-api-openapi.yml:
@@ -556,8 +636,8 @@ artifacts:
     method: derived
     evidence: paths are a subset of openapi/_original/ (split from the harvested spec)
   plans/basware-plans-pricing.yml:
-    method: unknown
-    evidence: no authorship recorded
+    method: searched
+    evidence: declared in the artifact
   rate-limits/basware-rate-limits.yml:
     method: unknown
     evidence: no authorship recorded
