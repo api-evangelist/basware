@@ -361,15 +361,24 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    ProjectResponseV2:
+    LanguageTranslationEntity:
       required:
-      - projects
+      - language
+      - translation
       type: object
       properties:
-        projects:
-          type: array
-          items:
-            $ref: '#/components/schemas/ProjectEntityV2'
+        translation:
+          maxLength: 2000
+          minLength: 2
+          type: string
+          description: Translated text
+          example: Office supplies
+        language:
+          maxLength: 10
+          minLength: 2
+          type: string
+          description: Language code
+          example: en-US
       additionalProperties: false
     ErrorEntity:
       type: object
@@ -419,6 +428,40 @@ components:
           - 'null'
           description: Information about type of the error.
           example: ''
+      additionalProperties: false
+    ProjectCompanyEntity:
+      required:
+      - active
+      - companyCode
+      type: object
+      properties:
+        companyCode:
+          maxLength: 32
+          minLength: 1
+          type: string
+          description: Defines the company code that the project is mapped to. You can map many projects to one company.
+          example: BW01
+        active:
+          type: boolean
+          description: This flag will enable the data to be visible on UI, provided if the value is true, not visible in case of value is false. It will be also used for soft delete.
+          example: true
+      additionalProperties: false
+    DeleteRequest:
+      type: object
+      properties:
+        lastUpdated:
+          type:
+          - string
+          - 'null'
+          description: 'To delete records updated after specific time, use lastUpdated -field. This will delete all items that have been updated after the specified date. In response, user will get the taskStatus api link where the task status can be checked. Note: ''0001-01-01'' can be used to delete all records.'
+          format: date-time
+        externalCode:
+          maxLength: 36
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Single item can be deleted using externalCode and final status is returned immediately.
       additionalProperties: false
     ProjectEntityV2:
       required:
@@ -476,6 +519,16 @@ components:
           description: Timestamp when the record was last sent to API. Set automatically.
           format: date-time
       additionalProperties: false
+    ProjectResponseV2:
+      required:
+      - projects
+      type: object
+      properties:
+        projects:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProjectEntityV2'
+      additionalProperties: false
     ProjectEntity:
       required:
       - companies
@@ -531,23 +584,6 @@ components:
           description: Timestamp when the record was last sent to API. Set automatically.
           format: date-time
       additionalProperties: false
-    DeleteRequest:
-      type: object
-      properties:
-        lastUpdated:
-          type:
-          - string
-          - 'null'
-          description: 'To delete records updated after specific time, use lastUpdated -field. This will delete all items that have been updated after the specified date. In response, user will get the taskStatus api link where the task status can be checked. Note: ''0001-01-01'' can be used to delete all records.'
-          format: date-time
-        externalCode:
-          maxLength: 36
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Single item can be deleted using externalCode and final status is returned immediately.
-      additionalProperties: false
     DeleteResponse:
       type: object
       properties:
@@ -563,25 +599,6 @@ components:
           type:
           - string
           - 'null'
-      additionalProperties: false
-    LanguageTranslationEntity:
-      required:
-      - language
-      - translation
-      type: object
-      properties:
-        translation:
-          maxLength: 2000
-          minLength: 2
-          type: string
-          description: Translated text
-          example: Office supplies
-        language:
-          maxLength: 10
-          minLength: 2
-          type: string
-          description: Language code
-          example: en-US
       additionalProperties: false
     ResponseEntityList:
       type: object
@@ -603,23 +620,6 @@ components:
             $ref: '#/components/schemas/ErrorEntity'
       additionalProperties: false
       description: Errors returned here are returned synchronously from Basware API middle layer. Additional errors coming from target system(s) may be returned through errorFeedbacks API.
-    ProjectCompanyEntity:
-      required:
-      - active
-      - companyCode
-      type: object
-      properties:
-        companyCode:
-          maxLength: 32
-          minLength: 1
-          type: string
-          description: Defines the company code that the project is mapped to. You can map many projects to one company.
-          example: BW01
-        active:
-          type: boolean
-          description: This flag will enable the data to be visible on UI, provided if the value is true, not visible in case of value is false. It will be also used for soft delete.
-          example: true
-      additionalProperties: false
   securitySchemes:
     Bearer:
       type: http

@@ -67,6 +67,20 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
+    ValidationErrorResponse:
+      properties:
+        error:
+          type: string
+          title: Error
+          description: Defines error
+          example: invalid_request
+        error_description:
+          type: string
+          title: Error Description
+          description: Defines error details
+          example: grant_type field required
+      type: object
+      title: ValidationErrorResponse
     UnauthorizedErrorResponse:
       properties:
         error:
@@ -106,35 +120,6 @@ components:
           title: Detail
       type: object
       title: HTTPValidationError
-    Body_get_token_v1_tokens_post:
-      properties:
-        grant_type:
-          type: string
-          title: Grant Type
-          description: 'Oauth2 grant type. Supported value(s): ''client_credentials'' = Client credential authentication flow.'
-        scope:
-          type: string
-          title: Scope
-          description: Scopes define the operations (e.g. vendors.write) allowed using the returned access token. See <https://developer.basware.com/api/p2p/manual#AccessRights> for list of available operations. Passed as HTTP form parameter.
-      type: object
-      required:
-      - grant_type
-      - scope
-      title: Body_get_token_v1_tokens_post
-    ValidationErrorResponse:
-      properties:
-        error:
-          type: string
-          title: Error
-          description: Defines error
-          example: invalid_request
-        error_description:
-          type: string
-          title: Error Description
-          description: Defines error details
-          example: grant_type field required
-      type: object
-      title: ValidationErrorResponse
     AccessTokenResponse:
       properties:
         access_token:
@@ -160,6 +145,21 @@ components:
           example: Bearer
       type: object
       title: AccessTokenResponse
+    Body_get_token_v1_tokens_post:
+      properties:
+        grant_type:
+          type: string
+          title: Grant Type
+          description: 'Oauth2 grant type. Supported value(s): ''client_credentials'' = Client credential authentication flow.'
+        scope:
+          type: string
+          title: Scope
+          description: Scopes define the operations (e.g. vendors.write) allowed using the returned access token. See <https://developer.basware.com/api/p2p/manual#AccessRights> for list of available operations. Passed as HTTP form parameter.
+      type: object
+      required:
+      - grant_type
+      - scope
+      title: Body_get_token_v1_tokens_post
   securitySchemes:
     HTTPBasic:
       type: http

@@ -509,16 +509,6 @@ components:
           format: date-time
       additionalProperties: false
       description: Contains details on indivisual spend events. Note that a spend event can contain just a part of the whole amount indicated on spend source document, such as when part of the invoice lines correspond to a contract.
-    ExportedContractSpendsResponse:
-      required:
-      - contractSpends
-      type: object
-      properties:
-        contractSpends:
-          type: array
-          items:
-            $ref: '#/components/schemas/ExportedContractSpendEntity'
-      additionalProperties: false
     ErrorEntity:
       type: object
       properties:
@@ -585,6 +575,34 @@ components:
           - 'null'
           description: Single item can be deleted using externalCode and final status is returned immediately.
       additionalProperties: false
+    ExportedContractSpendsResponse:
+      required:
+      - contractSpends
+      type: object
+      properties:
+        contractSpends:
+          type: array
+          items:
+            $ref: '#/components/schemas/ExportedContractSpendEntity'
+      additionalProperties: false
+    ContractSpendAcknowledgeRequest:
+      type: object
+      properties:
+        lastUpdated:
+          type:
+          - string
+          - 'null'
+          description: Records with lastUpdated -timestamp after the specified value are acknowledged. '0001-01-01' can be used as input value to acknowledge all records.
+          format: date-time
+          example: '2022-01-01'
+        externalCodes:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+          description: List of requestIds to acknowledge. Several requests can be acknowledged in one operation.
+      additionalProperties: false
     DeleteResponse:
       type: object
       properties:
@@ -621,24 +639,6 @@ components:
             $ref: '#/components/schemas/ErrorEntity'
       additionalProperties: false
       description: Errors returned here are returned synchronously from Basware API middle layer. Additional errors coming from target system(s) may be returned through errorFeedbacks API.
-    ContractSpendAcknowledgeRequest:
-      type: object
-      properties:
-        lastUpdated:
-          type:
-          - string
-          - 'null'
-          description: Records with lastUpdated -timestamp after the specified value are acknowledged. '0001-01-01' can be used as input value to acknowledge all records.
-          format: date-time
-          example: '2022-01-01'
-        externalCodes:
-          type:
-          - array
-          - 'null'
-          items:
-            type: string
-          description: List of requestIds to acknowledge. Several requests can be acknowledged in one operation.
-      additionalProperties: false
   securitySchemes:
     Bearer:
       type: http

@@ -725,22 +725,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    GenericListCompanyEntity:
-      required:
-      - active
-      - companyCode
-      type: object
-      properties:
-        companyCode:
-          maxLength: 32
-          minLength: 1
-          type: string
-          description: Company code identifier. Corresponds to company code used in P2P. Used as key in this array.
-          example: BW01
-        active:
-          type: boolean
-          description: Gets or Sets Active
-      additionalProperties: false
     ErrorEntity:
       type: object
       properties:
@@ -1217,16 +1201,6 @@ components:
           description: Purchase manager list identifier. Needed if Purchase Manager is integrated through Basware API. Not used by P2P.
           example: ''
       additionalProperties: false
-    GenericListResponse:
-      required:
-      - listItems
-      type: object
-      properties:
-        listItems:
-          type: array
-          items:
-            $ref: '#/components/schemas/GenericListEntity'
-      additionalProperties: false
     DeleteRequest:
       type: object
       properties:
@@ -1243,6 +1217,32 @@ components:
           - string
           - 'null'
           description: Single item can be deleted using externalCode and final status is returned immediately.
+      additionalProperties: false
+    GenericListResponse:
+      required:
+      - listItems
+      type: object
+      properties:
+        listItems:
+          type: array
+          items:
+            $ref: '#/components/schemas/GenericListEntity'
+      additionalProperties: false
+    GenericListCompanyEntity:
+      required:
+      - active
+      - companyCode
+      type: object
+      properties:
+        companyCode:
+          maxLength: 32
+          minLength: 1
+          type: string
+          description: Company code identifier. Corresponds to company code used in P2P. Used as key in this array.
+          example: BW01
+        active:
+          type: boolean
+          description: Gets or Sets Active
       additionalProperties: false
     DeleteResponse:
       type: object

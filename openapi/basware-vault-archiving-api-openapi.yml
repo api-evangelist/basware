@@ -139,6 +139,12 @@ paths:
       deprecated: false
 components:
   schemas:
+    ArchiveFileURL:
+      type: object
+      properties:
+        url:
+          type: string
+          example: https://cipreprod-archivewarm-openapistagings3bucket-503ac9e65ad1.s3.eu-west-1.amazonaws.com/70944116/otlwif/2023/03/03/CZ/U6/46aa4caf-b373-11ed-bbfc-cfd535abf178.zip?X-Amz-Security-Token=IQoJb3JpZ2luX2VjEFUaCWV1LXdlc3QtMSJHMEUCIQDCIc4zFGqvfPoixMy5L55YwXQi94j28XXbOIQ4nUjVcQIgAQ6soIBTE5Oq3wtl1%2BrrgssIz2mNzsvt9UxN3iiijZ8q3AMI7f%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARADGgw0OTM3NjA2MDY4MzAiDGI%2BalWWdyGDfGbq9yqwA%2BGAbXcyOWHLDPDiTdA7F9LVMm5OkNd1OTAwr0VbizgBgD8XYrf0qn6F4cyCNJEw20RqkfhgRUq2LXtMsBAd%2Fx2hwp2qqARdcpFA0thltLxlFIUT2wc03wmnsLrmo7oJUAKfZ6qrH5zK9JKG6fZtjdX9F6uC2TAa16o4vIVMLwrWs3VblSPoU4R5OpPetN7SMCmTiUW%2Fwa%2B2P4OhsWoceKS2H2xxtrnOHFr0bLAl7pXPhmNFh%2F5R2X4X9eFuPMsbEwn0sOVoAAMDJwaok%2Ffi8XwjP8g69bb4Q78txhgc21I9mY3Jm4aO7kvtpx28taczXRCIYnrgkuFbuZSc4MSg3YfEgSdZNLz63KekmOlgYhohvqqopgnZ5c3UURcV%2FjrLlTkg405u56SI%2BOtM7fXl6JC90B7n%2Ffb84LlzCSXbWVjcCBPOXFDYIQdMpzbXyIJPUBx75wIATmV7CKzgg%2FO%2FXlcZ8%2FWC3FJEe0oefsqFa4ifkW9d83ZKrzZXSr2MS3zW22Y8Sh9hOx%2FsMhJnpwY5hzP6K3SIRxnHyqc7rTswWLPBgPSvbpwLzVA9mYlyEf0przCKsN2fBjqeAT7tYKT1IaaGkB0t2X9CNMf2hbtJgyHrYQNS8%2FJ1KVwSahHS3YMuY88ZiGPZnqNdqep8xVUeO1t2tPA7QymHiuz5SYVA2y0Ifaf%2Bs0MKBZwjnFAyXy%2BZQkpkvUFzl20EhOTAYSbjvi%2FAocaKyGiLTdxliZVsnBP8mq0sEIz7rGIOZzWObOfk69qD4nYgis9mrldJHL2Z1DeM9fYyuIBo&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20230223T121201Z&X-Amz-SignedHeaders=host&X-Amz-Expires=900&X-Amz-Credential=ASIAXF5TM6JXFF7XYS77%2F20230223%2Feu-west-1%2Fs3%2Faws4_request&X-Amz-Signature=5a824dab54b0d325862d0e036b702fcab8d98e5542ba93e2da67239b72b19a33
     ArchivedDocumentResponse:
       type: object
       properties:
@@ -156,6 +162,34 @@ components:
           example: 10d96d73-ff7f-49a7-8e8f-a6c7359f4939
         archiveFileURL:
           $ref: '#/components/schemas/ArchiveFileURL'
+    ArchivedDocumentStatusResponse:
+      type: object
+      properties:
+        bumId:
+          type: string
+          description: Identifier of the archived document.
+          example: 46aa4caf-b373-11ed-bbfc-cfd535abf178
+        documentId:
+          type: string
+          description: Document identifier. For invoice, normally invoice number.
+          example: 10003456
+        clientUUID:
+          type: string
+          description: Unique identifier as passed on the request for correlation
+          example: 10d96d73-ff7f-49a7-8e8f-a6c7359f4939
+        lastUpdated:
+          type: string
+          description: Date and time of the last status update.
+          example: 2023-02-23 08:39:03+00:00
+        status:
+          type: string
+          pattern: WaitingForPackageUpload|ArchivingInProgress|ArchivingSuccessful|ArchivingFailed
+          description: Status of document archiving.
+          example: ArchivingInProgress
+        message:
+          type: string
+          description: Additional status message in exception cases. For example if file is not found in staging area in 15 minutes.
+          example: ''
     ArchivedDocument:
       type: object
       required:
@@ -240,40 +274,6 @@ components:
           description: Document flow direction. Either sending or receiving.
           pattern: sending|receiving
           example: sending
-    ArchiveFileURL:
-      type: object
-      properties:
-        url:
-          type: string
-          example: https://cipreprod-archivewarm-openapistagings3bucket-503ac9e65ad1.s3.eu-west-1.amazonaws.com/70944116/otlwif/2023/03/03/CZ/U6/46aa4caf-b373-11ed-bbfc-cfd535abf178.zip?X-Amz-Security-Token=IQoJb3JpZ2luX2VjEFUaCWV1LXdlc3QtMSJHMEUCIQDCIc4zFGqvfPoixMy5L55YwXQi94j28XXbOIQ4nUjVcQIgAQ6soIBTE5Oq3wtl1%2BrrgssIz2mNzsvt9UxN3iiijZ8q3AMI7f%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARADGgw0OTM3NjA2MDY4MzAiDGI%2BalWWdyGDfGbq9yqwA%2BGAbXcyOWHLDPDiTdA7F9LVMm5OkNd1OTAwr0VbizgBgD8XYrf0qn6F4cyCNJEw20RqkfhgRUq2LXtMsBAd%2Fx2hwp2qqARdcpFA0thltLxlFIUT2wc03wmnsLrmo7oJUAKfZ6qrH5zK9JKG6fZtjdX9F6uC2TAa16o4vIVMLwrWs3VblSPoU4R5OpPetN7SMCmTiUW%2Fwa%2B2P4OhsWoceKS2H2xxtrnOHFr0bLAl7pXPhmNFh%2F5R2X4X9eFuPMsbEwn0sOVoAAMDJwaok%2Ffi8XwjP8g69bb4Q78txhgc21I9mY3Jm4aO7kvtpx28taczXRCIYnrgkuFbuZSc4MSg3YfEgSdZNLz63KekmOlgYhohvqqopgnZ5c3UURcV%2FjrLlTkg405u56SI%2BOtM7fXl6JC90B7n%2Ffb84LlzCSXbWVjcCBPOXFDYIQdMpzbXyIJPUBx75wIATmV7CKzgg%2FO%2FXlcZ8%2FWC3FJEe0oefsqFa4ifkW9d83ZKrzZXSr2MS3zW22Y8Sh9hOx%2FsMhJnpwY5hzP6K3SIRxnHyqc7rTswWLPBgPSvbpwLzVA9mYlyEf0przCKsN2fBjqeAT7tYKT1IaaGkB0t2X9CNMf2hbtJgyHrYQNS8%2FJ1KVwSahHS3YMuY88ZiGPZnqNdqep8xVUeO1t2tPA7QymHiuz5SYVA2y0Ifaf%2Bs0MKBZwjnFAyXy%2BZQkpkvUFzl20EhOTAYSbjvi%2FAocaKyGiLTdxliZVsnBP8mq0sEIz7rGIOZzWObOfk69qD4nYgis9mrldJHL2Z1DeM9fYyuIBo&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20230223T121201Z&X-Amz-SignedHeaders=host&X-Amz-Expires=900&X-Amz-Credential=ASIAXF5TM6JXFF7XYS77%2F20230223%2Feu-west-1%2Fs3%2Faws4_request&X-Amz-Signature=5a824dab54b0d325862d0e036b702fcab8d98e5542ba93e2da67239b72b19a33
-    ArchivedDocumentStatusResponse:
-      type: object
-      properties:
-        bumId:
-          type: string
-          description: Identifier of the archived document.
-          example: 46aa4caf-b373-11ed-bbfc-cfd535abf178
-        documentId:
-          type: string
-          description: Document identifier. For invoice, normally invoice number.
-          example: 10003456
-        clientUUID:
-          type: string
-          description: Unique identifier as passed on the request for correlation
-          example: 10d96d73-ff7f-49a7-8e8f-a6c7359f4939
-        lastUpdated:
-          type: string
-          description: Date and time of the last status update.
-          example: 2023-02-23 08:39:03+00:00
-        status:
-          type: string
-          pattern: WaitingForPackageUpload|ArchivingInProgress|ArchivingSuccessful|ArchivingFailed
-          description: Status of document archiving.
-          example: ArchivingInProgress
-        message:
-          type: string
-          description: Additional status message in exception cases. For example if file is not found in staging area in 15 minutes.
-          example: ''
   securitySchemes:
     baswareBasicAuth:
       type: http

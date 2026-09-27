@@ -357,99 +357,24 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    PaymentTermDiscountRule:
+    LanguageTranslationEntity:
       required:
-      - active
-      - externalCode
+      - language
+      - translation
       type: object
       properties:
-        externalCode:
-          maxLength: 36
-          minLength: 1
+        translation:
+          maxLength: 2000
+          minLength: 2
           type: string
-          description: External code is a unique code for the payment term's discount rules.
-          example: c9921a52-6d8b-1017-cb8c-923d
-        discountDays:
-          maximum: 2147483647
-          minimum: 0
-          type:
-          - integer
-          - 'null'
-          description: Defines number of days used in dynamic cash discount. The number of days must be unique for each discount percentage.
-          format: int32
-          example: 21
-        discountPercent:
-          maximum: 1000000000
-          minimum: 0
-          type:
-          - number
-          - 'null'
-          description: Defines the discount percentage that the supplier offers for the buyer for early cash payments
-          format: double
-          example: 1
-        active:
-          type: boolean
-          description: This flag will enable the data to be visible on UI, provided if the value is true, not visible in case of value is false. It will be also used for soft delete.
-          example: false
-      additionalProperties: false
-    ErrorEntity:
-      type: object
-      properties:
-        externalCode:
-          type:
-          - string
-          - 'null'
-          description: External code of record on which error occurred (when available).
-          example: 4847-31231212-212121-1212
-        type:
-          enum:
-          - BUSINESS
-          - VALIDATION
-          - TECHNICAL
-          - SECURITY
+          description: Translated text
+          example: Office supplies
+        language:
+          maxLength: 10
+          minLength: 2
           type: string
-          description: Error type.
-          example: ''
-        code:
-          enum:
-          - EXTERNAL_CODE_MISMATCH
-          - SCHEMA_VALIDATION_ERROR
-          - CONFLICT_IN_POST
-          - DATA_ORIGIN_VALIDATION_ERROR
-          - ACCESS_TOKEN_VALIDATION_ERROR
-          - CREDENTIAL_VALIDATION_ERROR
-          - PARAMETER_VALIDATION_ERROR
-          - UNEXPECTED_ERROR
-          - METHOD_NOT_ALLOWED
-          - ENTITY_NOT_FOUND
-          - DATA_VALIDATION_FAILED
-          - SNS_PUBLISH_ERROR
-          - SQS_PUBLISH_ERROR
-          type: string
-          description: Error code.
-          example: ''
-        message:
-          type:
-          - string
-          - 'null'
-          description: Specific error message.
-          example: ''
-        info:
-          type:
-          - string
-          - 'null'
-          description: Information about type of the error.
-          example: ''
-      additionalProperties: false
-    PaymentTermResponse:
-      required:
-      - paymentTerms
-      type: object
-      properties:
-        paymentTerms:
-          type: array
-          items:
-            $ref: '#/components/schemas/PaymentTermEntity'
+          description: Language code
+          example: en-US
       additionalProperties: false
     PaymentTermEntity:
       required:
@@ -606,6 +531,65 @@ components:
           description: Timestamp when the record was last sent to API. Set automatically.
           format: date-time
       additionalProperties: false
+    ErrorEntity:
+      type: object
+      properties:
+        externalCode:
+          type:
+          - string
+          - 'null'
+          description: External code of record on which error occurred (when available).
+          example: 4847-31231212-212121-1212
+        type:
+          enum:
+          - BUSINESS
+          - VALIDATION
+          - TECHNICAL
+          - SECURITY
+          type: string
+          description: Error type.
+          example: ''
+        code:
+          enum:
+          - EXTERNAL_CODE_MISMATCH
+          - SCHEMA_VALIDATION_ERROR
+          - CONFLICT_IN_POST
+          - DATA_ORIGIN_VALIDATION_ERROR
+          - ACCESS_TOKEN_VALIDATION_ERROR
+          - CREDENTIAL_VALIDATION_ERROR
+          - PARAMETER_VALIDATION_ERROR
+          - UNEXPECTED_ERROR
+          - METHOD_NOT_ALLOWED
+          - ENTITY_NOT_FOUND
+          - DATA_VALIDATION_FAILED
+          - SNS_PUBLISH_ERROR
+          - SQS_PUBLISH_ERROR
+          type: string
+          description: Error code.
+          example: ''
+        message:
+          type:
+          - string
+          - 'null'
+          description: Specific error message.
+          example: ''
+        info:
+          type:
+          - string
+          - 'null'
+          description: Information about type of the error.
+          example: ''
+      additionalProperties: false
+    PaymentTermResponse:
+      required:
+      - paymentTerms
+      type: object
+      properties:
+        paymentTerms:
+          type: array
+          items:
+            $ref: '#/components/schemas/PaymentTermEntity'
+      additionalProperties: false
     DeleteRequest:
       type: object
       properties:
@@ -623,61 +607,6 @@ components:
           - 'null'
           description: Single item can be deleted using externalCode and final status is returned immediately.
       additionalProperties: false
-    DeleteResponse:
-      type: object
-      properties:
-        statusApiLink:
-          type:
-          - string
-          - 'null'
-        taskName:
-          type:
-          - string
-          - 'null'
-        taskStatus:
-          type:
-          - string
-          - 'null'
-      additionalProperties: false
-    LanguageTranslationEntity:
-      required:
-      - language
-      - translation
-      type: object
-      properties:
-        translation:
-          maxLength: 2000
-          minLength: 2
-          type: string
-          description: Translated text
-          example: Office supplies
-        language:
-          maxLength: 10
-          minLength: 2
-          type: string
-          description: Language code
-          example: en-US
-      additionalProperties: false
-    ResponseEntityList:
-      type: object
-      properties:
-        requestId:
-          type:
-          - string
-          - 'null'
-          description: ID of the request on which error occurred (generated by Basware API).
-          example: fbc082a2-65a4-469c-b230-d84a252f18fc
-        hasErrors:
-          type: boolean
-          description: Specifies whether the request has errors.
-        errors:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/ErrorEntity'
-      additionalProperties: false
-      description: Errors returned here are returned synchronously from Basware API middle layer. Additional errors coming from target system(s) may be returned through errorFeedbacks API.
     PaymentTermCompanyEntity:
       required:
       - active
@@ -699,6 +628,77 @@ components:
           description: This flag will enable the data to be visible on UI, provided if the value is true, not visible in case of value is false. It will be also used for soft delete.
           example: true
       additionalProperties: false
+    DeleteResponse:
+      type: object
+      properties:
+        statusApiLink:
+          type:
+          - string
+          - 'null'
+        taskName:
+          type:
+          - string
+          - 'null'
+        taskStatus:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    PaymentTermDiscountRule:
+      required:
+      - active
+      - externalCode
+      type: object
+      properties:
+        externalCode:
+          maxLength: 36
+          minLength: 1
+          type: string
+          description: External code is a unique code for the payment term's discount rules.
+          example: c9921a52-6d8b-1017-cb8c-923d
+        discountDays:
+          maximum: 2147483647
+          minimum: 0
+          type:
+          - integer
+          - 'null'
+          description: Defines number of days used in dynamic cash discount. The number of days must be unique for each discount percentage.
+          format: int32
+          example: 21
+        discountPercent:
+          maximum: 1000000000
+          minimum: 0
+          type:
+          - number
+          - 'null'
+          description: Defines the discount percentage that the supplier offers for the buyer for early cash payments
+          format: double
+          example: 1
+        active:
+          type: boolean
+          description: This flag will enable the data to be visible on UI, provided if the value is true, not visible in case of value is false. It will be also used for soft delete.
+          example: false
+      additionalProperties: false
+    ResponseEntityList:
+      type: object
+      properties:
+        requestId:
+          type:
+          - string
+          - 'null'
+          description: ID of the request on which error occurred (generated by Basware API).
+          example: fbc082a2-65a4-469c-b230-d84a252f18fc
+        hasErrors:
+          type: boolean
+          description: Specifies whether the request has errors.
+        errors:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/ErrorEntity'
+      additionalProperties: false
+      description: Errors returned here are returned synchronously from Basware API middle layer. Additional errors coming from target system(s) may be returned through errorFeedbacks API.
   securitySchemes:
     Bearer:
       type: http

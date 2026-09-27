@@ -210,55 +210,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    ErrorEntity:
-      type: object
-      properties:
-        externalCode:
-          type:
-          - string
-          - 'null'
-          description: External code of record on which error occurred (when available).
-          example: 4847-31231212-212121-1212
-        type:
-          enum:
-          - BUSINESS
-          - VALIDATION
-          - TECHNICAL
-          - SECURITY
-          type: string
-          description: Error type.
-          example: ''
-        code:
-          enum:
-          - EXTERNAL_CODE_MISMATCH
-          - SCHEMA_VALIDATION_ERROR
-          - CONFLICT_IN_POST
-          - DATA_ORIGIN_VALIDATION_ERROR
-          - ACCESS_TOKEN_VALIDATION_ERROR
-          - CREDENTIAL_VALIDATION_ERROR
-          - PARAMETER_VALIDATION_ERROR
-          - UNEXPECTED_ERROR
-          - METHOD_NOT_ALLOWED
-          - ENTITY_NOT_FOUND
-          - DATA_VALIDATION_FAILED
-          - SNS_PUBLISH_ERROR
-          - SQS_PUBLISH_ERROR
-          type: string
-          description: Error code.
-          example: ''
-        message:
-          type:
-          - string
-          - 'null'
-          description: Specific error message.
-          example: ''
-        info:
-          type:
-          - string
-          - 'null'
-          description: Information about type of the error.
-          example: ''
-      additionalProperties: false
     CompanyEntity:
       required:
       - active
@@ -354,15 +305,134 @@ components:
           description: When 'true, the company data entity will be published to Business Directory in Basware Portal.
           example: true
       additionalProperties: false
-    CompanyResponse:
+    CompanyContactEntity:
       required:
-      - companies
+      - name
+      - role
       type: object
       properties:
-        companies:
-          type: array
-          items:
-            $ref: '#/components/schemas/CompanyEntity'
+        name:
+          maxLength: 200
+          minLength: 1
+          type: string
+          description: Name of the contact. Used as a key in list of contacts.
+          example: DeliveryContact1
+        description:
+          maxLength: 200
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          example: Use this as a primary contact
+        telephone:
+          maxLength: 50
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Specifies the contact's telephone number.
+          example: 555-3342-454
+        telefax:
+          maxLength: 50
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Specifies the contact's fax number.
+          example: 555-3342-45412
+        email:
+          maxLength: 200
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Specifies the contact's email address.
+          example: mrsmith@business.org
+        website:
+          maxLength: 200
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Specifies the contact's web site address.
+          example: www.mrSmith.com
+        role:
+          enum:
+          - AdditionalContact
+          - PrimaryContact
+          - SecondaryContact
+          type: string
+          description: Role of contact.
+      additionalProperties: false
+    CompanyIdentifierEntity:
+      required:
+      - id
+      - schemeId
+      type: object
+      properties:
+        id:
+          maxLength: 36
+          minLength: 1
+          type: string
+          description: Company identifier value.
+          example: GB190101452
+        schemeId:
+          maxLength: 36
+          minLength: 1
+          type: string
+          description: 'Company identifier type. Defines type of ‘Id’ -field. Available values:
+
+            DUNS, EMAIL-RFC2822, GLN, IBAN, ISO6523-ACTORID-UPIS, UNKNOWN, EU:VAT, AT:ORGNR, AU:ABN, AU:ACN, AU:TFN, BE:KBO, CA:BN, CA:GST, CA:VAT, CH:ORGNR, CH:VAT, CN:BRN, CZ:ORGNR, DE:ORGNR, DK:CVR, EE:ORGNR, ES:CIF, ES:NIF, FI:Y-TUNNUS, FR:SIRENE, FR:SIRET, GB:UTR, IE:ORGNR, IN:GSTIN, IT:FISCALE, IT:IPA, LI:VAT, MX:VAT, MY:GST, NL:KVK, NO:ORGNR, NO:VAT, PL:KRS, PL:REGON, PT:NIF, SE:ORGNR, SK:ORGNR, GB:ORGNR, UstidNr, US:TIN'
+          example: EU:VAT
+      additionalProperties: false
+    ErrorEntity:
+      type: object
+      properties:
+        externalCode:
+          type:
+          - string
+          - 'null'
+          description: External code of record on which error occurred (when available).
+          example: 4847-31231212-212121-1212
+        type:
+          enum:
+          - BUSINESS
+          - VALIDATION
+          - TECHNICAL
+          - SECURITY
+          type: string
+          description: Error type.
+          example: ''
+        code:
+          enum:
+          - EXTERNAL_CODE_MISMATCH
+          - SCHEMA_VALIDATION_ERROR
+          - CONFLICT_IN_POST
+          - DATA_ORIGIN_VALIDATION_ERROR
+          - ACCESS_TOKEN_VALIDATION_ERROR
+          - CREDENTIAL_VALIDATION_ERROR
+          - PARAMETER_VALIDATION_ERROR
+          - UNEXPECTED_ERROR
+          - METHOD_NOT_ALLOWED
+          - ENTITY_NOT_FOUND
+          - DATA_VALIDATION_FAILED
+          - SNS_PUBLISH_ERROR
+          - SQS_PUBLISH_ERROR
+          type: string
+          description: Error code.
+          example: ''
+        message:
+          type:
+          - string
+          - 'null'
+          description: Specific error message.
+          example: ''
+        info:
+          type:
+          - string
+          - 'null'
+          description: Information about type of the error.
+          example: ''
       additionalProperties: false
     CompanyAddressEntity:
       required:
@@ -494,85 +564,15 @@ components:
           - 'null'
           description: Is this the default address (true / false).
       additionalProperties: false
-    CompanyContactEntity:
+    CompanyResponse:
       required:
-      - name
-      - role
+      - companies
       type: object
       properties:
-        name:
-          maxLength: 200
-          minLength: 1
-          type: string
-          description: Name of the contact. Used as a key in list of contacts.
-          example: DeliveryContact1
-        description:
-          maxLength: 200
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          example: Use this as a primary contact
-        telephone:
-          maxLength: 50
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Specifies the contact's telephone number.
-          example: 555-3342-454
-        telefax:
-          maxLength: 50
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Specifies the contact's fax number.
-          example: 555-3342-45412
-        email:
-          maxLength: 200
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Specifies the contact's email address.
-          example: mrsmith@business.org
-        website:
-          maxLength: 200
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Specifies the contact's web site address.
-          example: www.mrSmith.com
-        role:
-          enum:
-          - AdditionalContact
-          - PrimaryContact
-          - SecondaryContact
-          type: string
-          description: Role of contact.
-      additionalProperties: false
-    CompanyIdentifierEntity:
-      required:
-      - id
-      - schemeId
-      type: object
-      properties:
-        id:
-          maxLength: 36
-          minLength: 1
-          type: string
-          description: Company identifier value.
-          example: GB190101452
-        schemeId:
-          maxLength: 36
-          minLength: 1
-          type: string
-          description: 'Company identifier type. Defines type of ‘Id’ -field. Available values:
-
-            DUNS, EMAIL-RFC2822, GLN, IBAN, ISO6523-ACTORID-UPIS, UNKNOWN, EU:VAT, AT:ORGNR, AU:ABN, AU:ACN, AU:TFN, BE:KBO, CA:BN, CA:GST, CA:VAT, CH:ORGNR, CH:VAT, CN:BRN, CZ:ORGNR, DE:ORGNR, DK:CVR, EE:ORGNR, ES:CIF, ES:NIF, FI:Y-TUNNUS, FR:SIRENE, FR:SIRET, GB:UTR, IE:ORGNR, IN:GSTIN, IT:FISCALE, IT:IPA, LI:VAT, MX:VAT, MY:GST, NL:KVK, NO:ORGNR, NO:VAT, PL:KRS, PL:REGON, PT:NIF, SE:ORGNR, SK:ORGNR, GB:ORGNR, UstidNr, US:TIN'
-          example: EU:VAT
+        companies:
+          type: array
+          items:
+            $ref: '#/components/schemas/CompanyEntity'
       additionalProperties: false
     ResponseEntityList:
       type: object

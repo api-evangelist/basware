@@ -357,6 +357,25 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    LanguageTranslationEntity:
+      required:
+      - language
+      - translation
+      type: object
+      properties:
+        translation:
+          maxLength: 2000
+          minLength: 2
+          type: string
+          description: Translated text
+          example: Office supplies
+        language:
+          maxLength: 10
+          minLength: 2
+          type: string
+          description: Language code
+          example: en-US
+      additionalProperties: false
     AccountEntity:
       required:
       - accountCode
@@ -440,28 +459,6 @@ components:
           description: Timestamp when the record was last sent to API. Set automatically.
           format: date-time
       additionalProperties: false
-    AccountCompanyEntity:
-      required:
-      - active
-      - companyCode
-      - inherit
-      type: object
-      properties:
-        companyCode:
-          maxLength: 32
-          minLength: 1
-          type: string
-          description: Defines a company code that the account is mapped to
-          example: BW01
-        inherit:
-          type: boolean
-          description: The value specifies whether the property is inherited to lower organizations.
-          example: false
-        active:
-          type: boolean
-          description: This flag will enable the data to be visible on UI, provided if the value is true, not visible in case of value is false. It will be also used for soft delete.
-          example: true
-      additionalProperties: false
     ErrorEntity:
       type: object
       properties:
@@ -511,40 +508,15 @@ components:
           description: Information about type of the error.
           example: ''
       additionalProperties: false
-    LanguageTranslationEntity:
+    AccountResponse:
       required:
-      - language
-      - translation
+      - accounts
       type: object
       properties:
-        translation:
-          maxLength: 2000
-          minLength: 2
-          type: string
-          description: Translated text
-          example: Office supplies
-        language:
-          maxLength: 10
-          minLength: 2
-          type: string
-          description: Language code
-          example: en-US
-      additionalProperties: false
-    DeleteResponse:
-      type: object
-      properties:
-        statusApiLink:
-          type:
-          - string
-          - 'null'
-        taskName:
-          type:
-          - string
-          - 'null'
-        taskStatus:
-          type:
-          - string
-          - 'null'
+        accounts:
+          type: array
+          items:
+            $ref: '#/components/schemas/AccountEntity'
       additionalProperties: false
     DeleteRequest:
       type: object
@@ -562,6 +534,44 @@ components:
           - string
           - 'null'
           description: Single item can be deleted using externalCode and final status is returned immediately.
+      additionalProperties: false
+    AccountCompanyEntity:
+      required:
+      - active
+      - companyCode
+      - inherit
+      type: object
+      properties:
+        companyCode:
+          maxLength: 32
+          minLength: 1
+          type: string
+          description: Defines a company code that the account is mapped to
+          example: BW01
+        inherit:
+          type: boolean
+          description: The value specifies whether the property is inherited to lower organizations.
+          example: false
+        active:
+          type: boolean
+          description: This flag will enable the data to be visible on UI, provided if the value is true, not visible in case of value is false. It will be also used for soft delete.
+          example: true
+      additionalProperties: false
+    DeleteResponse:
+      type: object
+      properties:
+        statusApiLink:
+          type:
+          - string
+          - 'null'
+        taskName:
+          type:
+          - string
+          - 'null'
+        taskStatus:
+          type:
+          - string
+          - 'null'
       additionalProperties: false
     ResponseEntityList:
       type: object
@@ -583,16 +593,6 @@ components:
             $ref: '#/components/schemas/ErrorEntity'
       additionalProperties: false
       description: Errors returned here are returned synchronously from Basware API middle layer. Additional errors coming from target system(s) may be returned through errorFeedbacks API.
-    AccountResponse:
-      required:
-      - accounts
-      type: object
-      properties:
-        accounts:
-          type: array
-          items:
-            $ref: '#/components/schemas/AccountEntity'
-      additionalProperties: false
   securitySchemes:
     Bearer:
       type: http

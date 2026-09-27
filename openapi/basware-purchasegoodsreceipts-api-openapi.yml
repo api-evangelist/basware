@@ -295,6 +295,154 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    PurchaseGoodsReceiptEntity:
+      required:
+      - externalCode
+      - externalGRNumber
+      - lineReceivings
+      - orderExternalCode
+      - receiveDate
+      - receiver
+      type: object
+      properties:
+        externalCode:
+          maxLength: 100
+          minLength: 1
+          type: string
+          description: GR document external code. External identifier that is used as a key in API. Identifies goods receipt for updates through API.
+          example: 4847-31231212-212121-1212
+        externalGRNumber:
+          maxLength: 100
+          minLength: 1
+          type: string
+          description: Goods receipt document number in the system from which it is being imported.
+          example: GR123652138
+        orderExternalCode:
+          maxLength: 100
+          minLength: 1
+          type: string
+          description: External code of the order for which goods/services are being received. Needs to match with 'externalCode' in exportedPurchaseOrders API.
+          example: ERP1_PO1234233267
+        processingStatus:
+          enum:
+          - ImportInProgress
+          - Imported
+          - ImportFailed
+          type: string
+          description: Processing status of the goods receipt (set automatically by Basware API).
+          example: ImportInProgress
+        receiveDate:
+          type: string
+          description: Date on which goods have been received.
+          format: date-time
+          example: '2020-10-24T00:00:00'
+        referenceGRDocumentExternalCode:
+          maxLength: 100
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Indicates a return/cancellation for an earlier receipt. In such case, 1) this field needs to contain value of 'externalCode' field of the original goods receipt document and 2) lineReceivings need to contain referenceGRLineExternalCodes, 3) receivedQuantity is expected to be negative.
+          example: ''
+        deliveryNoteNumber:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Reference to the delivery note this delivery relates to.
+          example: D128735871
+        lastUpdated:
+          type: string
+          description: Timestamp when the record was last updated in API. Set automatically.
+          format: date-time
+        receiver:
+          $ref: '#/components/schemas/GoodsReceiver'
+        lineReceivings:
+          type: array
+          items:
+            $ref: '#/components/schemas/GoodsReceiptLine'
+          description: List of individual goods receipt lines.
+      additionalProperties: false
+    GoodsReceiver:
+      type: object
+      properties:
+        loginAccount:
+          maxLength: 100
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Login account.
+          example: company\\jyrik
+        emailAddress:
+          maxLength: 320
+          minLength: 0
+          pattern: ^(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*)@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])$
+          type:
+          - string
+          - 'null'
+          description: Email address.
+          example: emailaddress@company.com
+        externalCode:
+          maxLength: 50
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: External code.
+          example: sadkj2983g87i12diuodsahyukjd
+      additionalProperties: false
+      description: Specifies who has received the goods. At least one of the values needs to be provided.
+    ErrorEntity:
+      type: object
+      properties:
+        externalCode:
+          type:
+          - string
+          - 'null'
+          description: External code of record on which error occurred (when available).
+          example: 4847-31231212-212121-1212
+        type:
+          enum:
+          - BUSINESS
+          - VALIDATION
+          - TECHNICAL
+          - SECURITY
+          type: string
+          description: Error type.
+          example: ''
+        code:
+          enum:
+          - EXTERNAL_CODE_MISMATCH
+          - SCHEMA_VALIDATION_ERROR
+          - CONFLICT_IN_POST
+          - DATA_ORIGIN_VALIDATION_ERROR
+          - ACCESS_TOKEN_VALIDATION_ERROR
+          - CREDENTIAL_VALIDATION_ERROR
+          - PARAMETER_VALIDATION_ERROR
+          - UNEXPECTED_ERROR
+          - METHOD_NOT_ALLOWED
+          - ENTITY_NOT_FOUND
+          - DATA_VALIDATION_FAILED
+          - SNS_PUBLISH_ERROR
+          - SQS_PUBLISH_ERROR
+          type: string
+          description: Error code.
+          example: ''
+        message:
+          type:
+          - string
+          - 'null'
+          description: Specific error message.
+          example: ''
+        info:
+          type:
+          - string
+          - 'null'
+          description: Information about type of the error.
+          example: ''
+      additionalProperties: false
     GoodsReceiptLine:
       required:
       - externalCode
@@ -370,65 +518,6 @@ components:
           description: Used to notify supplier of damaged goods. True if goods are faulty while receiving.
           example: false
       additionalProperties: false
-    ErrorEntity:
-      type: object
-      properties:
-        externalCode:
-          type:
-          - string
-          - 'null'
-          description: External code of record on which error occurred (when available).
-          example: 4847-31231212-212121-1212
-        type:
-          enum:
-          - BUSINESS
-          - VALIDATION
-          - TECHNICAL
-          - SECURITY
-          type: string
-          description: Error type.
-          example: ''
-        code:
-          enum:
-          - EXTERNAL_CODE_MISMATCH
-          - SCHEMA_VALIDATION_ERROR
-          - CONFLICT_IN_POST
-          - DATA_ORIGIN_VALIDATION_ERROR
-          - ACCESS_TOKEN_VALIDATION_ERROR
-          - CREDENTIAL_VALIDATION_ERROR
-          - PARAMETER_VALIDATION_ERROR
-          - UNEXPECTED_ERROR
-          - METHOD_NOT_ALLOWED
-          - ENTITY_NOT_FOUND
-          - DATA_VALIDATION_FAILED
-          - SNS_PUBLISH_ERROR
-          - SQS_PUBLISH_ERROR
-          type: string
-          description: Error code.
-          example: ''
-        message:
-          type:
-          - string
-          - 'null'
-          description: Specific error message.
-          example: ''
-        info:
-          type:
-          - string
-          - 'null'
-          description: Information about type of the error.
-          example: ''
-      additionalProperties: false
-    PurchaseGoodsReceiptResponse:
-      required:
-      - goodsReceipts
-      type: object
-      properties:
-        goodsReceipts:
-          type: array
-          items:
-            $ref: '#/components/schemas/PurchaseGoodsReceiptEntity'
-      additionalProperties: false
     DeleteRequest:
       type: object
       properties:
@@ -462,36 +551,16 @@ components:
           - string
           - 'null'
       additionalProperties: false
-    GoodsReceiver:
+    PurchaseGoodsReceiptResponse:
+      required:
+      - goodsReceipts
       type: object
       properties:
-        loginAccount:
-          maxLength: 100
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Login account.
-          example: company\\jyrik
-        emailAddress:
-          maxLength: 320
-          minLength: 0
-          pattern: ^(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*)@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])$
-          type:
-          - string
-          - 'null'
-          description: Email address.
-          example: emailaddress@company.com
-        externalCode:
-          maxLength: 50
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: External code.
-          example: sadkj2983g87i12diuodsahyukjd
+        goodsReceipts:
+          type: array
+          items:
+            $ref: '#/components/schemas/PurchaseGoodsReceiptEntity'
       additionalProperties: false
-      description: Specifies who has received the goods. At least one of the values needs to be provided.
     ResponseEntityList:
       type: object
       properties:
@@ -512,75 +581,6 @@ components:
             $ref: '#/components/schemas/ErrorEntity'
       additionalProperties: false
       description: Errors returned here are returned synchronously from Basware API middle layer. Additional errors coming from target system(s) may be returned through errorFeedbacks API.
-    PurchaseGoodsReceiptEntity:
-      required:
-      - externalCode
-      - externalGRNumber
-      - lineReceivings
-      - orderExternalCode
-      - receiveDate
-      - receiver
-      type: object
-      properties:
-        externalCode:
-          maxLength: 100
-          minLength: 1
-          type: string
-          description: GR document external code. External identifier that is used as a key in API. Identifies goods receipt for updates through API.
-          example: 4847-31231212-212121-1212
-        externalGRNumber:
-          maxLength: 100
-          minLength: 1
-          type: string
-          description: Goods receipt document number in the system from which it is being imported.
-          example: GR123652138
-        orderExternalCode:
-          maxLength: 100
-          minLength: 1
-          type: string
-          description: External code of the order for which goods/services are being received. Needs to match with 'externalCode' in exportedPurchaseOrders API.
-          example: ERP1_PO1234233267
-        processingStatus:
-          enum:
-          - ImportInProgress
-          - Imported
-          - ImportFailed
-          type: string
-          description: Processing status of the goods receipt (set automatically by Basware API).
-          example: ImportInProgress
-        receiveDate:
-          type: string
-          description: Date on which goods have been received.
-          format: date-time
-          example: '2020-10-24T00:00:00'
-        referenceGRDocumentExternalCode:
-          maxLength: 100
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Indicates a return/cancellation for an earlier receipt. In such case, 1) this field needs to contain value of 'externalCode' field of the original goods receipt document and 2) lineReceivings need to contain referenceGRLineExternalCodes, 3) receivedQuantity is expected to be negative.
-          example: ''
-        deliveryNoteNumber:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Reference to the delivery note this delivery relates to.
-          example: D128735871
-        lastUpdated:
-          type: string
-          description: Timestamp when the record was last updated in API. Set automatically.
-          format: date-time
-        receiver:
-          $ref: '#/components/schemas/GoodsReceiver'
-        lineReceivings:
-          type: array
-          items:
-            $ref: '#/components/schemas/GoodsReceiptLine'
-          description: List of individual goods receipt lines.
-      additionalProperties: false
   securitySchemes:
     Bearer:
       type: http

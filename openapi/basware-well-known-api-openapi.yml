@@ -77,16 +77,6 @@ components:
           example: RS256
       type: object
       title: WellKnownTokenKey
-    WellKnownTokenResponse:
-      properties:
-        keys:
-          items:
-            $ref: '#/components/schemas/WellKnownTokenKey'
-          type: array
-          title: Keys
-          description: List of public keys available to validate access tokens.
-      type: object
-      title: WellKnownTokenResponse
     OpenIdConfigurationResponse:
       properties:
         issuer:
@@ -101,6 +91,16 @@ components:
           example: https://api.basware.com/.well-known/jwks.json
       type: object
       title: OpenIdConfigurationResponse
+    WellKnownTokenResponse:
+      properties:
+        keys:
+          items:
+            $ref: '#/components/schemas/WellKnownTokenKey'
+          type: array
+          title: Keys
+          description: List of public keys available to validate access tokens.
+      type: object
+      title: WellKnownTokenResponse
   securitySchemes:
     HTTPBasic:
       type: http

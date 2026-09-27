@@ -272,101 +272,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    Owner:
-      type: object
-      properties:
-        personCode:
-          maxLength: 25
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Person code.
-          example: '22110'
-        userName:
-          maxLength: 227
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: User name.
-          example: Liz Green
-        loginAccount:
-          maxLength: 100
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Login account.
-          example: company\\lizgreen
-        emailAddress:
-          maxLength: 320
-          minLength: 0
-          pattern: ^(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*)@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])$
-          type:
-          - string
-          - 'null'
-          description: Email address.
-          example: liz.green@company.com
-        externalCode:
-          maxLength: 50
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: External code.
-          example: 908123lkhjhdsai213io7
-      additionalProperties: false
-      description: Specifies owner for the order / requisition. Owner is by default same person as creator, unless manually changed.
-    ErrorEntity:
-      type: object
-      properties:
-        externalCode:
-          type:
-          - string
-          - 'null'
-          description: External code of record on which error occurred (when available).
-          example: 4847-31231212-212121-1212
-        type:
-          enum:
-          - BUSINESS
-          - VALIDATION
-          - TECHNICAL
-          - SECURITY
-          type: string
-          description: Error type.
-          example: ''
-        code:
-          enum:
-          - EXTERNAL_CODE_MISMATCH
-          - SCHEMA_VALIDATION_ERROR
-          - CONFLICT_IN_POST
-          - DATA_ORIGIN_VALIDATION_ERROR
-          - ACCESS_TOKEN_VALIDATION_ERROR
-          - CREDENTIAL_VALIDATION_ERROR
-          - PARAMETER_VALIDATION_ERROR
-          - UNEXPECTED_ERROR
-          - METHOD_NOT_ALLOWED
-          - ENTITY_NOT_FOUND
-          - DATA_VALIDATION_FAILED
-          - SNS_PUBLISH_ERROR
-          - SQS_PUBLISH_ERROR
-          type: string
-          description: Error code.
-          example: ''
-        message:
-          type:
-          - string
-          - 'null'
-          description: Specific error message.
-          example: ''
-        info:
-          type:
-          - string
-          - 'null'
-          description: Information about type of the error.
-          example: ''
-      additionalProperties: false
     ExportedPurchaseOrderLineEntity:
       required:
       - deliveryAddress
@@ -1142,7 +1047,7 @@ components:
             $ref: '#/components/schemas/ExportedPurchaseOrderGoodsReceiptEntity'
           description: Goods receipts for the order line.
       additionalProperties: false
-    Receiver:
+    Creator:
       type: object
       properties:
         personCode:
@@ -1172,6 +1077,7 @@ components:
         emailAddress:
           maxLength: 320
           minLength: 0
+          pattern: ^(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*)@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])$
           type:
           - string
           - 'null'
@@ -1186,16 +1092,382 @@ components:
           description: External code.
           example: douikj327sa8d07213879
       additionalProperties: false
-      description: Specifies who has received the goods.
-    ExportedPurchaseOrdersResponse:
-      required:
-      - exportedPurchaseOrders
+      description: Specifies who has created the order / requisition.
+    ErrorEntity:
       type: object
       properties:
-        exportedPurchaseOrders:
-          type: array
-          items:
-            $ref: '#/components/schemas/ExportedPurchaseOrderEntity'
+        externalCode:
+          type:
+          - string
+          - 'null'
+          description: External code of record on which error occurred (when available).
+          example: 4847-31231212-212121-1212
+        type:
+          enum:
+          - BUSINESS
+          - VALIDATION
+          - TECHNICAL
+          - SECURITY
+          type: string
+          description: Error type.
+          example: ''
+        code:
+          enum:
+          - EXTERNAL_CODE_MISMATCH
+          - SCHEMA_VALIDATION_ERROR
+          - CONFLICT_IN_POST
+          - DATA_ORIGIN_VALIDATION_ERROR
+          - ACCESS_TOKEN_VALIDATION_ERROR
+          - CREDENTIAL_VALIDATION_ERROR
+          - PARAMETER_VALIDATION_ERROR
+          - UNEXPECTED_ERROR
+          - METHOD_NOT_ALLOWED
+          - ENTITY_NOT_FOUND
+          - DATA_VALIDATION_FAILED
+          - SNS_PUBLISH_ERROR
+          - SQS_PUBLISH_ERROR
+          type: string
+          description: Error code.
+          example: ''
+        message:
+          type:
+          - string
+          - 'null'
+          description: Specific error message.
+          example: ''
+        info:
+          type:
+          - string
+          - 'null'
+          description: Information about type of the error.
+          example: ''
+      additionalProperties: false
+    DeliveryAddress:
+      required:
+      - name
+      type: object
+      properties:
+        name:
+          maxLength: 250
+          minLength: 1
+          type: string
+          description: Specifies the address’ name for the goods delivery.
+          example: Maple street office
+        pObox:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: PO box
+          example: ''
+        streetName:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Street name.
+          example: Maple street
+        additionalStreetName:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Additional street name.
+          example: ''
+        blockName:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Block name.
+          example: ''
+        buildingName:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Building name.
+          example: ''
+        buildingNumber:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Building number.
+          example: '68'
+        department:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Department.
+          example: ''
+        floor:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Floor.
+          example: ''
+        room:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Room.
+          example: ''
+        postalZone:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Postal zone.
+          example: '02600'
+        city:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: City.
+          example: Toronto
+        region:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Region.
+          example: ''
+        district:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: District.
+          example: ''
+        countryCode:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Country code.
+          example: CA
+        countryName:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Country name.
+          example: Canada
+        description:
+          maxLength: 1000
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Description.
+          example: ''
+        globalLocationNumber:
+          maxLength: 13
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Global location number.
+          example: ''
+        countrySubEntity:
+          maxLength: 50
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          example: TX
+        countrySubEntityDescription:
+          maxLength: 50
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          example: Texas
+        addressId:
+          maxLength: 2000
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Identifier for the address.
+          example: '1000467'
+        addressSchemeId:
+          maxLength: 2000
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Can be used to specify a code that represents the agency or organization responsible for the addressID numbering.
+          example: BuyerAccountId
+      additionalProperties: false
+      description: 'Specifies delivery address for the purchase requisition. If no address specified, uses the default delivery address of organization (configured in P2P).
+
+        Delivery address on header level applies to entire purchase reuisition. If addresses are also provided on requisition lines, these will apply only to the corresponding lines.'
+    ExportedPurchaseOrderGoodsReceiptEntity:
+      required:
+      - externalCode
+      - goodsReceiptDocumentCreationTime
+      - notifyFault
+      - receivedGrossSum
+      - receivedNetSum
+      - receivedQuantity
+      - receivingDate
+      type: object
+      properties:
+        externalCode:
+          maxLength: 100
+          minLength: 1
+          type: string
+          description: "Unique external identifier that is used as a key in API. \nIdentifies goods receipt line for updates through API."
+          example: 060cb8ea-5464-11ea-a38b-2e728ce88123
+        grHeaderExternalCode:
+          maxLength: 100
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: "Unique external identifier that is used as a key in API. \nIdentifies goods receipt document for updates through API. On goods receipt document can contain multiple goods receipt lines."
+          example: dlaskjdg-d264-11kj-asdb-22idulkjahs8
+        goodsReceiptNumber:
+          maxLength: 100
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Basware P2P goods receipt document number for the GR.
+          example: '98762139'
+        documentLink:
+          type:
+          - string
+          - 'null'
+          description: Specifies URL to view corresponding GR in Alusta.
+          format: uri
+          example: http://customertenant.p2p.basware.com/Portal/Default.aspx?forms=1&sl=1&tid=customertenant&dl=(Search/GoodsReceiptSearchDetails-GrId(e105de8f-3e13-4487-a7e5-8c1ba12d7ea9))
+        extGoodsReceiptNumber:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Goods receipt document number in external system (for imported goods receipts)
+          example: '9732816'
+        deliveryNoteNumber:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Reference to delivery note this delivery relates to.
+          example: D871263998
+        goodsReceiptDocumentCreationTime:
+          type: string
+          description: Timestamp when goods receipt document was entered to receiving system. This data key-in timestamp may differ from receivingDate if data key-in is not done at the same time.
+          format: date-time
+          example: '2020-10-24T00:00:00'
+        receivingDate:
+          type: string
+          description: Date on which goods have been received.
+          format: date-time
+          example: '2020-10-24T00:00:00'
+        goodsReceiptLocationAddress:
+          maxLength: 2000
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Specifies where the receiving took place (Order Location).
+          example: ''
+        productSerialNumber:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Product serial number.
+          example: ''
+        receivedQuantity:
+          type: number
+          description: Quantity received.
+          format: double
+          example: 1
+        unitOfMeasure:
+          maxLength: 30
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Unit of measure.
+          example: PCS
+        receivedNetSum:
+          type: number
+          description: Net total of receiving.
+          format: double
+          example: 100
+        receivedGrossSum:
+          type: number
+          description: Gross total of receiving.
+          format: double
+          example: 125
+        receivalMethod:
+          enum:
+          - Quantity
+          - NetSum
+          - GrossSum
+          type:
+          - string
+          - 'null'
+          description: Specifies whether the receival has been done by Quantity, NetSum or GrossSum. Same receival method needs to be used for all future goods receipts done to the same order line. The receival method can only be changed by first reversing all the previously received goods receipts to the order line.
+          example: Quantity
+        notifyFault:
+          type: boolean
+          description: Used to notify supplier of damaged goods. True if goods are faulty while receiving.
+          example: false
+        information:
+          maxLength: 255
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Additional information.
+          example: ''
+        referenceGRNumber:
+          maxLength: 100
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Specifies original goods receipt to be reversed (used only on reverse GR lines) Contains Basware P2P internal document number of the GR from which to substract reversed amount.
+          example: ''
+        referenceGRExternalCode:
+          maxLength: 100
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Specifies original goods receipt to be reversed (used only on reverse GR lines) Contains external document number of the GR from which to substract reversed amount. Applicable only for GRs imported from external systems.
+          example: ''
+        receiver:
+          $ref: '#/components/schemas/Receiver'
       additionalProperties: false
     ExportedPurchaseOrderEntity:
       required:
@@ -1811,333 +2083,6 @@ components:
             $ref: '#/components/schemas/ExportedPurchaseOrderLineEntity'
           description: Purchase order lines.
       additionalProperties: false
-    DeliveryAddress:
-      required:
-      - name
-      type: object
-      properties:
-        name:
-          maxLength: 250
-          minLength: 1
-          type: string
-          description: Specifies the address’ name for the goods delivery.
-          example: Maple street office
-        pObox:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: PO box
-          example: ''
-        streetName:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Street name.
-          example: Maple street
-        additionalStreetName:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Additional street name.
-          example: ''
-        blockName:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Block name.
-          example: ''
-        buildingName:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Building name.
-          example: ''
-        buildingNumber:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Building number.
-          example: '68'
-        department:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Department.
-          example: ''
-        floor:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Floor.
-          example: ''
-        room:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Room.
-          example: ''
-        postalZone:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Postal zone.
-          example: '02600'
-        city:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: City.
-          example: Toronto
-        region:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Region.
-          example: ''
-        district:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: District.
-          example: ''
-        countryCode:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Country code.
-          example: CA
-        countryName:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Country name.
-          example: Canada
-        description:
-          maxLength: 1000
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Description.
-          example: ''
-        globalLocationNumber:
-          maxLength: 13
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Global location number.
-          example: ''
-        countrySubEntity:
-          maxLength: 50
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          example: TX
-        countrySubEntityDescription:
-          maxLength: 50
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          example: Texas
-        addressId:
-          maxLength: 2000
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Identifier for the address.
-          example: '1000467'
-        addressSchemeId:
-          maxLength: 2000
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Can be used to specify a code that represents the agency or organization responsible for the addressID numbering.
-          example: BuyerAccountId
-      additionalProperties: false
-      description: 'Specifies delivery address for the purchase requisition. If no address specified, uses the default delivery address of organization (configured in P2P).
-
-        Delivery address on header level applies to entire purchase reuisition. If addresses are also provided on requisition lines, these will apply only to the corresponding lines.'
-    ExportedPurchaseOrderGoodsReceiptEntity:
-      required:
-      - externalCode
-      - goodsReceiptDocumentCreationTime
-      - notifyFault
-      - receivedGrossSum
-      - receivedNetSum
-      - receivedQuantity
-      - receivingDate
-      type: object
-      properties:
-        externalCode:
-          maxLength: 100
-          minLength: 1
-          type: string
-          description: "Unique external identifier that is used as a key in API. \nIdentifies goods receipt line for updates through API."
-          example: 060cb8ea-5464-11ea-a38b-2e728ce88123
-        grHeaderExternalCode:
-          maxLength: 100
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: "Unique external identifier that is used as a key in API. \nIdentifies goods receipt document for updates through API. On goods receipt document can contain multiple goods receipt lines."
-          example: dlaskjdg-d264-11kj-asdb-22idulkjahs8
-        goodsReceiptNumber:
-          maxLength: 100
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Basware P2P goods receipt document number for the GR.
-          example: '98762139'
-        documentLink:
-          type:
-          - string
-          - 'null'
-          description: Specifies URL to view corresponding GR in Alusta.
-          format: uri
-          example: http://customertenant.p2p.basware.com/Portal/Default.aspx?forms=1&sl=1&tid=customertenant&dl=(Search/GoodsReceiptSearchDetails-GrId(e105de8f-3e13-4487-a7e5-8c1ba12d7ea9))
-        extGoodsReceiptNumber:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Goods receipt document number in external system (for imported goods receipts)
-          example: '9732816'
-        deliveryNoteNumber:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Reference to delivery note this delivery relates to.
-          example: D871263998
-        goodsReceiptDocumentCreationTime:
-          type: string
-          description: Timestamp when goods receipt document was entered to receiving system. This data key-in timestamp may differ from receivingDate if data key-in is not done at the same time.
-          format: date-time
-          example: '2020-10-24T00:00:00'
-        receivingDate:
-          type: string
-          description: Date on which goods have been received.
-          format: date-time
-          example: '2020-10-24T00:00:00'
-        goodsReceiptLocationAddress:
-          maxLength: 2000
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Specifies where the receiving took place (Order Location).
-          example: ''
-        productSerialNumber:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Product serial number.
-          example: ''
-        receivedQuantity:
-          type: number
-          description: Quantity received.
-          format: double
-          example: 1
-        unitOfMeasure:
-          maxLength: 30
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Unit of measure.
-          example: PCS
-        receivedNetSum:
-          type: number
-          description: Net total of receiving.
-          format: double
-          example: 100
-        receivedGrossSum:
-          type: number
-          description: Gross total of receiving.
-          format: double
-          example: 125
-        receivalMethod:
-          enum:
-          - Quantity
-          - NetSum
-          - GrossSum
-          type:
-          - string
-          - 'null'
-          description: Specifies whether the receival has been done by Quantity, NetSum or GrossSum. Same receival method needs to be used for all future goods receipts done to the same order line. The receival method can only be changed by first reversing all the previously received goods receipts to the order line.
-          example: Quantity
-        notifyFault:
-          type: boolean
-          description: Used to notify supplier of damaged goods. True if goods are faulty while receiving.
-          example: false
-        information:
-          maxLength: 255
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Additional information.
-          example: ''
-        referenceGRNumber:
-          maxLength: 100
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Specifies original goods receipt to be reversed (used only on reverse GR lines) Contains Basware P2P internal document number of the GR from which to substract reversed amount.
-          example: ''
-        referenceGRExternalCode:
-          maxLength: 100
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Specifies original goods receipt to be reversed (used only on reverse GR lines) Contains external document number of the GR from which to substract reversed amount. Applicable only for GRs imported from external systems.
-          example: ''
-        receiver:
-          $ref: '#/components/schemas/Receiver'
-      additionalProperties: false
     ExportedPurchaseOrderLineCodingRowEntity:
       required:
       - externalCode
@@ -2750,6 +2695,107 @@ components:
           - 'null'
           description: Single item can be deleted using externalCode and final status is returned immediately.
       additionalProperties: false
+    Owner:
+      type: object
+      properties:
+        personCode:
+          maxLength: 25
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Person code.
+          example: '22110'
+        userName:
+          maxLength: 227
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: User name.
+          example: Liz Green
+        loginAccount:
+          maxLength: 100
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Login account.
+          example: company\\lizgreen
+        emailAddress:
+          maxLength: 320
+          minLength: 0
+          pattern: ^(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*)@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])$
+          type:
+          - string
+          - 'null'
+          description: Email address.
+          example: liz.green@company.com
+        externalCode:
+          maxLength: 50
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: External code.
+          example: 908123lkhjhdsai213io7
+      additionalProperties: false
+      description: Specifies owner for the order / requisition. Owner is by default same person as creator, unless manually changed.
+    ExportedPurchaseOrdersResponse:
+      required:
+      - exportedPurchaseOrders
+      type: object
+      properties:
+        exportedPurchaseOrders:
+          type: array
+          items:
+            $ref: '#/components/schemas/ExportedPurchaseOrderEntity'
+      additionalProperties: false
+    Receiver:
+      type: object
+      properties:
+        personCode:
+          maxLength: 25
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Person code.
+          example: '32232'
+        userName:
+          maxLength: 227
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: User name.
+          example: Timothy Smith
+        loginAccount:
+          maxLength: 100
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Login account.
+          example: company\\timsmith
+        emailAddress:
+          maxLength: 320
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Email address.
+          example: timothy.smith@company.com
+        externalCode:
+          maxLength: 50
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: External code.
+          example: douikj327sa8d07213879
+      additionalProperties: false
+      description: Specifies who has received the goods.
     DeleteResponse:
       type: object
       properties:
@@ -2786,52 +2832,6 @@ components:
             $ref: '#/components/schemas/ErrorEntity'
       additionalProperties: false
       description: Errors returned here are returned synchronously from Basware API middle layer. Additional errors coming from target system(s) may be returned through errorFeedbacks API.
-    Creator:
-      type: object
-      properties:
-        personCode:
-          maxLength: 25
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Person code.
-          example: '32232'
-        userName:
-          maxLength: 227
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: User name.
-          example: Timothy Smith
-        loginAccount:
-          maxLength: 100
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Login account.
-          example: company\\timsmith
-        emailAddress:
-          maxLength: 320
-          minLength: 0
-          pattern: ^(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*)@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])$
-          type:
-          - string
-          - 'null'
-          description: Email address.
-          example: timothy.smith@company.com
-        externalCode:
-          maxLength: 50
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: External code.
-          example: douikj327sa8d07213879
-      additionalProperties: false
-      description: Specifies who has created the order / requisition.
   securitySchemes:
     Bearer:
       type: http

@@ -356,15 +356,24 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    CostCenterResponse:
+    LanguageTranslationEntity:
       required:
-      - costCenters
+      - language
+      - translation
       type: object
       properties:
-        costCenters:
-          type: array
-          items:
-            $ref: '#/components/schemas/CostCenterEntity'
+        translation:
+          maxLength: 2000
+          minLength: 2
+          type: string
+          description: Translated text
+          example: Office supplies
+        language:
+          maxLength: 10
+          minLength: 2
+          type: string
+          description: Language code
+          example: en-US
       additionalProperties: false
     ErrorEntity:
       type: object
@@ -590,6 +599,16 @@ components:
           - 'null'
           description: Single item can be deleted using externalCode and final status is returned immediately.
       additionalProperties: false
+    CostCenterResponse:
+      required:
+      - costCenters
+      type: object
+      properties:
+        costCenters:
+          type: array
+          items:
+            $ref: '#/components/schemas/CostCenterEntity'
+      additionalProperties: false
     DeleteResponse:
       type: object
       properties:
@@ -606,24 +625,21 @@ components:
           - string
           - 'null'
       additionalProperties: false
-    LanguageTranslationEntity:
+    CostCenterCompanyEntity:
       required:
-      - language
-      - translation
+      - active
+      - companyCode
       type: object
       properties:
-        translation:
-          maxLength: 2000
-          minLength: 2
+        companyCode:
+          maxLength: 32
+          minLength: 1
           type: string
-          description: Translated text
-          example: Office supplies
-        language:
-          maxLength: 10
-          minLength: 2
-          type: string
-          description: Language code
-          example: en-US
+          description: Defines a company code that the cost center is mapped to
+          example: BW00
+        active:
+          type: boolean
+          description: This flag will enable the data to be visible on UI, provided if the value is true, not visible in case of value is false. It will be also used for soft delete.
       additionalProperties: false
     ResponseEntityList:
       type: object
@@ -645,22 +661,6 @@ components:
             $ref: '#/components/schemas/ErrorEntity'
       additionalProperties: false
       description: Errors returned here are returned synchronously from Basware API middle layer. Additional errors coming from target system(s) may be returned through errorFeedbacks API.
-    CostCenterCompanyEntity:
-      required:
-      - active
-      - companyCode
-      type: object
-      properties:
-        companyCode:
-          maxLength: 32
-          minLength: 1
-          type: string
-          description: Defines a company code that the cost center is mapped to
-          example: BW00
-        active:
-          type: boolean
-          description: This flag will enable the data to be visible on UI, provided if the value is true, not visible in case of value is false. It will be also used for soft delete.
-      additionalProperties: false
   securitySchemes:
     Bearer:
       type: http

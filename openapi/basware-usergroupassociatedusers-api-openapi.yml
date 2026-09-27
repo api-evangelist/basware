@@ -201,6 +201,16 @@ components:
           type: boolean
           readOnly: true
       additionalProperties: false
+    BulkOperationStatus:
+      enum:
+      - 0
+      - 1
+      - 2
+      - 3
+      - 4
+      type: integer
+      description: Represents the possible statuses of a bulk operation.
+      format: int32
     UserGroupAssociatedUser:
       required:
       - userExternalCode
@@ -220,27 +230,29 @@ components:
           description: External code of the user associated to the user group.
           example: joe@basware.com
       additionalProperties: false
-    UserGroupAssociationsDeleteRequest:
+    DeleteResponse:
       type: object
       properties:
-        userGroupExternalCode:
-          maxLength: 36
-          minLength: 0
+        statusApiLink:
           type:
           - string
           - 'null'
-        userExternalCode:
-          maxLength: 36
-          minLength: 0
+          description: Gets or sets the API link to check the status of the delete operation.
+        taskName:
           type:
           - string
           - 'null'
-        lastUpdated:
+          description: Gets or sets the name of the delete task.
+        taskStatus:
           type:
           - string
           - 'null'
-          format: date-time
+          description: Gets or sets the current status of the delete task.
+          readOnly: true
+        statusEnum:
+          $ref: '#/components/schemas/BulkOperationStatus'
       additionalProperties: false
+      description: Represents the response returned after a delete operation.
     IModelValidationError:
       type: object
       properties:
@@ -269,39 +281,27 @@ components:
           - string
           - 'null'
       additionalProperties: false
-    BulkOperationStatus:
-      enum:
-      - 0
-      - 1
-      - 2
-      - 3
-      - 4
-      type: integer
-      description: Represents the possible statuses of a bulk operation.
-      format: int32
-    DeleteResponse:
+    UserGroupAssociationsDeleteRequest:
       type: object
       properties:
-        statusApiLink:
+        userGroupExternalCode:
+          maxLength: 36
+          minLength: 0
           type:
           - string
           - 'null'
-          description: Gets or sets the API link to check the status of the delete operation.
-        taskName:
+        userExternalCode:
+          maxLength: 36
+          minLength: 0
           type:
           - string
           - 'null'
-          description: Gets or sets the name of the delete task.
-        taskStatus:
+        lastUpdated:
           type:
           - string
           - 'null'
-          description: Gets or sets the current status of the delete task.
-          readOnly: true
-        statusEnum:
-          $ref: '#/components/schemas/BulkOperationStatus'
+          format: date-time
       additionalProperties: false
-      description: Represents the response returned after a delete operation.
   securitySchemes:
     Bearer:
       type: http

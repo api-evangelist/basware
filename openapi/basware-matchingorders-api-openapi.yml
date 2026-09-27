@@ -424,15 +424,38 @@ components:
           description: Information about type of the error.
           example: ''
       additionalProperties: false
-    OrderResponse:
-      required:
-      - matchingOrders
+    DeleteRequest:
       type: object
       properties:
-        matchingOrders:
-          type: array
-          items:
-            $ref: '#/components/schemas/OrderEntity'
+        lastUpdated:
+          type:
+          - string
+          - 'null'
+          description: 'To delete records updated after specific time, use lastUpdated -field. This will delete all items that have been updated after the specified date. In response, user will get the taskStatus api link where the task status can be checked. Note: ''0001-01-01'' can be used to delete all records.'
+          format: date-time
+        externalCode:
+          maxLength: 36
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Single item can be deleted using externalCode and final status is returned immediately.
+      additionalProperties: false
+    DeleteResponse:
+      type: object
+      properties:
+        statusApiLink:
+          type:
+          - string
+          - 'null'
+        taskName:
+          type:
+          - string
+          - 'null'
+        taskStatus:
+          type:
+          - string
+          - 'null'
       additionalProperties: false
     OrderEntity:
       required:
@@ -791,38 +814,15 @@ components:
           description: Reference to parent order. Allows an invoice to be matched to child order(s) under the parent order. Intended for scenarios where one order number is given to supplier while customer keeps generating new orders, which are still matched using the parent order number given to supplier. This method of matching is by default not enabled and needs to be manually activated in P2P.
           example: PO4300157
       additionalProperties: false
-    DeleteRequest:
+    OrderResponse:
+      required:
+      - matchingOrders
       type: object
       properties:
-        lastUpdated:
-          type:
-          - string
-          - 'null'
-          description: 'To delete records updated after specific time, use lastUpdated -field. This will delete all items that have been updated after the specified date. In response, user will get the taskStatus api link where the task status can be checked. Note: ''0001-01-01'' can be used to delete all records.'
-          format: date-time
-        externalCode:
-          maxLength: 36
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Single item can be deleted using externalCode and final status is returned immediately.
-      additionalProperties: false
-    DeleteResponse:
-      type: object
-      properties:
-        statusApiLink:
-          type:
-          - string
-          - 'null'
-        taskName:
-          type:
-          - string
-          - 'null'
-        taskStatus:
-          type:
-          - string
-          - 'null'
+        matchingOrders:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderEntity'
       additionalProperties: false
     ResponseEntityList:
       type: object

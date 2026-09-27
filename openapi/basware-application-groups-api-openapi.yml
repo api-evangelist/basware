@@ -296,6 +296,16 @@ components:
           items:
             $ref: '#/components/schemas/Applications'
       additionalProperties: false
+    ApplicationGroupsResponse:
+      required:
+      - applicationGroups
+      type: object
+      properties:
+        applicationGroups:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApplicationGroupEntity'
+      additionalProperties: false
     Applications:
       required:
       - code
@@ -342,16 +352,6 @@ components:
             $ref: '#/components/schemas/ErrorEntity'
       additionalProperties: false
       description: Errors returned here are returned synchronously from Basware API middle layer. Additional errors coming from target system(s) may be returned through errorFeedbacks API.
-    ApplicationGroupsResponse:
-      required:
-      - applicationGroups
-      type: object
-      properties:
-        applicationGroups:
-          type: array
-          items:
-            $ref: '#/components/schemas/ApplicationGroupEntity'
-      additionalProperties: false
   securitySchemes:
     Bearer:
       type: http

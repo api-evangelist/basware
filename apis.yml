@@ -41,9 +41,9 @@ tags:
 - Purchase-To-Pay
 - Accounts Payable
 - Procurement
-- Electronic Invoicing
 - Finance Automation
 - B2B Payments
+- Invoicing
 tags_raw:
 - E-Invoicing
 - Purchase-to-Pay
@@ -52,6 +52,7 @@ tags_raw:
 - Electronic Invoicing
 - Finance Automation
 - B2B Payments
+- Invoicing
 apis:
 - name: Basware Data Access API
   description: >-
@@ -774,8 +775,6 @@ apis:
   humanURL: https://developer.basware.com/en/api/basware
   baseURL: https://api.basware.com/data
   tags:
-  - ApplicationGroups
-  tags_raw:
   - Application Groups
   properties:
   - type: OpenAPI

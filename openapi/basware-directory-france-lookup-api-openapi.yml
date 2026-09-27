@@ -142,6 +142,50 @@ components:
           title: Idinstance
       type: object
       title: History
+    Address:
+      properties:
+        addressLine1:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Addressline1
+        addressLine2:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Addressline2
+        addressLine3:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Addressline3
+        postalCode:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Postalcode
+        countrySubdivision:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Countrysubdivision
+        locality:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Locality
+        countryCode:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Countrycode
+        countryName:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Countryname
+      type: object
+      title: Address
     DirectoryEntry:
       properties:
         routingIdentifier:
@@ -197,6 +241,26 @@ components:
           - type: 'null'
       type: object
       title: DirectoryEntry
+    ErrorResponse:
+      properties:
+        error:
+          type: string
+          title: Error
+      type: object
+      required:
+      - error
+      title: ErrorResponse
+      example:
+        error: timeout
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
     ValidationError:
       properties:
         loc:
@@ -285,15 +349,6 @@ components:
           - type: 'null'
       type: object
       title: RoutingCode
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
     Facility:
       properties:
         siret:
@@ -332,61 +387,6 @@ components:
           - type: 'null'
       type: object
       title: Facility
-    Address:
-      properties:
-        addressLine1:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Addressline1
-        addressLine2:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Addressline2
-        addressLine3:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Addressline3
-        postalCode:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Postalcode
-        countrySubdivision:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Countrysubdivision
-        locality:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Locality
-        countryCode:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Countrycode
-        countryName:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Countryname
-      type: object
-      title: Address
-    ErrorResponse:
-      properties:
-        error:
-          type: string
-          title: Error
-      type: object
-      required:
-      - error
-      title: ErrorResponse
-      example:
-        error: timeout
   securitySchemes:
     BearerAuth:
       type: http

@@ -138,36 +138,27 @@ paths:
           description: Unprocessable Entity
 components:
   schemas:
-    RecordNotFoundResponse:
+    TasksResponse:
       properties:
-        detail:
-          type: string
-          title: Detail
-          description: Detail of error
-          default: Not Found
-          example: Not Found
+        taskStatus:
+          items:
+            $ref: '#/components/schemas/Task'
+          type: array
+          title: Taskstatus
       type: object
-      title: RecordNotFoundResponse
-    InternalServerErrorResponse:
-      properties:
-        message:
-          type: string
-          title: Message
-          description: Detail of error
-          default: Internal server error
-          example: Internal server error
-      type: object
-      title: InternalServerErrorResponse
-    UnauthorizeErrorResponse:
+      required:
+      - taskStatus
+      title: TasksResponse
+    UnprocessableEntityErrorResponse:
       properties:
         message:
           type: string
           title: Message
           description: Detail of error
-          default: Unauthorized
-          example: Unauthorized
+          default: UnprocessableEntity
+          example: UnprocessableEntity
       type: object
-      title: UnauthorizeErrorResponse
+      title: UnprocessableEntityErrorResponse
     Task:
       properties:
         taskId:
@@ -244,24 +235,33 @@ components:
           example: Task Created
       type: object
       title: TaskHistory
-    TasksResponse:
-      properties:
-        taskStatus:
-          items:
-            $ref: '#/components/schemas/Task'
-          type: array
-          title: Taskstatus
-      type: object
-      required:
-      - taskStatus
-      title: TasksResponse
-    UnprocessableEntityErrorResponse:
+    InternalServerErrorResponse:
       properties:
         message:
           type: string
           title: Message
           description: Detail of error
-          default: UnprocessableEntity
-          example: UnprocessableEntity
+          default: Internal server error
+          example: Internal server error
       type: object
-      title: UnprocessableEntityErrorResponse
+      title: InternalServerErrorResponse
+    UnauthorizeErrorResponse:
+      properties:
+        message:
+          type: string
+          title: Message
+          description: Detail of error
+          default: Unauthorized
+          example: Unauthorized
+      type: object
+      title: UnauthorizeErrorResponse
+    RecordNotFoundResponse:
+      properties:
+        detail:
+          type: string
+          title: Detail
+          description: Detail of error
+          default: Not Found
+          example: Not Found
+      type: object
+      title: RecordNotFoundResponse
