@@ -204,30 +204,61 @@ paths:
                 $ref: '#/components/schemas/UnauthorizeErrorResponse'
 components:
   schemas:
-    ValidationErrorResponse:
+    RecordNotFoundResponse:
       properties:
-        requestId:
+        detail:
           type: string
-          title: Requestid
-          description: RequestId of request
-          example: KLF5BiZ9DoEEMlQ=
-        transactionId:
-          type: string
-          title: Transactionid
-          description: TransactionId of request
-          example: JKL5BiZ9DoEEMkV=
-        hasError:
-          type: boolean
-          title: Haserror
-          description: Tells that request has error
-          example: true
-        errorMessages:
-          items:
-            $ref: '#/components/schemas/SchemaValidationError'
-          type: array
-          title: Errormessages
+          title: Detail
+          description: Detail of error
+          default: Not Found
+          example: Not Found
       type: object
-      title: ValidationErrorResponse
+      title: RecordNotFoundResponse
+    UnprocessableEntityErrorResponse:
+      properties:
+        message:
+          type: string
+          title: Message
+          description: Detail of error
+          default: UnprocessableEntity
+          example: UnprocessableEntity
+      type: object
+      title: UnprocessableEntityErrorResponse
+    InternalServerErrorResponse:
+      properties:
+        message:
+          type: string
+          title: Message
+          description: Detail of error
+          default: Internal server error
+          example: Internal server error
+      type: object
+      title: InternalServerErrorResponse
+    TableColumnDefinition:
+      properties:
+        Column name:
+          type: string
+          title: Column Name
+          example: NAME
+        Data Type:
+          type: string
+          title: Data Type
+          example: NVARCHAR2
+        Field definition:
+          type: string
+          title: Field Definition
+          example: Name of the person
+        Example value:
+          type: string
+          title: Example Value
+          example: John Doe
+      type: object
+      required:
+      - Column name
+      - Data Type
+      - Field definition
+      - Example value
+      title: TableColumnDefinition
     SuccessResponse:
       properties:
         succeeded:
@@ -243,66 +274,6 @@ components:
           example: Action done successfully
       type: object
       title: SuccessResponse
-    SchemaValidationError:
-      properties:
-        type:
-          type: string
-          title: Type
-          description: Type of error
-          example: VALIDATION
-        code:
-          type: string
-          title: Code
-          description: Code of error
-          example: SCHEMA_VALIDATION_ERROR
-        message:
-          type: string
-          title: Message
-          description: Detail of error
-          example: taskType field required
-      type: object
-      title: SchemaValidationError
-    DataExtractFileInfo:
-      properties:
-        extractId:
-          type: string
-          title: Extractid
-          description: Extract id for which file belongs
-          example: 14ad2cbc3445443fb042fbd1f653ec0e
-        tableName:
-          type: string
-          title: Tablename
-          description: Table name of data the file contains
-          example: IA_INVOICE
-        fileName:
-          type: string
-          title: Filename
-          description: File name
-          example: IA_INVOICE_0001.json.gz
-        startDate:
-          type: string
-          title: Startdate
-          description: Extract file data start time
-          example: 31/01/1970, 21:00:00
-        endDate:
-          type: string
-          title: Enddate
-          description: Extract file data end time
-          example: 28/03/2024, 10:17:02
-        downloadUrl:
-          type: string
-          title: Downloadurl
-          description: Url to download file
-          example: https://api.basware.com/v1/dataExtracts/14ad2cbc3445443fb042fbd1f653ec0e/getFile?file=IA_INVOICE_0001.json.gz
-      type: object
-      required:
-      - extractId
-      - tableName
-      - fileName
-      - startDate
-      - endDate
-      - downloadUrl
-      title: DataExtractFileInfo
     HTTPValidationError:
       properties:
         detail:
@@ -312,27 +283,22 @@ components:
           title: Detail
       type: object
       title: HTTPValidationError
-    ValidationError:
+    TableDefinition:
       properties:
-        loc:
+        Table name:
+          type: string
+          title: Table Name
+          example: TABLE_1
+        Columns:
           items:
-            anyOf:
-            - type: string
-            - type: integer
+            $ref: '#/components/schemas/TableColumnDefinition'
           type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
+          title: Columns
       type: object
       required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
+      - Table name
+      - Columns
+      title: TableDefinition
     AvailableDataExtractInfo:
       properties:
         id:
@@ -393,16 +359,138 @@ components:
       - extractDate
       - extractName
       title: AvailableDataExtractInfo
-    UnprocessableEntityErrorResponse:
+    UnauthorizeErrorResponse:
       properties:
         message:
           type: string
           title: Message
           description: Detail of error
-          default: UnprocessableEntity
-          example: UnprocessableEntity
+          default: Unauthorized
+          example: Unauthorized
       type: object
-      title: UnprocessableEntityErrorResponse
+      title: UnauthorizeErrorResponse
+    ValidationErrorResponse:
+      properties:
+        requestId:
+          type: string
+          title: Requestid
+          description: RequestId of request
+          example: KLF5BiZ9DoEEMlQ=
+        transactionId:
+          type: string
+          title: Transactionid
+          description: TransactionId of request
+          example: JKL5BiZ9DoEEMkV=
+        hasError:
+          type: boolean
+          title: Haserror
+          description: Tells that request has error
+          example: true
+        errorMessages:
+          items:
+            $ref: '#/components/schemas/SchemaValidationError'
+          type: array
+          title: Errormessages
+      type: object
+      title: ValidationErrorResponse
+    DataExtractFileInfo:
+      properties:
+        extractId:
+          type: string
+          title: Extractid
+          description: Extract id for which file belongs
+          example: 14ad2cbc3445443fb042fbd1f653ec0e
+        tableName:
+          type: string
+          title: Tablename
+          description: Table name of data the file contains
+          example: IA_INVOICE
+        fileName:
+          type: string
+          title: Filename
+          description: File name
+          example: IA_INVOICE_0001.json.gz
+        startDate:
+          type: string
+          title: Startdate
+          description: Extract file data start time
+          example: 31/01/1970, 21:00:00
+        endDate:
+          type: string
+          title: Enddate
+          description: Extract file data end time
+          example: 28/03/2024, 10:17:02
+        downloadUrl:
+          type: string
+          title: Downloadurl
+          description: Url to download file
+          example: https://api.basware.com/v1/dataExtracts/14ad2cbc3445443fb042fbd1f653ec0e/getFile?file=IA_INVOICE_0001.json.gz
+      type: object
+      required:
+      - extractId
+      - tableName
+      - fileName
+      - startDate
+      - endDate
+      - downloadUrl
+      title: DataExtractFileInfo
+    SchemaValidationError:
+      properties:
+        type:
+          type: string
+          title: Type
+          description: Type of error
+          example: VALIDATION
+        code:
+          type: string
+          title: Code
+          description: Code of error
+          example: SCHEMA_VALIDATION_ERROR
+        message:
+          type: string
+          title: Message
+          description: Detail of error
+          example: taskType field required
+      type: object
+      title: SchemaValidationError
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    TableDefinitionColumnChangeLog:
+      properties:
+        Added columns:
+          items:
+            type: string
+          type: array
+          title: Added Columns
+        Removed columns:
+          items:
+            type: string
+          type: array
+          title: Removed Columns
+      type: object
+      required:
+      - Added columns
+      - Removed columns
+      title: TableDefinitionColumnChangeLog
     TableDefinitionChangeLog:
       properties:
         Version:
@@ -430,91 +518,3 @@ components:
       - Removed tables
       - Column changes
       title: TableDefinitionChangeLog
-    TableDefinitionColumnChangeLog:
-      properties:
-        Added columns:
-          items:
-            type: string
-          type: array
-          title: Added Columns
-        Removed columns:
-          items:
-            type: string
-          type: array
-          title: Removed Columns
-      type: object
-      required:
-      - Added columns
-      - Removed columns
-      title: TableDefinitionColumnChangeLog
-    TableDefinition:
-      properties:
-        Table name:
-          type: string
-          title: Table Name
-          example: TABLE_1
-        Columns:
-          items:
-            $ref: '#/components/schemas/TableColumnDefinition'
-          type: array
-          title: Columns
-      type: object
-      required:
-      - Table name
-      - Columns
-      title: TableDefinition
-    InternalServerErrorResponse:
-      properties:
-        message:
-          type: string
-          title: Message
-          description: Detail of error
-          default: Internal server error
-          example: Internal server error
-      type: object
-      title: InternalServerErrorResponse
-    UnauthorizeErrorResponse:
-      properties:
-        message:
-          type: string
-          title: Message
-          description: Detail of error
-          default: Unauthorized
-          example: Unauthorized
-      type: object
-      title: UnauthorizeErrorResponse
-    RecordNotFoundResponse:
-      properties:
-        detail:
-          type: string
-          title: Detail
-          description: Detail of error
-          default: Not Found
-          example: Not Found
-      type: object
-      title: RecordNotFoundResponse
-    TableColumnDefinition:
-      properties:
-        Column name:
-          type: string
-          title: Column Name
-          example: NAME
-        Data Type:
-          type: string
-          title: Data Type
-          example: NVARCHAR2
-        Field definition:
-          type: string
-          title: Field Definition
-          example: Name of the person
-        Example value:
-          type: string
-          title: Example Value
-          example: John Doe
-      type: object
-      required:
-      - Column name
-      - Data Type
-      - Field definition
-      - Example value
-      title: TableColumnDefinition

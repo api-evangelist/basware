@@ -375,6 +375,179 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    VendorProcessingStatusEntity:
+      type: object
+      properties:
+        active:
+          type:
+          - boolean
+          - 'null'
+          description: 'Is the vendor active : true / false.'
+        paymentDenied:
+          type:
+          - boolean
+          - 'null'
+          description: 'Is payment block is enabled for the vendor: true / false.'
+          example: false
+      additionalProperties: false
+    VendorOrderingDetailsEntity:
+      type: object
+      properties:
+        orderingFormat:
+          enum:
+          - UBL
+          - EHFXML21
+          - email
+          - other
+          - none
+          - BaswareNetwork
+          type:
+          - string
+          - 'null'
+          description: "Specifies format in which orders are sent to vendor (from P2P Purchase).\n'UBL' = Deprecated value, will be converted to 'BaswareNetwork'.\n'EHFXML21' = Deprecated value, will be converted to 'BaswareNetwork'.\n'email' = Deliver purchase orders by email as PDF attachments or SmartOrders.\n'other' = Deprecated value, will be converted to 'none'.\n'none' = Vendor not available for purchasing process.\n'BaswareNetwork' = Deliver purchase orders in XML UBL2.0 format to Basware Network. \n\nNote: Since all ERP systems do not have a field for this information, P2P can be configured so that this field is maintained in P2P instead of being imported through API."
+          example: none
+        orderingMessageLanguage:
+          maxLength: 10
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Specifies language of order -message sent to vendor from P2P Purchase.
+          example: en-US
+        orderingLanguage:
+          maxLength: 25
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Specifies region-specific texts, including number- and date formats used in the order -message sent to supplier from P2P Purchase.
+          example: en-US
+        orderEmail:
+          maxLength: 320
+          minLength: 3
+          pattern: ^(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*)@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])$
+          type:
+          - string
+          - 'null'
+          description: 'Specifies the supplier''s email address where the purchase order is sent to. Note: Since all ERP systems do not have a field for this information, P2P can be configured so that this field is maintained in P2P instead of being imported through API.'
+          example: orders@vendor.com
+        orderProcessType:
+          maxLength: 50
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Name of order process. Not used in Basware P2P.
+        minimumOrderAllowed:
+          type:
+          - number
+          - 'null'
+          description: Value of the minimum order allowed. Not used in Basware P2P.
+          format: double
+        isTaxable:
+          type:
+          - boolean
+          - 'null'
+          description: Are purchases from this vendor taxable. Not used in Basware P2P.
+        automaticallyReceiveOnInvoice:
+          type:
+          - boolean
+          - 'null'
+          description: Not used in Basware P2P.
+        automaticallyReceiveOnOrder:
+          type:
+          - boolean
+          - 'null'
+          description: Not used in Basware P2P.
+        hasActiveCatalog:
+          type:
+          - boolean
+          - 'null'
+          description: Not used in Basware P2P.
+        createOrderAutomatically:
+          type:
+          - boolean
+          - 'null'
+          description: Not used in Basware P2P.
+        deliverOrderAutomatically:
+          type:
+          - boolean
+          - 'null'
+          description: Not used in Basware P2P.
+        noFreeformItems:
+          type:
+          - boolean
+          - 'null'
+          description: Not used in Basware P2P.
+        sendToNetwork:
+          type:
+          - boolean
+          - 'null'
+          description: Not used in Basware P2P.
+      additionalProperties: false
+    VendorIdentifierEntity:
+      required:
+      - id
+      - schemeId
+      type: object
+      properties:
+        id:
+          maxLength: 36
+          minLength: 1
+          type: string
+          description: Value of the identifier type specified by 'schemeId'.
+          example: 0592542-4
+        schemeId:
+          maxLength: 32
+          minLength: 1
+          type: string
+          description: Specifies identifier type. Typically used for eInvoicing address, VAT ID, local registry id, DUNS, GLN, etc. Configure available values in P2P. Available values are the supplier identifier keys configured in P2P "identifier configuration". For example 'PartyId' is commonly used for supplier's eInvoicing address.
+          example: PartyId
+        defaultPartyId:
+          type:
+          - boolean
+          - 'null'
+          description: 'Is this the default identifier: true / false.'
+      additionalProperties: false
+    VendorAddressPartEntity:
+      type: object
+      properties:
+        key:
+          enum:
+          - AdditionalField1
+          - AdditionalField2
+          - AdditionalStreetName
+          - BlockName
+          - BuildingName
+          - BuildingNumber
+          - CitySubDivisionName
+          - Country
+          - Department
+          - District
+          - Email
+          - Floor
+          - GlobalLocationNumber
+          - InhouseEmail
+          - MarkAttention
+          - MarkCare
+          - Region
+          - Room
+          - CoordinateSystemCode
+          - PlotIdentification
+          - LatitudeDegreesMeasure
+          - LatitudeDirectionCode
+          - LatitudeMinutesMeasure
+          - LongitudeDegreesMeasure
+          - LongitudeDirectionCode
+          - LongitudeMinutesMeasure
+          type: string
+        value:
+          maxLength: 200
+          minLength: 0
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
     VendorPaymentMeanEntity:
       required:
       - paymentMeansCode
@@ -414,6 +587,177 @@ components:
           - 'null'
           description: Is this the default payment means (true / false).
       additionalProperties: false
+    VendorTagEntity:
+      required:
+      - name
+      - value
+      type: object
+      properties:
+        name:
+          maxLength: 50
+          minLength: 1
+          type: string
+          description: Name of the tag. Used as key in this array.
+        value:
+          maxLength: 250
+          minLength: 1
+          type: string
+        tagGroup:
+          maxLength: 50
+          minLength: 0
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    VendorAddressEntity:
+      required:
+      - externalCode
+      - name
+      type: object
+      properties:
+        externalCode:
+          maxLength: 36
+          minLength: 1
+          type: string
+          description: External code for vendor address.
+          example: d6437eef-0d71-4cb0-8a6e-7f114831479d
+        name:
+          maxLength: 200
+          minLength: 1
+          type: string
+          description: Specifies the address' name for the vendor.
+          example: Delivery address
+        description:
+          maxLength: 200
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Freetext description of the address.
+          example: Default delivery addrss
+        addressType:
+          enum:
+          - AdditionalAddress
+          - VisitingAddress
+          - RemittanceAddress
+          - DeliveryAddress
+          - PostalAddress
+          - RegistrationAddress
+          type:
+          - string
+          - 'null'
+          description: 'Specifies type of the address. Typically PostalAddress and DeliveryAddress are used with P2P. Types supported by P2P: PostalAddress, DeliveryAddress, AdditionalAddress, RemittanceAddress.'
+          example: DeliveryAddress
+        addressLine1:
+          maxLength: 200
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: 'Vendor address as free text, line 1. Use by target systems - P2P: no, Vendor manager: yes.'
+          example: 1800 Main Street
+        addressLine2:
+          maxLength: 200
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: 'Vendor address as free text, line 2. Use by target systems - P2P: no, Vendor manager: yes.'
+        addressLine3:
+          maxLength: 200
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: 'Vendor address as free text, line 3. Use by target systems - P2P: no, Vendor manager: yes.'
+        cityName:
+          maxLength: 50
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          example: Dallas
+        postalZone:
+          maxLength: 50
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          example: '75201'
+        poBox:
+          maxLength: 50
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          example: '724'
+        streetName:
+          maxLength: 50
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          example: Burlington Avenue
+        locality:
+          maxLength: 50
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Attribute to postalAddress. This field is required in UK if a similar road name exists within a post town area.
+          example: Burlington
+        countrySubEntity:
+          maxLength: 50
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          example: TX
+        countrySubEntityDescription:
+          maxLength: 50
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          example: Texas
+        countryId:
+          maxLength: 2
+          minLength: 2
+          type:
+          - string
+          - 'null'
+          description: 'Defines the country ID for the account. Please use 2-char ISO country codes (according to ISO-3166-1 -standard). Note: This field is not used in P2P.'
+          example: US
+        default:
+          type:
+          - boolean
+          - 'null'
+          description: Is this the default address (true / false).
+        additionalAddressFields:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/VendorAddressPartEntity'
+          description: 'Additional address fields. Use by target systems - P2P: yes, Vendor manager: no.'
+      additionalProperties: false
+    VendorCompanyEntity:
+      required:
+      - companyCode
+      type: object
+      properties:
+        companyCode:
+          maxLength: 32
+          minLength: 1
+          type: string
+          description: Specifies the organization that the vendor is mapped to.
+          example: BW00
+        inheritToChildUnits:
+          type:
+          - boolean
+          - 'null'
+          description: Specifies whether the vendor is inherited to lower organizations.
+      additionalProperties: false
     VendorResponse:
       required:
       - vendorEntities
@@ -423,6 +767,164 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/VendorEntity'
+      additionalProperties: false
+    ErrorEntity:
+      type: object
+      properties:
+        externalCode:
+          type:
+          - string
+          - 'null'
+          description: External code of record on which error occurred (when available).
+          example: 4847-31231212-212121-1212
+        type:
+          enum:
+          - BUSINESS
+          - VALIDATION
+          - TECHNICAL
+          - SECURITY
+          type: string
+          description: Error type.
+          example: ''
+        code:
+          enum:
+          - EXTERNAL_CODE_MISMATCH
+          - SCHEMA_VALIDATION_ERROR
+          - CONFLICT_IN_POST
+          - DATA_ORIGIN_VALIDATION_ERROR
+          - ACCESS_TOKEN_VALIDATION_ERROR
+          - CREDENTIAL_VALIDATION_ERROR
+          - PARAMETER_VALIDATION_ERROR
+          - UNEXPECTED_ERROR
+          - METHOD_NOT_ALLOWED
+          - ENTITY_NOT_FOUND
+          - DATA_VALIDATION_FAILED
+          - SNS_PUBLISH_ERROR
+          - SQS_PUBLISH_ERROR
+          type: string
+          description: Error code.
+          example: ''
+        message:
+          type:
+          - string
+          - 'null'
+          description: Specific error message.
+          example: ''
+        info:
+          type:
+          - string
+          - 'null'
+          description: Information about type of the error.
+          example: ''
+      additionalProperties: false
+    VendorPaymentTermEntity:
+      required:
+      - paymentTermCode
+      type: object
+      properties:
+        paymentTermCode:
+          maxLength: 25
+          minLength: 1
+          type: string
+          description: Specifies the vendor's payment term code
+          example: Net90
+        description:
+          maxLength: 200
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          example: Payment 90 days after invoice date
+      additionalProperties: false
+    DeleteResponse:
+      type: object
+      properties:
+        statusApiLink:
+          type:
+          - string
+          - 'null'
+        taskName:
+          type:
+          - string
+          - 'null'
+        taskStatus:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    FinancialInstitutionEntity:
+      required:
+      - id
+      - name
+      - schemeId
+      type: object
+      properties:
+        name:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: Specifies the vendor's bank name.
+          example: Nordea UK
+        id:
+          maxLength: 20
+          minLength: 1
+          type: string
+          description: Specifies the value for idenfitier type specified in 'schemeId'. Typically used for importing bank account BIC/SWIFT number.
+          example: NDEAGB2L
+        schemeId:
+          maxLength: 36
+          minLength: 1
+          type: string
+          description: Specifies the identifier type for field 'id'. Use 'BIC' for importing bank account BIC/SWIFT number in field 'id'.
+          example: BIC
+        branchId:
+          maxLength: 50
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: 'BranchId. Note: Field is not used in P2P.'
+        branchIdSchemeId:
+          maxLength: 36
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: 'BranchIdSchemeId. Note: Field is not used in P2P.'
+        countryId:
+          maxLength: 2
+          minLength: 2
+          type:
+          - string
+          - 'null'
+          description: 'Defines the country ID for the vendor. Please use 2-char ISO country codes (according to ISO-3166-1 -standard). Note: Field is not used in P2P.'
+          example: US
+      additionalProperties: false
+    VendorAdditionalFieldEntity:
+      required:
+      - name
+      - value
+      type: object
+      properties:
+        name:
+          maxLength: 25
+          minLength: 1
+          type: string
+          description: Name of Supplier additional data key field.
+          example: TaxRegistrationValidUntil
+        value:
+          maxLength: 250
+          minLength: 1
+          type: string
+          description: Value for key field specified above.
+          example: 2021-06-30"
+        groupName:
+          maxLength: 500
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Group name. Not used in P2P.
       additionalProperties: false
     VendorContactEntity:
       required:
@@ -481,70 +983,96 @@ components:
           - SecondaryContact
           type: string
       additionalProperties: false
-    DeleteResponse:
+    FinancialAccountIdentifierEntity:
+      required:
+      - schemeId
       type: object
       properties:
-        statusApiLink:
+        schemeId:
+          maxLength: 36
+          minLength: 1
+          type: string
+          description: 'Account type: BBAN / IBAN.'
+          example: IBAN
+        description:
+          maxLength: 200
+          minLength: 0
           type:
           - string
           - 'null'
-        taskName:
+          description: 'Description. Note: Field is not used in P2P.'
+          example: UK only
+        id:
+          maxLength: 50
+          minLength: 0
           type:
           - string
           - 'null'
-        taskStatus:
+          description: 'The account number. Note: Max 32 chars when used with P2P.'
+          example: GB29 NWBK 6016 1331 9268 19
+        accountHolderName:
+          maxLength: 200
+          minLength: 0
           type:
           - string
           - 'null'
+          description: 'Account holder name. Note: Field is not used in P2P.'
+          example: United Parcels UK
+        currencyCode:
+          maxLength: 3
+          minLength: 3
+          type:
+          - string
+          - 'null'
+          description: 'Currency code of the account. Note: Field is not used in P2P. To import the supplier specific currency code to P2P, use the ''currencyCode'' field in ''paymentMeans'' -block.'
+          example: GBP
+        accountAdditionalData1:
+          maxLength: 200
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Account additional data field 1.
+          example: FRS123
+        accountAdditionalData2:
+          maxLength: 200
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Account additional data field 2.
+          example: 971298-1212
+        default:
+          type:
+          - boolean
+          - 'null'
+          description: Is this the default account (true / false).
+        linkedBbanOrIban:
+          maxLength: 50
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: 'Allows linking BBAN and IBAN together when both represent the same bank account.
+
+            Accounts are linked when the value of linkedBbanOrlban'' on account A is the same as the value of ''id'' on account B (and also the other way around).
+
+            Also, the schemeld values need to be ''IBAN'' and ''BBAN'' and values of fields ''currencyCode'', ''accountAdditionalDatal'', ''accountAdditionalData2'', ''default'' need to be same on both accounts.
+
+            Account linking is supported only by P2P.'
+          example: ''
       additionalProperties: false
-    ErrorEntity:
+    VendorfinancialAccountsEntity:
       type: object
       properties:
-        externalCode:
+        financialInstitution:
+          $ref: '#/components/schemas/FinancialInstitutionEntity'
+        financialAccountIdentifiers:
           type:
-          - string
+          - array
           - 'null'
-          description: External code of record on which error occurred (when available).
-          example: 4847-31231212-212121-1212
-        type:
-          enum:
-          - BUSINESS
-          - VALIDATION
-          - TECHNICAL
-          - SECURITY
-          type: string
-          description: Error type.
-          example: ''
-        code:
-          enum:
-          - EXTERNAL_CODE_MISMATCH
-          - SCHEMA_VALIDATION_ERROR
-          - CONFLICT_IN_POST
-          - DATA_ORIGIN_VALIDATION_ERROR
-          - ACCESS_TOKEN_VALIDATION_ERROR
-          - CREDENTIAL_VALIDATION_ERROR
-          - PARAMETER_VALIDATION_ERROR
-          - UNEXPECTED_ERROR
-          - METHOD_NOT_ALLOWED
-          - ENTITY_NOT_FOUND
-          - DATA_VALIDATION_FAILED
-          - SNS_PUBLISH_ERROR
-          - SQS_PUBLISH_ERROR
-          type: string
-          description: Error code.
-          example: ''
-        message:
-          type:
-          - string
-          - 'null'
-          description: Specific error message.
-          example: ''
-        info:
-          type:
-          - string
-          - 'null'
-          description: Information about type of the error.
-          example: ''
+          items:
+            $ref: '#/components/schemas/FinancialAccountIdentifierEntity'
       additionalProperties: false
     VendorEntity:
       required:
@@ -684,169 +1212,6 @@ components:
             $ref: '#/components/schemas/VendorCompanyEntity'
           description: List of company units to associate vendor to P2P organization hierarchy
       additionalProperties: false
-    FinancialAccountIdentifierEntity:
-      required:
-      - schemeId
-      type: object
-      properties:
-        schemeId:
-          maxLength: 36
-          minLength: 1
-          type: string
-          description: 'Account type: BBAN / IBAN.'
-          example: IBAN
-        description:
-          maxLength: 200
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: 'Description. Note: Field is not used in P2P.'
-          example: UK only
-        id:
-          maxLength: 50
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: 'The account number. Note: Max 32 chars when used with P2P.'
-          example: GB29 NWBK 6016 1331 9268 19
-        accountHolderName:
-          maxLength: 200
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: 'Account holder name. Note: Field is not used in P2P.'
-          example: United Parcels UK
-        currencyCode:
-          maxLength: 3
-          minLength: 3
-          type:
-          - string
-          - 'null'
-          description: 'Currency code of the account. Note: Field is not used in P2P. To import the supplier specific currency code to P2P, use the ''currencyCode'' field in ''paymentMeans'' -block.'
-          example: GBP
-        accountAdditionalData1:
-          maxLength: 200
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Account additional data field 1.
-          example: FRS123
-        accountAdditionalData2:
-          maxLength: 200
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Account additional data field 2.
-          example: 971298-1212
-        default:
-          type:
-          - boolean
-          - 'null'
-          description: Is this the default account (true / false).
-        linkedBbanOrIban:
-          maxLength: 50
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: 'Allows linking BBAN and IBAN together when both represent the same bank account.
-
-            Accounts are linked when the value of linkedBbanOrlban'' on account A is the same as the value of ''id'' on account B (and also the other way around).
-
-            Also, the schemeld values need to be ''IBAN'' and ''BBAN'' and values of fields ''currencyCode'', ''accountAdditionalDatal'', ''accountAdditionalData2'', ''default'' need to be same on both accounts.
-
-            Account linking is supported only by P2P.'
-          example: ''
-      additionalProperties: false
-    VendorfinancialAccountsEntity:
-      type: object
-      properties:
-        financialInstitution:
-          $ref: '#/components/schemas/FinancialInstitutionEntity'
-        financialAccountIdentifiers:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/FinancialAccountIdentifierEntity'
-      additionalProperties: false
-    FinancialInstitutionEntity:
-      required:
-      - id
-      - name
-      - schemeId
-      type: object
-      properties:
-        name:
-          maxLength: 250
-          minLength: 0
-          type: string
-          description: Specifies the vendor's bank name.
-          example: Nordea UK
-        id:
-          maxLength: 20
-          minLength: 1
-          type: string
-          description: Specifies the value for idenfitier type specified in 'schemeId'. Typically used for importing bank account BIC/SWIFT number.
-          example: NDEAGB2L
-        schemeId:
-          maxLength: 36
-          minLength: 1
-          type: string
-          description: Specifies the identifier type for field 'id'. Use 'BIC' for importing bank account BIC/SWIFT number in field 'id'.
-          example: BIC
-        branchId:
-          maxLength: 50
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: 'BranchId. Note: Field is not used in P2P.'
-        branchIdSchemeId:
-          maxLength: 36
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: 'BranchIdSchemeId. Note: Field is not used in P2P.'
-        countryId:
-          maxLength: 2
-          minLength: 2
-          type:
-          - string
-          - 'null'
-          description: 'Defines the country ID for the vendor. Please use 2-char ISO country codes (according to ISO-3166-1 -standard). Note: Field is not used in P2P.'
-          example: US
-      additionalProperties: false
-    VendorIdentifierEntity:
-      required:
-      - id
-      - schemeId
-      type: object
-      properties:
-        id:
-          maxLength: 36
-          minLength: 1
-          type: string
-          description: Value of the identifier type specified by 'schemeId'.
-          example: 0592542-4
-        schemeId:
-          maxLength: 32
-          minLength: 1
-          type: string
-          description: Specifies identifier type. Typically used for eInvoicing address, VAT ID, local registry id, DUNS, GLN, etc. Configure available values in P2P. Available values are the supplier identifier keys configured in P2P "identifier configuration". For example 'PartyId' is commonly used for supplier's eInvoicing address.
-          example: PartyId
-        defaultPartyId:
-          type:
-          - boolean
-          - 'null'
-          description: 'Is this the default identifier: true / false.'
-      additionalProperties: false
     VendorDeliveryTermEntity:
       required:
       - deliveryTermCode
@@ -874,388 +1239,6 @@ components:
           - 'null'
           description: Default delivery term description.
       additionalProperties: false
-    VendorAddressPartEntity:
-      type: object
-      properties:
-        key:
-          enum:
-          - AdditionalField1
-          - AdditionalField2
-          - AdditionalStreetName
-          - BlockName
-          - BuildingName
-          - BuildingNumber
-          - CitySubDivisionName
-          - Country
-          - Department
-          - District
-          - Email
-          - Floor
-          - GlobalLocationNumber
-          - InhouseEmail
-          - MarkAttention
-          - MarkCare
-          - Region
-          - Room
-          - CoordinateSystemCode
-          - PlotIdentification
-          - LatitudeDegreesMeasure
-          - LatitudeDirectionCode
-          - LatitudeMinutesMeasure
-          - LongitudeDegreesMeasure
-          - LongitudeDirectionCode
-          - LongitudeMinutesMeasure
-          type: string
-        value:
-          maxLength: 200
-          minLength: 0
-          type:
-          - string
-          - 'null'
-      additionalProperties: false
-    VendorTagEntity:
-      required:
-      - name
-      - value
-      type: object
-      properties:
-        name:
-          maxLength: 50
-          minLength: 1
-          type: string
-          description: Name of the tag. Used as key in this array.
-        value:
-          maxLength: 250
-          minLength: 1
-          type: string
-        tagGroup:
-          maxLength: 50
-          minLength: 0
-          type:
-          - string
-          - 'null'
-      additionalProperties: false
-    VendorProcessingStatusEntity:
-      type: object
-      properties:
-        active:
-          type:
-          - boolean
-          - 'null'
-          description: 'Is the vendor active : true / false.'
-        paymentDenied:
-          type:
-          - boolean
-          - 'null'
-          description: 'Is payment block is enabled for the vendor: true / false.'
-          example: false
-      additionalProperties: false
-    VendorAddressEntity:
-      required:
-      - externalCode
-      - name
-      type: object
-      properties:
-        externalCode:
-          maxLength: 36
-          minLength: 1
-          type: string
-          description: External code for vendor address.
-          example: d6437eef-0d71-4cb0-8a6e-7f114831479d
-        name:
-          maxLength: 200
-          minLength: 1
-          type: string
-          description: Specifies the address' name for the vendor.
-          example: Delivery address
-        description:
-          maxLength: 200
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Freetext description of the address.
-          example: Default delivery addrss
-        addressType:
-          enum:
-          - AdditionalAddress
-          - VisitingAddress
-          - RemittanceAddress
-          - DeliveryAddress
-          - PostalAddress
-          - RegistrationAddress
-          type:
-          - string
-          - 'null'
-          description: 'Specifies type of the address. Typically PostalAddress and DeliveryAddress are used with P2P. Types supported by P2P: PostalAddress, DeliveryAddress, AdditionalAddress, RemittanceAddress.'
-          example: DeliveryAddress
-        addressLine1:
-          maxLength: 200
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: 'Vendor address as free text, line 1. Use by target systems - P2P: no, Vendor manager: yes.'
-          example: 1800 Main Street
-        addressLine2:
-          maxLength: 200
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: 'Vendor address as free text, line 2. Use by target systems - P2P: no, Vendor manager: yes.'
-        addressLine3:
-          maxLength: 200
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: 'Vendor address as free text, line 3. Use by target systems - P2P: no, Vendor manager: yes.'
-        cityName:
-          maxLength: 50
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          example: Dallas
-        postalZone:
-          maxLength: 50
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          example: '75201'
-        poBox:
-          maxLength: 50
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          example: '724'
-        streetName:
-          maxLength: 50
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          example: Burlington Avenue
-        locality:
-          maxLength: 50
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Attribute to postalAddress. This field is required in UK if a similar road name exists within a post town area.
-          example: Burlington
-        countrySubEntity:
-          maxLength: 50
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          example: TX
-        countrySubEntityDescription:
-          maxLength: 50
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          example: Texas
-        countryId:
-          maxLength: 2
-          minLength: 2
-          type:
-          - string
-          - 'null'
-          description: 'Defines the country ID for the account. Please use 2-char ISO country codes (according to ISO-3166-1 -standard). Note: This field is not used in P2P.'
-          example: US
-        default:
-          type:
-          - boolean
-          - 'null'
-          description: Is this the default address (true / false).
-        additionalAddressFields:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/VendorAddressPartEntity'
-          description: 'Additional address fields. Use by target systems - P2P: yes, Vendor manager: no.'
-      additionalProperties: false
-    VendorAdditionalFieldEntity:
-      required:
-      - name
-      - value
-      type: object
-      properties:
-        name:
-          maxLength: 25
-          minLength: 1
-          type: string
-          description: Name of Supplier additional data key field.
-          example: TaxRegistrationValidUntil
-        value:
-          maxLength: 250
-          minLength: 1
-          type: string
-          description: Value for key field specified above.
-          example: 2021-06-30"
-        groupName:
-          maxLength: 500
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Group name. Not used in P2P.
-      additionalProperties: false
-    VendorPaymentTermEntity:
-      required:
-      - paymentTermCode
-      type: object
-      properties:
-        paymentTermCode:
-          maxLength: 25
-          minLength: 1
-          type: string
-          description: Specifies the vendor's payment term code
-          example: Net90
-        description:
-          maxLength: 200
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          example: Payment 90 days after invoice date
-      additionalProperties: false
-    VendorCompanyEntity:
-      required:
-      - companyCode
-      type: object
-      properties:
-        companyCode:
-          maxLength: 32
-          minLength: 1
-          type: string
-          description: Specifies the organization that the vendor is mapped to.
-          example: BW00
-        inheritToChildUnits:
-          type:
-          - boolean
-          - 'null'
-          description: Specifies whether the vendor is inherited to lower organizations.
-      additionalProperties: false
-    DeleteRequest:
-      type: object
-      properties:
-        lastUpdated:
-          type:
-          - string
-          - 'null'
-          description: 'To delete records updated after specific time, use lastUpdated -field. This will delete all items that have been updated after the specified date. In response, user will get the taskStatus api link where the task status can be checked. Note: ''0001-01-01'' can be used to delete all records.'
-          format: date-time
-        externalCode:
-          maxLength: 36
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Single item can be deleted using externalCode and final status is returned immediately.
-      additionalProperties: false
-    VendorOrderingDetailsEntity:
-      type: object
-      properties:
-        orderingFormat:
-          enum:
-          - UBL
-          - EHFXML21
-          - email
-          - other
-          - none
-          - BaswareNetwork
-          type:
-          - string
-          - 'null'
-          description: "Specifies format in which orders are sent to vendor (from P2P Purchase).\n'UBL' = Deprecated value, will be converted to 'BaswareNetwork'.\n'EHFXML21' = Deprecated value, will be converted to 'BaswareNetwork'.\n'email' = Deliver purchase orders by email as PDF attachments or SmartOrders.\n'other' = Deprecated value, will be converted to 'none'.\n'none' = Vendor not available for purchasing process.\n'BaswareNetwork' = Deliver purchase orders in XML UBL2.0 format to Basware Network. \n\nNote: Since all ERP systems do not have a field for this information, P2P can be configured so that this field is maintained in P2P instead of being imported through API."
-          example: none
-        orderingMessageLanguage:
-          maxLength: 10
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Specifies language of order -message sent to vendor from P2P Purchase.
-          example: en-US
-        orderingLanguage:
-          maxLength: 25
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Specifies region-specific texts, including number- and date formats used in the order -message sent to supplier from P2P Purchase.
-          example: en-US
-        orderEmail:
-          maxLength: 320
-          minLength: 3
-          pattern: ^(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*)@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])$
-          type:
-          - string
-          - 'null'
-          description: 'Specifies the supplier''s email address where the purchase order is sent to. Note: Since all ERP systems do not have a field for this information, P2P can be configured so that this field is maintained in P2P instead of being imported through API.'
-          example: orders@vendor.com
-        orderProcessType:
-          maxLength: 50
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Name of order process. Not used in Basware P2P.
-        minimumOrderAllowed:
-          type:
-          - number
-          - 'null'
-          description: Value of the minimum order allowed. Not used in Basware P2P.
-          format: double
-        isTaxable:
-          type:
-          - boolean
-          - 'null'
-          description: Are purchases from this vendor taxable. Not used in Basware P2P.
-        automaticallyReceiveOnInvoice:
-          type:
-          - boolean
-          - 'null'
-          description: Not used in Basware P2P.
-        automaticallyReceiveOnOrder:
-          type:
-          - boolean
-          - 'null'
-          description: Not used in Basware P2P.
-        hasActiveCatalog:
-          type:
-          - boolean
-          - 'null'
-          description: Not used in Basware P2P.
-        createOrderAutomatically:
-          type:
-          - boolean
-          - 'null'
-          description: Not used in Basware P2P.
-        deliverOrderAutomatically:
-          type:
-          - boolean
-          - 'null'
-          description: Not used in Basware P2P.
-        noFreeformItems:
-          type:
-          - boolean
-          - 'null'
-          description: Not used in Basware P2P.
-        sendToNetwork:
-          type:
-          - boolean
-          - 'null'
-          description: Not used in Basware P2P.
-      additionalProperties: false
     ResponseEntityList:
       type: object
       properties:
@@ -1276,6 +1259,23 @@ components:
             $ref: '#/components/schemas/ErrorEntity'
       additionalProperties: false
       description: Errors returned here are returned synchronously from Basware API middle layer. Additional errors coming from target system(s) may be returned through errorFeedbacks API.
+    DeleteRequest:
+      type: object
+      properties:
+        lastUpdated:
+          type:
+          - string
+          - 'null'
+          description: 'To delete records updated after specific time, use lastUpdated -field. This will delete all items that have been updated after the specified date. In response, user will get the taskStatus api link where the task status can be checked. Note: ''0001-01-01'' can be used to delete all records.'
+          format: date-time
+        externalCode:
+          maxLength: 36
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Single item can be deleted using externalCode and final status is returned immediately.
+      additionalProperties: false
   securitySchemes:
     Bearer:
       type: http

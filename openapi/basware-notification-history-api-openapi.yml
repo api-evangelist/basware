@@ -138,6 +138,57 @@ paths:
           description: Unprocessable Entity
 components:
   schemas:
+    RecordNotFoundResponse:
+      properties:
+        detail:
+          type: string
+          title: Detail
+          description: Detail of error
+          default: Not Found
+          example: Not Found
+      type: object
+      title: RecordNotFoundResponse
+    UnprocessableEntityErrorResponse:
+      properties:
+        message:
+          type: string
+          title: Message
+          description: Detail of error
+          default: UnprocessableEntity
+          example: UnprocessableEntity
+      type: object
+      title: UnprocessableEntityErrorResponse
+    InternalServerErrorResponse:
+      properties:
+        message:
+          type: string
+          title: Message
+          description: Detail of error
+          default: Internal server error
+          example: Internal server error
+      type: object
+      title: InternalServerErrorResponse
+    TaskHistory:
+      properties:
+        action:
+          type: string
+          title: Action
+          description: Action performed on the task.
+          example: New
+        timeStamp:
+          type: string
+          title: Timestamp
+          description: Timestamp when action occurred.
+          example: '2021-08-12T08:39:13Z'
+        messages:
+          items:
+            type: string
+          type: array
+          title: Messages
+          description: Additional information regarding task status change, such as error messages.
+          example: Task Created
+      type: object
+      title: TaskHistory
     TasksResponse:
       properties:
         taskStatus:
@@ -149,16 +200,6 @@ components:
       required:
       - taskStatus
       title: TasksResponse
-    UnprocessableEntityErrorResponse:
-      properties:
-        message:
-          type: string
-          title: Message
-          description: Detail of error
-          default: UnprocessableEntity
-          example: UnprocessableEntity
-      type: object
-      title: UnprocessableEntityErrorResponse
     Task:
       properties:
         taskId:
@@ -214,37 +255,6 @@ components:
           description: Shows information aboout task status changes.
       type: object
       title: Task
-    TaskHistory:
-      properties:
-        action:
-          type: string
-          title: Action
-          description: Action performed on the task.
-          example: New
-        timeStamp:
-          type: string
-          title: Timestamp
-          description: Timestamp when action occurred.
-          example: '2021-08-12T08:39:13Z'
-        messages:
-          items:
-            type: string
-          type: array
-          title: Messages
-          description: Additional information regarding task status change, such as error messages.
-          example: Task Created
-      type: object
-      title: TaskHistory
-    InternalServerErrorResponse:
-      properties:
-        message:
-          type: string
-          title: Message
-          description: Detail of error
-          default: Internal server error
-          example: Internal server error
-      type: object
-      title: InternalServerErrorResponse
     UnauthorizeErrorResponse:
       properties:
         message:
@@ -255,13 +265,3 @@ components:
           example: Unauthorized
       type: object
       title: UnauthorizeErrorResponse
-    RecordNotFoundResponse:
-      properties:
-        detail:
-          type: string
-          title: Detail
-          description: Detail of error
-          default: Not Found
-          example: Not Found
-      type: object
-      title: RecordNotFoundResponse

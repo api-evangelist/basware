@@ -299,10 +299,26 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    DeleteOrganisationRequest:
+    DeleteOrganisationResponse:
       type: object
       properties:
-        externalCode:
+        taskStatus:
+          enum:
+          - Success
+          - Failed
+          type: string
+        deletedRecordCount:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        deletedRecordExternalCodes:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+        message:
           type:
           - string
           - 'null'
@@ -355,117 +371,6 @@ components:
           - 'null'
           description: Information about type of the error.
           example: ''
-      additionalProperties: false
-    OrganizationTreeLocation:
-      required:
-      - parentExternalCode
-      type: object
-      properties:
-        pathToRoot:
-          type:
-          - array
-          - 'null'
-          items:
-            type: string
-          description: Lists all parent externalCodes on the way to root organization element (set automatically by API).
-        parentExternalCode:
-          minLength: 1
-          type: string
-          description: 'External code of the parent company. Note: Parent company cannot be changed after the company is published (published = true).'
-          example: ROOT
-        parentCompanyCode:
-          type:
-          - string
-          - 'null'
-          description: Company code of the parent company. This value is set automatically by API.
-          example: ROOT
-        level:
-          type: integer
-          description: Specifies how many levels from root node the organization element resides from. This value is set automatically by API based on number of parents on the way to the root node.
-          format: int32
-          example: 1
-        childCount:
-          type: integer
-          description: Count of child organization elements (immediate children) of this organization element. This value is set automatically by API.
-          format: int32
-          example: 0
-        sortPosition:
-          type: integer
-          description: Specifies the sorting position for organization elements under the same parent element. Used for placement of the company within the organization tree in UI.
-          format: int32
-          example: 3
-      additionalProperties: false
-      description: Speficies the organization element's position within the organization tree.
-    Identifiers:
-      required:
-      - description
-      - externalCode
-      - id
-      - schemeId
-      type: object
-      properties:
-        externalCode:
-          maxLength: 100
-          minLength: 1
-          type: string
-          description: External identifier for the Business identifier. Needs to be unique within business identifiers.
-          example: 4847-31231212-212121-1212
-        id:
-          maxLength: 100
-          minLength: 0
-          type: string
-          description: Specifies identifier value for the selected identifier type. The identifier type is determined by field 'schemeId'.
-          example: FI190101452
-        schemeId:
-          minLength: 1
-          type: string
-          description: 'Specifies identifier type. The identifier value is determined by field ''id''. Available values:
-
-            "DUNS", "EMAIL-RFC2822", "GLN", "IBAN", "ISO6523-ACTORID-UPIS", "UNKNOWN", "FI:Y-TUNNUS", "FI:VAT", "FI:OVT", "SE:ORGNR", "SE:VAT", "GLN", "NO:ORGNR", "NO:VAT", "DK:CVR", "DK:P", "DK:DIGST", "GLN", "FR:SIRENE", "FR:SIRET", "FR:VAT", "GLN", "DE:ORGNR", "DE:HRN", "DE:VAT", "DE:LWID", "GLN", "BE:EN", "BE:VAT", "GLN", "NL:KVK", "NL:VAT", "IBAN", "IT:FISCALE", "IT:IPA", "IT:IVA", "PT:NIF", "ES:CIF", "ES:NIF", "PL:KRS", "PL:REGON", "PL:VAT", "EE:ORGNR", "EE:VAT", "IE:ORGNR", "IE:VAT", "GLN", "GB:ORGNR", "GB:VAT", "XI:VAT", "GB:UTR", "GLN", "AT:ORGNR", "AT:VAT", "AT:GOV", "AT:CID", "CH:ORGNR", "CH:VAT", "HU:VAT", "RO:VAT", "GR:VAT", "GR:GEMI", "LI:VAT", "LU:VAT", "LT:LEC", "LT:VAT", "LV:VAT", "CZ:ORGNR", "CZ:VAT", "IS:KTNR", "IS:VAT", "BG:VAT", "HR:VAT", "SK:ORGNR", "SK:VAT", "CY:VAT", "US:TIN", "CA:BN", "CA:GST", "MX:VAT", "IN:GSTIN", "CN:BRN", "MY:GST", "AU:ABN", "AU:ACN", "AU:TFN", "NZ:BN"'
-          example: FI:VAT
-        description:
-          maxLength: 500
-          minLength: 0
-          type: string
-          description: Describes the business identifier. Auto-filled by API based on identifier scheme id, but can be set manually for 'UNKNOWN' type identifiers to provide information what kind of identifier is used.
-          example: Finnish Value Added Tax identifier.
-        category:
-          enum:
-          - Legal
-          - NonLegal
-          type:
-          - string
-          - 'null'
-          description: Specifies identifier category. Legal identifiers can no longer be changed after the company is published.
-        inherited:
-          type: boolean
-          description: Specifies whether the identifier has been inherited from a parent company. Legal identifiers for Units are automatically inherited from parent Company.
-          example: false
-      additionalProperties: false
-      description: Identifiers
-    DeleteOrganisationResponse:
-      type: object
-      properties:
-        taskStatus:
-          enum:
-          - Success
-          - Failed
-          type: string
-        deletedRecordCount:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        deletedRecordExternalCodes:
-          type:
-          - array
-          - 'null'
-          items:
-            type: string
-        message:
-          type:
-          - string
-          - 'null'
       additionalProperties: false
     OrganizationEntity:
       required:
@@ -565,6 +470,54 @@ components:
             $ref: '#/components/schemas/Identifiers'
           description: 'Company business identifiers. See "Usage scenario 6: Import companies on Basware API developer site for explanation of available identifier type values. Note: Identifiers are not allowed on ''group'' type organization elements.'
       additionalProperties: false
+    OrganizationTreeLocation:
+      required:
+      - parentExternalCode
+      type: object
+      properties:
+        pathToRoot:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+          description: Lists all parent externalCodes on the way to root organization element (set automatically by API).
+        parentExternalCode:
+          minLength: 1
+          type: string
+          description: 'External code of the parent company. Note: Parent company cannot be changed after the company is published (published = true).'
+          example: ROOT
+        parentCompanyCode:
+          type:
+          - string
+          - 'null'
+          description: Company code of the parent company. This value is set automatically by API.
+          example: ROOT
+        level:
+          type: integer
+          description: Specifies how many levels from root node the organization element resides from. This value is set automatically by API based on number of parents on the way to the root node.
+          format: int32
+          example: 1
+        childCount:
+          type: integer
+          description: Count of child organization elements (immediate children) of this organization element. This value is set automatically by API.
+          format: int32
+          example: 0
+        sortPosition:
+          type: integer
+          description: Specifies the sorting position for organization elements under the same parent element. Used for placement of the company within the organization tree in UI.
+          format: int32
+          example: 3
+      additionalProperties: false
+      description: Speficies the organization element's position within the organization tree.
+    DeleteOrganisationRequest:
+      type: object
+      properties:
+        externalCode:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
     ResponseEntityList:
       type: object
       properties:
@@ -585,6 +538,53 @@ components:
             $ref: '#/components/schemas/ErrorEntity'
       additionalProperties: false
       description: Errors returned here are returned synchronously from Basware API middle layer. Additional errors coming from target system(s) may be returned through errorFeedbacks API.
+    Identifiers:
+      required:
+      - description
+      - externalCode
+      - id
+      - schemeId
+      type: object
+      properties:
+        externalCode:
+          maxLength: 100
+          minLength: 1
+          type: string
+          description: External identifier for the Business identifier. Needs to be unique within business identifiers.
+          example: 4847-31231212-212121-1212
+        id:
+          maxLength: 100
+          minLength: 0
+          type: string
+          description: Specifies identifier value for the selected identifier type. The identifier type is determined by field 'schemeId'.
+          example: FI190101452
+        schemeId:
+          minLength: 1
+          type: string
+          description: 'Specifies identifier type. The identifier value is determined by field ''id''. Available values:
+
+            "DUNS", "EMAIL-RFC2822", "GLN", "IBAN", "ISO6523-ACTORID-UPIS", "UNKNOWN", "FI:Y-TUNNUS", "FI:VAT", "FI:OVT", "SE:ORGNR", "SE:VAT", "GLN", "NO:ORGNR", "NO:VAT", "DK:CVR", "DK:P", "DK:DIGST", "GLN", "FR:SIRENE", "FR:SIRET", "FR:VAT", "GLN", "DE:ORGNR", "DE:HRN", "DE:VAT", "DE:LWID", "GLN", "BE:EN", "BE:VAT", "GLN", "NL:KVK", "NL:VAT", "IBAN", "IT:FISCALE", "IT:IPA", "IT:IVA", "PT:NIF", "ES:CIF", "ES:NIF", "PL:KRS", "PL:REGON", "PL:VAT", "EE:ORGNR", "EE:VAT", "IE:ORGNR", "IE:VAT", "GLN", "GB:ORGNR", "GB:VAT", "XI:VAT", "GB:UTR", "GLN", "AT:ORGNR", "AT:VAT", "AT:GOV", "AT:CID", "CH:ORGNR", "CH:VAT", "HU:VAT", "RO:VAT", "GR:VAT", "GR:GEMI", "LI:VAT", "LU:VAT", "LT:LEC", "LT:VAT", "LV:VAT", "CZ:ORGNR", "CZ:VAT", "IS:KTNR", "IS:VAT", "BG:VAT", "HR:VAT", "SK:ORGNR", "SK:VAT", "CY:VAT", "US:TIN", "CA:BN", "CA:GST", "MX:VAT", "IN:GSTIN", "CN:BRN", "MY:GST", "AU:ABN", "AU:ACN", "AU:TFN", "NZ:BN"'
+          example: FI:VAT
+        description:
+          maxLength: 500
+          minLength: 0
+          type: string
+          description: Describes the business identifier. Auto-filled by API based on identifier scheme id, but can be set manually for 'UNKNOWN' type identifiers to provide information what kind of identifier is used.
+          example: Finnish Value Added Tax identifier.
+        category:
+          enum:
+          - Legal
+          - NonLegal
+          type:
+          - string
+          - 'null'
+          description: Specifies identifier category. Legal identifiers can no longer be changed after the company is published.
+        inherited:
+          type: boolean
+          description: Specifies whether the identifier has been inherited from a parent company. Legal identifiers for Units are automatically inherited from parent Company.
+          example: false
+      additionalProperties: false
+      description: Identifiers
   securitySchemes:
     Bearer:
       type: http

@@ -118,74 +118,55 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    History:
+    Facility:
       properties:
-        definitionDate:
+        siret:
           anyOf:
           - type: string
           - type: 'null'
-          title: Definitiondate
-        dateFrom:
+          title: Siret
+        siren:
           anyOf:
           - type: string
           - type: 'null'
-          title: Datefrom
-        createdBy:
+          title: Siren
+        name:
           anyOf:
           - type: string
           - type: 'null'
-          title: Createdby
-        idInstance:
+          title: Name
+        facilityType:
           anyOf:
           - type: string
           - type: 'null'
-          title: Idinstance
+          title: Facilitytype
+        diffusible:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Diffusible
+        administrativeStatus:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Administrativestatus
+        address:
+          anyOf:
+          - $ref: '#/components/schemas/Address'
+          - type: 'null'
       type: object
-      title: History
-    Address:
+      title: Facility
+    ErrorResponse:
       properties:
-        addressLine1:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Addressline1
-        addressLine2:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Addressline2
-        addressLine3:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Addressline3
-        postalCode:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Postalcode
-        countrySubdivision:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Countrysubdivision
-        locality:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Locality
-        countryCode:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Countrycode
-        countryName:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Countryname
+        error:
+          type: string
+          title: Error
       type: object
-      title: Address
+      required:
+      - error
+      title: ErrorResponse
+      example:
+        error: timeout
     DirectoryEntry:
       properties:
         routingIdentifier:
@@ -241,17 +222,6 @@ components:
           - type: 'null'
       type: object
       title: DirectoryEntry
-    ErrorResponse:
-      properties:
-        error:
-          type: string
-          title: Error
-      type: object
-      required:
-      - error
-      title: ErrorResponse
-      example:
-        error: timeout
     HTTPValidationError:
       properties:
         detail:
@@ -261,6 +231,107 @@ components:
           title: Detail
       type: object
       title: HTTPValidationError
+    Address:
+      properties:
+        addressLine1:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Addressline1
+        addressLine2:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Addressline2
+        addressLine3:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Addressline3
+        postalCode:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Postalcode
+        countrySubdivision:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Countrysubdivision
+        locality:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Locality
+        countryCode:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Countrycode
+        countryName:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Countryname
+      type: object
+      title: Address
+    RoutingCode:
+      properties:
+        routingIdentifier:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Routingidentifier
+        routingIdentifierType:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Routingidentifiertype
+        routingCodeName:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Routingcodename
+        managesLegalCommitment:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Manageslegalcommitment
+        administrativeStatus:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Administrativestatus
+        address:
+          anyOf:
+          - $ref: '#/components/schemas/Address'
+          - type: 'null'
+      type: object
+      title: RoutingCode
+    History:
+      properties:
+        definitionDate:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Definitiondate
+        dateFrom:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Datefrom
+        createdBy:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Createdby
+        idInstance:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Idinstance
+      type: object
+      title: History
     ValidationError:
       properties:
         loc:
@@ -316,77 +387,6 @@ components:
           title: Diffusible
       type: object
       title: LegalUnit
-    RoutingCode:
-      properties:
-        routingIdentifier:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Routingidentifier
-        routingIdentifierType:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Routingidentifiertype
-        routingCodeName:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Routingcodename
-        managesLegalCommitment:
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          title: Manageslegalcommitment
-        administrativeStatus:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Administrativestatus
-        address:
-          anyOf:
-          - $ref: '#/components/schemas/Address'
-          - type: 'null'
-      type: object
-      title: RoutingCode
-    Facility:
-      properties:
-        siret:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Siret
-        siren:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Siren
-        name:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Name
-        facilityType:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Facilitytype
-        diffusible:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Diffusible
-        administrativeStatus:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Administrativestatus
-        address:
-          anyOf:
-          - $ref: '#/components/schemas/Address'
-          - type: 'null'
-      type: object
-      title: Facility
   securitySchemes:
     BearerAuth:
       type: http

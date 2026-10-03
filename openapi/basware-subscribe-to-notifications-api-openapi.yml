@@ -206,25 +206,71 @@ paths:
           description: Unprocessable Entity
 components:
   schemas:
-    ValidationErrorResponse:
+    RecordNotFoundResponse:
       properties:
-        requestId:
+        detail:
           type: string
-          title: Requestid
-          description: RequestId of request
-          example: KLF5BiZ9DoEEMlQ=
-        hasError:
-          type: boolean
-          title: Haserror
-          description: Tells that request has error
-          example: true
-        errorMessages:
-          items:
-            $ref: '#/components/schemas/SchemaValidationError'
-          type: array
-          title: Errormessages
+          title: Detail
+          description: Detail of error
+          default: Not Found
+          example: Not Found
       type: object
-      title: ValidationErrorResponse
+      title: RecordNotFoundResponse
+    UnprocessableEntityErrorResponse:
+      properties:
+        message:
+          type: string
+          title: Message
+          description: Detail of error
+          default: UnprocessableEntity
+          example: UnprocessableEntity
+      type: object
+      title: UnprocessableEntityErrorResponse
+    InternalServerErrorResponse:
+      properties:
+        message:
+          type: string
+          title: Message
+          description: Detail of error
+          default: Internal server error
+          example: Internal server error
+      type: object
+      title: InternalServerErrorResponse
+    FieldUpdateArray:
+      properties:
+        fieldId:
+          type: string
+          title: Fieldid
+          description: Specifies the field to update. Use JSONpath to identify the value on response schema to update.
+          example: codingRows[2]/accountCode
+        updateToValue:
+          type: string
+          title: Updatetovalue
+          description: Specifies value to which field contents are set by the autoresponder.
+          example: '02600'
+      type: object
+      title: FieldUpdateArray
+    DeleteSubscriptionResponse:
+      properties:
+        status:
+          type: string
+          title: Status
+          description: Success message
+          default: Deleted successfully
+          example: Deleted successfully
+        numberOfRecordsDeleted:
+          type: integer
+          title: Numberofrecordsdeleted
+          description: Number of records deleted
+          example: '1'
+      type: object
+      title: DeleteSubscriptionResponse
+    SubscriptionType:
+      type: string
+      enum:
+      - Webhook
+      - Polling
+      title: SubscriptionType
     Subscription-Output:
       properties:
         taskType:
@@ -327,41 +373,46 @@ components:
       - notificationWebhookURL
       - webhookAuthenticationToken
       title: Subscription
-    SchemaValidationError:
+    SubscriptionsResponse:
       properties:
-        type:
-          type: string
-          title: Type
-          description: Type of error
-          example: VALIDATION
-        code:
-          type: string
-          title: Code
-          description: Code of error
-          example: SCHEMA_VALIDATION_ERROR
-        message:
-          type: string
-          title: Message
-          description: Detail of error
-          example: taskType field required
+        subscriptions:
+          items:
+            $ref: '#/components/schemas/Subscription-Output'
+          type: array
+          title: Subscriptions
       type: object
-      title: SchemaValidationError
-    SubscriptionType:
-      type: string
-      enum:
-      - Webhook
-      - Polling
-      title: SubscriptionType
-    UnprocessableEntityErrorResponse:
+      required:
+      - subscriptions
+      title: SubscriptionsResponse
+    UnauthorizeErrorResponse:
       properties:
         message:
           type: string
           title: Message
           description: Detail of error
-          default: UnprocessableEntity
-          example: UnprocessableEntity
+          default: Unauthorized
+          example: Unauthorized
       type: object
-      title: UnprocessableEntityErrorResponse
+      title: UnauthorizeErrorResponse
+    ValidationErrorResponse:
+      properties:
+        requestId:
+          type: string
+          title: Requestid
+          description: RequestId of request
+          example: KLF5BiZ9DoEEMlQ=
+        hasError:
+          type: boolean
+          title: Haserror
+          description: Tells that request has error
+          example: true
+        errorMessages:
+          items:
+            $ref: '#/components/schemas/SchemaValidationError'
+          type: array
+          title: Errormessages
+      type: object
+      title: ValidationErrorResponse
     NotificationPayload:
       properties:
         taskId:
@@ -401,6 +452,25 @@ components:
       - taskType
       - documentId
       title: NotificationPayload
+    SchemaValidationError:
+      properties:
+        type:
+          type: string
+          title: Type
+          description: Type of error
+          example: VALIDATION
+        code:
+          type: string
+          title: Code
+          description: Code of error
+          example: SCHEMA_VALIDATION_ERROR
+        message:
+          type: string
+          title: Message
+          description: Detail of error
+          example: taskType field required
+      type: object
+      title: SchemaValidationError
     AutoResponder:
       properties:
         autoResponseMode:
@@ -430,73 +500,3 @@ components:
       - Success
       - Failed
       title: AutoResponseModeEnum
-    FieldUpdateArray:
-      properties:
-        fieldId:
-          type: string
-          title: Fieldid
-          description: Specifies the field to update. Use JSONpath to identify the value on response schema to update.
-          example: codingRows[2]/accountCode
-        updateToValue:
-          type: string
-          title: Updatetovalue
-          description: Specifies value to which field contents are set by the autoresponder.
-          example: '02600'
-      type: object
-      title: FieldUpdateArray
-    DeleteSubscriptionResponse:
-      properties:
-        status:
-          type: string
-          title: Status
-          description: Success message
-          default: Deleted successfully
-          example: Deleted successfully
-        numberOfRecordsDeleted:
-          type: integer
-          title: Numberofrecordsdeleted
-          description: Number of records deleted
-          example: '1'
-      type: object
-      title: DeleteSubscriptionResponse
-    InternalServerErrorResponse:
-      properties:
-        message:
-          type: string
-          title: Message
-          description: Detail of error
-          default: Internal server error
-          example: Internal server error
-      type: object
-      title: InternalServerErrorResponse
-    UnauthorizeErrorResponse:
-      properties:
-        message:
-          type: string
-          title: Message
-          description: Detail of error
-          default: Unauthorized
-          example: Unauthorized
-      type: object
-      title: UnauthorizeErrorResponse
-    RecordNotFoundResponse:
-      properties:
-        detail:
-          type: string
-          title: Detail
-          description: Detail of error
-          default: Not Found
-          example: Not Found
-      type: object
-      title: RecordNotFoundResponse
-    SubscriptionsResponse:
-      properties:
-        subscriptions:
-          items:
-            $ref: '#/components/schemas/Subscription-Output'
-          type: array
-          title: Subscriptions
-      type: object
-      required:
-      - subscriptions
-      title: SubscriptionsResponse

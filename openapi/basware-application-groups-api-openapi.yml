@@ -259,6 +259,42 @@ components:
           description: Information about type of the error.
           example: ''
       additionalProperties: false
+    Applications:
+      required:
+      - code
+      type: object
+      properties:
+        code:
+          enum:
+          - PurchaseToPay
+          - Reporting
+          - SupplierPortal
+          - SupplierManagement
+          - CloudscanWithSelfValidation
+          - CloudscanWithBaswareValidation
+          - BaswareAdmin
+          - StrategicSourcing
+          - SmartPDFSelfValidation
+          - SmartPDFAdmin
+          - BaswareAdminOrgMgmt
+          - APAssuranceAdmin
+          - APAssuranceUser
+          - StatementMatchingUser
+          - StatementMatchingAdmin
+          type: string
+          description: " Specifies code for the application. \n 1. PurchaseToPay = Basware Purchase-to-Pay (P2P)\n 2. Reporting = Basware Reporting\n 3. SupplierPortal = Access to Basware network, user can see only own company's suppliers. \n 4. SupplierManagement = Access to Basware network, user can see suppliers from any company within tenant. \n 5. CloudscanWithSelfValidation = CloudScan with Self-Validation\n 6. CloudscanWithBaswareValidation = CloudScan with Basware Validation\n 7. BaswareAdmin = Basware Admin (excl. organization management)\n 8. StrategicSourcing = Strategic Sourcing\n 9. SmartPDFSelfValidation  = SmartPfd with self validation\n10. SmartPDFAdmin = SmartPdf Administration\n11. BaswareAdminOrgMgmt = Basware Admin - organization management (in piloting)\n12. APAssuranceUser = AP Assurance, user access\n13. APAssuranceAdmin = AP Assurance, administrator access\n14. StatementMatchingUser = Statement Matching, user access\n15. StatementMatchingAdmin = Statement Matching, administrator access\n \n Note: For accessing applications 2, 5, 6, 7, 9, 10 above, either loginType '4' (Basware Access login) or accessEnabledLogin = “True” is required on the user posted through users API."
+          example: PurchaseToPay
+      additionalProperties: false
+    ApplicationGroupsResponse:
+      required:
+      - applicationGroups
+      type: object
+      properties:
+        applicationGroups:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApplicationGroupEntity'
+      additionalProperties: false
     ApplicationGroupEntity:
       required:
       - applicationGroupCode
@@ -295,42 +331,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Applications'
-      additionalProperties: false
-    ApplicationGroupsResponse:
-      required:
-      - applicationGroups
-      type: object
-      properties:
-        applicationGroups:
-          type: array
-          items:
-            $ref: '#/components/schemas/ApplicationGroupEntity'
-      additionalProperties: false
-    Applications:
-      required:
-      - code
-      type: object
-      properties:
-        code:
-          enum:
-          - PurchaseToPay
-          - Reporting
-          - SupplierPortal
-          - SupplierManagement
-          - CloudscanWithSelfValidation
-          - CloudscanWithBaswareValidation
-          - BaswareAdmin
-          - StrategicSourcing
-          - SmartPDFSelfValidation
-          - SmartPDFAdmin
-          - BaswareAdminOrgMgmt
-          - APAssuranceAdmin
-          - APAssuranceUser
-          - StatementMatchingUser
-          - StatementMatchingAdmin
-          type: string
-          description: " Specifies code for the application. \n 1. PurchaseToPay = Basware Purchase-to-Pay (P2P)\n 2. Reporting = Basware Reporting\n 3. SupplierPortal = Access to Basware network, user can see only own company's suppliers. \n 4. SupplierManagement = Access to Basware network, user can see suppliers from any company within tenant. \n 5. CloudscanWithSelfValidation = CloudScan with Self-Validation\n 6. CloudscanWithBaswareValidation = CloudScan with Basware Validation\n 7. BaswareAdmin = Basware Admin (excl. organization management)\n 8. StrategicSourcing = Strategic Sourcing\n 9. SmartPDFSelfValidation  = SmartPfd with self validation\n10. SmartPDFAdmin = SmartPdf Administration\n11. BaswareAdminOrgMgmt = Basware Admin - organization management (in piloting)\n12. APAssuranceUser = AP Assurance, user access\n13. APAssuranceAdmin = AP Assurance, administrator access\n14. StatementMatchingUser = Statement Matching, user access\n15. StatementMatchingAdmin = Statement Matching, administrator access\n \n Note: For accessing applications 2, 5, 6, 7, 9, 10 above, either loginType '4' (Basware Access login) or accessEnabledLogin = “True” is required on the user posted through users API."
-          example: PurchaseToPay
       additionalProperties: false
     ResponseEntityList:
       type: object

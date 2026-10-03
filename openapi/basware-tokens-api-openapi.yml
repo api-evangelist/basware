@@ -67,20 +67,6 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    ValidationErrorResponse:
-      properties:
-        error:
-          type: string
-          title: Error
-          description: Defines error
-          example: invalid_request
-        error_description:
-          type: string
-          title: Error Description
-          description: Defines error details
-          example: grant_type field required
-      type: object
-      title: ValidationErrorResponse
     UnauthorizedErrorResponse:
       properties:
         error:
@@ -90,27 +76,6 @@ components:
           example: invalid_client
       type: object
       title: UnauthorizedErrorResponse
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
     HTTPValidationError:
       properties:
         detail:
@@ -145,6 +110,41 @@ components:
           example: Bearer
       type: object
       title: AccessTokenResponse
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    ValidationErrorResponse:
+      properties:
+        error:
+          type: string
+          title: Error
+          description: Defines error
+          example: invalid_request
+        error_description:
+          type: string
+          title: Error Description
+          description: Defines error details
+          example: grant_type field required
+      type: object
+      title: ValidationErrorResponse
     Body_get_token_v1_tokens_post:
       properties:
         grant_type:

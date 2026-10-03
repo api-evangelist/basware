@@ -232,6 +232,16 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    BulkOperationStatus:
+      enum:
+      - 0
+      - 1
+      - 2
+      - 3
+      - 4
+      type: integer
+      description: Represents the possible statuses of a bulk operation.
+      format: int32
     IModelValidationResult:
       type: object
       properties:
@@ -287,16 +297,6 @@ components:
       description: 'Represents a user group within an organization, including its unique identifier,
 
         name, description, and associated organization information.'
-    BulkOperationStatus:
-      enum:
-      - 0
-      - 1
-      - 2
-      - 3
-      - 4
-      type: integer
-      description: Represents the possible statuses of a bulk operation.
-      format: int32
     DeleteDataRequest:
       type: object
       properties:

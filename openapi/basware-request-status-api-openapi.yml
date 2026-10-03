@@ -268,135 +268,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    RequestStatusResponse:
-      required:
-      - requestStatus
-      type: object
-      properties:
-        requestStatus:
-          type: array
-          items:
-            $ref: '#/components/schemas/ConsumerLogEventUserView'
-      additionalProperties: false
-    ErrorEntity:
-      type: object
-      properties:
-        externalCode:
-          type:
-          - string
-          - 'null'
-          description: External code of record on which error occurred (when available).
-          example: 4847-31231212-212121-1212
-        type:
-          enum:
-          - BUSINESS
-          - VALIDATION
-          - TECHNICAL
-          - SECURITY
-          type: string
-          description: Error type.
-          example: ''
-        code:
-          enum:
-          - EXTERNAL_CODE_MISMATCH
-          - SCHEMA_VALIDATION_ERROR
-          - CONFLICT_IN_POST
-          - DATA_ORIGIN_VALIDATION_ERROR
-          - ACCESS_TOKEN_VALIDATION_ERROR
-          - CREDENTIAL_VALIDATION_ERROR
-          - PARAMETER_VALIDATION_ERROR
-          - UNEXPECTED_ERROR
-          - METHOD_NOT_ALLOWED
-          - ENTITY_NOT_FOUND
-          - DATA_VALIDATION_FAILED
-          - SNS_PUBLISH_ERROR
-          - SQS_PUBLISH_ERROR
-          type: string
-          description: Error code.
-          example: ''
-        message:
-          type:
-          - string
-          - 'null'
-          description: Specific error message.
-          example: ''
-        info:
-          type:
-          - string
-          - 'null'
-          description: Information about type of the error.
-          example: ''
-      additionalProperties: false
-    ProcessingStatusGetBatchRequest:
-      type: object
-      properties:
-        requestIds:
-          type:
-          - array
-          - 'null'
-          items:
-            type: string
-          description: List of requestIds to acknowledge. Several requests can be acknowledged in one operation.
-      additionalProperties: false
-    ProcessedItemErrorDetail:
-      type: object
-      properties:
-        type:
-          enum:
-          - Error
-          - Warning
-          - RecordExpired
-          type: string
-          description: "Mesage type.\n* Error: Error processing the record. \n* Warning: Record saved with warning(s). Some data on the record may not be saved. Example: One or more user group(s) indicated on user record not found in P2P. User was saved, missing user groups were omitted.\n* RecordExpired: More recent version of the record has been posted to API. Skipped this version since only the more recent version will be saved. This usually requires the same record to have been updated two or more times within less than a second."
-          example: Error
-        message:
-          type:
-          - string
-          - 'null'
-          description: Error message.
-          example: Record skipped due to wrong or missing CompanyCode
-        category:
-          enum:
-          - Unknown
-          - Technical
-          - DataValidation
-          type: string
-          description: "Error category.\n* DataValidation: Data validation error. Typically correctable by customr through correcting an error in the data payload sent by customer.\n* Technical: Technical error. These typically require an intervention from Basware. \n* Unknown: Error category not identified."
-          example: Data validation
-      additionalProperties: false
-    ProcessedItem:
-      type: object
-      properties:
-        externalCode:
-          type:
-          - string
-          - 'null'
-          description: ExternalCode of the processed record.
-          example: aedf21df912ebc89123687cgh181ea4
-        parentExternalCode:
-          type:
-          - string
-          - 'null'
-          description: ExternalCode of the parent record, if applicable. For example, for accounting document responses we will provide InvoiceID in this field.
-        status:
-          enum:
-          - InProgress
-          - NotProcessed
-          - Warning
-          - Success
-          - Error
-          - RecordExpired
-          - Unpublished
-          type: string
-          description: "Status of the processed record. \n* InProgress: Record is still being processed.  \n* NotProcessed: Record skipped due to no changes from previous version of the record. \n* Warning: Record saved with warning(s). Some data on the record may not be saved. Example: One or more user group(s) indicated on user record not found in P2P. User was saved, missing user groups were omitted. \n* Success: Record succesfully saved (no errors/warnings). \n* Error: Error processing the record. \n* RecordExpired: More recent version of the record has been posted to API. Skipped this version since only the more recent version will be saved. This usually requires the same record to have been updated two or more times within less than a second.\n* Unpublished: Record is in draft status ('published' = 'false') and is not distributed to any target system. This status is used only with organizations API (coming soon)."
-          example: Error
-        errors:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/ProcessedItemErrorDetail'
-      additionalProperties: false
     ConsumerLogEventUserView:
       type: object
       properties:
@@ -481,6 +352,42 @@ components:
             $ref: '#/components/schemas/BaswareSystem'
           description: Target system from which the response originates (P2P, network, etc).
       additionalProperties: false
+    ProcessedItemErrorDetail:
+      type: object
+      properties:
+        type:
+          enum:
+          - Error
+          - Warning
+          - RecordExpired
+          type: string
+          description: "Mesage type.\n* Error: Error processing the record. \n* Warning: Record saved with warning(s). Some data on the record may not be saved. Example: One or more user group(s) indicated on user record not found in P2P. User was saved, missing user groups were omitted.\n* RecordExpired: More recent version of the record has been posted to API. Skipped this version since only the more recent version will be saved. This usually requires the same record to have been updated two or more times within less than a second."
+          example: Error
+        message:
+          type:
+          - string
+          - 'null'
+          description: Error message.
+          example: Record skipped due to wrong or missing CompanyCode
+        category:
+          enum:
+          - Unknown
+          - Technical
+          - DataValidation
+          type: string
+          description: "Error category.\n* DataValidation: Data validation error. Typically correctable by customr through correcting an error in the data payload sent by customer.\n* Technical: Technical error. These typically require an intervention from Basware. \n* Unknown: Error category not identified."
+          example: Data validation
+      additionalProperties: false
+    RequestStatusResponse:
+      required:
+      - requestStatus
+      type: object
+      properties:
+        requestStatus:
+          type: array
+          items:
+            $ref: '#/components/schemas/ConsumerLogEventUserView'
+      additionalProperties: false
     BaswareSystem:
       type: object
       properties:
@@ -516,6 +423,66 @@ components:
             $ref: '#/components/schemas/ProcessedItem'
           description: Contains status for each invividual record posted in the original request.
       additionalProperties: false
+    ErrorEntity:
+      type: object
+      properties:
+        externalCode:
+          type:
+          - string
+          - 'null'
+          description: External code of record on which error occurred (when available).
+          example: 4847-31231212-212121-1212
+        type:
+          enum:
+          - BUSINESS
+          - VALIDATION
+          - TECHNICAL
+          - SECURITY
+          type: string
+          description: Error type.
+          example: ''
+        code:
+          enum:
+          - EXTERNAL_CODE_MISMATCH
+          - SCHEMA_VALIDATION_ERROR
+          - CONFLICT_IN_POST
+          - DATA_ORIGIN_VALIDATION_ERROR
+          - ACCESS_TOKEN_VALIDATION_ERROR
+          - CREDENTIAL_VALIDATION_ERROR
+          - PARAMETER_VALIDATION_ERROR
+          - UNEXPECTED_ERROR
+          - METHOD_NOT_ALLOWED
+          - ENTITY_NOT_FOUND
+          - DATA_VALIDATION_FAILED
+          - SNS_PUBLISH_ERROR
+          - SQS_PUBLISH_ERROR
+          type: string
+          description: Error code.
+          example: ''
+        message:
+          type:
+          - string
+          - 'null'
+          description: Specific error message.
+          example: ''
+        info:
+          type:
+          - string
+          - 'null'
+          description: Information about type of the error.
+          example: ''
+      additionalProperties: false
+    ProcessingStatusGetBatchRequest:
+      type: object
+      properties:
+        requestIds:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+          description: List of requestIds to acknowledge. Several requests can be acknowledged in one operation.
+      additionalProperties: false
     ResponseEntityList:
       type: object
       properties:
@@ -536,6 +503,39 @@ components:
             $ref: '#/components/schemas/ErrorEntity'
       additionalProperties: false
       description: Errors returned here are returned synchronously from Basware API middle layer. Additional errors coming from target system(s) may be returned through errorFeedbacks API.
+    ProcessedItem:
+      type: object
+      properties:
+        externalCode:
+          type:
+          - string
+          - 'null'
+          description: ExternalCode of the processed record.
+          example: aedf21df912ebc89123687cgh181ea4
+        parentExternalCode:
+          type:
+          - string
+          - 'null'
+          description: ExternalCode of the parent record, if applicable. For example, for accounting document responses we will provide InvoiceID in this field.
+        status:
+          enum:
+          - InProgress
+          - NotProcessed
+          - Warning
+          - Success
+          - Error
+          - RecordExpired
+          - Unpublished
+          type: string
+          description: "Status of the processed record. \n* InProgress: Record is still being processed.  \n* NotProcessed: Record skipped due to no changes from previous version of the record. \n* Warning: Record saved with warning(s). Some data on the record may not be saved. Example: One or more user group(s) indicated on user record not found in P2P. User was saved, missing user groups were omitted. \n* Success: Record succesfully saved (no errors/warnings). \n* Error: Error processing the record. \n* RecordExpired: More recent version of the record has been posted to API. Skipped this version since only the more recent version will be saved. This usually requires the same record to have been updated two or more times within less than a second.\n* Unpublished: Record is in draft status ('published' = 'false') and is not distributed to any target system. This status is used only with organizations API (coming soon)."
+          example: Error
+        errors:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/ProcessedItemErrorDetail'
+      additionalProperties: false
   securitySchemes:
     Bearer:
       type: http
