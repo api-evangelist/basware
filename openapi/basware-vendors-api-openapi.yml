@@ -485,6 +485,260 @@ components:
           - 'null'
           description: Not used in Basware P2P.
       additionalProperties: false
+    VendorContactEntity:
+      required:
+      - name
+      type: object
+      properties:
+        name:
+          maxLength: 200
+          minLength: 1
+          type: string
+          description: 'Name of the contact. Used as a key in list of contacts. Note: Max length 50 chars if vendors are imported to ScanMarket.'
+          example: DeliveryContact1
+        description:
+          maxLength: 200
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          example: Use this as a primary contact
+        telephone:
+          maxLength: 50
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Specifies the vendor's telephone number.
+          example: 555-3342-454
+        telefax:
+          maxLength: 50
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Specifies the vendor's fax number.
+          example: 555-3342-45412
+        email:
+          maxLength: 200
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Specifies the vendor's email address. Field is imported to P2P.
+          example: contact@vendor.com
+        website:
+          maxLength: 200
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Specifies the vendor's web site address.
+          example: www.mrSmith.com
+        role:
+          enum:
+          - AdditionalContact
+          - PrimaryContact
+          - SecondaryContact
+          type: string
+      additionalProperties: false
+    VendorAdditionalFieldEntity:
+      required:
+      - name
+      - value
+      type: object
+      properties:
+        name:
+          maxLength: 25
+          minLength: 1
+          type: string
+          description: Name of Supplier additional data key field.
+          example: TaxRegistrationValidUntil
+        value:
+          maxLength: 250
+          minLength: 1
+          type: string
+          description: Value for key field specified above.
+          example: 2021-06-30"
+        groupName:
+          maxLength: 500
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Group name. Not used in P2P.
+      additionalProperties: false
+    VendorResponse:
+      required:
+      - vendorEntities
+      type: object
+      properties:
+        vendorEntities:
+          type: array
+          items:
+            $ref: '#/components/schemas/VendorEntity'
+      additionalProperties: false
+    FinancialInstitutionEntity:
+      required:
+      - id
+      - name
+      - schemeId
+      type: object
+      properties:
+        name:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: Specifies the vendor's bank name.
+          example: Nordea UK
+        id:
+          maxLength: 20
+          minLength: 1
+          type: string
+          description: Specifies the value for idenfitier type specified in 'schemeId'. Typically used for importing bank account BIC/SWIFT number.
+          example: NDEAGB2L
+        schemeId:
+          maxLength: 36
+          minLength: 1
+          type: string
+          description: Specifies the identifier type for field 'id'. Use 'BIC' for importing bank account BIC/SWIFT number in field 'id'.
+          example: BIC
+        branchId:
+          maxLength: 50
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: 'BranchId. Note: Field is not used in P2P.'
+        branchIdSchemeId:
+          maxLength: 36
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: 'BranchIdSchemeId. Note: Field is not used in P2P.'
+        countryId:
+          maxLength: 2
+          minLength: 2
+          type:
+          - string
+          - 'null'
+          description: 'Defines the country ID for the vendor. Please use 2-char ISO country codes (according to ISO-3166-1 -standard). Note: Field is not used in P2P.'
+          example: US
+      additionalProperties: false
+    DeleteResponse:
+      type: object
+      properties:
+        statusApiLink:
+          type:
+          - string
+          - 'null'
+        taskName:
+          type:
+          - string
+          - 'null'
+        taskStatus:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    VendorfinancialAccountsEntity:
+      type: object
+      properties:
+        financialInstitution:
+          $ref: '#/components/schemas/FinancialInstitutionEntity'
+        financialAccountIdentifiers:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/FinancialAccountIdentifierEntity'
+      additionalProperties: false
+    VendorTagEntity:
+      required:
+      - name
+      - value
+      type: object
+      properties:
+        name:
+          maxLength: 50
+          minLength: 1
+          type: string
+          description: Name of the tag. Used as key in this array.
+        value:
+          maxLength: 250
+          minLength: 1
+          type: string
+        tagGroup:
+          maxLength: 50
+          minLength: 0
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    DeleteRequest:
+      type: object
+      properties:
+        lastUpdated:
+          type:
+          - string
+          - 'null'
+          description: 'To delete records updated after specific time, use lastUpdated -field. This will delete all items that have been updated after the specified date. In response, user will get the taskStatus api link where the task status can be checked. Note: ''0001-01-01'' can be used to delete all records.'
+          format: date-time
+        externalCode:
+          maxLength: 36
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Single item can be deleted using externalCode and final status is returned immediately.
+      additionalProperties: false
+    VendorPaymentTermEntity:
+      required:
+      - paymentTermCode
+      type: object
+      properties:
+        paymentTermCode:
+          maxLength: 25
+          minLength: 1
+          type: string
+          description: Specifies the vendor's payment term code
+          example: Net90
+        description:
+          maxLength: 200
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          example: Payment 90 days after invoice date
+      additionalProperties: false
+    VendorDeliveryTermEntity:
+      required:
+      - deliveryTermCode
+      type: object
+      properties:
+        deliveryTermCode:
+          maxLength: 25
+          minLength: 1
+          type: string
+          description: Specifies the vendor's delivery term code.
+          example: D02
+        deliveryLocation:
+          maxLength: 100
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Specifies delivery location to be used with delivery term selected on order sent to vendor from P2P Purchase.
+          example: Office
+        description:
+          maxLength: 200
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Default delivery term description.
+      additionalProperties: false
     VendorIdentifierEntity:
       required:
       - id
@@ -509,45 +763,105 @@ components:
           - 'null'
           description: 'Is this the default identifier: true / false.'
       additionalProperties: false
-    VendorAddressPartEntity:
+    FinancialAccountIdentifierEntity:
+      required:
+      - schemeId
       type: object
       properties:
-        key:
-          enum:
-          - AdditionalField1
-          - AdditionalField2
-          - AdditionalStreetName
-          - BlockName
-          - BuildingName
-          - BuildingNumber
-          - CitySubDivisionName
-          - Country
-          - Department
-          - District
-          - Email
-          - Floor
-          - GlobalLocationNumber
-          - InhouseEmail
-          - MarkAttention
-          - MarkCare
-          - Region
-          - Room
-          - CoordinateSystemCode
-          - PlotIdentification
-          - LatitudeDegreesMeasure
-          - LatitudeDirectionCode
-          - LatitudeMinutesMeasure
-          - LongitudeDegreesMeasure
-          - LongitudeDirectionCode
-          - LongitudeMinutesMeasure
+        schemeId:
+          maxLength: 36
+          minLength: 1
           type: string
-        value:
+          description: 'Account type: BBAN / IBAN.'
+          example: IBAN
+        description:
           maxLength: 200
           minLength: 0
           type:
           - string
           - 'null'
+          description: 'Description. Note: Field is not used in P2P.'
+          example: UK only
+        id:
+          maxLength: 50
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: 'The account number. Note: Max 32 chars when used with P2P.'
+          example: GB29 NWBK 6016 1331 9268 19
+        accountHolderName:
+          maxLength: 200
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: 'Account holder name. Note: Field is not used in P2P.'
+          example: United Parcels UK
+        currencyCode:
+          maxLength: 3
+          minLength: 3
+          type:
+          - string
+          - 'null'
+          description: 'Currency code of the account. Note: Field is not used in P2P. To import the supplier specific currency code to P2P, use the ''currencyCode'' field in ''paymentMeans'' -block.'
+          example: GBP
+        accountAdditionalData1:
+          maxLength: 200
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Account additional data field 1.
+          example: FRS123
+        accountAdditionalData2:
+          maxLength: 200
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Account additional data field 2.
+          example: 971298-1212
+        default:
+          type:
+          - boolean
+          - 'null'
+          description: Is this the default account (true / false).
+        linkedBbanOrIban:
+          maxLength: 50
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: 'Allows linking BBAN and IBAN together when both represent the same bank account.
+
+            Accounts are linked when the value of linkedBbanOrlban'' on account A is the same as the value of ''id'' on account B (and also the other way around).
+
+            Also, the schemeld values need to be ''IBAN'' and ''BBAN'' and values of fields ''currencyCode'', ''accountAdditionalDatal'', ''accountAdditionalData2'', ''default'' need to be same on both accounts.
+
+            Account linking is supported only by P2P.'
+          example: ''
       additionalProperties: false
+    ResponseEntityList:
+      type: object
+      properties:
+        requestId:
+          type:
+          - string
+          - 'null'
+          description: ID of the request on which error occurred (generated by Basware API).
+          example: fbc082a2-65a4-469c-b230-d84a252f18fc
+        hasErrors:
+          type: boolean
+          description: Specifies whether the request has errors.
+        errors:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/ErrorEntity'
+      additionalProperties: false
+      description: Errors returned here are returned synchronously from Basware API middle layer. Additional errors coming from target system(s) may be returned through errorFeedbacks API.
     VendorPaymentMeanEntity:
       required:
       - paymentMeansCode
@@ -587,23 +901,227 @@ components:
           - 'null'
           description: Is this the default payment means (true / false).
       additionalProperties: false
-    VendorTagEntity:
+    VendorEntity:
       required:
+      - companies
+      - externalCode
       - name
-      - value
+      - vendorCode
       type: object
       properties:
-        name:
-          maxLength: 50
+        externalCode:
+          maxLength: 36
           minLength: 1
           type: string
-          description: Name of the tag. Used as key in this array.
-        value:
+          description: Specifies a unique code to identify vendor for updates through Basware API.
+          example: c6437eef-0d71-4cb0-8a6e-7f114831478d
+        vendorCode:
+          maxLength: 25
+          minLength: 1
+          type: string
+          description: Vendor code. Normally the vendor code used by Customer ERP system.
+          example: '81264'
+        vendorParent:
+          type:
+          - string
+          - 'null'
+          description: VendorCode of parent. Not used in Basware P2P.
+          example: AS12154
+        buvid:
+          maxLength: 36
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Vendor identifier generated by Basware. Not to be included when posting data.
+          example: f0b29a62-a5e0-4285-8ceb-11a92eccf212
+        name:
           maxLength: 250
           minLength: 1
           type: string
-        tagGroup:
-          maxLength: 50
+          description: Vendor name.
+          example: Things and Gadgets Inc.
+        sourceSystem:
+          maxLength: 36
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Name of the source system, e.g. ERP instance
+          example: SAPEUR1
+        description:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Freetext description of vendor
+          example: ''
+        lastUpdated:
+          type: string
+          description: Timestamp when the record was last sent to API. Set automatically.
+          format: date-time
+        supplierAssignedAccountId:
+          maxLength: 128
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Customer ID in vendor's system.
+          example: '12890'
+        eligibleForSourcing:
+          type:
+          - boolean
+          - 'null'
+          description: 'Specifies whether the vendor is eligible for sourcing activities. This flag can be used to mark vendors that need to be copied to an external sourcing system. Note: If your sourcing system does not support a multiple company -structure, please make sure only one company-specific instance of the each vendor has eligibleForSourcing = ''true''.'
+          example: false
+        vendorClass:
+          maxLength: 100
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: 'Specifies vendor class. Can be used to determine preferred vendors in P2P Purchase. Values are determined by customer. Typical example values: A, B, C, Preferred. Note: Allowed values for vendor class need to be configured in P2P before posting data.'
+          example: Preferred
+        identifiers:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/VendorIdentifierEntity'
+          description: Vendor identifiers
+        addresses:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/VendorAddressEntity'
+          description: Vendor addresses
+        contacts:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/VendorContactEntity'
+          description: Vendor contacts. Used in Vendor Manager. Not used in Basware P2P, except for email address -field.
+        deliveryTerm:
+          $ref: '#/components/schemas/VendorDeliveryTermEntity'
+        paymentMeans:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/VendorPaymentMeanEntity'
+          description: Vendor payment means
+        paymentTerms:
+          $ref: '#/components/schemas/VendorPaymentTermEntity'
+        orderingDetails:
+          $ref: '#/components/schemas/VendorOrderingDetailsEntity'
+        processingStatus:
+          $ref: '#/components/schemas/VendorProcessingStatusEntity'
+        tags:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/VendorTagEntity'
+          description: Tags are used to group the vendors. Not used in P2P.
+        customFields:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/VendorAdditionalFieldEntity'
+          description: Custom fields are used to provide additional data. Posted as ‘Supplier additional data’ -fields to P2P.
+        companies:
+          type: array
+          items:
+            $ref: '#/components/schemas/VendorCompanyEntity'
+          description: List of company units to associate vendor to P2P organization hierarchy
+      additionalProperties: false
+    ErrorEntity:
+      type: object
+      properties:
+        externalCode:
+          type:
+          - string
+          - 'null'
+          description: External code of record on which error occurred (when available).
+          example: 4847-31231212-212121-1212
+        type:
+          enum:
+          - BUSINESS
+          - VALIDATION
+          - TECHNICAL
+          - SECURITY
+          type: string
+          description: Error type.
+          example: ''
+        code:
+          enum:
+          - EXTERNAL_CODE_MISMATCH
+          - SCHEMA_VALIDATION_ERROR
+          - CONFLICT_IN_POST
+          - DATA_ORIGIN_VALIDATION_ERROR
+          - ACCESS_TOKEN_VALIDATION_ERROR
+          - CREDENTIAL_VALIDATION_ERROR
+          - PARAMETER_VALIDATION_ERROR
+          - UNEXPECTED_ERROR
+          - METHOD_NOT_ALLOWED
+          - ENTITY_NOT_FOUND
+          - DATA_VALIDATION_FAILED
+          - SNS_PUBLISH_ERROR
+          - SQS_PUBLISH_ERROR
+          type: string
+          description: Error code.
+          example: ''
+        message:
+          type:
+          - string
+          - 'null'
+          description: Specific error message.
+          example: ''
+        info:
+          type:
+          - string
+          - 'null'
+          description: Information about type of the error.
+          example: ''
+      additionalProperties: false
+    VendorAddressPartEntity:
+      type: object
+      properties:
+        key:
+          enum:
+          - AdditionalField1
+          - AdditionalField2
+          - AdditionalStreetName
+          - BlockName
+          - BuildingName
+          - BuildingNumber
+          - CitySubDivisionName
+          - Country
+          - Department
+          - District
+          - Email
+          - Floor
+          - GlobalLocationNumber
+          - InhouseEmail
+          - MarkAttention
+          - MarkCare
+          - Region
+          - Room
+          - CoordinateSystemCode
+          - PlotIdentification
+          - LatitudeDegreesMeasure
+          - LatitudeDirectionCode
+          - LatitudeMinutesMeasure
+          - LongitudeDegreesMeasure
+          - LongitudeDirectionCode
+          - LongitudeMinutesMeasure
+          type: string
+        value:
+          maxLength: 200
           minLength: 0
           type:
           - string
@@ -757,524 +1275,6 @@ components:
           - boolean
           - 'null'
           description: Specifies whether the vendor is inherited to lower organizations.
-      additionalProperties: false
-    VendorResponse:
-      required:
-      - vendorEntities
-      type: object
-      properties:
-        vendorEntities:
-          type: array
-          items:
-            $ref: '#/components/schemas/VendorEntity'
-      additionalProperties: false
-    ErrorEntity:
-      type: object
-      properties:
-        externalCode:
-          type:
-          - string
-          - 'null'
-          description: External code of record on which error occurred (when available).
-          example: 4847-31231212-212121-1212
-        type:
-          enum:
-          - BUSINESS
-          - VALIDATION
-          - TECHNICAL
-          - SECURITY
-          type: string
-          description: Error type.
-          example: ''
-        code:
-          enum:
-          - EXTERNAL_CODE_MISMATCH
-          - SCHEMA_VALIDATION_ERROR
-          - CONFLICT_IN_POST
-          - DATA_ORIGIN_VALIDATION_ERROR
-          - ACCESS_TOKEN_VALIDATION_ERROR
-          - CREDENTIAL_VALIDATION_ERROR
-          - PARAMETER_VALIDATION_ERROR
-          - UNEXPECTED_ERROR
-          - METHOD_NOT_ALLOWED
-          - ENTITY_NOT_FOUND
-          - DATA_VALIDATION_FAILED
-          - SNS_PUBLISH_ERROR
-          - SQS_PUBLISH_ERROR
-          type: string
-          description: Error code.
-          example: ''
-        message:
-          type:
-          - string
-          - 'null'
-          description: Specific error message.
-          example: ''
-        info:
-          type:
-          - string
-          - 'null'
-          description: Information about type of the error.
-          example: ''
-      additionalProperties: false
-    VendorPaymentTermEntity:
-      required:
-      - paymentTermCode
-      type: object
-      properties:
-        paymentTermCode:
-          maxLength: 25
-          minLength: 1
-          type: string
-          description: Specifies the vendor's payment term code
-          example: Net90
-        description:
-          maxLength: 200
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          example: Payment 90 days after invoice date
-      additionalProperties: false
-    DeleteResponse:
-      type: object
-      properties:
-        statusApiLink:
-          type:
-          - string
-          - 'null'
-        taskName:
-          type:
-          - string
-          - 'null'
-        taskStatus:
-          type:
-          - string
-          - 'null'
-      additionalProperties: false
-    FinancialInstitutionEntity:
-      required:
-      - id
-      - name
-      - schemeId
-      type: object
-      properties:
-        name:
-          maxLength: 250
-          minLength: 0
-          type: string
-          description: Specifies the vendor's bank name.
-          example: Nordea UK
-        id:
-          maxLength: 20
-          minLength: 1
-          type: string
-          description: Specifies the value for idenfitier type specified in 'schemeId'. Typically used for importing bank account BIC/SWIFT number.
-          example: NDEAGB2L
-        schemeId:
-          maxLength: 36
-          minLength: 1
-          type: string
-          description: Specifies the identifier type for field 'id'. Use 'BIC' for importing bank account BIC/SWIFT number in field 'id'.
-          example: BIC
-        branchId:
-          maxLength: 50
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: 'BranchId. Note: Field is not used in P2P.'
-        branchIdSchemeId:
-          maxLength: 36
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: 'BranchIdSchemeId. Note: Field is not used in P2P.'
-        countryId:
-          maxLength: 2
-          minLength: 2
-          type:
-          - string
-          - 'null'
-          description: 'Defines the country ID for the vendor. Please use 2-char ISO country codes (according to ISO-3166-1 -standard). Note: Field is not used in P2P.'
-          example: US
-      additionalProperties: false
-    VendorAdditionalFieldEntity:
-      required:
-      - name
-      - value
-      type: object
-      properties:
-        name:
-          maxLength: 25
-          minLength: 1
-          type: string
-          description: Name of Supplier additional data key field.
-          example: TaxRegistrationValidUntil
-        value:
-          maxLength: 250
-          minLength: 1
-          type: string
-          description: Value for key field specified above.
-          example: 2021-06-30"
-        groupName:
-          maxLength: 500
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Group name. Not used in P2P.
-      additionalProperties: false
-    VendorContactEntity:
-      required:
-      - name
-      type: object
-      properties:
-        name:
-          maxLength: 200
-          minLength: 1
-          type: string
-          description: 'Name of the contact. Used as a key in list of contacts. Note: Max length 50 chars if vendors are imported to ScanMarket.'
-          example: DeliveryContact1
-        description:
-          maxLength: 200
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          example: Use this as a primary contact
-        telephone:
-          maxLength: 50
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Specifies the vendor's telephone number.
-          example: 555-3342-454
-        telefax:
-          maxLength: 50
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Specifies the vendor's fax number.
-          example: 555-3342-45412
-        email:
-          maxLength: 200
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Specifies the vendor's email address. Field is imported to P2P.
-          example: contact@vendor.com
-        website:
-          maxLength: 200
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Specifies the vendor's web site address.
-          example: www.mrSmith.com
-        role:
-          enum:
-          - AdditionalContact
-          - PrimaryContact
-          - SecondaryContact
-          type: string
-      additionalProperties: false
-    FinancialAccountIdentifierEntity:
-      required:
-      - schemeId
-      type: object
-      properties:
-        schemeId:
-          maxLength: 36
-          minLength: 1
-          type: string
-          description: 'Account type: BBAN / IBAN.'
-          example: IBAN
-        description:
-          maxLength: 200
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: 'Description. Note: Field is not used in P2P.'
-          example: UK only
-        id:
-          maxLength: 50
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: 'The account number. Note: Max 32 chars when used with P2P.'
-          example: GB29 NWBK 6016 1331 9268 19
-        accountHolderName:
-          maxLength: 200
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: 'Account holder name. Note: Field is not used in P2P.'
-          example: United Parcels UK
-        currencyCode:
-          maxLength: 3
-          minLength: 3
-          type:
-          - string
-          - 'null'
-          description: 'Currency code of the account. Note: Field is not used in P2P. To import the supplier specific currency code to P2P, use the ''currencyCode'' field in ''paymentMeans'' -block.'
-          example: GBP
-        accountAdditionalData1:
-          maxLength: 200
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Account additional data field 1.
-          example: FRS123
-        accountAdditionalData2:
-          maxLength: 200
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Account additional data field 2.
-          example: 971298-1212
-        default:
-          type:
-          - boolean
-          - 'null'
-          description: Is this the default account (true / false).
-        linkedBbanOrIban:
-          maxLength: 50
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: 'Allows linking BBAN and IBAN together when both represent the same bank account.
-
-            Accounts are linked when the value of linkedBbanOrlban'' on account A is the same as the value of ''id'' on account B (and also the other way around).
-
-            Also, the schemeld values need to be ''IBAN'' and ''BBAN'' and values of fields ''currencyCode'', ''accountAdditionalDatal'', ''accountAdditionalData2'', ''default'' need to be same on both accounts.
-
-            Account linking is supported only by P2P.'
-          example: ''
-      additionalProperties: false
-    VendorfinancialAccountsEntity:
-      type: object
-      properties:
-        financialInstitution:
-          $ref: '#/components/schemas/FinancialInstitutionEntity'
-        financialAccountIdentifiers:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/FinancialAccountIdentifierEntity'
-      additionalProperties: false
-    VendorEntity:
-      required:
-      - companies
-      - externalCode
-      - name
-      - vendorCode
-      type: object
-      properties:
-        externalCode:
-          maxLength: 36
-          minLength: 1
-          type: string
-          description: Specifies a unique code to identify vendor for updates through Basware API.
-          example: c6437eef-0d71-4cb0-8a6e-7f114831478d
-        vendorCode:
-          maxLength: 25
-          minLength: 1
-          type: string
-          description: Vendor code. Normally the vendor code used by Customer ERP system.
-          example: '81264'
-        vendorParent:
-          type:
-          - string
-          - 'null'
-          description: VendorCode of parent. Not used in Basware P2P.
-          example: AS12154
-        buvid:
-          maxLength: 36
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Vendor identifier generated by Basware. Not to be included when posting data.
-          example: f0b29a62-a5e0-4285-8ceb-11a92eccf212
-        name:
-          maxLength: 250
-          minLength: 1
-          type: string
-          description: Vendor name.
-          example: Things and Gadgets Inc.
-        sourceSystem:
-          maxLength: 36
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Name of the source system, e.g. ERP instance
-          example: SAPEUR1
-        description:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Freetext description of vendor
-          example: ''
-        lastUpdated:
-          type: string
-          description: Timestamp when the record was last sent to API. Set automatically.
-          format: date-time
-        supplierAssignedAccountId:
-          maxLength: 128
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Customer ID in vendor's system.
-          example: '12890'
-        eligibleForSourcing:
-          type:
-          - boolean
-          - 'null'
-          description: 'Specifies whether the vendor is eligible for sourcing activities. This flag can be used to mark vendors that need to be copied to an external sourcing system. Note: If your sourcing system does not support a multiple company -structure, please make sure only one company-specific instance of the each vendor has eligibleForSourcing = ''true''.'
-          example: false
-        vendorClass:
-          maxLength: 100
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: 'Specifies vendor class. Can be used to determine preferred vendors in P2P Purchase. Values are determined by customer. Typical example values: A, B, C, Preferred. Note: Allowed values for vendor class need to be configured in P2P before posting data.'
-          example: Preferred
-        identifiers:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/VendorIdentifierEntity'
-          description: Vendor identifiers
-        addresses:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/VendorAddressEntity'
-          description: Vendor addresses
-        contacts:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/VendorContactEntity'
-          description: Vendor contacts. Used in Vendor Manager. Not used in Basware P2P, except for email address -field.
-        deliveryTerm:
-          $ref: '#/components/schemas/VendorDeliveryTermEntity'
-        paymentMeans:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/VendorPaymentMeanEntity'
-          description: Vendor payment means
-        paymentTerms:
-          $ref: '#/components/schemas/VendorPaymentTermEntity'
-        orderingDetails:
-          $ref: '#/components/schemas/VendorOrderingDetailsEntity'
-        processingStatus:
-          $ref: '#/components/schemas/VendorProcessingStatusEntity'
-        tags:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/VendorTagEntity'
-          description: Tags are used to group the vendors. Not used in P2P.
-        customFields:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/VendorAdditionalFieldEntity'
-          description: Custom fields are used to provide additional data. Posted as ‘Supplier additional data’ -fields to P2P.
-        companies:
-          type: array
-          items:
-            $ref: '#/components/schemas/VendorCompanyEntity'
-          description: List of company units to associate vendor to P2P organization hierarchy
-      additionalProperties: false
-    VendorDeliveryTermEntity:
-      required:
-      - deliveryTermCode
-      type: object
-      properties:
-        deliveryTermCode:
-          maxLength: 25
-          minLength: 1
-          type: string
-          description: Specifies the vendor's delivery term code.
-          example: D02
-        deliveryLocation:
-          maxLength: 100
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Specifies delivery location to be used with delivery term selected on order sent to vendor from P2P Purchase.
-          example: Office
-        description:
-          maxLength: 200
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Default delivery term description.
-      additionalProperties: false
-    ResponseEntityList:
-      type: object
-      properties:
-        requestId:
-          type:
-          - string
-          - 'null'
-          description: ID of the request on which error occurred (generated by Basware API).
-          example: fbc082a2-65a4-469c-b230-d84a252f18fc
-        hasErrors:
-          type: boolean
-          description: Specifies whether the request has errors.
-        errors:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/ErrorEntity'
-      additionalProperties: false
-      description: Errors returned here are returned synchronously from Basware API middle layer. Additional errors coming from target system(s) may be returned through errorFeedbacks API.
-    DeleteRequest:
-      type: object
-      properties:
-        lastUpdated:
-          type:
-          - string
-          - 'null'
-          description: 'To delete records updated after specific time, use lastUpdated -field. This will delete all items that have been updated after the specified date. In response, user will get the taskStatus api link where the task status can be checked. Note: ''0001-01-01'' can be used to delete all records.'
-          format: date-time
-        externalCode:
-          maxLength: 36
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Single item can be deleted using externalCode and final status is returned immediately.
       additionalProperties: false
   securitySchemes:
     Bearer:

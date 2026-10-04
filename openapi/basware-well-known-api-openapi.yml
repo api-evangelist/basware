@@ -53,20 +53,6 @@ components:
           description: List of public keys available to validate access tokens.
       type: object
       title: WellKnownTokenResponse
-    OpenIdConfigurationResponse:
-      properties:
-        issuer:
-          type: string
-          title: Issuer
-          description: Defines token issuer
-          example: https://api.basware.com/
-        jwks_uri:
-          type: string
-          title: Jwks Uri
-          description: Defines well known endpoint
-          example: https://api.basware.com/.well-known/jwks.json
-      type: object
-      title: OpenIdConfigurationResponse
     WellKnownTokenKey:
       properties:
         e:
@@ -101,6 +87,20 @@ components:
           example: RS256
       type: object
       title: WellKnownTokenKey
+    OpenIdConfigurationResponse:
+      properties:
+        issuer:
+          type: string
+          title: Issuer
+          description: Defines token issuer
+          example: https://api.basware.com/
+        jwks_uri:
+          type: string
+          title: Jwks Uri
+          description: Defines well known endpoint
+          example: https://api.basware.com/.well-known/jwks.json
+      type: object
+      title: OpenIdConfigurationResponse
   securitySchemes:
     HTTPBasic:
       type: http

@@ -210,96 +210,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    CompanyResponse:
-      required:
-      - companies
-      type: object
-      properties:
-        companies:
-          type: array
-          items:
-            $ref: '#/components/schemas/CompanyEntity'
-      additionalProperties: false
-    CompanyIdentifierEntity:
-      required:
-      - id
-      - schemeId
-      type: object
-      properties:
-        id:
-          maxLength: 36
-          minLength: 1
-          type: string
-          description: Company identifier value.
-          example: GB190101452
-        schemeId:
-          maxLength: 36
-          minLength: 1
-          type: string
-          description: 'Company identifier type. Defines type of ‘Id’ -field. Available values:
-
-            DUNS, EMAIL-RFC2822, GLN, IBAN, ISO6523-ACTORID-UPIS, UNKNOWN, EU:VAT, AT:ORGNR, AU:ABN, AU:ACN, AU:TFN, BE:KBO, CA:BN, CA:GST, CA:VAT, CH:ORGNR, CH:VAT, CN:BRN, CZ:ORGNR, DE:ORGNR, DK:CVR, EE:ORGNR, ES:CIF, ES:NIF, FI:Y-TUNNUS, FR:SIRENE, FR:SIRET, GB:UTR, IE:ORGNR, IN:GSTIN, IT:FISCALE, IT:IPA, LI:VAT, MX:VAT, MY:GST, NL:KVK, NO:ORGNR, NO:VAT, PL:KRS, PL:REGON, PT:NIF, SE:ORGNR, SK:ORGNR, GB:ORGNR, UstidNr, US:TIN'
-          example: EU:VAT
-      additionalProperties: false
-    CompanyContactEntity:
-      required:
-      - name
-      - role
-      type: object
-      properties:
-        name:
-          maxLength: 200
-          minLength: 1
-          type: string
-          description: Name of the contact. Used as a key in list of contacts.
-          example: DeliveryContact1
-        description:
-          maxLength: 200
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          example: Use this as a primary contact
-        telephone:
-          maxLength: 50
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Specifies the contact's telephone number.
-          example: 555-3342-454
-        telefax:
-          maxLength: 50
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Specifies the contact's fax number.
-          example: 555-3342-45412
-        email:
-          maxLength: 200
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Specifies the contact's email address.
-          example: mrsmith@business.org
-        website:
-          maxLength: 200
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Specifies the contact's web site address.
-          example: www.mrSmith.com
-        role:
-          enum:
-          - AdditionalContact
-          - PrimaryContact
-          - SecondaryContact
-          type: string
-          description: Role of contact.
-      additionalProperties: false
     CompanyEntity:
       required:
       - active
@@ -444,6 +354,65 @@ components:
           description: Information about type of the error.
           example: ''
       additionalProperties: false
+    CompanyContactEntity:
+      required:
+      - name
+      - role
+      type: object
+      properties:
+        name:
+          maxLength: 200
+          minLength: 1
+          type: string
+          description: Name of the contact. Used as a key in list of contacts.
+          example: DeliveryContact1
+        description:
+          maxLength: 200
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          example: Use this as a primary contact
+        telephone:
+          maxLength: 50
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Specifies the contact's telephone number.
+          example: 555-3342-454
+        telefax:
+          maxLength: 50
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Specifies the contact's fax number.
+          example: 555-3342-45412
+        email:
+          maxLength: 200
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Specifies the contact's email address.
+          example: mrsmith@business.org
+        website:
+          maxLength: 200
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Specifies the contact's web site address.
+          example: www.mrSmith.com
+        role:
+          enum:
+          - AdditionalContact
+          - PrimaryContact
+          - SecondaryContact
+          type: string
+          description: Role of contact.
+      additionalProperties: false
     CompanyAddressEntity:
       required:
       - addressType
@@ -573,6 +542,37 @@ components:
           - boolean
           - 'null'
           description: Is this the default address (true / false).
+      additionalProperties: false
+    CompanyIdentifierEntity:
+      required:
+      - id
+      - schemeId
+      type: object
+      properties:
+        id:
+          maxLength: 36
+          minLength: 1
+          type: string
+          description: Company identifier value.
+          example: GB190101452
+        schemeId:
+          maxLength: 36
+          minLength: 1
+          type: string
+          description: 'Company identifier type. Defines type of ‘Id’ -field. Available values:
+
+            DUNS, EMAIL-RFC2822, GLN, IBAN, ISO6523-ACTORID-UPIS, UNKNOWN, EU:VAT, AT:ORGNR, AU:ABN, AU:ACN, AU:TFN, BE:KBO, CA:BN, CA:GST, CA:VAT, CH:ORGNR, CH:VAT, CN:BRN, CZ:ORGNR, DE:ORGNR, DK:CVR, EE:ORGNR, ES:CIF, ES:NIF, FI:Y-TUNNUS, FR:SIRENE, FR:SIRET, GB:UTR, IE:ORGNR, IN:GSTIN, IT:FISCALE, IT:IPA, LI:VAT, MX:VAT, MY:GST, NL:KVK, NO:ORGNR, NO:VAT, PL:KRS, PL:REGON, PT:NIF, SE:ORGNR, SK:ORGNR, GB:ORGNR, UstidNr, US:TIN'
+          example: EU:VAT
+      additionalProperties: false
+    CompanyResponse:
+      required:
+      - companies
+      type: object
+      properties:
+        companies:
+          type: array
+          items:
+            $ref: '#/components/schemas/CompanyEntity'
       additionalProperties: false
     ResponseEntityList:
       type: object

@@ -232,16 +232,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    BulkOperationStatus:
-      enum:
-      - 0
-      - 1
-      - 2
-      - 3
-      - 4
-      type: integer
-      description: Represents the possible statuses of a bulk operation.
-      format: int32
     IModelValidationResult:
       type: object
       properties:
@@ -297,23 +287,39 @@ components:
       description: 'Represents a user group within an organization, including its unique identifier,
 
         name, description, and associated organization information.'
-    DeleteDataRequest:
+    DeleteResponse:
       type: object
       properties:
-        externalCode:
-          maxLength: 36
-          minLength: 0
+        statusApiLink:
           type:
           - string
           - 'null'
-          description: Single item can be deleted using externalCode and final status is returned immediately.
-        lastUpdated:
+          description: Gets or sets the API link to check the status of the delete operation.
+        taskName:
           type:
           - string
           - 'null'
-          description: 'To delete records updated after specific time, use lastUpdated -field. This will delete all items that have been updated after the specified date. In response, user will get the taskStatus api link where the task status can be checked. Note: ''0001-01-01'' can be used to delete all records.'
-          format: date-time
+          description: Gets or sets the name of the delete task.
+        taskStatus:
+          type:
+          - string
+          - 'null'
+          description: Gets or sets the current status of the delete task.
+          readOnly: true
+        statusEnum:
+          $ref: '#/components/schemas/BulkOperationStatus'
       additionalProperties: false
+      description: Represents the response returned after a delete operation.
+    BulkOperationStatus:
+      enum:
+      - 0
+      - 1
+      - 2
+      - 3
+      - 4
+      type: integer
+      description: Represents the possible statuses of a bulk operation.
+      format: int32
     IModelValidationError:
       type: object
       properties:
@@ -342,29 +348,23 @@ components:
           - string
           - 'null'
       additionalProperties: false
-    DeleteResponse:
+    DeleteDataRequest:
       type: object
       properties:
-        statusApiLink:
+        externalCode:
+          maxLength: 36
+          minLength: 0
           type:
           - string
           - 'null'
-          description: Gets or sets the API link to check the status of the delete operation.
-        taskName:
+          description: Single item can be deleted using externalCode and final status is returned immediately.
+        lastUpdated:
           type:
           - string
           - 'null'
-          description: Gets or sets the name of the delete task.
-        taskStatus:
-          type:
-          - string
-          - 'null'
-          description: Gets or sets the current status of the delete task.
-          readOnly: true
-        statusEnum:
-          $ref: '#/components/schemas/BulkOperationStatus'
+          description: 'To delete records updated after specific time, use lastUpdated -field. This will delete all items that have been updated after the specified date. In response, user will get the taskStatus api link where the task status can be checked. Note: ''0001-01-01'' can be used to delete all records.'
+          format: date-time
       additionalProperties: false
-      description: Represents the response returned after a delete operation.
   securitySchemes:
     Bearer:
       type: http

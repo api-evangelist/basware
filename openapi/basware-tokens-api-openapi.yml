@@ -67,15 +67,21 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    UnauthorizedErrorResponse:
+    Body_get_token_v1_tokens_post:
       properties:
-        error:
+        grant_type:
           type: string
-          title: Error
-          description: 'Defines error '
-          example: invalid_client
+          title: Grant Type
+          description: 'Oauth2 grant type. Supported value(s): ''client_credentials'' = Client credential authentication flow.'
+        scope:
+          type: string
+          title: Scope
+          description: Scopes define the operations (e.g. vendors.write) allowed using the returned access token. See <https://developer.basware.com/api/p2p/manual#AccessRights> for list of available operations. Passed as HTTP form parameter.
       type: object
-      title: UnauthorizedErrorResponse
+      required:
+      - grant_type
+      - scope
+      title: Body_get_token_v1_tokens_post
     HTTPValidationError:
       properties:
         detail:
@@ -145,21 +151,15 @@ components:
           example: grant_type field required
       type: object
       title: ValidationErrorResponse
-    Body_get_token_v1_tokens_post:
+    UnauthorizedErrorResponse:
       properties:
-        grant_type:
+        error:
           type: string
-          title: Grant Type
-          description: 'Oauth2 grant type. Supported value(s): ''client_credentials'' = Client credential authentication flow.'
-        scope:
-          type: string
-          title: Scope
-          description: Scopes define the operations (e.g. vendors.write) allowed using the returned access token. See <https://developer.basware.com/api/p2p/manual#AccessRights> for list of available operations. Passed as HTTP form parameter.
+          title: Error
+          description: 'Defines error '
+          example: invalid_client
       type: object
-      required:
-      - grant_type
-      - scope
-      title: Body_get_token_v1_tokens_post
+      title: UnauthorizedErrorResponse
   securitySchemes:
     HTTPBasic:
       type: http

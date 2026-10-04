@@ -91,15 +91,6 @@ components:
       - receivingEmailAddress
       - notificationEmailAddress
       title: UploadRequest
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
     UploadResponse:
       properties:
         uploadUrl:
@@ -119,6 +110,15 @@ components:
       - uploadUrl
       - bumId
       title: UploadResponse
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
     ValidationError:
       properties:
         loc:

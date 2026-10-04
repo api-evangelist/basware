@@ -204,36 +204,42 @@ paths:
                 $ref: '#/components/schemas/UnauthorizeErrorResponse'
 components:
   schemas:
-    RecordNotFoundResponse:
+    UnauthorizeErrorResponse:
+      properties:
+        message:
+          type: string
+          title: Message
+          description: Detail of error
+          default: Unauthorized
+          example: Unauthorized
+      type: object
+      title: UnauthorizeErrorResponse
+    HTTPValidationError:
       properties:
         detail:
-          type: string
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
           title: Detail
-          description: Detail of error
-          default: Not Found
-          example: Not Found
       type: object
-      title: RecordNotFoundResponse
-    UnprocessableEntityErrorResponse:
+      title: HTTPValidationError
+    TableDefinitionColumnChangeLog:
       properties:
-        message:
-          type: string
-          title: Message
-          description: Detail of error
-          default: UnprocessableEntity
-          example: UnprocessableEntity
+        Added columns:
+          items:
+            type: string
+          type: array
+          title: Added Columns
+        Removed columns:
+          items:
+            type: string
+          type: array
+          title: Removed Columns
       type: object
-      title: UnprocessableEntityErrorResponse
-    InternalServerErrorResponse:
-      properties:
-        message:
-          type: string
-          title: Message
-          description: Detail of error
-          default: Internal server error
-          example: Internal server error
-      type: object
-      title: InternalServerErrorResponse
+      required:
+      - Added columns
+      - Removed columns
+      title: TableDefinitionColumnChangeLog
     TableColumnDefinition:
       properties:
         Column name:
@@ -259,46 +265,43 @@ components:
       - Field definition
       - Example value
       title: TableColumnDefinition
-    SuccessResponse:
-      properties:
-        succeeded:
-          type: boolean
-          title: Succeeded
-          description: Success status
-          example: true
-        message:
-          type: string
-          title: Message
-          description: Success message
-          default: Action done successfully
-          example: Action done successfully
-      type: object
-      title: SuccessResponse
-    HTTPValidationError:
+    RecordNotFoundResponse:
       properties:
         detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
-    TableDefinition:
-      properties:
-        Table name:
           type: string
-          title: Table Name
-          example: TABLE_1
-        Columns:
+          title: Detail
+          description: Detail of error
+          default: Not Found
+          example: Not Found
+      type: object
+      title: RecordNotFoundResponse
+    TableDefinitionChangeLog:
+      properties:
+        Version:
+          type: string
+          title: Version
+        Added tables:
           items:
-            $ref: '#/components/schemas/TableColumnDefinition'
+            type: string
           type: array
-          title: Columns
+          title: Added Tables
+        Removed tables:
+          items:
+            type: string
+          type: array
+          title: Removed Tables
+        Column changes:
+          additionalProperties:
+            $ref: '#/components/schemas/TableDefinitionColumnChangeLog'
+          type: object
+          title: Column Changes
       type: object
       required:
-      - Table name
-      - Columns
-      title: TableDefinition
+      - Version
+      - Added tables
+      - Removed tables
+      - Column changes
+      title: TableDefinitionChangeLog
     AvailableDataExtractInfo:
       properties:
         id:
@@ -359,40 +362,35 @@ components:
       - extractDate
       - extractName
       title: AvailableDataExtractInfo
-    UnauthorizeErrorResponse:
+    SchemaValidationError:
+      properties:
+        type:
+          type: string
+          title: Type
+          description: Type of error
+          example: VALIDATION
+        code:
+          type: string
+          title: Code
+          description: Code of error
+          example: SCHEMA_VALIDATION_ERROR
+        message:
+          type: string
+          title: Message
+          description: Detail of error
+          example: taskType field required
+      type: object
+      title: SchemaValidationError
+    UnprocessableEntityErrorResponse:
       properties:
         message:
           type: string
           title: Message
           description: Detail of error
-          default: Unauthorized
-          example: Unauthorized
+          default: UnprocessableEntity
+          example: UnprocessableEntity
       type: object
-      title: UnauthorizeErrorResponse
-    ValidationErrorResponse:
-      properties:
-        requestId:
-          type: string
-          title: Requestid
-          description: RequestId of request
-          example: KLF5BiZ9DoEEMlQ=
-        transactionId:
-          type: string
-          title: Transactionid
-          description: TransactionId of request
-          example: JKL5BiZ9DoEEMkV=
-        hasError:
-          type: boolean
-          title: Haserror
-          description: Tells that request has error
-          example: true
-        errorMessages:
-          items:
-            $ref: '#/components/schemas/SchemaValidationError'
-          type: array
-          title: Errormessages
-      type: object
-      title: ValidationErrorResponse
+      title: UnprocessableEntityErrorResponse
     DataExtractFileInfo:
       properties:
         extractId:
@@ -434,25 +432,6 @@ components:
       - endDate
       - downloadUrl
       title: DataExtractFileInfo
-    SchemaValidationError:
-      properties:
-        type:
-          type: string
-          title: Type
-          description: Type of error
-          example: VALIDATION
-        code:
-          type: string
-          title: Code
-          description: Code of error
-          example: SCHEMA_VALIDATION_ERROR
-        message:
-          type: string
-          title: Message
-          description: Detail of error
-          example: taskType field required
-      type: object
-      title: SchemaValidationError
     ValidationError:
       properties:
         loc:
@@ -474,47 +453,68 @@ components:
       - msg
       - type
       title: ValidationError
-    TableDefinitionColumnChangeLog:
+    ValidationErrorResponse:
       properties:
-        Added columns:
-          items:
-            type: string
-          type: array
-          title: Added Columns
-        Removed columns:
-          items:
-            type: string
-          type: array
-          title: Removed Columns
-      type: object
-      required:
-      - Added columns
-      - Removed columns
-      title: TableDefinitionColumnChangeLog
-    TableDefinitionChangeLog:
-      properties:
-        Version:
+        requestId:
           type: string
-          title: Version
-        Added tables:
+          title: Requestid
+          description: RequestId of request
+          example: KLF5BiZ9DoEEMlQ=
+        transactionId:
+          type: string
+          title: Transactionid
+          description: TransactionId of request
+          example: JKL5BiZ9DoEEMkV=
+        hasError:
+          type: boolean
+          title: Haserror
+          description: Tells that request has error
+          example: true
+        errorMessages:
           items:
-            type: string
+            $ref: '#/components/schemas/SchemaValidationError'
           type: array
-          title: Added Tables
-        Removed tables:
+          title: Errormessages
+      type: object
+      title: ValidationErrorResponse
+    TableDefinition:
+      properties:
+        Table name:
+          type: string
+          title: Table Name
+          example: TABLE_1
+        Columns:
           items:
-            type: string
+            $ref: '#/components/schemas/TableColumnDefinition'
           type: array
-          title: Removed Tables
-        Column changes:
-          additionalProperties:
-            $ref: '#/components/schemas/TableDefinitionColumnChangeLog'
-          type: object
-          title: Column Changes
+          title: Columns
       type: object
       required:
-      - Version
-      - Added tables
-      - Removed tables
-      - Column changes
-      title: TableDefinitionChangeLog
+      - Table name
+      - Columns
+      title: TableDefinition
+    SuccessResponse:
+      properties:
+        succeeded:
+          type: boolean
+          title: Succeeded
+          description: Success status
+          example: true
+        message:
+          type: string
+          title: Message
+          description: Success message
+          default: Action done successfully
+          example: Action done successfully
+      type: object
+      title: SuccessResponse
+    InternalServerErrorResponse:
+      properties:
+        message:
+          type: string
+          title: Message
+          description: Detail of error
+          default: Internal server error
+          example: Internal server error
+      type: object
+      title: InternalServerErrorResponse

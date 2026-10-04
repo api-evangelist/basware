@@ -272,777 +272,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    ExportedPurchaseOrderEntity:
-      required:
-      - creator
-      - deliveryAddress
-      - documentSource
-      - externalCode
-      - hidePricesFromSupplier
-      - orderCreationTime
-      - orderExportTimestamp
-      - orderNumber
-      - owner
-      - processingStatus
-      - releaseOrdersRequired
-      - requisitionCreationTime
-      - requisitionNumber
-      - sendingMethod
-      type: object
-      properties:
-        externalCode:
-          maxLength: 100
-          minLength: 1
-          type: string
-          description: External identifier that is used as a key in API.
-          example: 4847-31231212-212121-1212
-        orderNumber:
-          maxLength: 32
-          minLength: 1
-          type: string
-          description: Order number in Basware P2P.
-          example: P2P-PO-2123682
-        extOrderNumber:
-          maxLength: 100
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Order number in external system (for imported orders).
-          example: SAP-PO-213451
-        parentOrderNumber:
-          maxLength: 32
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Used only if the order type is release to specify what is the order number of the parent blanket order in P2P Purchase.
-          example: P2P-PO-2123682
-        parentOrderExternalCode:
-          maxLength: 100
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Used only if the order type is release to specify what is Basware API external code of the parent blanket order.
-          example: 4847-31231212-212121-1212
-        parentOrderExtOrderNumber:
-          maxLength: 100
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Used only if the order type is release to specify what is order number of the parent blanket order in the external system.
-          example: SAP-PO-213451
-        processingStatus:
-          enum:
-          - WaitingForExport
-          - Exported
-          type: string
-          description: Processing status of the order in Basware API. Can be used for retrieving order updates which have not been acknowledged by customer. 'WaitingForExport' = Has not been acknowledged. 'Exported' = Has been acknowledged.
-          example: WaitingForExport
-        orderStatus:
-          enum:
-          - Confirmed
-          - ReadyForOrder
-          - Ordered
-          - SupplierRejected
-          - SupplierConfirmed
-          - ModifiedBySupplier
-          - PartiallyReceived
-          - Received
-          - Canceled
-          - OrderCreated
-          - Closed
-          type: string
-          description: Order status in Basware P2P Purchase.
-          example: Ordered
-        reasonForPendingAction:
-          enum:
-          - None
-          - SendingFailed
-          - ModifiedBySupplier
-          - ModifiedByBuyer
-          type: string
-          description: Specifies reason for action pending for user in P2P.
-          example: None
-        requisitionNumber:
-          maxLength: 32
-          minLength: 1
-          type: string
-          description: Requisition number of related requisition in Basware P2P.
-          example: Alusta-PR-321424
-        extRequisitionNumber:
-          maxLength: 100
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Requisition number of related requisition in external system (for imported requisitions).
-          example: SAP-PR-12321
-        organizationUnitCode:
-          maxLength: 25
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: P2P company  code for buyer organisation unit.
-          example: BE100
-        organizationUnitName:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: P2P company name for buyer organisation unit.
-          example: BuyerLtd
-        purchasingGroupCode:
-          maxLength: 25
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Purchasing group code.
-          example: PG201
-        purchasingGroupName:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Purchasing group name.
-          example: Office equipment
-        purpose:
-          maxLength: 2000
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Reason why order is placed.
-          example: Goods for Project A
-        validityPeriodStartDate:
-          type:
-          - string
-          - 'null'
-          description: 'Used only if the order type is blanket to specify the start date for blanket purchase order validity period (date format: yyyy-MM-dd).'
-          format: date-time
-          example: ''
-        validityPeriodEndDate:
-          type:
-          - string
-          - 'null'
-          description: 'Used only if the order type is blanket to specify the end date for blanket purchase order validity period (date format: yyyy-MM-dd).'
-          format: date-time
-          example: ''
-        desiredDeliveryDate:
-          type:
-          - string
-          - 'null'
-          description: Delivery date requested by buyer.
-          format: date-time
-          example: '2020-10-24T00:00:00'
-        desiredDeliveryEndDate:
-          type:
-          - string
-          - 'null'
-          description: Buyer requested latest delivery date.
-          format: date-time
-          example: '2020-10-24T00:00:00'
-        promisedDeliveryDate:
-          type:
-          - string
-          - 'null'
-          description: Delivery date provided by supplier.
-          format: date-time
-          example: '2020-10-24T00:00:00'
-        promisedDeliveryEndDate:
-          type:
-          - string
-          - 'null'
-          description: Supplier confirmed deliverytime.
-          format: date-time
-          example: '2020-10-24T00:00:00'
-        classification:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Order classification code. Values are specified by customer. Often used to group orders and assign groups for handling by different persons.
-          example: Project A
-        cancellationNote:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Reason for cancelling order (if order is cancelled).
-          example: ''
-        requisitionCreationTime:
-          type: string
-          description: Creation time of related purchase requisition in P2P.
-          format: date-time
-          example: '2020-10-24T00:00:00'
-        orderCreationTime:
-          type: string
-          description: Creation time of order in P2P.
-          format: date-time
-          example: '2020-10-24T00:00:00'
-        orderExportTimestamp:
-          type: string
-          description: Export time of order to Basware API.
-          format: date-time
-          example: '2020-10-24T00:00:00'
-        documentSource:
-          enum:
-          - P2P
-          - ImportedAsRequisition
-          - ImportedAsOrder
-          type: string
-          description: Specifies where the order was created (imported or created manually in P2P).
-          example: P2P
-        sendingMethod:
-          enum:
-          - BaswareNetwork
-          - Email
-          - SmartOrder
-          type: string
-          description: Determines which method Basware P2P uses to send order to supplier when the order is placed.
-          example: BaswareNetwork
-        salesOrderNumber:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Reference to sales order that this order relates to.
-          example: ''
-        documentLink:
-          type:
-          - string
-          - 'null'
-          description: URL link to view the order in Basware P2P.
-          format: uri
-          example: http://customertenant.p2p.basware.com/Portal/Default.aspx?forms=1&sl=1&tid=customertenant&dl=(Search/PurchaseOrderDetails-SearchOrderId(e105de8f-3e13-4487-a7e5-8c1ba12d7ea9))
-        contractNumber:
-          maxLength: 255
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Reference to contract that this order relates to.
-          example: CON-1262
-        orderType:
-          enum:
-          - Standard
-          - Blanket
-          - Release
-          type: string
-          description: "Standard order is a quantity-based purchase order. It specifies quantity amounts, prices and desired delivery dates for the items or services. \nStandard purchase orders typically require goods receipts.\n\nBlanket order is a sum-based long-term purchase order. It is placed for items or services for a specific period of time (validity period) \nand with an pre-determined maximum currency amount. Blanket orders are typically used for recurring invoices, for example ordering office cleaning \nfor one year. They can be used for ordering both services and consumable goods. Quantity amount used on the blanket order is always '1'. \nGoods receipts are not used with blanket orders.\n\nRelease orders are purchase orders that are created against/from a blanket order to authorize delivery and invoicing. If a blanket order requires \nrelease orders, the supplier should not act upon receiving the blanket order, but needs to wait for the release orders. The release orders are created \nfrom the blanket order. The release orders need no further acceptance because they are consuming an already approved blanket order. Invoicing will happen \nagainst the release orders."
-          example: standard
-        noteToSupplier:
-          maxLength: 2000
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Note to supplier concerning this order. This is sent to supplier when order is placed.
-          example: Please deliver to 2nd floor
-        noteFromSupplier:
-          maxLength: 2000
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Note received from supplier concerning this order.
-          example: Will be delivered to front desk not 2nd floor
-        companyCode:
-          maxLength: 32
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: P2P company code for buyer company.
-          example: BE100
-        companyName:
-          maxLength: 255
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: P2P company name for buyer company.
-          example: BuyerLtd
-        supplierCode:
-          maxLength: 32
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Supplier code to whom the order is addressed.
-          example: SU100
-        supplierName:
-          maxLength: 255
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Supplier name to whom the order is addressed.
-          example: ACME goods and gadgets inc
-        supplierContactName:
-          maxLength: 255
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Supplier contact name to whom the order is addressed.
-          example: Mark Green
-        supplierOrderingEmail:
-          maxLength: 1800
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: The email address(es) where the order is sent to when sending order to supplier. Can contain multiple email addresses.
-          example: Mark@supplier.com
-        ownerOrderingEmail:
-          maxLength: 1800
-          minLength: 0
-          pattern: ^(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*)@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])$
-          type:
-          - string
-          - 'null'
-          description: 'Contact email to which supplier can send questions about the order. Note: When order is sent to supplier, it is not sent to this email. Note: Fields visible on the order sent to supplier are configured in P2P Purchase.'
-          example: john.smith@buyer.com
-        otherOrderingEmail:
-          type:
-          - string
-          - 'null'
-          description: The email address(es) where the order is sent by P2P purchase. Can contain multiple email addresses. The order is sent to these addresses when orderRecipientType is 'Owner' or 'Both'.
-          example: Mark@supplier.com
-        paymentTermCode:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Order payment term code.
-          example: 30N
-        paymentTermName:
-          maxLength: 2000
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Order payment term name.
-          example: 30DaysNet
-        releaseOrdersRequired:
-          type: boolean
-          description: Used only if the order type is blanket to specify, if the blanket order requires release orders.
-          example: false
-        hidePricesFromSupplier:
-          type: boolean
-          description: Specifies, if all price information is hidden from the supplier in the outgoing order.
-          example: false
-        attachPdfToNetworkOrder:
-          type: boolean
-          description: Specifies if order is attached as pdf file when order is sent to supplier through Basware network.
-          example: true
-        orderRecipientType:
-          enum:
-          - Supplier
-          - Owner
-          - SupplierAndOwner
-          type: string
-          description: 'Determines who order is sent to.
-
-            -Supplier(0) : Order is sent only to supplier.
-
-            -If orderingMethod is email, order is sent to the email indicated by ''supplierOrderingEmail''. -If orderingMethod is network, the order is sent through Basware network.
-
-            -Owner (1): Order is sent only to email address(es) indicated by field ''otherOrderingEmail''. Used for example when goods were picked up from a store and no order needs to be sent to supplier.
-
-            -SupplierAndOwner (2): Order is sent to both supplier and email addresses indicated by field ''otherOrderingEmail''. Order delivery method to supplier is determined by orderingMethod, same as above.'
-          example: Supplier
-        deliveryLocation:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Details on Delivery.
-          example: ''
-        deliveryTerm:
-          maxLength: 100
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Delivery term. Generally Incoterms (International Commercial Terms) are used here, however customer and supplier can also agree to use different sets of delivery terms.
-          example: Supplier to Buyer via Post
-        deliveryReceiverName:
-          maxLength: 255
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Person receiving delivery of ordered goods.
-          example: SallyPetersSectetary
-        purchaseCurrency:
-          maxLength: 25
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Currency code for currency in which the order is placed.
-          example: EUR
-        companyCurrency:
-          maxLength: 25
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Currency code of the company in P2P for which the order is placed.
-          example: EUR
-        groupCurrency:
-          maxLength: 25
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: "Currency code of the group / organization in P2P for which the order is placed. \nThe group is a parent-level entity to the company in P2P."
-          example: EUR
-        exchangeRateComp:
-          type:
-          - number
-          - 'null'
-          description: Exchange rate between order currency (=purchaseCurrency) and company currency.
-          format: double
-          example: 1
-        exchangeRateOrg:
-          type:
-          - number
-          - 'null'
-          description: Exchange rate between order currency (=purchaseCurrency) and group  currency.
-          format: double
-          example: 1
-        grossSum:
-          type: number
-          description: Gross sum of order in order currency (=purchaseCurrency).
-          format: double
-          example: 125
-        grossSumComp:
-          type: number
-          description: Gross sum of order in company currency.
-          format: double
-          example: 125
-        grossSumOrg:
-          type: number
-          description: Gross sum of order in company currency.
-          format: double
-          example: 125
-        netSum:
-          type: number
-          description: Net sum of order in order currency (=purchaseCurrency).
-          format: double
-          example: 100
-        netSumComp:
-          type: number
-          description: Net sum of order in company currency.
-          format: double
-          example: 100
-        netSumOrg:
-          type: number
-          description: Net sum of order in organization currency.
-          format: double
-          example: 100
-        taxSum:
-          type: number
-          description: Tax sum of order in order currency (=purchaseCurrency).
-          format: double
-          example: 25
-        taxSumComp:
-          type: number
-          description: Tax sum of order in company currency.
-          format: double
-          example: 25
-        taxSumOrg:
-          type: number
-          description: Tax sum of order in company currency.
-          format: double
-          example: 25
-        headerDataDate1:
-          type:
-          - string
-          - 'null'
-          description: 'HeaderDataDate1-5: Reserved for customer-specific date fields.'
-          format: date-time
-          example: '2020-10-24T00:00:00'
-        headerDataDate2:
-          type:
-          - string
-          - 'null'
-          format: date-time
-          example: ''
-        headerDataDate3:
-          type:
-          - string
-          - 'null'
-          format: date-time
-          example: ''
-        headerDataDate4:
-          type:
-          - string
-          - 'null'
-          format: date-time
-          example: ''
-        headerDataDate5:
-          type:
-          - string
-          - 'null'
-          format: date-time
-          example: ''
-        headerDataNum1:
-          type:
-          - number
-          - 'null'
-          description: 'HeaderDataNum1-5: Can be used for customer-specific numeric fields.'
-          format: double
-          example: 3122
-        headerDataNum2:
-          type:
-          - number
-          - 'null'
-          format: double
-          example: 0
-        headerDataNum3:
-          type:
-          - number
-          - 'null'
-          format: double
-          example: 0
-        headerDataNum4:
-          type:
-          - number
-          - 'null'
-          format: double
-          example: 0
-        headerDataNum5:
-          type:
-          - number
-          - 'null'
-          format: double
-          example: 0
-        headerDataText1:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: 'HeaderDataText1-5: Can be used for customer-specific numeric fields.'
-          example: ''
-        headerDataText2:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          example: ''
-        headerDataText3:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          example: ''
-        headerDataText4:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          example: ''
-        headerDataText5:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          example: ''
-        lastUpdated:
-          type: string
-          description: Timestamp when the purchase order was last updated (from Basware P2P or from customer end).
-          format: date-time
-        creator:
-          $ref: '#/components/schemas/Creator'
-        owner:
-          $ref: '#/components/schemas/Owner'
-        deliveryAddress:
-          $ref: '#/components/schemas/DeliveryAddress'
-        orderLines:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/ExportedPurchaseOrderLineEntity'
-          description: Purchase order lines.
-      additionalProperties: false
-    Creator:
-      type: object
-      properties:
-        personCode:
-          maxLength: 25
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Person code.
-          example: '32232'
-        userName:
-          maxLength: 227
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: User name.
-          example: Timothy Smith
-        loginAccount:
-          maxLength: 100
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Login account.
-          example: company\\timsmith
-        emailAddress:
-          maxLength: 320
-          minLength: 0
-          pattern: ^(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*)@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])$
-          type:
-          - string
-          - 'null'
-          description: Email address.
-          example: timothy.smith@company.com
-        externalCode:
-          maxLength: 50
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: External code.
-          example: douikj327sa8d07213879
-      additionalProperties: false
-      description: Specifies who has created the order / requisition.
-    DeleteResponse:
-      type: object
-      properties:
-        statusApiLink:
-          type:
-          - string
-          - 'null'
-        taskName:
-          type:
-          - string
-          - 'null'
-        taskStatus:
-          type:
-          - string
-          - 'null'
-      additionalProperties: false
-    ErrorEntity:
-      type: object
-      properties:
-        externalCode:
-          type:
-          - string
-          - 'null'
-          description: External code of record on which error occurred (when available).
-          example: 4847-31231212-212121-1212
-        type:
-          enum:
-          - BUSINESS
-          - VALIDATION
-          - TECHNICAL
-          - SECURITY
-          type: string
-          description: Error type.
-          example: ''
-        code:
-          enum:
-          - EXTERNAL_CODE_MISMATCH
-          - SCHEMA_VALIDATION_ERROR
-          - CONFLICT_IN_POST
-          - DATA_ORIGIN_VALIDATION_ERROR
-          - ACCESS_TOKEN_VALIDATION_ERROR
-          - CREDENTIAL_VALIDATION_ERROR
-          - PARAMETER_VALIDATION_ERROR
-          - UNEXPECTED_ERROR
-          - METHOD_NOT_ALLOWED
-          - ENTITY_NOT_FOUND
-          - DATA_VALIDATION_FAILED
-          - SNS_PUBLISH_ERROR
-          - SQS_PUBLISH_ERROR
-          type: string
-          description: Error code.
-          example: ''
-        message:
-          type:
-          - string
-          - 'null'
-          description: Specific error message.
-          example: ''
-        info:
-          type:
-          - string
-          - 'null'
-          description: Information about type of the error.
-          example: ''
-      additionalProperties: false
-    Owner:
-      type: object
-      properties:
-        personCode:
-          maxLength: 25
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Person code.
-          example: '22110'
-        userName:
-          maxLength: 227
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: User name.
-          example: Liz Green
-        loginAccount:
-          maxLength: 100
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Login account.
-          example: company\\lizgreen
-        emailAddress:
-          maxLength: 320
-          minLength: 0
-          pattern: ^(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*)@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])$
-          type:
-          - string
-          - 'null'
-          description: Email address.
-          example: liz.green@company.com
-        externalCode:
-          maxLength: 50
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: External code.
-          example: 908123lkhjhdsai213io7
-      additionalProperties: false
-      description: Specifies owner for the order / requisition. Owner is by default same person as creator, unless manually changed.
     ExportedPurchaseOrderLineEntity:
       required:
       - deliveryAddress
@@ -1818,6 +1047,52 @@ components:
             $ref: '#/components/schemas/ExportedPurchaseOrderGoodsReceiptEntity'
           description: Goods receipts for the order line.
       additionalProperties: false
+    Owner:
+      type: object
+      properties:
+        personCode:
+          maxLength: 25
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Person code.
+          example: '22110'
+        userName:
+          maxLength: 227
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: User name.
+          example: Liz Green
+        loginAccount:
+          maxLength: 100
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Login account.
+          example: company\\lizgreen
+        emailAddress:
+          maxLength: 320
+          minLength: 0
+          pattern: ^(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*)@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])$
+          type:
+          - string
+          - 'null'
+          description: Email address.
+          example: liz.green@company.com
+        externalCode:
+          maxLength: 50
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: External code.
+          example: 908123lkhjhdsai213io7
+      additionalProperties: false
+      description: Specifies owner for the order / requisition. Owner is by default same person as creator, unless manually changed.
     ExportedPurchaseOrdersResponse:
       required:
       - exportedPurchaseOrders
@@ -1828,6 +1103,117 @@ components:
           items:
             $ref: '#/components/schemas/ExportedPurchaseOrderEntity'
       additionalProperties: false
+    ErrorEntity:
+      type: object
+      properties:
+        externalCode:
+          type:
+          - string
+          - 'null'
+          description: External code of record on which error occurred (when available).
+          example: 4847-31231212-212121-1212
+        type:
+          enum:
+          - BUSINESS
+          - VALIDATION
+          - TECHNICAL
+          - SECURITY
+          type: string
+          description: Error type.
+          example: ''
+        code:
+          enum:
+          - EXTERNAL_CODE_MISMATCH
+          - SCHEMA_VALIDATION_ERROR
+          - CONFLICT_IN_POST
+          - DATA_ORIGIN_VALIDATION_ERROR
+          - ACCESS_TOKEN_VALIDATION_ERROR
+          - CREDENTIAL_VALIDATION_ERROR
+          - PARAMETER_VALIDATION_ERROR
+          - UNEXPECTED_ERROR
+          - METHOD_NOT_ALLOWED
+          - ENTITY_NOT_FOUND
+          - DATA_VALIDATION_FAILED
+          - SNS_PUBLISH_ERROR
+          - SQS_PUBLISH_ERROR
+          type: string
+          description: Error code.
+          example: ''
+        message:
+          type:
+          - string
+          - 'null'
+          description: Specific error message.
+          example: ''
+        info:
+          type:
+          - string
+          - 'null'
+          description: Information about type of the error.
+          example: ''
+      additionalProperties: false
+    DeleteResponse:
+      type: object
+      properties:
+        statusApiLink:
+          type:
+          - string
+          - 'null'
+        taskName:
+          type:
+          - string
+          - 'null'
+        taskStatus:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    Creator:
+      type: object
+      properties:
+        personCode:
+          maxLength: 25
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Person code.
+          example: '32232'
+        userName:
+          maxLength: 227
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: User name.
+          example: Timothy Smith
+        loginAccount:
+          maxLength: 100
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Login account.
+          example: company\\timsmith
+        emailAddress:
+          maxLength: 320
+          minLength: 0
+          pattern: ^(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*)@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])$
+          type:
+          - string
+          - 'null'
+          description: Email address.
+          example: timothy.smith@company.com
+        externalCode:
+          maxLength: 50
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: External code.
+          example: douikj327sa8d07213879
+      additionalProperties: false
+      description: Specifies who has created the order / requisition.
     ExportedPurchaseOrderLineCodingRowEntity:
       required:
       - externalCode
@@ -2423,6 +1809,204 @@ components:
           format: date-time
           example: ''
       additionalProperties: false
+    DeleteRequest:
+      type: object
+      properties:
+        lastUpdated:
+          type:
+          - string
+          - 'null'
+          description: 'To delete records updated after specific time, use lastUpdated -field. This will delete all items that have been updated after the specified date. In response, user will get the taskStatus api link where the task status can be checked. Note: ''0001-01-01'' can be used to delete all records.'
+          format: date-time
+        externalCode:
+          maxLength: 36
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Single item can be deleted using externalCode and final status is returned immediately.
+      additionalProperties: false
+    DeliveryAddress:
+      required:
+      - name
+      type: object
+      properties:
+        name:
+          maxLength: 250
+          minLength: 1
+          type: string
+          description: Specifies the address’ name for the goods delivery.
+          example: Maple street office
+        pObox:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: PO box
+          example: ''
+        streetName:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Street name.
+          example: Maple street
+        additionalStreetName:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Additional street name.
+          example: ''
+        blockName:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Block name.
+          example: ''
+        buildingName:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Building name.
+          example: ''
+        buildingNumber:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Building number.
+          example: '68'
+        department:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Department.
+          example: ''
+        floor:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Floor.
+          example: ''
+        room:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Room.
+          example: ''
+        postalZone:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Postal zone.
+          example: '02600'
+        city:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: City.
+          example: Toronto
+        region:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Region.
+          example: ''
+        district:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: District.
+          example: ''
+        countryCode:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Country code.
+          example: CA
+        countryName:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Country name.
+          example: Canada
+        description:
+          maxLength: 1000
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Description.
+          example: ''
+        globalLocationNumber:
+          maxLength: 13
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Global location number.
+          example: ''
+        countrySubEntity:
+          maxLength: 50
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          example: TX
+        countrySubEntityDescription:
+          maxLength: 50
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          example: Texas
+        addressId:
+          maxLength: 2000
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Identifier for the address.
+          example: '1000467'
+        addressSchemeId:
+          maxLength: 2000
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Can be used to specify a code that represents the agency or organization responsible for the addressID numbering.
+          example: BuyerAccountId
+      additionalProperties: false
+      description: 'Specifies delivery address for the purchase requisition. If no address specified, uses the default delivery address of organization (configured in P2P).
+
+        Delivery address on header level applies to entire purchase reuisition. If addresses are also provided on requisition lines, these will apply only to the corresponding lines.'
     ExportedPurchaseOrderGoodsReceiptEntity:
       required:
       - externalCode
@@ -2634,204 +2218,620 @@ components:
           example: douikj327sa8d07213879
       additionalProperties: false
       description: Specifies who has received the goods.
-    DeleteRequest:
-      type: object
-      properties:
-        lastUpdated:
-          type:
-          - string
-          - 'null'
-          description: 'To delete records updated after specific time, use lastUpdated -field. This will delete all items that have been updated after the specified date. In response, user will get the taskStatus api link where the task status can be checked. Note: ''0001-01-01'' can be used to delete all records.'
-          format: date-time
-        externalCode:
-          maxLength: 36
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Single item can be deleted using externalCode and final status is returned immediately.
-      additionalProperties: false
-    DeliveryAddress:
+    ExportedPurchaseOrderEntity:
       required:
-      - name
+      - creator
+      - deliveryAddress
+      - documentSource
+      - externalCode
+      - hidePricesFromSupplier
+      - orderCreationTime
+      - orderExportTimestamp
+      - orderNumber
+      - owner
+      - processingStatus
+      - releaseOrdersRequired
+      - requisitionCreationTime
+      - requisitionNumber
+      - sendingMethod
       type: object
       properties:
-        name:
-          maxLength: 250
+        externalCode:
+          maxLength: 100
           minLength: 1
           type: string
-          description: Specifies the address’ name for the goods delivery.
-          example: Maple street office
-        pObox:
+          description: External identifier that is used as a key in API.
+          example: 4847-31231212-212121-1212
+        orderNumber:
+          maxLength: 32
+          minLength: 1
+          type: string
+          description: Order number in Basware P2P.
+          example: P2P-PO-2123682
+        extOrderNumber:
+          maxLength: 100
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Order number in external system (for imported orders).
+          example: SAP-PO-213451
+        parentOrderNumber:
+          maxLength: 32
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Used only if the order type is release to specify what is the order number of the parent blanket order in P2P Purchase.
+          example: P2P-PO-2123682
+        parentOrderExternalCode:
+          maxLength: 100
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Used only if the order type is release to specify what is Basware API external code of the parent blanket order.
+          example: 4847-31231212-212121-1212
+        parentOrderExtOrderNumber:
+          maxLength: 100
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Used only if the order type is release to specify what is order number of the parent blanket order in the external system.
+          example: SAP-PO-213451
+        processingStatus:
+          enum:
+          - WaitingForExport
+          - Exported
+          type: string
+          description: Processing status of the order in Basware API. Can be used for retrieving order updates which have not been acknowledged by customer. 'WaitingForExport' = Has not been acknowledged. 'Exported' = Has been acknowledged.
+          example: WaitingForExport
+        orderStatus:
+          enum:
+          - Confirmed
+          - ReadyForOrder
+          - Ordered
+          - SupplierRejected
+          - SupplierConfirmed
+          - ModifiedBySupplier
+          - PartiallyReceived
+          - Received
+          - Canceled
+          - OrderCreated
+          - Closed
+          type: string
+          description: Order status in Basware P2P Purchase.
+          example: Ordered
+        reasonForPendingAction:
+          enum:
+          - None
+          - SendingFailed
+          - ModifiedBySupplier
+          - ModifiedByBuyer
+          type: string
+          description: Specifies reason for action pending for user in P2P.
+          example: None
+        requisitionNumber:
+          maxLength: 32
+          minLength: 1
+          type: string
+          description: Requisition number of related requisition in Basware P2P.
+          example: Alusta-PR-321424
+        extRequisitionNumber:
+          maxLength: 100
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Requisition number of related requisition in external system (for imported requisitions).
+          example: SAP-PR-12321
+        organizationUnitCode:
+          maxLength: 25
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: P2P company  code for buyer organisation unit.
+          example: BE100
+        organizationUnitName:
           maxLength: 250
           minLength: 0
           type:
           - string
           - 'null'
-          description: PO box
-          example: ''
-        streetName:
+          description: P2P company name for buyer organisation unit.
+          example: BuyerLtd
+        purchasingGroupCode:
+          maxLength: 25
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Purchasing group code.
+          example: PG201
+        purchasingGroupName:
           maxLength: 250
           minLength: 0
           type:
           - string
           - 'null'
-          description: Street name.
-          example: Maple street
-        additionalStreetName:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Additional street name.
-          example: ''
-        blockName:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Block name.
-          example: ''
-        buildingName:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Building name.
-          example: ''
-        buildingNumber:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Building number.
-          example: '68'
-        department:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Department.
-          example: ''
-        floor:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Floor.
-          example: ''
-        room:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Room.
-          example: ''
-        postalZone:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Postal zone.
-          example: '02600'
-        city:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: City.
-          example: Toronto
-        region:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Region.
-          example: ''
-        district:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: District.
-          example: ''
-        countryCode:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Country code.
-          example: CA
-        countryName:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Country name.
-          example: Canada
-        description:
-          maxLength: 1000
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Description.
-          example: ''
-        globalLocationNumber:
-          maxLength: 13
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Global location number.
-          example: ''
-        countrySubEntity:
-          maxLength: 50
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          example: TX
-        countrySubEntityDescription:
-          maxLength: 50
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          example: Texas
-        addressId:
+          description: Purchasing group name.
+          example: Office equipment
+        purpose:
           maxLength: 2000
           minLength: 0
           type:
           - string
           - 'null'
-          description: Identifier for the address.
-          example: '1000467'
-        addressSchemeId:
+          description: Reason why order is placed.
+          example: Goods for Project A
+        validityPeriodStartDate:
+          type:
+          - string
+          - 'null'
+          description: 'Used only if the order type is blanket to specify the start date for blanket purchase order validity period (date format: yyyy-MM-dd).'
+          format: date-time
+          example: ''
+        validityPeriodEndDate:
+          type:
+          - string
+          - 'null'
+          description: 'Used only if the order type is blanket to specify the end date for blanket purchase order validity period (date format: yyyy-MM-dd).'
+          format: date-time
+          example: ''
+        desiredDeliveryDate:
+          type:
+          - string
+          - 'null'
+          description: Delivery date requested by buyer.
+          format: date-time
+          example: '2020-10-24T00:00:00'
+        desiredDeliveryEndDate:
+          type:
+          - string
+          - 'null'
+          description: Buyer requested latest delivery date.
+          format: date-time
+          example: '2020-10-24T00:00:00'
+        promisedDeliveryDate:
+          type:
+          - string
+          - 'null'
+          description: Delivery date provided by supplier.
+          format: date-time
+          example: '2020-10-24T00:00:00'
+        promisedDeliveryEndDate:
+          type:
+          - string
+          - 'null'
+          description: Supplier confirmed deliverytime.
+          format: date-time
+          example: '2020-10-24T00:00:00'
+        classification:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Order classification code. Values are specified by customer. Often used to group orders and assign groups for handling by different persons.
+          example: Project A
+        cancellationNote:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Reason for cancelling order (if order is cancelled).
+          example: ''
+        requisitionCreationTime:
+          type: string
+          description: Creation time of related purchase requisition in P2P.
+          format: date-time
+          example: '2020-10-24T00:00:00'
+        orderCreationTime:
+          type: string
+          description: Creation time of order in P2P.
+          format: date-time
+          example: '2020-10-24T00:00:00'
+        orderExportTimestamp:
+          type: string
+          description: Export time of order to Basware API.
+          format: date-time
+          example: '2020-10-24T00:00:00'
+        documentSource:
+          enum:
+          - P2P
+          - ImportedAsRequisition
+          - ImportedAsOrder
+          type: string
+          description: Specifies where the order was created (imported or created manually in P2P).
+          example: P2P
+        sendingMethod:
+          enum:
+          - BaswareNetwork
+          - Email
+          - SmartOrder
+          type: string
+          description: Determines which method Basware P2P uses to send order to supplier when the order is placed.
+          example: BaswareNetwork
+        salesOrderNumber:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Reference to sales order that this order relates to.
+          example: ''
+        documentLink:
+          type:
+          - string
+          - 'null'
+          description: URL link to view the order in Basware P2P.
+          format: uri
+          example: http://customertenant.p2p.basware.com/Portal/Default.aspx?forms=1&sl=1&tid=customertenant&dl=(Search/PurchaseOrderDetails-SearchOrderId(e105de8f-3e13-4487-a7e5-8c1ba12d7ea9))
+        contractNumber:
+          maxLength: 255
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Reference to contract that this order relates to.
+          example: CON-1262
+        orderType:
+          enum:
+          - Standard
+          - Blanket
+          - Release
+          type: string
+          description: "Standard order is a quantity-based purchase order. It specifies quantity amounts, prices and desired delivery dates for the items or services. \nStandard purchase orders typically require goods receipts.\n\nBlanket order is a sum-based long-term purchase order. It is placed for items or services for a specific period of time (validity period) \nand with an pre-determined maximum currency amount. Blanket orders are typically used for recurring invoices, for example ordering office cleaning \nfor one year. They can be used for ordering both services and consumable goods. Quantity amount used on the blanket order is always '1'. \nGoods receipts are not used with blanket orders.\n\nRelease orders are purchase orders that are created against/from a blanket order to authorize delivery and invoicing. If a blanket order requires \nrelease orders, the supplier should not act upon receiving the blanket order, but needs to wait for the release orders. The release orders are created \nfrom the blanket order. The release orders need no further acceptance because they are consuming an already approved blanket order. Invoicing will happen \nagainst the release orders."
+          example: standard
+        noteToSupplier:
           maxLength: 2000
           minLength: 0
           type:
           - string
           - 'null'
-          description: Can be used to specify a code that represents the agency or organization responsible for the addressID numbering.
-          example: BuyerAccountId
-      additionalProperties: false
-      description: 'Specifies delivery address for the purchase requisition. If no address specified, uses the default delivery address of organization (configured in P2P).
+          description: Note to supplier concerning this order. This is sent to supplier when order is placed.
+          example: Please deliver to 2nd floor
+        noteFromSupplier:
+          maxLength: 2000
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Note received from supplier concerning this order.
+          example: Will be delivered to front desk not 2nd floor
+        companyCode:
+          maxLength: 32
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: P2P company code for buyer company.
+          example: BE100
+        companyName:
+          maxLength: 255
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: P2P company name for buyer company.
+          example: BuyerLtd
+        supplierCode:
+          maxLength: 32
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Supplier code to whom the order is addressed.
+          example: SU100
+        supplierName:
+          maxLength: 255
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Supplier name to whom the order is addressed.
+          example: ACME goods and gadgets inc
+        supplierContactName:
+          maxLength: 255
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Supplier contact name to whom the order is addressed.
+          example: Mark Green
+        supplierOrderingEmail:
+          maxLength: 1800
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: The email address(es) where the order is sent to when sending order to supplier. Can contain multiple email addresses.
+          example: Mark@supplier.com
+        ownerOrderingEmail:
+          maxLength: 1800
+          minLength: 0
+          pattern: ^(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*)@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])$
+          type:
+          - string
+          - 'null'
+          description: 'Contact email to which supplier can send questions about the order. Note: When order is sent to supplier, it is not sent to this email. Note: Fields visible on the order sent to supplier are configured in P2P Purchase.'
+          example: john.smith@buyer.com
+        otherOrderingEmail:
+          type:
+          - string
+          - 'null'
+          description: The email address(es) where the order is sent by P2P purchase. Can contain multiple email addresses. The order is sent to these addresses when orderRecipientType is 'Owner' or 'Both'.
+          example: Mark@supplier.com
+        paymentTermCode:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Order payment term code.
+          example: 30N
+        paymentTermName:
+          maxLength: 2000
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Order payment term name.
+          example: 30DaysNet
+        releaseOrdersRequired:
+          type: boolean
+          description: Used only if the order type is blanket to specify, if the blanket order requires release orders.
+          example: false
+        hidePricesFromSupplier:
+          type: boolean
+          description: Specifies, if all price information is hidden from the supplier in the outgoing order.
+          example: false
+        attachPdfToNetworkOrder:
+          type: boolean
+          description: Specifies if order is attached as pdf file when order is sent to supplier through Basware network.
+          example: true
+        orderRecipientType:
+          enum:
+          - Supplier
+          - Owner
+          - SupplierAndOwner
+          type: string
+          description: 'Determines who order is sent to.
 
-        Delivery address on header level applies to entire purchase reuisition. If addresses are also provided on requisition lines, these will apply only to the corresponding lines.'
+            -Supplier(0) : Order is sent only to supplier.
+
+            -If orderingMethod is email, order is sent to the email indicated by ''supplierOrderingEmail''. -If orderingMethod is network, the order is sent through Basware network.
+
+            -Owner (1): Order is sent only to email address(es) indicated by field ''otherOrderingEmail''. Used for example when goods were picked up from a store and no order needs to be sent to supplier.
+
+            -SupplierAndOwner (2): Order is sent to both supplier and email addresses indicated by field ''otherOrderingEmail''. Order delivery method to supplier is determined by orderingMethod, same as above.'
+          example: Supplier
+        deliveryLocation:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Details on Delivery.
+          example: ''
+        deliveryTerm:
+          maxLength: 100
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Delivery term. Generally Incoterms (International Commercial Terms) are used here, however customer and supplier can also agree to use different sets of delivery terms.
+          example: Supplier to Buyer via Post
+        deliveryReceiverName:
+          maxLength: 255
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Person receiving delivery of ordered goods.
+          example: SallyPetersSectetary
+        purchaseCurrency:
+          maxLength: 25
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Currency code for currency in which the order is placed.
+          example: EUR
+        companyCurrency:
+          maxLength: 25
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Currency code of the company in P2P for which the order is placed.
+          example: EUR
+        groupCurrency:
+          maxLength: 25
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: "Currency code of the group / organization in P2P for which the order is placed. \nThe group is a parent-level entity to the company in P2P."
+          example: EUR
+        exchangeRateComp:
+          type:
+          - number
+          - 'null'
+          description: Exchange rate between order currency (=purchaseCurrency) and company currency.
+          format: double
+          example: 1
+        exchangeRateOrg:
+          type:
+          - number
+          - 'null'
+          description: Exchange rate between order currency (=purchaseCurrency) and group  currency.
+          format: double
+          example: 1
+        grossSum:
+          type: number
+          description: Gross sum of order in order currency (=purchaseCurrency).
+          format: double
+          example: 125
+        grossSumComp:
+          type: number
+          description: Gross sum of order in company currency.
+          format: double
+          example: 125
+        grossSumOrg:
+          type: number
+          description: Gross sum of order in company currency.
+          format: double
+          example: 125
+        netSum:
+          type: number
+          description: Net sum of order in order currency (=purchaseCurrency).
+          format: double
+          example: 100
+        netSumComp:
+          type: number
+          description: Net sum of order in company currency.
+          format: double
+          example: 100
+        netSumOrg:
+          type: number
+          description: Net sum of order in organization currency.
+          format: double
+          example: 100
+        taxSum:
+          type: number
+          description: Tax sum of order in order currency (=purchaseCurrency).
+          format: double
+          example: 25
+        taxSumComp:
+          type: number
+          description: Tax sum of order in company currency.
+          format: double
+          example: 25
+        taxSumOrg:
+          type: number
+          description: Tax sum of order in company currency.
+          format: double
+          example: 25
+        headerDataDate1:
+          type:
+          - string
+          - 'null'
+          description: 'HeaderDataDate1-5: Reserved for customer-specific date fields.'
+          format: date-time
+          example: '2020-10-24T00:00:00'
+        headerDataDate2:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          example: ''
+        headerDataDate3:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          example: ''
+        headerDataDate4:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          example: ''
+        headerDataDate5:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          example: ''
+        headerDataNum1:
+          type:
+          - number
+          - 'null'
+          description: 'HeaderDataNum1-5: Can be used for customer-specific numeric fields.'
+          format: double
+          example: 3122
+        headerDataNum2:
+          type:
+          - number
+          - 'null'
+          format: double
+          example: 0
+        headerDataNum3:
+          type:
+          - number
+          - 'null'
+          format: double
+          example: 0
+        headerDataNum4:
+          type:
+          - number
+          - 'null'
+          format: double
+          example: 0
+        headerDataNum5:
+          type:
+          - number
+          - 'null'
+          format: double
+          example: 0
+        headerDataText1:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: 'HeaderDataText1-5: Can be used for customer-specific numeric fields.'
+          example: ''
+        headerDataText2:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          example: ''
+        headerDataText3:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          example: ''
+        headerDataText4:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          example: ''
+        headerDataText5:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          example: ''
+        lastUpdated:
+          type: string
+          description: Timestamp when the purchase order was last updated (from Basware P2P or from customer end).
+          format: date-time
+        creator:
+          $ref: '#/components/schemas/Creator'
+        owner:
+          $ref: '#/components/schemas/Owner'
+        deliveryAddress:
+          $ref: '#/components/schemas/DeliveryAddress'
+        orderLines:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/ExportedPurchaseOrderLineEntity'
+          description: Purchase order lines.
+      additionalProperties: false
   securitySchemes:
     Bearer:
       type: http

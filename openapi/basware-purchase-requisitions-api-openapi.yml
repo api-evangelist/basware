@@ -295,6 +295,269 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    ErrorEntity:
+      type: object
+      properties:
+        externalCode:
+          type:
+          - string
+          - 'null'
+          description: External code of record on which error occurred (when available).
+          example: 4847-31231212-212121-1212
+        type:
+          enum:
+          - BUSINESS
+          - VALIDATION
+          - TECHNICAL
+          - SECURITY
+          type: string
+          description: Error type.
+          example: ''
+        code:
+          enum:
+          - EXTERNAL_CODE_MISMATCH
+          - SCHEMA_VALIDATION_ERROR
+          - CONFLICT_IN_POST
+          - DATA_ORIGIN_VALIDATION_ERROR
+          - ACCESS_TOKEN_VALIDATION_ERROR
+          - CREDENTIAL_VALIDATION_ERROR
+          - PARAMETER_VALIDATION_ERROR
+          - UNEXPECTED_ERROR
+          - METHOD_NOT_ALLOWED
+          - ENTITY_NOT_FOUND
+          - DATA_VALIDATION_FAILED
+          - SNS_PUBLISH_ERROR
+          - SQS_PUBLISH_ERROR
+          type: string
+          description: Error code.
+          example: ''
+        message:
+          type:
+          - string
+          - 'null'
+          description: Specific error message.
+          example: ''
+        info:
+          type:
+          - string
+          - 'null'
+          description: Information about type of the error.
+          example: ''
+      additionalProperties: false
+    DeleteResponse:
+      type: object
+      properties:
+        statusApiLink:
+          type:
+          - string
+          - 'null'
+        taskName:
+          type:
+          - string
+          - 'null'
+        taskStatus:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    DeleteRequest:
+      type: object
+      properties:
+        lastUpdated:
+          type:
+          - string
+          - 'null'
+          description: 'To delete records updated after specific time, use lastUpdated -field. This will delete all items that have been updated after the specified date. In response, user will get the taskStatus api link where the task status can be checked. Note: ''0001-01-01'' can be used to delete all records.'
+          format: date-time
+        externalCode:
+          maxLength: 36
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Single item can be deleted using externalCode and final status is returned immediately.
+      additionalProperties: false
+    DeliveryAddress:
+      required:
+      - name
+      type: object
+      properties:
+        name:
+          maxLength: 250
+          minLength: 1
+          type: string
+          description: Specifies the address’ name for the goods delivery.
+          example: Maple street office
+        pObox:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: PO box
+          example: ''
+        streetName:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Street name.
+          example: Maple street
+        additionalStreetName:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Additional street name.
+          example: ''
+        blockName:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Block name.
+          example: ''
+        buildingName:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Building name.
+          example: ''
+        buildingNumber:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Building number.
+          example: '68'
+        department:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Department.
+          example: ''
+        floor:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Floor.
+          example: ''
+        room:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Room.
+          example: ''
+        postalZone:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Postal zone.
+          example: '02600'
+        city:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: City.
+          example: Toronto
+        region:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Region.
+          example: ''
+        district:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: District.
+          example: ''
+        countryCode:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Country code.
+          example: CA
+        countryName:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Country name.
+          example: Canada
+        description:
+          maxLength: 1000
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Description.
+          example: ''
+        globalLocationNumber:
+          maxLength: 13
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Global location number.
+          example: ''
+        countrySubEntity:
+          maxLength: 50
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          example: TX
+        countrySubEntityDescription:
+          maxLength: 50
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          example: Texas
+        addressId:
+          maxLength: 2000
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Identifier for the address.
+          example: '1000467'
+        addressSchemeId:
+          maxLength: 2000
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Can be used to specify a code that represents the agency or organization responsible for the addressID numbering.
+          example: BuyerAccountId
+      additionalProperties: false
+      description: 'Specifies delivery address for the purchase requisition. If no address specified, uses the default delivery address of organization (configured in P2P).
+
+        Delivery address on header level applies to entire purchase reuisition. If addresses are also provided on requisition lines, these will apply only to the corresponding lines.'
     PurchaseRequisitionEntity:
       required:
       - extDocumentNumber
@@ -1098,55 +1361,6 @@ components:
             $ref: '#/components/schemas/ErrorEntity'
       additionalProperties: false
       description: Errors returned here are returned synchronously from Basware API middle layer. Additional errors coming from target system(s) may be returned through errorFeedbacks API.
-    ErrorEntity:
-      type: object
-      properties:
-        externalCode:
-          type:
-          - string
-          - 'null'
-          description: External code of record on which error occurred (when available).
-          example: 4847-31231212-212121-1212
-        type:
-          enum:
-          - BUSINESS
-          - VALIDATION
-          - TECHNICAL
-          - SECURITY
-          type: string
-          description: Error type.
-          example: ''
-        code:
-          enum:
-          - EXTERNAL_CODE_MISMATCH
-          - SCHEMA_VALIDATION_ERROR
-          - CONFLICT_IN_POST
-          - DATA_ORIGIN_VALIDATION_ERROR
-          - ACCESS_TOKEN_VALIDATION_ERROR
-          - CREDENTIAL_VALIDATION_ERROR
-          - PARAMETER_VALIDATION_ERROR
-          - UNEXPECTED_ERROR
-          - METHOD_NOT_ALLOWED
-          - ENTITY_NOT_FOUND
-          - DATA_VALIDATION_FAILED
-          - SNS_PUBLISH_ERROR
-          - SQS_PUBLISH_ERROR
-          type: string
-          description: Error code.
-          example: ''
-        message:
-          type:
-          - string
-          - 'null'
-          description: Specific error message.
-          example: ''
-        info:
-          type:
-          - string
-          - 'null'
-          description: Information about type of the error.
-          example: ''
-      additionalProperties: false
     PurchaseRequisitionResponse:
       required:
       - purchaseRequisitions
@@ -1765,220 +1979,6 @@ components:
           description: Date5
           format: date-time
       additionalProperties: false
-    DeleteResponse:
-      type: object
-      properties:
-        statusApiLink:
-          type:
-          - string
-          - 'null'
-        taskName:
-          type:
-          - string
-          - 'null'
-        taskStatus:
-          type:
-          - string
-          - 'null'
-      additionalProperties: false
-    DeleteRequest:
-      type: object
-      properties:
-        lastUpdated:
-          type:
-          - string
-          - 'null'
-          description: 'To delete records updated after specific time, use lastUpdated -field. This will delete all items that have been updated after the specified date. In response, user will get the taskStatus api link where the task status can be checked. Note: ''0001-01-01'' can be used to delete all records.'
-          format: date-time
-        externalCode:
-          maxLength: 36
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Single item can be deleted using externalCode and final status is returned immediately.
-      additionalProperties: false
-    DeliveryAddress:
-      required:
-      - name
-      type: object
-      properties:
-        name:
-          maxLength: 250
-          minLength: 1
-          type: string
-          description: Specifies the address’ name for the goods delivery.
-          example: Maple street office
-        pObox:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: PO box
-          example: ''
-        streetName:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Street name.
-          example: Maple street
-        additionalStreetName:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Additional street name.
-          example: ''
-        blockName:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Block name.
-          example: ''
-        buildingName:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Building name.
-          example: ''
-        buildingNumber:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Building number.
-          example: '68'
-        department:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Department.
-          example: ''
-        floor:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Floor.
-          example: ''
-        room:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Room.
-          example: ''
-        postalZone:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Postal zone.
-          example: '02600'
-        city:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: City.
-          example: Toronto
-        region:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Region.
-          example: ''
-        district:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: District.
-          example: ''
-        countryCode:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Country code.
-          example: CA
-        countryName:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Country name.
-          example: Canada
-        description:
-          maxLength: 1000
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Description.
-          example: ''
-        globalLocationNumber:
-          maxLength: 13
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Global location number.
-          example: ''
-        countrySubEntity:
-          maxLength: 50
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          example: TX
-        countrySubEntityDescription:
-          maxLength: 50
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          example: Texas
-        addressId:
-          maxLength: 2000
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Identifier for the address.
-          example: '1000467'
-        addressSchemeId:
-          maxLength: 2000
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Can be used to specify a code that represents the agency or organization responsible for the addressID numbering.
-          example: BuyerAccountId
-      additionalProperties: false
-      description: 'Specifies delivery address for the purchase requisition. If no address specified, uses the default delivery address of organization (configured in P2P).
-
-        Delivery address on header level applies to entire purchase reuisition. If addresses are also provided on requisition lines, these will apply only to the corresponding lines.'
   securitySchemes:
     Bearer:
       type: http

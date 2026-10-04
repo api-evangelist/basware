@@ -810,353 +810,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    AccountingDocumentResponse:
-      required:
-      - accountingDocuments
-      type: object
-      properties:
-        accountingDocuments:
-          type: array
-          items:
-            $ref: '#/components/schemas/AccountingDocumentEntity'
-      additionalProperties: false
-    InvoiceLine:
-      type: object
-      properties:
-        externalCode:
-          type:
-          - string
-          - 'null'
-          description: Basware P2P identifier for the invoice row
-          example: a86f243081c24d6a939f6e885ed0e539
-        rowIndex:
-          type:
-          - integer
-          - 'null'
-          description: Invoice row number
-          format: int32
-          example: 1
-        productCode:
-          type:
-          - string
-          - 'null'
-          description: Product code
-          example: '1.000000'
-        productName:
-          type:
-          - string
-          - 'null'
-          description: Product name
-        quantity:
-          type:
-          - number
-          - 'null'
-          description: Quantity
-          format: double
-        orderNumber:
-          type:
-          - string
-          - 'null'
-          description: Order number
-          example: '6000235428'
-        netPrice:
-          type:
-          - number
-          - 'null'
-          description: Net unit price
-          format: double
-          example: 1000
-        taxPercent:
-          type:
-          - number
-          - 'null'
-          description: Tax percent
-          format: double
-          example: 25
-        taxSum:
-          type:
-          - number
-          - 'null'
-          description: Tax sum
-          format: double
-          example: 250
-        quantityUnit:
-          type:
-          - string
-          - 'null'
-          description: Unit in which quantity is specified, e.g. pcs, kg
-        infoItem:
-          type:
-          - integer
-          - 'null'
-          description: Information about the item
-          format: int32
-          example: 0
-        grossPrice:
-          type:
-          - number
-          - 'null'
-          description: Gross unit price
-          format: double
-          example: 1250
-        additionalCost:
-          type:
-          - boolean
-          - 'null'
-        additionalCostRecognition:
-          maxLength: 200
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Additional cost recognition keywork. The keywords are configured in P2P.
-        deliveryNoteNumber:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Delivery note number
-        discountAmount:
-          type:
-          - number
-          - 'null'
-          description: Discount amount
-          format: double
-          example: 0
-        discountPercent:
-          type:
-          - number
-          - 'null'
-          description: Discount percentage
-          format: double
-          example: 0
-        grossSum:
-          type:
-          - number
-          - 'null'
-          description: Gross sum
-          format: double
-          example: 1250
-        itemTotalSum:
-          type:
-          - number
-          - 'null'
-          description: Total amount of the item
-          format: double
-          example: 0
-        lineType:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        netSum:
-          type:
-          - number
-          - 'null'
-          description: Net sum
-          format: double
-          example: 1000
-        orderRowNumber:
-          maxLength: 50
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Order row number
-        taxCode:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Tax code
-        taxPercent2:
-          type:
-          - number
-          - 'null'
-          description: Secondary tax percent
-          format: double
-          example: 0
-        taxSum2:
-          type:
-          - number
-          - 'null'
-          description: Secondary tax sum
-          format: double
-          example: 0
-        date1:
-          type:
-          - string
-          - 'null'
-          description: date1-5 Customer specific date field
-          format: date-time
-          example: '"2023-05-23T11:17:25.830Z"'
-        date2:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        date3:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        date4:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        date5:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        numeric1:
-          type:
-          - number
-          - 'null'
-          description: numeric1-20 Customer specific numeric field
-          format: double
-          example: 0
-        numeric2:
-          type:
-          - number
-          - 'null'
-          format: double
-        numeric3:
-          type:
-          - number
-          - 'null'
-          format: double
-        numeric4:
-          type:
-          - number
-          - 'null'
-          format: double
-        numeric5:
-          type:
-          - number
-          - 'null'
-          format: double
-        numeric6:
-          type:
-          - number
-          - 'null'
-          format: double
-        numeric7:
-          type:
-          - number
-          - 'null'
-          format: double
-        numeric8:
-          type:
-          - number
-          - 'null'
-          format: double
-        numeric9:
-          type:
-          - number
-          - 'null'
-          format: double
-        numeric10:
-          type:
-          - number
-          - 'null'
-          format: double
-        text1:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: text1-85 Customer specific text field
-        text2:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-        text3:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-        text4:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-        text5:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-        text6:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-        text7:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-        text8:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-        text9:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-        text10:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-      additionalProperties: false
-    Attachment:
-      type: object
-      properties:
-        externalCode:
-          type:
-          - string
-          - 'null'
-          description: Attachment external code. Used to retrieve the actual attachment file through the accountingDocuments/{invoiceId}/{attachmentExternalCode} endpoint.
-          example: fafv67fe21747s791f2eeafgc9ab78ae
-        category:
-          type:
-          - string
-          - 'null'
-          description: 'Attachment category. Available values: ORIGINALIMAGE, ATTACHMENT, EXPORTEDEMAIL.'
-          example: ATTACHMENT
-        filename:
-          type:
-          - string
-          - 'null'
-          description: Attachment file name.
-          example: Image.jpg
-        isConfidential:
-          type: boolean
-          description: Indicates whether the attachment is confidential. true = confidential, false = not confidential.
-          example: false
-        creationTime:
-          type: string
-          description: Creation time of the attachment in P2P.
-          format: date-time
-          example: '2024-03-19T09:28:19.093Z'
-      additionalProperties: false
     AccountingDocumentsStatusResponseEntity:
       type: object
       properties:
@@ -1226,10 +879,44 @@ components:
           format: date-time
       additionalProperties: false
       description: ''
-    PaymentResponseEntity:
+    RemoveResponseEntity:
+      required:
+      - externalCode
+      - responseMessage
+      type: object
+      properties:
+        externalCode:
+          maxLength: 36
+          minLength: 2
+          type: string
+          description: External identifier
+          example: dd79ba5612a744bf9a92333fe14a6aef
+        success:
+          type:
+          - boolean
+          - 'null'
+          description: Identifies if the invoice was succesfully removed
+          example: false
+        responseMessage:
+          maxLength: 250
+          minLength: 0
+          type: string
+          description: Message that gives more details of the deviance that was identified in the invoice details. The message is stored to a comment field in the invoice action log item that is created based on the result.
+          example: ''
+        sourceSystem:
+          maxLength: 32
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Indicates the system that is returning transfer response.
+          example: ERP1
+      additionalProperties: false
+    PrebookResponseEntity:
       required:
       - externalCode
       - paymentBlock
+      - responseMessage
       - success
       type: object
       properties:
@@ -1237,124 +924,1228 @@ components:
           maxLength: 36
           minLength: 1
           type: string
-          description: External identifier that is used as a key in API. External code of the paymentResponse needs to be unique within an accountingDocument -record. You should always create a new externalCode when sending response, there is no overwriting/editing of previous response. This will enable the visibility that all responses are tracked in API. ExternalCode in response messages plays no role in P2P (other than it is used in communication between P2P and the API layer).
-          example: f24fff19120445de9c23651434129991
+          description: External identifier
+          example: ff842a95dbb445b8bb3dcb4d53e51f44
         success:
+          maxLength: 250
+          minLength: 1
           type: boolean
-          description: Indicates a succesful response from ERP. Needs to be 'true' for P2P to update invoice data field contents.
+          description: Specifies if the invoice was succesfully prebooked to ERP system (true = invoice successfully prebooked, false = prebook failed). Note that if success = false, only the responseMessage and prebook status are saved to the invoice. Other fields, such as the voucher numbers or paymentBlock, are not updated.
           example: true
         responseMessage:
           maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: This message is stored to P2P invoice action log.
-          example: Invoice Paid.
+          minLength: 1
+          type: string
+          description: Informative message for P2P user regarding the prebook. If prebook failed, please indicate reason for failure in this message. This message is shown in invoice action log.
+          example: Prebooked to ERP
         sourceSystem:
           maxLength: 32
           minLength: 0
           type:
           - string
           - 'null'
-          description: Indicates the system that is returning payment response.
+          description: Indicates the system that is returning prebook response.
           example: ERP1
-        paymentDate:
-          type:
-          - string
-          - 'null'
-          description: Date when the invoice was paid can be updated here.
-          format: date-time
-        paymentTermCode:
+        voucherNumber1:
           maxLength: 25
           minLength: 0
           type:
           - string
           - 'null'
-          description: Invoice payment term code can be updated here.
-          example: 7D2-NT30
+          description: Available for returning voucher number from ERP system. Voucher number is saved onto the invoice in P2P.
+          example: '114785224'
+        voucherNumber2:
+          maxLength: 25
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Available for returning second voucher number from ERP system. Voucher number 2 is saved onto the invoice in P2P.
+          example: '774785220'
+        prebookDate:
+          type:
+          - string
+          - 'null'
+          description: 'Prebook date. Note: Field is not saved to P2P (P2P saves the moment when prebook response message arrives).'
+          format: date-time
         paymentBlock:
           type: boolean
-          description: Payment block.
+          description: Available for indicating if invoice has been set to payment blocked -state by the receiving ERP system. Saved onto the invoice in P2P.
           example: false
-        paymentMethod:
-          maxLength: 25
+      additionalProperties: false
+    ErrorEntity:
+      type: object
+      properties:
+        externalCode:
+          type:
+          - string
+          - 'null'
+          description: External code of record on which error occurred (when available).
+          example: 4847-31231212-212121-1212
+        type:
+          enum:
+          - BUSINESS
+          - VALIDATION
+          - TECHNICAL
+          - SECURITY
+          type: string
+          description: Error type.
+          example: ''
+        code:
+          enum:
+          - EXTERNAL_CODE_MISMATCH
+          - SCHEMA_VALIDATION_ERROR
+          - CONFLICT_IN_POST
+          - DATA_ORIGIN_VALIDATION_ERROR
+          - ACCESS_TOKEN_VALIDATION_ERROR
+          - CREDENTIAL_VALIDATION_ERROR
+          - PARAMETER_VALIDATION_ERROR
+          - UNEXPECTED_ERROR
+          - METHOD_NOT_ALLOWED
+          - ENTITY_NOT_FOUND
+          - DATA_VALIDATION_FAILED
+          - SNS_PUBLISH_ERROR
+          - SQS_PUBLISH_ERROR
+          type: string
+          description: Error code.
+          example: ''
+        message:
+          type:
+          - string
+          - 'null'
+          description: Specific error message.
+          example: ''
+        info:
+          type:
+          - string
+          - 'null'
+          description: Information about type of the error.
+          example: ''
+      additionalProperties: false
+    TransferParameterEntity:
+      required:
+      - key
+      - value
+      type: object
+      properties:
+        key:
+          maxLength: 250
+          minLength: 1
+          type: string
+          example: InvoiceBatchId
+        value:
+          maxLength: 250
+          minLength: 1
+          type: string
+          example: ca7f0c603388437ea9584446e26cf01c
+      additionalProperties: false
+    StandardCodingEntity:
+      required:
+      - externalCode
+      type: object
+      properties:
+        externalCode:
+          maxLength: 36
+          minLength: 1
+          type: string
+          description: Coding row external code.
+          example: d5dc444e5c4a4222bc70ee1f8eabcb7d
+        rowIndex:
+          maximum: 100000
+          minimum: 0
+          type:
+          - integer
+          - 'null'
+          description: "Unique number assigned to a row at the time of it's creation. \nNote: Does not necessarily contain sequential numbers. May contain gaps (as in 1,2,5,6) in cases where coding lines are deleted."
+          format: int32
+          example: 1
+        accountCode:
+          maxLength: 50
           minLength: 0
           type:
           - string
           - 'null'
-          description: Payment method can be updated here.
-          example: BankTransfer
-        paidTotal:
-          type:
-          - number
-          - 'null'
-          description: Total amount paid for the invoice so far. For partial payments, this value will increase each time more of the invoice is paid.
-          format: double
-          example: 1136.8
-        cashDiscount:
-          type:
-          - number
-          - 'null'
-          description: discount amount can be updated here.
-          format: double
-          example: 23.2
-        checkNumber:
-          maxLength: 25
+          description: Account code.
+          example: '18620'
+        accountName:
+          maxLength: 250
           minLength: 0
           type:
           - string
           - 'null'
-          description: Unique identifier from the check used in payment transaction.
-          example: '123456012'
-        paymentMessage:
+          description: Account name.
+          example: Office expenses
+        costCenterCode:
+          maxLength: 200
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Cost center code.
+          example: '61300'
+        costCenterName:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Cose center name.
+          example: Helsinki Office
+        deliveryNoteNumber:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Delivery note number.
+          example: ''
+        lastComment:
+          maxLength: 1000
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Last user comment related to a coding row.
+          example: ''
+        matchingType:
+          type:
+          - integer
+          - 'null'
+          description: "Order matching type. Possible values: \n0 = Regular, \n1 = Framework, \n2 = Return, \n3 = Service, \n4 = Many, \n5 = Subsequent."
+          format: int32
+          example: 0
+        grossTotal:
+          type:
+          - number
+          - 'null'
+          description: Coding row gross sum, in invoice currency.
+          format: double
+          example: 1160
+        grossTotalCompany:
+          type:
+          - number
+          - 'null'
+          description: Coding row gross sum, in company home currency.
+          format: double
+          example: 1160
+        grossTotalOrganization:
+          type:
+          - number
+          - 'null'
+          description: Coding row gross sum, in organization currency.
+          format: double
+          example: 1160
+        netTotal:
+          type:
+          - number
+          - 'null'
+          description: Coding row net sum, in invoice currency.
+          format: double
+          example: 1000
+        netTotalCompany:
+          type:
+          - number
+          - 'null'
+          description: Coding row net sum, in company home currency.
+          format: double
+          example: 1000
+        netTotalOrganization:
+          type:
+          - number
+          - 'null'
+          description: Coding row net sum, in organization currency.
+          format: double
+          example: 1000
+        orderLineNetTotal:
+          type:
+          - number
+          - 'null'
+          description: Net total on (matched) order line.
+          format: double
+          example: 1000
+        orderLineGrossTotal:
+          type:
+          - number
+          - 'null'
+          description: Gross total on (matched) order line.
+          format: double
+          example: 1160
+        receivedQuantity:
+          type:
+          - number
+          - 'null'
+          description: Received quantity on (matched) goods receipt.
+          format: double
+          example: 100
+        receivedNetPrice:
+          type:
+          - number
+          - 'null'
+          description: Received net unit price on (matched) goods receipt.
+          format: double
+          example: 10
+        receivedGrossPrice:
+          type:
+          - number
+          - 'null'
+          description: Received gross unit price on (matched) goods receipt.
+          format: double
+          example: 11.6
+        receivedNetTotal:
+          type:
+          - number
+          - 'null'
+          description: Received net total on (matched) goods receipt.
+          format: double
+          example: 1000
+        receivedGrossTotal:
+          type:
+          - number
+          - 'null'
+          description: Received gross total on (matched) goods receipt.
+          format: double
+          example: 1160
+        organizationElementName:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Organization element name.
+          example: Basware Helsinki
+        organizationElementCode:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Organization element code.
+          example: BW00
+        freightSlip:
+          type:
+          - string
+          - 'null'
+          description: Freight slip.
+          example: ''
+        conversionNumerator:
+          type:
+          - number
+          - 'null'
+          description: Conversion numerator. Used in giving fractional unit amounts. Used with SAP.
+          format: double
+          example: 1
+        conversionDeNumerator:
+          type:
+          - number
+          - 'null'
+          description: Deprecated field - not in use.
+          format: double
+          example: 1
+        conversionDenominator:
+          type:
+          - number
+          - 'null'
+          description: Conversion denominator. Used in giving fractional unit amounts. Used with SAP.
+          format: double
+          example: 1
+        orderedQuantity:
+          type:
+          - number
+          - 'null'
+          description: Ordered quantity on (matched) order line.
+          format: double
+          example: 10
+        orderNetTotal:
+          type:
+          - number
+          - 'null'
+          description: Ordered net total on (matched) order line.
+          format: double
+          example: 1000
+        orderGrossTotal:
+          type:
+          - number
+          - 'null'
+          description: Ordered gross total on (matched) order line.
+          format: double
+          example: 1160
+        orderedNetPrice:
+          type:
+          - number
+          - 'null'
+          description: Ordered net unit price (matched) order line.
+          format: double
+          example: 10
+        orderedGrossPrice:
+          type:
+          - number
+          - 'null'
+          description: Ordered gross unit price on (matched) order line.
+          format: double
+          example: 11.6
+        internalOrderCode:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Internal order code.
+          example: ''
+        internalOrderName:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Internal order name.
+          example: ''
+        orderItemNumber:
+          type:
+          - string
+          - 'null'
+          description: Order item number (from matched order line).
+          example: '1'
+        orderNumber:
+          maxLength: 1000
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Order number (from matched order).
+          example: PO612298
+        orderLineNumber:
+          maxLength: 2000
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Order line number (from matched order line).
+          example: '1'
+        contractNumber:
+          maxLength: 255
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Contract number.
+          example: '123456'
+        allocatedQuantity:
+          type:
+          - number
+          - 'null'
+          description: Allocated quantity.
+          format: double
+          example: 10
+        matchedQuantity:
+          type:
+          - number
+          - 'null'
+          description: Matched quantity.
+          format: double
+          example: 10
+        matchedNetSum:
+          type:
+          - number
+          - 'null'
+          description: Matched net sum.
+          format: double
+          example: 1000
+        matchedGrossSum:
+          type:
+          - number
+          - 'null'
+          description: Matched gross sum.
+          format: double
+          example: 1160
+        closeOrder:
           maxLength: 100
           minLength: 0
           type:
           - string
           - 'null'
-          description: Payment message can be updated here.
+          description: Close order -indicator.
           example: ''
-        paymentNumber:
+        plant:
           maxLength: 250
           minLength: 0
           type:
           - string
           - 'null'
-          description: Payment number can be updated here.
-          example: 122447-55257552
-        paymentDocument:
+          description: Plant.
+          example: ''
+        profitCenterCode:
           maxLength: 250
           minLength: 0
           type:
           - string
           - 'null'
-          description: Payment document number can be updated here.
-          example: '873326806'
-        paymentReversalDocument:
+          description: Profit center code.
+          example: ''
+        profitCenterName:
           maxLength: 250
           minLength: 0
           type:
           - string
           - 'null'
-          description: Payment reversal document can be updated here.
-          example: '873326806'
-      additionalProperties: false
-    DeleteResponse:
-      type: object
-      properties:
-        statusApiLink:
+          description: Profit center name.
+          example: ''
+        businessUnitCode:
+          maxLength: 250
+          minLength: 0
           type:
           - string
           - 'null'
-        taskName:
+          description: Business unit code.
+          example: ''
+        businessUnitName:
+          maxLength: 250
+          minLength: 0
           type:
           - string
           - 'null'
-        taskStatus:
+          description: Business unit name.
+          example: ''
+        projectCode:
+          maxLength: 250
+          minLength: 0
           type:
           - string
           - 'null'
+          description: Project code.
+          example: ''
+        projectName:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Project name.
+          example: ''
+        projectSubCode:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Project sub code.
+          example: ''
+        projectSubName:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Project sub name.
+          example: ''
+        employeeCode:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Employee code.
+          example: ''
+        employeeName:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Employee name.
+          example: ''
+        vehicleNumber:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Vehicle number.
+          example: ''
+        vehicleName:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Vehicle name.
+          example: ''
+        salesOrderCode:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Sales order code.
+          example: ''
+        salesOrderName:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Sales order name.
+          example: ''
+        salesOrderSubCode:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Sales order sub code.
+          example: ''
+        salesOrderSubName:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Sales order sub name.
+          example: ''
+        customerCode:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Customer code.
+          example: ''
+        customerName:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Customer name.
+          example: ''
+        conditionType:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Condition type.
+          example: ''
+        accAssignmentCategoryCode:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Account assignment cotegory code.
+          example: ''
+        accAssignmentCategoryName:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Account assignment category name.
+          example: ''
+        budgetCode:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Budget code.
+          example: ''
+        budgetName:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Budget name.
+          example: ''
+        serviceCode:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Service code.
+          example: ''
+        serviceName:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Service name.
+          example: ''
+        businessAreaCode:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Business area code.
+          example: ''
+        businessAreaName:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Business area name.
+          example: ''
+        productCode:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Product code.
+          example: ''
+        productName:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Product name.
+          example: ''
+        buyerName:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Buyer name.
+          example: ''
+        orderLineDescription:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Order line description (from matched order line).
+          example: Box of ball-point pencils
+        orderLinePriceUnit:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Order line price unit (from matched order line).
+          example: BOX
+        orderLinePriceUnitDescription:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Order line price unit description (from matched order line).
+          example: Box
+        partnerProfitCenter:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Partner profit center.
+          example: ''
+        fixedAssetCode:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Fixed asset code.
+          example: ''
+        fixedAssetName:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Fixed asset name.
+          example: ''
+        goodsReceiptItemNumber:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Goods receipt item number (from matched goods receipt).
+          example: '1'
+        goodsReceiptNumber:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Goods receipt number (from matched goods receipt).
+          example: '215871624'
+        materialGroup:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Material group.
+          example: ''
+        fiscalYear:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Fiscal Year.
+          example: '2021'
+        fixedAssetSubCode:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Fixed asset sub code.
+          example: ''
+        fixedAssetSubName:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Fixed asset sub name.
+          example: ''
+        orderLineUOM:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Order line unit of measure (from matched order line).
+          example: BOX
+        subUOM:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Order line sub unit of measure (from matched order line).
+          example: ''
+        workOrderCode:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Work order code.
+          example: ''
+        workOrderName:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Work order name.
+          example: ''
+        workOrderSubCode:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Work order sub code.
+          example: ''
+        workOrderSubName:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Work order sub name.
+          example: ''
+        commitmentItem:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Commitment item.
+          example: ''
+        controllingArea:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Controlling area.
+          example: ''
+        functionalArea:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Functional area.
+          example: ''
+        network:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Network.
+          example: ''
+        networkActivity:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Network activity.
+          example: ''
+        orderCodingRowNumber:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Order coding row number - from coding row(s) of matched order line.
+          example: '1'
+        ownerName:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Owner name.
+          example: ''
+        taxCode:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Tax code.
+          example: T16
+        taxJurisdictionCode:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Tax juristiction code.
+          example: ''
+        taxPercent:
+          maximum: 1000000000
+          minimum: -1000000000
+          type:
+          - number
+          - 'null'
+          description: Tax percent.
+          format: double
+          example: 16
+        taxPercent2:
+          maximum: 1000000000
+          minimum: -1000000000
+          type:
+          - number
+          - 'null'
+          description: Tax percent 2. Can be used for example for handling reverse charges on EU VAT.
+          format: double
+          example: 0
+        taxSum:
+          type:
+          - number
+          - 'null'
+          description: Coding row tax sum, in invoice currency.
+          format: double
+          example: 160
+        taxSumCompany:
+          type:
+          - number
+          - 'null'
+          description: Coding row tax sum, in company home currency.
+          format: double
+          example: 160
+        taxSumOrganization:
+          type:
+          - number
+          - 'null'
+          description: Coding row tax sum, in organization currency.
+          format: double
+          example: 160
+        taxSum2:
+          type:
+          - number
+          - 'null'
+          description: Coding row tax sum 2, in invoice currency.
+          format: double
+          example: 0
+        taxSum2Company:
+          type:
+          - number
+          - 'null'
+          description: Coding row tax sum 2, in company home currency.
+          format: double
+          example: 0
+        taxSum2Organization:
+          type:
+          - number
+          - 'null'
+          description: Coding row tax sum 2, in organization currency.
+          format: double
+          example: 0
+        rowOrigin:
+          maxLength: 50
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Not in use. Reserved for indicating how coding row was created.
+          example: ''
+        plannedAdditionalCostType:
+          type: integer
+          description: Planned additional cost type.
+          format: int32
+          example: 0
+        dimCode1:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: dimCode1-10 are often used for additional, customer-specific, coding dimensions. Specifies the dimension code.
+          example: ''
+        dimCode2:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          example: ''
+        dimCode3:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          example: ''
+        dimCode4:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          example: ''
+        dimCode5:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          example: ''
+        dimCode6:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          example: ''
+        dimCode7:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          example: ''
+        dimCode8:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          example: ''
+        dimCode9:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          example: ''
+        dimCode10:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          example: ''
+        dimName1:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: dimName1-10 are often used for additional, customer-specific, coding dimensions. Specifies the dimension name.
+          example: ''
+        dimName2:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          example: ''
+        dimName3:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          example: ''
+        dimName4:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          example: ''
+        dimName5:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          example: ''
+        dimName6:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          example: ''
+        dimName7:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          example: ''
+        dimName8:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          example: ''
+        dimName9:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          example: ''
+        dimName10:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          example: ''
+        num1:
+          type:
+          - number
+          - 'null'
+          description: Num1-5 can be used for additional, customer-specific, numeric coding fields.
+          format: double
+        num2:
+          type:
+          - number
+          - 'null'
+          format: double
+        num3:
+          type:
+          - number
+          - 'null'
+          format: double
+        num4:
+          type:
+          - number
+          - 'null'
+          format: double
+        num5:
+          type:
+          - number
+          - 'null'
+          format: double
+        text1:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Text1-5, Text84-85 can be used for additional, customer-specific, text coding fields.
+          example: ''
+        text2:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          example: ''
+        text3:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          example: ''
+        text4:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          example: ''
+        text5:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          example: ''
+        text84:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          example: ''
+        text85:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          example: ''
+        date1:
+          type:
+          - string
+          - 'null'
+          description: Date1-5 can be used for additional, customer-specific, date coding fields.
+          format: date-time
+        date2:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        date3:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        date4:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        date5:
+          type:
+          - string
+          - 'null'
+          format: date-time
       additionalProperties: false
     AccountingDocumentEntity:
       required:
@@ -2681,6 +3472,39 @@ components:
           - boolean
           - 'null'
       additionalProperties: false
+    DeleteResponse:
+      type: object
+      properties:
+        statusApiLink:
+          type:
+          - string
+          - 'null'
+        taskName:
+          type:
+          - string
+          - 'null'
+        taskStatus:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    DeleteRequest:
+      type: object
+      properties:
+        lastUpdated:
+          type:
+          - string
+          - 'null'
+          description: 'To delete records updated after specific time, use lastUpdated -field. This will delete all items that have been updated after the specified date. In response, user will get the taskStatus api link where the task status can be checked. Note: ''0001-01-01'' can be used to delete all records.'
+          format: date-time
+        externalCode:
+          maxLength: 36
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Single item can be deleted using externalCode and final status is returned immediately.
+      additionalProperties: false
     TransferResponseEntity:
       required:
       - externalCode
@@ -2740,1257 +3564,6 @@ components:
           description: Available for indicating if invoice has been set to payment blocked -state by the receiving ERP system. Saved onto the invoice in P2P.
           example: false
       additionalProperties: false
-    RemoveResponseEntity:
-      required:
-      - externalCode
-      - responseMessage
-      type: object
-      properties:
-        externalCode:
-          maxLength: 36
-          minLength: 2
-          type: string
-          description: External identifier
-          example: dd79ba5612a744bf9a92333fe14a6aef
-        success:
-          type:
-          - boolean
-          - 'null'
-          description: Identifies if the invoice was succesfully removed
-          example: false
-        responseMessage:
-          maxLength: 250
-          minLength: 0
-          type: string
-          description: Message that gives more details of the deviance that was identified in the invoice details. The message is stored to a comment field in the invoice action log item that is created based on the result.
-          example: ''
-        sourceSystem:
-          maxLength: 32
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Indicates the system that is returning transfer response.
-          example: ERP1
-      additionalProperties: false
-    ErrorEntity:
-      type: object
-      properties:
-        externalCode:
-          type:
-          - string
-          - 'null'
-          description: External code of record on which error occurred (when available).
-          example: 4847-31231212-212121-1212
-        type:
-          enum:
-          - BUSINESS
-          - VALIDATION
-          - TECHNICAL
-          - SECURITY
-          type: string
-          description: Error type.
-          example: ''
-        code:
-          enum:
-          - EXTERNAL_CODE_MISMATCH
-          - SCHEMA_VALIDATION_ERROR
-          - CONFLICT_IN_POST
-          - DATA_ORIGIN_VALIDATION_ERROR
-          - ACCESS_TOKEN_VALIDATION_ERROR
-          - CREDENTIAL_VALIDATION_ERROR
-          - PARAMETER_VALIDATION_ERROR
-          - UNEXPECTED_ERROR
-          - METHOD_NOT_ALLOWED
-          - ENTITY_NOT_FOUND
-          - DATA_VALIDATION_FAILED
-          - SNS_PUBLISH_ERROR
-          - SQS_PUBLISH_ERROR
-          type: string
-          description: Error code.
-          example: ''
-        message:
-          type:
-          - string
-          - 'null'
-          description: Specific error message.
-          example: ''
-        info:
-          type:
-          - string
-          - 'null'
-          description: Information about type of the error.
-          example: ''
-      additionalProperties: false
-    StandardCodingEntity:
-      required:
-      - externalCode
-      type: object
-      properties:
-        externalCode:
-          maxLength: 36
-          minLength: 1
-          type: string
-          description: Coding row external code.
-          example: d5dc444e5c4a4222bc70ee1f8eabcb7d
-        rowIndex:
-          maximum: 100000
-          minimum: 0
-          type:
-          - integer
-          - 'null'
-          description: "Unique number assigned to a row at the time of it's creation. \nNote: Does not necessarily contain sequential numbers. May contain gaps (as in 1,2,5,6) in cases where coding lines are deleted."
-          format: int32
-          example: 1
-        accountCode:
-          maxLength: 50
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Account code.
-          example: '18620'
-        accountName:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Account name.
-          example: Office expenses
-        costCenterCode:
-          maxLength: 200
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Cost center code.
-          example: '61300'
-        costCenterName:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Cose center name.
-          example: Helsinki Office
-        deliveryNoteNumber:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Delivery note number.
-          example: ''
-        lastComment:
-          maxLength: 1000
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Last user comment related to a coding row.
-          example: ''
-        matchingType:
-          type:
-          - integer
-          - 'null'
-          description: "Order matching type. Possible values: \n0 = Regular, \n1 = Framework, \n2 = Return, \n3 = Service, \n4 = Many, \n5 = Subsequent."
-          format: int32
-          example: 0
-        grossTotal:
-          type:
-          - number
-          - 'null'
-          description: Coding row gross sum, in invoice currency.
-          format: double
-          example: 1160
-        grossTotalCompany:
-          type:
-          - number
-          - 'null'
-          description: Coding row gross sum, in company home currency.
-          format: double
-          example: 1160
-        grossTotalOrganization:
-          type:
-          - number
-          - 'null'
-          description: Coding row gross sum, in organization currency.
-          format: double
-          example: 1160
-        netTotal:
-          type:
-          - number
-          - 'null'
-          description: Coding row net sum, in invoice currency.
-          format: double
-          example: 1000
-        netTotalCompany:
-          type:
-          - number
-          - 'null'
-          description: Coding row net sum, in company home currency.
-          format: double
-          example: 1000
-        netTotalOrganization:
-          type:
-          - number
-          - 'null'
-          description: Coding row net sum, in organization currency.
-          format: double
-          example: 1000
-        orderLineNetTotal:
-          type:
-          - number
-          - 'null'
-          description: Net total on (matched) order line.
-          format: double
-          example: 1000
-        orderLineGrossTotal:
-          type:
-          - number
-          - 'null'
-          description: Gross total on (matched) order line.
-          format: double
-          example: 1160
-        receivedQuantity:
-          type:
-          - number
-          - 'null'
-          description: Received quantity on (matched) goods receipt.
-          format: double
-          example: 100
-        receivedNetPrice:
-          type:
-          - number
-          - 'null'
-          description: Received net unit price on (matched) goods receipt.
-          format: double
-          example: 10
-        receivedGrossPrice:
-          type:
-          - number
-          - 'null'
-          description: Received gross unit price on (matched) goods receipt.
-          format: double
-          example: 11.6
-        receivedNetTotal:
-          type:
-          - number
-          - 'null'
-          description: Received net total on (matched) goods receipt.
-          format: double
-          example: 1000
-        receivedGrossTotal:
-          type:
-          - number
-          - 'null'
-          description: Received gross total on (matched) goods receipt.
-          format: double
-          example: 1160
-        organizationElementName:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Organization element name.
-          example: Basware Helsinki
-        organizationElementCode:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Organization element code.
-          example: BW00
-        freightSlip:
-          type:
-          - string
-          - 'null'
-          description: Freight slip.
-          example: ''
-        conversionNumerator:
-          type:
-          - number
-          - 'null'
-          description: Conversion numerator. Used in giving fractional unit amounts. Used with SAP.
-          format: double
-          example: 1
-        conversionDeNumerator:
-          type:
-          - number
-          - 'null'
-          description: Deprecated field - not in use.
-          format: double
-          example: 1
-        conversionDenominator:
-          type:
-          - number
-          - 'null'
-          description: Conversion denominator. Used in giving fractional unit amounts. Used with SAP.
-          format: double
-          example: 1
-        orderedQuantity:
-          type:
-          - number
-          - 'null'
-          description: Ordered quantity on (matched) order line.
-          format: double
-          example: 10
-        orderNetTotal:
-          type:
-          - number
-          - 'null'
-          description: Ordered net total on (matched) order line.
-          format: double
-          example: 1000
-        orderGrossTotal:
-          type:
-          - number
-          - 'null'
-          description: Ordered gross total on (matched) order line.
-          format: double
-          example: 1160
-        orderedNetPrice:
-          type:
-          - number
-          - 'null'
-          description: Ordered net unit price (matched) order line.
-          format: double
-          example: 10
-        orderedGrossPrice:
-          type:
-          - number
-          - 'null'
-          description: Ordered gross unit price on (matched) order line.
-          format: double
-          example: 11.6
-        internalOrderCode:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Internal order code.
-          example: ''
-        internalOrderName:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Internal order name.
-          example: ''
-        orderItemNumber:
-          type:
-          - string
-          - 'null'
-          description: Order item number (from matched order line).
-          example: '1'
-        orderNumber:
-          maxLength: 1000
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Order number (from matched order).
-          example: PO612298
-        orderLineNumber:
-          maxLength: 2000
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Order line number (from matched order line).
-          example: '1'
-        contractNumber:
-          maxLength: 255
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Contract number.
-          example: '123456'
-        allocatedQuantity:
-          type:
-          - number
-          - 'null'
-          description: Allocated quantity.
-          format: double
-          example: 10
-        matchedQuantity:
-          type:
-          - number
-          - 'null'
-          description: Matched quantity.
-          format: double
-          example: 10
-        matchedNetSum:
-          type:
-          - number
-          - 'null'
-          description: Matched net sum.
-          format: double
-          example: 1000
-        matchedGrossSum:
-          type:
-          - number
-          - 'null'
-          description: Matched gross sum.
-          format: double
-          example: 1160
-        closeOrder:
-          maxLength: 100
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Close order -indicator.
-          example: ''
-        plant:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Plant.
-          example: ''
-        profitCenterCode:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Profit center code.
-          example: ''
-        profitCenterName:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Profit center name.
-          example: ''
-        businessUnitCode:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Business unit code.
-          example: ''
-        businessUnitName:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Business unit name.
-          example: ''
-        projectCode:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Project code.
-          example: ''
-        projectName:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Project name.
-          example: ''
-        projectSubCode:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Project sub code.
-          example: ''
-        projectSubName:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Project sub name.
-          example: ''
-        employeeCode:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Employee code.
-          example: ''
-        employeeName:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Employee name.
-          example: ''
-        vehicleNumber:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Vehicle number.
-          example: ''
-        vehicleName:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Vehicle name.
-          example: ''
-        salesOrderCode:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Sales order code.
-          example: ''
-        salesOrderName:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Sales order name.
-          example: ''
-        salesOrderSubCode:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Sales order sub code.
-          example: ''
-        salesOrderSubName:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Sales order sub name.
-          example: ''
-        customerCode:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Customer code.
-          example: ''
-        customerName:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Customer name.
-          example: ''
-        conditionType:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Condition type.
-          example: ''
-        accAssignmentCategoryCode:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Account assignment cotegory code.
-          example: ''
-        accAssignmentCategoryName:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Account assignment category name.
-          example: ''
-        budgetCode:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Budget code.
-          example: ''
-        budgetName:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Budget name.
-          example: ''
-        serviceCode:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Service code.
-          example: ''
-        serviceName:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Service name.
-          example: ''
-        businessAreaCode:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Business area code.
-          example: ''
-        businessAreaName:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Business area name.
-          example: ''
-        productCode:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Product code.
-          example: ''
-        productName:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Product name.
-          example: ''
-        buyerName:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Buyer name.
-          example: ''
-        orderLineDescription:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Order line description (from matched order line).
-          example: Box of ball-point pencils
-        orderLinePriceUnit:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Order line price unit (from matched order line).
-          example: BOX
-        orderLinePriceUnitDescription:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Order line price unit description (from matched order line).
-          example: Box
-        partnerProfitCenter:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Partner profit center.
-          example: ''
-        fixedAssetCode:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Fixed asset code.
-          example: ''
-        fixedAssetName:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Fixed asset name.
-          example: ''
-        goodsReceiptItemNumber:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Goods receipt item number (from matched goods receipt).
-          example: '1'
-        goodsReceiptNumber:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Goods receipt number (from matched goods receipt).
-          example: '215871624'
-        materialGroup:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Material group.
-          example: ''
-        fiscalYear:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Fiscal Year.
-          example: '2021'
-        fixedAssetSubCode:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Fixed asset sub code.
-          example: ''
-        fixedAssetSubName:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Fixed asset sub name.
-          example: ''
-        orderLineUOM:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Order line unit of measure (from matched order line).
-          example: BOX
-        subUOM:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Order line sub unit of measure (from matched order line).
-          example: ''
-        workOrderCode:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Work order code.
-          example: ''
-        workOrderName:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Work order name.
-          example: ''
-        workOrderSubCode:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Work order sub code.
-          example: ''
-        workOrderSubName:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Work order sub name.
-          example: ''
-        commitmentItem:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Commitment item.
-          example: ''
-        controllingArea:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Controlling area.
-          example: ''
-        functionalArea:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Functional area.
-          example: ''
-        network:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Network.
-          example: ''
-        networkActivity:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Network activity.
-          example: ''
-        orderCodingRowNumber:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Order coding row number - from coding row(s) of matched order line.
-          example: '1'
-        ownerName:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Owner name.
-          example: ''
-        taxCode:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Tax code.
-          example: T16
-        taxJurisdictionCode:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Tax juristiction code.
-          example: ''
-        taxPercent:
-          maximum: 1000000000
-          minimum: -1000000000
-          type:
-          - number
-          - 'null'
-          description: Tax percent.
-          format: double
-          example: 16
-        taxPercent2:
-          maximum: 1000000000
-          minimum: -1000000000
-          type:
-          - number
-          - 'null'
-          description: Tax percent 2. Can be used for example for handling reverse charges on EU VAT.
-          format: double
-          example: 0
-        taxSum:
-          type:
-          - number
-          - 'null'
-          description: Coding row tax sum, in invoice currency.
-          format: double
-          example: 160
-        taxSumCompany:
-          type:
-          - number
-          - 'null'
-          description: Coding row tax sum, in company home currency.
-          format: double
-          example: 160
-        taxSumOrganization:
-          type:
-          - number
-          - 'null'
-          description: Coding row tax sum, in organization currency.
-          format: double
-          example: 160
-        taxSum2:
-          type:
-          - number
-          - 'null'
-          description: Coding row tax sum 2, in invoice currency.
-          format: double
-          example: 0
-        taxSum2Company:
-          type:
-          - number
-          - 'null'
-          description: Coding row tax sum 2, in company home currency.
-          format: double
-          example: 0
-        taxSum2Organization:
-          type:
-          - number
-          - 'null'
-          description: Coding row tax sum 2, in organization currency.
-          format: double
-          example: 0
-        rowOrigin:
-          maxLength: 50
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Not in use. Reserved for indicating how coding row was created.
-          example: ''
-        plannedAdditionalCostType:
-          type: integer
-          description: Planned additional cost type.
-          format: int32
-          example: 0
-        dimCode1:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: dimCode1-10 are often used for additional, customer-specific, coding dimensions. Specifies the dimension code.
-          example: ''
-        dimCode2:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          example: ''
-        dimCode3:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          example: ''
-        dimCode4:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          example: ''
-        dimCode5:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          example: ''
-        dimCode6:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          example: ''
-        dimCode7:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          example: ''
-        dimCode8:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          example: ''
-        dimCode9:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          example: ''
-        dimCode10:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          example: ''
-        dimName1:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: dimName1-10 are often used for additional, customer-specific, coding dimensions. Specifies the dimension name.
-          example: ''
-        dimName2:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          example: ''
-        dimName3:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          example: ''
-        dimName4:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          example: ''
-        dimName5:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          example: ''
-        dimName6:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          example: ''
-        dimName7:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          example: ''
-        dimName8:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          example: ''
-        dimName9:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          example: ''
-        dimName10:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          example: ''
-        num1:
-          type:
-          - number
-          - 'null'
-          description: Num1-5 can be used for additional, customer-specific, numeric coding fields.
-          format: double
-        num2:
-          type:
-          - number
-          - 'null'
-          format: double
-        num3:
-          type:
-          - number
-          - 'null'
-          format: double
-        num4:
-          type:
-          - number
-          - 'null'
-          format: double
-        num5:
-          type:
-          - number
-          - 'null'
-          format: double
-        text1:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Text1-5, Text84-85 can be used for additional, customer-specific, text coding fields.
-          example: ''
-        text2:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          example: ''
-        text3:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          example: ''
-        text4:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          example: ''
-        text5:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          example: ''
-        text84:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          example: ''
-        text85:
-          maxLength: 250
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          example: ''
-        date1:
-          type:
-          - string
-          - 'null'
-          description: Date1-5 can be used for additional, customer-specific, date coding fields.
-          format: date-time
-        date2:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        date3:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        date4:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        date5:
-          type:
-          - string
-          - 'null'
-          format: date-time
-      additionalProperties: false
-    PrebookResponseEntity:
-      required:
-      - externalCode
-      - paymentBlock
-      - responseMessage
-      - success
-      type: object
-      properties:
-        externalCode:
-          maxLength: 36
-          minLength: 1
-          type: string
-          description: External identifier
-          example: ff842a95dbb445b8bb3dcb4d53e51f44
-        success:
-          maxLength: 250
-          minLength: 1
-          type: boolean
-          description: Specifies if the invoice was succesfully prebooked to ERP system (true = invoice successfully prebooked, false = prebook failed). Note that if success = false, only the responseMessage and prebook status are saved to the invoice. Other fields, such as the voucher numbers or paymentBlock, are not updated.
-          example: true
-        responseMessage:
-          maxLength: 250
-          minLength: 1
-          type: string
-          description: Informative message for P2P user regarding the prebook. If prebook failed, please indicate reason for failure in this message. This message is shown in invoice action log.
-          example: Prebooked to ERP
-        sourceSystem:
-          maxLength: 32
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Indicates the system that is returning prebook response.
-          example: ERP1
-        voucherNumber1:
-          maxLength: 25
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Available for returning voucher number from ERP system. Voucher number is saved onto the invoice in P2P.
-          example: '114785224'
-        voucherNumber2:
-          maxLength: 25
-          minLength: 0
-          type:
-          - string
-          - 'null'
-          description: Available for returning second voucher number from ERP system. Voucher number 2 is saved onto the invoice in P2P.
-          example: '774785220'
-        prebookDate:
-          type:
-          - string
-          - 'null'
-          description: 'Prebook date. Note: Field is not saved to P2P (P2P saves the moment when prebook response message arrives).'
-          format: date-time
-        paymentBlock:
-          type: boolean
-          description: Available for indicating if invoice has been set to payment blocked -state by the receiving ERP system. Saved onto the invoice in P2P.
-          example: false
-      additionalProperties: false
     EnrichmentResponseEntity:
       required:
       - externalCode
@@ -4030,22 +3603,435 @@ components:
           format: date-time
       additionalProperties: false
       description: enrichment response entity
-    TransferParameterEntity:
+    AccountingDocumentResponse:
       required:
-      - key
-      - value
+      - accountingDocuments
       type: object
       properties:
-        key:
+        accountingDocuments:
+          type: array
+          items:
+            $ref: '#/components/schemas/AccountingDocumentEntity'
+      additionalProperties: false
+    InvoiceLine:
+      type: object
+      properties:
+        externalCode:
+          type:
+          - string
+          - 'null'
+          description: Basware P2P identifier for the invoice row
+          example: a86f243081c24d6a939f6e885ed0e539
+        rowIndex:
+          type:
+          - integer
+          - 'null'
+          description: Invoice row number
+          format: int32
+          example: 1
+        productCode:
+          type:
+          - string
+          - 'null'
+          description: Product code
+          example: '1.000000'
+        productName:
+          type:
+          - string
+          - 'null'
+          description: Product name
+        quantity:
+          type:
+          - number
+          - 'null'
+          description: Quantity
+          format: double
+        orderNumber:
+          type:
+          - string
+          - 'null'
+          description: Order number
+          example: '6000235428'
+        netPrice:
+          type:
+          - number
+          - 'null'
+          description: Net unit price
+          format: double
+          example: 1000
+        taxPercent:
+          type:
+          - number
+          - 'null'
+          description: Tax percent
+          format: double
+          example: 25
+        taxSum:
+          type:
+          - number
+          - 'null'
+          description: Tax sum
+          format: double
+          example: 250
+        quantityUnit:
+          type:
+          - string
+          - 'null'
+          description: Unit in which quantity is specified, e.g. pcs, kg
+        infoItem:
+          type:
+          - integer
+          - 'null'
+          description: Information about the item
+          format: int32
+          example: 0
+        grossPrice:
+          type:
+          - number
+          - 'null'
+          description: Gross unit price
+          format: double
+          example: 1250
+        additionalCost:
+          type:
+          - boolean
+          - 'null'
+        additionalCostRecognition:
+          maxLength: 200
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Additional cost recognition keywork. The keywords are configured in P2P.
+        deliveryNoteNumber:
           maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Delivery note number
+        discountAmount:
+          type:
+          - number
+          - 'null'
+          description: Discount amount
+          format: double
+          example: 0
+        discountPercent:
+          type:
+          - number
+          - 'null'
+          description: Discount percentage
+          format: double
+          example: 0
+        grossSum:
+          type:
+          - number
+          - 'null'
+          description: Gross sum
+          format: double
+          example: 1250
+        itemTotalSum:
+          type:
+          - number
+          - 'null'
+          description: Total amount of the item
+          format: double
+          example: 0
+        lineType:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        netSum:
+          type:
+          - number
+          - 'null'
+          description: Net sum
+          format: double
+          example: 1000
+        orderRowNumber:
+          maxLength: 50
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Order row number
+        taxCode:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Tax code
+        taxPercent2:
+          type:
+          - number
+          - 'null'
+          description: Secondary tax percent
+          format: double
+          example: 0
+        taxSum2:
+          type:
+          - number
+          - 'null'
+          description: Secondary tax sum
+          format: double
+          example: 0
+        date1:
+          type:
+          - string
+          - 'null'
+          description: date1-5 Customer specific date field
+          format: date-time
+          example: '"2023-05-23T11:17:25.830Z"'
+        date2:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        date3:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        date4:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        date5:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        numeric1:
+          type:
+          - number
+          - 'null'
+          description: numeric1-20 Customer specific numeric field
+          format: double
+          example: 0
+        numeric2:
+          type:
+          - number
+          - 'null'
+          format: double
+        numeric3:
+          type:
+          - number
+          - 'null'
+          format: double
+        numeric4:
+          type:
+          - number
+          - 'null'
+          format: double
+        numeric5:
+          type:
+          - number
+          - 'null'
+          format: double
+        numeric6:
+          type:
+          - number
+          - 'null'
+          format: double
+        numeric7:
+          type:
+          - number
+          - 'null'
+          format: double
+        numeric8:
+          type:
+          - number
+          - 'null'
+          format: double
+        numeric9:
+          type:
+          - number
+          - 'null'
+          format: double
+        numeric10:
+          type:
+          - number
+          - 'null'
+          format: double
+        text1:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: text1-85 Customer specific text field
+        text2:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+        text3:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+        text4:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+        text5:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+        text6:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+        text7:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+        text8:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+        text9:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+        text10:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    PaymentResponseEntity:
+      required:
+      - externalCode
+      - paymentBlock
+      - success
+      type: object
+      properties:
+        externalCode:
+          maxLength: 36
           minLength: 1
           type: string
-          example: InvoiceBatchId
-        value:
+          description: External identifier that is used as a key in API. External code of the paymentResponse needs to be unique within an accountingDocument -record. You should always create a new externalCode when sending response, there is no overwriting/editing of previous response. This will enable the visibility that all responses are tracked in API. ExternalCode in response messages plays no role in P2P (other than it is used in communication between P2P and the API layer).
+          example: f24fff19120445de9c23651434129991
+        success:
+          type: boolean
+          description: Indicates a succesful response from ERP. Needs to be 'true' for P2P to update invoice data field contents.
+          example: true
+        responseMessage:
           maxLength: 250
-          minLength: 1
-          type: string
-          example: ca7f0c603388437ea9584446e26cf01c
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: This message is stored to P2P invoice action log.
+          example: Invoice Paid.
+        sourceSystem:
+          maxLength: 32
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Indicates the system that is returning payment response.
+          example: ERP1
+        paymentDate:
+          type:
+          - string
+          - 'null'
+          description: Date when the invoice was paid can be updated here.
+          format: date-time
+        paymentTermCode:
+          maxLength: 25
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Invoice payment term code can be updated here.
+          example: 7D2-NT30
+        paymentBlock:
+          type: boolean
+          description: Payment block.
+          example: false
+        paymentMethod:
+          maxLength: 25
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Payment method can be updated here.
+          example: BankTransfer
+        paidTotal:
+          type:
+          - number
+          - 'null'
+          description: Total amount paid for the invoice so far. For partial payments, this value will increase each time more of the invoice is paid.
+          format: double
+          example: 1136.8
+        cashDiscount:
+          type:
+          - number
+          - 'null'
+          description: discount amount can be updated here.
+          format: double
+          example: 23.2
+        checkNumber:
+          maxLength: 25
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Unique identifier from the check used in payment transaction.
+          example: '123456012'
+        paymentMessage:
+          maxLength: 100
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Payment message can be updated here.
+          example: ''
+        paymentNumber:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Payment number can be updated here.
+          example: 122447-55257552
+        paymentDocument:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Payment document number can be updated here.
+          example: '873326806'
+        paymentReversalDocument:
+          maxLength: 250
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          description: Payment reversal document can be updated here.
+          example: '873326806'
       additionalProperties: false
     ResponseEntityList:
       type: object
@@ -4088,22 +4074,36 @@ components:
           format: date-time
       additionalProperties: false
       description: ''
-    DeleteRequest:
+    Attachment:
       type: object
       properties:
-        lastUpdated:
-          type:
-          - string
-          - 'null'
-          description: 'To delete records updated after specific time, use lastUpdated -field. This will delete all items that have been updated after the specified date. In response, user will get the taskStatus api link where the task status can be checked. Note: ''0001-01-01'' can be used to delete all records.'
-          format: date-time
         externalCode:
-          maxLength: 36
-          minLength: 0
           type:
           - string
           - 'null'
-          description: Single item can be deleted using externalCode and final status is returned immediately.
+          description: Attachment external code. Used to retrieve the actual attachment file through the accountingDocuments/{invoiceId}/{attachmentExternalCode} endpoint.
+          example: fafv67fe21747s791f2eeafgc9ab78ae
+        category:
+          type:
+          - string
+          - 'null'
+          description: 'Attachment category. Available values: ORIGINALIMAGE, ATTACHMENT, EXPORTEDEMAIL.'
+          example: ATTACHMENT
+        filename:
+          type:
+          - string
+          - 'null'
+          description: Attachment file name.
+          example: Image.jpg
+        isConfidential:
+          type: boolean
+          description: Indicates whether the attachment is confidential. true = confidential, false = not confidential.
+          example: false
+        creationTime:
+          type: string
+          description: Creation time of the attachment in P2P.
+          format: date-time
+          example: '2024-03-19T09:28:19.093Z'
       additionalProperties: false
   securitySchemes:
     Bearer:

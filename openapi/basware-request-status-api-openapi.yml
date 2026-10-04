@@ -268,6 +268,65 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    ErrorEntity:
+      type: object
+      properties:
+        externalCode:
+          type:
+          - string
+          - 'null'
+          description: External code of record on which error occurred (when available).
+          example: 4847-31231212-212121-1212
+        type:
+          enum:
+          - BUSINESS
+          - VALIDATION
+          - TECHNICAL
+          - SECURITY
+          type: string
+          description: Error type.
+          example: ''
+        code:
+          enum:
+          - EXTERNAL_CODE_MISMATCH
+          - SCHEMA_VALIDATION_ERROR
+          - CONFLICT_IN_POST
+          - DATA_ORIGIN_VALIDATION_ERROR
+          - ACCESS_TOKEN_VALIDATION_ERROR
+          - CREDENTIAL_VALIDATION_ERROR
+          - PARAMETER_VALIDATION_ERROR
+          - UNEXPECTED_ERROR
+          - METHOD_NOT_ALLOWED
+          - ENTITY_NOT_FOUND
+          - DATA_VALIDATION_FAILED
+          - SNS_PUBLISH_ERROR
+          - SQS_PUBLISH_ERROR
+          type: string
+          description: Error code.
+          example: ''
+        message:
+          type:
+          - string
+          - 'null'
+          description: Specific error message.
+          example: ''
+        info:
+          type:
+          - string
+          - 'null'
+          description: Information about type of the error.
+          example: ''
+      additionalProperties: false
+    RequestStatusResponse:
+      required:
+      - requestStatus
+      type: object
+      properties:
+        requestStatus:
+          type: array
+          items:
+            $ref: '#/components/schemas/ConsumerLogEventUserView'
+      additionalProperties: false
     ConsumerLogEventUserView:
       type: object
       properties:
@@ -352,42 +411,6 @@ components:
             $ref: '#/components/schemas/BaswareSystem'
           description: Target system from which the response originates (P2P, network, etc).
       additionalProperties: false
-    ProcessedItemErrorDetail:
-      type: object
-      properties:
-        type:
-          enum:
-          - Error
-          - Warning
-          - RecordExpired
-          type: string
-          description: "Mesage type.\n* Error: Error processing the record. \n* Warning: Record saved with warning(s). Some data on the record may not be saved. Example: One or more user group(s) indicated on user record not found in P2P. User was saved, missing user groups were omitted.\n* RecordExpired: More recent version of the record has been posted to API. Skipped this version since only the more recent version will be saved. This usually requires the same record to have been updated two or more times within less than a second."
-          example: Error
-        message:
-          type:
-          - string
-          - 'null'
-          description: Error message.
-          example: Record skipped due to wrong or missing CompanyCode
-        category:
-          enum:
-          - Unknown
-          - Technical
-          - DataValidation
-          type: string
-          description: "Error category.\n* DataValidation: Data validation error. Typically correctable by customr through correcting an error in the data payload sent by customer.\n* Technical: Technical error. These typically require an intervention from Basware. \n* Unknown: Error category not identified."
-          example: Data validation
-      additionalProperties: false
-    RequestStatusResponse:
-      required:
-      - requestStatus
-      type: object
-      properties:
-        requestStatus:
-          type: array
-          items:
-            $ref: '#/components/schemas/ConsumerLogEventUserView'
-      additionalProperties: false
     BaswareSystem:
       type: object
       properties:
@@ -423,54 +446,31 @@ components:
             $ref: '#/components/schemas/ProcessedItem'
           description: Contains status for each invividual record posted in the original request.
       additionalProperties: false
-    ErrorEntity:
+    ProcessedItemErrorDetail:
       type: object
       properties:
-        externalCode:
-          type:
-          - string
-          - 'null'
-          description: External code of record on which error occurred (when available).
-          example: 4847-31231212-212121-1212
         type:
           enum:
-          - BUSINESS
-          - VALIDATION
-          - TECHNICAL
-          - SECURITY
+          - Error
+          - Warning
+          - RecordExpired
           type: string
-          description: Error type.
-          example: ''
-        code:
-          enum:
-          - EXTERNAL_CODE_MISMATCH
-          - SCHEMA_VALIDATION_ERROR
-          - CONFLICT_IN_POST
-          - DATA_ORIGIN_VALIDATION_ERROR
-          - ACCESS_TOKEN_VALIDATION_ERROR
-          - CREDENTIAL_VALIDATION_ERROR
-          - PARAMETER_VALIDATION_ERROR
-          - UNEXPECTED_ERROR
-          - METHOD_NOT_ALLOWED
-          - ENTITY_NOT_FOUND
-          - DATA_VALIDATION_FAILED
-          - SNS_PUBLISH_ERROR
-          - SQS_PUBLISH_ERROR
-          type: string
-          description: Error code.
-          example: ''
+          description: "Mesage type.\n* Error: Error processing the record. \n* Warning: Record saved with warning(s). Some data on the record may not be saved. Example: One or more user group(s) indicated on user record not found in P2P. User was saved, missing user groups were omitted.\n* RecordExpired: More recent version of the record has been posted to API. Skipped this version since only the more recent version will be saved. This usually requires the same record to have been updated two or more times within less than a second."
+          example: Error
         message:
           type:
           - string
           - 'null'
-          description: Specific error message.
-          example: ''
-        info:
-          type:
-          - string
-          - 'null'
-          description: Information about type of the error.
-          example: ''
+          description: Error message.
+          example: Record skipped due to wrong or missing CompanyCode
+        category:
+          enum:
+          - Unknown
+          - Technical
+          - DataValidation
+          type: string
+          description: "Error category.\n* DataValidation: Data validation error. Typically correctable by customr through correcting an error in the data payload sent by customer.\n* Technical: Technical error. These typically require an intervention from Basware. \n* Unknown: Error category not identified."
+          example: Data validation
       additionalProperties: false
     ProcessingStatusGetBatchRequest:
       type: object
