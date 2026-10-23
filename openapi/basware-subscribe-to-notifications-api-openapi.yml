@@ -500,3 +500,9 @@ components:
       - notificationWebhookURL
       - webhookAuthenticationToken
       title: Subscription
+x-provenance:
+  method: harvested
+  publisher: Basware
+  source: https://api.basware.com/openapi.json
+  note: split by refine-openapis from the provider's own published document, verified by fetch (openapi/_original/*.fetch.json);
+    stamped by stamp-openapi-provenance.py (roadmap#793)
